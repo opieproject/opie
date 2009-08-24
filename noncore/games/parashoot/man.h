@@ -29,7 +29,7 @@ class Man : public QCanvasSprite
 {
 
 public:
-   Man (QCanvas*); 
+   Man (QCanvas*);
    Man (QCanvas*, int x, int y);
    ~Man();
    void advance(int phase);
@@ -49,4 +49,4 @@ private:
     bool dead;
     int count;
     Sound splat;
-}; 
+};

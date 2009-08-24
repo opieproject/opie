@@ -16,7 +16,7 @@ int mpeg3_mmx_test()
 	{
 		return 0;
 	}
-	
+
 	while(!feof(proc))
 	{
 		fgets(string, MPEG3_STRLEN, proc);

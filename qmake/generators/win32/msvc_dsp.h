@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Definition of DspMakefileGenerator class.
 **
@@ -62,7 +62,7 @@ protected:
     virtual void processPrlVariable(const QString &, const QStringList &);
     virtual bool findLibraries();
 
-    QString precompH, 
+    QString precompH,
 	    precompObj, precompPch;
     bool usePCH;
 };

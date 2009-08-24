@@ -17,7 +17,7 @@ class DateBookWeekLstView: public QWidget
 {
     Q_OBJECT
 public:
-    DateBookWeekLstView(Opie::OPimOccurrence::List &ev, 
+    DateBookWeekLstView(Opie::OPimOccurrence::List &ev,
                         Opie::Datebook::WeekLstView *view, const QDate &d,
                         bool onM, int timeDisplay, bool showAmPm, QWidget* parent = 0,
                         const char* name = 0,

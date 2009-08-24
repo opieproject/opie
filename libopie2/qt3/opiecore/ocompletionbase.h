@@ -350,7 +350,7 @@ class OCompletionBase
      * the internal pointer is @p NULL. Use this method to get the
      * pointer to a completion object when inheriting so that you
      * won't inadvertently create it!!
-     *	
+     *
      * @returns the completion object or NULL if one does not exist.
      */
     OCompletion* compObj() const { return m_delegate ? m_delegate->compObj() : (OCompletion*) m_pCompObj; }

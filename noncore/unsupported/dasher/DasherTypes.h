@@ -13,7 +13,7 @@
 namespace Dasher
 {
 	/* TODO: note by IAM 08/2002 {{{
-	
+
 	MS docs tell us the __int64 type has no ANSI equivalent
 	I've checked and currently a 32bit long leads to problems.
 	The code could probably be altered to get around this 64bit
@@ -21,10 +21,10 @@ namespace Dasher
 	(or implemented fairly easily). However, as GCC supports
 	"long long int" I'm giving this low priority until someone
 	complains...
-	
+
 	"ISO C99 supports data types for integers that are at least 64 bits wide,
 	and as an extension GCC supports them in C89 mode and in C++."
-	
+
 	I've heard some compilers have a "quad int". If "long long int" does not
 	work, try that.
 	}}} */
@@ -37,16 +37,16 @@ namespace Dasher
 	        #define LLONG_MAX 9223372036854775807LL
 	        #define LLONG_MIN (-LLONG_MAX - 1LL)
 	#endif
-	
+
 	// Using a signed symbol type allows "Out of band" ie negative {{{
 	// values to be used to flag non-symbol data. For example commands
 	// in dasher nodes.
 	//typedef unsigned int symbol; // }}}
 	typedef int symbol;
-	
+
 //	typedef unsigned int uint;
 	//	typedef unsigned short ushort;
-	
+
 	namespace Opts
 	{
 		// Numbers should be applied to elements of the following two enumerations as these preferences may be stored to file. Constancy between

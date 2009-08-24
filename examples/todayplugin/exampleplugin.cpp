@@ -6,7 +6,7 @@
  */
 #include "exampleplugin.h"
 
-ExamplePlugin::ExamplePlugin() 
+ExamplePlugin::ExamplePlugin()
     : m_widget(0l)
 {
 }

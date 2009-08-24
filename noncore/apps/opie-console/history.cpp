@@ -144,7 +144,7 @@ int HistoryBuffer::len()
 
 // History Scroll //////////////////////////////////////
 
-/* 
+/*
    The history scroll makes a Row(Row(Cell)) from
    two history buffers. The index buffer contains
    start of line positions which refere to the cells
@@ -162,13 +162,13 @@ HistoryScroll::HistoryScroll()
 HistoryScroll::~HistoryScroll()
 {
 }
- 
+
 void HistoryScroll::setScroll(bool on)
 {
   index.setScroll(on);
   cells.setScroll(on);
 }
- 
+
 bool HistoryScroll::hasScroll()
 {
   return index.hasScroll() && cells.hasScroll();

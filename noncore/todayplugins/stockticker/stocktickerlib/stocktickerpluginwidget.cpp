@@ -45,7 +45,7 @@ void getStocks(char *blah) {
       stock_liste = blah;
       ::free ( blah );
       //    char *stock_liste = (char *)blah->latin1();
-      //      odebug << "" << stock_liste.data() << "" << oendl; 
+      //      odebug << "" << stock_liste.data() << "" << oendl;
       output = "";
   QString tempString;
       libstocks_return_code error;
@@ -278,7 +278,7 @@ void getStocks(char *blah) {
   }
 
   void StockTickerPluginWidget::checkConnection() {
-  //     odebug << "checking connection" << oendl; 
+  //     odebug << "checking connection" << oendl;
   //     Sock = new QSocket( this );
 
   //      if( wasError)
@@ -289,13 +289,13 @@ void getStocks(char *blah) {
   //         connect( Sock, SIGNAL( error(int) ),  SLOT(socketError(int)) );
   //         connect( Sock, SIGNAL( hostFound() ), SLOT(isConnected()) );
   //     } else {
-  //         odebug << "State is not Idle" << oendl; 
+  //         odebug << "State is not Idle" << oendl;
           isConnected();
   //    }
   }
 
   void StockTickerPluginWidget::isConnected() {
-  //    odebug << "We connect, so ok to grab stocks" << oendl; 
+  //    odebug << "We connect, so ok to grab stocks" << oendl;
      if(this->isVisible())
         doStocks();
 
@@ -304,7 +304,7 @@ void getStocks(char *blah) {
       timerDelay= cfg.readNumEntry("Delay",0);
       if(timerDelay > 0)
           startTimer(timerDelay*60000);
-      //      odebug << "timer set for " << (timerDelay*60000)/60000 << "" << oendl; 
+      //      odebug << "timer set for " << (timerDelay*60000)/60000 << "" << oendl;
       wasError = false;
 
   //    Sock->close();

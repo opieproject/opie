@@ -3,9 +3,9 @@
 
 
 
-/* 
- *  Constructs a MobileMsg which is a child of 'parent', with the 
- *  name 'name' and widget flags set to 'f' 
+/*
+ *  Constructs a MobileMsg which is a child of 'parent', with the
+ *  name 'name' and widget flags set to 'f'
  */
 MobileMsg::MobileMsg( QWidget* parent,  const char* name, WFlags fl )
     : MobileMsgBase( parent, name, fl )
@@ -16,7 +16,7 @@ MobileMsg::MobileMsg( QWidget* parent,  const char* name, WFlags fl )
     //connect(settings, SIGNAL(selectionChanged()), this, SLOT(goodBye()) );
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 MobileMsg::~MobileMsg()

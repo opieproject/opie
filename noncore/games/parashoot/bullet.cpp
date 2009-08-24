@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 
-#include "codes.h"  
+#include "codes.h"
 #include "bullet.h"
 #include "man.h"
 #include "helicopter.h"
@@ -38,7 +38,7 @@ Bullet::Bullet(QCanvas* canvas, double angle, int cannonx, int cannony) :
 {
      QCanvasPixmapArray* bulletarray = new QCanvasPixmapArray(Opie::Core::OResource::findPixmap("parashoot/bullet"));
      setSequence(bulletarray);
-     if (nobullets < limit) { 
+     if (nobullets < limit) {
         nobullets++;
         move(cannonx, cannony);
         dy = 0;
@@ -47,7 +47,7 @@ Bullet::Bullet(QCanvas* canvas, double angle, int cannonx, int cannony) :
         setXY(angle);
         setVelocity(-dx, -dy);
 	bang.play();
-     } else 
+     } else
         return;
 }
 
@@ -56,8 +56,8 @@ void Bullet::setXY(double angle)
    double ang = angle;
    if ( (y() < 0) || (x() < 0) || (y() > canvas()->height()) ||
         (x() > canvas()->width()) )
-       delete this; 
-   else { 
+       delete this;
+   else {
        double radians = 0;
        radians = ang * 3.14159265/180;
        dx = (qCos(radians)) *7;
@@ -101,7 +101,7 @@ void Bullet::checkCollision()
                delete this;
                return;
          }
-      } 
+      }
       //check shot is not out of bounds
      if ( (y() < 0) || (x() < 0) ||
           (y() > canvas()->height()) ||
@@ -117,7 +117,7 @@ void Bullet::advance(int phase)
 {
    QCanvasSprite::advance(phase);
 
-   if (phase == 0) 
+   if (phase == 0)
          checkCollision();
 
 }
@@ -126,7 +126,7 @@ int Bullet::getShotCount()
 {
    return shotcount;
 }
- 
+
 void Bullet::setShotCount(int amount)
 {
    shotcount = amount;

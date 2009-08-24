@@ -29,7 +29,7 @@ class OxydataWidget;
 class PSEWidget : public QWidget
 {
 	Q_OBJECT
-	
+
     public:
 		PSEWidget(const QStringList &list=0);
         QGridLayout *bottom_grid;
@@ -41,7 +41,7 @@ class PSEWidget : public QWidget
 
     private:
         QGridLayout *maingrid;
-        
+
         void position( int, int&, int& );
         QColor PSEColor( QString ) const;
 		QStringList names;

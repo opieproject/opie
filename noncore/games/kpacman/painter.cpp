@@ -183,7 +183,7 @@ QRect Painter::rect(int pos, PixMap pix, uint i)
     QRect rect = PIXMAP->rect();
     QPoint point = this->point(pos);
     rect.moveCenter(QPoint(point.x()-1, point.y()-1));
-  
+
     return rect;
 }
 
@@ -254,7 +254,7 @@ int Painter::maxPixmaps(PixMap pix)
         default              : return 0;
     }
 }
-        
+
 void Painter::draw(QPoint point, DrawWidget where, QPixmap pix)
 {
     switch (where) {
@@ -264,7 +264,7 @@ void Painter::draw(QPoint point, DrawWidget where, QPixmap pix)
                         break;
         case BackPix  : bitBlt(&backPix, point.x(), point.y(), &pix);
                         break;
-    }   
+    }
 }
 
 void Painter::draw(QRect rect, DrawWidget where, QPixmap pix)
@@ -311,13 +311,13 @@ void Painter::draw(int pos, DrawWidget where, PixMap pix, uint i)
     rect.moveCenter(QPoint(point.x()-1, point.y()-1));
 
     switch (where) {
-        case Widget   : bitBlt(w, rect.x(), rect.y(), PIXMAP); 
+        case Widget   : bitBlt(w, rect.x(), rect.y(), PIXMAP);
                         break;
         case RoomPix  : bitBlt(&roomPix, rect.x(), rect.y(), PIXMAP);
                         break;
         case BackPix  : bitBlt(&backPix, rect.x(), rect.y(), PIXMAP);
                         break;
-    }   
+    }
 }
 
 QPixmap Painter::draw(int pos, DrawWidget where,
@@ -350,7 +350,7 @@ QRect Painter::draw(int col, int row, DrawWidget where,
 
     QRect rect = this->rect(row*BoardWidth+col, str, align);
     draw(rect, where, TEXT);
-     
+
     return rect;
 }
 
@@ -675,7 +675,7 @@ void Painter::fillScoreString(QStrList &list, QArray<int> &values)
         list.clear();
 
     QString s;
-        
+
     for (uint i = 0; i < values.size(); i++) {
 
         if (values[i] < 10 || values[i] > 10000)

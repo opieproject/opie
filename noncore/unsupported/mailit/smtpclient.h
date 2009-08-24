@@ -39,7 +39,7 @@ struct RawEmail
 class SmtpClient: public QObject
 {
   Q_OBJECT
-  
+
 public:
   SmtpClient();
   ~SmtpClient();
@@ -50,7 +50,7 @@ signals:
   void errorOccurred(int, const QString & LR );
   void updateStatus(const QString &);
   void mailSent();
-  
+
 public slots:
   void errorHandling(int);
   void errorHandlingWithMsg(int, const QString & LastResponse );
@@ -58,7 +58,7 @@ public slots:
 protected slots:
   void connectionEstablished();
   void incomingData();
-  
+
 private:
   QSocket *socket;
   QTextStream *stream;

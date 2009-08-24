@@ -106,7 +106,7 @@ QWidget *DayView::createConfigWidget( QWidget *owner ) {
     chkJumpToCurTime->setText( tr( "Jump to current time" ) );
     GroupBox4Layout->addWidget( chkJumpToCurTime );
 
-    QHBoxLayout *Layout5_2 = new QHBoxLayout; 
+    QHBoxLayout *Layout5_2 = new QHBoxLayout;
     Layout5_2->setSpacing( 6 );
     Layout5_2->setMargin( 0 );
 
@@ -131,7 +131,7 @@ void DayView::readConfigWidget( QWidget *widget ) {
     QCheckBox *chkJumpToCurTime = (QCheckBox *)widget->child( "chkJumpToCurTime" );
     if( chkJumpToCurTime )
         setJumpToCurTime( chkJumpToCurTime->isChecked() );
-    
+
     QComboBox *comboRowStyle = (QComboBox *)widget->child( "comboRowStyle" );
     if( comboRowStyle )
         setRowStyle( comboRowStyle->currentItem() );
@@ -173,7 +173,7 @@ void DayView::setJumpToCurTime( bool bJump )
 
 void DayView::setRowStyle( int style )
 {
-    if (rowStyle != style) 
+    if (rowStyle != style)
         m_view->setRowStyle( style );
     rowStyle = style;
 }
@@ -466,4 +466,4 @@ void DayView::slotNewEvent( const QString &txt )
     QDateTime start, end;
     m_view->selectedDateTimes( start, end );
     View::add( start, end, txt );
-} 
+}

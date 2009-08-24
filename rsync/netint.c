@@ -2,20 +2,20 @@
  *
  * librsync -- library for network deltas
  * $Id: netint.c,v 1.2 2007-07-30 17:37:05 erik Exp $
- * 
+ *
  * Copyright (C) 1999, 2000, 2001 by Martin Pool <mbp@samba.org>
  * Copyright (C) 1999 by Andrew Tridgell <tridge@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation; either version 2.1 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -148,7 +148,7 @@ rs_suck_byte(rs_job_t *job, unsigned char *v)
 {
     void *inb;
     rs_result result;
-    
+
     if ((result = rs_scoop_read(job, 1, &inb)) == RS_DONE)
         *v = *((unsigned char *) inb);
 
@@ -165,7 +165,7 @@ rs_suck_n4(rs_job_t *job, int *v)
     result = rs_suck_netint(job, &d, 4);
     *v = d;
     return result;
-}        
+}
 
 
 int rs_int_len(rs_long_t val)

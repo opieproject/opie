@@ -37,7 +37,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     Config conf("backgammon");
     if(!conf.isValid())
     {
-        odebug << "config file does not exist" << oendl; 
+        odebug << "config file does not exist" << oendl;
         conf.setGroup("general");
         conf.writeEntry("theme","default");
         conf.setGroup("rules");
@@ -63,9 +63,9 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     conf.setGroup("rules");
     rules.move_with_pieces_out=conf.readBoolEntry("move_with_pieces_out",false);
     rules.generous_dice=conf.readBoolEntry("nice_dice",false);
-       
+
     move->setRules(rules);
-    
+
     //get the AI settings
     AISettings ai;
     conf.setGroup("ai");
@@ -79,10 +79,10 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
 
 
     //get the theme component names
-    Config theme(theme_file,Config::File);   
+    Config theme(theme_file,Config::File);
     if(!theme.isValid())
     {
-      odebug << "theme file does not exist" << oendl; 
+      odebug << "theme file does not exist" << oendl;
       theme.setGroup("theme");
       theme.writeEntry("board","casino_board_1");
       theme.writeEntry("pieces1","casino_pieces_blue");
@@ -100,7 +100,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     diceB_name=theme.readEntry("dice2","casino_dice");
     table_name=theme.readEntry("table","casino_table_green");
     odds_name=theme.readEntry("odds","casino_odds");
-    
+
 
     //the menu
     QMenuBar* menuBar = new QMenuBar(this);
@@ -479,7 +479,7 @@ void BackGammon::savetheme()
     QString theme_file=QPEApplication::qpeDir()+"backgammon/"+theme_name+".theme";
     if(QMessageBox::information(this,"Backgammon","Save Theme\n"+theme_name,"Yes","No"))
       return;
-      
+
     Config theme(theme_file,Config::File);
     theme.setGroup("theme");
     theme.writeEntry("board",board_name);
@@ -489,7 +489,7 @@ void BackGammon::savetheme()
     theme.writeEntry("dice2",diceB_name);
     theme.writeEntry("table",table_name);
     theme.writeEntry("odds",odds_name);
-    
+
 }
 
 void BackGammon::themedefault()
@@ -499,7 +499,7 @@ void BackGammon::themedefault()
 
     Config conf("backgammon");
     conf.setGroup("general");
-    conf.writeEntry("theme",theme_name);    
+    conf.writeEntry("theme",theme_name);
 }
 
 void BackGammon::deletetheme()
@@ -523,7 +523,7 @@ void BackGammon::modify_AI()
     ai_mod->setAISettings(move->getAISettings());
     if(!ai_mod->exec())
         return;
-    
+
     //get the AI settings
     AISettings ai=ai_mod->getAISettings();
     move->setAISettings(ai);

@@ -8,7 +8,7 @@ int VolumeControl::volume() {
     Config cfg( "qpe" );
     cfg. setGroup( "Volume" );
     m_volumePerc = cfg. readNumEntry( "VolumePercent", 50 );
-    
+
     return m_volumePerc;
 }
 

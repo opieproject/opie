@@ -10,7 +10,7 @@
 
 class QWidget;
 class Config;
-struct PInterfaceInfo {   
+struct PInterfaceInfo {
     virtual QString name()const = 0;
     virtual QWidget* configWidget( const Config& ) = 0;
     virtual void writeConfig(  QWidget* wid, Config& ) = 0;

@@ -19,7 +19,7 @@ void Pacman::setMaxPixmaps(int max)
             mouthPosition = 0;
         else
             mouthPosition = lastPix % (maxPixmaps/4);
-        maxPixmaps = max;       
+        maxPixmaps = max;
 
         lastPix = pix();
 
@@ -78,7 +78,7 @@ int Pacman::direction()
 
 bool Pacman::move()
 {
-    if (pause-- > 0) 
+    if (pause-- > 0)
         return FALSE;
     else
         pause = pauseDuration;
@@ -112,7 +112,7 @@ bool Pacman::move()
             if (board->isWay(actualPosition, nextDirection, empty) ||
                 board->isWay(actualPosition, nextDirection, tunnel)) {
                 actualDirection = nextDirection;
-                nextDirection = X;      
+                nextDirection = X;
             }
 
         if (board->isWay(actualPosition, actualDirection, empty) ||

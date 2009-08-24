@@ -70,7 +70,7 @@ fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, boo
     QVBoxLayout* grid = new QVBoxLayout(this);
     grid->addWidget(dirLabel);
     QHBoxLayout* hgrid = new QHBoxLayout(grid);
-    
+
     QPushButton* bt = new QPushButton( this );
     bt->setText( tr( "SD" ) );
     connect( bt, SIGNAL( clicked() ), this, SLOT( onSD() ) );
@@ -123,7 +123,7 @@ fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, boo
 void fileBrowser::resizeEvent(QResizeEvent* e)
 {
     ListView->setColumnWidth(1,(ListView->width())/4);
-    ListView->setColumnWidth(0,ListView->width()-20-ListView->columnWidth(1));    
+    ListView->setColumnWidth(0,ListView->width()-20-ListView->columnWidth(1));
 }
 
 fileBrowser::~fileBrowser()
@@ -155,8 +155,8 @@ void fileBrowser::populateList()
 	    if( fi->isDir() )
 	    {
 		fileL+="/";
-	    } 
-	    else 
+	    }
+	    else
 	    {
 ////        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
 	    }
@@ -180,7 +180,7 @@ void fileBrowser::listClicked(QListViewItem *selectedItem)
     QString strItem=selectedItem->text(0);
 
 ////    qDebug("%s", (const char*)strItem);
-    
+
 
     QString strSize=selectedItem->text(1);
 

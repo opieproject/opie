@@ -20,7 +20,7 @@ class QDir;
 
 class ListViewConfDir : public QListView  {
    Q_OBJECT
-public: 
+public:
 	ListViewConfDir(QString settingsPath, QWidget *parent=0, const char *name=0);
 	~ListViewConfDir();
 protected slots:

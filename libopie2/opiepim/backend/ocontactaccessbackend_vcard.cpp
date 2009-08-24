@@ -225,7 +225,7 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
             QString region;
             QString postal;
             QString country;
-    
+
             VObjectIterator nit;
             initPropIterator( &nit, o );
             while( moreIteration( &nit ) ) {
@@ -273,7 +273,7 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
                 UNKNOWN = 0x80
             };
             int type = 0;
-    
+
             VObjectIterator nit;
             initPropIterator( &nit, o );
             while( moreIteration( &nit ) ) {
@@ -304,7 +304,7 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
                     type |= HOME;
                 if ( ( type & (VOICE|CELL|FAX|PAGER) ) == 0 ) // default
                     type |= VOICE;
-    
+
                 odebug << "value %s %d" << value.data() << type << oendl;
 
                 if ( (type & (VOICE|HOME) ) == (VOICE|HOME) && (type & (CELL|HOME) ) != (CELL|HOME) )
@@ -464,7 +464,7 @@ VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
     safeAddPropValue( name, VCNameSuffixesProp, c.suffix() );
 
     // home properties
-    if ( !( c.homeStreet().isEmpty() 
+    if ( !( c.homeStreet().isEmpty()
        && c.homeCity().isEmpty()
        && c.homeState().isEmpty()
        && c.homeZip().isEmpty()
@@ -488,7 +488,7 @@ VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
     safeAddProp( home_phone, VCHomeProp );
 
     // work properties
-    if ( !( c.businessStreet().isEmpty() 
+    if ( !( c.businessStreet().isEmpty()
        && c.businessCity().isEmpty()
        && c.businessState().isEmpty()
        && c.businessZip().isEmpty()

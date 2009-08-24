@@ -25,20 +25,20 @@
 PSEWidget::PSEWidget(const QStringList &list) : QWidget()
 {
     this->setCaption( tr( "Periodic System" ) );
-	
+
 	lastElement=1;
 	names = list;
 
     QVBoxLayout *vlay = new QVBoxLayout( this );
-    
+
     QGridLayout *grid = new QGridLayout( 18,10 );
     int h=0, v=0;
-    
+
     Config configobj( QPEApplication::qpeDir() +"share/oxygen/oxygendata", Config::File );
     for( int n = 0 ; n < 109 ; n++ )
     {
         configobj.setGroup( QString::number( n+1 ));
-        
+
         position( n+1,h,v );
         PSEframe.append( new OxyFrame( this , QString::number(n), configobj.readEntry( "Symbol" ) ) );
         grid->addWidget( PSEframe.current() , v/40+1 , h/40 );
@@ -47,7 +47,7 @@ PSEWidget::PSEWidget(const QStringList &list) : QWidget()
         connect( PSEframe.current(), SIGNAL( num(QString) ), this, SLOT( slotShowElement(QString) ));
         connect( PSEframe.current(), SIGNAL( num(QString) ), this, SLOT( inverseColor(QString) ));
     }
-    
+
     oxyDW = new OxydataWidget(this, "PSEWidget_oxyDW", names);
     oxyDW->setElement( 0 );
     oxyDW->setLayout();
@@ -74,7 +74,7 @@ void PSEWidget::inverseColor( QString number)
     QColor c, d;
 	c = PSEColor( block );
 	d = c.dark();
-	
+
 	PSEframe.at( number.toUInt() )->setPalette(  QPalette( d ) );
 
 	configobj.setGroup( QString::number( lastElement+1 ) );
@@ -86,7 +86,7 @@ void PSEWidget::inverseColor( QString number)
 }
 
 void PSEWidget::slotShowElement(QString number)
-{ 
+{
     oxyDW->setElement( number.toInt() );
 };
 

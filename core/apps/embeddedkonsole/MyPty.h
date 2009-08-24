@@ -73,7 +73,7 @@ Q_OBJECT
   protected slots:
       void readPty();
       void donePty();
-      
+
   private:
     int  openPty();
 

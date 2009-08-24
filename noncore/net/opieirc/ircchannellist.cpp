@@ -17,13 +17,13 @@ void IRCChannelList::update() {
         IRCChannelPerson *person = it.current();
         if (person->flags() & IRCChannelPerson::PERSON_FLAG_OP) {
             insertItem(op, "1" + person->nick());
-        } 
+        }
         else if (person->flags() & IRCChannelPerson::PERSON_FLAG_HALFOP) {
             insertItem(op, "2" + person->nick());
-        } 
+        }
         else if (person->flags() & IRCChannelPerson::PERSON_FLAG_VOICE) {
             insertItem(voice, "3" + person->nick());
-        } 
+        }
         else {
             insertItem("4" + person->nick());
         }

@@ -18,7 +18,7 @@ public:
                                 int cat ) = 0;
     virtual void        removeAllCompleted() = 0;
     virtual QBitArray supports()const = 0;
-    
+
 private:
     class Private;
     Private *d;

@@ -5,7 +5,7 @@
  *  of /var/run/resumeat and setting the RTC alarm to that time/date.
  *  It is designed to run via a script just before the iPAQ
  *  is suspended and right after the iPAQ resumes operation.
- * 
+ *
  *  written and copyrighted by Robert Griebl <sandman@handhelds.org>
  */
 
@@ -57,7 +57,7 @@ void sig_handler_parent ( int sig )
 {
 	// parent got SIGUSR1 -> safe to exit now
 
-	parent_pid = 0;	
+	parent_pid = 0;
 	exit ( 0 );
 }
 
@@ -75,15 +75,15 @@ int fork_with_pidfile ( void )
 {
 	FILE *fp;
 	pid_t pid;
-	
+
 	pid = fork ( );
-	
+
 	if ( pid > 0 ) {
-		// We can not just exit now, because the kernel could suspend 
+		// We can not just exit now, because the kernel could suspend
 		// the iPAQ just before the child process sets the RTC.
-		// Solution: just wait for SIGUSR1 - the child process will 
+		// Solution: just wait for SIGUSR1 - the child process will
 		// signal this when it thinks it is safe to exit.
-		
+
 		signal ( SIGUSR1, sig_handler_parent );
 		while ( 1 )
 			sleep ( 1000 );
@@ -92,7 +92,7 @@ int fork_with_pidfile ( void )
 	else if ( pid < 0 ) {
 		perror ( "forking failed" );
 		return 0;
-	}	
+	}
 	//	sleep( 60 );
 
 	// child process needs to react to SIGUSR2. This is sent when
@@ -141,12 +141,12 @@ void remove_pidfile ( void )
 {
 	// child is about to exit - cleanup
 
-	unlink ( PIDFILE );	
+	unlink ( PIDFILE );
 	signal ( SIGUSR2, SIG_DFL );
 }
 
 
-int main ( int argc, char **argv ) 
+int main ( int argc, char **argv )
 {
 	int mode = 0;
 	int ac_resusp = 0;
@@ -165,23 +165,23 @@ int main ( int argc, char **argv )
 				ac_resusp = atoi ( optarg );
 				if ( ac_resusp < 30 ) {
 					ac_resusp = 120;
-					
+
 					fprintf ( stderr, "Warning: resuspend timeout must be >= 30 sec. -- now set to 120 sec\n" );
 				}
 				break;
 			case 'f':
 				fix_rtc = 1;
-				break;				
+				break;
 			default:
 				usage ( );
 		}
-	}	
-	
+	}
+
 	if ( geteuid ( ) != 0 ) {
 		fprintf ( stderr, "You need root priviledges to run opiealarm." );
 		return 2;
 	}
-	
+
 	if ( !mode )
 		usage ( );
 
@@ -199,11 +199,11 @@ int main ( int argc, char **argv )
 		default : opt = suspend ( fix_rtc );
 		          break;
 	}
-	
+
 	parent_pid = 0;
 	return opt;
-}		
-		
+}
+
 
 int suspend ( int fix_rtc )
 {
@@ -214,37 +214,37 @@ int suspend ( int fix_rtc )
 	int fd;
 	int rtc_sys_diff;
 	int use_sysfs;
-	
+
 	if ( !fork_with_pidfile ( ))
 		return 3;
 
 	// we are the child process from here on ...
 
 	tzset ( );  // not sure if it is really needed -- it probably doesn't hurt ...
-	
+
 	time ( &syst );// get the UNIX system time
-	sys = *localtime ( &syst );		
-	
+	sys = *localtime ( &syst );
+
 	use_sysfs = 0;
 	do {
-		
+
 		if (( fd = open ( "/dev/misc/rtc", O_RDWR )) < 0 )
 			if (( fd = open ( "/dev/rtc", O_RDWR )) < 0 )
-				break; //  ( 1, "rtc" );	
-	
+				break; //  ( 1, "rtc" );
+
 		memset ( &rtc, 0, sizeof ( struct tm ));    // get the RTC time
-	
+
 		if ( ioctl ( fd, RTC_RD_TIME, &rtc ) < 0 )
-			break; //  ( 1, "ioctl RTC_RD_TIME" );		
-	
+			break; //  ( 1, "ioctl RTC_RD_TIME" );
+
 		rtct = mktime ( &rtc );
 
 		rtc_sys_diff = ( syst - rtct ) - sys. tm_gmtoff;  // calculate the difference between system and hardware time
-	
+
 		if ( fix_rtc && (( rtc_sys_diff < -3 ) || ( rtc_sys_diff > 3 ))) {
-			struct tm set;		
+			struct tm set;
 			set = *gmtime ( &syst );
-		
+
 			// if the difference between system and hardware time is more than 3 seconds,
 			// we have to set the RTC (hwclock --systohc), or alarms won't work reliably.
 
@@ -253,28 +253,28 @@ int suspend ( int fix_rtc )
 		}
 
 		// read the wakeup time from TIMEFILE
-		if (!( fp = fopen ( TIMEFILE, "r" ))) 
+		if (!( fp = fopen ( TIMEFILE, "r" )))
 			break; //  ( 1, TIMEFILE );
-	
+
 		if ( !fgets ( buf, sizeof( buf ) - 1, fp ))
 			break; //  ( 1, TIMEFILE );
 
 		fclose ( fp );
 		fp = NULL;
-	
+
 		alrt = atoi ( buf ); // get the alarm time
 
 		if ( alrt == 0 )
-			break; //  ( 0, TIMEFILE " contains an invalid time description" );	
-		alrt -= 5; 	// wake up 5 sec before the specified time	
-	
+			break; //  ( 0, TIMEFILE " contains an invalid time description" );
+		alrt -= 5; 	// wake up 5 sec before the specified time
+
 		alr = *gmtime ( &alrt );
-	
+
 		if (( fp = fopen ( "/sys/class/rtc/rtc0/alarm/since_epoch", "w" ))) {
 			fprintf ( fp, "%d", mktime( &alr ) );
 			fclose ( fp );
 			fp = NULL;
-			
+
 			if (( fp = fopen ( "/sys/class/rtc/rtc0/alarm/wakeup_enabled", "w" ))) {
 				fprintf ( fp, "1" );
 				fclose ( fp );
@@ -286,21 +286,21 @@ int suspend ( int fix_rtc )
 		}
 		else {
 			if ( ioctl ( fd, RTC_ALM_SET, &alr ) < 0 )  // set RTC alarm time
-				break; //  ( 1, "ioctl RTC_ALM_SET" );		
-		
+				break; //  ( 1, "ioctl RTC_ALM_SET" );
+
 			if ( ioctl ( fd, RTC_AIE_ON, 0 ) < 0 )
 				break; //  ( 1, "ioctl RTC_AIE_ON" );   // enable RTC alarm irq
 		}
 
 		// tell the parent it is safe to exit now .. we have set the RTC alarm
 		kill ( parent_pid, SIGUSR1 );
-			
+
 		if ( read ( fd, buf, sizeof( unsigned long )) < 0 ) // wait for the RTC alarm irq
 			break; //  ( 1, "read rtc alarm" );
-	
+
 		// iPAQ woke up via RTC irq -- otherwise we would have received a SIGUSR2
 		// from the "resume instance" of opiealarm.
-	
+
 		if ( use_sysfs ) {
 			if (( fp = fopen ( "/sys/class/rtc/rtc0/alarm/wakeup_enabled", "w" ))) {
 				fprintf ( fp, "0" );
@@ -316,16 +316,16 @@ int suspend ( int fix_rtc )
 
 		close ( fd );
 		fd = -1;
-		
+
 		remove_pidfile ( );
-		
-		return 0;	
+
+		return 0;
 
 	} while ( 0 );
 
 	if ( fp != NULL )
 		fclose ( fp );
-	
+
 	if ( fd != -1 )
 		close ( fd );
 
@@ -343,9 +343,9 @@ int onac ( void )
 
 	// check the apm proc interface for AC status
 
-	if (( fp = fopen ( APMFILE, "r" ))) { 
+	if (( fp = fopen ( APMFILE, "r" ))) {
 		int ac = 0;
-	
+
 		if ( fscanf ( fp, "%*[^ ] %*d.%*d 0x%*x 0x%x 0x%*x 0x%*x %*d%% %*i %*c", &ac ) == 1 )
 			on = ( ac == 0x01 ) ? 1 : 0;
 
@@ -360,20 +360,20 @@ int resume ( int resuspend )
 
 	// re-suspend when on AC (optional) when woken up via RTC
 
-	if ( !opiealarm_was_running ) { 
+	if ( !opiealarm_was_running ) {
 		// if opiealarm -s didn't wake up via RTC, the old process gets killed
 		// by kill_by_pidfile(), which is recorded in opiealarm_was_running
-	
-		if ( resuspend && onac ( )) {	
+
+		if ( resuspend && onac ( )) {
 			time_t start, now;
 			char *argv [4];
-						
+
 			if ( !fork_with_pidfile ( ))
 				return 4;
-				
+
 			// we can't wait for the resuspend timeout in the parent process.
 			// so we fork and tell the parent it can exit immediatly
-				
+
 			kill ( parent_pid, SIGUSR1 );
 
 			// sleep <resuspend> seconds - this method is much more precise than sleep() !
@@ -388,20 +388,20 @@ int resume ( int resuspend )
 				argv[1] = "QPE/Desktop";
 				argv[2] = "suspend()";
 				argv[3] = 0;
-	
+
 				// hard coded for now ...but needed
 				// another way would be to simulate a power-button press
-				
+
 				setenv ( "LOGNAME", "root", 1 );
 				setenv ( "HOME", "/root", 1 );
 				setenv ( "LD_LIBRARY_PATH", "/opt/QtPalmtop/lib", 1 );
 				setenv ( "QTDIR", "/opt/QtPalmtop", 1 );
-			
+
 				remove_pidfile ( );
-			
-				// no need for system() since this process is no longer useful anyway				
+
+				// no need for system() since this process is no longer useful anyway
 				execv ( "/opt/QtPalmtop/bin/qcop", argv );
-				
+
 				perror ( "exec for qcop failed" );
 				return 5;
 			}

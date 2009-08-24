@@ -58,7 +58,7 @@ public:
   //CC: WARNING! Destructor Not virtual (but you don't derive classes from this anyhow...)
 
 public:
- 	
+
   /**
    * Only a single instance of this class is allowed at a time,
    * and this static variable is used to track the one instance.
@@ -75,7 +75,7 @@ public:
    */
   static void theSigCHLDHandler(int signal);
   // handler for sigchld
-  
+
   /**
    * @internal
   */

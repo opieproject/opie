@@ -50,7 +50,7 @@ public:
 
 signals:
     void key( ushort, ushort, ushort, bool, bool );
-    
+
 private slots:
     void wordPicked( const QString & );
     void selectCharSet( int );

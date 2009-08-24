@@ -15,9 +15,9 @@ size_t UnZip(UInt8* compressedbuffer, size_t reclen, UInt8* tgtbuffer, size_t bs
   zstream.zalloc = Z_NULL;
   zstream.zfree = Z_NULL;
   zstream.opaque = Z_NULL;
-  
+
   //  printf("Initialising\n");
-  
+
   inflateInit(&zstream);
   int err = 0;
   do {

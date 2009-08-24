@@ -33,7 +33,7 @@ public:
     ~Bullet();
     void setXY(double angle);
     void checkCollision();
-    void advance(int phase);   
+    void advance(int phase);
     int rtti() const;
     static int getShotCount();
     static void setShotCount(int amount);

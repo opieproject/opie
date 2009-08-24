@@ -284,7 +284,7 @@ OPimEvent::ValueList ODateBookAccessBackend_XML::directRawRepeats()const {
     return list;
 }
 
-bool ODateBookAccessBackend_XML::loadFile() 
+bool ODateBookAccessBackend_XML::loadFile()
 {
     // initialize dict
     QAsciiDict<int> dict(26);
@@ -299,7 +299,7 @@ bool ODateBookAccessBackend_XML::loadFile()
     return ret;
 }
 
-void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) 
+void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev )
 {
     if ( m_raw.contains( ev.uid() ) || m_rep.contains( ev.uid() ) ) {
         ev.setUid( 1 );
@@ -355,7 +355,7 @@ void OPimDateBookXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, 
     ev.fromMap( map );
     for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
         ev.setCustomField(it.key(), it.data() );
-    
+
     m_backend.finalizeRecord( ev );
 }
 

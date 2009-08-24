@@ -3,11 +3,11 @@
 
 #include "netnodeinterface.h"
 
-static const char * IRDANeeds[] = 
+static const char * IRDANeeds[] =
     { 0
     };
 
-static const char * IRDAProvides[] = 
+static const char * IRDAProvides[] =
     { "line",
       0
     };

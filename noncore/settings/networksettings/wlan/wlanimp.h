@@ -8,7 +8,7 @@ class InterfaceSetupImp;
 class Interface;
 class Config;
 
-class WLANImp : public WLAN { 
+class WLANImp : public WLAN {
   Q_OBJECT
 
 public:
@@ -20,15 +20,15 @@ protected:
 
 private slots:
   void typeChanged(int);
-  
+
 private:
   void parseSettingFile();
   void changeAndSaveSettingFile();
-  
+
   InterfaceSetupImp *interfaceSetup;
   QStringList settingsFileText;
   QString currentProfile;
 };
 
 #endif
- 
+

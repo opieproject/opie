@@ -12,16 +12,16 @@
 #include "SearchResults.h"
 #include <qpe/config.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QLabel;
 class QLineEdit;
 class QPushButton;
 class QCheckBox;
 
 class SearchDialog : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:

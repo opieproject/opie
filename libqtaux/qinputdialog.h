@@ -55,7 +55,7 @@ class Q_EXPORT QInputDialog : public QDialog
     friend class QInputDialog;
 #endif
     Q_OBJECT
-	
+
 private:
     enum Type { LineEdit, SpinBox, ComboBox, EditableComboBox };
 

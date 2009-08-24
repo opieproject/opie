@@ -405,7 +405,7 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 		  _p->drawPixmap( currentx, _y-yoffset, pc );
 		  currentx += pc.width();
 	       }
-	  }	  
+	  }
 	return;
      }
     QString text = toQString(data());
@@ -469,7 +469,7 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 	drawBackground = !(bgColour == _bg);
 
 //       if (drawBackground) qDebug("Drawing background");
-       
+
 	QFont f((currentstyle.isMono() && fc->hasCourier()) ? fc->fixedfontname() : fc->name(), fc->getsize(currentstyle), (currentstyle.isBold()) ? QFont::Bold : QFont::Normal, (currentstyle.isItalic()) );
 //	f.setUnderline(currentstyle.isUnderline());
 //	if (currentstyle.isUnderline()) qDebug("UNDERLINE");
@@ -686,7 +686,7 @@ linkType CDrawBuffer::getLinkType(int numchars, size_t& tgt, size_t& offset, siz
       {
 	tabletgt = currentstyle.getTable();
 	ret |= eTable;
-      }	
+      }
     return ret;
 }
 
@@ -720,11 +720,11 @@ void CDrawBuffer::resize(int availht)
 	     iter++;
 	     int st = next->start;
 	     if (st < 0) st = 0;
-	     
+
 	     CStyle _style = next->style;
-	     
+
 	     int linespacing, ascent, descent, extra;
-	     
+
 	     ascent = fc->ascent(_style);
 	     descent = fc->descent(_style);
 	     linespacing = fc->lineSpacing(_style);
@@ -765,7 +765,7 @@ void CDrawBuffer::resize(int availht)
 		    }
 		  extra = 0;
 	       }
-	     
+
 	     /*
 	      else if (fc != NULL)
 	      {

@@ -155,7 +155,7 @@ int BluepingPlugin::authenticate() {
         QObject::connect(this, SIGNAL(emitCode(int)), &bluepingDialog, SLOT(done(int)));
 
 
-        
+
         /* let's start Bluetooth if it's not running
          */
         OProcess checkB;

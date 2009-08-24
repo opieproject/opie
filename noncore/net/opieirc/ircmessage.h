@@ -52,7 +52,7 @@ public:
     QString trailing();
     /* Return the complete parameter string */
     QString allParameters();
-    /* Return one parameter */ 
+    /* Return one parameter */
     QString param(int param);
     /* Return some parameters */
     QStringList params(const QString &paramstring) const;

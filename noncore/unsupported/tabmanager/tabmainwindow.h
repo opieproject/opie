@@ -7,7 +7,7 @@
 #include <qtoolbutton.h>
 #include <qpe/resource.h>
 
-class TabMainWindow : public QMainWindow { 
+class TabMainWindow : public QMainWindow {
 
 public:
   static QString appName() { return QString::fromLatin1( QUICKAPP_NAME ); }
@@ -20,13 +20,13 @@ public:
     QToolBar *newToolBar = new QToolBar("toolbar", this);
     QToolBar *emptyToolBar = new QToolBar("empty", this);
     emptyToolBar->setHorizontalStretchable(true);
-   
-    // Insert all of the buttons. 
+
+    // Insert all of the buttons.
     QToolButton *newFolder = new QToolButton(Resource::loadPixmap("fileopen"), "New Folder", 0, tabManager, SLOT(newFolder()), newToolBar);
     QToolButton *newFile = new QToolButton(Resource::loadPixmap("new"), "New Application", 0, tabManager, SLOT(newApplication()), newToolBar);
     QToolButton *editItem = new QToolButton(Resource::loadPixmap("edit"), "Edit", 0, tabManager, SLOT(editCurrentItem()), newToolBar);
     QToolButton *deleteItem = new QToolButton(Resource::loadPixmap("trash"), "Delete", 0, tabManager, SLOT(removeItem()), newToolBar);
-    
+
   };
 
 protected:
@@ -36,5 +36,5 @@ protected:
 
 #endif
 
-// tabmainwindow.h 
+// tabmainwindow.h
 

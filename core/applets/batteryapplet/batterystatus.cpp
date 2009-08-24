@@ -49,7 +49,7 @@ bool BatteryStatus::getProcApmStatusIpaq() {
         QString streamIn;
         streamIn = stream.read();
         list = QStringList::split("\n", streamIn);
-       
+
         sec2 = sec1 = "";
 
         for(QStringList::Iterator line=list.begin(); line!=list.end(); line++) {

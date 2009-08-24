@@ -54,7 +54,7 @@
 //
 
 #ifndef QT_H
-#endif // QT_H 
+#endif // QT_H
 
 extern uint qt_get_rgb_val( const char *name );
 extern bool qt_get_named_rgb( const char *, QRgb* );

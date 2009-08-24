@@ -7,12 +7,12 @@ class BluetoothBNEPRun  : public RuntimeInfo {
 
 public :
 
-      BluetoothBNEPRun( ANetNodeInstance * NNI, 
+      BluetoothBNEPRun( ANetNodeInstance * NNI,
                         BluetoothBNEPData & D );
       virtual ~BluetoothBNEPRun( void );
 
       // i am a device
-      virtual RuntimeInfo * device( void ) 
+      virtual RuntimeInfo * device( void )
         { return this; }
 
       bool handlesInterface( const QString & );

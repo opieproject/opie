@@ -27,12 +27,12 @@ signals:
 
 protected:
 	virtual void setHBarGeometry ( QScrollBar &hbar, int x, int y, int w, int h );
-	
+
 	virtual void keyPressEvent ( QKeyEvent *e );
 	virtual void viewportMousePressEvent ( QMouseEvent *e );
-	virtual void viewportMouseMoveEvent ( QMouseEvent *e ); 
+	virtual void viewportMouseMoveEvent ( QMouseEvent *e );
 	virtual void viewportMouseReleaseEvent ( QMouseEvent *e );
-	
+
 	virtual void drawContents ( QPainter *p, int, int, int, int );
 
 private:

@@ -122,15 +122,15 @@ int mpeg3audio_imdct_init(mpeg3audio_t *audio);
 /* VIDEO */
 mpeg3video_t* mpeg3video_new(mpeg3_t *file, mpeg3_vtrack_t *track);
 int mpeg3video_delete(mpeg3video_t *video);
-int mpeg3video_read_frame(mpeg3video_t *video, 
-		long frame_number, 
+int mpeg3video_read_frame(mpeg3video_t *video,
+		long frame_number,
 		unsigned char **output_rows,
-		int in_x, 
-		int in_y, 
-		int in_w, 
-		int in_h, 
-		int out_w, 
-		int out_h, 
+		int in_x,
+		int in_y,
+		int in_w,
+		int in_h,
+		int out_w,
+		int out_h,
 		int color_model);
 int mpeg3video_set_cpus(mpeg3video_t *video, int cpus);
 int mpeg3video_set_mmx(mpeg3video_t *video, int use_mmx);

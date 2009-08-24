@@ -36,10 +36,10 @@ class TVEditView : public QDialog
 	Q_OBJECT
 
 public:
-	TVEditView(TableState *s, DataElem *d, QWidget* parent = 0, 
+	TVEditView(TableState *s, DataElem *d, QWidget* parent = 0,
                 const char* name = 0, WFlags fl = 0);
-	~TVEditView();                                                          
-    
+	~TVEditView();
+
     static bool openEditItemDialog(TableState *s, DataElem *d, QWidget *parent);
 
 protected slots:

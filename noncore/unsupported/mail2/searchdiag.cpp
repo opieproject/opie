@@ -17,7 +17,7 @@
 
 SearchDiag::SearchDiag(QWidget *parent, const char *name, WFlags fl)
 	: SearchDiagBase(parent, name,  fl)
-{	
+{
 	_selected = false;
 
 	in->insertItem(tr("Body"), INMENU_BODY);

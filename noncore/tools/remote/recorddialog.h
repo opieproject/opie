@@ -62,7 +62,7 @@ private:
 	QString errors;
 	QString remotefile;
 	LircHandler *lh;
-	
+
 	void writeToProcess(const char *buffer, int len);
 };
 

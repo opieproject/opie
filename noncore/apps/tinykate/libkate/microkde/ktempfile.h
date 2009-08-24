@@ -10,10 +10,10 @@ class KTempFile
   public:
     KTempFile();
     KTempFile( const QString &filename, const QString &extension );
-  
+
     void setAutoDelete( bool );
     QString name();
-    
+
     QTextStream *textStream();
 };
 

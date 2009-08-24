@@ -172,13 +172,13 @@ DatebookEventDesc::~DatebookEventDesc()
 void DatebookEventDesc::mousePressEvent(QMouseEvent*)
 {
     hide();
-    if (m_Timer->isActive()) 
+    if (m_Timer->isActive())
         m_Timer->stop();
 }
 
 void DatebookEventDesc::disp_event(const OPimEvent&e)
 {
-    if (m_Timer->isActive()) 
+    if (m_Timer->isActive())
         m_Timer->stop();
 
     QString text;

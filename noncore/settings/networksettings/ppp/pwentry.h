@@ -3,8 +3,8 @@
  *            kPPP: A pppd front end for the KDE project
  *
  * $Id: pwentry.h,v 1.2 2003-08-09 17:14:56 kergoth Exp $
- * 
- *            Copyright (C) 1997 Bernd Johannes Wuebben 
+ *
+ *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
  *
  *
@@ -26,7 +26,7 @@
 
 #ifndef PWENTRY_H
 #define PWENTRY_H
- 
+
 #include <qwidget.h>
 #include <qlineedit.h>
 #include <qlabel.h>
@@ -38,7 +38,7 @@ class PWEntry : public QWidget {
 
 public:
 
-   PWEntry( QWidget *parent=0,  const char *name=0 );   
+   PWEntry( QWidget *parent=0,  const char *name=0 );
    bool Consumed();
    void setConsumed();
    QString text();
@@ -68,5 +68,5 @@ private:
     bool isconsumed;
 
 };
- 
+
 #endif

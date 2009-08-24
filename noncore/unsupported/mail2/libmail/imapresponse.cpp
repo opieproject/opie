@@ -6,73 +6,73 @@ IMAPResponseParser::IMAPResponseParser()
 }
 
 void IMAPResponseParser::parse ( const QString &_data )
-{	
+{
 	QString data = _data;
 
 	int pos = 0;
 	int len = data. length ( );
-	
-	
+
+
 	while ( pos < len ) {
 		pos = data. find ( QRegExp ( "[^\\s]" ), pos );
-		
+
 		if (( pos < 0 ) ||  ( pos >= len ))
 			break;
-	
+
 		switch ( data [pos]. latin1 ( )) {
 			case '*': {
 				qDebug ( "* ASTERIX\n" );
-			
+
 				int eol = data. find ( '\n', pos );
 				int bracket = data. findRev ( '{', eol );
 				int rest = data. find ( QRegExp ( "[^\\s]" ), pos + 1 );
-				
+
 				qDebug ( "pos=%d, rest=%d, bracket=%d, eol=%d\n", pos, rest, bracket, eol );
-				
+
 				if ( bracket > pos ) {
 					uint needdata = data. mid ( bracket + 1, data. find ( '}', bracket + 1 ) - bracket - 1 ). toUInt ( );
-					
+
 					if ( needdata ) {
 						qDebug ( "nd=%d - hd=%d\n", needdata, ( len - eol - 1 ));
-					
+
 						while ( needdata > ( len - eol - 1 )) {
 							qDebug ( "emitting need more...\n" );
 							emit needMoreData ( data );
 							len = data. length ( );
 						}
 						qDebug ( "Got all data...\n" );
-					
+
 						QString tmp = data. mid ( rest, eol - rest + 1 + needdata );
-						
-						int tail = 0;	
-						
+
+						int tail = 0;
+
 						while ( data [eol - rest + 1 + needdata + tail] != ')' )
 							tail++;
 						tmp. append ( data. mid ( eol - rest + 1 + needdata, tail + 1 ));
-							
-					
+
+
 						qDebug ( "Complete parse = |%s|\n", tmp.latin1());
-					
+
 						parseResponse ( tmp );
-						
+
 						pos = rest + needdata + tail + 1;
 						break;
-					}									
+					}
 				}
-				
-				parseResponse ( data. mid ( rest, eol - rest + 1 ). stripWhiteSpace ( ));				
+
+				parseResponse ( data. mid ( rest, eol - rest + 1 ). stripWhiteSpace ( ));
 				break;
-			}          
+			}
 			case '+': {
 				qDebug ( "+ PLUS\n" );
-				
+
 				emit needMoreData ( data );
 				len = data. length ( );
 				break;
-			}			          
+			}
 			default : {
 				qDebug ( "OTHER: '%s...'\n", data. mid ( pos, 20 ). latin1 ( ));
-			
+
 				uint rest = data. find ( ' ', pos + 1 );
 				rest = data. find ( QRegExp ( "[^\\s]" ), rest + 1 );
 				_iresponse. setTag ( data. mid ( pos, rest - pos ). stripWhiteSpace ( ));
@@ -152,7 +152,7 @@ void IMAPResponseParser::parseResponse(const QString &data, bool tagged)
 		parseParenthesizedList(list[0], flags);
 
 		removeLimiters(list[1]);
-		removeLimiters(list[2]);		
+		removeLimiters(list[2]);
 		IMAPResponseLIST rlist(parseFlagList(flags), list[1], list[2]);
 		_iresponse.addLIST(rlist);
 	} else if (response == "LSUB") {
@@ -211,14 +211,14 @@ void IMAPResponseParser::parseResponse(const QString &data, bool tagged)
 
 			QStringList fetchList = splitData(line, true);
 			QStringList list;
-			
+
 			qDebug ( "fl [0]=%s, fl [1]=%s, fl[2]=%s\n", fetchList[0].latin1(),fetchList[1].latin1(),fetchList[2].latin1());
-			
+
 			parseParenthesizedList(fetchList[1], list);
 
 			for (it = list.begin(); it != list.end(); it++) {
 				qDebug ( "Checking list[] == %s\n", (*it).latin1());
-			
+
 				if (*it == "BODY") {
 					qDebug("IMAPResponseParser: responseParser: got FETCH::BODY");
 					// XXX
@@ -309,25 +309,25 @@ void IMAPResponseParser::parseResponse(const QString &data, bool tagged)
 						parseParenthesizedList(*it, sendera);
 						if (senderl[0] != "NIL")
 							envelope.addSender(IMAPResponseAddress(
-								removeLimiters(sendera[0]), 
-								removeLimiters(sendera[1]), 
-								removeLimiters(sendera[2]), 
+								removeLimiters(sendera[0]),
+								removeLimiters(sendera[1]),
+								removeLimiters(sendera[2]),
 								removeLimiters(sendera[3])));
 					}
 
 					for (it = replytol.begin(); it != replytol.end(); it++) {
-						parseParenthesizedList(*it, replytoa);				
+						parseParenthesizedList(*it, replytoa);
 						if (replytol[0] != "NIL")
 							envelope.addReplyTo(IMAPResponseAddress(
 								removeLimiters(replytoa[0]),
 								removeLimiters(replytoa[1]),
-								removeLimiters(replytoa[2]), 
+								removeLimiters(replytoa[2]),
 								removeLimiters(replytoa[3])));
 					}
 
 					for (it = tol.begin(); it != tol.end(); it++) {
 						parseParenthesizedList(*it, toa);
-						if (tol[0] != "NIL") 
+						if (tol[0] != "NIL")
 							envelope.addTo(IMAPResponseAddress(
 								removeLimiters(toa[0]),
 								removeLimiters(toa[1]),
@@ -357,7 +357,7 @@ void IMAPResponseParser::parseResponse(const QString &data, bool tagged)
 
 					envelope.setInReplyTo(envList[7] == "NIL" ? QString(0) : removeLimiters(envList[7]));
 					envelope.setMessageId(envList[8] == "NIL" ? QString(0) : removeLimiters(envList[8]));
-				
+
 					fetch.setEnvelope(envelope);
 				} else if (*it == "FLAGS") {
 					QString flagdata = *(++it);
@@ -379,18 +379,18 @@ void IMAPResponseParser::parseResponse(const QString &data, bool tagged)
 					// XXX
 				} else if (*it == "UID") {
 					fetch.setUid(*(++it));
-				}	
+				}
 			}
 			_iresponse.addFETCH(fetch);
 		}
 	} else qWarning((QString("IMAPResponseParser: parseResponse: Unknown response: ") + response + "|").latin1());
-	
+
 }
 
 QStringList IMAPResponseParser::splitData(const QString &data, bool withBrackets)
 {
 	int b = 0;
-	bool a = false, noappend = false, escaped = false;	 
+	bool a = false, noappend = false, escaped = false;
 	QString temp;
 	QStringList list;
 
@@ -402,16 +402,16 @@ QStringList IMAPResponseParser::splitData(const QString &data, bool withBrackets
 
 		if (data[i] == '{' && !escaped && !a ) {
 			qDebug ( "sd: found a {\n" );
-		
+
 			int p = data. find ( '}', i + 1 );
 			int eol = data. find ( '\n', i + 1 );
 
 			if ( p > int( i )) {
 				int len = data. mid ( i + 1, p - i - 1 ). toInt ( );
-		
+
 				qDebug ( "sd: skipping %d bytes\n", len );
-			
-				if ( b == 0 ) {			
+
+				if ( b == 0 ) {
 					temp = data. mid ( eol + 1, len );
 					noappend = false;
 					i = eol + len;
@@ -466,7 +466,7 @@ QString IMAPResponseParser::removeLimiters(QString &string, const QChar &sl, con
 {
 	QString tmpString;
 	string = string. stripWhiteSpace ( );
-	
+
 	if (string[0] == sl && string[string.length() - 1] == el) {
 		string.truncate(string.length() - 1);
 		string.replace(0, 1, "");

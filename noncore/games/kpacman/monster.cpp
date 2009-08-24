@@ -13,7 +13,7 @@ Monster::Monster(Board *b, int mid)
         setPrison(board->position(prisonentry));
     else
         setPrison(board->position(monsterhome, mid));
-   
+
     actualPosition = lastPosition = OUT;
     feetPosition = 0;
     IQ = 0;
@@ -119,7 +119,7 @@ bool Monster::move()
         harmlessLeft--;
         if (harmlessLeft == 0 && actualState == harmless) {
             actualState = dangerous;
-            pauseDuration = dangerousPause; 
+            pauseDuration = dangerousPause;
         }
     }
 
@@ -164,10 +164,10 @@ bool Monster::move()
         }
         if (actualState == dangerous)
             pauseDuration = dangerousPause;
-        
-    } 
 
-    if (arrestLeft == 0)                        
+    }
+
+    if (arrestLeft == 0)
         if (actualState == rem) {       // on the way to prison
 
             d = board->closeup(actualPosition, d, prisonPosition);
@@ -202,8 +202,8 @@ bool Monster::move()
 
     actualDirection = d;
     actualPosition = board->move(actualPosition, actualDirection);
-    
-    if (arrestLeft == 1 && actualPosition == freedomPosition) 
+
+    if (arrestLeft == 1 && actualPosition == freedomPosition)
         arrestLeft = 0;
 
     if (actualState == rem && actualPosition == prisonPosition) {
@@ -230,7 +230,7 @@ int Monster::body()
         return -1;
     else
         if (actualState == harmless)
-            if (harmlessLeft > warningDuration || 
+            if (harmlessLeft > warningDuration ||
                 harmlessLeft % (int) (warningDuration/4.5) > (int) (warningDuration/9))
                 return ((maxBodyPixmaps/10)*8)+feetPosition;
             else

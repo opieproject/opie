@@ -75,7 +75,7 @@ inline LONG MulDiv (long a, long b, long c)
 #define  GHND   0
 
 inline signed char * GlobalAllocPtr(unsigned int, size_t size)
-{ 
+{
   signed char * p = (signed char *) malloc(size);
 
   if (p != NULL) memset(p, 0, size);

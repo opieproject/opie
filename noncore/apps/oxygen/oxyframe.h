@@ -23,7 +23,7 @@
 class OxyFrame : public QLabel
 {
 	Q_OBJECT
-	
+
     public:
         OxyFrame(  QWidget *parent=0, const char *name=0, QString symbol="" );
 
@@ -33,7 +33,7 @@ class OxyFrame : public QLabel
 
     signals:
         /*
-         * this signal emits the name (the element-number) 
+         * this signal emits the name (the element-number)
          */
         void num(QString);
 };

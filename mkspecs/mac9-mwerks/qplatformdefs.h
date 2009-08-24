@@ -50,7 +50,7 @@
 #endif
 
 #define QT_SIGNAL_RETTYPE	void
-#define QT_SIGNAL_ARGS		
+#define QT_SIGNAL_ARGS
 #define QT_SIGNAL_IGNORE	(void (*)())1
 
 #define QT_SOCKLEN_T		int

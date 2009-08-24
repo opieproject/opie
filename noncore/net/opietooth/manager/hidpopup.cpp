@@ -23,10 +23,10 @@ using namespace OpieTooth;
 /*
  * c'tor init the QAction
  */
-HidPopup::HidPopup(const OpieTooth::Services&, OpieTooth::BTDeviceItem* item) : 
+HidPopup::HidPopup(const OpieTooth::Services&, OpieTooth::BTDeviceItem* item) :
     QPopupMenu()  {
 
-    owarn << "HidPopup c'tor" << oendl; 
+    owarn << "HidPopup c'tor" << oendl;
 
     m_item = item;
     QAction* a;
@@ -55,17 +55,17 @@ void HidPopup::slotConnect() {
     odebug << "connect" << oendl;
     m_hidConnect = new OProcess();
     *m_hidConnect << "hidd" << "--connect" << m_item->mac();
-    connect(m_hidConnect, 
+    connect(m_hidConnect,
         SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int)),
         this, SLOT(fillOutPut(Opie::Core::OProcess*, char*, int)));
-    connect(m_hidConnect, 
+    connect(m_hidConnect,
         SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int)),
         this,    SLOT(fillErr(Opie::Core::OProcess*, char*, int)));
-    connect(m_hidConnect, 
+    connect(m_hidConnect,
         SIGNAL(processExited(Opie::Core::OProcess*)),
         this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
     if (!m_hidConnect->start(OProcess::Block, OProcess::AllOutput)) {
-        QMessageBox::critical(this, tr("HID Connection"), 
+        QMessageBox::critical(this, tr("HID Connection"),
             tr("HID Connection\nto device ") + m_item->mac() + tr("\nfailed"));
         delete m_hidConnect;
         m_hidConnect = 0l;
@@ -93,10 +93,10 @@ void HidPopup::fillErr(OProcess*, char* buf, int len)
 
 void HidPopup::slotProcessExited(OProcess* proc) {
     if (m_hidConnect->normalExit())
-        QMessageBox::information(this, tr("HID Connection"), 
+        QMessageBox::information(this, tr("HID Connection"),
             tr("HID Connect\nstarted"));
     else
-        QMessageBox::critical(this, tr("HID Connection"), 
+        QMessageBox::critical(this, tr("HID Connection"),
             tr("HID Connection\nto device ") + m_item->mac() + tr("\nfailed"));
     delete m_hidConnect;
     m_hidConnect = 0l;

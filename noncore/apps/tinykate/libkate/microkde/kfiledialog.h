@@ -4,7 +4,7 @@
 class KFileDialog
 {
   public:
-  
+
     static QString getSaveFileName( const QString &,
                                     const QString &, QWidget * )
     {

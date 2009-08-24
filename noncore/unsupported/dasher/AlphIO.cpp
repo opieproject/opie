@@ -14,8 +14,8 @@ using namespace Dasher;
 using namespace std;
 
 CAlphIO::CAlphIO(string SystemLocation, string UserLocation)
-	: BlankInfo(), 
-	  SystemLocation(SystemLocation), 
+	: BlankInfo(),
+	  SystemLocation(SystemLocation),
           UserLocation(UserLocation),
 	  CData("")
 {
@@ -26,10 +26,10 @@ CAlphIO::CAlphIO(string SystemLocation, string UserLocation)
 void CAlphIO::GetAlphabets(std::vector< std::string > * AlphabetList) const
 {
 	AlphabetList->clear();
-	
+
 	typedef std::map<std::string, AlphInfo>::const_iterator CI;
 	CI End = Alphabets.end();
-	
+
 	for (CI Cur=Alphabets.begin(); Cur!=End; Cur++)
 		AlphabetList->push_back( (*Cur).second.AlphID);
 }

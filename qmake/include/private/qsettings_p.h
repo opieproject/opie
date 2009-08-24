@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Definition of QSettings related classes
 **
@@ -43,7 +43,7 @@
 //  -------------
 //
 // This file is not part of the Qt API.  It exists for the convenience
-// of QSettings. This header file may change from version to 
+// of QSettings. This header file may change from version to
 // version without notice, or even be removed.
 //
 // We mean it.
@@ -106,7 +106,7 @@ public:
     bool globalScope :1;
 
 #if !defined(QWS) && (defined(Q_WS_WIN) || defined(Q_OS_MAC))
-    // system dependent implementations to use the 
+    // system dependent implementations to use the
     // system specific setting database (ie. registry on Windows)
 
     QSettingsSysPrivate *sysd;

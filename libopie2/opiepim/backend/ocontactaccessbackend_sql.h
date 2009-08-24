@@ -73,9 +73,9 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	UIDArray allRecords() const;
 
 	OPimContact find( int uid ) const;
-	OPimContact find( int uid, const UIDArray& items, uint cur, Frontend::CacheDirection ) const; 
+	OPimContact find( int uid, const UIDArray& items, uint cur, Frontend::CacheDirection ) const;
 
-	UIDArray queryByExample ( const UIDArray& uidlist, const OPimContact &query, int settings, 
+	UIDArray queryByExample ( const UIDArray& uidlist, const OPimContact &query, int settings,
 				     const QDateTime& d ) const;
 
 	UIDArray matchRegexp(  const QRegExp &r ) const;
@@ -85,7 +85,7 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	bool hasQuerySettings (uint querySettings) const;
 
 	UIDArray sorted( const UIDArray& ar, bool asc, int sortOrder,
-			 int filter, const QArray<int>& categories)const;	
+			 int filter, const QArray<int>& categories)const;
 
  	bool add ( const OPimContact &newcontact );
 

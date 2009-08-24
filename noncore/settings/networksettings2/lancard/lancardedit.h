@@ -16,7 +16,7 @@ public slots :
 
     void SLOT_ScanCards( void );
     void SLOT_RemoveUnknown( void );
-    
+
 private :
 
     void populateList( void );

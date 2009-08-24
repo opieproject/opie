@@ -46,7 +46,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 //  packageListServers( QObject(parent), name ),
 //  packageListSearch( parent, name ),
 //  packageListDocLnk( parent, name )
-{	
+{
   setCaption( tr("Package Manager") );
   settings = new PackageManagerSettings(this,0,TRUE);
   listViewPackages =  new PackageListView( this,"listViewPackages",settings );
@@ -63,7 +63,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 	pvDebug(9,"packageListDocLnk.update");
   packageListDocLnk.update();
 	pvDebug(9,"makeMenu");
-  makeMenu();	
+  makeMenu();
   makeChannel();
 
 
@@ -101,7 +101,7 @@ void MainWindow::makeMenu()
 //  spacer->setBackgroundColor( toolBar->backgroundColor() );
 //  toolBar->setStretchableWidget( spacer );
 
-		
+
   runAction = new QAction( tr( "Apply" ),
 			   Resource::loadPixmap( "oipkg/install" ),
 			   QString::null, 0, this, 0 );
@@ -127,7 +127,7 @@ void MainWindow::makeMenu()
   connect( cfgact, SIGNAL( activated() ),
 	   SLOT( showSettingsSetup() ) );
   cfgact->addTo( cfgMenu );
-		
+
   cfgact = new QAction( tr( "Servers" ),
 			QString::null, 0, this, 0 );
   connect( cfgact, SIGNAL( activated() ),
@@ -148,7 +148,7 @@ void MainWindow::makeMenu()
   QLabel *label = new QLabel( sectionBar, "section" );
 //  label->setBackgroundMode( NoBackground );
  	label->font().setPointSize( 8 );
-  label->setText( tr( "Section:" ) ); 	
+  label->setText( tr( "Section:" ) );
   sectionBar->setStretchableWidget( label );
   section = new QComboBox( false, sectionBar );
  	section->font().setPointSize( 8 );
@@ -297,7 +297,7 @@ MainWindow::~MainWindow()
   cfg.writeEntry( "sectionBar", !sectionBar->isHidden() );
   cfg.writeEntry( "destBar", !destBar->isHidden() );
   cfg.writeEntry( "default_section", section->currentText() );
-	
+
 }
 
 void MainWindow::runIpkg()
@@ -466,7 +466,7 @@ void MainWindow::setDocument(const QString &fileName)
 
 
 void MainWindow::makeChannel()
-{   	
+{
 	channel = new QCopChannel( "QPE/Application/oipkg", this );
 	connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
 		this, SLOT(receive(const QCString&,const QByteArray&)) );

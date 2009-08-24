@@ -99,18 +99,18 @@ _STOCKS_C_EXT libstocks_return_code get_stocks(const char *, stock **);
 _HTTP_C_EXT   libstocks_return_code set_proxy(char *);
 
 
-_CURRENCY_C_EXT libstocks_return_code get_currency_exchange(char *, 
-                  char *, 
+_CURRENCY_C_EXT libstocks_return_code get_currency_exchange(char *,
+                  char *,
                   float *);
 
-_HISTORY_C_EXT libstocks_return_code get_history_csv(char *, 
-                 char *, 
-                 char *, 
+_HISTORY_C_EXT libstocks_return_code get_history_csv(char *,
+                 char *,
+                 char *,
                  char **);
 
-_HISTORY_C_EXT libstocks_return_code get_stock_history(char *, 
-                   char *, 
-                   char *, 
+_HISTORY_C_EXT libstocks_return_code get_stock_history(char *,
+                   char *,
+                   char *,
                    stock **);
 
 

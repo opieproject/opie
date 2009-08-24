@@ -16,7 +16,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the

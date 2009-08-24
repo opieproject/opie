@@ -26,7 +26,7 @@ Interfaces::Interfaces(QString useInterfacesFile){
   interfacesFile = useInterfacesFile;
   QFile file(interfacesFile);
   if (!file.open(IO_ReadOnly)){
-    odebug << "Interfaces: Can't open file: " << interfacesFile.latin1() << " for reading." << oendl; 
+    odebug << "Interfaces: Can't open file: " << interfacesFile.latin1() << " for reading." << oendl;
     currentIface = interfaces.end();
     currentMapping = interfaces.end();
     return;
@@ -78,7 +78,7 @@ bool Interfaces::isAuto(const QString &interface) const {
   QStringList autoLines = interfaces.grep(QRegExp(AUTO));
   QStringList awi = autoLines.grep(QRegExp(interface));
   if(awi.count() > 1)
-    odebug << QString("Interfaces: Found more then auto group with interface: %1.").arg(interface).latin1() << oendl; 
+    odebug << QString("Interfaces: Found more then auto group with interface: %1.").arg(interface).latin1() << oendl;
   return awi.count() > 0;
 }
 
@@ -154,7 +154,7 @@ bool Interfaces::isInterfaceSet() const {
  * @return true if successful.
  */
 bool Interfaces::addInterface(const QString &interface, const QString &family, const QString &method){
-    odebug << "Interfaces::addInterface(" << interface.latin1() << ")" << oendl; 
+    odebug << "Interfaces::addInterface(" << interface.latin1() << ")" << oendl;
   if(0 == acceptedFamily.contains(family))
     return false;
   QString newInterface = interface.simplifyWhiteSpace();
@@ -170,7 +170,7 @@ bool Interfaces::addInterface(const QString &interface, const QString &family, c
  * @return bool true if successful
  */
 bool Interfaces::copyInterface(const QString &interface, const QString &newInterface){
-    odebug << "copy interface " << interface.latin1() << " to " << newInterface.latin1() << "" << oendl; 
+    odebug << "copy interface " << interface.latin1() << " to " << newInterface.latin1() << "" << oendl;
   if(!setInterface(interface))
     return false;
 
@@ -277,14 +277,14 @@ QString Interfaces::getInterfaceMethod(bool &error){
  * @return bool true if successful.
  */
 bool Interfaces::setInterfaceName(const QString &newName){
-    odebug << "setInterfaceName " << newName.latin1() << "" << oendl; 
+    odebug << "setInterfaceName " << newName.latin1() << "" << oendl;
   if(currentIface == interfaces.end())
     return false;
   QString name = newName.simplifyWhiteSpace();
   name = name.replace(QRegExp(" "), "");
   bool returnValue = false;
   QString tmp = QString("iface %1 %2 %3").arg(name).arg(getInterfaceFamily(returnValue)).arg(getInterfaceMethod(returnValue));
-  odebug << "setting  " << tmp.latin1() << "" << oendl; 
+  odebug << "setting  " << tmp.latin1() << "" << oendl;
 
   (*currentIface) = tmp;
   return !returnValue;
@@ -347,7 +347,7 @@ bool Interfaces::setInterfaceOption(const QString &option, const QString &value)
     if( value.stripWhiteSpace().isEmpty() )
 	return removeInterfaceOption( option );
 
-    odebug << "iface >" << (*currentIface).latin1() << "< option >" << option.latin1() << "< value >" << value.latin1() << "<" << oendl; 
+    odebug << "iface >" << (*currentIface).latin1() << "< option >" << option.latin1() << "< value >" << value.latin1() << "<" << oendl;
     return setOption(currentIface, option, value);
 }
 
@@ -488,7 +488,7 @@ bool Interfaces::setStanza(const QString &stanza, const QString &option, QString
       }
       if(valid){
         if(found == true){
-          odebug << QString("Interfaces: Found multiple stanza's for search: %1 %2").arg(stanza).arg(option).latin1() << oendl; 
+          odebug << QString("Interfaces: Found multiple stanza's for search: %1 %2").arg(stanza).arg(option).latin1() << oendl;
         }
         found = true;
         iterator = it;
@@ -507,12 +507,12 @@ bool Interfaces::setStanza(const QString &stanza, const QString &option, QString
 bool Interfaces::setOption(const QStringList::Iterator &start, const QString &option, const QString &value){
   if(start == interfaces.end())
     return false;
-  odebug << "setting option" << oendl; 
+  odebug << "setting option" << oendl;
   bool found = false;
   bool replaced = false;
   QStringList::Iterator insertAt = NULL;
   for ( QStringList::Iterator it = start; it != interfaces.end(); ++it ) {
-      odebug << " Interfaces::setOption got line >" << (*it).latin1() << "<" << oendl; 
+      odebug << " Interfaces::setOption got line >" << (*it).latin1() << "<" << oendl;
       // FIXME: was  not completly stupid just wrong sice all options got inserted bevore the iface line
       // but since it works with an empty interfaces file I (tille) will not do anything more
       if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO)) ){
@@ -520,10 +520,10 @@ bool Interfaces::setOption(const QStringList::Iterator &start, const QString &op
 //  && it != start){
 //       if(!found && value != ""){
 //         // Got to the end of the stanza without finding it, so append it.
-//           odebug << " Got to the end of the stanza without finding it, so append it." << oendl; 
+//           odebug << " Got to the end of the stanza without finding it, so append it." << oendl;
 //         interfaces.insert(--it, QString("\t%1 %2").arg(option).arg(value));
 //       }
-         odebug << "found 1" << oendl; 
+         odebug << "found 1" << oendl;
 //         interfaces.insert(++it, QString("\t%1 %2").arg(option).arg(value));
        found = true;
        insertAt = it;
@@ -531,23 +531,23 @@ bool Interfaces::setOption(const QStringList::Iterator &start, const QString &op
      }
     if((*it).contains(option) && it != start && (*it).at(0) != '#'){
       // Found it in stanza so replace it.
-        odebug << "found 2" << oendl; 
+        odebug << "found 2" << oendl;
       if(found)
-        odebug << QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1() << oendl; 
+        odebug << QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1() << oendl;
       found = true;
       replaced = true;
         (*it) = QString("\t%1 %2").arg(option).arg(value);
     }
   }
   if(!found){
-      odebug << "! found insert anyway" << oendl; 
+      odebug << "! found insert anyway" << oendl;
     QStringList::Iterator p = start;
     interfaces.insert(++p, QString("\t%1 %2").arg(option).arg(value));
     found = true;
   }
 
   if(found && !replaced){
-      odebug << "found iface but not the option so insert it here..." << oendl; 
+      odebug << "found iface but not the option so insert it here..." << oendl;
       interfaces.insert(++insertAt, QString("\t%1 %2").arg(option).arg(value));
   }
   return found;
@@ -584,7 +584,7 @@ bool Interfaces::removeOption(const QStringList::Iterator &start, const QString 
     if((*it).contains(option) && it != start && (*it).at(0) != '#'){
       // Found it in stanza so replace it.
       if(found)
-        odebug << QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1() << oendl; 
+        odebug << QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1() << oendl;
       found = true;
       it = interfaces.remove( it ); // we really want to remove the line
       --it; // we do ++it later in the head of the for loop
@@ -612,7 +612,7 @@ bool Interfaces::removeOption(const QStringList::Iterator &start, const QString 
     if((*it).contains(option) && (*it).contains(value) && it != start && (*it).at(0) != '#'){
       // Found it in stanza so replace it.
       if(found)
-        odebug << QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1() << oendl; 
+        odebug << QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1() << oendl;
       found = true;
       it = interfaces.remove( it ); // we really want to remove the line
       --it; // we do ++it later in the head of the for loop
@@ -665,7 +665,7 @@ QString Interfaces::getOption(const QStringList::Iterator &start, const QString 
     }
     if((*it).contains(option) && (*it).at(0) != '#'){
       if(found)
-        odebug << QString("Interfaces: getOption found more then one value: %1 for option: %2 in stanza %3").arg((*it)).arg(option).arg((*start)).latin1() << oendl; 
+        odebug << QString("Interfaces: getOption found more then one value: %1 for option: %2 in stanza %3").arg((*it)).arg(option).arg((*start)).latin1() << oendl;
       found = true;
       QString line = (*it).simplifyWhiteSpace();
       int space = line.find(" ", option.length());
@@ -689,7 +689,7 @@ bool Interfaces::write(){
   QFile file(interfacesFile);
 
   if (!file.open(IO_ReadWrite)){
-    odebug << QString("Interfaces: Can't open file: %1 for writing.").arg(interfacesFile).latin1() << oendl; 
+    odebug << QString("Interfaces: Can't open file: %1 for writing.").arg(interfacesFile).latin1() << oendl;
     return false;
   }
   QTextStream stream( &file );
@@ -702,7 +702,7 @@ bool Interfaces::write(){
     else
       whiteSpaceCount = 0;
     if(whiteSpaceCount < 2){
-      odebug << (*it).latin1() << oendl; 
+      odebug << (*it).latin1() << oendl;
       stream << (*it) << '\n';
     }
   }

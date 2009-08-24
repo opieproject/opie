@@ -26,7 +26,7 @@
  * <key name=key3name type=Date>Key 3</key>
  * <key name=key4name type=Int>key 4</key>
  * </header>
- * <record> 
+ * <record>
  * <key_name>string</key_name>
  * <key4name>int</key4name>
  * <key2name>string</key2name>
@@ -37,7 +37,7 @@
  * ....
  * </database>
  *
- * There is some room for improvment mostly around using better checking 
+ * There is some room for improvment mostly around using better checking
  * and the use of more advanced xml features.
  */
 

@@ -356,7 +356,7 @@ QArray<int> OPimTodoAccessXML::sorted( const UIDArray& events, bool asc,
             if ( bCat && cat == -1 ) {
                 if(!todo.categories().isEmpty() )
                     continue;
-            } 
+            }
             else if ( bCat && cat != 0)
                 if (!todo.categories().contains( cat ) )
                     continue;
@@ -429,7 +429,7 @@ void OPimTodoXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QStr
     todo.fromMap( map );
     for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
         todo.setCustomField(it.key(), it.data() );
-    
+
     m_backend.finalizeRecord( todo );
 }
 

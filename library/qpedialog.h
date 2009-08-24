@@ -29,7 +29,7 @@ class QPEDialogListenerData;
  *
  * If you want your dialog to be acceptables/rejectable by QCOP
  * You need to create a QPEDialogListener with your Dialog as Argument.
- * 
+ *
  * This feature is at least use with the first use support of Opie
  */
 class QPEDialogListener : public QObject
@@ -38,7 +38,7 @@ class QPEDialogListener : public QObject
 public:
     QPEDialogListener(QDialog *di);
     ~QPEDialogListener();
-    
+
 private slots:
     void appMessage( const QCString &msg, const QByteArray &data );
 

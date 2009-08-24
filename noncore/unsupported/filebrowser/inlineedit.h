@@ -25,7 +25,7 @@
 class InlineEdit : public QLineEdit
 {
     Q_OBJECT
-    
+
 public:
     InlineEdit( QWidget * parent = 0, const char * name = 0 );
 

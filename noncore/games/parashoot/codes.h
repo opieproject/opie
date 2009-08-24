@@ -18,8 +18,8 @@
 **
 **********************************************************************/
 
-const int man_rtti = 1500; 
-const int bullet_rtti = 1600; 
+const int man_rtti = 1500;
+const int bullet_rtti = 1600;
 const int cannon_rtti = 1700;
 const int base_rtti = 1800;
 const int helicopter_rtti = 1900;

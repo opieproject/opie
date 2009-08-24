@@ -24,7 +24,7 @@ public slots:
 
 private slots:
     void authChanged(const QString&);
-    void showUsernamePassword(bool); 
+    void showUsernamePassword(bool);
     void showScriptWindow(bool);
     void toggleEchoMode(bool);
 

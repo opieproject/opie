@@ -109,7 +109,7 @@ inline mpeg3_real_t& mpeg3_real_t::operator*= (const mpeg3_real_t& o)
 
 inline mpeg3_real_t& mpeg3_real_t::operator/= (const mpeg3_real_t& o)
 {
-    *this = *this / o; 
+    *this = *this / o;
     return *this;
 }
 

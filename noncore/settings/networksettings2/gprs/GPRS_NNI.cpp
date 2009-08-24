@@ -89,14 +89,14 @@ bool AGPRSDevice::hasDataForFile( SystemFile & S ) {
 }
 
 short AGPRSDevice::generateFile( SystemFile & SF,
-                                 long 
+                                 long
                                ) {
 
     if( SF.name() == "pap-secrets" ) {
-      SF << Data.User 
-         << " * " 
-         << Data.Password 
-         << " *" 
+      SF << Data.User
+         << " * "
+         << Data.Password
+         << " *"
          << endl;
       return 0;
     } else if( SF.name() == "chatscripts" ) {
@@ -110,8 +110,8 @@ short AGPRSDevice::generateFile( SystemFile & SF,
       SF << "\"\"           AT" << oendl;
       SF << "OK           AT+CGATT=1" << oendl;
       SF << "OK           AT+CGDCONT=1,\"IP\",\""
-         << Data.APN 
-         << "\"" 
+         << Data.APN
+         << "\""
          << oendl;
       SF << "OK           ATD*99***1#\\n" << oendl;
       SF << "TIMEOUT      10" << oendl;
@@ -121,9 +121,9 @@ short AGPRSDevice::generateFile( SystemFile & SF,
     } else if( SF.name() == "peers" ) {
       SF << "noauth" << oendl;
       SF << "user " << Data.User << oendl;
-      SF << "connect \"/usr/sbin/chat -s -v -f /etc/chatscripts/" 
-         << removeSpaces( networkSetup()->name() ) 
-         << "\"" 
+      SF << "connect \"/usr/sbin/chat -s -v -f /etc/chatscripts/"
+         << removeSpaces( networkSetup()->name() )
+         << "\""
          << oendl;
       SF << "ipcp-accept-local" << oendl;
       SF << "ipcp-accept-remote" << oendl;
@@ -134,8 +134,8 @@ short AGPRSDevice::generateFile( SystemFile & SF,
         }
       }
       if( Data.Debug ) {
-        SF << "logfile /tmp/" 
-           << removeSpaces( networkSetup()->name() ) 
+        SF << "logfile /tmp/"
+           << removeSpaces( networkSetup()->name() )
            << oendl;
         for( int i = 0; i < Data.Debug; i ++ ) {
           SF << "debug" << oendl;
@@ -154,7 +154,7 @@ short AGPRSDevice::generateFile( SystemFile & SF,
     } else if( SF.name() == "extra" ) {
       unsigned long Bits;
       // generate 'fixed' settings
-      for( unsigned int i = 0 ; 
+      for( unsigned int i = 0 ;
            i < Data.Routing.count();
            i ++ ) {
         if( Data.Routing[i]->Mask == 32 ) {
@@ -211,21 +211,21 @@ bool AGPRSDevice::openFile( SystemFile & SF, QStringList & SL ) {
     bool retval = false;
     if( SF.name() == "peers" ) {
       SL << "/etc" << "ppp" << "peers";
-      SF.setPath( 
-          QString( "/etc/ppp/peers/" ) + 
+      SF.setPath(
+          QString( "/etc/ppp/peers/" ) +
               removeSpaces( networkSetup()->name() )
           );
       retval = true;
     } else if ( SF.name() == "chatscripts" ) {
       SL << "/etc" << "chatscripts";
-      SF.setPath( 
-          QString( "/etc/chatscripts/" ) + 
+      SF.setPath(
+          QString( "/etc/chatscripts/" ) +
               removeSpaces( networkSetup()->name() )
           );
       retval = true;
     } else if ( SF.name() == "extra" ) {
-      SF.setPath( 
-          QString( "/etc/ppp/" ) + 
+      SF.setPath(
+          QString( "/etc/ppp/" ) +
               removeSpaces( networkSetup()->name() ) + ".fixed"
           );
       retval = true;

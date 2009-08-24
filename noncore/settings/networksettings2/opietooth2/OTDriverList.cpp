@@ -55,7 +55,7 @@ void OTDriverList::update() {
       if( ioctl( OT->getSocket(), HCIGETDEVLIST, (void*)dl) ) {
 	free(dl);
         odebug << "WARNING : cannot read device list. "
-              << errno 
+              << errno
               << strerror( errno ) << oendl;
         return;
       }
@@ -74,7 +74,7 @@ void OTDriverList::update() {
           memset( &di, 0, sizeof( di ) );
           di.dev_id = (dr+cur)->dev_id;
 
-          // get device info 
+          // get device info
           if( ioctl( OT->getSocket(), HCIGETDEVINFO, (void*)&di) != 0 )
               continue;  // uh ?
           insert( cur, new OTDriver( OT, &di ) );

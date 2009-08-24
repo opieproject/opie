@@ -32,13 +32,13 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 	int port=80, addrEnd, portSep;
 	QString host, file, portS, name, tempString;
 	bool done=false, isText=true;
-	
+
 //	comm->setUp((QString *)&abs_name);
 
 	name = abs_name;
 //	name = name.lower();
 	name = name.stripWhiteSpace();
-	
+
 //	printf("%s\n", name.latin1());
 
 	if(name.startsWith("http://"))
@@ -63,7 +63,7 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 
 	host.truncate(addrEnd);
 	file.remove(0, addrEnd);
-	
+
 	portSep = host.find(':');
 	if(portSep != -1)
 	{
@@ -74,12 +74,12 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 	}
 
 //	printf("%s %s %d\n", host.latin1(), file.latin1(), port);
-	
+
 	if(port == 80)
 	{
 		portS="80";
 	}
-	
+
 //	if(file.find(".png", file.length()-4) != -1 || file.find(".gif", file.length()-4) != -1 || file.find(".jpg", file.length()-4) != -1)
 //	{
 //		isImage=true;
@@ -92,7 +92,7 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 	int con, bytesSent;
 	struct sockaddr_in serverAddr;
 	struct hostent * serverInfo = gethostbyname( host.latin1() );
-	
+
 	if( serverInfo == NULL )
 	{
 		QMessageBox *mb = new QMessageBox(QObject::tr("Error!"),
@@ -105,12 +105,12 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 		perror("HttpFactory::data:");
 		return 0;
 	}
-	
+
 	QByteArray data;
 //	printf( "HttpFactory::data: %s\n", inet_ntoa(*((struct in_addr *)serverInfo->h_addr )) );
-	
+
 	QString request("GET " + file + " HTTP/1.1\r\nHost: " + host + ':' + portS + "\r\nConnection: close\r\n\r\n");
-	 
+
 	con = socket( AF_INET, SOCK_STREAM, 0 );
 	if( con == -1 )
 	{
@@ -124,12 +124,12 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 		perror("HttpFactory::data:");
 		return 0;
 	}
-	
+
 	serverAddr.sin_family = AF_INET;
 	serverAddr.sin_port = htons( port );
 	serverAddr.sin_addr.s_addr = inet_addr( inet_ntoa(*((struct in_addr *)serverInfo->h_addr )) );
 	memset( &(serverAddr.sin_zero), '\0', 8 );
-	
+
 	if(::connect( con, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr)) == -1 )
 	{
 		QMessageBox *mb = new QMessageBox(QObject::tr("Error!"),
@@ -142,16 +142,16 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 		perror("HttpFactory::data:");
 		return 0;
 	}
-	
-	
+
+
 	bytesSent = send( con, request.latin1(), request.length(), 0);
 //	printf("HttpFactory::data: bytes written: %d out of: %d\n", bytesSent, request.length() );
 //	printf("HttpFactory::data: request sent:\n%s", request.latin1());
-	
+
 	data = this->processResponse( con, isText );
-	
+
 	::close( con );
-	
+
 	if(isText)
 	{
 		text->setText( QString( data ) );
@@ -176,7 +176,7 @@ const QMimeSource * HttpFactory::data(const QString &abs_or_rel_name, const QStr
 	{
 		return data(context + abs_or_rel_name);
 	}
-	
+
 	return 0;
 }
 
@@ -188,17 +188,17 @@ const QByteArray HttpFactory::processResponse( int sockfd, bool &isText ) const
 	QString currentLine;
 	bool done=false, chunked=false;
 	int dataLength = 0;
-	
+
 	for( int i = 0; i < 27; i++)
 	{
 		conClosedErr[i] = conClosedErrMsg[i];
 	}
-	
+
 	while( !done )
 	{
 		recv( sockfd, inputBin.data(), inputBin.size(), 0 );
 		currentLine += *(inputBin.data());
-		
+
 		if( *(inputBin.data()) == '\n' )
 		{
 			if( currentLine.isEmpty() || currentLine.startsWith( "\r") )
@@ -212,13 +212,13 @@ const QByteArray HttpFactory::processResponse( int sockfd, bool &isText ) const
 				}
 				done = true;
 			}
-			
+
 			if( currentLine.contains( "Transfer-Encoding: chunked", false) >= 1 )
 			{
 				chunked = true;
 //				printf( "HttpFactory::processResponse: chunked encoding\n" );
 			}
-			
+
 			if( currentLine.contains( "Content-Type: text", false ) >= 1 )
 			{
 				isText = true;
@@ -229,26 +229,26 @@ const QByteArray HttpFactory::processResponse( int sockfd, bool &isText ) const
 //					printf( "HttpFactory::processResponse: content type html\n" );
 				}
 			}
-			
+
 			if( currentLine.contains( "Content-Type: image", false ) >= 1 )
 			{
 				isText = false;
 //				printf( "HttpFactory::processResponse: content type image\n" );
 			}
-			
+
 			if( currentLine.contains( "Content-Length", false ) >= 1 )
 			{
 				currentLine.remove( 0, 16 );
 				dataLength = currentLine.toInt();
 //				printf( "HttpFactory::processResponse: content length: %d\n", dataLength );
 			}
-			
+
 			if( currentLine.contains( "404", false ) >= 1 )
 			{
 //				printf( "HttpFactory::processResponse: 404 error\n" );
 				return 0;
 			}
-			
+
 			currentLine = "";
 //			printf("HttpFactory::processResponse: reseting currentLine: %s\n", currentLine.latin1() );
 		}
@@ -258,11 +258,11 @@ const QByteArray HttpFactory::processResponse( int sockfd, bool &isText ) const
 const QByteArray HttpFactory::recieveNormal( int sockfd, int dataLen ) const
 {
 //	printf( "HttpFactory::recieveNormal: recieving w/out chunked encoding\n" );
-	
+
 	QByteArray data( dataLen );
 	QByteArray temp( dataLen );
 	int recieved, i;
-	
+
 	recieved = recv( sockfd, temp.data(), temp.size(), 0 );
 //	printf( "HttpFactory::recieveNormal: found some data: %s\n", (char *)temp.data() );
 	for( i = 0; i < recieved; i++ )
@@ -282,7 +282,7 @@ const QByteArray HttpFactory::recieveNormal( int sockfd, int dataLen ) const
 		}
 		temp.fill('\0');
 	}
-	
+
 //	printf( "HttpFactory::recieveNormal: end of data\n" );
 	return data;
 }
@@ -290,12 +290,12 @@ const QByteArray HttpFactory::recieveNormal( int sockfd, int dataLen ) const
 const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 {
 //	printf( "HttpFactory::recieveChunked: recieving data with chunked encoding\n" );
-	
+
 	QByteArray data;
 	QByteArray temp( 1 );
 	int recieved, i = 0, cSize = 0;
 	QString cSizeS;
-	
+
 //	printf( "HttpFactory::recieveChunked: temp.size(): %d\n", temp.size() );
 	recv( sockfd, temp.data(), temp.size(), 0 );
 	while( *(temp.data()) != '\n' && *(temp.data()) != ';' )
@@ -305,11 +305,11 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 		cSizeS += temp[0];
 		recv( sockfd, temp.data(), temp.size(), 0 );
 	}
-	
+
 //	printf( "HttpFactory::recieveChunked: cSizeS: %s\n", cSizeS.latin1() );
 	cSize = cSizeS.toInt( 0, 16 );
 //	printf( "HttpFactory::recieveChunked: first chunk of size: %d\n", cSize );
-	
+
 	if( *(temp.data()) == ';' )
 	{
 		while( *(temp.data()) != '\n' )
@@ -317,10 +317,10 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 			recv( sockfd, temp.data(), temp.size(), 0 );
 		}
 	}
-	
+
 	temp.fill( '\0', cSize );
 	data.fill( '\0', cSize );
-	
+
 	while( cSize > 0 )
 	{
 		while( cSize > 0 )
@@ -334,13 +334,13 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 			}
 			temp.fill('\0', cSize);
 		}
-		
+
 //		printf( "HttpFactory::recieveChunked: current data:\n%s", data.data() );
-		
+
 		temp.fill('\0', 1);
 		cSizeS = "";
 		cSize = 0;
-		
+
 		recv( sockfd, temp.data(), temp.size(), 0 );
 		if( *(temp.data()) == '\r' )
 		{
@@ -354,11 +354,11 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 			cSizeS += temp[0];
 			recv( sockfd, temp.data(), temp.size(), 0 );
 		}
-	
+
 //		printf( "HttpFactory::recieveChunked: cSizeS: %s\n", cSizeS.latin1() );
 		cSize = cSizeS.toInt( 0, 16 );
 //		printf( "HttpFactory::recieveChunked: next chunk of size: %d\n", cSize );
-	
+
 		if( *(temp.data()) == ';' )
 		{
 			while( *(temp.data()) != '\n' )
@@ -366,11 +366,11 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 				recv( sockfd, temp.data(), temp.size(), 0 );
 			}
 		}
-	
+
 		temp.fill( '\0', cSize );
 		data.resize( data.size() + cSize );
 	}
-	
+
 //	printf( "HttpFactory::recieveChunked: end of data\n" );
 	return data;
 }

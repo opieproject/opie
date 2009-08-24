@@ -51,7 +51,7 @@ typedef struct
    short indx,
    v[401];
 } intList;
-   
+
 typedef struct { short w, s, sm; } sgRec;
 
 typedef struct

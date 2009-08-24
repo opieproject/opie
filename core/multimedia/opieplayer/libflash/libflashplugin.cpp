@@ -211,7 +211,7 @@ bool LibFlashPlugin::videoReadScaledFrame( unsigned char **output_rows, int in_x
 /*
 	for (int i = 0; i < out_h; i++)
 	    memcpy( output_rows[i], (char*)fd->pixels + i*fd->bpl, QMIN( fd->width * fd->bpp, out_w * fd->bpp ) );
-*/	
+*/
 	memcpy( output_rows[0], (char*)fd->pixels, out_w * out_h * 2 );
 }
 

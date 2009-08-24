@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef LIBMPEG3_PLUGIN_H 
+#ifndef LIBMPEG3_PLUGIN_H
 #define LIBMPEG3_PLUGIN_H
 
 #include <qstring.h>
@@ -51,7 +51,7 @@ public:
     int audioChannels( int stream ) { return file ? mpeg3_audio_channels( file, stream ) : 0; }
     int audioFrequency( int stream ) { return file ? mpeg3_sample_rate( file, stream ) : 0; }
 /*     int audioBitsPerSample(int) { return 0;} */
-    int audioSamples( int stream ) { return file ? mpeg3_audio_samples( file, stream ) : 0; } 
+    int audioSamples( int stream ) { return file ? mpeg3_audio_samples( file, stream ) : 0; }
     bool audioSetSample( long sample, int stream ) { return file ? mpeg3_set_sample( file, sample, stream) == 1 : FALSE; }
     long audioGetSample( int stream ) { return file ? mpeg3_get_sample( file, stream ) : 0; }
 #ifdef OLD_MEDIAPLAYER_API

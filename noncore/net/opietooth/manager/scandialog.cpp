@@ -158,7 +158,7 @@ namespace OpieTooth {
  * Cleanup
  */
     ScanDialog::~ScanDialog() {
-        owarn << "delete scan dialog" << oendl; 
+        owarn << "delete scan dialog" << oendl;
         delete localDevice;
     }
 }

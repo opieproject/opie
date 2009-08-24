@@ -31,10 +31,10 @@ class ImageEdit : public QScrollView
 public:
     ImageEdit( QWidget *parent = 0, const char *name = 0 );
     ~ImageEdit();
-    
+
     void setPixmap( const QPixmap &pm );
     QPixmap pixmap() const;
-    
+
 protected:
     void drawContents( QPainter *p, int cx, int cy, int cw, int ch );
     void contentsMousePressEvent( QMouseEvent *e );

@@ -13,7 +13,7 @@ QSettings::QSettings(const QString &_fn)
 		qWarning("Settings "+_fn);
 	// read the prefs from the file
 	fn = _fn;
-	
+
 	QFile f(_fn);
     if ( f.open(IO_ReadOnly) ) {    // file opened successfully
         QTextStream t( &f );        // use a text stream
@@ -26,12 +26,12 @@ QSettings::QSettings(const QString &_fn)
 			QString key = s.left (pos);
 			QString val = s.right (s.length() - pos - 3);
 			writeEntry (key, val);
-			
+
 			sprintf (buf, "%s|%s", (const char *)key, (const char *)val);
         }
         f.close();
     }
-	
+
 
 }
 
@@ -53,7 +53,7 @@ QSettings::~QSettings()
 	   ts << *key << " = " << *val << endl;
        ++it;
 	}
-	
+
 	f.close();
 	prefs.clear();
 }
@@ -65,13 +65,13 @@ void QSettings::insertSearchPath (System sys, const QString &str)
 
 QString QSettings::readEntry (const QString &key, const QString &def)
 {
-	
+
 	QString *s = prefs.find((const char *)key);
 	if (!s)
 		return def;
-	else 
+	else
 		return *s;
-	
+
 }
 
 int     QSettings::readNumEntry (const QString &key, int def)
@@ -137,7 +137,7 @@ QStringList QSettings::entryList (const QString &key) const
 	QStringList list;
 		if(!prefs.isEmpty()) {
 	QAsciiDictIterator <QString> it( prefs ); // iterator for dict
- qDebug("ready"); 
+ qDebug("ready");
     while ( it.current() )
 	{
 	   char buf[512];

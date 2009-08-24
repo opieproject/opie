@@ -140,7 +140,7 @@ void KpacmanWidget::setScheme(int Scheme, int Mode)
 
 void KpacmanWidget::resizeEvent( QResizeEvent * )
 {
-    owarn << "Resize" << oendl; 
+    owarn << "Resize" << oendl;
     referee->setGeometry(0, bitfont->height()*3, referee->width(), referee->height());
     referee->setBackgroundColor(BLACK);
 

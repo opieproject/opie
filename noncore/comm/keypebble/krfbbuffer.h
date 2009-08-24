@@ -1,7 +1,7 @@
 // -*- c++ -*-
 
-#ifndef KRFBBUFFER_H 
-#define KRFBBUFFER_H 
+#ifndef KRFBBUFFER_H
+#define KRFBBUFFER_H
 
 #include <qobject.h>
 
@@ -59,4 +59,4 @@ private:
   QPixmap *pix;
 };
 
-#endif // KRFBBUFFER_H 
+#endif // KRFBBUFFER_H

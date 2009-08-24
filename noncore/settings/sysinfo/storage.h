@@ -47,13 +47,13 @@ private:
 
     QWidget     *container;
     QVBoxLayout *vb;
-    
+
     StorageInfo     *storage;
     QDict<MountInfo> disks;
     QList<QFrame>    lines;
 
     bool rebuildDisks;
-    
+
 private slots:
     void disksChanged();
 };
@@ -66,7 +66,7 @@ public:
     ~MountInfo();
 
     void updateData();
-    
+
     FileSystem *fs;
 
 private:

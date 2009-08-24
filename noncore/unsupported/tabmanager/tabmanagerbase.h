@@ -12,14 +12,14 @@
 #include <qvariant.h>
 #include <qwidget.h>
 #include "tablistview.h"
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QListView;
 class QListViewItem;
 
 class TabManagerBase : public QWidget
-{ 
+{
     Q_OBJECT
 
 public:

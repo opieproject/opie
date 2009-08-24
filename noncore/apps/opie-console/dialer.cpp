@@ -155,7 +155,7 @@ void Dialer::trydial(const QString& number)
 	{
 		switchState(state_options);
 
-                owarn << "ATM3l3" << oendl; 
+                owarn << "ATM3l3" << oendl;
 		send("ATM3L3\r");
 		QString response3 = receive();
 		if(!response3.contains("\nOK\r"))

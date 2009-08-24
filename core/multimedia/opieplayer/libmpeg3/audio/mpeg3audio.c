@@ -70,8 +70,8 @@ int mpeg3audio_read_frame(mpeg3audio_t *audio)
 		{
 			case AUDIO_AC3:
 				result = mpeg3audio_do_ac3(audio);
-				break;	
-				
+				break;
+
 			case AUDIO_MPEG:
 				switch(audio->layer)
 				{
@@ -91,7 +91,7 @@ int mpeg3audio_read_frame(mpeg3audio_t *audio)
 						break;
 				}
 				break;
-			
+
 			case AUDIO_PCM:
 				result = mpeg3audio_do_pcm(audio);
 				break;
@@ -401,7 +401,7 @@ int mpeg3audio_read_raw(mpeg3audio_t *audio, unsigned char *output, long *size, 
 				*size += audio->framesize;
 			}
 			break;
-		
+
 		case AUDIO_PCM:
 			if(mpeg3bits_read_buffer(audio->astream, output, audio->framesize))
 				return 1;
@@ -412,11 +412,11 @@ int mpeg3audio_read_raw(mpeg3audio_t *audio, unsigned char *output, long *size, 
 }
 
 /* Channel is 0 to channels - 1 */
-int mpeg3audio_decode_audio(mpeg3audio_t *audio, 
-		mpeg3_real_t *output_f, 
-		short *output_i, int sampleSpacing, 
-		int channel, 
-		long start_position, 
+int mpeg3audio_decode_audio(mpeg3audio_t *audio,
+		mpeg3_real_t *output_f,
+		short *output_i, int sampleSpacing,
+		int channel,
+		long start_position,
 		long len)
 {
 	long allocation_needed = len + MPEG3AUDIO_PADDING;
@@ -495,8 +495,8 @@ int mpeg3audio_decode_audio(mpeg3audio_t *audio,
 /* Copy the buffer to the output */
 	if(output_f)
 	{
-		for(i = 0, j = (start_position - audio->pcm_position) * audio->channels + channel; 
-			i < len && j < audio->pcm_size * audio->channels; 
+		for(i = 0, j = (start_position - audio->pcm_position) * audio->channels + channel;
+			i < len && j < audio->pcm_size * audio->channels;
 			i++, j += audio->channels)
 		{
 			output_f[i] = audio->pcm_sample[j];
@@ -510,15 +510,15 @@ int mpeg3audio_decode_audio(mpeg3audio_t *audio,
 	if(output_i)
 	{
 		int sample;
-		for(i = 0, j = (start_position - audio->pcm_position) * audio->channels + channel; 
-			i < (len*(sampleSpacing+1)) && j < audio->pcm_size * audio->channels; 
+		for(i = 0, j = (start_position - audio->pcm_position) * audio->channels + channel;
+			i < (len*(sampleSpacing+1)) && j < audio->pcm_size * audio->channels;
 			i++, j += audio->channels)
 		{
 			sample = (int)(audio->pcm_sample[j] * 32767);
 			if(sample > 32767) sample = 32767;
-			else 
+			else
 			if(sample < -32768) sample = -32768;
-			
+
 			output_i[i] = sample;
 			i += sampleSpacing;
 		}

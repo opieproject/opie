@@ -82,7 +82,7 @@ QString SFCave::menuOptions[NR_MENUS][MAX_MENU_OPTIONS] = { { "Start Game", "Rep
 
 int SFCave::nrMenuOptions[NR_MENUS] = { 5, 4, 4 };
 int SFCave ::currentMenuOption[NR_MENUS] = { 0, 0, 0 };
-                                    
+
 #define UP_THRUST               0.6
 #define NO_THRUST               0.8
 #define MAX_DOWN_THRUST         4.0
@@ -90,15 +90,15 @@ int SFCave ::currentMenuOption[NR_MENUS] = { 0, 0, 0 };
 double SFCave::UpThrustVals[3][3]               = {{ 0.6,   0.6, 0.6 },     // SFCave
                                                    { 0.6,   0.6, 0.8 },     // Gates
                                                    { 0.4,   0.7, 1.0 } };   // Fly
-                                                   
+
 double SFCave::DownThrustVals[3][3]             = {{ 0.8,   0.8, 0.8 },     // SFCave
                                                    { 0.8,   0.8, 1.0 },     // Gates
                                                    { 0.4,   0.7, 1.0 } };   // Fly
-                                                   
+
 double SFCave::MaxUpThrustVals[3][3]            = {{ -3.5, -3.5, -3.5 },    // SFCave
                                                    { -3.5, -4.0, -5.0 },    // Gates
                                                    { -3.5, -4.0, -5.0 } };  // Fly
-                                                   
+
 double SFCave::MaxDownThrustVals[3][3]          = {{ 4.0,   4.0, 4.0 },     // SFCave
                                                    { 4.0,   5.0, 5.5 },     // Gates
                                                    { 3.5,   4.0, 5.0 } };   // Fly
@@ -140,8 +140,8 @@ SFCave :: SFCave( QWidget *w, const char *name, WFlags fl )
     showMaximized();
     movel = true;
     int spd = 3;
-    
-    
+
+
     replayIt = 0;
 
     replayFile = Global::applicationFileName("sfcave", "replay");
@@ -167,7 +167,7 @@ SFCave :: SFCave( QWidget *w, const char *name, WFlags fl )
         for ( int j = 0 ; j < 3 ; ++j )
             highestScore[i][j] = cfg.readNumEntry( key + gameTypes[i] + "_" + dificultyOption[j], 0 );
     }
-    
+
     currentGameType = cfg.readNumEntry( "gameType", 0 );
     currentGameDifficulty = cfg.readNumEntry( "difficulty", 0 );
 #endif
@@ -186,7 +186,7 @@ SFCave :: SFCave( QWidget *w, const char *name, WFlags fl )
     gameTimer = new QTimer( this, "game timer" );
     connect( gameTimer, SIGNAL( timeout() ),
              this, SLOT( run() ) );
-	     
+
     QTimer::singleShot(0, this, SLOT(start()));
 }
 
@@ -208,13 +208,13 @@ void SFCave :: setSeed( int seed )
         currentSeed = seed;
     PutSeed( currentSeed );
 }
-    
+
 int SFCave :: nextInt( int range )
 {
     int val = (int)(Random( ) * range);
 
     return val;
-    
+
 }
 
 void SFCave :: setUp()
@@ -264,7 +264,7 @@ void SFCave :: setUp()
         else
             flyScores = (int*)flyHardScores;
     }
-    
+
     crashLineLength = 0;
     lastGateBottomY = 0;
 
@@ -283,7 +283,7 @@ void SFCave :: setUp()
     if ( CURRENT_GAME_TYPE != FLY_GAME )
     {
         maxHeight = 50;
-        
+
         mapTop[0] = (int)(nextInt(50)) + 5;
         mapBottom[0] = (int)(nextInt(50)) + 5;
         for ( int i = 1 ; i < MAPSIZE ; ++i )
@@ -352,7 +352,7 @@ void SFCave :: run()
                     ++(*replayIt);
                 }
             }
-            
+
             if ( CURRENT_GAME_TYPE == SFCAVE_GAME )
                 handleGameSFCave();
             else if ( CURRENT_GAME_TYPE == GATES_GAME )
@@ -513,7 +513,7 @@ void SFCave :: setFlyPoint( int point )
         dir *= -1;
 
     int prevPoint = mapBottom[point-1];
-    
+
     int nextPoint = prevPoint + (dir * nextInt( fly_difficulty_levels[currentGameDifficulty] ) );
 
     if ( nextPoint > sHeight )
@@ -612,7 +612,7 @@ void SFCave :: addGate()
             int x2 = sWidth;
             int y2 = y1 + b1Height + gapHeight;
             int b2Height = mapBottom[50] - y2;
-            
+
 
             blocks[i].setRect( x1, y1, blockWidth, b1Height );
             blocks[i+1].setRect( x2, y2, blockWidth, b2Height );
@@ -664,7 +664,7 @@ void SFCave :: draw()
         // Only display top landscape if not running FLY_GAME
         if ( CURRENT_GAME_TYPE != FLY_GAME )
             p.drawLine( (i*segSize) - (offset*speed), mapTop[i], ((i+1)*segSize)-(offset*speed), mapTop[i+1] );
-            
+
         p.drawLine( (i*segSize) - (offset*speed), mapBottom[i], ((i+1)*segSize)-(offset*speed), mapBottom[i+1] );
 
         if ( CURRENT_GAME_TYPE == FLY_GAME && showScoreZones )
@@ -679,14 +679,14 @@ void SFCave :: draw()
             }
 
             p.setPen( Qt::white );
-        }        
+        }
     }
 
     // Uncomment this to show user segment (usful for checking collision boundary with landscape
 //    p.setPen( Qt::red );
 //    p.drawLine( (11*segSize) - (offset*speed), 0, ((11)*segSize)-(offset*speed), sHeight );
 //    p.setPen( Qt::white );
-    
+
     // Draw user
     p.drawRect( user );
 
@@ -740,7 +740,7 @@ void SFCave :: draw()
 /*
             text = "Press r to replay";
             p.drawText( (sWidth/2) - (fm.width( text )/2), 150, text );
-                                                           
+
             text = "Press s to save the replay";
             p.drawText( (sWidth/2) - (fm.width( text )/2), 165, text );
 
@@ -829,7 +829,7 @@ void SFCave :: keyPressEvent( QKeyEvent *e )
                     if ( e->key() == Key_Up )
                         state = STATE_NEWGAME;
                 }
-                
+
                 break;
             case Qt::Key_M:
             case Qt::Key_Return:
@@ -845,7 +845,7 @@ void SFCave :: keyPressEvent( QKeyEvent *e )
             case Qt::Key_Z:
                 showScoreZones = !showScoreZones;
                 break;
-                
+
            default:
                 e->ignore();
                 break;
@@ -878,7 +878,7 @@ void SFCave :: keyReleaseEvent( QKeyEvent *e )
             case Qt::Key_E:
                 showEyeCandy = !showEyeCandy;
                 break;
-                
+
             case Qt::Key_R:
                 if ( state == STATE_CRASHED )
                     state = STATE_REPLAY;
@@ -934,7 +934,7 @@ void SFCave :: saveReplay()
     // Format is:: <landscape seed> <game type> <difficulty> <framenr> <framenr>.......
     QString val;
     val.sprintf( "%d %d %d ", currentSeed, currentGameType, currentGameDifficulty );
-    
+
     QListIterator<int> it( replayList );
     while( it.current() )
     {
@@ -951,7 +951,7 @@ void SFCave :: saveReplay()
     fwrite( (const char *)line, 1, line.length(), out );
 
     fwrite( (const char *)val, 1, val.length(), out );
-   
+
     fclose( out );
 
     printf( "Replay saved to %s\n", QFile::encodeName(replayFile).data() );
@@ -966,7 +966,7 @@ void SFCave :: loadReplay()
     {
         printf( "Couldn't load replay file!\n" );
         return;
-    }   
+    }
 
     // Read next line - contains the size of the options
     char line[10+1];
@@ -981,7 +981,7 @@ void SFCave :: loadReplay()
 
     QString sep  = " ";
     QStringList list = QStringList::split( sep, QString( data ) );
-    
+
     // print it out
     QStringList::Iterator it = list.begin();
     currentSeed = (*it).toInt();
@@ -1001,7 +1001,7 @@ void SFCave :: loadReplay()
     delete [] data;
 
     fclose( in );
-    
+
     printf( "Replay loaded from %s\n", QFile::encodeName(replayFile).data() );
 }
 

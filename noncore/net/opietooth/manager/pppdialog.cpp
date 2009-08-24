@@ -27,14 +27,14 @@ using namespace Opie::Core;
 
 Connection PPPDialog::conns[NCONNECTS];
 
-PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,  
+PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,
     const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
     int i; //Just an index variable
     QDir d("/etc/ppp/peers/"); //Dir we search files in
     d.setFilter( QDir::Files);
     d.setSorting( QDir::Size | QDir::Reversed );
-    
+
     if ( !name )
         setName( "PPPDialog" );
     setCaption( tr( "ppp connection " ) ) ;
@@ -58,13 +58,13 @@ PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,
 
     connectButton = new QPushButton( this );
     connectButton->setText( tr( "Connect" ) );
-    
+
     serPort = new QComboBox(this);
     for (i = 0; i < NCONNECTS; i++) {
         if (!PPPDialog::conns[i].proc.isRunning())
             serPort->insertItem(tr("rfcomm%1").arg(i));
     }
-    
+
     layout->addWidget(info);
     layout->addWidget(cmdLine);
     layout->addWidget(serPort);
@@ -90,16 +90,16 @@ void PPPDialog::connectToDevice() {
     PPPDialog::conns[portNum].proc.clearArguments();
     // vom popupmenu beziehen
     if (cmdLine->currentText().isEmpty()) {//Connect by rfcomm
-        PPPDialog::conns[portNum].proc << "rfcomm" << "connect" 
+        PPPDialog::conns[portNum].proc << "rfcomm" << "connect"
             << QString::number(portNum) << m_device << QString::number(m_port);
     }
     else {
-        PPPDialog::conns[portNum].proc << "pppd" 
-            << tr("/dev/bluetooth/rfcomm/%1").arg(portNum) 
-            << "call" 
+        PPPDialog::conns[portNum].proc << "pppd"
+            << tr("/dev/bluetooth/rfcomm/%1").arg(portNum)
+            << "call"
             << cmdLine->currentText();
     }
-    if (!PPPDialog::conns[portNum].proc.start(OProcess::NotifyOnExit, 
+    if (!PPPDialog::conns[portNum].proc.start(OProcess::NotifyOnExit,
         OProcess::All)) {
         outPut->append(tr("Couldn't start"));
     }
@@ -109,13 +109,13 @@ void PPPDialog::connectToDevice() {
         outPut->append(tr("Started"));
         PPPDialog::conns[portNum].btAddr = m_device;
         PPPDialog::conns[portNum].port = m_port;
-        connect(&PPPDialog::conns[portNum].proc, 
+        connect(&PPPDialog::conns[portNum].proc,
 		    SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int)),
             this, SLOT(fillOutPut(Opie::Core::OProcess*, char*, int)));
-        connect( &PPPDialog::conns[portNum].proc, 
+        connect( &PPPDialog::conns[portNum].proc,
             SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int)),
             this,    SLOT(fillErr(Opie::Core::OProcess*, char*, int)));
-        connect( &PPPDialog::conns[portNum].proc, 
+        connect( &PPPDialog::conns[portNum].proc,
             SIGNAL(processExited(Opie::Core::OProcess*)),
             this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
     }

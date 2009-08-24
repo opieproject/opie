@@ -61,7 +61,7 @@ using namespace Opie::DB;
 
 ODateBookAccessBackend_SQL::ODateBookAccessBackend_SQL( const QString& ,
                                                         const QString& fileName )
-	: ODateBookAccessBackend(), m_driver( NULL ) 
+	: ODateBookAccessBackend(), m_driver( NULL )
 {
 	m_fileName = fileName.isEmpty() ? Global::applicationFileName( "datebook", "datebook.db" ) : fileName;
 
@@ -83,7 +83,7 @@ ODateBookAccessBackend_SQL::~ODateBookAccessBackend_SQL() {
 void ODateBookAccessBackend_SQL::initFields()
 {
 
-	// This map contains the translation of the fieldtype id's to 
+	// This map contains the translation of the fieldtype id's to
 	// the names of the table columns
 	m_fieldMap.insert( OEvent::FUid, "uid" );
 	m_fieldMap.insert( OEvent::FCategories, "Categories" );
@@ -112,10 +112,10 @@ void ODateBookAccessBackend_SQL::initFields()
 	for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
 		m_reverseFieldMap.insert( it.data(), it.key() );
 	}
-	
+
 }
 
-bool ODateBookAccessBackend_SQL::load() 
+bool ODateBookAccessBackend_SQL::load()
 {
 	if (!m_driver->open() )
 		return false;
@@ -124,13 +124,13 @@ bool ODateBookAccessBackend_SQL::load()
 	// It is save here to create the table, even if it
 	// do exist. ( Is that correct for all databases ?? )
 	QString	qu = "create table datebook( uid INTEGER PRIMARY KEY ";
-	
+
 	QMap<int, QString>::Iterator it;
 	for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
 		qu += QString( ",%1 VARCHAR(10)" ).arg( it.data() );
 	}
 	qu += " );";
-		
+
 	qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR, priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id) );";
 
 	qWarning( "command: %s", qu.latin1() );
@@ -155,22 +155,22 @@ void ODateBookAccessBackend_SQL::update()
 		// m_uids.clear();
 		return;
 	}
-	
+
 	m_uids = extractUids( res );
-	
+
 }
 
-bool ODateBookAccessBackend_SQL::reload() 
+bool ODateBookAccessBackend_SQL::reload()
 {
 	return load();
 }
 
-bool ODateBookAccessBackend_SQL::save() 
+bool ODateBookAccessBackend_SQL::save()
 {
 	return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
 }
 
-QArray<int> ODateBookAccessBackend_SQL::allRecords()const 
+QArray<int> ODateBookAccessBackend_SQL::allRecords()const
 {
 	return m_uids;
 }
@@ -179,7 +179,7 @@ QArray<int> ODateBookAccessBackend_SQL::queryByExample(const OEvent&, int,  cons
 	return QArray<int>();
 }
 
-void ODateBookAccessBackend_SQL::clear() 
+void ODateBookAccessBackend_SQL::clear()
 {
 	QString qu = "drop table datebook;";
 	qu += "drop table custom_data;";
@@ -217,7 +217,7 @@ OEvent ODateBookAccessBackend_SQL::find( int uid ) const{
 }
 
 // FIXME: Speed up update of uid's..
-bool ODateBookAccessBackend_SQL::add( const OEvent& ev ) 
+bool ODateBookAccessBackend_SQL::add( const OEvent& ev )
 {
 	QMap<int,QString> eventMap = ev.toMap();
 
@@ -234,42 +234,22 @@ bool ODateBookAccessBackend_SQL::add( const OEvent& ev )
 	// Add custom entries
 	int id = 0;
 	QMap<QString, QString> customMap = ev.toExtraMap();
-	for( QMap<QString, QString>::Iterator it = customMap.begin(); 
+	for( QMap<QString, QString>::Iterator it = customMap.begin();
 	     it != customMap.end(); ++it ){
-		qu  += "insert into custom_data VALUES(" 
+		qu  += "insert into custom_data VALUES("
 			+  QString::number( ev.uid() )
 			+ ","
-			+  QString::number( id++ ) 
-			+ ",'" 
+			+  QString::number( id++ )
+			+ ",'"
 			+ it.key() //.latin1()
 			+ "',"
 			+ "0" // Priority for future enhancements
-			+ ",'" 
+			+ ",'"
 			+ it.data() //.latin1()
 			+ "');";
-	}		
+	}
 	qWarning("add %s", qu.latin1() );
 
-	OSQLRawQuery raw( qu );
-	OSQLResult res = m_driver->query( &raw );
-	if ( res.state() != OSQLResult::Success ){
-		return false;
-	}
-
-	// Update list of uid's 
-	update();
-	
-	return true;
-}
-
-// FIXME: Speed up update of uid's..
-bool ODateBookAccessBackend_SQL::remove( int uid ) 
-{
-	QString qu = "DELETE from datebook where uid = " 
-		+ QString::number( uid ) + ";";
-	qu += "DELETE from custom_data where uid = " 
-		+ QString::number( uid ) + ";";
-	
 	OSQLRawQuery raw( qu );
 	OSQLResult res = m_driver->query( &raw );
 	if ( res.state() != OSQLResult::Success ){
@@ -282,18 +262,38 @@ bool ODateBookAccessBackend_SQL::remove( int uid )
 	return true;
 }
 
-bool ODateBookAccessBackend_SQL::replace( const OEvent& ev ) 
+// FIXME: Speed up update of uid's..
+bool ODateBookAccessBackend_SQL::remove( int uid )
+{
+	QString qu = "DELETE from datebook where uid = "
+		+ QString::number( uid ) + ";";
+	qu += "DELETE from custom_data where uid = "
+		+ QString::number( uid ) + ";";
+
+	OSQLRawQuery raw( qu );
+	OSQLResult res = m_driver->query( &raw );
+	if ( res.state() != OSQLResult::Success ){
+		return false;
+	}
+
+	// Update list of uid's
+	update();
+
+	return true;
+}
+
+bool ODateBookAccessBackend_SQL::replace( const OEvent& ev )
 {
     remove( ev.uid() );
     return add( ev );
 }
 
-QArray<int> ODateBookAccessBackend_SQL::rawEvents()const 
+QArray<int> ODateBookAccessBackend_SQL::rawEvents()const
 {
     return allRecords();
 }
 
-QArray<int> ODateBookAccessBackend_SQL::rawRepeats()const 
+QArray<int> ODateBookAccessBackend_SQL::rawRepeats()const
 {
 	QString qu = "select uid from datebook where RType!=\"\" AND RType!=\"NoRepeat\"";
 	OSQLRawQuery raw( qu );
@@ -302,11 +302,11 @@ QArray<int> ODateBookAccessBackend_SQL::rawRepeats()const
 		QArray<int> nix;
 		return nix;
 	}
-	
+
 	return extractUids( res );
 }
 
-QArray<int> ODateBookAccessBackend_SQL::nonRepeats()const 
+QArray<int> ODateBookAccessBackend_SQL::nonRepeats()const
 {
 	QString qu = "select uid from datebook where RType=\"\" or RType=\"NoRepeat\"";
 	OSQLRawQuery raw( qu );
@@ -315,11 +315,11 @@ QArray<int> ODateBookAccessBackend_SQL::nonRepeats()const
 		QArray<int> nix;
 		return nix;
 	}
-	
+
 	return extractUids( res );
 }
 
-OEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats() 
+OEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats()
 {
 	QArray<int> nonRepUids = nonRepeats();
 	OEvent::ValueList list;
@@ -331,7 +331,7 @@ OEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats()
 	return list;
 
 }
-OEvent::ValueList ODateBookAccessBackend_SQL::directRawRepeats() 
+OEvent::ValueList ODateBookAccessBackend_SQL::directRawRepeats()
 {
 	QArray<int> rawRepUids = rawRepeats();
 	OEvent::ValueList list;

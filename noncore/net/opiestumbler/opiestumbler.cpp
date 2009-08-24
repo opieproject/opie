@@ -30,7 +30,7 @@
 #include "stationviewitem.h"
 #include "stumblerstation.h"
 #include "stationinfo.h"
-    
+
 
 using Opie::Net::OWirelessNetworkInterface;
 using Opie::Net::ONetwork;
@@ -48,7 +48,7 @@ OpieStumbler::OpieStumbler(QWidget *parent, const char *name, WFlags)
     m_popupHistory(new QPopupMenu(this)),
     m_db(NULL), m_proc(NULL)
 {
-    
+
     if ( QCopChannel::isRegistered("QPE/OpieStumbler") ) {
          QCopEnvelope e("QPE/OpieStumbler", "show()");
          exit(EXIT_SUCCESS);
@@ -63,20 +63,20 @@ OpieStumbler::OpieStumbler(QWidget *parent, const char *name, WFlags)
     grid->addLayout(lay, 0, 0);
 
     m_stationsCurrent->setAutoDelete(true);
-    
+
     m_channel = new QCopChannel( "QPE/OpieStumbler", this );
-    connect(m_channel, SIGNAL(received(const QCString &, const QByteArray &)), 
+    connect(m_channel, SIGNAL(received(const QCString &, const QByteArray &)),
             this, SLOT(slotMessageReceived( const QCString &, const QByteArray &)) );
-    
+
     //setCaption(appCaption());
     //setCentralWidget(grid);
     setToolBarsMovable(false);
-    
-    
+
+
     QPopupMenu *fileMenu = new QPopupMenu(this);
     QPopupMenu *configMenu = new QPopupMenu(this);
     QPopupMenu *scanMenu = new QPopupMenu(this);
-    
+
     fileMenu->insertItem( tr("Exit"), this, SLOT(close()) );
     configMenu->insertItem( tr("Configure"), this, SLOT(slotConfigure()) );
     scanMenu->insertItem( tr("Start"), this, SLOT(slotStartScanning()) );
@@ -84,14 +84,14 @@ OpieStumbler::OpieStumbler(QWidget *parent, const char *name, WFlags)
 
     m_popupCurrent->insertItem( tr("Show details"), this, SLOT(slotShowDetails()) );
     m_popupCurrent->insertItem( tr("Join Network"), this, SLOT(slotJoinNetwork()) );
-    
+
     menuBar()->insertItem(tr("File"), fileMenu);
     menuBar()->insertItem(tr("Settings"), configMenu);
     menuBar()->insertItem(tr("Scanning"), scanMenu);
-    
+
     QPEApplication::setStylusOperation(m_listCurrent->viewport(), QPEApplication::RightOnHold);
     QPEApplication::setStylusOperation(m_listHistory->viewport(), QPEApplication::RightOnHold);
-    
+
     m_listCurrent->addColumn(tr("SSID"));
     m_listCurrent->addColumn(tr("Chan"));
     m_listCurrent->addColumn(tr("Signal"));
@@ -103,13 +103,13 @@ OpieStumbler::OpieStumbler(QWidget *parent, const char *name, WFlags)
     m_listHistory->addColumn(tr("Max Sig"));
     m_listHistory->addColumn(tr("Enc"));
     m_listHistory->addColumn(tr("Vendor"));
-   
+
     connect(m_listCurrent, SIGNAL(mouseButtonPressed (int, QListViewItem*, const QPoint&, int)),
             this, SLOT(slotCurrentMousePressed (int, QListViewItem*, const QPoint&, int)));
 
     connect(m_listHistory, SIGNAL(mouseButtonPressed (int, QListViewItem*, const QPoint&, int)),
             this, SLOT(slotHistoryMousePressed (int, QListViewItem*, const QPoint&, int)));
-    
+
     for(int i = CURCHAN; i <= CURENC; ++i) {
         m_listCurrent->setColumnAlignment( i, Qt::AlignHCenter );
         m_listHistory->setColumnAlignment( i, Qt::AlignHCenter );
@@ -120,7 +120,7 @@ OpieStumbler::OpieStumbler(QWidget *parent, const char *name, WFlags)
     connect(m_stumbler, SIGNAL(newdata()), this, SLOT(slotUpdateStations()));
 
     QTimer::singleShot(1000, this, SLOT(slotLoadManufacturers()) );
-    
+
     slotStartScanning();
 }
 
@@ -153,7 +153,7 @@ void OpieStumbler::slotStopScanning()
 void OpieStumbler::slotUpdateStations()
 {
     m_stationsCurrent->clear();
-    
+
     m_stationsCurrent = m_stumbler->stations();
     if (m_stationsCurrent) {
         QListIterator<Opie::Net::OStation> it(*m_stationsCurrent);
@@ -173,9 +173,9 @@ void OpieStumbler::slotUpdateStations()
             else {
                 if ( itr.current()->st->level < station->level )
                     itr.current()->st->level = station->level;
-                
+
                 itr.current()->lastTimeSeen = QDateTime::currentDateTime();
-            }   
+            }
         }
     }
     displayStations();
@@ -189,7 +189,7 @@ void OpieStumbler::displayStations()
                 QString::number(it.current()->level), it.current()->encrypted ? "Y": "N", it.current()->macAddress.toString() );
 
     m_listHistory->clear();
-    for(QListIterator<StumblerStation> it(m_stationsHistory); it.current(); ++it) 
+    for(QListIterator<StumblerStation> it(m_stationsHistory); it.current(); ++it)
         new StationViewItem( m_listHistory, it.current()->st->ssid, QString::number(it.current()->st->channel),
                 QString::number(it.current()->st->level), it.current()->st->encrypted ? "Y": "N",
                 manufacturer(it.current()->st->macAddress.toString()), it.current()->st->macAddress.toString() );
@@ -206,7 +206,7 @@ void OpieStumbler::slotMessageReceived( const QCString &message, const QByteArra
 void OpieStumbler::slotCurrentMousePressed(int button, QListViewItem * item, const QPoint &point, int c)
 {
     Q_UNUSED(c)
-        
+
     if ( 2 == button ) {
         m_mac = item->text(CURENC + 1);
         m_popupCurrent->popup(point);
@@ -217,7 +217,7 @@ void OpieStumbler::slotCurrentMousePressed(int button, QListViewItem * item, con
 void OpieStumbler::slotHistoryMousePressed(int button, QListViewItem * item, const QPoint &point, int c)
 {
     Q_UNUSED(c)
-    
+
     if ( 2 == button ) {
         m_mac = item->text(HISVENDOR + 1);
         m_popupHistory->popup(point);
@@ -228,17 +228,17 @@ void OpieStumbler::slotShowDetails()
 {
     QListIterator<StumblerStation> it(m_stationsHistory);
     for(; it.current() && it.current()->st->macAddress.toString() != m_mac; ++it );
-    
+
     if( it.current() ) {
         StationInfo info(it.current()->st->ssid, it.current()->st->type, QString::number(it.current()->st->channel),
                 QString::number(it.current()->st->rates.last()/1000000), QString::number(it.current()->st->level),
-                it.current()->st->encrypted ? "WEP": "No", 
+                it.current()->st->encrypted ? "WEP": "No",
                 it.current()->st->macAddress.toString(), manufacturer(it.current()->st->macAddress.toString(), true),
                     it.current()->lastTimeSeen.toString() ,this, "", true);
         info.exec();
     }
-    
-} 
+
+}
 
 void OpieStumbler::slotLoadManufacturers()
 {
@@ -264,18 +264,18 @@ void OpieStumbler::slotJoinNetwork()
 {
     slotStopScanning();
 
-    OWirelessNetworkInterface *wiface = static_cast<OWirelessNetworkInterface*>(ONetwork::instance()->interface(m_interface)); 
-    
+    OWirelessNetworkInterface *wiface = static_cast<OWirelessNetworkInterface*>(ONetwork::instance()->interface(m_interface));
+
     if( !wiface )
         return;
-    
+
     QListIterator<StumblerStation> it(m_stationsHistory);
-    
+
     for(; it.current() && it.current()->st->macAddress.toString() != m_mac; ++it );
 
     if( !it.current() )
         return;
-    
+
     m_ssid = it.current()->st->ssid.left(it.current()->st->ssid.length()-1);
     m_splash = new QFrame( this, "splash", false, WStyle_StaysOnTop | WStyle_DialogBorder | WStyle_Customize );
     m_splash->setFrameStyle( QFrame::Panel | QFrame::Raised );
@@ -292,21 +292,21 @@ void OpieStumbler::slotJoinNetwork()
     m_splash->raise();
 
     Opie::Net::OStation *station = it.current()->st;
-    
+
     odebug << "Bringing interface down" << oendl;
     wiface->setUp(false);
-    
+
     odebug << "Setting mode to " << (station->type == "adhoc" ? "adhoc" : "managed") << oendl;
     wiface->setMode(station->type == "adhoc" ? "adhoc" : "managed" );
-    
+
     odebug << "Setting channel to " << station->channel << oendl;
     wiface->setChannel(station->channel);
-    
+
     odebug << "Setting SSID to " << station->ssid << oendl;
     wiface->setSSID(station->ssid);
-    
+
     wiface->commit();
-    
+
     odebug << "Bringing interface up" << oendl;
     wiface->setUp(true);
     m_pbar->setProgress(1);
@@ -329,18 +329,18 @@ void OpieStumbler::slotAssociated()
         QTimer::singleShot(5000, this, SLOT(slotCleanSplash()));
         return;
     }
-    
+
     Global::statusMessage(tr("Joined"));
     m_pbar->setProgress(2);
     m_infoLabel->setText(QString("<center><b>%1 %2</b></center>").arg(tr("Joined Network")).arg(m_ssid));
-   
+
     if(m_proc) {
         m_proc->kill();
         delete m_proc;
     }
 
     m_proc = new Opie::Core::OProcess(this);
-        
+
     *m_proc << "udhcpc" << "-f" << "-n" << "-i" << m_interface;
     if (!m_proc->start(Opie::Core::OProcess::DontCare))
 	owarn << "Execution of udhcpc returned false. Are paths correct?" << oendl;
@@ -365,21 +365,21 @@ void OpieStumbler::slotCheckDHCP()
     m_infoLabel->setText(QString("<center><b>%1 %2</b></center>").arg(tr("Obtained IP")).arg(ipv4));
     Global::statusMessage(tr("Obtained IP") + " " + ipv4);
     QTimer::singleShot(5000, this, SLOT(slotCleanSplash()));
-    
+
 }
 
 void OpieStumbler::slotCleanSplash()
 {
     delete m_pbar;
-    m_pbar = 0;  
-    
+    m_pbar = 0;
+
     delete m_infoLabel;
     m_infoLabel = 0;
-    
+
     delete m_splashBox;
     m_splashBox = 0;
-    
+
     delete m_splash;
-    m_splash = 0;           
+    m_splash = 0;
 }
 

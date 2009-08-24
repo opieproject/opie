@@ -2,7 +2,7 @@
 #define __OFLOATBAR_H
 
 #include <qtoolbar.h>
-#include <qevent.h> 
+#include <qevent.h>
 
 class OFloatBar : public QToolBar
 {

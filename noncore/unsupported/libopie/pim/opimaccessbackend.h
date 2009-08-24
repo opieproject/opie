@@ -48,7 +48,7 @@ public:
      */
     virtual QArray<int> allRecords()const = 0;
 
-     /** 
+     /**
      * return a List of records
      * that match the regex
      */
@@ -56,7 +56,7 @@ public:
 
     /**
      * queryByExample for T with the given Settings
-     * 
+     *
      */
     virtual QArray<int> queryByExample( const T& t, int settings, const QDateTime& d = QDateTime() ) = 0;
 

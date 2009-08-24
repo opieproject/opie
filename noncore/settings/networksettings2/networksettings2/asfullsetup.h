@@ -10,11 +10,11 @@ class AsFullSetup : public RuntimeInfo {
 public :
 
     AsFullSetup( ANetNodeInstance * NNI ) :
-        RuntimeInfo( NNI ) { 
+        RuntimeInfo( NNI ) {
     }
 
     virtual const QString & description( void ) = 0;
-    virtual bool triggersVPN( void ) 
+    virtual bool triggersVPN( void )
       { return 0; }
 
 };

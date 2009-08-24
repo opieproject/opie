@@ -46,7 +46,7 @@ typedef struct
 
 #define AC3_N 512
 
-struct al_table 
+struct al_table
 {
 	short bits;
 	short d;

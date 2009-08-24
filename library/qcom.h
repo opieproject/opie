@@ -20,7 +20,7 @@
 
 #ifndef QCOM_H
 #define QCOM_H
- 
+
 #include <qstringlist.h>
 
 #ifndef QT_NO_COMPONENT
@@ -54,7 +54,7 @@ struct Q_EXPORT QUnknownInterface
 #ifndef IID_QLibrary
 #define IID_QLibrary QUuid( 0xd16111d4, 0xe1e7, 0x4c47, 0x85, 0x99, 0x24, 0x48, 0x3d, 0xae, 0x2e, 0x07)
 #endif
- 
+
 struct Q_EXPORT QLibraryInterface : public QUnknownInterface
 {
     virtual bool    init() = 0;

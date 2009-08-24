@@ -168,7 +168,7 @@ namespace {
         // We used to handle X-Qtopia-NOTES here, but since that seems to have
         // been set as a duplicate of the event description on vcal export (and
         // notes are not exported at all) it is useless and thus was removed.
-        
+
         VObjectIterator it;
         initPropIterator( &it, obj );
         while( moreIteration( &it ) ) {
@@ -332,7 +332,7 @@ bool ODateBookAccessBackend_VCal::reload() {
 }
 
 bool ODateBookAccessBackend_VCal::save() {
-    if (!m_changed) 
+    if (!m_changed)
         return true;
 
     QFile file( m_file );

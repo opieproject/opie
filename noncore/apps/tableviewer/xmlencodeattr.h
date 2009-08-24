@@ -1,7 +1,7 @@
 /*
  * xmlencodeattr.h
  *
- * copyright   : (c) 2003 by Joseph Wenninger   		
+ * copyright   : (c) 2003 by Joseph Wenninger
  *               except for a small modification it's identical to qdom.cpp:encodeAttr
  * email       : jowenn@handhelds.org
  *

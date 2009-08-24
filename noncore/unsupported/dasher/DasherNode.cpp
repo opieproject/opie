@@ -14,18 +14,18 @@ using namespace std;
 /////////////////////////////////////////////////////////////////////////////
 
 void CDasherNode::Dump_node () const
-{ 	
+{
 	/* TODO sort out
 	dchar out[256];
 	if (m_Symbol)
 		wsprintf(out,TEXT("%7x %3c %7x %5d %7x  %5d %8x %8x      \n"),this,m_Symbol,m_iGroup,m_context,m_Children,m_Cscheme,m_iLbnd,m_iHbnd);
 	else
 		wsprintf(out,TEXT("%7x     %7x %5d %7x  %5d %8x %8x      \n"),this,m_iGroup,m_context,m_Children,m_Cscheme,m_iLbnd,m_iHbnd);
-	
+
 	OutputDebugString(out);
-	
+
 	if (m_Children) {
-		unsigned int i; 
+		unsigned int i;
 		for (i=1;i<m_iChars;i++)
 			m_Children[i]->Dump_node();
 	}
@@ -39,7 +39,7 @@ void CDasherNode::Generic_Push_Node(CLanguageModel::CNodeContext *) {
 	if (m_Symbol && !m_iChars)   // make sure it's a valid symbol and don't enter if already done
 		m_languagemodel->EnterNodeSymbol(m_context,m_Symbol);
 
-	
+
 	vector<symbol> newchars;   // place to put this list of characters
 	vector<unsigned int> cum,groups;   // for the probability list
 	m_languagemodel->GetNodeProbs(m_context,newchars,groups,cum,0.003);
@@ -60,7 +60,7 @@ void CDasherNode::Generic_Push_Node(CLanguageModel::CNodeContext *) {
 		NormalScheme = Nodes1;
 		SpecialScheme = Special1;
 	}
-	
+
 	ColorSchemes ChildScheme;
 	for (i=1;i<m_iChars;i++) {
 		if (newchars[i]==this->m_languagemodel->GetSpaceSymbol())
@@ -73,7 +73,7 @@ void CDasherNode::Generic_Push_Node(CLanguageModel::CNodeContext *) {
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CDasherNode::Push_Node(CLanguageModel::CNodeContext *context) 
+void CDasherNode::Push_Node(CLanguageModel::CNodeContext *context)
 // push a node copying the specified context
 {
 
@@ -97,7 +97,7 @@ void CDasherNode::Push_Node(CLanguageModel::CNodeContext *context)
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CDasherNode::Push_Node() 
+void CDasherNode::Push_Node()
 {
 
 	if (m_Children) {
@@ -111,11 +111,11 @@ void CDasherNode::Push_Node()
 	}
 
 	// if we haven't got a context then try to get a new one
-	if (m_parent) 
+	if (m_parent)
 		m_context=m_languagemodel->CloneNodeContext(m_parent->m_context);
 	else
 		m_context=m_languagemodel->GetRootNodeContext();
-	
+
 	// if it fails, be patient
 	if (!m_context)
 		return;
@@ -126,9 +126,9 @@ void CDasherNode::Push_Node()
 
 void CDasherNode::Get_string_under(const int iNormalization,const myint miY1,const myint miY2,const myint miMousex,const myint miMousey, vector<symbol> &vString) const
 {
-	// we are over (*this) node so add it to the string 
+	// we are over (*this) node so add it to the string
 	vString.push_back(m_Symbol);
-	
+
 	// look for children who might also be under the coords
 	if (m_Children) {
 		myint miRange=miY2-miY1;
@@ -147,7 +147,7 @@ void CDasherNode::Get_string_under(const int iNormalization,const myint miY1,con
 
 /////////////////////////////////////////////////////////////////////////////
 
-CDasherNode * const CDasherNode::Get_node_under(int iNormalization,myint miY1,myint miY2,myint miMousex,myint miMousey) 
+CDasherNode * const CDasherNode::Get_node_under(int iNormalization,myint miY1,myint miY2,myint miMousex,myint miMousey)
 {
 	if (m_Children) {
 		myint miRange=miY2-miY1;
@@ -157,7 +157,7 @@ CDasherNode * const CDasherNode::Get_node_under(int iNormalization,myint miY1,my
 		for (i=1;i<m_iChars;i++) {
 			myint miNewy1=miY1+(miRange*m_Children[i]->m_iLbnd)/iNormalization;
 			myint miNewy2=miY1+(miRange*m_Children[i]->m_iHbnd)/iNormalization;
-		if (miMousey<miNewy2 && miMousey>miNewy1 && miMousex<miNewy2-miNewy1) 
+		if (miMousey<miNewy2 && miMousey>miNewy1 && miMousex<miNewy2-miNewy1)
 				return m_Children[i]->Get_node_under(iNormalization,miNewy1,miNewy2,miMousex,miMousey);
 		}
 	}

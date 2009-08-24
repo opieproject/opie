@@ -26,7 +26,7 @@ class Dasher::CPPMLanguageModel : public Dasher::CLanguageModel, private NoClone
 public:
 	CPPMLanguageModel(CAlphabet *_alphabet, int _normalization);
 	virtual ~CPPMLanguageModel();
-	
+
 	class CPPMnode {
 	public:
 		CPPMnode* find_symbol(int sym);
@@ -38,7 +38,7 @@ public:
 		const short int symbol;
 		CPPMnode(int sym);
 	};
-	
+
 	class CPPMContext : public CContext {
 	public:
 		CPPMContext(CPPMContext const &input) : CContext(input)
@@ -49,17 +49,17 @@ public:
 		CPPMnode* head;
 		int order;
 	};
-	
+
 	void ReleaseContext(CContext*);
 	CContext* GetRootContext();
 	inline CContext* CloneContext(CContext*);
 	void EnterSymbol(CContext* context, modelchar Symbol);
 	//inline bool GetProbs(CContext*,std::vector<symbol> &newchars,std::vector<unsigned int> &groups,std::vector<unsigned int> &probs,double addprob);
 	bool GetProbs(CContext*, std::vector<unsigned int> &Probs, double AddProb);
-	
+
 	void LearnSymbol(CContext* Context, modelchar Symbol);
 	void dump();
-	
+
 private:
 	CPPMContext *m_rootcontext;
 	CPPMnode *root;
@@ -73,7 +73,7 @@ private:
 };
 
 ////////////////////////////////////////////////////////////////////////
-// Inline functions 
+// Inline functions
 ////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////
@@ -86,7 +86,7 @@ inline CPPMLanguageModel::CPPMnode::CPPMnode(int sym) : symbol(sym)
 
 ///////////////////////////////////////////////////////////////////
 
-inline void CPPMLanguageModel::CPPMContext::dump() 
+inline void CPPMLanguageModel::CPPMContext::dump()
 	// diagnostic output
 {
 	// TODO uncomment this when headers sorted out

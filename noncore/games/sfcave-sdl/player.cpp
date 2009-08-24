@@ -197,7 +197,7 @@ void Player :: decValue( int valueType )
 }
 
 void Player :: setValue( int valueType, double val )
-{    
+{
     switch( valueType )
     {
         case PLAYER_THRUST:
@@ -233,7 +233,7 @@ double Player :: getValue( int valueType )
             val = maxDownSpeed;
             break;
     }
-    
+
     return val;
 }
 
@@ -277,7 +277,7 @@ string Player :: getValueString( int valueType )
             sprintf( val, "Max Speed Down - %lf", maxDownSpeed );
             break;
     }
-    
+
     string ret = val;
     return ret;
 }

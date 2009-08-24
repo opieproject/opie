@@ -44,10 +44,10 @@ public:
 public slots:
     void connectionClosed( QCopBridgePI *pi );
     void desktopMessage( const QCString &call, const QByteArray & );
-    
+
 protected:
     void timerEvent( QTimerEvent * );
-    
+
 private:
     QCopChannel *desktopChannel;
     QCopChannel *cardChannel;
@@ -68,10 +68,10 @@ public:
 
     void sendDesktopMessage( const QString &msg );
     void startSync() { sendSync = TRUE; }
-    
+
 signals:
     void connectionClosed( QCopBridgePI *);
-    
+
 protected slots:
     void read();
     void send( const QString& msg );

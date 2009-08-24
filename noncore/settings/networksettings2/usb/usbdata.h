@@ -4,6 +4,6 @@
 class USBData {
 public :
       bool Fake;
-} ; 
+} ;
 
 #endif

@@ -81,7 +81,7 @@ PredictTabWidget::PredictTabWidget( QWidget *parent )
 	tblLookups->horizontalHeader()->setLabel( 0, tr( "Shift [s/h]" ) );
 	tblLookups->horizontalHeader()->setLabel( 1, tr( "Last [h]" ) );
 	tblLookups->horizontalHeader()->setLabel( 2, tr( "Offset [s]" ) );
-	
+
 	tblLookups->setMinimumHeight( 50 );
 	tblLookups->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Maximum ) );
 	layout->addMultiCellWidget( tblLookups, 3, 3, 0, 1 );

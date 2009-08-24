@@ -47,12 +47,12 @@ int mpeg3_expand_slice_buffer(mpeg3_slice_buffer_t *slice_buffer)
 
 /* move/add 8x8-Block from block[comp] to refframe */
 
-static inline int mpeg3video_addblock(mpeg3_slice_t *slice, 
-		mpeg3video_t *video, 
-		int comp, 
-		int bx, 
-		int by, 
-		int dct_type, 
+static inline int mpeg3video_addblock(mpeg3_slice_t *slice,
+		mpeg3video_t *video,
+		int comp,
+		int bx,
+		int by,
+		int dct_type,
 		int addflag)
 {
 	int cc, i, iincr;
@@ -60,37 +60,37 @@ static inline int mpeg3video_addblock(mpeg3_slice_t *slice,
 	short *bp;
 	int spar = slice->sparse[comp];
 /* color component index */
-  	cc = (comp < 4) ? 0 : (comp & 1) + 1; 
+  	cc = (comp < 4) ? 0 : (comp & 1) + 1;
 
   	if(cc == 0)
-	{   
+	{
 /* luminance */
     	if(video->pict_struct == FRAME_PICTURE)
 		{
       		if(dct_type)
 			{
 /* field DCT coding */
-        		rfp = video->newframe[0] + 
+        		rfp = video->newframe[0] +
               		video->coded_picture_width * (by + ((comp & 2) >> 1)) + bx + ((comp & 1) << 3);
         		iincr = (video->coded_picture_width << 1);
       		}
       		else
 			{
 /* frame DCT coding */
-        		rfp = video->newframe[0] + 
+        		rfp = video->newframe[0] +
              		video->coded_picture_width * (by + ((comp & 2) << 2)) + bx + ((comp & 1) << 3);
         		iincr = video->coded_picture_width;
       		}
 		}
-    	else 
+    	else
 		{
 /* field picture */
-      		rfp = video->newframe[0] + 
+      		rfp = video->newframe[0] +
            		(video->coded_picture_width << 1) * (by + ((comp & 2) << 2)) + bx + ((comp & 1) << 3);
       		iincr = (video->coded_picture_width << 1);
     	}
  	}
-  	else 
+  	else
 	{
 /* chrominance */
 
@@ -106,7 +106,7 @@ static inline int mpeg3video_addblock(mpeg3_slice_t *slice,
             		  + video->chrom_width * (by + ((comp & 2) >> 1)) + bx + (comp & 8);
         		iincr = (video->chrom_width << 1);
     		}
-    		else 
+    		else
 			{
 /* frame DCT coding */
         		rfp = video->newframe[cc]
@@ -114,7 +114,7 @@ static inline int mpeg3video_addblock(mpeg3_slice_t *slice,
         		iincr = video->chrom_width;
     		}
     	}
-    	else 
+    	else
 		{
 /* field picture */
     		rfp = video->newframe[cc]
@@ -155,7 +155,7 @@ static inline int mpeg3video_addblock(mpeg3_slice_t *slice,
             	  : "c" (8),"r" (rfp), "r" (bp), "r" (iincr)
                 	);
     		}
-    		else 
+    		else
 			{
     	   __asm__ __volatile__(
         		 "pxor    %%mm4, %%mm4\n"
@@ -200,12 +200,12 @@ static inline int mpeg3video_addblock(mpeg3_slice_t *slice,
     			bp += 8;
 			}
   	}
-  	else 
+  	else
   	{
 #ifdef HAVE_MMX
 		if(video->have_mmx)
 		{
-    		if(spar) 
+    		if(spar)
 			{
             __asm__ __volatile__(
             	"movd       (%2),           %%mm0\n"    /* " 0 0 0  v1" */
@@ -230,7 +230,7 @@ static inline int mpeg3video_addblock(mpeg3_slice_t *slice,
             	: "D" (rfp), "c" (iincr), "b" (bp)
             	: "eax");
     		}
-    		else 
+    		else
 			{
     		__asm__ __volatile__(
             	"movq        MMX_128,%%mm4\n"
@@ -296,7 +296,7 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
 	int pmv[2][2][2], mv_field_sel[2][2];
 	int dmv, dmvector[2];
 	int qs;
-	int stwtype, stwclass; 
+	int stwtype, stwclass;
 	int snr_cbp;
 	int i;
 	mpeg3_slice_buffer_t *slice_buffer = slice->slice_buffer;
@@ -306,10 +306,10 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
 
 /* field picture has half as many macroblocks as frame */
 	if(video->pict_struct != FRAME_PICTURE)
-	    mba_max >>= 1; 
+	    mba_max >>= 1;
 
 /* macroblock address */
-  	macroblock_address = 0; 
+  	macroblock_address = 0;
 /* first macroblock in slice is not skipped */
   	mba_inc = 0;
   	slice->fault = 0;
@@ -323,8 +323,8 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
     pmv[0][0][0] = pmv[0][0][1] = pmv[1][0][0] = pmv[1][0][1] = 0;
     pmv[0][1][0] = pmv[0][1][1] = pmv[1][1][0] = pmv[1][1][1] = 0;
 
-  	for(i = 0; 
-		slice_buffer->current_position < slice_buffer->buffer_size; 
+  	for(i = 0;
+		slice_buffer->current_position < slice_buffer->buffer_size;
 		i++)
 	{
 		if(mba_inc == 0)
@@ -357,16 +357,16 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
 /* not skipped */
     	if(mba_inc == 1)
 		{
-			mpeg3video_macroblock_modes(slice, 
-				video, 
-				&mb_type, 
-				&stwtype, 
+			mpeg3video_macroblock_modes(slice,
+				video,
+				&mb_type,
+				&stwtype,
 				&stwclass,
-        		&motion_type, 
-				&mv_count, 
-				&mv_format, 
-				&dmv, 
-				&mvscale, 
+        		&motion_type,
+				&mv_count,
+				&mv_format,
+				&dmv,
+				&mvscale,
 				&dct_type);
 
 			if(slice->fault) return 1;
@@ -377,7 +377,7 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
 
         		if(video->mpeg2)
             	 	slice->quant_scale = video->qscale_type ? mpeg3_non_linear_mquant_table[qs] : (qs << 1);
-        		else 
+        		else
 					slice->quant_scale = qs;
 
         		if(video->scalable_mode == SC_DP)
@@ -392,27 +392,27 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
       		if((mb_type & MB_FORWARD) || ((mb_type & MB_INTRA) && video->conceal_mv))
 			{
         		if(video->mpeg2)
-        			mpeg3video_motion_vectors(slice, 
-						video, 
-						pmv, 
-						dmvector, 
-						mv_field_sel, 
-            			0, 
-						mv_count, 
-						mv_format, 
-						video->h_forw_r_size, 
-						video->v_forw_r_size, 
-						dmv, 
+        			mpeg3video_motion_vectors(slice,
+						video,
+						pmv,
+						dmvector,
+						mv_field_sel,
+            			0,
+						mv_count,
+						mv_format,
+						video->h_forw_r_size,
+						video->v_forw_r_size,
+						dmv,
 						mvscale);
         		else
-        		  	mpeg3video_motion_vector(slice, 
-						video, 
-						pmv[0][0], 
-						dmvector, 
-            			video->forw_r_size, 
-						video->forw_r_size, 
-						0, 
-						0, 
+        		  	mpeg3video_motion_vector(slice,
+						video,
+						pmv[0][0],
+						dmvector,
+            			video->forw_r_size,
+						video->forw_r_size,
+						0,
+						0,
 						video->full_forw);
     		}
       		if(slice->fault) return 1;
@@ -421,27 +421,27 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
     		if(mb_type & MB_BACKWARD)
 			{
         		if(video->mpeg2)
-        		  	mpeg3video_motion_vectors(slice, 
-						video, 
-						pmv, 
-						dmvector, 
-						mv_field_sel, 
-            			1, 
-						mv_count, 
-						mv_format, 
-						video->h_back_r_size, 
-						video->v_back_r_size, 
-						0, 
+        		  	mpeg3video_motion_vectors(slice,
+						video,
+						pmv,
+						dmvector,
+						mv_field_sel,
+            			1,
+						mv_count,
+						mv_format,
+						video->h_back_r_size,
+						video->v_back_r_size,
+						0,
 						mvscale);
         		else
-        		  	mpeg3video_motion_vector(slice, 
-						video, 
-						pmv[0][1], 
-						dmvector, 
-            			video->back_r_size, 
-						video->back_r_size, 
-						0, 
-						0, 
+        		  	mpeg3video_motion_vector(slice,
+						video,
+						pmv[0][1],
+						dmvector,
+            			video->back_r_size,
+						video->back_r_size,
+						0,
+						0,
 						video->full_back);
     		}
 
@@ -458,13 +458,13 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
         		if(video->chroma_format == CHROMA422)
 				{
 /* coded_block_pattern_1 */
-        		  	cbp = (cbp << 2) | mpeg3slice_getbits2(slice_buffer); 
+        		  	cbp = (cbp << 2) | mpeg3slice_getbits2(slice_buffer);
         		}
         		else
 				if(video->chroma_format == CHROMA444)
 				{
 /* coded_block_pattern_2 */
-        		  	cbp = (cbp << 6) | mpeg3slice_getbits(slice_buffer, 6); 
+        		  	cbp = (cbp << 6) | mpeg3slice_getbits(slice_buffer, 6);
         		}
     		}
     		else
@@ -484,11 +484,11 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
             			else
 							mpeg3video_getintrablock(slice, video, comp, dc_dct_pred);
           			}
-        			else 
+        			else
 					{
-            		  	if(video->mpeg2) 
+            		  	if(video->mpeg2)
 					  		mpeg3video_getmpg2interblock(slice, video, comp);
-            		  	else           
+            		  	else
 					  		mpeg3video_getinterblock(slice, video, comp);
         			}
         			if(slice->fault) return 1;
@@ -513,7 +513,7 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
         		pmv[0][0][0] = pmv[0][0][1] = pmv[1][0][0] = pmv[1][0][1] = 0;
 
 /* derive motion_type */
-        		if(video->pict_struct == FRAME_PICTURE) 
+        		if(video->pict_struct == FRAME_PICTURE)
 					motion_type = MC_FRAME;
         		else
         		{
@@ -530,7 +530,7 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
         		pmv[0][1][0] = pmv[0][1][1] = pmv[1][1][0] = pmv[1][1][1] = 0;
     		}
     	}
-    	else 
+    	else
 		{
 /* mba_inc!=1: skipped macroblock */
       		mpeg3video_clearblock(slice, 0, video->blk_cnt);
@@ -560,7 +560,7 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
       		mb_type &= ~MB_INTRA;
 
 /* no block data */
-      		cbp = 0; 
+      		cbp = 0;
     	}
 
     	snr_cbp = 0;
@@ -571,14 +571,14 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
 
 /* motion compensation */
     	if(!(mb_type & MB_INTRA))
-    	  	mpeg3video_reconstruct(video, 
-				bx, 
-				by, 
-				mb_type, 
-				motion_type, 
-				pmv, 
-				mv_field_sel, 
-				dmvector, 
+    	  	mpeg3video_reconstruct(video,
+				bx,
+				by,
+				mb_type,
+				motion_type,
+				pmv,
+				mv_field_sel,
+				dmvector,
 				stwtype);
 
 /* copy or add block data into picture */
@@ -593,12 +593,12 @@ int mpeg3_decode_slice(mpeg3_slice_t *slice)
 #endif
           			mpeg3video_idct_conversion(slice->block[comp]);
 
-        		mpeg3video_addblock(slice, 
-					video, 
-					comp, 
-					bx, 
-					by, 
-					dct_type, 
+        		mpeg3video_addblock(slice,
+					video,
+					comp,
+					bx,
+					by,
+					dct_type,
 					(mb_type & MB_INTRA) == 0);
       		}
     	}

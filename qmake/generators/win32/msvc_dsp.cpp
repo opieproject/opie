@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of DspMakefileGenerator class.
 **
@@ -229,13 +229,13 @@ DspMakefileGenerator::writeDspParts(QTextStream &t)
 		    if (!createMOC.isEmpty() || !compilePCH.isEmpty()) {
 			bool doMOC = !createMOC.isEmpty();
 			bool doPCH = !compilePCH.isEmpty();
-			QString build = "\n\n# Begin Custom Build - "+ 
+			QString build = "\n\n# Begin Custom Build - "+
 					QString(doMOC?"Moc'ing ":"") +
 					QString((doMOC&&doPCH)?" and ":"") +
 					QString(doPCH?"Creating PCH cpp from ":"") +
 					(*it) + "...\nInputPath=.\\" + (*it) + "\n\n" +
 					buildCmds + "%1\n" +
-					createMOC + 
+					createMOC +
 					compilePCH +
 					"# End Custom Build\n\n";
 
@@ -611,7 +611,7 @@ DspMakefileGenerator::init()
 	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_RTTI_OFF"];
     }
 
-    
+
     /* this should probably not be here, but I'm using it to wrap the .t files */
     if(project->first("TEMPLATE") == "vcapp" )
 	project->variables()["QMAKE_APP_FLAG"].append("1");
@@ -867,7 +867,7 @@ DspMakefileGenerator::init()
     }
 
     project->variables()["QMAKE_LIBS"] += project->variables()["QMAKE_LIBS_WINDOWS"];
- 
+
     processPrlFiles();
 
      // Update -lname to name.lib,
@@ -880,7 +880,7 @@ DspMakefileGenerator::init()
 	    libit2 = libs2.remove( libit2 );
 	}
     }
-    
+
     project->variables()["MSVCDSP_LFLAGS" ] += project->variables()["QMAKE_LFLAGS"];
     if ( !project->variables()["QMAKE_LIBDIR"].isEmpty() )
 	project->variables()["MSVCDSP_LFLAGS" ].append(varGlue("QMAKE_LIBDIR","/LIBPATH:\"","\" /LIBPATH:\"","\""));
@@ -958,7 +958,7 @@ DspMakefileGenerator::init()
 	    version = "1.0";
 	project->variables()["MSVCDSP_IDLSOURCES"].append( var("OBJECTS_DIR") + targetfilename + ".idl" );
 	if ( project->isActiveConfig( "dll" ) ) {
-	    activeQtStepPreCopyDll += 
+	    activeQtStepPreCopyDll +=
 			     "\t" + idc + " %1 -idl " + var("OBJECTS_DIR") + targetfilename + ".idl -version " + version +
 			     "\t" + idl + " /nologo " + var("OBJECTS_DIR") + targetfilename + ".idl /tlb " + var("OBJECTS_DIR") + targetfilename + ".tlb" +
 			     "\t" + idc + " %2 /tlb " + var("OBJECTS_DIR") + targetfilename + ".tlb";
@@ -973,7 +973,7 @@ DspMakefileGenerator::init()
 	    activeQtStepPreCopyDllDebug = activeQtStepPreCopyDll.arg(executable).arg(executable);
 	    activeQtStepPostCopyDllDebug = activeQtStepPostCopyDll.arg(executable);
 	} else {
-	    activeQtStepPreCopyDll += 
+	    activeQtStepPreCopyDll +=
 			     "\t%1 -dumpidl " + var("OBJECTS_DIR") + targetfilename + ".idl -version " + version +
 			     "\t" + idl + " /nologo " + var("OBJECTS_DIR") + targetfilename + ".idl /tlb " + var("OBJECTS_DIR") + targetfilename + ".tlb" +
 			     "\t" + idc + " %2 /tlb " + var("OBJECTS_DIR") + targetfilename + ".tlb";
@@ -990,7 +990,7 @@ DspMakefileGenerator::init()
 
     }
 
-    
+
     if ( !postLinkStep.isEmpty() || !copyDllStep.isEmpty() || !activeQtStepPreCopyDllDebug.isEmpty() || !activeQtStepPreCopyDllRelease.isEmpty() ) {
 	project->variables()["MSVCDSP_POST_LINK_DBG"].append(
 	    "# Begin Special Build Tool\n"
@@ -1014,7 +1014,7 @@ DspMakefileGenerator::init()
 	if ( QFile::exists( *it + ".h" ) )
 	    project->variables()["SOURCES"].append( *it + ".h" );
     }
-    project->variables()["QMAKE_INTERNAL_PRL_LIBS"] << "MSVCDSP_LIBS"; 
+    project->variables()["QMAKE_INTERNAL_PRL_LIBS"] << "MSVCDSP_LIBS";
 }
 
 
@@ -1063,7 +1063,7 @@ DspMakefileGenerator::beginGroupForFile(QString file, QTextStream &t,
 	endGroups(t);
 	return;
     }
-    
+
     QString tempFile = file;
     if(tempFile.startsWith(currentGroup))
 	tempFile = tempFile.mid(currentGroup.length());

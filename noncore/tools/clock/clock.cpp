@@ -865,7 +865,7 @@ void Clock::slotBrowseMp3File()
 void Clock::slotTestAlarmSound()
 {
     int player = sndOption->currentItem();
-    if( player == ALARMTYPE_DEFALARM ) 
+    if( player == ALARMTYPE_DEFALARM )
         Sound::soundAlarm();
     else if( player == ALARMTYPE_OPIEPLAYER || player == ALARMTYPE_OPIEPLAYER2 )
         playFile( sndFileName->text(), player == ALARMTYPE_OPIEPLAYER2 );
@@ -945,7 +945,7 @@ void Clock::slotAlarmProcessExit(Opie::Core::OProcess*)
         if(alarmProc->normalExit()) {
             if(alarmProc->exitStatus() == 0) {
                 // Found an existing command
-                odebug << "Playing with " << playerCmds[alarmCmd] << oendl; 
+                odebug << "Playing with " << playerCmds[alarmCmd] << oendl;
                 alarmPlay(alarmFile, playerCmds[alarmCmd]);
                 alarmCmd = 0;
             }

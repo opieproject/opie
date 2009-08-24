@@ -68,7 +68,7 @@ stock *malloc_stock(void)
   stockptr->Symbol=NULL;
   stockptr->Name=NULL;
   stockptr->Time=NULL;
-  stockptr->Date=NULL;  
+  stockptr->Date=NULL;
   stockptr->CurrentPrice=0;
   stockptr->LastPrice=0;
   stockptr->OpenPrice=0;
@@ -79,7 +79,7 @@ stock *malloc_stock(void)
   stockptr->Volume=0;
   stockptr->PreviousStock=0;
   stockptr->NextStock=0;
-  
+
   return(stockptr);
 }
 
@@ -90,9 +90,9 @@ stock *malloc_stock(void)
 void free_stocks(stock *stock_to_free)
 {
   stock *next_stock;
-  
+
   while(stock_to_free)
-    {    
+    {
       next_stock = stock_to_free->NextStock;
       free(stock_to_free->Symbol);
       free(stock_to_free->Name);

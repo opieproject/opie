@@ -87,7 +87,7 @@ QStringList OContactFields::phonefields( bool sorted, bool translated )
 
     list.append( mapIdToStr[Qtopia::BusinessPhone] );
     list.append( mapIdToStr[Qtopia::BusinessFax] );
-    list.append( mapIdToStr[Qtopia::BusinessMobile] ); 
+    list.append( mapIdToStr[Qtopia::BusinessMobile] );
     list.append( mapIdToStr[Qtopia::BusinessPager] );
     list.append( mapIdToStr[Qtopia::BusinessWebPage] );
 
@@ -397,7 +397,7 @@ OContactFields::OContactFields():
 OContactFields::~OContactFields(){
 
 	// We will store the fieldorder into the config file
-	// to reuse it for the future.. 
+	// to reuse it for the future..
 	if ( changedFieldOrder ){
 		Config cfg ( "AddressBook" );
 		cfg.setGroup( "ContactFieldOrder" );
@@ -443,7 +443,7 @@ void OContactFields::setFieldOrder( int num, int index ){
 
 	fieldOrder[num] = QString::number( index, 16 )[0];
 
-	// We will store this new fieldorder globally to 
+	// We will store this new fieldorder globally to
 	// remember it for contacts which have none
 	globalFieldOrder = fieldOrder;
 	changedFieldOrder = true;

@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
 #endif
 
     m_closeOnEmpty = TRUE;
-    
+
     setCaption(QObject::tr("Opie Console") );
     KeyTrans::loadAll();
     for (int i = 0; i < KeyTrans::count(); i++ ) {
@@ -182,7 +182,7 @@ void MainWindow::initUI() {
     m_recordLog = new QAction();
     m_recordLog->setText( tr("Start log") );
     m_recordLog->addTo( m_console );
-    connect(m_recordLog, SIGNAL(activated() ), 
+    connect(m_recordLog, SIGNAL(activated() ),
             this, SLOT( slotSaveLog() ) );
     m_recordingLog = false;
 
@@ -220,8 +220,8 @@ void MainWindow::initUI() {
     m_saveScript = new QAction(tr("Save Script"), QString::null, 0, this, 0);
     m_saveScript->addTo(m_scripts);
     connect(m_saveScript, SIGNAL(activated()), this, SLOT(slotSaveScript()));
-   
-    
+
+
     /*
      * action that open/closes the keyboard
      */
@@ -426,7 +426,7 @@ void MainWindow::slotConnect() {
             // if it does not support file transfer, disable the menu entry
             if ( ( m_curSession->layer() )->supports()[1] == 0 ) {
                 m_transfer->setEnabled( false );
-            } 
+            }
             else {
                 m_transfer->setEnabled( true );
             }
@@ -464,7 +464,7 @@ void MainWindow::slotQuickLaunch()  {
     Profile prof = manager()->profile(  "default" );
     if ( prof.name() == "default"  )  {
         create( prof );
-    } 
+    }
     else {
     #ifndef EAST
         Profile newProf =  Profile( "default",  "console", "default" ,  0, 3,  0 );
@@ -516,7 +516,7 @@ void MainWindow::create( const Profile& prof ) {
 
     if ( homeDir )
         ::chdir( homeDir );
-    
+
     if ( m_curSession )
         if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
 
@@ -559,7 +559,7 @@ void MainWindow::create( const Profile& prof ) {
 
     if(currentSession()->profile().readNumEntry("Wrap", 80)){
         m_isWrapped = true;
-    } 
+    }
     else {
         m_isWrapped = false;
     }
@@ -584,16 +584,16 @@ void MainWindow::slotTransfer()
 }
 
 void MainWindow::slotOpenKeb(bool state) {
-    if (state) 
+    if (state)
         m_keyBar->show();
-    else 
+    else
         m_keyBar->hide();
 }
 
 void MainWindow::slotOpenButtons( bool state ) {
     if ( state ) {
         m_buttonBar->show();
-    } 
+    }
     else {
         m_buttonBar->hide();
     }
@@ -613,7 +613,7 @@ void MainWindow::slotSessionChanged( Session* ses ) {
             m_recordScript->setEnabled(!m_curSession->emulationHandler()->isRecording());
             m_saveScript->setEnabled(m_curSession->emulationHandler()->isRecording());
             m_scripts->setItemEnabled(m_runScript_id, true);
-        } 
+        }
         else {
             m_connect->setEnabled( true );
             m_disconnect->setEnabled( false );
@@ -624,25 +624,25 @@ void MainWindow::slotSessionChanged( Session* ses ) {
 
         if ( ( currentSession()->emulationHandler()->isLogging() ) ) {
             m_recordLog->setText( tr("Stop log") );
-        } 
+        }
         else {
             m_recordLog->setText( tr("Start log") );
         }
 
         if ( ( m_curSession->layer() )->supports()[1] == 0 ) {
             m_transfer->setEnabled( false );
-        } 
+        }
         else {
             m_transfer->setEnabled( true );
         }
 
         QWidget *w = m_curSession->widget();
-        if( w ) 
+        if( w )
             w->setFocus();
 
         if( currentSession()->profile().readNumEntry( "Wrap", 80 ) ) {
             m_isWrapped = true;
-        } 
+        }
         else {
             m_isWrapped = false;
         }
@@ -654,7 +654,7 @@ void MainWindow::slotSessionChanged( Session* ses ) {
 void MainWindow::slotSessionClosed( Session *ses )
 {
     /* set to NULL to be safe, if its needed slotSessionChanged resets it automatically */
-    if(ses == m_curSession) 
+    if(ses == m_curSession)
         m_curSession = NULL;
     tabWidget()->remove( ses );
     // it's autodelete
@@ -703,7 +703,7 @@ void MainWindow::slotFullscreen() {
         ( m_curSession->emulationHandler() )->cornerButton()->hide();
         disconnect( ( m_curSession->emulationHandler() )->cornerButton(), SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
 
-    } 
+    }
     else {
         savedParentFullscreen = ( m_curSession->widgetStack() )->parentWidget();
         ( m_curSession->widgetStack() )->setFrameStyle( QFrame::NoFrame );
@@ -733,7 +733,7 @@ void MainWindow::slotScrollbarSelected(int index)
     else if( index == sm_right ) {
         loc = 2;
     }
-    
+
     cfg.writeEntry("Position", loc);
 
     if (currentSession()) {
@@ -800,8 +800,8 @@ void MainWindow::slotSaveLog() {
         nf.writeLink();
         m_recordLog->setText( tr("Start log") );
         m_recordingLog = false;
-        currentSession()->emulationHandler()->clearLog(); 
-    } 
+        currentSession()->emulationHandler()->clearLog();
+    }
     else {
         QMap<QString, QStringList> map;
         QStringList text;
@@ -811,12 +811,12 @@ void MainWindow::slotSaveLog() {
         cfg.setGroup("defaults");
         QString startDir = cfg.readEntry("defaultlogdir", QPEApplication::documentDir() );
         QString m_logName = OFileDialog::getSaveFileName(2, startDir, QString::null, map, 0, startDir);
-        if (m_logName.isEmpty() ) 
+        if (m_logName.isEmpty() )
             return;
 
-        m_recordLog->setText( tr("Stop log") ); 
+        m_recordLog->setText( tr("Stop log") );
         m_recordingLog = true;
-        currentSession()->emulationHandler()->startLogging(m_logName); 
+        currentSession()->emulationHandler()->startLogging(m_logName);
     }
 }
 

@@ -23,11 +23,11 @@ using namespace OpieTooth;
 
 using namespace Opie::Core;
 
-PanDialog::PanDialog( const QString& device, QWidget* parent,  
+PanDialog::PanDialog( const QString& device, QWidget* parent,
     const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
     m_panConnect = NULL;
-    
+
     if ( !name )
         setName( "PANDialog" );
     setCaption( tr( "PAN connection " ) ) ;
@@ -44,7 +44,7 @@ PanDialog::PanDialog( const QString& device, QWidget* parent,
 
     connectButton = new QPushButton( this );
     connectButton->setText( tr( "Connect" ) );
-    
+
     doEncryption = new QCheckBox(this, "encrypt");
     doEncryption->setText( tr( "encrypt" ) );
     doSecure = new QCheckBox(this, "secure connection");
@@ -71,7 +71,7 @@ void PanDialog::connectToDevice() {
     }
     m_panConnect = new OProcess();
     outPut->clear();
-    
+
     // Fill process command line
     *m_panConnect << tr("pand")
             << tr("--connect") << m_device
@@ -80,7 +80,7 @@ void PanDialog::connectToDevice() {
         *m_panConnect << tr("--encrypt");
     if (doSec)
         *m_panConnect << tr("--secure");
-    if (!m_panConnect->start(OProcess::NotifyOnExit, 
+    if (!m_panConnect->start(OProcess::NotifyOnExit,
         OProcess::All)) {
         outPut->append(tr("Couldn't start"));
         delete m_panConnect;
@@ -90,13 +90,13 @@ void PanDialog::connectToDevice() {
     {
         m_panConnect->resume();
         outPut->append(tr("Started"));
-        connect(m_panConnect, 
+        connect(m_panConnect,
 		    SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int)),
             this, SLOT(fillOutPut(Opie::Core::OProcess*, char*, int)));
-        connect(m_panConnect, 
+        connect(m_panConnect,
             SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int)),
             this,    SLOT(fillErr(Opie::Core::OProcess*, char*, int)));
-        connect(m_panConnect, 
+        connect(m_panConnect,
             SIGNAL(processExited(Opie::Core::OProcess*)),
             this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
     }

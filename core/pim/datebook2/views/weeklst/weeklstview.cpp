@@ -55,7 +55,7 @@ void WeekLstView::clockChanged() {
 }
 
 void WeekLstView::dayChanged() {
-    // FIXME notify header    
+    // FIXME notify header
     reschedule();
 }
 
@@ -96,7 +96,7 @@ QWidget *WeekLstView::createConfigWidget( QWidget *owner ) {
     GroupBox5Layout->setSpacing( 6 );
     GroupBox5Layout->setMargin( 11 );
 
-    QHBoxLayout *Layout6 = new QHBoxLayout; 
+    QHBoxLayout *Layout6 = new QHBoxLayout;
     Layout6->setSpacing( 6 );
     Layout6->setMargin( 0 );
 
@@ -110,7 +110,7 @@ QWidget *WeekLstView::createConfigWidget( QWidget *owner ) {
     comboWeekListView->insertItem( tr( "Start-End" ) );
     Layout6->addWidget( comboWeekListView );
     GroupBox5Layout->addLayout( Layout6 );
-    
+
     comboWeekListView->setCurrentItem( m_timeDisplay );
 
     return GroupBox5;
@@ -150,7 +150,7 @@ void WeekLstView::initUI(QWidget *parent) {
 
 void WeekLstView::getEvents()
 {
-    if (!dateset) 
+    if (!dateset)
         return;
 
     QDate startWeek = weekDate();
@@ -181,7 +181,7 @@ void WeekLstView::getEvents()
     } else {
         if (m_dbl) {
             m_CurrentView->setEvents(eventList, eventList2, startWeek, weekStartOnMonday(), m_timeDisplay);
-        } 
+        }
         else {
             m_CurrentView->setEvents(eventList, startWeek, weekStartOnMonday(), m_timeDisplay);
         }
@@ -212,7 +212,7 @@ QDate WeekLstView::weekDate() const
 
     // Calculate offset to first day of week.
     int dayoffset=d.dayOfWeek();
-    if( weekStartOnMonday() ) 
+    if( weekStartOnMonday() )
         dayoffset--;
     else if( dayoffset == 7 )
         dayoffset = 0;

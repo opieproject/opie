@@ -1,5 +1,5 @@
 /****************************************************************************
-   inputDialog.cpp  
+   inputDialog.cpp
                              -------------------
 ** Created: Sat Mar 9 23:33:09 2002
     copyright            : (C) 2002 by ljp
@@ -23,7 +23,7 @@ InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags
 {
     if ( !name )
         setName( "InputDialog" );
-    resize( 234, 50 ); 
+    resize( 234, 50 );
     setMaximumSize( QSize( 240, 50 ) );
     setCaption( tr(name ) );
 

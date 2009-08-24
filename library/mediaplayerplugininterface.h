@@ -42,8 +42,8 @@ class MediaPlayerDecoder {
 
 public:
     virtual ~MediaPlayerDecoder() { };
-   
-    // About Plugin 
+
+    // About Plugin
     virtual const char *pluginName() = 0;
     virtual const char *pluginComment() = 0;
     virtual double pluginVersion() = 0;

@@ -8,11 +8,11 @@ class QTimer;
 class QListBoxItem;
 class QEvent;
 
-namespace Opie { 
+namespace Opie {
 
-  namespace Ui { 
+  namespace Ui {
 
-    class OLedBox; 
+    class OLedBox;
 
   };
 
@@ -24,12 +24,12 @@ class NetworkSettings : public NetworkSettingsGUI {
 
 public :
 
-      NetworkSettings( QWidget *parent=0, 
-                       const char *name=0, 
+      NetworkSettings( QWidget *parent=0,
+                       const char *name=0,
                        WFlags fl = 0 );
       virtual ~NetworkSettings( void );
 
-      static QString appName( void ) 
+      static QString appName( void )
         { return QString::fromLatin1("networksettings"); }
 
 public slots :

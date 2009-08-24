@@ -96,18 +96,18 @@ namespace OpieTooth {
             tmpLine = str.simplifyWhiteSpace();
             //If it's commented out, remove the comment and check again
             //Now, let's check if this is a real keyword (not word_keyword)
-            if (tmpLine.startsWith("#")) { 
+            if (tmpLine.startsWith("#")) {
                 tmpLine.remove(0, 1);
                 tmpLine = tmpLine.simplifyWhiteSpace();
                 wasCommented = true;
             }
             if( (tmpLine.contains(rx1)) > 0 || (tmpLine.contains(rx2)) > 0) {
                 odebug << "Found " + key << oendl;
-                
+
                 if (wasCommented)
                     str = ("\t" + key + " " + value + ";");
                 else
-                    str = str.replace(QRegExp("\\s*" + key + "\\s+[^\\s][^;]*;"), 
+                    str = str.replace(QRegExp("\\s*" + key + "\\s+[^\\s][^;]*;"),
                         "\t" + key + " " + value + ";");
                 odebug << str << oendl;
                 it = m_file.remove( it );

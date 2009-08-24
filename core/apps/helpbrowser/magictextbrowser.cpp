@@ -89,7 +89,7 @@ QString MagicTextBrowser::generateQpe(const QString& name) const {
         bool helpExists = FALSE;
         for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it) {
             helpExists = QFile::exists( *it + "/" + helpFile );
-	    
+
 	    if( !helpExists && QFile::exists( *it + "/" + exec + "/" + helpFile ) ) {
 		helpFile = exec + "/" + helpFile;
 		helpExists = true;

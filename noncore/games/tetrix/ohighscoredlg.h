@@ -33,7 +33,7 @@ class OHighscore : public QWidget
 		 *An OHighscore-Object contains all Points, level and playernames sorted in a stl::vector
 		 */
 		OHighscore( int , int );
-	
+
 		~OHighscore();
 
 		/*
@@ -45,9 +45,9 @@ class OHighscore : public QWidget
 		 * this inserts the new entry at the correct position
 		 */
 		void insertData( QString , int , int );
-		
+
 		QList<t_playerData> playerData;
-		
+
 		/*
 		 * As Qt/e does not support QInputDialog I did that code myself
 		 */
@@ -63,12 +63,12 @@ class OHighscore : public QWidget
 		 * the level of the highscore
 		 */
 		int pLevel;
-		
+
 		/*
 		 * get all scores in a vector and give "lowest" a value
 		 */
 		void getList();
-		
+
 		/*
 		 * sets the bool if the current score is in the top10
 		 */
@@ -78,15 +78,15 @@ class OHighscore : public QWidget
 class OHighscoreDialog : public QDialog
 {
 	Q_OBJECT
-	
+
     public:
 		OHighscoreDialog(OHighscore *highscore, QWidget *parent, const char *name = 0, bool modal = true );
 
 	private:
 		OHighscore *hs_;
-	
+
 		QVBoxLayout *vbox_layout;
-		
+
 		/*
 		 * this method creates the QListView with all data
 		 */

@@ -48,7 +48,7 @@ using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 using namespace OpieObex;
 
-ObexServer::ObexServer(int trans) : 
+ObexServer::ObexServer(int trans) :
     OProcess(tr("ObexServer"), 0, "ObexServer")
 {
     transport = trans;
@@ -73,7 +73,7 @@ static int file_received(uint8_t* name, const uint8_t* data, size_t data_len)
     path += (char*)name;
     QFile out(path);
     int err = 0;
-    
+
     if (!out.open(IO_Raw | IO_ReadWrite | IO_Truncate)) {
         printf("File %s open error %d\n", (const char*)path, errno);
         err = -1;
@@ -115,12 +115,12 @@ static int put_done(obex_t* handle, obex_object_t* object)
             body = hv.bs;
             body_len = hlen;
             break;
-        
+
         case OBEX_HDR_NAME:
             name = new uint8_t[(hlen / 2) + 1];
             OBEX_UnicodeToChar(name, hv.bs, hlen);
             break;
-	  
+
         default:
             break;
         }
@@ -128,7 +128,7 @@ static int put_done(obex_t* handle, obex_object_t* object)
 
     if (body)
         err = file_received(name, body, body_len);
-  
+
     if (name)
         delete[] name;
     return err;
@@ -138,11 +138,11 @@ static int put_done(obex_t* handle, obex_object_t* object)
  * Function handles OBEX request
  * @param handle OBEX connection handle
  * @param object OBEX object itself
- * @param mode 
+ * @param mode
  * @param event event code
  * @param cmd OBEX command itself
  */
-static void handle_request (obex_t* handle, obex_object_t* object, 
+static void handle_request (obex_t* handle, obex_object_t* object,
     int event, int cmd)
 {
     (void)event;
@@ -152,7 +152,7 @@ static void handle_request (obex_t* handle, obex_object_t* object,
         break;
     case OBEX_CMD_PUT:
         if (put_done (handle, object) < 0)
-            OBEX_ObjectSetRsp (object, OBEX_RSP_INTERNAL_SERVER_ERROR, 
+            OBEX_ObjectSetRsp (object, OBEX_RSP_INTERNAL_SERVER_ERROR,
                 OBEX_RSP_INTERNAL_SERVER_ERROR);
         else
             OBEX_ObjectSetRsp (object, OBEX_RSP_CONTINUE, OBEX_RSP_SUCCESS);
@@ -166,7 +166,7 @@ static void handle_request (obex_t* handle, obex_object_t* object,
     default:
         printf("Denied %02x request\n", cmd);
         fflush(stdout);
-        OBEX_ObjectSetRsp (object, OBEX_RSP_NOT_IMPLEMENTED, 
+        OBEX_ObjectSetRsp (object, OBEX_RSP_NOT_IMPLEMENTED,
             OBEX_RSP_NOT_IMPLEMENTED);
         break;
     }
@@ -177,17 +177,17 @@ static void handle_request (obex_t* handle, obex_object_t* object,
  * Function handles OBEX event when a client is connected to the server
  * @param handle OBEX connection handle
  * @param object OBEX object itself
- * @param mode 
+ * @param mode
  * @param event event code
  * @param obex_cmd OBEX command itself
  * @param obex_rsp OBEX responce
  */
-static void obex_conn_event (obex_t *handle, obex_object_t *object, 
+static void obex_conn_event (obex_t *handle, obex_object_t *object,
     int mode, int event, int obex_cmd, int obex_rsp)
 {
     (void)mode;
     (void)obex_rsp;
-    
+
     switch(event) {
     case OBEX_EV_REQHINT:
         switch(obex_cmd) {
@@ -197,7 +197,7 @@ static void obex_conn_event (obex_t *handle, obex_object_t *object,
             OBEX_ObjectSetRsp (object, OBEX_RSP_CONTINUE, OBEX_RSP_SUCCESS);
             break;
         default:
-            OBEX_ObjectSetRsp (object, OBEX_RSP_NOT_IMPLEMENTED, 
+            OBEX_ObjectSetRsp (object, OBEX_RSP_NOT_IMPLEMENTED,
                 OBEX_RSP_NOT_IMPLEMENTED);
             break;
         }
@@ -229,22 +229,22 @@ static void obex_conn_event (obex_t *handle, obex_object_t *object,
  * Function handles OBEX event
  * @param handle OBEX connection handle
  * @param object OBEX object itself
- * @param mode 
+ * @param mode
  * @param event event code
  * @param obex_cmd OBEX command itself
  * @param obex_rsp OBEX responce
  */
-static void obex_event (obex_t* handle, obex_object_t* object, int mode, 
+static void obex_event (obex_t* handle, obex_object_t* object, int mode,
     int event, int obex_cmd, int obex_rsp)
 {
 
     obex_t *obex; //OBEX connection handle
-    
+
     switch (event) {
     case OBEX_EV_ACCEPTHINT:
         obex = OBEX_ServerAccept (handle, obex_conn_event, NULL);
         break;
-        
+
     default:
         obex_conn_event(handle, object, mode, event, obex_cmd, obex_rsp);
     }
@@ -273,49 +273,49 @@ sdp_session_t* ObexServer::addOpushSvc(uint8_t chan, const char* name)
     sdp_data_t *sflist;
     int err = 0;
     sdp_session_t* lsession = 0;
-    
+
     memset((void *)&record, 0, sizeof(sdp_record_t));
     record.handle = 0xffffffff;
     sdp_uuid16_create(&root_uuid, PUBLIC_BROWSE_GROUP);
     root = sdp_list_append(0, &root_uuid);
     sdp_set_browse_groups(&record, root);
-    
+
     sdp_uuid16_create(&opush_uuid, OBEX_OBJPUSH_SVCLASS_ID);
     svclass_id = sdp_list_append(0, &opush_uuid);
     sdp_set_service_classes(&record, svclass_id);
-    
+
     sdp_uuid16_create(&profile[0].uuid, OBEX_OBJPUSH_PROFILE_ID);
     profile[0].version = 0x0100;
     pfseq = sdp_list_append(0, profile);
     sdp_set_profile_descs(&record, pfseq);
-    
+
     sdp_uuid16_create(&l2cap_uuid, L2CAP_UUID);
     proto[0] = sdp_list_append(0, &l2cap_uuid);
     apseq = sdp_list_append(0, proto[0]);
-    
+
     sdp_uuid16_create(&rfcomm_uuid, RFCOMM_UUID);
     proto[1] = sdp_list_append(0, &rfcomm_uuid);
     channel = sdp_data_alloc(SDP_UINT8, &chan);
     proto[1] = sdp_list_append(proto[1], channel);
     apseq = sdp_list_append(apseq, proto[1]);
-    
+
     sdp_uuid16_create(&obex_uuid, OBEX_UUID);
     proto[2] = sdp_list_append(0, &obex_uuid);
     apseq = sdp_list_append(apseq, proto[2]);
-    
+
     aproto = sdp_list_append(0, apseq);
     sdp_set_access_protos(&record, aproto);
-    
-    for (i = 0; i < sizeof(formats); i++) 
+
+    for (i = 0; i < sizeof(formats); i++)
     {
         dtds[i] = &dtd;
         values[i] = &formats[i];
     }
     sflist = sdp_seq_alloc(dtds, values, sizeof(formats));
     sdp_attr_add(&record, SDP_ATTR_SUPPORTED_FORMATS_LIST, sflist);
-    
+
     sdp_set_info_attr(&record, name, 0, 0);
-    
+
     // connect to the local SDP server, register the service record, and
     // disconnect
     lsession = sdp_connect(BDADDR_ANY, BDADDR_LOCAL, SDP_RETRY_IF_BUSY);
@@ -333,7 +333,7 @@ errout:
     sdp_list_free(proto[2], 0);
     sdp_list_free(apseq, 0);
     sdp_list_free(aproto, 0);
-    
+
     return lsession;
 }
 

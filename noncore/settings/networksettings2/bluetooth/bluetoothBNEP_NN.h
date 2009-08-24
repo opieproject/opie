@@ -18,7 +18,7 @@ public:
       virtual QString genNic( long );
       virtual long instanceCount( void )
         { return InstanceCount; }
-      virtual const QString pixmapName() 
+      virtual const QString pixmapName()
         { return "Devices/bluetooth"; }
 
       virtual const QString nodeDescription() ;

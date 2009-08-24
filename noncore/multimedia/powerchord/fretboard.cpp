@@ -61,7 +61,7 @@ void FretBoard::refresh(){
 FretBoard::FretBoard(QWidget *parent, const char *name )
   : QWidget( parent, name ), ce()
 {
-  
+
   ce.base(9);
   ce.chord(0);
   ce.fret(0);
@@ -104,7 +104,7 @@ void FretBoard::Finger(int f, int position){
     fprintf(stderr, "Error - finger2 value was %d\n", f);
     return;
   }
-  
+
   finger[f] = position;
 }
 
@@ -121,7 +121,7 @@ void FretBoard::Finger(int f, int position){
 
 
 //void FretBoard::draw_box(void) {
-  
+
 void FretBoard::paintEvent(QPaintEvent *){
 
   //  fl_color(FL_WHITE);
@@ -201,7 +201,7 @@ void FretBoard::paintEvent(QPaintEvent *){
 //  	fl_color(FL_WHITE);
 //  	p.setBrush(white);
 //  	p.setPen(NoPen);
-	
+
 //  	fl_rectf(cx+4, cy+4, 16, 16);
 	//	p.drawRect( QRect(cx+4, cy+4, 16, 16));
 //          fl_color(FL_BLACK);

@@ -15,7 +15,7 @@ KDialogBase::KDialogBase()
 KDialogBase::KDialogBase( QWidget *parent, const char *name, bool modal,
              const QString &caption,
              int buttonMask, ButtonCode defaultButton,
-             bool separator, 
+             bool separator,
              const QString &user1,
              const QString &user2,
              const QString &user3) :
@@ -24,9 +24,9 @@ KDialogBase::KDialogBase( QWidget *parent, const char *name, bool modal,
   init( caption, buttonMask, user1 );
 }
 
-KDialogBase::KDialogBase( int dialogFace, const QString &caption, 
-             int buttonMask, ButtonCode defaultButton, 
-             QWidget *parent, const char *name, bool modal, 
+KDialogBase::KDialogBase( int dialogFace, const QString &caption,
+             int buttonMask, ButtonCode defaultButton,
+             QWidget *parent, const char *name, bool modal,
              bool separator,
              const QString &user1,
              const QString &user2,
@@ -103,12 +103,12 @@ void KDialogBase::initLayout()
   mTopLayout = new QVBoxLayout( this );
   mTopLayout->setMargin( marginHint() );
   mTopLayout->setSpacing( spacingHint() );
-  
+
   mTopLayout->addWidget( mMainWidget );
-  
+
   QBoxLayout *buttonLayout = new QHBoxLayout;
   mTopLayout->addLayout( buttonLayout );
-  
+
   if ( mUser1Button ) buttonLayout->addWidget( mUser1Button );
   if ( mOkButton ) buttonLayout->addWidget( mOkButton );
   if ( mApplyButton ) buttonLayout->addWidget( mApplyButton );
@@ -151,7 +151,7 @@ void KDialogBase::enableButton( ButtonCode id, bool state )
       button = mApplyButton;
       break;
     default:
-      break;      
+      break;
   }
   if ( button ) {
     button->setEnabled( state );

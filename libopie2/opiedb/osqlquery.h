@@ -52,7 +52,7 @@ public:
     virtual QString query()const = 0;
 private:
     class Private;
-    Private *d;    
+    Private *d;
 };
 
 class OSQLRawQuery : public OSQLQuery {

@@ -129,7 +129,7 @@ rs_delta_s_scan(rs_job_t *job)
             job->statefn = rs_delta_s_end;
         }
         return RS_BLOCKED;
-    } 
+    }
 
     /* must read at least one block, or give up */
     if ((avail_len < job->block_len) && !is_ending) {
@@ -138,11 +138,11 @@ rs_delta_s_scan(rs_job_t *job)
         rs_scoop_input(job, job->block_len);
         return RS_BLOCKED;
     }
-    
+
     result = rs_scoop_readahead(job, avail_len, &inptr);
     if (result != RS_DONE)
         return result;
-    
+
     return rs_delta_scan(job, avail_len, inptr);
 }
 
@@ -164,7 +164,7 @@ rs_delta_scan(rs_job_t *job, rs_long_t avail_len, void *p)
     unsigned char        *inptr = (unsigned char *) p;
     uint32_t             s1 = job->weak_sig & 0xFFFF;
     uint32_t             s2 = job->weak_sig >> 16;
-    
+
     /* So, we have avail_len bytes of data, and we want to look
      * through it for a match at some point.  It's OK if it's not at
      * the start of the available input data.  If we're approaching
@@ -173,15 +173,15 @@ rs_delta_scan(rs_job_t *job, rs_long_t avail_len, void *p)
 
     /* FIXME: Perhaps we should be working in signed chars for the
      * rolling sum? */
-    
+
     if (job->stream->eof_in)
         end_pos = avail_len - 1;
     else
         end_pos = avail_len - job->block_len;
-    
+
     for (search_pos = 0; search_pos <= end_pos; search_pos++) {
         size_t this_len = job->block_len;
-            
+
         if (search_pos + this_len > avail_len) {
             this_len = avail_len - search_pos;
             rs_trace("block reduced to %d", this_len);
@@ -208,8 +208,8 @@ rs_delta_scan(rs_job_t *job, rs_long_t avail_len, void *p)
                 rs_fatal("mismatch between rolled sum %#x and check %#x",
                          job->weak_sig, verify);
             }
-        }            
-        
+        }
+
         if (rs_search_for_block(job->weak_sig, inptr + search_pos, this_len,
                                 job->signature, &job->stats, &match_where)) {
             /* So, we got a match.  Cool.  However, there may be
@@ -240,7 +240,7 @@ rs_delta_scan(rs_job_t *job, rs_long_t avail_len, void *p)
          * some literal data at the start of the buffer.  Therefore,
          * we have to flush that out before we can continue on and
          * emit the copy command or keep searching. */
-         
+
         /* FIXME: At the moment, if you call with very short buffers,
          * then you will get a series of very short LITERAL commands.
          * Perhaps this is what you deserve, or perhaps we should try
@@ -252,7 +252,7 @@ rs_delta_scan(rs_job_t *job, rs_long_t avail_len, void *p)
         rs_emit_literal_cmd(job, search_pos);
         rs_tube_copy(job, search_pos);
     }
-    
+
     return RS_RUNNING;
 }
 
@@ -264,12 +264,12 @@ static rs_result rs_delta_s_deferred_copy(rs_job_t *job)
         rs_log(RS_LOG_ERR, "somehow got zero basis_len");
         return RS_INTERNAL_ERROR;
     }
-    
+
     rs_emit_copy_cmd(job, job->basis_pos, job->basis_len);
     rs_scoop_advance(job, job->basis_len);
 
     job->statefn = rs_delta_s_scan;
-    
+
     return RS_RUNNING;
 }
 
@@ -292,7 +292,7 @@ static rs_result rs_delta_s_slack(rs_job_t *job)
         if (rs_job_input_is_ending(job)) {
             job->statefn = rs_delta_s_end;
             return RS_RUNNING;
-        } else {                
+        } else {
             return RS_BLOCKED;
         }
     }
@@ -331,7 +331,7 @@ rs_job_t *rs_delta_begin(rs_signature_t *sig)
 
     job = rs_job_new("delta", rs_delta_s_header);
     job->signature = sig;
-    
+
     if ((job->block_len = sig->block_len) < 0) {
         rs_log(RS_LOG_ERR, "unreasonable block_len %d in signature",
                job->block_len);
@@ -346,7 +346,7 @@ rs_job_t *rs_delta_begin(rs_signature_t *sig)
 	rs_job_free(job);
         return NULL;
     }
-	
+
     return job;
 }
 

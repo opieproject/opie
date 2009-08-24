@@ -49,7 +49,7 @@ private:
 PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
     : QListView( parent, name )
 {
-//    odebug << "starting playlistselector" << oendl; 
+//    odebug << "starting playlistselector" << oendl;
      addColumn( tr( "Playlist Selection" ) );
     header()->hide();
     setSorting( -1, FALSE );
@@ -61,7 +61,7 @@ PlayListSelection::~PlayListSelection() {
 
 
 void PlayListSelection::drawBackground( QPainter *p, const QRect &r ) {
-//  odebug << "drawBackground" << oendl; 
+//  odebug << "drawBackground" << oendl;
    p->fillRect( r, QBrush( white ) );
 }
 
@@ -185,9 +185,9 @@ void  PlayListSelection::setSelectedItem(const QString &strk ) {
     unSelect();
     QListViewItemIterator it( this );
     for ( ; it.current(); ++it ) {
-//        odebug << it.current()->text(0) << oendl; 
+//        odebug << it.current()->text(0) << oendl;
         if( strk == it.current()->text(0)) {
-//             odebug << "We have a match "+strk << oendl; 
+//             odebug << "We have a match "+strk << oendl;
             setSelected( it.current(), TRUE);
             ensureItemVisible( it.current() );
             return;

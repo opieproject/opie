@@ -34,10 +34,10 @@ public:
 		CNodeContext() {};
 		virtual ~CNodeContext() {};
 	};
-	
+
 	// return the model's normalization - what the probabilities sum to
 	const int normalization() const { return m_iNorm;}
-	
+
 	CNodeContext* GetRootNodeContext();
 	CNodeContext* CloneNodeContext(CNodeContext* NodeContext);
 	void ReleaseNodeContext(CNodeContext* NodeContext);
@@ -47,19 +47,19 @@ public:
 	void LearnText(CNodeContext* NodeContext, std::string* TheText, bool IsMore);
 	bool GetNodeProbs(CNodeContext* Context, std::vector<symbol> &NewSymbols,
 		std::vector<unsigned int> &Groups, std::vector<unsigned int> &Probs, double AddProb);
-	
+
 	// Alphabet pass-through functions for widely needed information
 	symbol GetSpaceSymbol() {return m_Alphabet->GetSpaceSymbol();}
-	
+
 	int GetColour(int character);
 
 protected:
 	int GetNumberModelChars() {return m_Alphabet->GetNumberSymbols();}
-	
-	// Generic language model functions to be implemented 
+
+	// Generic language model functions to be implemented
 	// --------------------------------------------------------------------------
 	typedef unsigned int modelchar;
-	
+
 	// return the id for the root context:
 	virtual CContext* GetRootContext()=0;
 	// clone a context and return the new id:
@@ -74,7 +74,7 @@ protected:
 	virtual void EnterSymbol(CContext* context, modelchar Symbol)=0;
 	// get the probability distrubution at the given context:
 	virtual bool GetProbs(CContext* Context, std::vector<unsigned int> &Probs, double AddProb)=0;
-	
+
 private:
 	CAlphabet *m_Alphabet;
 	int m_iModelChars; // number of charater in the model 1...ModelChars

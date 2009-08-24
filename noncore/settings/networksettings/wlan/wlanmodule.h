@@ -9,7 +9,7 @@ class WLANModule : Module{
 
 signals:
   void updateInterface(Interface *i);
-	
+
 public:
   WLANModule();
   ~WLANModule();

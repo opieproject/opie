@@ -24,8 +24,8 @@
 value1, , value 3, "value 4"
 value1, , value 3, "value 4"
 
- * '\' is the escape character.  Basically \", \' and \\ escape the ", ' or \ 
- * into the actual value of the field. 
+ * '\' is the escape character.  Basically \", \' and \\ escape the ", ' or \
+ * into the actual value of the field.
  * Before any other character will have the effect of dropping the '\'.
  *
  * Currently there is no support for comments. */

@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Definition of Option class.
 **
@@ -78,14 +78,14 @@ struct Option
     static QString dir_sep;
     //both of these must be called..
     static bool parseCommandLine(int argc, char **argv); //parse cmdline
-    static bool postProcessProject(QMakeProject *); 
+    static bool postProcessProject(QMakeProject *);
 
-    //and convenience functions    
+    //and convenience functions
     static QString fixPathToLocalOS(const QString& in, bool fix_env=TRUE, bool canonical=TRUE);
     static QString fixPathToTargetOS(const QString& in, bool fix_env=TRUE, bool canonical=TRUE);
 
     //global qmake mode, can only be in one mode per invocation!
-    enum QMAKE_MODE { QMAKE_GENERATE_NOTHING, QMAKE_GENERATE_PROJECT, QMAKE_GENERATE_MAKEFILE, 
+    enum QMAKE_MODE { QMAKE_GENERATE_NOTHING, QMAKE_GENERATE_PROJECT, QMAKE_GENERATE_MAKEFILE,
 		      QMAKE_GENERATE_PRL, QMAKE_SET_PROPERTY, QMAKE_QUERY_PROPERTY };
     static QMAKE_MODE qmake_mode;
 
@@ -99,7 +99,7 @@ struct Option
     static TARG_MODE target_mode;
     static QString user_template, user_template_prefix;
 
-    
+
     //QMAKE_*_PROPERTY options
     struct prop {
 	static QStringList properties;

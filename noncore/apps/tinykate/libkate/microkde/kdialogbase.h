@@ -37,7 +37,7 @@ class KDialogBase : public KDialog
     {
       TreeList,
       Tabbed,
-      Plain, 
+      Plain,
       Swallow,
       IconList
     };
@@ -46,19 +46,19 @@ class KDialogBase : public KDialog
     KDialogBase( QWidget *parent=0, const char *name=0, bool modal=true,
 		 const QString &caption=QString::null,
 		 int buttonMask=Ok|Apply|Cancel, ButtonCode defaultButton=Ok,
-		 bool separator=false, 
+		 bool separator=false,
 		 const QString &user1=QString::null,
 		 const QString &user2=QString::null,
 		 const QString &user3=QString::null);
-    KDialogBase( int dialogFace, const QString &caption, 
-		 int buttonMask, ButtonCode defaultButton, 
-		 QWidget *parent=0, const char *name=0, bool modal=true, 
+    KDialogBase( int dialogFace, const QString &caption,
+		 int buttonMask, ButtonCode defaultButton,
+		 QWidget *parent=0, const char *name=0, bool modal=true,
 		 bool separator=false,
 		 const QString &user1=QString::null,
 		 const QString &user2=QString::null,
 		 const QString &user3=QString::null);
     virtual ~KDialogBase();
-    
+
     QFrame *addPage( const QString & );
     QFrame *addPage( const QString &, int, const QPixmap & );
 
@@ -94,12 +94,12 @@ class KDialogBase : public KDialog
     QTabWidget *mTabWidget;
     QFrame *mPlainPage;
     QBoxLayout *mTopLayout;
-    
+
     QPushButton *mUser1Button;
     QPushButton *mCloseButton;
     QPushButton *mOkButton;
     QPushButton *mApplyButton;
-    QPushButton *mCancelButton;    
+    QPushButton *mCancelButton;
 };
 
 #endif

@@ -12,7 +12,7 @@ PPPAuthEdit::PPPAuthEdit( QWidget * Parent ) : PPPAuthGUI( Parent ){
 bool PPPAuthEdit::PAP_Checked( void ) {
       return ( Pap_RB->isChecked() ||
                Chap_RB->isChecked() ||
-               EAP_RB->isChecked() 
+               EAP_RB->isChecked()
              );
 }
 
@@ -45,7 +45,7 @@ bool PPPAuthEdit::commit( PPPData & D ) {
         ( D.Auth.Mode == 2 && ! Terminal_RB->isChecked() ) ) {
       // mode modifed
       SM = 1;
-      D.Auth.Mode = ( Login_RB->isChecked() ) ? 
+      D.Auth.Mode = ( Login_RB->isChecked() ) ?
                     0 :
                     ( PAP_Checked() ) ? 1 : 2;
     }
@@ -73,10 +73,10 @@ bool PPPAuthEdit::commit( PPPData & D ) {
 void PPPAuthEdit::showData( PPPData & D ) {
 
     switch( D.Auth.Mode ) {
-      case 0 : 
+      case 0 :
         Login_RB->setChecked( TRUE );
         break;
-      case 1 : 
+      case 1 :
         switch( D.Auth.PCEMode ) {
           case 0 :
             Pap_RB->setChecked( TRUE );
@@ -89,7 +89,7 @@ void PPPAuthEdit::showData( PPPData & D ) {
             break;
         }
         break;
-      case 2 : 
+      case 2 :
         Terminal_RB->setChecked( TRUE );
         break;
     }

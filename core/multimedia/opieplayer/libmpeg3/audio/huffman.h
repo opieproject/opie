@@ -23,19 +23,19 @@
 /*
  * huffman tables ... recalcualted to work with my optimzed
  * decoder scheme (MH)
- * 
- * probably we could save a few bytes of memory, because the 
+ *
+ * probably we could save a few bytes of memory, because the
  * smaller tables are often the part of a bigger table
  */
 
-struct newhuff 
+struct newhuff
 {
   unsigned int linbits;
   short *table;
 };
 
-static short mpeg3_tab0[] = 
-{ 
+static short mpeg3_tab0[] =
+{
    0
 };
 
@@ -308,7 +308,7 @@ static short mpeg3_tab_c1[] =
 
 
 
-static struct newhuff mpeg3_ht[] = 
+static struct newhuff mpeg3_ht[] =
 {
  { /* 0 */ 0 , mpeg3_tab0  } ,
  { /* 2 */ 0 , mpeg3_tab1  } ,
@@ -345,7 +345,7 @@ static struct newhuff mpeg3_ht[] =
  { /* 16 */ 13, mpeg3_tab24 }
 };
 
-static struct newhuff mpeg3_htc[] = 
+static struct newhuff mpeg3_htc[] =
 {
  { /* 1 , 1 , */ 0 , mpeg3_tab_c0 } ,
  { /* 1 , 1 , */ 0 , mpeg3_tab_c1 }

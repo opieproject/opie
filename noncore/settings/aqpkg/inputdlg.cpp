@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -103,7 +103,7 @@ QString InputDialog :: getText()
     return lineEdit->text();
 }
 
-QString InputDialog::getText( const QString &caption, const QString &label, 
+QString InputDialog::getText( const QString &caption, const QString &label,
     			              const QString &text, bool *ok, QWidget *parent,
                               const char *name )
 {

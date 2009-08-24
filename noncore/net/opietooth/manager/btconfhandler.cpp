@@ -60,7 +60,7 @@ BTConfHandler::BTConfHandler(const QString& conf): confName(conf)
     hiddEnable = false;
     sdpdEnable = false;
     rfcommEnable = false;
-    
+
     //dund parameters
     dundEnable = false;
     dundDisableSDP = false;
@@ -74,7 +74,7 @@ BTConfHandler::BTConfHandler(const QString& conf): confName(conf)
     dundPPPd = false;
     dundPPPdPath = "";
     dundPPPdOptions = "";
-    
+
     //pandparameters
     pandEnable = false;
     pandEncrypt = false;
@@ -133,7 +133,7 @@ void BTConfHandler::parsePanParameters(const QString& conf)
     i = 1;
     optind = 0;
     argv[0] = strdup("pand");
-    for (QStringList::Iterator arg = panList.begin(); 
+    for (QStringList::Iterator arg = panList.begin();
         arg != panList.end() && i < argc + 1; arg++, i++)  {
         argv[i] = strdup((*arg));
     }
@@ -194,7 +194,7 @@ void BTConfHandler::parseDunParameters(const QString& conf)
     i = 1;
     optind = 0;
     argv[0] = strdup("dund");
-    for (QStringList::Iterator arg = dunList.begin(); 
+    for (QStringList::Iterator arg = dunList.begin();
         arg != dunList.end() && i < argc + 1; arg++, i++)  {
         argv[i] = strdup((*arg));
     }
@@ -260,7 +260,7 @@ bool BTConfHandler::readConfig(const QString& conf)
     if (btConf.open(IO_ReadOnly))  {
         QTextStream inStream(&btConf);
         list = QStringList::split("\n", inStream.read(), true);
-        for (QStringList::Iterator line = list.begin(); 
+        for (QStringList::Iterator line = list.begin();
             line != list.end(); line++)  {
             QString tmpLine = (*line).simplifyWhiteSpace();
             if (tmpLine.startsWith("#"))
@@ -302,7 +302,7 @@ bool BTConfHandler::saveConfig()
     if (!btConf.open(IO_WriteOnly))
         return false;
     QTextStream stream(&btConf);
-    for (QStringList::Iterator line = list.begin(); 
+    for (QStringList::Iterator line = list.begin();
         line != list.end(); line++)  {
         QString tmpLine = (*line).simplifyWhiteSpace();
         if (tmpLine.startsWith(k_hcidEnable))

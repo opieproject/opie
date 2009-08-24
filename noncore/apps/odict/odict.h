@@ -27,7 +27,7 @@ class DingWidget;
 class ODict : public QMainWindow
 {
 	Q_OBJECT
-	
+
     public:
 		ODict(QWidget* parent = 0, const char* name = 0, WFlags fl = 0  );
 		QVBox *vbox;
@@ -46,11 +46,11 @@ class ODict : public QMainWindow
 		QVBoxLayout *vbox_layout;
 
 		QAction *setting_a, *setting_b;
-		
+
 		void setupMenus();
 
 		bool casesens, completewords;
-		
+
 		void loadConfig();
 		void saveConfig();
 
@@ -61,7 +61,7 @@ class ODict : public QMainWindow
 		QString top_name_content, bottom_name_content;
 
 		void lookupLanguageNames( QString );
-	
+
 	private slots:
 		void slotStartQuery();
 		void slotSettings();

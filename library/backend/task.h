@@ -56,14 +56,14 @@ public:
     // Use THESE functions
     void setDueDate( const QDate &date);
     void clearDueDate();
-   
+
     // Instead of these functions.
     void setDueDate( const QDate& date, bool hasDue ) { mDueDate = date; mDue = hasDue; }
     void setHasDueDate( bool b ) { mDue = b; }
 
     const QDate &dueDate() const { return mDueDate; }
     bool hasDueDate() const { return mDue; }
-    
+
     void setCompleted( bool b ) { mCompleted = b; }
     bool isCompleted() const { return mCompleted; }
 

@@ -174,7 +174,7 @@ void CanvasCard::draw(QPainter &painter)
     QPainter *p = &painter;
     QPixmap *unscaledCard = NULL;
 
-    if ((scaleX <= 0.98) || (scaleY <= 0.98)) 
+    if ((scaleX <= 0.98) || (scaleY <= 0.98))
     {
 	p = new QPainter();
 	unscaledCard = new QPixmap( cardsFaces->width(), cardsFaces->height() );
@@ -182,9 +182,9 @@ void CanvasCard::draw(QPainter &painter)
 	ix = 0;
 	iy = 0;
     }
-	
+
     if ( isFacing() ) {
-	
+
 	int w = cardsFaces->width(), h = cardsFaces->height();
 
 	p->setBrush( QColor( 0xFF, 0xFF, 0xFF ) );
@@ -209,7 +209,7 @@ void CanvasCard::draw(QPainter &painter)
 	}
 
     } else {
-	
+
 	p->drawPixmap( ix, iy, *cardsBacks );
 
     }

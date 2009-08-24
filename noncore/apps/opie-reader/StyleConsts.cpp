@@ -12,7 +12,7 @@ pmstore::pmstore(bool _canScale, QImage* p, bool isLnk, unsigned long tgt) :
 }
 
 pmstore::~pmstore()
-{ 
+{
 ////    qDebug("Deleting image");
     delete graphic;
 }

@@ -3,7 +3,7 @@
               =.             Copyright 2009 Team Opie <opie@handhelds.org>
             .=l.             Copyright 2002 Jeremy Cowgar <jc@cowgar.com>
            .>+-=             Copyright 2002 and 2003 L.J.Potter <ljp@llornkcor.com>
- _;:,     .>    :=|.         
+ _;:,     .>    :=|.
 .> <`_,   >  .   <=          This program is free software; you can
 :`=1 )Y*s>-.--   :           redistribute it and/or  modify it under
 .="- .-=="i,     .._         the terms of the GNU Library General Public

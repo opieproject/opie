@@ -536,7 +536,7 @@ QMap<QString, ORecur::RepeatType> ORecur::rTypeValueConvertMap() const
 QMap<int, QString> ORecur::toMap() const
 {
 	QMap<int, QString> retMap;
-	
+
 	retMap.insert( ORecur::RType, rTypeString() );
 	retMap.insert( ORecur::RWeekdays, QString::number( static_cast<int>( data->days ) ) );
 	retMap.insert( ORecur::RPosition, QString::number(data->pos ) );
@@ -545,7 +545,7 @@ QMap<int, QString> ORecur::toMap() const
 	if( data -> hasEnd )
 		retMap.insert( ORecur::EndDate, QString::number( OTimeZone::utc().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) ) );
 	retMap.insert( ORecur::Created, QString::number( OTimeZone::utc().fromUTCDateTime( data->create ) ) );
-	
+
 	if ( data->list.isEmpty() ) return retMap;
 
 	// save exceptions list here!!
@@ -556,7 +556,7 @@ QMap<int, QString> ORecur::toMap() const
 	for ( it = list.begin(); it != list.end(); ++it ) {
 		date = (*it);
 		if ( it != list.begin() ) exceptBuf += " ";
-		
+
 		exceptBuf += QCString().sprintf("%04d%02d%02d", date.year(), date.month(), date.day() );
 	}
 
@@ -567,7 +567,7 @@ QMap<int, QString> ORecur::toMap() const
 
 void ORecur::fromMap( const QMap<int, QString>& map )
 {
-	QMap<QString, RepeatType> repTypeMap = rTypeValueConvertMap(); 
+	QMap<QString, RepeatType> repTypeMap = rTypeValueConvertMap();
 
 	data -> type  = repTypeMap[ map [ORecur::RType] ];
 	data -> days  = (char) map[ ORecur::RWeekdays ].toInt();
@@ -588,6 +588,6 @@ void ORecur::fromMap( const QMap<int, QString>& map )
 	QStringList exceptList = QStringList::split( " ", exceptStr );
 	...
 #endif
-	
-	
+
+
 }

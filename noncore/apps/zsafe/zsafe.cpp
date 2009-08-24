@@ -366,7 +366,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
 
    setCaption( tr( "ZSafe" ) );
    QString zsafeAppDirPath = QDir::homeDirPath() + "/Documents/application/zsafe";
-   
+
    filename = conf->readEntry(APP_KEY+"document");
    if ( !QFileInfo(filename).exists() || !QDir(zsafeAppDirPath).exists() )
    {

@@ -41,7 +41,7 @@ signals:
 public slots:
 	void compose();
 	void composeReply(Email &, bool&);
-	void composeForward(Email &);	
+	void composeForward(Email &);
 	void showEmailClient();
 	void viewMail(QListView *, Email *mail);
 	void updateMailView(Email *mail);
@@ -52,7 +52,7 @@ public slots:
 	void replyAll(Email&);
 	void forward(Email&);
 	void remove(Email&);*/
-	
+
 private:
 	EmailClient *emailClient;
 	WriteMail *writeMail;

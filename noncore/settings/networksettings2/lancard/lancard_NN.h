@@ -15,7 +15,7 @@ public:
     LanCardNetNode();
     virtual ~LanCardNetNode();
 
-    virtual const QString pixmapName() 
+    virtual const QString pixmapName()
       { return "Devices/card"; }
 
     virtual QString genNic( long );

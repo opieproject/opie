@@ -41,7 +41,7 @@ void TabWidget::slotSessionClosed( Session *ses ) {
     static bool lock = false;
     if(lock)
         return;
-    
+
     lock = true;
     emit sessionClosed( ses );
     lock = false;

@@ -33,21 +33,21 @@ class KateConfig
 {
 public:
     typedef QMap< QString, QString > KateConfigGroup;
-    
+
     enum Domain { File, User };
     KateConfig( const QString &name, Domain domain=User );
     ~KateConfig();
-    
+
     bool operator == ( const KateConfig & other ) const { return (filename == other.filename); }
     bool operator != ( const KateConfig & other ) const { return (filename != other.filename); }
-    
+
     bool isValid() const;
     bool hasKey( const QString &key ) const;
 
 	// inline for better SharpROM BC
 	inline bool hasGroup ( const QString &gname ) const  { return ( groups. find ( gname ) != groups. end ( )); };
 	inline QStringList groupList ( ) const { QStringList sl; for ( QMap< QString, KateConfigGroup >::ConstIterator it = groups. begin ( ); it != groups. end ( ); ++it ) { sl << it.key(); } return sl; };
-    
+
     void setGroup( const QString &gname );
     void writeEntry( const QString &key, const char* value );
     void writeEntry( const QString &key, const QString &value );
@@ -61,7 +61,7 @@ public:
     void writeEntry( const QString &key, const QColor & );
     void writeEntry( const QString &key, const QFont & );
     void removeEntry( const QString &key );
-    
+
     QString readEntry( const QString &key, const QString &deflt = QString::null ) const;
     QString readEntryCrypt( const QString &key, const QString &deflt = QString::null ) const;
     QString readEntryDirect( const QString &key, const QString &deflt = QString::null ) const;
@@ -79,15 +79,15 @@ public:
     int readNumEntry( const QString &key, int deflt );
     bool readBoolEntry( const QString &key, bool deflt );
     QStringList readListEntry( const QString &key, const QChar &sep );
-    
+
     void clearGroup();
-    
+
     void write( const QString &fn = QString::null );
-    
+
 protected:
     void read();
     bool parse( const QString &line );
-    
+
     QMap< QString, KateConfigGroup > groups;
     QMap< QString, KateConfigGroup >::Iterator git;
     QString filename;

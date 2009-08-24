@@ -59,7 +59,7 @@ public:
 
     void showState(bool on);
     void setInverted(bool on);
-    
+
  private:
     class Private;
     Private *d; // private d pointer

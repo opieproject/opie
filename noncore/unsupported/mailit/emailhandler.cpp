@@ -43,13 +43,13 @@ EmailHandler::EmailHandler()
 
   smtpClient = new SmtpClient();
   popClient = new PopClient();
-  
+
   connect(smtpClient, SIGNAL(errorOccurred(int,const QString&)), this,
       SIGNAL(smtpError(int,const QString&)) );
   connect(smtpClient, SIGNAL(mailSent()), this, SIGNAL(mailSent()) );
   connect(smtpClient, SIGNAL(updateStatus(const QString&)), this,
       SIGNAL(updateSmtpStatus(const QString&)) );
-  
+
   connect(popClient, SIGNAL(errorOccurred(int,const QString&)), this,
       SIGNAL(popError(int,const QString&)) );
   connect(popClient, SIGNAL(newMessage(const QString&,int,uint,bool)),
@@ -75,10 +75,10 @@ void EmailHandler::sendMail(QList<Email> *mailList)
   // not supported by ALL SMTP servers in the MAIL From field
   // userName = "\""+mailAccount.name+"\"";
   userName += "<" + mailAccount.emailAddress + ">";
-  
+
   for (currentMail = mailList->first(); currentMail != 0;
       currentMail = mailList->next()) {
-    
+
     if (encodeMime(currentMail) == 0) {
       smtpClient->addMail(userName, currentMail->subject,
         currentMail->recipients, currentMail->rawMail);
@@ -87,7 +87,7 @@ void EmailHandler::sendMail(QList<Email> *mailList)
         currentMail->subject;
       temp += tr("\nMail has NOT been sent");
       QMessageBox::warning(qApp->activeWindow(), tr("Attachment error"), temp, tr("OK\n"));
-      
+
     }
   }
   smtpClient->newConnection(mailAccount.smtpServer, 25);
@@ -106,7 +106,7 @@ void EmailHandler::getMail()
   } else {
     popClient->removeSynchronize();
   }
-  
+
   headers = FALSE;
   //popClient->headersOnly(headers, 0);
   popClient->newConnection(mailAccount.popServer, 110);
@@ -116,7 +116,7 @@ void EmailHandler::getMailHeaders()
 {
   popClient->setAccount(mailAccount.popUserName, mailAccount.popPasswd);
   mailAccount.synchronize ? popClient->setSynchronize(mailAccount.lastServerMailCount): popClient->removeSynchronize();
-  
+
   headers = TRUE;
   popClient->headersOnly(headers, mailAccount.syncLimit);  //less than requested syncLimit, download all
   qDebug("Initiating connection");
@@ -129,10 +129,10 @@ void EmailHandler::getMailByList(MailList *mailList)
     emit mailTransfered(0);
     return;
   }
-  
+
   headers = FALSE;
   popClient->headersOnly(FALSE, 0);
-  
+
   popClient->setAccount(mailAccount.popUserName,mailAccount.popPasswd);
   popClient->setSelectedMails(mailList);
   popClient->newConnection(mailAccount.popServer, 110);
@@ -141,12 +141,12 @@ void EmailHandler::getMailByList(MailList *mailList)
 void EmailHandler::messageArrived(const QString &message, int id, uint size, bool complete)
 {
   Email mail;
-  
+
   mail.rawMail = message;
   mail.serverId = id;
   mail.size = size;
   mail.downloaded = complete;
-  
+
   emit mailArrived(mail, FALSE);
 }
 
@@ -158,25 +158,25 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
   QString content, contentType, contentAttribute, id, encoding;
   QString fileName, storedName;
   int enclosureId = 0;
-  
+
   mail->rawMail = in;
   mail->received = TRUE;
   mail->files.setAutoDelete(TRUE);
-  
+
   temp = lineShift + "." + lineShift;
 
   if (in.right(temp.length()) != temp) {
     mail->rawMail += temp;
   }
 
-  
+
   delimiter = lineShift + lineShift;  // "\n\n" or "\r\n\r\n"
   pos = in.find(delimiter, 0, FALSE);
   header = in.left(pos);
   body = in.right(in.length() - pos - delimiter.length());
   if ((body.at(body.length()-2) == '.') && (body.at(body.length()-3) == '\n'))
       body.truncate(body.length()-2);
-  
+
   //  TextParser p(header, lineShift);
   TextParser * lp = new TextParser(header, lineShift);
 #define p (*lp)
@@ -190,7 +190,7 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
         mail->from = mail->from.left(mail->from.length() - 1);
         mail->from = mail->from.right(mail->from.length() - 1);
       }
-      pos++;                 
+      pos++;
       mail->fromMail = p.getString(&pos, '>', false);
     } else {
       if (p.separatorAt(pos) == '<')       //No name.. nasty
@@ -202,51 +202,51 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
       mail->from=mail->fromMail;
     }
   }
-  
+
   pos=0;
-  
+
   //Search for To: after the FROM: attribute to prevent hitting the Delivered-To:
   while((pos = p.find("TO",':', pos+1, TRUE))!=-1)
   {
     QString rec;
-  
+
     if (p.separatorAt(pos-1)!='-')  //The - separator means that this is a Delivered-To: or Reply-To:
   {
     pos++;
     mail->recipients.append(p.getString(&pos, '\r', TRUE));
-        } 
+        }
   }
   //
-  //if (pos==-1) mail->recipients.append (tr("undisclosed recipients") ); 
-  
+  //if (pos==-1) mail->recipients.append (tr("undisclosed recipients") );
+
   if ((pos = p.find("CC",':', 0, TRUE)) != -1)
   {
       pos++;
       mail->carbonCopies.append (p.getString(&pos, 'z', TRUE) );
   }
- 
+
   if ((pos = p.find("SUBJECT",':', 0, TRUE)) != -1) {
     pos++;
     mail->subject = p.getString(&pos, 'z', TRUE);
   }
-  
+
   if ((pos = p.find("DATE",':', 0, TRUE)) != -1) {
     pos++;
     mail->date = p.getString(&pos, 'z', TRUE);
   }
-  
-  
-  
+
+
+
   if ((pos = p.find("MESSAGE",'-', 0, TRUE)) != -1) {
     pos++;
     if ( (p.wordAt(pos).upper() == "ID") &&
       (p.separatorAt(pos) == ':') ) {
-      
+
       id = p.getString(&pos, 'z', TRUE);
       mail->id = id;
     }
   }
-  
+
   pos = 0;
   while ( ((pos = p.find("MIME",'-', pos, TRUE)) != -1) ) {
     pos++;
@@ -258,7 +258,7 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
         }
     }
   }
-  
+
   if (mail->mimeType == 1) {
     boundary = "";
     if ((pos = p.find("BOUNDARY", '=', 0, TRUE)) != -1) {
@@ -270,21 +270,21 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
       }
       boundary = "--" + boundary;   //create boundary field
     }
-    
+
     if (boundary == "") {     //fooled by Mime-Version
       mail->body = body;
       mail->bodyPlain = body;
      delete lp;
       return mail;
     }
-    
+
     while (body.length() > 0) {
       pos = body.find(boundary, 0, FALSE);
       pos = body.find(delimiter, pos, FALSE);
       mimeHeader = body.left(pos);
       mimeBody = body.right(body.length() - pos - delimiter.length());
       TextParser bp(mimeHeader, lineShift);
-    
+
       contentType = "";
       contentAttribute = "";
       fileName = "";
@@ -301,7 +301,7 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
           pos++;
           encoding = bp.getString(&pos, 'z', TRUE);
         }
-        
+
         if ( (pos = bp.find("FILENAME",'=', 0, TRUE)) != -1) {
           pos++;
           fileName = bp.getString(&pos, 'z', TRUE);
@@ -315,9 +315,9 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
         pos = mimeBody.length();
       body = mimeBody.right(mimeBody.length() - pos);
       mimeBody = mimeBody.left(pos);
-        
+
       if (fileName != "") { //attatchments of some type, audio, image etc.
-        
+
         Enclosure e;
         e.id = enclosureId;
         e.originalName = fileName;
@@ -328,7 +328,7 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
         e.saved = FALSE;
         mail->addEnclosure(&e);
         enclosureId++;
-        
+
       } else if (contentType == "TEXT") {
         if (contentAttribute == "PLAIN") {
           mail->body = mimeBody;
@@ -354,19 +354,19 @@ bool EmailHandler::getEnclosure(Enclosure *ePtr)
   char *destPtr;
   QByteArray buffer;
   uint bufCount, pos, decodedCount, size, x;
-  
+
   if (! f.open(IO_WriteOnly) ) {
     qWarning("could not save: " + ePtr->path + ePtr->name);
     return FALSE;
   }
-  
+
   if (ePtr->encoding.upper() == "BASE64") {
     size = (ePtr->body.length() * 3 / 4); //approximate size (always above)
     buffer.resize(size);
     bufCount = 0;
     pos = 0;
     destPtr = buffer.data();
-    
+
     while (pos < ePtr->body.length()) {
       decodedCount = 4;
       x = 0;
@@ -383,7 +383,7 @@ bool EmailHandler::getEnclosure(Enclosure *ePtr)
         bufCount += decodedCount;
       }
     }
-    
+
     buffer.resize(bufCount);  //set correct length of file
     f.writeBlock(buffer);
   } else {
@@ -394,7 +394,7 @@ bool EmailHandler::getEnclosure(Enclosure *ePtr)
 }
 
 int EmailHandler::parse64base(char *src, char *bufOut) {
-  
+
   char c, z;
   char li[4];
   int processed;
@@ -402,7 +402,7 @@ int EmailHandler::parse64base(char *src, char *bufOut) {
   //conversion table withouth table...
   for (int x = 0; x < 4; x++) {
     c = src[x];
-  
+
     if ( (int) c >= 'A' && (int) c <= 'Z')
       li[x] = (int) c - (int) 'A';
     if ( (int) c >= 'a' && (int) c <= 'z')
@@ -414,13 +414,13 @@ int EmailHandler::parse64base(char *src, char *bufOut) {
     if (c == '/')
       li[x] = 63;
   }
-  
+
   processed = 1;
   bufOut[0] = (char) li[0] & (32+16+8+4+2+1); //mask out top 2 bits
   bufOut[0] <<= 2;
   z = li[1] >> 4;
   bufOut[0] = bufOut[0] | z;    //first byte retrived
-    
+
   if (src[2] != '=') {
     bufOut[1] = (char) li[1] & (8+4+2+1); //mask out top 4 bits
     bufOut[1] <<= 4;
@@ -439,33 +439,33 @@ int EmailHandler::parse64base(char *src, char *bufOut) {
   return processed;
 }
 
-int EmailHandler::encodeMime(Email *mail) 
+int EmailHandler::encodeMime(Email *mail)
 {
-  
+
   QString fileName, fileType, contentType, newBody, boundary;
   Enclosure *ePtr;
   QString userName;
-  
+
   if ( ! mailAccount.name.isEmpty() ) {
     userName = "\"" + mailAccount.name + "\" <" + mailAccount.emailAddress + ">";
   } else {
     userName = "<" + mailAccount.emailAddress + ">";
   }
-  
+
   //add standard headers
   newBody = "From: " + userName + "\r\nTo: ";
         for (QStringList::Iterator it = mail->recipients.begin(); it != mail->recipients.end(); ++it ) {
     newBody += *it + " ";
   }
-  
+
    newBody += "\r\nCC: ";
-   
+
    for (QStringList::Iterator it = mail->carbonCopies.begin(); it != mail->carbonCopies.end(); ++it ) {
     newBody += *it + " ";
   }
-  
+
   newBody += "\r\nSubject: " + mail->subject + "\r\n";
-  
+
   if (mail->files.count() == 0) {         //just a simple mail
     newBody += "\r\n" + mail->body;
     mail->rawMail = newBody;
@@ -474,20 +474,20 @@ int EmailHandler::encodeMime(Email *mail)
 
   //Build mime encoded mail
   boundary = "-----4345=next_bound=0495----";
-  
+
   newBody += "Mime-Version: 1.0\r\n";
   newBody += "Content-Type: multipart/mixed; boundary=\"" +
         boundary + "\"\r\n\r\n";
-  
+
   newBody += "This is a multipart message in Mime 1.0 format\r\n\r\n";
   newBody += "--" + boundary + "\r\nContent-Type: text/plain\r\n\r\n";
   newBody += mail->body;
-  
+
   for ( ePtr=mail->files.first(); ePtr != 0; ePtr=mail->files.next() ) {
     fileName = ePtr->originalName;
     fileType = ePtr->contentType;
     QFileInfo fi(fileName);
-    
+
     // This specification of contentType is temporary
     contentType = "";
     if (fileType == "Picture") {
@@ -501,21 +501,21 @@ int EmailHandler::encodeMime(Email *mail)
     } else {
       contentType = "application/octet-stream";
     }
-    
+
     newBody += "\r\n\r\n--" + boundary + "\r\n";
     newBody += "Content-Type: " + contentType + "; name=\"" +
           fi.fileName() + "\"\r\n";
     newBody += "Content-Transfer-Encoding: base64\r\n";
     newBody += "Content-Disposition: inline; filename=\"" +
           fi.fileName() + "\"\r\n\r\n";
-    
+
     if (encodeFile(fileName, &newBody) == -1)   //file not found?
       return -1;
   }
-  
+
   newBody += "\r\n\r\n--" + boundary + "--";
   mail->rawMail = newBody;
-  
+
   return 0;
 }
 
@@ -526,7 +526,7 @@ int EmailHandler::encodeFile(const QString &fileName, QString *toBody)
   QString temp;
   uint dataSize, count;
   QFile f(fileName);
-  
+
   if (! f.open(IO_ReadOnly) ) {
     qWarning("could not open file: " + fileName);
     return -1;
@@ -535,7 +535,7 @@ int EmailHandler::encodeFile(const QString &fileName, QString *toBody)
   dataSize = f.size();
   fileData = (char *) malloc(dataSize + 3);
   s.readRawBytes(fileData, dataSize);
-  
+
   temp = "";
   dataPtr = fileData;
   count  = 0;
@@ -555,7 +555,7 @@ int EmailHandler::encodeFile(const QString &fileName, QString *toBody)
     }
   }
   toBody->append(temp);
-  
+
   delete(fileData);
   f.close();
   return 0;
@@ -566,10 +566,10 @@ void EmailHandler::encode64base(char *src, QString *dest, int len)
   QString temp;
   uchar c;
   uchar bufOut[4];
-  
+
   bufOut[0] = src[0];
   bufOut[0] >>= 2;                  //Done byte 0
-  
+
   bufOut[1] = src[0];
   bufOut[1] = bufOut[1] & (1 + 2);            //mask out top 6 bits
   bufOut[1] <<= 4;                  //copy up 4 places
@@ -578,11 +578,11 @@ void EmailHandler::encode64base(char *src, QString *dest, int len)
   } else {
     c = 0;
   }
-  
+
   c = c & (16 + 32 + 64 + 128);
   c >>= 4;
   bufOut[1] = bufOut[1] | c;              //Done byte 1
-  
+
   bufOut[2] = src[1];
   bufOut[2] = bufOut[2] & (1 + 2 + 4 + 8);
   bufOut[2] <<= 2;
@@ -593,10 +593,10 @@ void EmailHandler::encode64base(char *src, QString *dest, int len)
   }
   c >>= 6;
   bufOut[2] = bufOut[2] | c;
-  
+
   bufOut[3] = src[2];
   bufOut[3] = bufOut[3] & (1 + 2 + 4 + 8 + 16 + 32);
-  
+
   if (len == 1) {
     bufOut[2] = 64;
     bufOut[3] = 64;

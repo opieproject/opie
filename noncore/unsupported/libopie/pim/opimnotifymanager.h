@@ -24,7 +24,7 @@ public:
     Reminders reminders()const;
 
     /**
-     * Return 
+     * Return
      */
     Alarms    alarms()const;
 
@@ -34,7 +34,7 @@ public:
      * If none was found, an empty Alarm is returned.
      * @param when The date and time of the returned alarm
      * @param found Returns true if anything was found.
-     * @return Returns the found alarm at given DateTime. It is empty if found is false 
+     * @return Returns the found alarm at given DateTime. It is empty if found is false
      * (nothing could be found at given date and time)
      */
     OPimAlarm alarmAtDateTime( const QDateTime& when, bool& found ) const;
@@ -56,17 +56,17 @@ public:
 
     bool isEmpty()const;
 
-    /** 
+    /**
      * Return all alarms as string
      */
     QString alarmsToString() const;
-    /** 
+    /**
      * Return all notifiers as string
      */
     QString remindersToString() const;
 
     /**
-     * Convert string to alarms 
+     * Convert string to alarms
      * @param str String created by alarmsToString()
      */
     void alarmsFromString( const QString& str );

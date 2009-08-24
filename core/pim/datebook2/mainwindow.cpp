@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
-              =.             
+              =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -79,7 +79,7 @@ MainWindow::MainWindow()
     m_currView = NULL;
     m_initialDate = QDate::currentDate();
     m_inSearch = false;
-    
+
     initConfig();
     initBars();
     initUI();
@@ -90,7 +90,7 @@ MainWindow::MainWindow()
 
     setCaption( tr("Calendar") );
     setIcon( Opie::Core::OResource::loadPixmap( "datebook_icon" ) );
-   
+
     QTimer::singleShot(0, this, SLOT(populate() ) );
 
     QCopChannel* chan = new QCopChannel( "QPE/System", this );
@@ -143,7 +143,7 @@ void MainWindow::setDocument( const QString& filename ) {
                     // Ensure the event has a unique ID
                     if ( ev.uid() == 0 )
                         ev.assignUid();
-                    
+
                     manager()->add( ev );
                 }
 
@@ -186,7 +186,7 @@ void MainWindow::add( const OPimRecord& ad) {
 }
 
 void MainWindow::edit() {
-   
+
 }
 
 void MainWindow::edit( int uid ) {
@@ -293,7 +293,7 @@ void MainWindow::initUI() {
 
     m_toolBar = new QToolBar( this );
     m_toolBar->setHorizontalStretchable( TRUE );
-    
+
     m_itemNewAction->addTo( m_toolBar );
 
     m_popTemplate = new QPopupMenu( this );
@@ -332,7 +332,7 @@ void MainWindow::initUI() {
         connect( m_itemBeamOccurrenceAction, SIGNAL(activated()), this, SLOT(slotItemBeamOccurrence()) );
         m_itemBeamOccurrenceAction->setWhatsThis( tr( "Transmit the specific occurrence of the selected recurring item." ) );
     }
-    
+
 /*X
     a = new QAction( tr("Configure Templates"), QString::null, 0, 0 );
     a->addTo( m_popSetting );
@@ -353,7 +353,7 @@ void MainWindow::initConfig() {
     qpeconfig.setGroup("Time");
     m_ampm = qpeconfig.readBoolEntry( "AMPM", TRUE );
     m_onMonday = qpeconfig.readBoolEntry( "MONDAY" );
-    
+
     Config config("DateBook");
     config.setGroup("Main");
     m_defaultViewIdx = config.readNumEntry("defaultview", 1);
@@ -394,7 +394,7 @@ void MainWindow::saveConfig() {
         tmpStringList << QString::number(m_defaultCategories[i]);
     }
     config.writeEntry("defaultCategories",tmpStringList.join(","));
-    
+
     for ( QListIterator<View> it(m_views); it.current(); ++it ) {
         it.current()->saveConfig( &config );
     }
@@ -416,7 +416,7 @@ void MainWindow::initViews() {
         if(idx == m_defaultViewIdx)
             a->setOn(TRUE);
         connect(a, SIGNAL( activated() ), this, SLOT( slotChangeView() ) );
-        
+
         it.current()->loadConfig( &config );
         idx++;
     }
@@ -441,7 +441,7 @@ void MainWindow::initManagers() {
         m_locMan.add( tr("Office") );
         m_locMan.add( tr("Home") );
     }
-    
+
     setTemplateMenu();
 }
 
@@ -502,7 +502,7 @@ void MainWindow::slotDoFind( const QString& txt, const QDate &dt,
         startdt = QDateTime( dt, QTime(0,0,0) );
         m_inSearch = true;
     }
-    
+
     OPimEvent ev = manager()->find( txt, caseSensitive, startdt );
     if ( ev.uid() != 0 ) {
 //X        dayView->setStartViewTime( dtEnd.time().hour() );
@@ -513,7 +513,7 @@ void MainWindow::slotDoFind( const QString& txt, const QDate &dt,
         if ( wrapAround ) {
             emit signalFindWrapAround();
             startdt = QDateTime();
-        } 
+        }
         else
             emit signalFindNotFound();
         wrapAround = !wrapAround;
@@ -529,7 +529,7 @@ void MainWindow::slotConfigure() {
     frmSettings.setViews( &m_views );
     frmSettings.setManagers( descriptionManager(), locationManager() );
     frmSettings.comboDefaultView->setCurrentItem(m_defaultViewIdx-1);
-    
+
     bool found=false;
     for (int i=0; i<(frmSettings.comboLocation->count()); i++) {
         if ( frmSettings.comboLocation->text(i) == m_defaultLocation ) {
@@ -550,7 +550,7 @@ void MainWindow::slotConfigure() {
         manager()->holiday()->reloadPlugins();
 
         frmSettings.saveViews();
-        
+
         m_alarmPreset = frmSettings.alarmPreset();
         m_alarmPresetTime = frmSettings.presetTime();
         m_alarmPresetUnits = frmSettings.presetUnits();
@@ -572,7 +572,7 @@ void MainWindow::slotClockChanged( bool ) {
     Config qpeconfig( "qpe" );
     qpeconfig.setGroup("Time");
     m_ampm = qpeconfig.readBoolEntry( "AMPM", TRUE );
-    
+
     for ( QListIterator<View> it(m_views); it.current(); ++it ) {
         (*it)->clockChanged();
     }
@@ -582,7 +582,7 @@ void MainWindow::slotWeekChanged(bool ) {
     Config qpeconfig( "qpe" );
     qpeconfig.setGroup("Time");
     m_onMonday = qpeconfig.readBoolEntry( "MONDAY" );
-    
+
     for ( QListIterator<View> it(m_views); it.current(); ++it ) {
         (*it)->dayChanged();
     }
@@ -652,7 +652,7 @@ void MainWindow::slotItemDuplicate() {
     const OPimOccurrence *occurrence = currentView()->currentItem();
     if(!occurrence)
         return;
-    
+
     OPimEvent event = occurrence->toEvent();
     if ( editor()->edit( event ) ) {
         OPimEvent dupEvent( editor()->event() );
@@ -666,7 +666,7 @@ void MainWindow::slotItemDelete() {
     const OPimOccurrence *occurrence = currentView()->currentItem();
     if(!occurrence)
         return;
-    
+
     OPimEvent ev = occurrence->toEvent();
     QString strName = ev.description();
 
@@ -697,7 +697,7 @@ void MainWindow::slotItemBeam() {
     const OPimOccurrence *ev = currentView()->currentItem();
     if(!ev)
         return;
-    
+
     beamEvent( ev->toEvent() );
 }
 
@@ -707,7 +707,7 @@ void MainWindow::slotItemBeamOccurrence() {
         return;
 
     // create an OPimEvent from the OPimOccurrence and beam it...
-    
+
     // Start with the easy stuff. If start and end date is the same we can just use
     // the values of the occurrence
     // If it is a multi-day event we need to find the real start and end date...
@@ -816,13 +816,13 @@ void MainWindow::slotChangeView() {
             for ( QListIterator<View> it(m_views); it.current(); ++it ) {
                 if(it.current()->type() == a->name())
                     selected = it.current();
-            }    
-            
+            }
+
             break;
         }
     }
     m_currView = selected;
-   
+
     if( m_currView->date() != lastDate ) {
         odebug << "*** calling showDay" << oendl;
         m_currView->showDay(lastDate);
@@ -878,7 +878,7 @@ void MainWindow::viewPopup( const OPimOccurrence &ev, const QPoint &pt ) {
         m_itemDeleteAction->addTo( &m );
         if( Ir::supported() && m_itemBeamAction ) {
             m_itemBeamAction->addTo( &m );
-            if( eve.hasRecurrence() ) 
+            if( eve.hasRecurrence() )
                 m_itemBeamOccurrenceAction->addTo( &m );
         }
         m.exec( pt );
@@ -963,7 +963,7 @@ int MainWindow::alarmPresetUnits()const {
 
 bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
     bool needshow = false;
-    
+
     // check to make it's okay to continue,
     // this is the case that the time was set ahead, and
     // we are forced given a stale alarm...
@@ -979,7 +979,7 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
         QString msg;
         bool alarmfound = FALSE;
         bool bSound = FALSE;
-        
+
         OPimAlarm alarm = event.notifiers().alarmAtDateTime( when, alarmfound );
         if ( !alarmfound ) {
             // Probably snoozed, look for a "historical" alarm we left when snoozing (see below)
@@ -1005,7 +1005,7 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
                     int diff = when.secsTo( occurDateTime );
                     if( diff >= 0 && diff <= warn ) {
                         break;
-                    }   
+                    }
                     else if( diff > warn ) {
                         occurDateTime = prev;
                         break;
@@ -1014,7 +1014,7 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
                     start = occurDateTime.addSecs(1);
                 }
             }
-            
+
             msg += "<CENTER><B>" + event.description() + "</B>"
                 + "<BR>" + event.location()
                 + event.note() + "</CENTER>";
@@ -1023,11 +1023,11 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
                 startAlarm();
                 bSound = TRUE;
             }
-            
+
             OPimAlarmDlg dlg( occurDateTime, tr("Calendar Alarm"), msg, m_snoozeTime, m_snoozeUnits, m_ampm, TRUE, FALSE, this );
             connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
             QPEApplication::execDialog( &dlg );
-            
+
             if ( bSound )
                 killAlarm();
 
@@ -1057,16 +1057,16 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
                     manager()->update( event );
                 }
             }
-            
-            
+
+
             if( dlg.response() == OPimAlarmDlg::View ) {
                 edit( uid );
                 needshow = TRUE;
             }
         }
-        else 
+        else
             owarn << "Started for alarm at " << when << " (uid=" << uid << ") that does not exist!" << oendl;
     }
-    
+
     return needshow;
 }

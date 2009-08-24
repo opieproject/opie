@@ -20,7 +20,7 @@ class QPushButton;
 class QMultiLineEdit;
 class QLineEdit;
 class QComboBox;
-#define NCONNECTS 10 //Maximal 
+#define NCONNECTS 10 //Maximal
 
 namespace OpieTooth {
     typedef struct {

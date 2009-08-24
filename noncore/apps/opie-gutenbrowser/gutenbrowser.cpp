@@ -133,7 +133,7 @@ Gutenbrowser::Gutenbrowser(QWidget *,const char*, WFlags )
 
     QString gutenIndex = local_library + "/GUTINDEX.ALL";
     qDebug("gutenindex "+gutenIndex );
-    
+
     if( QFile( gutenIndex).exists() )
         indexLib.setName( gutenIndex);
     else {
@@ -189,7 +189,7 @@ void Gutenbrowser::goGetit( const QString &url, bool showMsg) {
     cfg.setGroup("FTPsite");
     ftp_host=cfg.readEntry("SiteName", "sailor.gutenberg.org");
     ftp_base_dir= cfg.readEntry("base",  "/pub/gutenberg");
-   
+
     if(!showMsg) {
 	//if we just get the gutenindex.all
         cmd="wget -O " + filename +" " + url+" 2>&1" ;

@@ -21,14 +21,14 @@
 #define DOCTAB_H
 
 
-#include <qstrlist.h> 
+#include <qstrlist.h>
 #include <qasciidict.h>
 #include "doctabsettingsbase.h"
 
 class QPEDialogListener;
 
 class DocTabSettings : public DocTabSettingsBase
-{ 
+{
     Q_OBJECT
 
 public:

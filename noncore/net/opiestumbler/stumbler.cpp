@@ -18,7 +18,7 @@ Stumbler::Stumbler(const QString &iface, QObject *parent, const char *name)
     m_wiface = static_cast<OWirelessNetworkInterface*>(ONetwork::instance()->interface(m_wifaceName));
     connect(m_timer, SIGNAL(timeout()), this, SLOT(slotRefresh()));
 }
-   
+
 
 void Stumbler::start()
 {
@@ -26,13 +26,13 @@ void Stumbler::start()
         odebug << "Error, interface " << m_wifaceName << " does not exist" << oendl;
         return;
     }
-    
+
     if (!ONetwork::instance()->isWirelessInterface(m_wifaceName.ascii())) {
         odebug << "Error, " << m_wifaceName << " is not a wireless interface" << oendl;
         //FIXME: Tell the user about this
         return;
     }
-    
+
     if (!m_timer->isActive()) {
         odebug << "Starting stumbler" << oendl;
         m_wiface->setUp(false);

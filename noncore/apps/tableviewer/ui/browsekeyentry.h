@@ -38,7 +38,7 @@ class TVBrowseKeyEntry: public QWidget
 {
     Q_OBJECT
 public:
-    TVBrowseKeyEntry( QWidget *parent = 0, 
+    TVBrowseKeyEntry( QWidget *parent = 0,
                         const char *name = 0, WFlags f = 0 );
     ~TVBrowseKeyEntry();
 

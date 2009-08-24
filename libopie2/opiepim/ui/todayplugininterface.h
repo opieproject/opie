@@ -80,7 +80,7 @@ public:
      * widget for the today view
      * It _needs_ a parent here.
      * Plugin authors need to take parent as parent!
-     * 
+     *
      * Note that you always need to create a new QWidget
      * on this call and the ownership is transfered to the
      * caller.

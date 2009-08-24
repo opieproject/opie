@@ -50,7 +50,7 @@ bool LircHandler::connectLirc(void)
 {
 	if(!checkLircdConfValid(false))
 		return false;
-	
+
 	fd = socket(AF_UNIX, SOCK_STREAM, 0);
 	if(fd == -1)
 	{
@@ -64,7 +64,7 @@ bool LircHandler::connectLirc(void)
 		perror("LircHandler::connectLirc");
 		return false;
 	}
-	
+
 	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
 	{
 		QMessageBox mb(QObject::tr("Error"),
@@ -77,7 +77,7 @@ bool LircHandler::connectLirc(void)
 		perror("LircHandler::connectLirc");
 		return false;
 	}
-	
+
 	return true;
 }
 
@@ -144,22 +144,22 @@ QStringList LircHandler::getRemotes(void)
 	const char *readbuffer;
 	int i, numlines;
 	QStringList list;
-	
+
 	if(connectLirc()) {
 		write(fd, write_buffer, strlen(write_buffer) );
-	
+
 		for(i=0; i<5; i++)
 		{
 			readbuffer = readPacket();
 		}
-	
+
 		numlines = atoi(readbuffer);
-	
+
 		for(i=0; i<numlines; i++)
 		{
 			list+=readPacket();
 		}
-	
+
 		if(strcasecmp(readPacket(), "END") != 0)
 		{
 			QMessageBox mb(QObject::tr("Error"),
@@ -172,10 +172,10 @@ QStringList LircHandler::getRemotes(void)
 			perror("LircHandler::getRemotes");
 			return NULL;
 		}
-	
+
 		::close(fd);
 	}
-	
+
 	return list;
 }
 
@@ -192,14 +192,14 @@ QStringList LircHandler::getButtons(const char *remoteName)
 
 	if(connectLirc()) {
 		write(fd, write_buffer.latin1(), strlen(write_buffer) );
-	
+
 		for(i=0; i<5; i++)
 		{
 			readbuffer = readPacket();
 		}
-	
+
 		numlines = atoi(readbuffer);
-	
+
 		for(i=0; i<numlines; i++)
 		{
 			list+=readPacket();
@@ -223,10 +223,10 @@ QStringList LircHandler::getButtons(const char *remoteName)
 			perror("LircHandler::getRemotes");
 			return NULL;
 		}
-		
+
 		::close(fd);
 	}
-		
+
 	return list;
 }
 
@@ -238,7 +238,7 @@ int LircHandler::sendIR(const char *lircaction)
 	if(connectLirc()) {
 		printf("fd2: %d\n", fd);
 		printf("%s", lircaction);
-	
+
 		printf("1\n");
 		printf("%d\n", write(fd, lircaction, strlen(lircaction) ) );
 		printf("2\n");
@@ -312,11 +312,11 @@ void LircHandler::mergeRemoteConfig(const QString &newconfig)
 	QStringList newcontents;
 	QFile conf(LIRCD_CONF);
 	QFile newconf(newconfig);
-	
+
 	readFromFile(conf, contents);
 	readFromFile(newconf, newcontents);
 	contents += newcontents;
-	
+
 	writeToFile(conf, contents);
 }
 
@@ -330,9 +330,9 @@ void LircHandler::removeRemote(const QString &remotetodelete)
 	int lineidx = 0;
 	int startidx = 0;
 	int lastendidx = 0;
-	
+
 	readFromFile(conf, contents);
-	
+
 	for (QStringList::Iterator it = contents.begin(); it != contents.end(); ++it ) {
 		QString line = (*it).stripWhiteSpace();
 		if(line == "begin remote") {
@@ -352,15 +352,15 @@ void LircHandler::removeRemote(const QString &remotetodelete)
 		}
 		lineidx++;
 	}
-	
+
 	if(found) {
 		// Remove the remote and any preceding lines (most likely associated comments)
-		int linecount = lastendidx - startidx; 
+		int linecount = lastendidx - startidx;
 		QStringList::Iterator it = contents.at(startidx);
 		for (int i = 0; i < linecount; i++ ) {
 			it = contents.remove(it);
 		}
-		
+
 		// Check if there is at least one remote still defined
 		found = false;
 		for (it = contents.begin(); it != contents.end(); ++it ) {
@@ -370,7 +370,7 @@ void LircHandler::removeRemote(const QString &remotetodelete)
 				break;
 			}
 		}
-		
+
 		if(found)
 			writeToFile(conf, contents);
 		else
@@ -383,9 +383,9 @@ bool LircHandler::checkRemoteExists(const QString &remote)
 	QStringList contents;
 	QFile conf(LIRCD_CONF);
 	bool inremote = false;
-	
+
 	readFromFile(conf, contents);
-	
+
 	for (QStringList::Iterator it = contents.begin(); it != contents.end(); ++it ) {
 		QString line = (*it).stripWhiteSpace();
 		if(line == "begin remote") {
@@ -408,10 +408,10 @@ bool LircHandler::checkLircdConfValid(bool silent)
 	QStringList contents;
 	QFile conf(LIRCD_CONF);
 	bool inremote = false;
-	
+
 	if(conf.exists()) {
 		readFromFile(conf, contents);
-		
+
 		for (QStringList::Iterator it = contents.begin(); it != contents.end(); ++it ) {
 			QString line = (*it).stripWhiteSpace();
 			if(line == "begin remote") {
@@ -423,17 +423,17 @@ bool LircHandler::checkLircdConfValid(bool silent)
 			}
 		}
 	}
-	
+
 	if(!silent) {
 		QMessageBox::information(NULL, QObject::tr("No remote"),
 				QObject::tr("No remotes have been learned.\nPlease go to the Learn tab\nand learn a remote."),
 				QMessageBox::Ok, QMessageBox::NoButton);
 	}
-	
+
 	return false;
 }
 
-bool LircHandler::readFromFile(QFile &file, QStringList &strlist) 
+bool LircHandler::readFromFile(QFile &file, QStringList &strlist)
 {
 	if(file.open(IO_ReadOnly)) {
 		QTextStream in(&file);
@@ -446,7 +446,7 @@ bool LircHandler::readFromFile(QFile &file, QStringList &strlist)
 	return true;
 }
 
-bool LircHandler::writeToFile(QFile &file, QStringList &strlist) 
+bool LircHandler::writeToFile(QFile &file, QStringList &strlist)
 {
 	if(file.open(IO_WriteOnly | IO_Truncate)) {
 		QTextStream out(&file);

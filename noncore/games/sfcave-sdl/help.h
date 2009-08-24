@@ -23,12 +23,12 @@ private:
 
     SFCave *parent;
     StarField *stars;
-    
+
     int textSpeed;
 	list<string> textList;
 	int startPos;
 	int currLine;
-	
+
 	void loadText();
 };
 

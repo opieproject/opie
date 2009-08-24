@@ -88,7 +88,7 @@ void ztxt::locate(unsigned int n)
 	    zstream.zalloc = Z_NULL;
 	    zstream.zfree = Z_NULL;
 	    zstream.opaque = Z_NULL;
-	    
+
 	    inflateInit(&zstream);
 	}
 
@@ -126,9 +126,9 @@ unsuspend();
     zstream.zalloc = Z_NULL;
     zstream.zfree = Z_NULL;
     zstream.opaque = Z_NULL;
-  
+
 //  printf("Initialising\n");
-  
+
     inflateInit(&zstream);
 
     int ret = inflate(&zstream, Z_SYNC_FLUSH);

@@ -8,8 +8,8 @@ using Opietooth2::OTGateway;
 using Opietooth2::OTPANNetworkSetup;
 using Opietooth2::PANNetworkSetupVector;
 
-BluetoothBNEPRun::BluetoothBNEPRun( ANetNodeInstance * NNI, 
-                  BluetoothBNEPData & D ) : 
+BluetoothBNEPRun::BluetoothBNEPRun( ANetNodeInstance * NNI,
+                  BluetoothBNEPData & D ) :
                   RuntimeInfo( NNI ),
                   Data( D),
                   Pat( "bnep[0-6]" ) {
@@ -22,11 +22,11 @@ BluetoothBNEPRun::~BluetoothBNEPRun( void ) {
     }
 }
 
-State_t BluetoothBNEPRun::detectState( void ) { 
+State_t BluetoothBNEPRun::detectState( void ) {
 
     /*
 
-        need to detect 
+        need to detect
 
         1. for any PAN NetworkSetup that is found if that
            PAN is connected.
@@ -74,7 +74,7 @@ QString BluetoothBNEPRun::setMyState( NetworkSetup * NC, Action_t A, bool  ) {
     }
 
     if( A == Deactivate ) {
-      // nothing to do 
+      // nothing to do
       NC->setCurrentState( Off );
       return QString();
     }
@@ -115,8 +115,8 @@ bool BluetoothBNEPRun::hasFreePANNetworkSetup( bool Grab ) {
         // is this PAN NetworkSetup connecting to a Peer
         // we allow ?
         IsValid = 0;
-        for ( QStringList::Iterator it = Data.BDAddress.begin(); 
-              it != Data.BDAddress.end(); 
+        for ( QStringList::Iterator it = Data.BDAddress.begin();
+              it != Data.BDAddress.end();
               ++ it ) {
           if( C->ConnectedTo == (*it) ) {
             // this is a NetworkSetup we could accept

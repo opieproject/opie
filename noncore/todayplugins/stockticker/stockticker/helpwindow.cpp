@@ -30,7 +30,7 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* par
     browser = new QTextBrowser( this );
     QStringList Strlist;
     Strlist.append( home_);
-    
+
     browser->mimeSourceFactory()->setFilePath( Strlist );
 
     browser->setFrameStyle( QFrame::Panel | QFrame::Sunken );

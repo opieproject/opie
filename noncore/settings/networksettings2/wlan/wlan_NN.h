@@ -14,7 +14,7 @@ public:
     WLanNetNode();
     virtual ~WLanNetNode();
 
-    virtual const QString pixmapName() 
+    virtual const QString pixmapName()
       { return "Devices/wlan"; }
 
     virtual const QString nodeDescription() ;

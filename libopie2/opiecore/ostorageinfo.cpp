@@ -53,13 +53,13 @@ QString OStorageInfo::cfPath()const
             break;
         }
     }
-    
-    if ( r == "" ) 
+
+    if ( r == "" )
     {
         for (QListIterator<FileSystem> i( fileSystems() ); i.current(); ++i)
         {
             const FileSystem *fs = (*i);
-            if ( fs->disk().left( 8 ) == "/dev/hda" 
+            if ( fs->disk().left( 8 ) == "/dev/hda"
                     && fs->path().left(6) == "/media" )
             {
                 r = (*i)->path();

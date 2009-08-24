@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of QSettings class
 **
@@ -170,8 +170,8 @@ static inline int qt_open( const char *pathname, int flags, mode_t mode )
 
     These limitations are not enforced on Unix or Mac OS X.
 
-    \warning Creating multiple, simultaneous instances of QSettings writing 
-    to a text file may lead to data loss! This is a known issue which will 
+    \warning Creating multiple, simultaneous instances of QSettings writing
+    to a text file may lead to data loss! This is a known issue which will
     be fixed in a future release of Qt.
 
     \section1 Notes for Mac OS X Applications
@@ -956,7 +956,7 @@ bool QSettings::sync()
 	    QFileInfo fi((*pit++) + "/" + filebase + "rc");
 
 	    if ((fi.exists() && fi.isFile() && fi.isWritable()) ||
-		(! fi.exists() && di.isDir() 
+		(! fi.exists() && di.isDir()
 #ifndef Q_WS_WIN
 		&& di.isWritable()
 #else

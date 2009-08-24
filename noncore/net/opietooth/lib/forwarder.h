@@ -4,7 +4,7 @@
  *	(c) Copyright 2006 GPL
  *
  *	This software is provided under the GNU public license, incorporated
- *	herein by reference. The software is provided without warranty or 
+ *	herein by reference. The software is provided without warranty or
  *	support.
  */
 #ifndef OpieTooth_Forwarder_H
@@ -18,16 +18,16 @@ namespace Opie {
     namespace Core {
         class OProcess;
         namespace Internal {
-            class OProcessController; 
+            class OProcessController;
         }
     }
 };
 
 namespace OpieTooth {
     class SerialForwarder : public Opie::Core::OProcess {
-        
+
         Q_OBJECT
-    
+
     protected:
         QString device; //Name of the device
         int speed; //device speed to set

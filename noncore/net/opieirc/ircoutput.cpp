@@ -37,7 +37,7 @@ QString IRCOutput::htmlMessage() {
 
 QString IRCOutput::toHTML(const QString &message) {
     QString htmlMessage = Qtopia::escapeString(message);
-    
+
     for(int i=0; m_escapeSecuences[i].escape != 0;++i) {
         int pos = 0;
         bool isOpen = false;
@@ -47,13 +47,13 @@ QString IRCOutput::toHTML(const QString &message) {
                 htmlMessage.insert(pos, m_escapeSecuences[i].close);
             else
                 htmlMessage.insert(pos, m_escapeSecuences[i].open);
-        
+
             isOpen = !isOpen;
         }
         if(isOpen)
             htmlMessage.append(m_escapeSecuences[i].close);
     }
-    
+
     htmlMessage = htmlMessage.replace(QRegExp("\n"), "<br>");
     return htmlMessage;
 }

@@ -52,7 +52,7 @@ private:
     int  actualPosition;                // actual position on board
     int  lastPosition;                  // the last position of the monster
     int  feetPosition;                  // left, right, left, right, ...
-    int  maxBodyPixmaps;                
+    int  maxBodyPixmaps;
     int  maxEyesPixmaps;
     int  prisonPosition;                // where to go, if arrested
     int  freedomPosition;               // where to go, if released from prison

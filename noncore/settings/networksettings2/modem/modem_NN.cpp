@@ -3,11 +3,11 @@
 
 #include "netnodeinterface.h"
 
-static const char * ModemNeeds[] = 
+static const char * ModemNeeds[] =
     { "line",
       0
     };
-static const char * ModemProvides[] = 
+static const char * ModemProvides[] =
     { "modem",
       0
     };

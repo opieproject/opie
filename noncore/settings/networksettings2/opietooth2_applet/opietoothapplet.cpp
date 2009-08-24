@@ -86,19 +86,19 @@ void MessagePanel::closeEvent( QCloseEvent *e ){
         if (!popupParent)
             return;
 
-        /* 
-           remember that we (as a popup) might recieve the mouse 
-           release event instead of the popupParent. This is due to 
-           the fact that the popupParent popped us up in its 
-           mousePressEvent handler. To avoid the button remaining in 
-           pressed state we simply send a faked mouse button release 
+        /*
+           remember that we (as a popup) might recieve the mouse
+           release event instead of the popupParent. This is due to
+           the fact that the popupParent popped us up in its
+           mousePressEvent handler. To avoid the button remaining in
+           pressed state we simply send a faked mouse button release
            event to it.
         */
 
-        QMouseEvent me( QEvent::MouseButtonRelease, 
-                        QPoint(0,0), 
-                        QPoint(0,0), 
-                        QMouseEvent::LeftButton, 
+        QMouseEvent me( QEvent::MouseButtonRelease,
+                        QPoint(0,0),
+                        QPoint(0,0),
+                        QMouseEvent::LeftButton,
                         QMouseEvent::NoButton);
         QApplication::sendEvent( popupParent, &me );
 }
@@ -108,8 +108,8 @@ void MessagePanel::popup( QWidget* parent) {
         popupParent = parent;
 
         if (popupParent)
-            move( popupParent->mapToGlobal( 
-                    popupParent->rect().bottomLeft() ) 
+            move( popupParent->mapToGlobal(
+                    popupParent->rect().bottomLeft() )
                 );
         show();
 }
@@ -125,7 +125,7 @@ Opietooth2Applet::Opietooth2Applet( QWidget *parent, const char *name ) : QWidge
         OTIcons Ic;
         setFixedHeight( 18 );
         setFixedWidth( 14 );
-        
+
         OT = OTGateway::getOTGateway();
 
         OnP = Ic.loadPixmap( "bluezon" );
@@ -201,7 +201,7 @@ void Opietooth2Applet::mousePressEvent( QMouseEvent *) {
 void Opietooth2Applet::SLOT_Error( const QString & S ) {
         MessagePanel * MP = new MessagePanel( S );
 
-        QPoint p = mapToGlobal( 
+        QPoint p = mapToGlobal(
               QPoint(1, - MP->sizeHint().height()-1) );
         MP->move( p );
 

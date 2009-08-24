@@ -50,7 +50,7 @@ OWavFile::OWavFile( const QString &fileName )
     track.setName(fileName);
 }
 
-OWavFile::OWavFile( const QString &fileName, OWavFileParameters fileparams, 
+OWavFile::OWavFile( const QString &fileName, OWavFileParameters fileparams,
         unsigned short samplesPerBlock )
 {
     owarn << "new wave file: " << fileName << oendl;
@@ -77,7 +77,7 @@ int OWavFile::openFile() {
         odebug << "<<<<<<<<<<< " << errorMsg << oendl;
         QMessageBox::message("Note", "Error opening file.\n" + errorMsg);
         return -1;
-    } 
+    }
 
     parseWavHeader( track.handle());
     return track.handle();
@@ -89,7 +89,7 @@ int OWavFile::createFile() {
         odebug << errorMsg << oendl;
         QMessageBox::message("Note", "Error opening file.\n" + errorMsg);
         return -1;
-    } 
+    }
 
     setWavHeader( track.handle() );
     return track.handle();
@@ -146,22 +146,22 @@ bool OWavFile::setWavHeader(int fd) {
     strncpy(datahdr.dataID, "data", 4);
     datahdr.dataLen = 0;
     write( fd, &datahdr, sizeof(datahdr));
-    
+
 //   owarn << "writing header: bitrate " << m_fileparams.resolution << ", samplerate " << m_fileparams.sampleRate << ",  channels " << m_fileparams.channels << oendl;
     return true;
 }
 
 bool OWavFile::adjustHeaders(unsigned long total) {
-    // This is cheating, but we only support PCM and IMA ADPCM 
+    // This is cheating, but we only support PCM and IMA ADPCM
     // at the moment so we can get away with it
     int hdrsize;
     if( hdr.fmtTag == WAVE_FORMAT_DVI_ADPCM )
         hdrsize = 36 + 4 + 12;
-    else 
+    else
         hdrsize = 36;
 
     int fd = track.handle();
-    
+
     // RIFF size
     lseek(fd, 4, SEEK_SET);
     unsigned long size = total + hdrsize;
@@ -194,7 +194,7 @@ int OWavFile::parseWavHeader(int fd) {
     m_fileparams.channels = hdr.nChannels;
     m_fileparams.sampleRate = hdr.sampleRate;
     m_fileparams.resolution = hdr.bitsPerSample;
-    
+
     if (hdr.fmtTag == WAVE_FORMAT_DVI_ADPCM) {
         m_fileparams.resolution = 16;
         bytes = read(fd, &imaext, sizeof(imaext));

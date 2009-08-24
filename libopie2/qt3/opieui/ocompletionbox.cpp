@@ -401,7 +401,7 @@ void OCompletionBox::slotItemClicked( QListBoxItem *item )
             d->down_workaround = false;
             emit highlighted( item->text() );
         }
-    
+
         hide();
         emit activated( item->text() );
     }

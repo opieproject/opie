@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qcanvas.h> 
+#include <qcanvas.h>
 
 class Obstacle : public QCanvasSprite
 {

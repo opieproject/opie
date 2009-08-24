@@ -59,7 +59,7 @@ class QLibraryPrivate : public QObject
 public:
     QLibraryPrivate( QLibrary *lib );
     ~QLibraryPrivate();
- 
+
     void startTimer();
     void killTimer();
 

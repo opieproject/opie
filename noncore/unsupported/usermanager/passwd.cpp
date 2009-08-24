@@ -54,7 +54,7 @@ char *Passwd::crypt_make_salt() {
 //  opens the files /etc/passwd & /etc/group and loads the contents into passwdStringList & groupStringList
 bool Passwd::open() {
 	int returnvalue=false;
-	
+
 	QFile passwd_file("/etc/passwd");
 	QFile group_file("/etc/group");
 	passwdStringList.clear();
@@ -301,5 +301,5 @@ bool Passwd::delGroupMember(QString groupname, QString member) {
 	return true;
 }
 
-// Global Object 
+// Global Object
 Passwd *accounts;

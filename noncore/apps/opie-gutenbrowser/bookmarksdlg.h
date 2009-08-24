@@ -30,11 +30,11 @@
 
 class bookMarksDlg : public QDialog  {
    Q_OBJECT
-public: 
+public:
 	bookMarksDlg(QWidget *parent, QString name);
 	~bookMarksDlg();
 
-protected: 
+protected:
 //	void initDialog();
 	QLineEdit *QLineEdit_1;
 	QMultiLineEdit *QMultiLineEdit_1;
@@ -44,7 +44,7 @@ protected:
 	QComboBox *QComboBox_1;
 	QPushButton *QPushButton_Ok;
 	QPushButton *QPushButton_cancel;
-	
+
 
 private:
 

@@ -28,7 +28,7 @@ class gt : public QObject {
   short min;
   short max;
   int phase;
-  
+
  protected:
 
  public:

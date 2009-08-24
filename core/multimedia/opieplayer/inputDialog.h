@@ -14,10 +14,10 @@ public:
     InputDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
     ~InputDialog();
     QString text()const;
-    
+
 private:
     QLineEdit* LineEdit1;
-    
+
 protected slots:
     void browse();
 };

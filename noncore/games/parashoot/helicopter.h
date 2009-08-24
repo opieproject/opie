@@ -38,7 +38,7 @@ public:
     static void deleteAll();
 
     int rtti() const;
- 
+
 private:
     int hits;
     Sound chikachika;

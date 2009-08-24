@@ -9,7 +9,7 @@ public:
 
     void setMaxMails(unsigned int aMaxMails);
     void setCurrentMails(unsigned int aCurrent);
-    
+
     void setSingleMail(unsigned int aCurrent,unsigned int aMax);
 
 protected:

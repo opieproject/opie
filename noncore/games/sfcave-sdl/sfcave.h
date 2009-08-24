@@ -56,7 +56,7 @@ private:
 	long time1;
 	long start;
 	long end;
-	
+
 	// This is used when the user is setting the custom
 	// values in the menu
 	int customPlayerMenuVal;

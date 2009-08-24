@@ -50,7 +50,7 @@ SettingsTabWidget::SettingsTabWidget( QWidget *parent )
 	sv->setFrameStyle( QFrame::NoFrame );
 	QWidget *container = new QWidget( sv->viewport() );
 	sv->addChild( container );
-    
+
 	QGridLayout *layout = new QGridLayout( container );
 	layout->setMargin( 2 );
 	layout->setSpacing( 4 );
@@ -151,7 +151,7 @@ void SettingsTabWidget::saveSettings()
 		curSrv = 0;
 		for ( int i = 1; i < srvCount; i++ )
 		{
-//			odebug << "ntpSrvs[" << i << "/" << srvCount << "]=" << cbTimeServer->text( i ).latin1() << "" << oendl; 
+//			odebug << "ntpSrvs[" << i << "/" << srvCount << "]=" << cbTimeServer->text( i ).latin1() << "" << oendl;
 			ntpSrvs.setGroup( QString::number( i ) );
 			ntpSrvs.writeEntry( "name", cbTimeServer->text( i-1 ) );
 		}

@@ -35,7 +35,7 @@
 #include "viewatt.h"
 
 class ReadMail : public QMainWindow
-{ 
+{
 	Q_OBJECT
 
 public:
@@ -64,18 +64,18 @@ public slots:
 	void replyAll();
 	void forward();
 	void download();
-	
+
 private:
 	void init();
 	void updateButtons();
-	
+
 private:
 	QListView *view;
 	EmailListItem *item;
 	bool plainTxt, inbox;
 	Email *mail;
 	ViewAtt *viewAtt;
-	
+
 	QToolBar *bar;
 	QMenuBar *menu;
 	QPopupMenu *viewMenu, *mailMenu;

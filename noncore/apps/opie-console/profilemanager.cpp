@@ -53,7 +53,7 @@ void ProfileManager::clear()
     m_list.clear();
 }
 
-Profile::ValueList ProfileManager::all() const 
+Profile::ValueList ProfileManager::all() const
 {
     return m_list;
 }
@@ -136,7 +136,7 @@ void ProfileManager::setProfiles( const Profile::ValueList& list )
     m_list = list;
 }
 
-Profile ProfileManager::profile( const QString& name ) const 
+Profile ProfileManager::profile( const QString& name ) const
 {
     Profile prof;
     Profile::ValueList::ConstIterator it;

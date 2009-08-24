@@ -40,7 +40,7 @@ namespace Internal {
 int testAlarmNotifiers( const OPimNotifyManager& leftnotifiers, const OPimNotifyManager& rightnotifiers ){
 	OPimNotifyManager::Alarms left_alarms = leftnotifiers.alarms();
 	OPimNotifyManager::Alarms right_alarms = rightnotifiers.alarms();
-	
+
 	// Well.. How could we compare two lists of alarms? I think we should find the most early datetimes
 	// and compare them.. (se)
 	// Find the first alarm of the left list
@@ -57,19 +57,19 @@ int testAlarmNotifiers( const OPimNotifyManager& leftnotifiers, const OPimNotify
 			right_earliest = (*it).dateTime();
 		}
 	}
-	
+
 	int ret = 0;
-	
+
 	// Now compare this found alarms
 	if ( !left_earliest .isValid() ) ret++;
 	if ( !right_earliest.isValid() ) ret--;
-	
+
 	if ( left_earliest.isValid() && right_earliest.isValid() ){
 		left_earliest < right_earliest ? ret-- : ret++;
 	}
-	
+
 	return ret;
-	
+
 }
 
 OPimEventSortVector::OPimEventSortVector( uint size, bool asc, int sort )

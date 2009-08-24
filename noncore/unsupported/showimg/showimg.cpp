@@ -33,7 +33,7 @@
 #include <qpe/config.h>
 #include <qpe/resource.h>
 using namespace Opie::Core;
-using namespace Opie::Ui; 
+using namespace Opie::Ui;
 
 /* QT */
 #include <qtoolbar.h>
@@ -288,7 +288,7 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int /*wFlags*/ )
     else
         cv=ImageFileSelector::DETAILED;
 
-    odebug << "cv = " << cv << "" << oendl; 
+    odebug << "cv = " << cv << "" << oendl;
 
     fileSelector = new ImageFileSelector( cv,stack, "fs");
 
@@ -415,7 +415,7 @@ void ImageViewer::settings()
     dlg.setFastLoad(fastLoad);
 
     if ( QPEApplication::execDialog(&dlg) == QDialog::Accepted ) {
-        odebug << "<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>" << oendl; 
+        odebug << "<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>" << oendl;
         slideDelay = dlg.delay();
         slideRepeat = dlg.repeat();
         slideReverse = dlg.reverse();
@@ -507,7 +507,7 @@ void ImageViewer::show()
 
 void ImageViewer::show(const QString& fileref)
 {
-//    odebug << "Show "+fileref << oendl; 
+//    odebug << "Show "+fileref << oendl;
     bFromDocView = TRUE;
     closeFileSelector();
     DocLnk link(fileref);
@@ -537,7 +537,7 @@ void ImageViewer::openFile( const DocLnk &link )
 {
     closeFileSelector();
 //    DocLnk link(file);
-    odebug << "open "+link.name() << oendl; 
+    odebug << "open "+link.name() << oendl;
     updateCaption( link.name() );
     loadImage( link.file() );
     if (slideTimer->isActive()) {

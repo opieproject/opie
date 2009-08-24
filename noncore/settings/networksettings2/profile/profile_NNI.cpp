@@ -66,10 +66,10 @@ short AProfile::generateFileEmbedded( SystemFile & SF,
         if( Data.TriggerVPN ) {
           // this profile triggers VPN -> insert trigger
           SF << "  up "
-             << QPEApplication::qpeDir() 
-             << "bin/networksettings2 --triggervpn " 
+             << QPEApplication::qpeDir()
+             << "bin/networksettings2 --triggervpn "
              << runtime()->device()->netNode()->nodeClass()->genNic( DevNr )
-             << " || true" 
+             << " || true"
              << endl;
           rvl = 0;
         }

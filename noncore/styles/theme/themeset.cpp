@@ -46,14 +46,14 @@ public:
 	}
 };
 
-class MyItem : public QListViewItem 
+class MyItem : public QListViewItem
 {
 public:
 	MyItem ( QListView *lv, QListViewItem *after, const QString &name, const QString &comm, const QString &theme ) : QListViewItem ( lv, after, name, comm )
 	{
-		m_theme = theme;	
+		m_theme = theme;
 	}
-	
+
 
 	QString m_theme;
 };
@@ -63,7 +63,7 @@ ThemeSettings::ThemeSettings ( QWidget* parent, const char *name, WFlags fl )
 		: QWidget ( parent, name, fl )
 {
 	setCaption ( tr( "Theme Style" ) );
-	
+
 	Config config ( "qpe" );
     config. setGroup ( "Appearance" );
 
@@ -82,25 +82,25 @@ ThemeSettings::ThemeSettings ( QWidget* parent, const char *name, WFlags fl )
 	m_list-> setAllColumnsShowFocus ( true );
 	m_list-> setSorting ( -1 );
 	vbox-> addWidget ( m_list, 10 );
-		
+
 	QListViewItem *item = new MyItem ( m_list, 0, tr( "[No theme]" ), "", "" );
 	m_list-> setSelected ( item, true );
-	
+
 	QString path = QPEApplication::qpeDir() + "plugins/styles/themes";
 	QStringList list = QDir ( path, "*.themerc" ). entryList ( );
-	
+
 	for ( QStringList::Iterator it = list. begin(); it != list. end ( ); ++it ) {
 		MyConfig cfg ( path + "/" + *it, Config::File );
-		
+
 		if ( cfg. hasGroup ( "Misc" )) {
 			cfg. setGroup ( "Misc" );
-			
+
 			QString name = cfg. readEntry ( "Name" );
 			QString comm = cfg. readEntry ( "Comment" );
-	
-			if ( !name. isEmpty ( )) {	
+
+			if ( !name. isEmpty ( )) {
 				QString fname = (*it). left ((*it). length ( ) - 8 );
-			
+
 				item = new MyItem ( m_list, item, name, comm, fname );
 				if ( active == fname ) {
 					m_list-> setSelected ( item, true );

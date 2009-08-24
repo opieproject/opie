@@ -22,7 +22,7 @@ int main( int argc, char* argv[]  ) {
 	int test;
 	char te;
 
-	
+
 	if( ( fd = socket(PF_UNIX, SOCK_STREAM, 0 ) ) < 0 ){
 		printf("Could not socket\n" ); return 0;
 	}
@@ -38,21 +38,21 @@ int main( int argc, char* argv[]  ) {
 	//te = (char)test;
         //write(fd,&test,sizeof(test));
 
-	
+
 	he.magic = 47;
 	he.flags = 5;
 	he.chlen = strlen(ch);
 	he.funclen = strlen(fun);
 	he.datalen = 0;
-	
+
 	for(;;){
-	   write(fd,&he,sizeof(he) );   
+	   write(fd,&he,sizeof(he) );
 	   //write(fd,(char*)&he.magic,1);
 	   write(fd,ch,strlen(ch) );
 	   write(fd,fun,strlen(fun) );
 	   sleep(5);
 	};
-	
 
-	
+
+
 }

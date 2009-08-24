@@ -7,10 +7,10 @@
 #include "cabledata.h"
 #include "cableedit.h"
 
-static long SpeedTable[] = { 
-        2400, 9600, 19200, 38400, 57600, 115200, 
-        230400, 460800, 500000, 921600, 1000000, 
-        1152000, 1500000, 2000000, 2500000, 3000000, 
+static long SpeedTable[] = {
+        2400, 9600, 19200, 38400, 57600, 115200,
+        230400, 460800, 500000, 921600, 1000000,
+        1152000, 1500000, 2000000, 2500000, 3000000,
         3500000, 4000000, -1
 };
 
@@ -22,7 +22,7 @@ void CableEdit::showData( CableData & D ) {
       LockFile_LE->setText( D.LockFile );
       for( long * Run = SpeedTable; *Run != -1; *Run ++ ) {
         if( *Run == D.Speed ) {
-          Speed_CB->setCurrentItem( 
+          Speed_CB->setCurrentItem(
                 ((long)(Run)-(long)(SpeedTable))/sizeof(long) );
           break;
         }

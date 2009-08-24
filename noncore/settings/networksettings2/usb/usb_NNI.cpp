@@ -18,7 +18,7 @@ void AUSB::saveSpecificAttribute( QTextStream & ) {
 
 QWidget * AUSB::edit( QWidget * parent ) {
     GUI = new USBEdit( parent );
-    GUI->showData( Data ); 
+    GUI->showData( Data );
     return GUI;
 }
 
@@ -34,7 +34,7 @@ void AUSB::commit( void ) {
 
 short AUSB::generateFileEmbedded( SystemFile & SF,
                                  long DevNr ) {
- 
+
     QString NIC = runtime()->device()->netNode()->nodeClass()->genNic( DevNr );
     short rvl, rvd;
 
@@ -43,11 +43,11 @@ short AUSB::generateFileEmbedded( SystemFile & SF,
     if( SF.name() == "interfaces" ) {
       Log(("Generate USB for %s\n", SF.name().latin1() ));
       // generate mapping stanza for this interface
-      SF << "  pre-up " 
-         << QPEApplication::qpeDir() 
-         << "bin/NS2SetMac.sh " 
-         << NIC 
-         << " || true" 
+      SF << "  pre-up "
+         << QPEApplication::qpeDir()
+         << "bin/NS2SetMac.sh "
+         << NIC
+         << " || true"
          << endl;
       rvl = 0;
     }

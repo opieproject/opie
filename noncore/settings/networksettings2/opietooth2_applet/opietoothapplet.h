@@ -45,16 +45,16 @@ class MessagePanel : public QLabel {
 public:
 
     MessagePanel( const QString & Msg,
-                  QWidget* parent = 0, 
+                  QWidget* parent = 0,
                   const char*  name=0);
-    
+
     void popup( QWidget* parent = 0);
 
 protected:
 
     virtual void mouseReleaseEvent( QMouseEvent * );
     virtual void closeEvent( QCloseEvent * );
-    
+
 private:
 
     QWidget* popupParent;

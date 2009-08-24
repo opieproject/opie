@@ -27,9 +27,9 @@
 
 #include "orkey.h"
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 //class QCheckBox;
 class QLabel;
 //class QSpinBox;

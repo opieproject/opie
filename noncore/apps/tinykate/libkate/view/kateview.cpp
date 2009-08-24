@@ -1347,7 +1347,7 @@ void KateView::setupActions()
     list.append("&Windows/Dos");
     list.append("&Macintosh");
     setEndOfLine->setItems(list);
-#endif 
+#endif
 }
 #endif
 
@@ -2266,7 +2266,7 @@ void KateView::configDialog()
 
 #warning fixme
 
-#if 1 
+#if 1
   KDialogBase *kd = new KDialogBase(KDialogBase::IconList,
                                     i18n("Configure Editor"),
                                     KDialogBase::Ok | KDialogBase::Cancel |

@@ -15,13 +15,13 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QLineEdit;
 
 class InputDialog : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
@@ -29,7 +29,7 @@ public:
     ~InputDialog();
     QString inputText;
     QLineEdit* LineEdit1;
-  void setInputText(const QString &); 
+  void setInputText(const QString &);
 
 };
 

@@ -15,11 +15,11 @@ RulesDialog::RulesDialog(QWidget* parent,const char* name,bool modal,WFlags f)
     //
     QGroupBox* pieces_out_box=new QGroupBox("Movement",this);
     pieces_out_box->setGeometry(10,10,220,120);
-    
+
     pieces_out=new QCheckBox("Don't care about others",pieces_out_box);
     pieces_out->setGeometry(10,20,200,20);
     connect(pieces_out,SIGNAL(clicked()),this,SLOT(pieces_out_clicked()));
-   
+
     QLabel* pieces_out_help=new QLabel("allow movement of the pieses\neven if there are pieces knocked\nout by the opponent",pieces_out_box);
     pieces_out_help->setGeometry(10,40,200,60);
 
@@ -33,7 +33,7 @@ RulesDialog::RulesDialog(QWidget* parent,const char* name,bool modal,WFlags f)
 
     QLabel* nice_dice_help=new QLabel("allow to rescue pieces with dice\nvalues graeter than the distance\nto the players endzone.",nice_dice_box);
     nice_dice_help->setGeometry(10,40,200,60);
-    
+
     QPEApplication::showDialog( this );
 }
 
@@ -69,7 +69,7 @@ void RulesDialog::setRules(const Rules& new_rules)
   if(rules.generous_dice)
     nice_dice->setChecked(true);
   else
-    nice_dice->setChecked(false);    
+    nice_dice->setChecked(false);
 }
 
 Rules RulesDialog::getRules()

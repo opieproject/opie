@@ -2,7 +2,7 @@
                             This file is part of the Opie Project
                              Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
                              Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
-                             
+
               =.
             .=l.
            .>+-=

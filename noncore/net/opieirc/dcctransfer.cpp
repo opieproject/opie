@@ -10,7 +10,7 @@ DCCTransfer::DCCTransfer(Q_UINT32 ip4Addr, Q_UINT16 port, const QString &filenam
 {
     m_file->setName(filename);
 }
-    
+
 DCCTransfer::~DCCTransfer()
 {
     if(m_socket)
@@ -28,7 +28,7 @@ void DCCTransfer::cancel()
 {
     if(m_socket)
         m_socket->close();
-    
+
     emit(finished(this, DCCTransfer::SelfAborted));
 }
 

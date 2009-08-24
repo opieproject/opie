@@ -45,6 +45,6 @@ public :
         QString PreDisconnect;
         QString PostDisconnect;
       } Run;
-}; 
+};
 
 #endif

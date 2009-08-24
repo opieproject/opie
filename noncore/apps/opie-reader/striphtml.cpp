@@ -75,15 +75,15 @@ void striphtml::skipblock(const QString& _ent)
   CStyle dummy;
   QString ent;
   unsigned long pos;
-  do 
+  do
     {
       while (ch != '<' && ch != UEOF)
 	{
 	  mygetch(ch, dummy, pos);
 	}
-      
+
       ch = skip_ws();
-      
+
       ent = getname(ch, " >").lower();
       qDebug("Skipblock:%s", (const char*)ent);
     } while (ent != _ent && ch != UEOF);
@@ -247,7 +247,7 @@ bool striphtml::findanchor(const QString& _info)
     }
   qDebug("Using html find");
   parent->locate(parent->startSection());
-#if defined(USEQPE) || defined(_WINDOWS) 
+#if defined(USEQPE) || defined(_WINDOWS)
   QString info;
   for (int i = 0; i < _info.length(); i++)
   {
@@ -335,7 +335,7 @@ void striphtml::initentmap()
 #else
   QString fname(getenv("READERDIR"));
   fname += "/data";
-#endif  
+#endif
   QFileInfo fi;
   fi.setFile(fname, "HTMLentities");
   if (fi.exists())
@@ -501,10 +501,10 @@ linkType striphtml::hyperlink(unsigned int n, unsigned int, QString& w, QString&
 	{
 	  file = dehtml(href);
 	}
-      
+
       qDebug("File:%s", (const char*)file);
       qDebug("Name:%s", (const char*)name);
-      
+
 
       if (file.isEmpty())
 	{
@@ -729,7 +729,7 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	  QString ent = getname(ch, " >").lower();
 
 	  //	  qDebug("Entity:%s", (const char*)ent);
-	
+
 	  if (ent == "a"/* || ent == "reference"*/)
 	    {
 	      if (ch == ' ') ch = skip_ws();
@@ -786,8 +786,8 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 		    }
 		  (*id2href)[currentid] = ref;
 		  currentid++;
-		
-		
+
+
 		  if (fileposfound)
 		    {
 		      (*href2filepos)[ref] = filepos;
@@ -1027,8 +1027,8 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	      ch = 10;
 	      continue;
 	    }
-	
-	
+
+
 	  else if (ent == "/a")
 	    {
 	      currentstyle.setColour(0,0,0);

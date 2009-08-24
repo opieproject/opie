@@ -14,8 +14,8 @@ public :
 
       ALanCard( LanCardNetNode * PNN );
 
-      RuntimeInfo * runtime( void ) 
-        {  return 
+      RuntimeInfo * runtime( void )
+        {  return
            ( RT ) ? RT : ( RT = new LanCardRun( this, Data ) );
         }
 
@@ -23,7 +23,7 @@ public :
       QString acceptable( void );
       void commit( void );
 
-      virtual void * data( void ) 
+      virtual void * data( void )
         { return (void *)&Data; }
 
 protected :
@@ -32,7 +32,7 @@ protected :
       virtual void saveSpecificAttribute( QTextStream & TS );
 
 private :
-      
+
       LanCardEdit * GUI;
       LanCardData Data;
       LanCardRun * RT;

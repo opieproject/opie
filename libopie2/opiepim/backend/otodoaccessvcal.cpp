@@ -47,9 +47,9 @@ namespace {
     static OPimTodo eventByVObj( VObject *obj ){
         OPimTodo event;
         QString itemDesc, itemSummary, itemAttachNote;
-        
+
         event.setCompleted( false );
-        
+
         // no uid, attendees, ... and no fun
         VObjectIterator it;
         initPropIterator( &it, obj );
@@ -91,7 +91,7 @@ namespace {
                 event.setCategoryNames( categories, "Todo List" ); // no tr
             }
         }
-        
+
         // Handle description and notes
         if( itemSummary.isEmpty() ) {
             // This is typical of vcs files sent from older PocketPC & Palm
@@ -122,7 +122,7 @@ namespace {
         event.setUid( 1 );
         return event;
     };
-    
+
     static VObject *vobjByEvent( const OPimTodo &event )  {
         VObject *task = newVObject( VCTodoProp );
         if( task == 0 )

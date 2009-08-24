@@ -25,8 +25,8 @@
 class QTimer;
 class JezzField;
 
-#define FIELD_WIDTH 26 
-#define FIELD_HEIGHT 26 
+#define FIELD_WIDTH 26
+#define FIELD_HEIGHT 26
 
 class Arrow : public QCanvasSprite
 {

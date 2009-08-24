@@ -103,7 +103,7 @@ private:
     uint moveResizeMode	    :1;
     uint active		    :1;
     uint sizeprotect	    :1;
-    uint moving		    :1; 
+    uint moving		    :1;
 
     void setMouseCursor( MousePosition m );
     bool isMove() const {

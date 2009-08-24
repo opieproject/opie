@@ -37,7 +37,7 @@ class TESession;
 
 class TEWidget : public QFrame
 // a widget representing attributed text
-{ 
+{
   Q_OBJECT
 
 //  friend class Konsole;
@@ -136,7 +136,7 @@ protected:
 
 public:
     const QPixmap *backgroundPixmap();
-    
+
     void setSelection(const QString &t);
 
     virtual void setFont(const QFont &);
@@ -187,12 +187,12 @@ private:
 
     QClipboard*    cb;
     QScrollBar* scrollbar, *hScrollbar;
-    
+
     int         scrollLoc, hScrollLoc;
     int hposition, vcolumns;
 
     int mouse_down_x, mouse_down_y;
-    
+
 //#define SCRNONE  0
 //#define SCRLEFT  1
 //#define SCRRIGHT 2

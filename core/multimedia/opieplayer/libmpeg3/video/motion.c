@@ -18,7 +18,7 @@ static inline void mpeg3video_calc_mv(int *pred, int r_size, int motion_code, in
     	vec += ((motion_code - 1) << r_size) + motion_r + 1;
     	if(vec >= lim) vec -= lim + lim;
 	}
-	else 
+	else
 	if(motion_code < 0)
 	{
     	vec -= ((-motion_code - 1) << r_size) + motion_r + 1;
@@ -32,10 +32,10 @@ static inline void mpeg3video_calc_mv(int *pred, int r_size, int motion_code, in
 int *dmvector, * differential motion vector *
 int mvx, int mvy  * decoded mv components (always in field format) *
 */
-void mpeg3video_calc_dmv(mpeg3video_t *video, 
-		int DMV[][2], 
-		int *dmvector, 
-		int mvx, 
+void mpeg3video_calc_dmv(mpeg3video_t *video,
+		int DMV[][2],
+		int *dmvector,
+		int mvx,
 		int mvy)
 {
 	if(video->pict_struct == FRAME_PICTURE)
@@ -50,7 +50,7 @@ void mpeg3video_calc_dmv(mpeg3video_t *video,
     		DMV[1][0] = ((3 * mvx + (mvx > 0)) >> 1) + dmvector[0];
     		DMV[1][1] = ((3 * mvy + (mvy > 0)) >> 1) + dmvector[1] + 1;
     	}
-    	else 
+    	else
 		{
 /* vector for prediction of top field from bottom field */
     		DMV[0][0] = ((3 * mvx + (mvx>0)) >> 1) + dmvector[0];
@@ -61,7 +61,7 @@ void mpeg3video_calc_dmv(mpeg3video_t *video,
     		DMV[1][1] = ((mvy + (mvy>0)) >> 1) + dmvector[1] + 1;
     	}
 	}
-	else 
+	else
 	{
 /* vector for prediction from field of opposite 'parity' */
     	DMV[0][0] = ((mvx + (mvx > 0)) >> 1) + dmvector[0];
@@ -70,7 +70,7 @@ void mpeg3video_calc_dmv(mpeg3video_t *video,
 /* correct for vertical field shift */
     	if(video->pict_struct == TOP_FIELD)
 			DMV[0][1]--;
-    	else 
+    	else
 			DMV[0][1]++;
 	}
 }
@@ -119,7 +119,7 @@ static inline int mpeg3video_get_dmv(mpeg3_slice_t *slice)
 	{
     	return mpeg3slice_getbit(slice_buffer) ? -1 : 1;
   	}
-  	else 
+  	else
 	{
     	return 0;
   	}
@@ -130,13 +130,13 @@ static inline int mpeg3video_get_dmv(mpeg3_slice_t *slice)
 /* get and decode motion vector and differential motion vector */
 
 void mpeg3video_motion_vector(mpeg3_slice_t *slice,
-		mpeg3video_t *video, 
-		int *PMV, 
-		int *dmvector, 
-		int h_r_size, 
+		mpeg3video_t *video,
+		int *PMV,
+		int *dmvector,
+		int h_r_size,
 		int v_r_size,
-		int dmv, 
-		int mvscale, 
+		int dmv,
+		int mvscale,
 		int full_pel_vector)
 {
 	int motion_r;
@@ -155,7 +155,7 @@ void mpeg3video_motion_vector(mpeg3_slice_t *slice,
   	motion_r = (v_r_size != 0 && motion_code != 0) ? mpeg3slice_getbits(slice_buffer, v_r_size) : 0;
 
 /* DIV 2 */
-  	if(mvscale) PMV[1] >>= 1; 
+  	if(mvscale) PMV[1] >>= 1;
 
   	mpeg3video_calc_mv(&PMV[1], v_r_size, motion_code, motion_r, full_pel_vector);
 
@@ -164,16 +164,16 @@ void mpeg3video_motion_vector(mpeg3_slice_t *slice,
 }
 
 int mpeg3video_motion_vectors(mpeg3_slice_t *slice,
-		mpeg3video_t *video, 
-		int PMV[2][2][2], 
-		int dmvector[2], 
+		mpeg3video_t *video,
+		int PMV[2][2][2],
+		int dmvector[2],
 		int mv_field_sel[2][2],
-		int s, 
-		int mv_count, 
-		int mv_format, 
-		int h_r_size, 
-		int v_r_size, 
-		int dmv, 
+		int s,
+		int mv_count,
+		int mv_format,
+		int h_r_size,
+		int v_r_size,
+		int dmv,
 		int mvscale)
 {
 	int result = 0;
@@ -185,14 +185,14 @@ int mpeg3video_motion_vectors(mpeg3_slice_t *slice,
 			mv_field_sel[1][s] = mv_field_sel[0][s] = mpeg3slice_getbit(slice_buffer);
 		}
 
-    	mpeg3video_motion_vector(slice, 
-			video, 
-			PMV[0][s], 
-			dmvector, 
-			h_r_size, 
-			v_r_size, 
-			dmv, 
-			mvscale, 
+    	mpeg3video_motion_vector(slice,
+			video,
+			PMV[0][s],
+			dmvector,
+			h_r_size,
+			v_r_size,
+			dmv,
+			mvscale,
 			0);
     	if(slice->fault) return 1;
 
@@ -200,29 +200,29 @@ int mpeg3video_motion_vectors(mpeg3_slice_t *slice,
     	PMV[1][s][0] = PMV[0][s][0];
     	PMV[1][s][1] = PMV[0][s][1];
   	}
-  	else 
+  	else
 	{
     	mv_field_sel[0][s] = mpeg3slice_getbit(slice_buffer);
-    	mpeg3video_motion_vector(slice, 
-			video, 
-			PMV[0][s], 
-			dmvector, 
-			h_r_size, 
-			v_r_size, 
-			dmv, 
-			mvscale, 
+    	mpeg3video_motion_vector(slice,
+			video,
+			PMV[0][s],
+			dmvector,
+			h_r_size,
+			v_r_size,
+			dmv,
+			mvscale,
 			0);
     	if(slice->fault) return 1;
 
     	mv_field_sel[1][s] = mpeg3slice_getbit(slice_buffer);
-    	mpeg3video_motion_vector(slice, 
-			video, 
-			PMV[1][s], 
-			dmvector, 
-			h_r_size, 
-			v_r_size, 
-			dmv, 
-			mvscale, 
+    	mpeg3video_motion_vector(slice,
+			video,
+			PMV[1][s],
+			dmvector,
+			h_r_size,
+			v_r_size,
+			dmv,
+			mvscale,
 			0);
     	if(slice->fault) return 1;
   	}

@@ -162,7 +162,7 @@ public:
 
     void fillMenu(QPopupMenu& menu);
     void doMenu(int i);
-    
+
     void add(const QString& set);
 
 protected:

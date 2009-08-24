@@ -62,23 +62,23 @@ void ANetwork::saveSpecificAttribute( QTextStream & TS ) {
     TS << "gateway=" << Data.Gateway << endl;
     TS << "dns1=" << Data.DNS1 << endl;
     TS << "dns2=" << Data.DNS2 << endl;
-    for ( QStringList::Iterator it = Data.PreUp_SL.begin(); 
-          it != Data.PreUp_SL.end(); 
+    for ( QStringList::Iterator it = Data.PreUp_SL.begin();
+          it != Data.PreUp_SL.end();
           ++it ) {
       TS << "preup=" << quote(*it) << endl;
     }
-    for ( QStringList::Iterator it = Data.PreDown_SL.begin(); 
-          it != Data.PreDown_SL.end(); 
+    for ( QStringList::Iterator it = Data.PreDown_SL.begin();
+          it != Data.PreDown_SL.end();
           ++it ) {
       TS << "predown=" << quote(*it) << endl;
     }
-    for ( QStringList::Iterator it = Data.PostUp_SL.begin(); 
-          it != Data.PostUp_SL.end(); 
+    for ( QStringList::Iterator it = Data.PostUp_SL.begin();
+          it != Data.PostUp_SL.end();
           ++it ) {
       TS << "postup=" << quote(*it) << endl;
     }
-    for ( QStringList::Iterator it = Data.PostDown_SL.begin(); 
-          it != Data.PostDown_SL.end(); 
+    for ( QStringList::Iterator it = Data.PostDown_SL.begin();
+          it != Data.PostDown_SL.end();
           ++it ) {
       TS << "postdown=" << quote(*it) << endl;
     }
@@ -104,7 +104,7 @@ bool ANetwork::hasDataForFile( SystemFile & S ) {
 }
 
 short ANetwork::generateFile( SystemFile &SF,
-                               long DevNr 
+                               long DevNr
                              ) {
 
     short rvl, rvd ;
@@ -115,53 +115,53 @@ short ANetwork::generateFile( SystemFile &SF,
       Log(("Generate Network for %s\n", SF.name().latin1() ));
       // we can safely call from here since device item is deeper
       if( Data.UseDHCP ) {
-        SF << "iface " 
-           << "A" 
-           << networkSetup()->number() 
-           << NIC 
-           << " inet dhcp" 
+        SF << "iface "
+           << "A"
+           << networkSetup()->number()
+           << NIC
+           << " inet dhcp"
            << endl;
-        SF << "  up echo \"" 
-           << NIC 
-           << "\" > /tmp/profile-" 
-           << networkSetup()->number() 
-           << ".up" 
+        SF << "  up echo \""
+           << NIC
+           << "\" > /tmp/profile-"
+           << networkSetup()->number()
+           << ".up"
            << endl;
         if( Data.SendHostname ) {
           SF << "  hostname "
-             << Data.Hostname  
+             << Data.Hostname
              << endl;
         }
 
-        SF << "  down rm -f /tmp/profile-" 
-           << networkSetup()->number() 
+        SF << "  down rm -f /tmp/profile-"
+           << networkSetup()->number()
            << ".up"
            << endl;
       } else {
-        SF << "iface " 
-           << "A" 
-           << networkSetup()->number() 
-           << NIC 
-           << " inet static" 
+        SF << "iface "
+           << "A"
+           << networkSetup()->number()
+           << NIC
+           << " inet static"
            << endl;
-        SF << "  up echo \"" 
-           << NIC 
-           << "\" > /tmp/profile-" 
-           << networkSetup()->number() 
-           << ".up" 
+        SF << "  up echo \""
+           << NIC
+           << "\" > /tmp/profile-"
+           << networkSetup()->number()
+           << ".up"
            << endl;
-        SF << "  down rm -f /tmp/profile-" 
-           << networkSetup()->number() 
-           << ".up" 
+        SF << "  down rm -f /tmp/profile-"
+           << networkSetup()->number()
+           << ".up"
            << endl;
-        SF << "  address   " 
-           << Data.IPAddress 
+        SF << "  address   "
+           << Data.IPAddress
            << endl;
-        SF << "  broadcast " 
-           << Data.Broadcast 
+        SF << "  broadcast "
+           << Data.Broadcast
            << endl;
-        SF << "  netmask   " 
-           << Data.NetMask 
+        SF << "  netmask   "
+           << Data.NetMask
            << endl;
 
         // derive network address = IPAddress & netmask
@@ -174,37 +174,37 @@ short ANetwork::generateFile( SystemFile &SF,
               arg( ipal[1].toShort() & nmal[1].toShort() ).
               arg( ipal[2].toShort() & nmal[2].toShort() ).
               arg( ipal[3].toShort() & nmal[3].toShort() );
-          SF << "  network   " 
-             << NW 
+          SF << "  network   "
+             << NW
              << endl;
         }
       }
-      for ( QStringList::Iterator it = Data.PreUp_SL.begin(); 
-            it != Data.PreUp_SL.end(); 
+      for ( QStringList::Iterator it = Data.PreUp_SL.begin();
+            it != Data.PreUp_SL.end();
             ++it ) {
-        SF << "  pre-up    " 
-           << (*it) 
+        SF << "  pre-up    "
+           << (*it)
            << endl;
       }
-      for ( QStringList::Iterator it = Data.PostUp_SL.begin(); 
-            it != Data.PostUp_SL.end(); 
+      for ( QStringList::Iterator it = Data.PostUp_SL.begin();
+            it != Data.PostUp_SL.end();
             ++it ) {
-        SF << "  up        " 
-           << (*it) 
+        SF << "  up        "
+           << (*it)
            << endl;
       }
-      for ( QStringList::Iterator it = Data.PreDown_SL.begin(); 
-            it != Data.PreDown_SL.end(); 
+      for ( QStringList::Iterator it = Data.PreDown_SL.begin();
+            it != Data.PreDown_SL.end();
             ++it ) {
-        SF << "  down      " 
-           << (*it) 
+        SF << "  down      "
+           << (*it)
            << endl;
       }
-      for ( QStringList::Iterator it = Data.PostDown_SL.begin(); 
-            it != Data.PostDown_SL.end(); 
+      for ( QStringList::Iterator it = Data.PostDown_SL.begin();
+            it != Data.PostDown_SL.end();
             ++it ) {
-        SF << "  post-down " 
-           << (*it) 
+        SF << "  post-down "
+           << (*it)
            << endl;
       }
       rvl = 0;

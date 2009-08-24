@@ -35,7 +35,7 @@ Q_OBJECT
 	LinesBoard * lsb;
 	LinesPrompt * lPrompt;
 	QLabel *mPoints;
-	
+
 public:
 	MainWidget( QWidget* parent=0, const char* name=0 );
 	~MainWidget();

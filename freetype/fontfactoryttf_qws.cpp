@@ -113,13 +113,13 @@ public:
 
 	err=FT_Load_Glyph(myface,index,FT_LOAD_DEFAULT);
 	if(err)
-	    ofatal << "Load glyph error " << err << "" << oendl; 
+	    ofatal << "Load glyph error " << err << "" << oendl;
 
 	int width=0,height=0,pitch=0,size=0;
 	FT_Glyph glyph;
 	err=FT_Get_Glyph( myface->glyph, &glyph );
 	if(err)
-	    ofatal << "Get glyph error " << err << "" << oendl; 
+	    ofatal << "Get glyph error " << err << "" << oendl;
 
 	FT_BBox bbox;
 	FT_Glyph_Get_CBox(glyph, ft_glyph_bbox_gridfit, &bbox);
@@ -133,7 +133,7 @@ public:
 		smooth ? ft_render_mode_normal : ft_render_mode_mono,
 		&origin, 1); // destroy original glyph
 	    if(err)
-		owarn << "Get bitmap error " << err << "" << oendl; 
+		owarn << "Get bitmap error " << err << "" << oendl;
 	}
 
 	if ( !err ) {
@@ -186,7 +186,7 @@ private:
 	err=FT_Set_Char_Size(myface, psize,psize,dpi,dpi);
 	if (err) {
 	    if (FT_IS_SCALABLE(myface) ) {
-		owarn << "Set char size error " << err << " for size " << ptsize << "" << oendl; 
+		owarn << "Set char size error " << err << " for size " << ptsize << "" << oendl;
 	    } else {
 		int best=-1;
 		int bdh=99;
@@ -204,7 +204,7 @@ private:
 			myface->available_sizes[best].width,
 			myface->available_sizes[best].height);
 		if ( err )
-		    owarn << "Set char size error " << err << " for size " << ptsize << "" << oendl; 
+		    owarn << "Set char size error " << err << " for size " << ptsize << "" << oendl;
 	    }
 	}
     }
@@ -215,7 +215,7 @@ QFontFactoryFT::QFontFactoryFT()
     FT_Error err;
     err=FT_Init_FreeType(&library);
     if(err) {
-	ofatal << "Couldn't initialise Freetype library" << oendl; 
+	ofatal << "Couldn't initialise Freetype library" << oendl;
     }
 }
 
@@ -242,7 +242,7 @@ void QFontFactoryFT::load(QDiskFont * qdf) const
     FT_Error err;
     err=FT_New_Face(library,qdf->file.ascii(),0,&(f->face));
     if(err) {
-	ofatal << "Error " << err << " opening face" << oendl; 
+	ofatal << "Error " << err << " opening face" << oendl;
     }
     qdf->loaded=true;
 }

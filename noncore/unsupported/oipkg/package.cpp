@@ -26,12 +26,12 @@ OipkgPackage::OipkgPackage( QObject *parent, const char *name )
 
 OipkgPackage::~OipkgPackage()
 {
-  
+
 }
 
 OipkgPackage::OipkgPackage( PackageManagerSettings *s, QObject *parent, const char *name )
 	: QObject(parent,name)
-{	
+{
 	settings = s;
 	init();
 }
@@ -62,7 +62,7 @@ void OipkgPackage::init( )
 
 OipkgPackage::OipkgPackage( QStringList pack, PackageManagerSettings *s , QObject *parent, const char *name )
 	: QObject(parent,name)
-{ 
+{
   settings = s;
   init();
   parsePackage( pack );
@@ -70,7 +70,7 @@ OipkgPackage::OipkgPackage( QStringList pack, PackageManagerSettings *s , QObjec
 
 OipkgPackage::OipkgPackage( QString n, PackageManagerSettings *s, QObject *parent, const char *name )
 	: QObject(parent,name)
-{ 
+{
   settings = s;
   init();
  	if ( !QFile::exists( n ) )

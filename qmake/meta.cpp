@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of QMakeMetaInfo class.
 **
@@ -42,7 +42,7 @@ QMap<QString, QMap<QString, QStringList> > QMakeMetaInfo::cache_vars;
 
 QMakeMetaInfo::QMakeMetaInfo()
 {
-    
+
 }
 
 
@@ -51,7 +51,7 @@ QMakeMetaInfo::readLib(const QString &lib)
 {
     clear();
     QString meta_file = findLib(lib);
-    
+
     if(cache_vars.contains(meta_file)) {
 	vars = cache_vars[meta_file];
 	return TRUE;
@@ -60,14 +60,14 @@ QMakeMetaInfo::readLib(const QString &lib)
     bool ret = FALSE;
     if(!meta_file.isNull()) {
 	if(meta_file.endsWith(Option::pkgcfg_ext)) {
-	    if((ret=readPkgCfgFile(meta_file))) 
+	    if((ret=readPkgCfgFile(meta_file)))
 		meta_type = "pkgcfg";
 	} else if(meta_file.endsWith(Option::libtool_ext)) {
-	    if((ret=readLibtoolFile(meta_file))) 
+	    if((ret=readLibtoolFile(meta_file)))
 		meta_type = "libtool";
 	} else if(meta_file.endsWith(Option::prl_ext)) {
 	    QMakeProject proj;
-	    if(!proj.read(Option::fixPathToLocalOS(meta_file), 
+	    if(!proj.read(Option::fixPathToLocalOS(meta_file),
 			  QDir::currentDirPath(), QMakeProject::ReadProFile))
 		return FALSE;
 	    meta_type = "qmake";
@@ -77,7 +77,7 @@ QMakeMetaInfo::readLib(const QString &lib)
 	    warn_msg(WarnLogic, "QMakeMetaInfo: unknown file format for %s", meta_file.latin1());
 	}
     }
-    if(ret) 
+    if(ret)
 	cache_vars.insert(meta_file, vars);
     return ret;
 }
@@ -149,7 +149,7 @@ QMakeMetaInfo::readLibtoolFile(const QString &f)
 		for(int i = 0; !found && dirs[i] != "(term)"; i++) {
 		    if(QFile::exists(dirs[i] + (*lst_it))) {
 			QString targ = dirs[i] + (*lst_it);
-			if(QDir::isRelativePath(targ)) 
+			if(QDir::isRelativePath(targ))
 			    targ.prepend(QDir::currentDirPath() + QDir::separator());
 			vars["QMAKE_PRL_TARGET"] << targ;
 			found = TRUE;

@@ -49,7 +49,7 @@ class TVFilterKeyEntry: public QWidget
 {
     Q_OBJECT
 public:
-    TVFilterKeyEntry( QWidget *parent = 0, 
+    TVFilterKeyEntry( QWidget *parent = 0,
                         const char *name = 0, WFlags f = 0 );
     ~TVFilterKeyEntry();
 
@@ -86,9 +86,9 @@ private:
     QWidgetStack *ws;
 
     /* This allows for the inherited functions dealing with prefered size
-     * etc to simply get the information from the layout.  
+     * etc to simply get the information from the layout.
      */
-    QHBoxLayout *layout; 
+    QHBoxLayout *layout;
 
     TVVariant::KeyType current_type;
 };

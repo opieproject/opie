@@ -15,7 +15,7 @@
 #include "smtphandler.h"
 #include "miscfunctions.h"
 
-SmtpHandler::SmtpHandler(const QString &header, const QString &message, Account &account, const QString &to) 
+SmtpHandler::SmtpHandler(const QString &header, const QString &message, Account &account, const QString &to)
 	: QObject(), _header(header), _message(message), _account(account), _to(to)
 {
 	_header.replace(QRegExp("\\n"), "\r\n");
@@ -90,7 +90,7 @@ void SmtpHandler::readyRead()
 			QString line = _socket->readLine().stripWhiteSpace();
 			capabilities.append(line);
 		}
-		
+
 		// FIXME: Dirty, quick hack!
 		if (!capabilities.grep(QRegExp("^250-AUTH=LOGIN.*CRAM-MD5.*$")).isEmpty()) {
 //			emit errorOccourred(ErrAuthNotSupported);
@@ -102,9 +102,9 @@ void SmtpHandler::readyRead()
 		}
 	} else if (_state == ReadAuth && responseCode == 334) {
 		QString msgId = MiscFunctions::decodeBase64(response);
-	
+
 		QString authString;
-		authString = _account.user() + " " + 
+		authString = _account.user() + " " +
 			MiscFunctions::smtpAuthCramMd5(msgId, _account.pass());
 		authString = MiscFunctions::encodeBase64(authString);
 

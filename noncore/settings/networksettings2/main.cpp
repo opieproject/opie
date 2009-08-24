@@ -21,7 +21,7 @@ OPIE_EXPORT_APP( OApplicationFactory<NetworkSettings> )
 #define ACT_REQUEST     1
 // regenerate config files
 #define ACT_REGEN       2
-// used by interfaces to request user prompt 
+// used by interfaces to request user prompt
 #define ACT_PROMPT      3
 // used by interfaces to trigger VPN prompting
 #define ACT_TRIGGERVPN  4
@@ -43,7 +43,7 @@ int main( int argc, char * argv[] ) {
         int rv = 0;
         int Action = ACT_GUI;
         // could be overruled by -qws
-        QApplication::Type GuiType = QApplication::GuiClient; 
+        QApplication::Type GuiType = QApplication::GuiClient;
 
         QPEApplication * TheApp;
 
@@ -69,7 +69,7 @@ int main( int argc, char * argv[] ) {
             rmv = 1;
           }
           if( rmv ) {
-            memmove( argv+i, argv+i+rmv, 
+            memmove( argv+i, argv+i+rmv,
                 sizeof( char * ) * (argc-i-rmv) );
             i --;
             argc -= rmv;
@@ -105,7 +105,7 @@ int main( int argc, char * argv[] ) {
                 SL << QPEApplication::qpeDir() + "bin/networksettings2"
                    << "--prompt"
                    << argv[1];
-                // exec synchronous -> blocks 
+                // exec synchronous -> blocks
                 NSResources->system().execAsUser( SL, 1 );
               }
             }
@@ -132,7 +132,7 @@ int main( int argc, char * argv[] ) {
           case ACT_PROMPT :
             { ActivateProfile AP(argv[1]);
               if( AP.exec() == QDialog::Accepted ) {
-                Log(("allow profile %ld for %s\n", 
+                Log(("allow profile %ld for %s\n",
                     AP.selectedProfile(), argv[1] ));
                 printf( "A%ld%s\n", AP.selectedProfile(), argv[1] );
               } else {
@@ -156,7 +156,7 @@ int main( int argc, char * argv[] ) {
               } else {
                 W = new NetworkSettings(0);
               }
-              TheApp->setMainWidget( W ); 
+              TheApp->setMainWidget( W );
 
               W->show();
               W->showMaximized();

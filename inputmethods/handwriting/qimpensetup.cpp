@@ -110,7 +110,7 @@ QIMPenSetup::QIMPenSetup( QIMPenProfile *p, QWidget *parent,
 #endif
 
     owarn << "profiles: " << profileList.count() << oendl;
-    
+
     QTabWidget *tw = new QTabWidget( this );
     vb->addWidget( tw );
 

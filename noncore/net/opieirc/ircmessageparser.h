@@ -45,7 +45,7 @@ typedef struct IRCCTCPMessageParserStruct {
 
 /* Struct representing a numerical command handler */
 typedef struct IRCNumericalMessageParserStruct {
-    unsigned short commandNumber; 
+    unsigned short commandNumber;
     char *message;
     char *params;
     IRCMessageParseProc proc;

@@ -6,9 +6,9 @@
 namespace OpieTooth {
 
     class PinDlg : public PinDlgBase {
-        
+
 	Q_OBJECT
-	
+
     public:
         PinDlg(QWidget* parent = 0,const char* name = 0, Qt::WFlags f = 0);
 
@@ -16,8 +16,8 @@ namespace OpieTooth {
         void setMac( const QString& );
         QString pin() const;
 
-	static QString appName() { return QString::fromLatin1("bluepin") ; } 
-        
+	static QString appName() { return QString::fromLatin1("bluepin") ; }
+
     private:
         void test( const QString& mac );
 

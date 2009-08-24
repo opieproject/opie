@@ -232,7 +232,7 @@ void OPimEvent::setRecurrence( const OPimRecurrence& rec )
         ( *data->recur ) = rec;
     else
         data->recur = new OPimRecurrence( rec );
-    
+
     data->recur->setStart( data->start.date() );
 }
 

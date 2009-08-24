@@ -2,7 +2,7 @@
 #include "packagelistview.h"
 
 #include <qlistview.h>
-	
+
 ListViewItemOipkg::ListViewItemOipkg(QListView *parent, QString name, QCheckListItem::Type qct, Type type)
 	: QCheckListItem(parent,name,qct)
 {
@@ -19,7 +19,7 @@ ListViewItemOipkg::ListViewItemOipkg(ListViewItemOipkg *parent, QString name, Ty
 {
   _type = type;
 }
-         
+
 ListViewItemOipkg::ListViewItemOipkg(PackageListView *parent, QString name, Type type)
 	: QCheckListItem(parent,name,Controller)
 {

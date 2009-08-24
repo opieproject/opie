@@ -39,9 +39,9 @@ void CLanguageModel::EnterText(CNodeContext* NodeContext, string TheText)
 void CLanguageModel::LearnText(CNodeContext* NodeContext, string* TheText, bool IsMore)
 {
 	vector<symbol> Symbols;
-	
+
 	m_Alphabet->GetSymbols(&Symbols, TheText, IsMore);
-	
+
 	for (unsigned int i=0; i<Symbols.size(); i++)
 		LearnSymbol((CContext*) NodeContext, (modelchar) Symbols[i]);
 }

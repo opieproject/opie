@@ -26,7 +26,7 @@ using namespace OpieTooth;
 
 using namespace Opie::Core;
 
-DunDialog::DunDialog( const QString& device, int port, QWidget* parent,  
+DunDialog::DunDialog( const QString& device, int port, QWidget* parent,
     const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
     QDir d("/etc/ppp/peers/"); //Dir we search files in
@@ -57,7 +57,7 @@ DunDialog::DunDialog( const QString& device, int port, QWidget* parent,
 
     connectButton = new QPushButton( this );
     connectButton->setText( tr( "Connect" ) );
-    
+
     doEncryption = new QCheckBox(this, "encrypt");
     doEncryption->setText( tr( "encrypt" ) );
 
@@ -82,7 +82,7 @@ DunDialog::~DunDialog() {
 void DunDialog::connectToDevice() {
     bool doEnc = doEncryption->isChecked();
     bool doPersist = persist->isChecked();
-    
+
     if (cmdLine->currentText() == "")
         return;
     if (m_dunConnect) {
@@ -91,11 +91,11 @@ void DunDialog::connectToDevice() {
     }
     m_dunConnect = new OProcess();
     outPut->clear();
-    
+
     // Fill process command line
     *m_dunConnect << tr("dund")
             << tr("--connect") << m_device
-            << tr("--channel") << QString::number(m_port) 
+            << tr("--channel") << QString::number(m_port)
             << tr("--nodetach");
     if (doEnc)
         *m_dunConnect << tr("--encrypt");
@@ -103,7 +103,7 @@ void DunDialog::connectToDevice() {
         *m_dunConnect << tr("--persist");
     *m_dunConnect << tr("call")
             << cmdLine->currentText();
-    if (!m_dunConnect->start(OProcess::NotifyOnExit, 
+    if (!m_dunConnect->start(OProcess::NotifyOnExit,
         OProcess::All)) {
         outPut->append(tr("Couldn't start"));
         delete m_dunConnect;
@@ -113,13 +113,13 @@ void DunDialog::connectToDevice() {
     {
         m_dunConnect->resume();
         outPut->append(tr("Started"));
-        connect(m_dunConnect, 
+        connect(m_dunConnect,
 		    SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int)),
             this, SLOT(fillOutPut(Opie::Core::OProcess*, char*, int)));
-        connect(m_dunConnect, 
+        connect(m_dunConnect,
             SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int)),
             this,    SLOT(fillErr(Opie::Core::OProcess*, char*, int)));
-        connect(m_dunConnect, 
+        connect(m_dunConnect,
             SIGNAL(processExited(Opie::Core::OProcess*)),
             this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
     }

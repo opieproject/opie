@@ -22,7 +22,7 @@
 #include <qpainter.h>
 #include <qapplication.h>
 
-PolishedDecoration::PolishedDecoration() 
+PolishedDecoration::PolishedDecoration()
 {
 }
 

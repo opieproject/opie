@@ -5,7 +5,7 @@
 int mpeg3audio_read_pcm_header(mpeg3audio_t *audio)
 {
 	unsigned int code;
-	
+
 	code = mpeg3bits_getbits(audio->astream, 16);
 	while(!mpeg3bits_eof(audio->astream) && code != MPEG3_PCM_START_CODE)
 	{
@@ -16,7 +16,7 @@ int mpeg3audio_read_pcm_header(mpeg3audio_t *audio)
 
 	audio->avg_framesize = audio->framesize = 0x7db;
 	audio->channels = 2;
-	
+
 	return mpeg3bits_eof(audio->astream);
 }
 
@@ -42,7 +42,7 @@ int mpeg3audio_do_pcm(mpeg3audio_t *audio)
 		{
 			sample = ((MPEG3_INT16)(audio->ac3_buffer[k++])) << 8;
 			sample |= audio->ac3_buffer[k++];
-			audio->pcm_sample[audio->pcm_point + i * audio->channels + j] = 
+			audio->pcm_sample[audio->pcm_point + i * audio->channels + j] =
 				(mpeg3_real_t)sample / 32767;
 		}
 	}

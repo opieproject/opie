@@ -218,7 +218,7 @@ QPopupMenu* PackageListItem::getPopupMenu()
     popupMenu->insertItem( QObject::tr("Remove"));
   connect( popupMenu, SIGNAL( activated(int) ),
 	       this, SLOT( menuAction(int) ) );
-      popupMenu->popup( QCursor::pos() );   
+      popupMenu->popup( QCursor::pos() );
   }
   return popupMenu;
 }

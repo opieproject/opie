@@ -84,7 +84,7 @@ class OPimTodo : public OPimRecord
         FRHasEndDate,
         FREndDate,
         FRStart,
-        FREnd    
+        FREnd
     };
   public:
     // priorities from Very low to very high

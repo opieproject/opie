@@ -120,7 +120,7 @@ void AccountWidget::create()
     int result;
     if (_pppdata->newaccount() == -1)
     {
-        odebug << "_pppdata->newaccount() == -1" << oendl; 
+        odebug << "_pppdata->newaccount() == -1" << oendl;
         return;
     }
     result = doTab();

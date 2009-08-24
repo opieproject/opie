@@ -32,7 +32,7 @@ RecordDialog::RecordDialog(QWidget *parent, const char *name)
 	QHBoxLayout *hlayout = new QHBoxLayout(this);
 
 	layout->insertSpacing(0,5);
-	
+
 	output = new QMultiLineEdit(this, "output");
 	output->setReadOnly(true);
 	output->setWordWrap(QMultiLineEdit::WidgetWidth);
@@ -53,17 +53,17 @@ RecordDialog::RecordDialog(QWidget *parent, const char *name)
 	hlayout->insertWidget(-1, nextbtn);
 	hlayout->insertSpacing(-1, 5);
 	connect(nextbtn, SIGNAL(clicked()), this, SLOT(nextPressed()) );
-	
+
 	setCaption(tr("Learn Remote"));
 	input->setFocus();
-	
+
 	stepnum = 0;
 	outputenabled = false;
 	writeok = true;
 	ignorekill = false;
-	
+
 	record = new OProcess;
-	
+
 	// We need to stop lircd because irrecord accesses the IR device directly
 	lh = new LircHandler();
 	lh->stopLircd();
@@ -79,21 +79,21 @@ void RecordDialog::nextPressed()
 {
 	if(stepnum == 0) {
 		QString remotename = input->text().stripWhiteSpace();
-		
+
 		if(remotename == "") {
 			QMessageBox::warning(this, tr("Error"),
 											tr("Please enter a name"),
 											QMessageBox::Ok, QMessageBox::NoButton);
 			return;
 		}
-		
+
 		if(remotename.left(1) == ".") {
 			QMessageBox::warning(this, tr("Error"),
 											tr("Name cannot start with a dot"),
 											QMessageBox::Ok, QMessageBox::NoButton);
 			return;
 		}
-		
+
 		// Check for invalid chars
 		QRegExp invalidchars = QRegExp("[~\\[\\]/'\"|\\\\]", TRUE, FALSE);
 		if(remotename.find(invalidchars) > -1) {
@@ -102,7 +102,7 @@ void RecordDialog::nextPressed()
 											QMessageBox::Ok, QMessageBox::NoButton);
 			return;
 		}
-		
+
 		// Check if name already exists in config
 		if(lh->checkRemoteExists(remotename)) {
 			QMessageBox::warning(this, tr("Error"),
@@ -110,22 +110,22 @@ void RecordDialog::nextPressed()
 											QMessageBox::Ok, QMessageBox::NoButton);
 			return;
 		}
-		
+
 		printf("RecordDialog::nextPressed: starting irrecord\n");
 		input->setEnabled(false);
-		
+
 		connect(record, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)), this, SLOT(incoming(Opie::Core::OProcess*,char*,int)) );
 		connect(record, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)), this, SLOT(incomingErr(Opie::Core::OProcess*,char*,int)) );
 		connect(record, SIGNAL(processExited(Opie::Core::OProcess*)), this, SLOT(done(Opie::Core::OProcess*)) );
 		connect(record, SIGNAL(wroteStdin(Opie::Core::OProcess*)), this, SLOT(writeFinished(Opie::Core::OProcess*)) );
-		
+
 		// Prepare temp path
 		QString tmpdir = RECORD_TMPDIR;
 		mkdir(tmpdir, 0700);
 		remotefile = tmpdir + "/" + remotename;
 		if(QFile::exists(remotefile))
 			QFile::remove(remotefile);
-		
+
 		// Set up and start irrecord
 		*record<<"irrecord"<<remotename.latin1();
 		record->setWorkingDirectory(tmpdir);
@@ -159,12 +159,12 @@ void RecordDialog::nextPressed()
 void RecordDialog::incoming(OProcess *proc, char *buffer, int len)
 {
 	int line, col;
-	
+
 	if(outputenabled) {
 		char *bufstr = strndup(buffer, len);
 		output->getCursorPosition( &line, &col );
 		output->insertAt( bufstr, line, col );
-						
+
 		if(decoding) {
 			int pos = output->text().find("Now enter the names for the buttons");
 			if(pos > -1) {
@@ -177,7 +177,7 @@ void RecordDialog::incoming(OProcess *proc, char *buffer, int len)
 				input->setFocus();
 			}
 		}
-		
+
 		free(bufstr);
 	}
 }
@@ -205,10 +205,10 @@ void RecordDialog::done(OProcess *proc)
 {
 	if(proc->normalExit() && proc->exitStatus() == 0) {
 		// Success
-		
+
 		// Merge in new remote to lircd.conf
 		lh->mergeRemoteConfig(remotefile);
-		
+
 		nextbtn->hide();
 		input->hide();
 		output->setText("Learning completed successfully. Click OK to close.");
@@ -248,7 +248,7 @@ bool RecordDialog::checkClose()
 		if(QFile::exists(remotefile))
 			unlink(remotefile);
 		rmdir(RECORD_TMPDIR);
-		
+
 		return true;
 	}
 	return false;
@@ -256,7 +256,7 @@ bool RecordDialog::checkClose()
 
 bool RecordDialog::confirmClose()
 {
-	return (QMessageBox::warning(this, tr("Cancel"), 
-					tr("Learning is not complete.\nAre you sure you want to close?"), 
+	return (QMessageBox::warning(this, tr("Cancel"),
+					tr("Learning is not complete.\nAre you sure you want to close?"),
 					QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes);
 }

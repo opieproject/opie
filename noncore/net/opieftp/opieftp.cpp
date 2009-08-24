@@ -253,7 +253,7 @@ void OpieFtp::initializeGui() {
     ServerComboBox->setEditable(TRUE);
 		ServerComboBox->setAutoCompletion(true);
 //		ServerComboBox->blockSignals(true);
-		
+
     tabLayout_3->addMultiCellWidget( ServerComboBox, 3, 3, 0, 1 );
 
     connect(ServerComboBox,SIGNAL(activated(int)),this,SLOT(serverComboSelected(int) ));
@@ -408,7 +408,7 @@ void OpieFtp::newConnection()
 void OpieFtp::serverComboEdited(const QString & )
 {
 //   if(  ServerComboBox->text(currentServerConfig) != edit /*edit.isEmpty() */) {
-//       odebug << "ServerComboEdited" << oendl; 
+//       odebug << "ServerComboEdited" << oendl;
 //  //        currentServerConfig = -1;
 //      }
 }
@@ -533,7 +533,7 @@ void OpieFtp::localUpload()
                 FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
                 FtpOptions(FTPLIB_CALLBACKARG, (long) &fsz, conn);
                 FtpOptions(FTPLIB_CALLBACKBYTES, (long) fsz/10, conn);
-//                odebug << "Put: " << localFile.latin1() << ", " << remoteFile.latin1() << "" << oendl; 
+//                odebug << "Put: " << localFile.latin1() << ", " << remoteFile.latin1() << "" << oendl;
 
                 if( !FtpPut( localFile.latin1(), remoteFile.latin1(),FTPLIB_IMAGE, conn ) ) {
                     QString msg;
@@ -594,7 +594,7 @@ void OpieFtp::remoteDownload()
             FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
             FtpOptions(FTPLIB_CALLBACKARG, (long) &fsz, conn);
             FtpOptions(FTPLIB_CALLBACKBYTES, (long) fsz/10, conn);
-//            odebug << "Get: " << localFile.latin1() << ", " << remoteFile.latin1() << "" << oendl; 
+//            odebug << "Get: " << localFile.latin1() << ", " << remoteFile.latin1() << "" << oendl;
 
             if(!FtpGet( localFile.latin1(), remoteFile.latin1(),FTPLIB_IMAGE, conn ) ) {
                 QString msg;
@@ -623,7 +623,7 @@ bool OpieFtp::remoteDirList(const QString &dir)
         tmp+="/._temp";
     else
         tmp+="._temp";
-//    odebug << "Listing remote dir "+tmp << oendl; 
+//    odebug << "Listing remote dir "+tmp << oendl;
 //    QCopEnvelope ( "QPE/System", "busy()" );
     if (!FtpDir( tmp.latin1(), dir.latin1(), conn) ) {
         QString msg;
@@ -645,7 +645,7 @@ bool OpieFtp::remoteChDir(const QString &dir)
         msg.sprintf(tr("Unable to change directories\n")+dir+"\n%s",FtpLastResponse(conn));
         msg.replace(QRegExp(":"),"\n");
         QMessageBox::message(tr("Note"),msg);
-//        odebug << msg << oendl; 
+//        odebug << msg << oendl;
 //        QCopEnvelope ( "QPE/System", "notBusy()" );
         return FALSE;
     }
@@ -667,20 +667,20 @@ void OpieFtp::populateLocalView()
     while ( (fi=it.current()) ) {
         if (fi->isSymLink() ){
             QString symLink=fi->readLink();
-//         odebug << "Symlink detected "+symLink << oendl; 
+//         odebug << "Symlink detected "+symLink << oendl;
             QFileInfo sym( symLink);
             fileS.sprintf( "%10i", sym.size() );
             fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.absFilePath().data() );
             fileDate = sym.lastModified().toString();
         } else {
-//        odebug << "Not a dir: "+currentDir.canonicalPath()+fileL << oendl; 
+//        odebug << "Not a dir: "+currentDir.canonicalPath()+fileL << oendl;
             fileS.sprintf( "%10i", fi->size() );
             fileL.sprintf( "%s",fi->fileName().data() );
             fileDate= fi->lastModified().toString();
             if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
                 fileL+="/";
                 isDir=TRUE;
-//     odebug << fileL << oendl; 
+//     odebug << fileL << oendl;
             }
         }
 
@@ -724,7 +724,7 @@ void OpieFtp::populateLocalView()
 
 bool OpieFtp::populateRemoteView( )
 {
-//    odebug << "populate remoteview" << oendl; 
+//    odebug << "populate remoteview" << oendl;
     QString sfile=QDir::homeDirPath();
     if(sfile.right(1) != "/")
         sfile+="/._temp";
@@ -772,8 +772,8 @@ bool OpieFtp::populateRemoteView( )
         file.close();
         if( file.exists())
             file. remove();
-    } 
-//        odebug << "temp file not opened successfully "+sfile << oendl; 
+    }
+//        odebug << "temp file not opened successfully "+sfile << oendl;
     Remote_View->setSorting( 4,TRUE);
     return true;
 }
@@ -792,7 +792,7 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
                 msg.sprintf(tr("Unable to cd up\n")+"%s",FtpLastResponse(conn));
                 msg.replace(QRegExp(":"),"\n");
                 QMessageBox::message(tr("Note"),msg);
-//                odebug << msg << oendl; 
+//                odebug << msg << oendl;
             }
             char path[256];
             if( FtpPwd( path,sizeof(path),conn) == 0) { //this is easier than fudging the string
@@ -800,7 +800,7 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
                 msg.sprintf(tr("Unable to get working dir\n")+"%s",FtpLastResponse(conn));
                 msg.replace(QRegExp(":"),"\n");
                 QMessageBox::message(tr("Note"),msg);
-//                odebug << msg << oendl; 
+//                odebug << msg << oendl;
             }
             currentRemoteDir=path;
         } else {
@@ -811,13 +811,13 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
                 if( !remoteChDir( (const QString &)strItem)) {
                     currentRemoteDir = oldRemoteCurrentDir;
                     strItem="";
-//                     odebug << "RemoteCurrentDir1 "+oldRemoteCurrentDir << oendl; 
+//                     odebug << "RemoteCurrentDir1 "+oldRemoteCurrentDir << oendl;
                 }
             } else if(strItem.find("/",0,TRUE) != -1) { // this is a directory
                 if( !remoteChDir( (const QString &)currentRemoteDir + strItem)) {
                     currentRemoteDir = oldRemoteCurrentDir;
                     strItem="";
-//                     odebug << "RemoteCurrentDir1 "+oldRemoteCurrentDir << oendl; 
+//                     odebug << "RemoteCurrentDir1 "+oldRemoteCurrentDir << oendl;
 
                 } else {
                     currentRemoteDir = currentRemoteDir+strItem;
@@ -870,7 +870,7 @@ void OpieFtp::localListClicked(QListViewItem *selectedItem)
             } else {
                 strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
                 if( QFile::exists(strItem ) ) {
-                      //  odebug << "upload "+strItem << oendl; 
+                      //  odebug << "upload "+strItem << oendl;
                     return;
                 }
             } //end not symlink
@@ -1178,7 +1178,7 @@ void OpieFtp::fillRemoteCombo(const QString &currentPath) {
 void OpieFtp::currentPathComboChanged()
 {
     QString  oldRemoteCurrentDir =  currentRemoteDir;
-//    odebug << "oldRemoteCurrentDir "+oldRemoteCurrentDir << oendl; 
+//    odebug << "oldRemoteCurrentDir "+oldRemoteCurrentDir << oendl;
     if (TabWidget->currentPageIndex() == 0) {
         if(QDir( currentPathCombo->lineEdit()->text()).exists()) {
             currentDir.setPath( currentPathCombo->lineEdit()->text() );
@@ -1224,14 +1224,14 @@ void OpieFtp::readConfig()
     cfg.setGroup("Server");
     currentServerConfig = cfg.readNumEntry("currentServer", -1);
 
-//    odebug << "Reading " << currentServerConfig << "" << oendl; 
+//    odebug << "Reading " << currentServerConfig << "" << oendl;
     serverComboSelected( currentServerConfig-1);
 
 }
 
 void OpieFtp::writeConfig()
 {
-//    odebug << "write config" << oendl; 
+//    odebug << "write config" << oendl;
     Config cfg("opieftp");
     cfg.setGroup("Server");
 
@@ -1262,7 +1262,7 @@ void OpieFtp::writeConfig()
         cfg.writeEntry("currentServer", numberOfEntries+1);
 
         currentServerConfig = numberOfEntries+1;
-//        odebug << "setting currentserverconfig to " << currentServerConfig << "" << oendl; 
+//        odebug << "setting currentserverconfig to " << currentServerConfig << "" << oendl;
 
         cfg.setGroup(temp);
         if(!newServerName.isEmpty())
@@ -1281,7 +1281,7 @@ void OpieFtp::writeConfig()
 }
 
 void OpieFtp::clearCombos() {
-//    odebug << "clearing" << oendl; 
+//    odebug << "clearing" << oendl;
     ServerComboBox->clear();
     UsernameComboBox->clear();
     PasswordEdit->clear();
@@ -1301,10 +1301,10 @@ void OpieFtp::fillCombos()
 
     for (int i = 1; i <= numberOfEntries; i++) {
         temp.setNum(i);
-//        odebug << temp << oendl; 
+//        odebug << temp << oendl;
         cfg.setGroup("Server");
         remoteServerStr = cfg.readEntry( temp,"");
-//        odebug << remoteServerStr << oendl; 
+//        odebug << remoteServerStr << oendl;
 
         int divider = remoteServerStr.length() - remoteServerStr.find(":",0,TRUE);
         port = remoteServerStr.right( divider - 1);
@@ -1312,7 +1312,7 @@ void OpieFtp::fillCombos()
         PortSpinBox->setValue( port.toInt(&ok,10));
 
         remoteServerStr = remoteServerStr.left(remoteServerStr.length()-divider);
-//        odebug << "remote server string "+remoteServerStr << oendl; 
+//        odebug << "remote server string "+remoteServerStr << oendl;
         ServerComboBox->insertItem( remoteServerStr );
 
         cfg.setGroup(temp);
@@ -1331,7 +1331,7 @@ void OpieFtp::serverComboSelected(int index)
 {
 		QString servername;
     currentServerConfig = index+1;
-//    odebug << "server combo selected " << index + 1 << "" << oendl; 
+//    odebug << "server combo selected " << index + 1 << "" << oendl;
     QString username, remoteServerStr, remotePathStr, password, port, temp;
     servername = remoteServerStr = ServerComboBox->text(index);
 		qDebug("server text "  + remoteServerStr);
@@ -1346,7 +1346,7 @@ void OpieFtp::serverComboSelected(int index)
     temp.setNum(index + 1);
     remoteServerStr = cfg.readEntry( temp,"");
 
-//    odebug << "Group " +temp << oendl; 
+//    odebug << "Group " +temp << oendl;
     cfg.setGroup(temp);
 
     int divider = remoteServerStr.length() - remoteServerStr.find(":",0,TRUE);
@@ -1362,8 +1362,8 @@ void OpieFtp::serverComboSelected(int index)
 
     username = cfg.readEntry("Username", "anonymous");
     UsernameComboBox->lineEdit()->setText(username);
-//    odebug << username << oendl; 
-//    odebug << "Password is "+cfg.readEntryCrypt(username << oendl; 
+//    odebug << username << oendl;
+//    odebug << "Password is "+cfg.readEntryCrypt(username << oendl;
     PasswordEdit->setText(cfg.readEntryCrypt(username, "me@opieftp.org"));
 //   UsernameComboBox
 //        PasswordEdit
@@ -1373,7 +1373,7 @@ void OpieFtp::serverComboSelected(int index)
     cfg.writeEntry("currentServer", temp);
     cfg.writeEntry(temp,servername);
 
-		
+
    fuckeduphack = TRUE;
    serverListView->setCurrentItem( index);
    fuckeduphack = FALSE;
@@ -1407,7 +1407,7 @@ void OpieFtp::deleteServer()
 
             serverListView->removeItem(i);
 
-//            odebug << "OK DELETE "+tempname << oendl; 
+//            odebug << "OK DELETE "+tempname << oendl;
             cfg.removeEntry(QString::number(i));
             for ( ; i <= numberOfEntries; i++) {
                 cfg.setGroup("Server");
@@ -1462,7 +1462,7 @@ void OpieFtp::upDir()
             msg.sprintf(tr("Unable to cd up\n")+"%s",FtpLastResponse(conn));
             msg.replace(QRegExp(":"),"\n");
             QMessageBox::message(tr("Note"),msg);
-//                odebug << msg << oendl; 
+//                odebug << msg << oendl;
         }
         char path[256];
         if( FtpPwd( path,sizeof(path),conn) == 0) { //this is easier than fudging the string
@@ -1470,7 +1470,7 @@ void OpieFtp::upDir()
             msg.sprintf(tr("Unable to get working dir\n")+"%s",FtpLastResponse(conn));
             msg.replace(QRegExp(":"),"\n");
             QMessageBox::message(tr("Note"),msg);
-//                odebug << msg << oendl; 
+//                odebug << msg << oendl;
         }
         currentRemoteDir=path;
         remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
@@ -1531,7 +1531,7 @@ void OpieFtp::NewServer() {
 void OpieFtp::serverListClicked( const QString &item) {
     if(item.isEmpty()) return;
     Config cfg("opieftp");
-//    odebug << "highltined "+item << oendl; 
+//    odebug << "highltined "+item << oendl;
     int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
         for (int i = 1; i <= numberOfEntries; i++) {
             cfg.setGroup(QString::number(i));

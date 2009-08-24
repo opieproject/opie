@@ -439,17 +439,17 @@ void PIMListView::showCurrentRecord() {
 QString PIMListView::makeString( const Opie::OPimOccurrence& _ev ) {
     QString str;
     str += _ev.summary();
-    
+
     Opie::OPimEvent ev = _ev.toEvent();
     if ( !ev.isAllDay() ) {
-#if 0    
+#if 0
         if ( ev.startDate() != ev.endDate() ) {
             str += tr("Start ") + TimeString::timeString( ev.startDateTime().time() );
             str += " - " + TimeString::longDateString( ev.startDateTime().date() );
             str +=  tr("End ") + TimeString::timeString( ev.endDateTime().time() );
             str += " - " + TimeString::longDateString( ev.endDateTime().date() );
         }else
-#endif	
+#endif
 	{
             str += tr("Time ") + TimeString::timeString( _ev.startTime() );
             str += " - " + TimeString::timeString( _ev.endTime() );

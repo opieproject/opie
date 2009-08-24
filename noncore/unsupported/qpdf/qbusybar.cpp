@@ -15,17 +15,17 @@ QBusyBar::QBusyBar ( QWidget *parent, const char *name, int flags ) : QWidget ( 
 	m_fade = 0;
 	m_fadecols = 0;
 	m_speed = 500;
-	
-	m_timer = new QTimer ( this );	
-	connect ( m_timer, SIGNAL( timeout()), this, SLOT( slotTimeout()));	
+
+	m_timer = new QTimer ( this );
+	connect ( m_timer, SIGNAL( timeout()), this, SLOT( slotTimeout()));
 
 	setParameters ( 12, 8, 200 );
 }
 
-void QBusyBar::setParameters ( int d, int s, int v )	
-{	
+void QBusyBar::setParameters ( int d, int s, int v )
+{
 	bool running = m_timer-> isActive ( );
-	
+
 	if ( running )
 		m_timer-> stop ( );
 
@@ -41,10 +41,10 @@ void QBusyBar::setParameters ( int d, int s, int v )
 
 	colorGroup ( ). color ( QColorGroup::Highlight ). rgb ( &rf, &gf, &bf );
 	colorGroup ( ). color ( QColorGroup::Background ). rgb ( &rt, &gt, &bt );
-	
-	for ( int i = 0; i < s; i++ ) 
+
+	for ( int i = 0; i < s; i++ )
 		m_fadecols [i]. setRgb ( rf + ( rt - rf ) * i / s, gf + ( gt - gf ) * i / s, bf + ( bt - bf ) * i / s );
-		
+
 	if ( running ) {
 		m_pos = 0;
 		m_timer-> start ( m_speed );
@@ -74,20 +74,20 @@ void QBusyBar::endBusy ( )
 void QBusyBar::setBusy ( bool b )
 {
 	int busy = m_busy + ( b ? 1 : -1 );
-	
+
 	if ( busy < 0 )
 		busy = 0;
-	
+
 	if (( m_busy == 0 ) && ( busy > 0 )) { // Changed state	to on
 		m_pos = 0;
 		m_timer-> start ( m_speed );
-		update ( );		
+		update ( );
 	}
 	else if (( m_busy > 0 ) && ( busy == 0 )) { // Changed state to off
 		m_timer-> stop ( );
-		update ( );	
+		update ( );
 	}
-	
+
 	m_busy = busy;
 }
 
@@ -107,7 +107,7 @@ void QBusyBar::paintEvent ( QPaintEvent *e )
 
 	int x  = 0;
 	int dx = width ( ) / m_div;
-	int y  = clip. top ( ); 
+	int y  = clip. top ( );
 	int dy = clip. height ( );
 
 	if ( m_busy ) {
@@ -118,15 +118,15 @@ void QBusyBar::paintEvent ( QPaintEvent *e )
 			int ind = ( pos - i ) * dir;
 			if (( ind < 0 ) || ( ind >= m_fade ))
 				ind = m_fade - 1;
-			
+
 			if ((( x + dx ) > clip. left ( )) || ( x < clip. right ( )))
-				p. fillRect ( x, y, ( i < ( m_div - 1 )) ? dx : width ( ) - x, dy, m_fadecols [ind] );	
+				p. fillRect ( x, y, ( i < ( m_div - 1 )) ? dx : width ( ) - x, dy, m_fadecols [ind] );
 			x += dx;
 		}
 	}
 	else {
 		p. fillRect ( e-> rect ( ), m_fadecols [m_fade - 1] );
-	}		
+	}
 }
 
 

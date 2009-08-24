@@ -56,7 +56,7 @@ void QTetrixBoard::startGame(int gameType,int fillRandomLines)
     if ( isPaused )
         return;		// ignore if game is paused
     noGame = FALSE;
-    
+
     GenericTetrix::startGame( gameType, fillRandomLines );
     // Note that the timer is started by updateLevel!
 }
@@ -88,7 +88,7 @@ void QTetrixBoard::drawSquare(int x,int y,int value)
     bool localPainter = paint == 0;
     QPainter *p;
     if ( localPainter )
-	p = new QPainter( this );    
+	p = new QPainter( this );
     else
 	p = paint;
     drawTetrixButton( p, X, Y, blockWidth, blockHeight,

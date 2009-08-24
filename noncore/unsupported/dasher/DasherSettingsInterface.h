@@ -18,7 +18,7 @@ class Dasher::CDasherSettingsInterface
 {
 public:
 	void SettingsDefaults(CSettingsStore* Store);
-	
+
 	// These actually affect the way Dasher works
 	//! Change the alphabet in use to NewAlphabetID
 	virtual void ChangeAlphabet(const std::string& ) {};
@@ -40,7 +40,7 @@ public:
 
 	//! Inform the core that the screen has this size
 	virtual void SetScreenSize(long , long ) {};
-	
+
 	//! Set the size of the font used in the Dasher canvas
 	virtual void SetDasherFontSize(Dasher::Opts::FontSize ) {};
 
@@ -76,7 +76,7 @@ public:
 	//! True if a box should be drawn to represent the logical position of the mouse
 	virtual void DrawMouse(bool ) {};
 
-	//! Set the editbox font 
+	//! Set the editbox font
 	virtual void SetEditFont(std::string , long ) {};
 
 	//! Set the canvas font
@@ -84,16 +84,16 @@ public:
 
 	//! Set the height of the edit box
 	virtual void SetEditHeight(long ) {};
-	
+
 	//! Should Dasher start and stop on space bar?
 	virtual void StartOnSpace(bool ) {};
 
 	//! Should Dasher start and stop on left mouse button?
 	virtual void StartOnLeft(bool ) {};
-	
+
 	//! Should Dasher be keyboard controlled?
 	virtual void KeyControl(bool ) {};
-	
+
 	//! Should Dasher pause when the pointer leaves the window?
 	virtual void WindowPause(bool ) {};
 };
@@ -107,7 +107,7 @@ namespace Keys
 {
 	// Standard Option strings. You are encouraged to use these constants.
 	// -------------------------------------------------------------------
-	
+
 	// bool options
 	extern const std::string TIME_STAMP;
 	extern const std::string SHOW_TOOLBAR;
@@ -133,7 +133,7 @@ namespace Keys
 	extern const std::string SCREEN_HEIGHT;
 	extern const std::string DASHER_FONTSIZE;
 	extern const std::string DASHER_DIMENSIONS;
-	
+
 	// string options
 	extern const std::string ALPHABET_ID;
 	extern const std::string DASHER_FONT;

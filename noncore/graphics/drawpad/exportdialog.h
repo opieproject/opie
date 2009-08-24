@@ -23,7 +23,7 @@ class QLineEdit;
 class QSpinBox;
 
 class ExportDialog : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:

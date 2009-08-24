@@ -87,9 +87,9 @@ bool AutoRotate::isRotateEnabled()
     bool res = cfg.readBoolEntry( "rotateEnabled", true );
 
     if (res )
-        odebug << "Enabled" << oendl; 
+        odebug << "Enabled" << oendl;
     else
-        odebug << "Disabled" << oendl; 
+        odebug << "Disabled" << oendl;
     return res;
 }
 

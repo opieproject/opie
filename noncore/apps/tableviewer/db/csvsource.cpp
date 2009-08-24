@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 #include "csvsource.h"
 #include "common.h"
 #include "datacache.h"
@@ -30,7 +30,7 @@ DBCsv::DBCsv(DBStore *d)
     dstore = d;
 }
 
-DBCsv::~DBCsv() 
+DBCsv::~DBCsv()
 {
 }
 
@@ -52,7 +52,7 @@ QStringList readElem(QString in)
     while(index < in.length()) {
 	if(firstChar) {
 	    /* skip whitespace */
-	    while(index < in.length() && in[index] == ' ') 
+	    while(index < in.length() && in[index] == ' ')
 		index++;
 	    if(in[index] == '"') {
 		quotedElem = TRUE;
@@ -95,7 +95,7 @@ QStringList readElem(QString in)
 	while (index < in.length() && in[index] != ',') index++;
 	if(index == in.length())
 	    return out;
-	else 
+	else
 	    index++;
     }
     return out;
@@ -118,7 +118,7 @@ bool DBCsv::openSource(QIODevice *inDev)
     while(i != keys.end()) {
 	if ((*i).isEmpty())
 	    keyIndexes.insert(fileIndex, keyR->addKey("Unamed", TVVariant::String));
-	else 
+	else
 	    keyIndexes.insert(fileIndex, keyR->addKey(*i, TVVariant::String));
 	i++;
 	fileIndex++;
@@ -170,14 +170,14 @@ bool DBCsv::saveSource(QIODevice *outDev)
 	    outstream << name;
 	}
 	++it;
-	if(it.current()) 
+	if(it.current())
 	    outstream << ", ";
     }
     outstream << "\n";
 
     dstore->first();
 
-    do { 
+    do {
 	elem = dstore->getCurrentData();
 	if(!elem)
 	    break;
@@ -197,7 +197,7 @@ bool DBCsv::saveSource(QIODevice *outDev)
 		outstream << name;
 	    }
 	    ++it;
-	    if(it.current()) 
+	    if(it.current())
 		outstream << ", ";
 	}
 	outstream << "\n";

@@ -26,7 +26,7 @@
 
 */
 /*
- * The basic class for OBEX manipulating classes implementation 
+ * The basic class for OBEX manipulating classes implementation
  */
 
 #include "obexbase.h"
@@ -39,7 +39,7 @@ using namespace  OpieObex;
 
 using namespace Opie::Core;
 
-ObexBase::ObexBase(QObject *parent, const char* name) 
+ObexBase::ObexBase(QObject *parent, const char* name)
     : QObject(parent, name)
 {
     m_count = 0;

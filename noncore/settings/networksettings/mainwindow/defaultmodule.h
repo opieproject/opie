@@ -9,7 +9,7 @@ class DefaultModule : Module{
 
 public:
   DefaultModule(){};
-  
+
   virtual bool isOwner(Interface *i);
   virtual QWidget *configure();
   virtual QWidget *information()};

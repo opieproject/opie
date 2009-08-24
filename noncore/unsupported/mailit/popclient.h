@@ -31,7 +31,7 @@
 class PopClient: public QObject
 {
   Q_OBJECT
-  
+
 public:
   PopClient();
   ~PopClient();
@@ -41,7 +41,7 @@ public:
   void removeSynchronize();
   void headersOnly(bool headers, int limit);
   void setSelectedMails(MailList *list);
-  
+
 signals:
   void newMessage(const QString &, int, uint, bool);
   void errorOccurred(int status, const QString & Msg );
@@ -50,7 +50,7 @@ signals:
   void mailboxSize(int);
   void currentMailSize(int);
   void downloadedSize(int);
-    
+
 public slots:
   void errorHandling(int);
   void errorHandlingWithMsg(int, const QString & );
@@ -58,7 +58,7 @@ public slots:
 protected slots:
   void connectionEstablished();
   void incomingData();
-  
+
 private:
   QSocket *socket;
   QTextStream *stream;

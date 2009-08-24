@@ -3,11 +3,11 @@
 
 #include "netnodeinterface.h"
 
-static const char * VPNNeeds[] = 
+static const char * VPNNeeds[] =
     { 0
     };
 
-static const char * VPNProvides[] = 
+static const char * VPNProvides[] =
     { "connection",
       0
     };

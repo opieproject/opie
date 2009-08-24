@@ -111,7 +111,7 @@ void CardApplet::readGlobalConfig()
     cfg.setGroup( "Global" );
     m_promptconfig = cfg.readBoolEntry("promptConfig", false);
     m_sounds = cfg.readBoolEntry("enableSounds", true);
-    
+
     int defaultdis = 0;
     if( ODevice::inst()->model() == Model_Zaurus_SLC3000 )
         defaultdis = defaultdis | 1;
@@ -129,7 +129,7 @@ void CardApplet::handleSystemChannel( const QCString&msg, const QByteArray& )
 
         while ( it.current() )
         {
-            if ( ( !it.current()->isEmpty() ) && ((m_disabledSockets & (1 << it.current()->number())) == 0) ) 
+            if ( ( !it.current()->isEmpty() ) && ((m_disabledSockets & (1 << it.current()->number())) == 0) )
             {
                 executeAction( it.current(), "resume" );
             }
@@ -210,7 +210,7 @@ void CardApplet::mousePressEvent( QMouseEvent* )
             ++it;
         }
     }
-    
+
     if ( m_mounts.count() ) {
         if ( sys->count() )
             menu->insertSeparator(i++);
@@ -249,10 +249,10 @@ void CardApplet::mainMenuAction( int action )
 void CardApplet::showOptions()
 {
     static bool excllock = false;
-    
+
     if(excllock)
         return;
-    
+
     excllock = true;
 
     QDialog optDlg(0,0,true);
@@ -278,13 +278,13 @@ void CardApplet::showOptions()
     if(optDlg.exec()) {
         m_promptconfig = promptcb->isChecked();
         m_sounds = soundscb->isChecked();
-        
+
         OConfig cfg( "PCMCIA" );
         cfg.setGroup( "Global" );
         cfg.writeEntry("promptConfig", m_promptconfig);
         cfg.writeEntry("enableSounds", m_sounds);
     }
-    
+
     excllock = false;
 }
 
@@ -306,9 +306,9 @@ void CardApplet::updatePcmcia()
 
     if(excllock)
         return;
-    
+
     excllock = true;
-    
+
     OPcmciaSystem::instance()->synchronize();
 
     OPcmciaSystem* sys = OPcmciaSystem::instance();
@@ -343,7 +343,7 @@ void CardApplet::updatePcmcia()
         it = sys->iterator();
         while ( it.current() && newCard )
         {
-            if ( m_disabledSockets & (1 << it.current()->number()) ) 
+            if ( m_disabledSockets & (1 << it.current()->number()) )
             {
                 odebug << "pcmcia: skipping disabled socket " << it.current()->number() << oendl;
                 ++it;
@@ -482,7 +482,7 @@ void CardApplet::updateMounts( bool showPopup )
                                 if(f.getch() == '1')
                                     removable = true;
                             }
-                            
+
                             if(!removable && mntdir != "/") {
                                 const FileSystem *fsi = storage.fileSystemOf(mntdir);
                                 if(fsi)
@@ -560,7 +560,7 @@ void CardApplet::findRootBlock()
             }
         }
     }
-    
+
     odebug << "CARD: root devnode = " << m_rootdevnode << oendl;
 }
 
@@ -653,7 +653,7 @@ void CardApplet::slotExited( OProcess*  )
                 // fuser found no processes using the device
                 // Note that if fuser failed and is returning non-zero here for some other reason
                 // it doesn't really matter since the unmount will fail anyway
-                
+
                 // Move checked mount point to umount list
                 m_umount += m_check[0];
                 m_check.remove(m_check.begin());
@@ -871,7 +871,7 @@ void CardApplet::getProcessInfo( const QString &processes )
 bool CardApplet::isRoot ( const QString &mountpt )
 {
     struct stat st_mountpt;
-   
+
     odebug << "CARD: Checking if " << mountpt << " is the root" << oendl;
     if(stat(mountpt, &st_mountpt) == 0 && (m_rootdev != 0) )
         return ( st_mountpt.st_dev == m_rootdev );

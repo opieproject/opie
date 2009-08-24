@@ -116,7 +116,7 @@ OPimBackendOccurrence::List ODateBookAccessBackend::occurrences( const QDate& fr
     return tmpList;
 }
 
-OPimBackendOccurrence::List ODateBookAccessBackend::occurrences( const QDateTime& dt )const 
+OPimBackendOccurrence::List ODateBookAccessBackend::occurrences( const QDateTime& dt )const
 {
     OPimBackendOccurrence::List day = occurrences( dt.date(), dt.date() );
 
@@ -124,7 +124,7 @@ OPimBackendOccurrence::List ODateBookAccessBackend::occurrences( const QDateTime
 }
 
 OPimBackendOccurrence::List ODateBookAccessBackend::effectiveNonRepeatingEvents( const QDate& from,
-                                                                                 const QDate& to )const 
+                                                                                 const QDate& to )const
 {
     OPimBackendOccurrence::List tmpList;
     OPimEvent::ValueList list = directNonRepeats();
@@ -134,7 +134,7 @@ OPimBackendOccurrence::List ODateBookAccessBackend::effectiveNonRepeatingEvents(
     return tmpList;
 }
 
-OPimBackendOccurrence::List ODateBookAccessBackend::effectiveNonRepeatingEvents( const QDateTime& dt )const 
+OPimBackendOccurrence::List ODateBookAccessBackend::effectiveNonRepeatingEvents( const QDateTime& dt )const
 {
     OPimBackendOccurrence::List day = effectiveNonRepeatingEvents( dt.date(), dt.date() );
     return filterOccurrences( day,dt );
@@ -153,7 +153,7 @@ bool ODateBookAccessBackend::hasQuerySettings (uint querySettings) const
 
 
 UIDArray ODateBookAccessBackend::queryByExample( const UIDArray& uidlist, const OPimEvent&, int settings,
-                                                 const QDateTime& d )const 
+                                                 const QDateTime& d )const
 {
 	qDebug( "Accessing ODateBookAccessBackend::queryByExample() which is not implemented!" );
     return UIDArray();
@@ -167,7 +167,7 @@ UIDArray ODateBookAccessBackend::sorted( const UIDArray& ar, bool asc, int sortO
 
     for ( uint i = 0; i < ar.count(); ++i ){
 	    OPimEvent event = find( ar[i], ar, i, Frontend::Forward );
-	    if ( event.isEmpty() ) 
+	    if ( event.isEmpty() )
 		    continue;
 
 	    bool catPassed = true;
@@ -181,7 +181,7 @@ UIDArray ODateBookAccessBackend::sorted( const UIDArray& ar, bool asc, int sortO
 				    // Else: take it as we will not filter unfiled events..
 				    if ( !event.categories().isEmpty() )
 					    continue;
-				    else 
+				    else
 					    catPassed = true;
 			    } else {
 				    if ( !event.categories().contains( cat ) )
@@ -197,7 +197,7 @@ UIDArray ODateBookAccessBackend::sorted( const UIDArray& ar, bool asc, int sortO
 	    // Continue to next event if the category filter removed this item
 	    if ( !catPassed )
 		    continue;
-	    
+
 	    vector.insert( item++, event );
     }
 
@@ -210,7 +210,7 @@ UIDArray ODateBookAccessBackend::sorted( const UIDArray& ar, bool asc, int sortO
         array[i] = vector.uidAt( i );
 
     return array;
-    
+
 }
 
 OPimBackendOccurrence::List ODateBookAccessBackend::filterOccurrences( const OPimBackendOccurrence::List dayList,

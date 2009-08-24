@@ -336,7 +336,7 @@ void PackageManagerSettings::writeCurrentInstallationSetting()
   QStringList sers = getActiveServers();
   int srvc = 0;
   for ( QStringList::Iterator it = sers.begin(); it != sers.end(); ++it ) {
-    cfg.writeEntry( "server_" + QString::number(srvc++), *it );  	
+    cfg.writeEntry( "server_" + QString::number(srvc++), *it );
   }
   cfg.writeEntry( "server_count", srvc );
 }
@@ -488,7 +488,7 @@ bool PackageManagerSettings::createLinks()
 /** get the servers that are active */
 QStringList PackageManagerSettings::getActiveServers()
 {
-  QStringList sl;	
+  QStringList sl;
   for (int i=0; i<(int)activeServers->count(); i++)
     {
       if ( activeServers->isSelected(i) )
@@ -498,7 +498,7 @@ QStringList PackageManagerSettings::getActiveServers()
 }
  QStringList PackageManagerSettings::getServers()
 {
-  QStringList sl;	
+  QStringList sl;
   for (int i=0; i<(int)activeServers->count(); i++)
     {
 			sl += activeServers->text(i);
@@ -509,9 +509,9 @@ QStringList PackageManagerSettings::getActiveServers()
 /** returns the destination listed in ipkg.conf */
 QStringList PackageManagerSettings::getDestinationUrls()
 {
-  QStringList sl;	
+  QStringList sl;
   for (int i=0; i<(int)destinations->count(); i++)
-    {   	
+    {
       sl += *destinationurlDic[i];
     }
   return sl;
@@ -520,9 +520,9 @@ QStringList PackageManagerSettings::getDestinationUrls()
 /** returns the destination listed in ipkg.conf */
 QString PackageManagerSettings::getDestinationUrlByName(QString n)
 {
-  QStringList sl;	
+  QStringList sl;
   for (int i=0; i<(int)destinations->count(); i++)
-    {   	
+    {
       if ( n ==  destinations->text(i)) return*destinationurlDic[i];
     }
   return "";
@@ -531,14 +531,14 @@ QString PackageManagerSettings::getDestinationUrlByName(QString n)
 /** returns the destination listed in ipkg.conf */
 QStringList PackageManagerSettings::getDestinationNames()
 {
-  QStringList sl;	
+  QStringList sl;
   for (int i=0; i<(int)destinations->count(); i++)
-    {   	
+    {
       sl += destinations->text(i);
     }
   return sl;
 }
-                               
+
 
 void PackageManagerSettings::linkEnabled( bool b )
 {

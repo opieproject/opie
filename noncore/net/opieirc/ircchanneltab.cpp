@@ -63,7 +63,7 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     connect(m_list,  SIGNAL(doubleClicked ( QListBoxItem * ) ), this, SLOT(popupQuery( QListBoxItem * ) ));
     settingsChanged();
-    
+
     if(m_queuedMessages[m_channel->channelname()]) {
         appendText(*m_queuedMessages[m_channel->channelname()]);
         delete m_queuedMessages[m_channel->channelname()];
@@ -83,7 +83,7 @@ void IRCChannelTab::appendText(QString text) {
         if (firstBreak != -1) {
             txt = "<qt bgcolor=\"" + m_backgroundColor + "\"/>" + txt.right(txt.length() - (firstBreak + 1));
         }
-    } 
+    }
     else {
         m_lines++;
     }
@@ -120,7 +120,7 @@ void IRCChannelTab::processCommand() {
                 session()->sendMessage(m_channel, m_field->text());
                 appendText("<font color=\"" + m_textColor + "\">&lt;</font><font color=\"" + m_selfColor + "\">"+m_parentTab->server()->nick()+"</font><font color=\"" + m_textColor + "\">&gt; "+IRCOutput::toHTML(m_field->text())+"</font><br>");
             }
-        } 
+        }
         else {
             appendText("<font color=\"" + m_errorColor + "\">"+tr("Disconnected")+"</font><br>");
         }
@@ -137,7 +137,7 @@ void IRCChannelTab::toggleList() {
     if (m_listVisible) {
         m_list->setMaximumWidth(0);
         m_listButton->setText("<");
-    } 
+    }
     else {
         m_list->setMaximumWidth(LISTWIDTH);
         m_listButton->setText(">");
@@ -203,7 +203,7 @@ IRCSession *IRCChannelTab::session() {
 void IRCChannelTab::remove() {
     if (session()->isSessionActive()) {
         session()->part(m_channel);
-    } 
+    }
     else {
         m_mainWindow->killTab(this);
     }

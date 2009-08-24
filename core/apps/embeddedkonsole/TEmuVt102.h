@@ -59,7 +59,7 @@ public:
   ~TEmuVt102();
 
 public slots: // signals incoming from TEWidget
- 
+
   void onKeyPress(QKeyEvent*);
   void onMouse(int cb, int cx, int cy);
 
@@ -77,7 +77,7 @@ public:
   void sendString(const char *);
 
 public:
-    
+
   BOOL getMode    (int m);
 
   void setMode    (int m);
@@ -109,7 +109,7 @@ private:
   void tau(int code, int p, int q);
   void XtermHack();
 
-  // 
+  //
 
   void reportTerminalType();
   void reportStatus();

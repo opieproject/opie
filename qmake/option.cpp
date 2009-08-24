@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of Option class.
 **
@@ -162,7 +162,7 @@ bool usage(const char *a0)
 	    "\t-nomoc         Don't generate moc targets  [makefile mode only]\n"
 	    "\t-nopwd         Don't look for files in pwd [ project mode only]\n"
 	    "\t-norecursive   Don't do a recursive search [ project mode only]\n"
-	    ,a0, 
+	    ,a0,
 	    default_mode(a0) == Option::QMAKE_GENERATE_PROJECT  ? " (default)" : "", project_builtin_regx().latin1(),
 	    default_mode(a0) == Option::QMAKE_GENERATE_MAKEFILE ? " (default)" : "");
     return FALSE;
@@ -291,7 +291,7 @@ Option::internalParseCommandLine(int argc, char **argv, int skip)
 			Option::mkfile::project_files.append(arg);
 		    else if(Option::qmake_mode == Option::QMAKE_GENERATE_PROJECT)
 			Option::projfile::project_dirs.append(arg);
-		    else 
+		    else
 			handled = FALSE;
 		}
 		if(!handled)
@@ -348,7 +348,7 @@ Option::parseCommandLine(int argc, char **argv)
 		    currlen = 0;
 		    env_argv[env_argc] = (char*)malloc(255);
 		}
-		if(currlen < 255) 
+		if(currlen < 255)
 		    env_argv[env_argc][currlen++] = envflags[i];
 	    }
 	}
@@ -366,7 +366,7 @@ Option::parseCommandLine(int argc, char **argv)
     }
     {
 	int ret = internalParseCommandLine(argc, argv, 1);
-	if(ret != QMAKE_CMDLINE_SUCCESS) 
+	if(ret != QMAKE_CMDLINE_SUCCESS)
 	    return ret == QMAKE_CMDLINE_SHOW_USAGE ? usage(argv[0]) : FALSE;
     }
 
@@ -378,7 +378,7 @@ Option::parseCommandLine(int argc, char **argv)
 
 	//try REALLY hard to do it for them, lazy..
 	if(Option::mkfile::project_files.isEmpty()) {
-	    QString pwd = QDir::currentDirPath(), 
+	    QString pwd = QDir::currentDirPath(),
 		   proj = pwd + "/" + pwd.right(pwd.length() - (pwd.findRev('/') + 1)) + ".pro";
 	    if(QFile::exists(proj)) {
 		Option::mkfile::project_files.append(proj);
@@ -482,11 +482,11 @@ Option::fixPathToTargetOS(const QString& in, bool fix_env, bool canonical)
     if(canonical)
 	tmp = fixPath(tmp);
     QString rep;
-    if(Option::target_mode == TARG_MAC9_MODE) 
+    if(Option::target_mode == TARG_MAC9_MODE)
 	tmp = tmp.replace('/', Option::dir_sep).replace('\\', Option::dir_sep);
-    else if(Option::target_mode == TARG_WIN_MODE) 
+    else if(Option::target_mode == TARG_WIN_MODE)
 	tmp = tmp.replace('/', Option::dir_sep);
-    else 
+    else
 	tmp = tmp.replace('\\', Option::dir_sep);
     return tmp;
 }

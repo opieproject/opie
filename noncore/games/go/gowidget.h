@@ -37,7 +37,7 @@ protected:
     void resizeEvent( QResizeEvent * );
 private:
     QToolBar *toolbar;
-    
+
 };
 
 
@@ -55,7 +55,7 @@ public:
     void readConfig();
     void writeConfig();
 
-public slots:    
+public slots:
     void pass();
     void resign();
     void newGame();
@@ -64,7 +64,7 @@ public slots:
 signals:
     void showScore( const QString& );
     void showTurn( const QPixmap& );
-    
+
 protected:
     void paintEvent( QPaintEvent * );
     void mousePressEvent( QMouseEvent * );
@@ -79,7 +79,7 @@ private:
     void refresh( int x, int y );
     void showStone( int x, int y, enum bVal );
     void reportPrisoners(int,int);
-    
+
     inline int x2board( int x ) { return (x-bx+d/2)/d; }
     inline int y2board( int y ) { return (y-by+d/2)/d; }
 
@@ -94,10 +94,10 @@ private:
     int d; //distance between lines
     int bx; //vertical baseline
     int by; //horizontal baseline
-    
+
     int lastX,lastY;
     int newX,newY;
-    
+
     static GoWidget *self;
 
     friend void removestone(short x, short y);

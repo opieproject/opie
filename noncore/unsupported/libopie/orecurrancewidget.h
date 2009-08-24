@@ -84,7 +84,7 @@ private:
     repeatButtons currInterval;
     bool startWeekOnMonday : 1;
     DateBookMonth *repeatPicker;
-    
+
     class Private;
     Private *d;
 

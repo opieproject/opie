@@ -1,23 +1,23 @@
-/* 
+/*
  *
  *	mantissa.c Copyright (C) Aaron Holtzman - May 1999
  *
  *
  *  This file is part of libmpeg3
- *	
+ *
  *  libmpeg3 is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2, or (at your option)
  *  any later version.
- *   
+ *
  *  libmpeg3 is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *   
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with GNU Make; see the file COPYING.  If not, write to
- *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. 
+ *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
@@ -27,64 +27,64 @@
 
 
 /* Lookup tables of 0.16 two's complement quantization values */
-static short mpeg3_q_1[3] = 
+static short mpeg3_q_1[3] =
 {
-	(-2 << 15) / 3, 
-	0, 
+	(-2 << 15) / 3,
+	0,
 	(2 << 15) / 3
 };
 
-static short mpeg3_q_2[5] = 
+static short mpeg3_q_2[5] =
 {
-	(-4 << 15) / 5, 
-	((-2 << 15) / 5) << 1, 
+	(-4 << 15) / 5,
+	((-2 << 15) / 5) << 1,
 	0,
-	(2 << 15) / 5, 
+	(2 << 15) / 5,
 	((4 << 15) / 5) << 1
 };
 
-static short mpeg3_q_3[7] = 
+static short mpeg3_q_3[7] =
 {
-	(-6 << 15) / 7, 
-	(-4 << 15) / 7, 
+	(-6 << 15) / 7,
+	(-4 << 15) / 7,
 	(-2 << 15) / 7,
-	0, 
-	(2 << 15) / 7, 
+	0,
+	(2 << 15) / 7,
 	(4 << 15) / 7,
 	(6 << 15) / 7
 };
 
-static short mpeg3_q_4[11] = 
+static short mpeg3_q_4[11] =
 {
-	(-10 << 15) / 11, 
-	(-8 << 15) / 11, 
+	(-10 << 15) / 11,
+	(-8 << 15) / 11,
 	(-6 << 15) / 11,
-	(-4 << 15) / 11, 
-	(-2 << 15) / 11, 
+	(-4 << 15) / 11,
+	(-2 << 15) / 11,
 	0,
-	( 2 << 15) / 11, 
-	( 4 << 15) / 11, 
+	( 2 << 15) / 11,
+	( 4 << 15) / 11,
 	( 6 << 15) / 11,
-	( 8 << 15) / 11, 
+	( 8 << 15) / 11,
 	(10 << 15) / 11
 };
 
-static short mpeg3_q_5[15] = 
+static short mpeg3_q_5[15] =
 {
-	(-14 << 15) / 15, 
-	(-12 << 15) / 15, 
+	(-14 << 15) / 15,
+	(-12 << 15) / 15,
 	(-10 << 15) / 15,
-    (-8 << 15) / 15, 
-	(-6 << 15) / 15, 
+    (-8 << 15) / 15,
+	(-6 << 15) / 15,
 	(-4 << 15) / 15,
-	(-2 << 15) / 15, 			
-	0, 
+	(-2 << 15) / 15,
+	0,
 	( 2 << 15) / 15,
-	( 4 << 15) / 15, 
-	( 6 << 15) / 15, 
+	( 4 << 15) / 15,
+	( 6 << 15) / 15,
 	( 8 << 15) / 15,
-	(10 << 15) / 15, 
-	(12 << 15) / 15, 
+	(10 << 15) / 15,
+	(12 << 15) / 15,
 	(14 << 15) / 15
 };
 
@@ -95,7 +95,7 @@ static short mpeg3_qnttztab[16] = {0, 0, 0, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 
 /* Scale factors for tofloat */
 /* */
 
-static const unsigned MPEG3_INT32 mpeg3_scale_factors[25] = 
+static const unsigned MPEG3_INT32 mpeg3_scale_factors[25] =
 {
 	0x38000000, /*2 ^ -(0 + 15) */
 	0x37800000, /*2 ^ -(1 + 15) */
@@ -142,7 +142,7 @@ static inline void mpeg3audio_ac3_mantissa_reset(mpeg3_ac3_mantissa_t *mantissa)
 	mantissa->m_1_pointer = mantissa->m_2_pointer = mantissa->m_4_pointer = 3;
 }
 
-/* 
+/*
  * Generate eight bits of pseudo-entropy using a 16 bit linear
  * feedback shift register (LFSR). The primitive polynomial used
  * is 1 + x^4 + x^14 + x^16.
@@ -162,7 +162,7 @@ inline unsigned int mpeg3audio_ac3_dither_gen(mpeg3audio_t *audio)
 /* Generate eight pseudo random bits */
 	for(i = 0; i < 8; i++)
 	{
-		state <<= 1;	
+		state <<= 1;
 
 		if(state & 0x10000)
 			state ^= 0xa011;
@@ -174,8 +174,8 @@ inline unsigned int mpeg3audio_ac3_dither_gen(mpeg3audio_t *audio)
 
 
 /* Fetch an unpacked, left justified, and properly biased/dithered mantissa value */
-static inline unsigned short mpeg3audio_ac3_mantissa_get(mpeg3audio_t *audio, 
-	unsigned short bap, 
+static inline unsigned short mpeg3audio_ac3_mantissa_get(mpeg3audio_t *audio,
+	unsigned short bap,
 	unsigned short dithflag)
 {
 	unsigned short mantissa;
@@ -204,9 +204,9 @@ static inline unsigned short mpeg3audio_ac3_mantissa_get(mpeg3audio_t *audio,
 					return 0;
 				}
 
-				mantissa_struct->m_1[0] = group_code / 9; 
-				mantissa_struct->m_1[1] = (group_code % 9) / 3; 
-				mantissa_struct->m_1[2] = (group_code % 9) % 3; 
+				mantissa_struct->m_1[0] = group_code / 9;
+				mantissa_struct->m_1[1] = (group_code % 9) / 3;
+				mantissa_struct->m_1[2] = (group_code % 9) % 3;
 				mantissa_struct->m_1_pointer = 0;
 			}
 			mantissa = mantissa_struct->m_1[mantissa_struct->m_1_pointer++];
@@ -226,7 +226,7 @@ static inline unsigned short mpeg3audio_ac3_mantissa_get(mpeg3audio_t *audio,
 
 				mantissa_struct->m_2[0] = group_code / 25;
 				mantissa_struct->m_2[1] = (group_code % 25) / 5;
-				mantissa_struct->m_2[2] = (group_code % 25) % 5; 
+				mantissa_struct->m_2[2] = (group_code % 25) % 5;
 				mantissa_struct->m_2_pointer = 0;
 			}
 			mantissa = mantissa_struct->m_2[mantissa_struct->m_2_pointer++];
@@ -286,8 +286,8 @@ static inline unsigned short mpeg3audio_ac3_mantissa_get(mpeg3audio_t *audio,
 
 void mpeg3audio_ac3_uncouple_channel(mpeg3audio_t *audio,
 		mpeg3_real_t samples[],
-		mpeg3_ac3bsi_t *bsi, 
-		mpeg3_ac3audblk_t *audblk, 
+		mpeg3_ac3bsi_t *bsi,
+		mpeg3_ac3audblk_t *audblk,
 		unsigned int ch)
 {
 	unsigned int bnd = 0;
@@ -334,8 +334,8 @@ void mpeg3audio_ac3_uncouple_channel(mpeg3audio_t *audio,
 	return;
 }
 
-int mpeg3audio_ac3_coeff_unpack(mpeg3audio_t *audio, 
-	mpeg3_ac3bsi_t *bsi, 
+int mpeg3audio_ac3_coeff_unpack(mpeg3audio_t *audio,
+	mpeg3_ac3bsi_t *bsi,
 	mpeg3_ac3audblk_t *audblk,
 	mpeg3ac3_stream_samples_t samples)
 {
@@ -358,8 +358,8 @@ int mpeg3audio_ac3_coeff_unpack(mpeg3audio_t *audio,
 /* ncplmant is equal to 12 * ncplsubnd */
 /* Don't dither coupling channel until channel separation so that
  * interchannel noise is uncorrelated */
-			for(j = audblk->cplstrtmant; 
-				j < audblk->cplendmant && !mpeg3bits_error(audio->astream); 
+			for(j = audblk->cplstrtmant;
+				j < audblk->cplendmant && !mpeg3bits_error(audio->astream);
 				j++)
 			{
 				audblk->cplmant[j] = mpeg3audio_ac3_mantissa_get(audio, audblk->cpl_bap[j], 0);

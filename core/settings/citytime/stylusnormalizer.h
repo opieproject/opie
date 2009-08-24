@@ -46,7 +46,7 @@ private:
 class StylusNormalizer : public QWidget
 {
     Q_OBJECT
-public: 
+public:
     StylusNormalizer( QWidget *parent = 0, const char* name = 0 );
     ~StylusNormalizer();
     void start();

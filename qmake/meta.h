@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Definition of QMakeMetaInfo class.
 **
@@ -40,7 +40,7 @@
 #include <qstringlist.h>
 #include <qstring.h>
 
-class QMakeMetaInfo 
+class QMakeMetaInfo
 {
     bool readLibtoolFile(const QString &f);
     bool readPkgCfgFile(const QString &f);

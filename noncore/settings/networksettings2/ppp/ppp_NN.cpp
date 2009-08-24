@@ -8,13 +8,13 @@
 
 QStringList * PPPNetNode::ProperFiles = 0;
 
-static const char * PPPNeeds[] = 
-    { "modem", 
+static const char * PPPNeeds[] =
+    { "modem",
       0
     };
 
-static const char * PPPProvides[] = 
-    { "connection", 
+static const char * PPPProvides[] =
+    { "connection",
       0
     };
 
@@ -23,9 +23,9 @@ static const char * PPPProvides[] =
  */
 PPPNetNode::PPPNetNode() : ANetNode(tr("PPP connection")) {
 
-      NSResources->addSystemFile( 
+      NSResources->addSystemFile(
         "pap-secrets", "/etc/ppp/pap-secrets", 0 );
-      NSResources->addSystemFile( 
+      NSResources->addSystemFile(
         "chap-secrets", "/etc/ppp/chap-secrets", 0 );
 }
 
@@ -57,7 +57,7 @@ const char ** PPPNetNode::provides( void ) {
 
 QStringList PPPNetNode::properFiles( void ) {
       QStringList SL;
-      SL << "peers" << "chatscripts"; 
+      SL << "peers" << "chatscripts";
       return SL;
 }
 
@@ -65,13 +65,13 @@ QStringList PPPNetNode::properFiles( void ) {
 //      /etc/ppp/pap-secrets
 //      /etc/ppp/pap-secrets
 bool PPPNetNode::hasDataForFile( SystemFile & S ) {
-      return S.name() == "pap-secrets" || 
+      return S.name() == "pap-secrets" ||
              S.name() == "chap-secrets" ;
 }
 
-QString PPPNetNode::genNic( long NicNr ) { 
-      QString S; 
-      return S.sprintf( "ppp%ld", NicNr ); 
+QString PPPNetNode::genNic( long NicNr ) {
+      QString S;
+      return S.sprintf( "ppp%ld", NicNr );
 }
 
 void PPPNetNode::setSpecificAttribute( QString & , QString & ) {

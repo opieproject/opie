@@ -85,7 +85,7 @@ void mainWindowWidget::deleteFile()
     if( notesList->count() > 0 )
     {
         switch (QMessageBox::warning(0, tr("Delete note"), tr("Really delete\n'") + notesList->currentText() + "'?",
-                    QMessageBox::Yes, QMessageBox::No)) 
+                    QMessageBox::Yes, QMessageBox::No))
         {
             case QMessageBox::Yes:
                 this->selected = notesList->currentItem();
@@ -130,17 +130,17 @@ int mainWindowWidget::create()
     return 0;   //FIXME
 }
 
-void mainWindowWidget::slotItemEdit() 
+void mainWindowWidget::slotItemEdit()
 {
     openFile();
 }
 
-void mainWindowWidget::slotItemDelete() 
+void mainWindowWidget::slotItemDelete()
 {
     deleteFile();
 }
 
-void mainWindowWidget::slotItemNew() 
+void mainWindowWidget::slotItemNew()
 {
     create();
 }
@@ -152,13 +152,13 @@ void mainWindowWidget::slotItemDuplicate()
 
     QFile fileOld(fileName);
 
-    if (fileOld.exists()) 
+    if (fileOld.exists())
     {
-        if (!fileOld.open(IO_ReadOnly)) 
+        if (!fileOld.open(IO_ReadOnly))
         {
             QMessageBox::warning(0, tr("File i/o error"), fileName.sprintf(tr("Could not read file '%s'"), fileName));
-        } 
-        else 
+        }
+        else
         {
             QFile fileNew(documentsDirName + fileName.sprintf("%d.txt", now));
 
@@ -204,20 +204,20 @@ void mainWindowWidget::refreshList()
     fileList.setFilter(QDir::Files);
     fileList.setSorting(QDir::Name);
 
-    for (item = 0; item < fileList.count(); item++) 
+    for (item = 0; item < fileList.count(); item++)
     {
         QFile file(documentsDirName + fileList[item]);
 
-        if (!file.open(IO_ReadOnly)) 
+        if (!file.open(IO_ReadOnly))
         {
             QMessageBox::warning(0, tr("File i/o error"), title.sprintf(tr("Could not read file '%s'"), fileList[item]));
         }
-        else 
+        else
         {
             QTextStream inStream(&file);
             inStream.setEncoding(QTextStream::UnicodeUTF8);
 
-            if (!inStream.atEnd()) 
+            if (!inStream.atEnd())
             {
                 title = inStream.readLine();
             }

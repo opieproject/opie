@@ -34,16 +34,16 @@ class OTSDPAttribute {
 public:
 
     enum AttrType {
-        INVALID     = 0,  
-        NIL         = 1, 
-        UINT        = 2, 
-        INT         = 3, 
-        UUID        = 4, 
-        BOOLEAN     = 5, 
+        INVALID     = 0,
+        NIL         = 1,
+        UINT        = 2,
+        INT         = 3,
+        UUID        = 4,
+        BOOLEAN     = 5,
         STRING      = 6,
-        SEQUENCE    = 7, 
-        ALTERNATIVE = 8, 
-        URL         = 9, 
+        SEQUENCE    = 7,
+        ALTERNATIVE = 8,
+        URL         = 9,
         UNKNOWN     = 10
     };
 

@@ -96,7 +96,7 @@ class OPimTimeZone {
     static OPimTimeZone utc();
 
     QString timeZone() const;
-    
+
  private:
     ZoneName m_name;
     class Private;

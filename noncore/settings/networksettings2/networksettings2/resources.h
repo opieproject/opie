@@ -59,7 +59,7 @@ public :
     int assignNetworkSetupNumber(void);
     QPixmap getPixmap( const QString & Name );
 
-    Name2NetNode_t & netNodes( void ) 
+    Name2NetNode_t & netNodes( void )
       { return AllNodeTypes; }
     bool netNodeExists( const QString & X )
       { return AllNodeTypes.find(X)!=0; }
@@ -73,7 +73,7 @@ public :
 
     Name2SystemFile_t & systemFiles( void )
       { return SystemFiles; }
-    void addSystemFile( const QString & ID, 
+    void addSystemFile( const QString & ID,
                         const QString & P,
                         bool KDI );
 
@@ -82,7 +82,7 @@ public :
 
         Log(( "Find node type %s : %p\n", S.latin1(), NN ));
 
-        if( NN == 0 ) 
+        if( NN == 0 )
           // type of this instance not found
           return 0;
 
@@ -91,7 +91,7 @@ public :
         return NNI;
       }
 
-    Name2Instance_t & netNodeInstances( void ) 
+    Name2Instance_t & netNodeInstances( void )
       { return AllNodes; }
     void addNodeInstance( ANetNodeInstance * I )
       { AllNodes.insert( I->name(), I ); }
@@ -134,7 +134,7 @@ private :
     System *                  TheSystem;
     Name2SystemFile_t         SystemFiles;
 
-    // all node type classes 
+    // all node type classes
     Name2NetNode_t            AllNodeTypes;
 
     // all nodes

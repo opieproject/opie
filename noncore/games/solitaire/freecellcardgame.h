@@ -17,8 +17,8 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef FREECELL_CARD_GAME_H 
-#define FREECELL_CARD_GAME_H 
+#ifndef FREECELL_CARD_GAME_H
+#define FREECELL_CARD_GAME_H
 
 
 #include "patiencecardgame.h"
@@ -46,12 +46,12 @@ public:
 	if ( cardOnBottom() == NULL ) {
 	    int numberOfCardsBeingMoved = 0;
 	    Card *tempCard = card;
-	    
+
 	    while ((tempCard != NULL)) {
 		numberOfCardsBeingMoved++;
-		tempCard = cardInfront(tempCard); 
+		tempCard = cardInfront(tempCard);
 	    }
-       
+
 	    if (numberOfCardsBeingMoved > numberOfFreeCells)
 		return FALSE;
 	}
@@ -59,15 +59,15 @@ public:
 	if ( card->isFacing() &&
 	      cardOnTop() == NULL )
 	    return TRUE;
-        return PatienceWorkingPile::isAllowedOnTop( card );	
+        return PatienceWorkingPile::isAllowedOnTop( card );
     }
-    
+
 
     virtual bool isAllowedToBeMoved(Card *card) {
 	int nextExpectedValue = (int)card->getValue();
 	bool nextExpectedColor = card->isRed();
 	int numberOfCardsBeingMoved = 0;
-	
+
 	while ((card != NULL)) {
 	    numberOfCardsBeingMoved++;
 	    if ( (int)card->getValue() != nextExpectedValue )
@@ -76,12 +76,12 @@ public:
 		return FALSE;
 	    nextExpectedValue--;;
 	    nextExpectedColor = !nextExpectedColor;
-	    card = cardInfront(card); 
+	    card = cardInfront(card);
 	}
-       
+
 	if (numberOfCardsBeingMoved <= (numberOfFreeCells + 1))
 	    return TRUE;
-	
+
 	return FALSE;
     }
     virtual void cardRemoved(Card *card) {
@@ -105,7 +105,7 @@ public:
     virtual bool isAllowedOnTop(Card *card) {
 	if ( ( cardOnTop() == NULL ) && ( card->getCardPile()->cardInfront(card) == NULL  ) )
 	    return TRUE;
-        return FALSE;	
+        return FALSE;
     }
     virtual bool isAllowedToBeMoved(Card *card) {
 	Q_UNUSED(card);
@@ -127,7 +127,7 @@ class FreecellCardGame : public CanvasCardGame
 public:
     FreecellCardGame(QCanvas *c, bool snap, QWidget *parent = 0);
     virtual void deal(void);
-    virtual bool haveWeWon() { 
+    virtual bool haveWeWon() {
 	return ( discardPiles[0]->kingOnTop() &&
 		 discardPiles[1]->kingOnTop() &&
 		 discardPiles[2]->kingOnTop() &&

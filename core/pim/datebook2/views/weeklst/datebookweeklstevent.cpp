@@ -21,7 +21,7 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(bool ap, const OPimOccurrence &ev,
 {
     // old values... lastday = "__|__", middle="   |---", Firstday="00:00",
     QString s,start,middle,end,day;
-    
+
     weekLstView = view;
 
     odebug << "weeklistviewconfig=" << weeklistviewconfig << oendl;
@@ -35,7 +35,7 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(bool ap, const OPimOccurrence &ev,
                 }
                 start.sprintf( "%.2d:%.2d PM", shour, smin );
                 day.sprintf("%.2d:%.2d PM",shour,smin);
-            } 
+            }
             else {
                 if ( shour == 0 ) {
                     shour = 12;
@@ -43,14 +43,14 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(bool ap, const OPimOccurrence &ev,
                 start.sprintf( "%.2d:%.2d AM", shour, smin );
                 day.sprintf("%.2d:%.2d AM",shour,smin);
             }
-        } 
+        }
         else {
             start.sprintf("%.2d:%.2d",ev.startTime().hour(),ev.startTime().minute());
             day.sprintf("%.2d:%.2d",ev.startTime().hour(),ev.startTime().minute());
         }
         middle.sprintf("   |---");
         end.sprintf("__|__");
-    } 
+    }
     else if(weeklistviewconfig==EXTENDED) { // Extended mode, display start and end times.
         start.sprintf("%.2d:%.2d-",ev.startTime().hour(),ev.startTime().minute());
         middle.sprintf("<--->");
@@ -62,13 +62,13 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(bool ap, const OPimOccurrence &ev,
         OPimOccurrence::Position pos = ev.position();
         if( pos == OPimOccurrence::StartEnd ) {  // day event.
             s = day;
-        } 
+        }
         else if( pos == OPimOccurrence::Start ) {  // start event.
             s = start;
-        } 
+        }
         else if( pos == OPimOccurrence::End ) { // end event.
             s = end;
-        } 
+        }
         else {    // middle day.
             s = middle;
         }

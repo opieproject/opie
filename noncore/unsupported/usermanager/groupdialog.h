@@ -13,7 +13,7 @@
 #include <qdialog.h>
 #include <qlineedit.h>
 
-class GroupDialog : public QDialog 
+class GroupDialog : public QDialog
 {
 	Q_OBJECT
 private:
@@ -22,8 +22,8 @@ private:
 	QLineEdit *gidLineEdit;
 	QLineEdit *groupnameLineEdit;
 	int execStatus;
-	
-	void accept(void);	
+
+	void accept(void);
 
 public:
 	GroupDialog( QWidget* parent = 0, const char* name = 0, bool modal=true, WFlags fl = 0 );

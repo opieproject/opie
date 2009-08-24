@@ -58,7 +58,7 @@ int mpeg3io_open_file(mpeg3_fs_t *fs)
   }
 
   fs->total_bytes = mpeg3io_get_total_bytes(fs);
-  
+
   if(!fs->total_bytes)
   {
     fclose(fs->fd);

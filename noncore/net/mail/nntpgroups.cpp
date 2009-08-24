@@ -16,7 +16,7 @@ NNTPGroups::NNTPGroups(NNTPaccount *account, QWidget* parent, const char* name, 
 
 NNTPGroups::~NNTPGroups()
 {
-    
+
 }
 
 void NNTPGroups::slotGetNG()
@@ -55,7 +55,7 @@ void NNTPGroups::storeValues()
     subscribedGroups.clear();
     for ( ; list_it.current(); ++list_it ) {
         if ( ( (QCheckListItem*)list_it.current() )->isOn() ) {
-            odebug << list_it.current()->text(0) << oendl; 
+            odebug << list_it.current()->text(0) << oendl;
             subscribedGroups.append(  list_it.current()->text(0) );
         }
     }

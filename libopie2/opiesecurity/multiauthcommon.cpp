@@ -50,9 +50,9 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     Layout5->setSpacing( 6 );
     Layout5->setMargin( 0 );
 
-    // I'd rather this be laid out with the Owner label on the left, however 
+    // I'd rather this be laid out with the Owner label on the left, however
     // there is apparently something in the top left of the dialog that
-    // covers the text. I couldn't figure out the cause so I had no choice 
+    // covers the text. I couldn't figure out the cause so I had no choice
     // but to align the label to the right so it is at least readable.
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
     Layout5->addItem( spacer );
@@ -64,7 +64,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     TextLabel1->setFont(f);
     TextLabel1->setMinimumSize( QSize( 0, 20 ) );
     TextLabel1->setText( tr( "Owner" ) + "  " );
-    TextLabel1->setAlignment( AlignVCenter | AlignRight ); 
+    TextLabel1->setAlignment( AlignVCenter | AlignRight );
     Layout5->addWidget( TextLabel1 );
 
     pxIcon = new QLabel( this, "pxIcon" );
@@ -92,7 +92,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     lbNameLabel = new QLabel( this, "lbNameLabel" );
     QFont lbNameLabel_font(  lbNameLabel->font() );
     lbNameLabel_font.setBold( TRUE );
-    lbNameLabel->setFont( lbNameLabel_font ); 
+    lbNameLabel->setFont( lbNameLabel_font );
     lbNameLabel->setText( tr( "Name:" ) );
 
     Layout8->addWidget( lbNameLabel, 0, 0 );
@@ -105,7 +105,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     lbHomeAddressLabel->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)4, (QSizePolicy::SizeType)1, lbHomeAddressLabel->sizePolicy().hasHeightForWidth() ) );
     QFont lbHomeAddressLabel_font(  lbHomeAddressLabel->font() );
     lbHomeAddressLabel_font.setBold( TRUE );
-    lbHomeAddressLabel->setFont( lbHomeAddressLabel_font ); 
+    lbHomeAddressLabel->setFont( lbHomeAddressLabel_font );
     lbHomeAddressLabel->setText( tr( "Address:" ) );
     lbHomeAddressLabel->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
 
@@ -120,7 +120,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     lbEmailLabel = new QLabel( this, "lbEmailLabel" );
     QFont lbEmailLabel_font(  lbEmailLabel->font() );
     lbEmailLabel_font.setBold( TRUE );
-    lbEmailLabel->setFont( lbEmailLabel_font ); 
+    lbEmailLabel->setFont( lbEmailLabel_font );
     lbEmailLabel->setText( tr( "Email:" ) );
 
     Layout8->addWidget( lbEmailLabel, 7, 0 );
@@ -129,7 +129,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     lbWorkAddressLabel->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)4, (QSizePolicy::SizeType)1, lbWorkAddressLabel->sizePolicy().hasHeightForWidth() ) );
     QFont lbWorkAddressLabel_font(  lbWorkAddressLabel->font() );
     lbWorkAddressLabel_font.setBold( TRUE );
-    lbWorkAddressLabel->setFont( lbWorkAddressLabel_font ); 
+    lbWorkAddressLabel->setFont( lbWorkAddressLabel_font );
     lbWorkAddressLabel->setText( tr( "Address:" ) );
     lbWorkAddressLabel->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
 
@@ -138,7 +138,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     lbWorkPhoneLabel = new QLabel( this, "lbWorkPhoneLabel" );
     QFont lbWorkPhoneLabel_font(  lbWorkPhoneLabel->font() );
     lbWorkPhoneLabel_font.setBold( TRUE );
-    lbWorkPhoneLabel->setFont( lbWorkPhoneLabel_font ); 
+    lbWorkPhoneLabel->setFont( lbWorkPhoneLabel_font );
     lbWorkPhoneLabel->setText( tr( "Work:" ) );
 
     Layout8->addWidget( lbWorkPhoneLabel, 2, 0 );
@@ -160,7 +160,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     lbWorkMobileLabel = new QLabel( this, "lbWorkMobileLabel" );
     QFont lbWorkMobileLabel_font(  lbWorkMobileLabel->font() );
     lbWorkMobileLabel_font.setBold( TRUE );
-    lbWorkMobileLabel->setFont( lbWorkMobileLabel_font ); 
+    lbWorkMobileLabel->setFont( lbWorkMobileLabel_font );
     lbWorkMobileLabel->setText( tr( "Mobile:" ) );
 
     Layout8->addWidget( lbWorkMobileLabel, 4, 0 );
@@ -176,7 +176,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     lbHomeMobileLabel = new QLabel( this, "lbHomeMobileLabel" );
     QFont lbHomeMobileLabel_font(  lbHomeMobileLabel->font() );
     lbHomeMobileLabel_font.setBold( TRUE );
-    lbHomeMobileLabel->setFont( lbHomeMobileLabel_font ); 
+    lbHomeMobileLabel->setFont( lbHomeMobileLabel_font );
     lbHomeMobileLabel->setText( tr( "Mobile:" ) );
 
     Layout8->addWidget( lbHomeMobileLabel, 3, 0 );
@@ -279,7 +279,7 @@ int runPlugins() {
 
                 // Allow window to redraw
                 qApp->processEvents();
-                
+
                 /// \todo parametrize the time penalty according to \em mode (exponential,
                 /// linear or fixed) and \em basetime (time penalty for the first failure)
                 sleep(2 * tries);

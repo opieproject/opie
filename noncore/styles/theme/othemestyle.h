@@ -85,7 +85,7 @@ public:
 	                             bool rounded = FALSE, WidgetType type = Bevel,
 	                             const QBrush *fill = 0 );
 	/**
-	 * Draw a mask with for widgets that may be rounded. 
+	 * Draw a mask with for widgets that may be rounded.
 	 *
 	 *Currently used
 	 * by pushbuttons and comboboxes.
@@ -317,7 +317,7 @@ public:
 	 * Draw a menubar item.
 	 */
 	virtual void drawMenuBarItem( QPainter *p, int x, int y, int w, int h,
-	                              QMenuItem *item, const QColorGroup &g, 
+	                              QMenuItem *item, const QColorGroup &g,
 	                              bool enabled, bool active );
 	/**
 	 * Return the width of the splitter as specified in the config file.
@@ -352,11 +352,11 @@ public:
 	                    const QColor *c = 0, bool atBorder = false );
 	/**
 	 * Draw a @ref KProgess bar.
-	 */ 
+	 */
 	virtual void drawProgressBar (QPainter *, int , int , int , int , const QColorGroup &, int );
 	/**
 	 * Return the background for @ref KProgress.
-	 */ 
+	 */
 	//    virtual void getKProgressBackground(const QColorGroup &g, QBrush &bg);
 	virtual void tabbarMetrics( const QTabBar*, int&, int&, int& );
 	virtual void drawTab( QPainter*, const QTabBar*, QTab*, bool selected );

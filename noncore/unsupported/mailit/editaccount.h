@@ -29,7 +29,7 @@
 #include "emailhandler.h"
 
 class EditAccount : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
@@ -52,7 +52,7 @@ private:
     QLabel *popServerInputLabel;
     QLabel *smtpServerInputLabel;
     QLabel *syncLimitInputLabel;
-    
+
     QLineEdit *accountNameInput;
     QLineEdit *nameInput;
     QLineEdit *emailInput;
@@ -60,7 +60,7 @@ private:
     QLineEdit *popPasswInput;
     QLineEdit *popServerInput;
     QLineEdit *smtpServerInput;
-    QSpinBox *syncLimitInput;    
+    QSpinBox *syncLimitInput;
     QCheckBox *syncCheckBox;
 
     QGridLayout *grid;

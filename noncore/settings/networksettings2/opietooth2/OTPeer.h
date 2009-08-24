@@ -50,18 +50,18 @@ public :
       inline OTGateway * gateway() const
         { return OT; }
 
-      inline int deviceClass( void ) const 
+      inline int deviceClass( void ) const
         { return Class; }
       inline void setDeviceClass( int cls )
         { Class = cls; }
 
-      void setAddress( const OTDeviceAddress & A ) 
+      void setAddress( const OTDeviceAddress & A )
         { Addr = A; }
 
       const OTDeviceAddress & address( void )
         { return Addr; }
 
-      inline QString name( void ) const 
+      inline QString name( void ) const
         { return Name; }
       inline void setName( const QString & n )
         { Name = n; }
@@ -73,15 +73,15 @@ public :
           return serviceList;
         }
 
-      /* Returns TRUE if the device has at least a service 
+      /* Returns TRUE if the device has at least a service
          with inside the required class Id.*/
       bool hasServiceClassID( const OTUUID & uuid);
 
-      /* Get a vector of Rfcomm channels of the services 
+      /* Get a vector of Rfcomm channels of the services
          having "uuid" in the class ID List */
       QArray<int> rfcommList( const OTUUID & uuid );
 
-      inline void setState( PeerState_t S) 
+      inline void setState( PeerState_t S)
         { State = S; }
       inline PeerState_t state( void )
         { return State; }
@@ -95,11 +95,11 @@ public :
       // if it is connected
       inline OTDriver * connectedTo( void ) const
         { return ConnectedTo; }
-      inline void setConnectedTo( OTDriver * D ) 
+      inline void setConnectedTo( OTDriver * D )
         { ConnectedTo = D; }
 
-      void save( QTextStream& TS ); 
-      void load( QTextStream& TS ); 
+      void save( QTextStream& TS );
+      void load( QTextStream& TS );
 
 signals :
 

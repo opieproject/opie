@@ -1,23 +1,23 @@
-/* 
+/*
  *
  *	ac3.c Copyright (C) Aaron Holtzman - May 1999
  *
  *
  *  This file is part of libmpeg3
- *	
+ *
  *  libmpeg3 is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2, or (at your option)
  *  any later version.
- *   
+ *
  *  libmpeg3 is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *   
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with GNU Make; see the file COPYING.  If not, write to
- *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. 
+ *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
@@ -41,7 +41,7 @@ struct mpeg3_framesize_s
 	unsigned short frm_size[3];
 };
 
-struct mpeg3_framesize_s framesize_codes[] = 
+struct mpeg3_framesize_s framesize_codes[] =
 {
       { 32  ,{64   ,69   ,96   } },
       { 32  ,{64   ,70   ,96   } },
@@ -93,11 +93,11 @@ struct rematrix_band_s
 	int end;
 };
 
-struct rematrix_band_s mpeg3_rematrix_band[] = 
-{ 
-	{13, 24}, 
-	{25, 36}, 
-	{37, 60}, 
+struct rematrix_band_s mpeg3_rematrix_band[] =
+{
+	{13, 24},
+	{25, 36},
+	{37, 60},
 	{61, 252}
 };
 
@@ -137,7 +137,7 @@ int mpeg3audio_read_ac3_header(mpeg3audio_t *audio)
 	{
 		if(mpeg3bits_read_buffer(audio->astream, audio->ac3_buffer, audio->framesize - 4))
 			return 1;
-		mpeg3bits_use_ptr(audio->astream, audio->ac3_buffer);	
+		mpeg3bits_use_ptr(audio->astream, audio->ac3_buffer);
 	}
 
 /* Get the sampling rate code */
@@ -157,7 +157,7 @@ int mpeg3audio_read_ac3_header(mpeg3audio_t *audio)
 
 /* Get the audio coding mode (ie how many channels)*/
 	bsi->acmod = mpeg3bits_getbits(audio->astream, 3);
-	
+
 /* Predecode the number of full bandwidth channels as we use this
  * number a lot */
 	bsi->nfchans = mpeg3_ac3_acmodes[bsi->acmod];
@@ -247,7 +247,7 @@ int mpeg3audio_read_ac3_header(mpeg3audio_t *audio)
 
 /* Get the original bit */
 	bsi->origbs = mpeg3bits_getbits(audio->astream, 1);
-	
+
 /* Does timecode one exist? */
 	bsi->timecod1e = mpeg3bits_getbits(audio->astream, 1);
 
@@ -338,11 +338,11 @@ int mpeg3audio_read_ac3_audblk(mpeg3audio_t *audio)
 			audblk->ncplsubnd = (audblk->cplendf + 2) - audblk->cplbegf + 1;
 
 /* Calculate the start and end bins of the coupling channel */
-			audblk->cplstrtmant = (audblk->cplbegf * 12) + 37 ; 
+			audblk->cplstrtmant = (audblk->cplbegf * 12) + 37 ;
 			audblk->cplendmant =  ((audblk->cplendf + 3) * 12) + 37;
 
 /* The number of combined subbands is ncplsubnd minus each combined band */
-			audblk->ncplbnd = audblk->ncplsubnd; 
+			audblk->ncplbnd = audblk->ncplsubnd;
 
 			for(i = 1; i < audblk->ncplsubnd; i++)
 			{
@@ -354,7 +354,7 @@ int mpeg3audio_read_ac3_audblk(mpeg3audio_t *audio)
 
 	if(audblk->cplinu)
 	{
-/* Loop through all the channels and get their coupling co-ords */	
+/* Loop through all the channels and get their coupling co-ords */
 		for(i = 0; i < bsi->nfchans; i++)
 		{
 			if(!audblk->chincpl[i])
@@ -365,17 +365,17 @@ int mpeg3audio_read_ac3_audblk(mpeg3audio_t *audio)
 
 			if(audblk->cplcoe[i])
 			{
-				audblk->mstrcplco[i] = mpeg3bits_getbits(audio->astream, 2); 
+				audblk->mstrcplco[i] = mpeg3bits_getbits(audio->astream, 2);
 				for(j = 0; j < audblk->ncplbnd; j++)
 				{
-					audblk->cplcoexp[i][j] = mpeg3bits_getbits(audio->astream, 4); 
-					audblk->cplcomant[i][j] = mpeg3bits_getbits(audio->astream, 4); 
+					audblk->cplcoexp[i][j] = mpeg3bits_getbits(audio->astream, 4);
+					audblk->cplcomant[i][j] = mpeg3bits_getbits(audio->astream, 4);
 				}
 			}
 		}
 
 /* If we're in dual mono mode, there's going to be some phase info */
-		if((bsi->acmod == 0x2) && audblk->phsflginu && 
+		if((bsi->acmod == 0x2) && audblk->phsflginu &&
 			(audblk->cplcoe[0] || audblk->cplcoe[1]))
 		{
 			for(j = 0; j < audblk->ncplbnd; j++)
@@ -391,23 +391,23 @@ int mpeg3audio_read_ac3_audblk(mpeg3audio_t *audio)
 		audblk->rematstr = mpeg3bits_getbits(audio->astream, 1);
 		if(audblk->rematstr)
 		{
-			if (audblk->cplinu == 0) 
-			{ 
-				for(i = 0; i < 4; i++) 
-					audblk->rematflg[i] = mpeg3bits_getbits(audio->astream, 1);
-			}
-			if((audblk->cplbegf > 2) && audblk->cplinu) 
+			if (audblk->cplinu == 0)
 			{
-				for(i = 0; i < 4; i++) 
+				for(i = 0; i < 4; i++)
 					audblk->rematflg[i] = mpeg3bits_getbits(audio->astream, 1);
 			}
-			if((audblk->cplbegf <= 2) && audblk->cplinu) 
-			{ 
-				for(i = 0; i < 3; i++) 
+			if((audblk->cplbegf > 2) && audblk->cplinu)
+			{
+				for(i = 0; i < 4; i++)
 					audblk->rematflg[i] = mpeg3bits_getbits(audio->astream, 1);
-			} 
-			if((audblk->cplbegf == 0) && audblk->cplinu) 
-				for(i = 0; i < 2; i++) 
+			}
+			if((audblk->cplbegf <= 2) && audblk->cplinu)
+			{
+				for(i = 0; i < 3; i++)
+					audblk->rematflg[i] = mpeg3bits_getbits(audio->astream, 1);
+			}
+			if((audblk->cplbegf == 0) && audblk->cplinu)
+				for(i = 0; i < 2; i++)
 					audblk->rematflg[i] = mpeg3bits_getbits(audio->astream, 1);
 
 		}
@@ -418,10 +418,10 @@ int mpeg3audio_read_ac3_audblk(mpeg3audio_t *audio)
 /* Get the coupling channel exponent strategy */
 		audblk->cplexpstr = mpeg3bits_getbits(audio->astream, 2);
 
-		if(audblk->cplexpstr == 0) 
+		if(audblk->cplexpstr == 0)
 			audblk->ncplgrps = 0;
 		else
-			audblk->ncplgrps = (audblk->cplendmant - audblk->cplstrtmant) / 
+			audblk->ncplgrps = (audblk->cplendmant - audblk->cplstrtmant) /
 				(3 << (audblk->cplexpstr - 1));
 
 	}
@@ -432,23 +432,23 @@ int mpeg3audio_read_ac3_audblk(mpeg3audio_t *audio)
 	}
 
 /* Get the exponent strategy for lfe channel */
-	if(bsi->lfeon) 
+	if(bsi->lfeon)
 		audblk->lfeexpstr = mpeg3bits_getbits(audio->astream, 1);
 
 /* Determine the bandwidths of all the fbw channels */
 	for(i = 0; i < bsi->nfchans; i++)
-	{ 
+	{
 		unsigned short grp_size;
 
-		if(audblk->chexpstr[i] != MPEG3_EXP_REUSE) 
-		{ 
-			if (audblk->cplinu && audblk->chincpl[i]) 
+		if(audblk->chexpstr[i] != MPEG3_EXP_REUSE)
+		{
+			if (audblk->cplinu && audblk->chincpl[i])
 			{
 				audblk->endmant[i] = audblk->cplstrtmant;
 			}
 			else
 			{
-				audblk->chbwcod[i] = mpeg3bits_getbits(audio->astream, 6); 
+				audblk->chbwcod[i] = mpeg3bits_getbits(audio->astream, 6);
 				audblk->endmant[i] = ((audblk->chbwcod[i] + 12) * 3) + 37;
 			}
 
@@ -528,17 +528,17 @@ int mpeg3audio_read_ac3_audblk(mpeg3audio_t *audio)
 /* Get coupling leakage info if it exists */
 	if(audblk->cplinu)
 	{
-		audblk->cplleake = mpeg3bits_getbits(audio->astream, 1);	
-		
+		audblk->cplleake = mpeg3bits_getbits(audio->astream, 1);
+
 		if(audblk->cplleake)
 		{
 			audblk->cplfleak = mpeg3bits_getbits(audio->astream, 3);
 			audblk->cplsleak = mpeg3bits_getbits(audio->astream, 3);
 		}
 	}
-	
+
 /* Get the delta bit alloaction info */
-	audblk->deltbaie = mpeg3bits_getbits(audio->astream, 1);	
+	audblk->deltbaie = mpeg3bits_getbits(audio->astream, 1);
 
 	if(audblk->deltbaie)
 	{
@@ -589,9 +589,9 @@ int mpeg3audio_read_ac3_audblk(mpeg3audio_t *audio)
 }
 
 
-/* This routine simply does stereo rematrixing for the 2 channel 
+/* This routine simply does stereo rematrixing for the 2 channel
  * stereo mode */
-int mpeg3audio_ac3_rematrix(mpeg3_ac3audblk_t *audblk, 
+int mpeg3audio_ac3_rematrix(mpeg3_ac3audblk_t *audblk,
 		mpeg3ac3_stream_samples_t samples)
 {
 	int num_bands;
@@ -614,7 +614,7 @@ int mpeg3audio_ac3_rematrix(mpeg3_ac3audblk_t *audblk,
 
 		start = mpeg3_rematrix_band[i].start;
 		end = mpeg3_min(mpeg3_rematrix_band[i].end, 12 * audblk->cplbegf + 36);
-	
+
 		for(j = start; j < end; j++)
 		{
 			left = samples[0][j] + samples[1][j];
@@ -652,30 +652,30 @@ int mpeg3audio_do_ac3(mpeg3audio_t *audio)
 
 /* Take the differential exponent data and turn it into
  * absolute exponents */
-		if(!result) result |= mpeg3audio_ac3_exponent_unpack(audio, 
-					&(audio->ac3_bsi), 
+		if(!result) result |= mpeg3audio_ac3_exponent_unpack(audio,
+					&(audio->ac3_bsi),
 					&(audio->ac3_audblk));
 
 /* Figure out how many bits per mantissa */
-		if(!result) result |= mpeg3audio_ac3_bit_allocate(audio, 
-					audio->sampling_frequency_code, 
-					&(audio->ac3_bsi), 
+		if(!result) result |= mpeg3audio_ac3_bit_allocate(audio,
+					audio->sampling_frequency_code,
+					&(audio->ac3_bsi),
 					&(audio->ac3_audblk));
 
 /* Extract the mantissas from the data stream */
 		if(!result) result |= mpeg3audio_ac3_coeff_unpack(audio,
-					&(audio->ac3_bsi), 
+					&(audio->ac3_bsi),
 					&(audio->ac3_audblk),
 					audio->ac3_samples);
 
 		if(audio->ac3_bsi.acmod == 0x2)
-			if(!result) result |= mpeg3audio_ac3_rematrix(&(audio->ac3_audblk), 
+			if(!result) result |= mpeg3audio_ac3_rematrix(&(audio->ac3_audblk),
 					audio->ac3_samples);
 
 /* Convert the frequency data into time samples */
-		if(!result) result |= mpeg3audio_ac3_imdct(audio, 
-			&(audio->ac3_bsi), 
-			&(audio->ac3_audblk), 
+		if(!result) result |= mpeg3audio_ac3_imdct(audio,
+			&(audio->ac3_bsi),
+			&(audio->ac3_audblk),
 			audio->ac3_samples);
 
 		if(audio->pcm_point / audio->channels >= audio->pcm_allocated - MPEG3AUDIO_PADDING * audio->channels)

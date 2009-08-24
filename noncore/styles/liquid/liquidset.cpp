@@ -97,30 +97,30 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 	QCheckBox *shadow = new QCheckBox ( tr( "Use shadowed menu text" ), this );
 	shadow-> setChecked ( m_shadow );
 	vbox-> addWidget ( shadow );
-	
+
 	vbox-> addSpacing ( 4 );
-	
+
 	QCheckBox *flattb = new QCheckBox ( tr( "Make toolbar buttons appear flat" ), this );
 	flattb-> setChecked ( m_flat );
 	vbox-> addWidget ( flattb );
 
 	vbox-> addSpacing ( 4 );
-	
+
 	QHBoxLayout *hbox = new QHBoxLayout ( vbox );
-	
-	hbox-> addWidget ( new QLabel ( tr( "Stipple contrast" ), this )); 
-	
+
+	hbox-> addWidget ( new QLabel ( tr( "Stipple contrast" ), this ));
+
 	m_contsld = new QSlider ( Horizontal, this );
 	m_contsld-> setRange ( 0, 10 );
 	m_contsld-> setSteps ( 1, 1 );
 	m_contsld-> setValue ( contrast );
 	m_contsld-> setTickmarks ( QSlider::Below );
 	hbox-> addWidget ( m_contsld, 10 );
-	
+
 	vbox-> addStretch ( 10 );
 
 	changeType ( m_type );
-	
+
 	connect ( cb, SIGNAL( highlighted(int) ), this, SLOT( changeType(int) ) );
 	connect ( shadow, SIGNAL( toggled(bool) ), this, SLOT( changeShadow(bool) ) );
 	connect ( flattb, SIGNAL( toggled(bool) ), this, SLOT( changeFlat(bool) ) );
@@ -129,14 +129,14 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 void LiquidSettings::changeType ( int t )
 {
 	bool custom = ( t == Custom );
-	
-	m_menulbl-> setEnabled ( custom );	
-	m_textlbl-> setEnabled ( custom );	
-	m_opaclbl-> setEnabled ( custom );	
-	m_menubtn-> setEnabled ( custom );	
-	m_textbtn-> setEnabled ( custom );	
-	m_opacsld-> setEnabled ( custom );	
-	
+
+	m_menulbl-> setEnabled ( custom );
+	m_textlbl-> setEnabled ( custom );
+	m_opaclbl-> setEnabled ( custom );
+	m_menubtn-> setEnabled ( custom );
+	m_textbtn-> setEnabled ( custom );
+	m_opacsld-> setEnabled ( custom );
+
 	m_type = t;
 }
 
@@ -160,7 +160,7 @@ bool LiquidSettings::writeConfig ( )
 	config. writeEntry ( "Color",  m_menubtn-> color ( ). name ( ));
 	config. writeEntry ( "TextColor", m_textbtn-> color ( ). name ( ));
 	config. writeEntry ( "Opacity", m_opacsld-> value ( ));
-	config. writeEntry ( "ShadowText", m_shadow );	
+	config. writeEntry ( "ShadowText", m_shadow );
 	config. writeEntry ( "StippleContrast", m_contsld-> value ( ));
 	config. writeEntry ( "FlatToolButtons", m_flat );
 	config. write ( );

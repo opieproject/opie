@@ -31,7 +31,7 @@ void DingWidget::loadDict( QString name )
 {
 	lines.clear(); //as we will load a new list we have to
 	               //remove the old one
-	
+
 	Config cfg(  "odict" );
 	cfg.setGroup( "Method_" + name );
 	QFile file( cfg.readEntry( "file" )  );
@@ -39,7 +39,7 @@ void DingWidget::loadDict( QString name )
 	if(  file.open(  IO_ReadOnly ) )
 	{
 		QTextStream stream(  &file );
-		stream.setEncoding(QTextStream::UnicodeUTF8);		
+		stream.setEncoding(QTextStream::UnicodeUTF8);
 		while ( !stream.eof() )
 		{
 			lines.append(  stream.readLine() );
@@ -53,7 +53,7 @@ void DingWidget::loadDict( QString name )
 }
 
 QString DingWidget::loadedDict() const
-{ 
+{
 	return dictName;
 }
 
@@ -79,7 +79,7 @@ void DingWidget::loadValues()
 	Config cfg(  "odict" );
 	cfg.setGroup( "Method_" + methodname );
 	trenner = cfg.readEntry( "Seperator" );
-	
+
 	lang1_name = cfg.readEntry( "Lang1" );
 	lang2_name = cfg.readEntry( "Lang2" );
 }
@@ -108,7 +108,7 @@ BroswerContent DingWidget::parseInfo()
 	{
 		current = *it;
 		left = current.left( current.find( trenner ) );
-	
+
 		right = current.right( current.length() - current.find(trenner) - trenner.length() );
 
  		if ( left.contains( queryword , isCaseSensitive ) )
@@ -127,7 +127,7 @@ BroswerContent DingWidget::parseInfo()
 
 	s_strings.top = toplist.join( "<br>" );
 	s_strings.bottom = bottomlist.join( "<br>" );
-	
+
 	return s_strings;
 }
 

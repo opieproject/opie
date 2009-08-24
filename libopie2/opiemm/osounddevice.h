@@ -51,7 +51,7 @@ public:
     int devWrite(char *buffer);
 
 private:
-    snd_pcm_format_t devForm; 
+    snd_pcm_format_t devForm;
     unsigned int devCh, devRate;
     QString dspstr, mixstr;
     bool selectMicInput();

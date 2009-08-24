@@ -259,7 +259,7 @@ inline void Contact::removeEmail( const QString &v )
     QString def = defaultEmail();
     QString emailsStr = find( Qtopia::Emails );
     QStringList emails = emailList();
-	
+
     // otherwise, must first contain it
     if ( !emailsStr.contains( e ) )
 	return;
@@ -292,9 +292,9 @@ inline void Contact::setDefaultEmail( const QString &v )
     //qDebug("Contact::setDefaultEmail %s", e.latin1());
     replace( Qtopia::DefaultEmail, e );
 
-    if ( !e.isEmpty() )	
+    if ( !e.isEmpty() )
 	insertEmail( e );
-	
+
 }
 
 inline void Contact::insertEmails( const QStringList &v )

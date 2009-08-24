@@ -54,11 +54,11 @@ void BenD::slotClicked()
 {
 	QCopEnvelope e("QPE/System", "execute(QString)");
 	e << QString("mail");
-	
+
 	ODevice *device = ODevice::inst();
 	if ( !device-> ledList ( ). isEmpty ( )) {
-		OLed led = ( device-> ledList ( ). contains ( Led_Mail )) ? Led_Mail : device-> ledList ( ) [0];	
-		
+		OLed led = ( device-> ledList ( ). contains ( Led_Mail )) ? Led_Mail : device-> ledList ( ) [0];
+
 		device->setLedState(led, Led_Off);
 	}
 }
@@ -78,11 +78,11 @@ void BenD::slotCheck()
 	QValueList<Account> acList = ConfigFile::getAccounts();
 	QValueList<Account>::Iterator ot;
 	for (ot = acList.begin(); ot != acList.end(); ot++) {
-		if (!((*ot).imapServer().isEmpty() || 
-		      (*ot).imapPort().isEmpty() || 
+		if (!((*ot).imapServer().isEmpty() ||
+		      (*ot).imapPort().isEmpty() ||
 		      (*ot).user().isEmpty() ||
 		      (*ot).pass().isEmpty())) {
-			if (!((*ot).imapSsl() && 
+			if (!((*ot).imapSsl() &&
 			      (*ot).imapSslPort().isEmpty())) {
 				IMAPHandler *handler = new IMAPHandler(*ot);
 				handler->iStatus("INBOX", "RECENT");
@@ -102,8 +102,8 @@ void BenD::slotIMAPStatus(IMAPResponse &response)
 			if (isHidden()) show();
 			if (_config->readBoolEntry("BlinkLed", true)) {
 				if ( !device-> ledList ( ). isEmpty ( )) {
-					OLed led = ( device-> ledList ( ). contains ( Led_Mail )) ? Led_Mail : device-> ledList ( ) [0];	
-				
+					OLed led = ( device-> ledList ( ). contains ( Led_Mail )) ? Led_Mail : device-> ledList ( ) [0];
+
 					device->setLedState(led, device-> ledStateList ( led ). contains ( Led_BlinkSlow ) ? Led_BlinkSlow : Led_On );
 				}
 			}
@@ -113,8 +113,8 @@ void BenD::slotIMAPStatus(IMAPResponse &response)
 			ODevice *device = ODevice::inst();
 			if (!isHidden()) hide();
 			if ( !device-> ledList ( ). isEmpty ( )) {
-				OLed led = ( device-> ledList ( ). contains ( Led_Mail )) ? Led_Mail : device-> ledList ( ) [0];	
-			
+				OLed led = ( device-> ledList ( ). contains ( Led_Mail )) ? Led_Mail : device-> ledList ( ) [0];
+
 				device->setLedState(led, Led_Off);
 			}
 		}

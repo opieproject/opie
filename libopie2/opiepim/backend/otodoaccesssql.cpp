@@ -315,23 +315,23 @@ namespace {
     ClearQuery::ClearQuery()
         : OSQLQuery() {}
     ClearQuery::~ClearQuery() {}
-    QString ClearQuery::query()const 
+    QString ClearQuery::query()const
     {
         QString qu = "drop table todolist";
         return qu;
     }
 
     FindQuery::FindQuery(int uid)
-        : OSQLQuery(), m_uid(uid ) 
+        : OSQLQuery(), m_uid(uid )
     {
     }
-    
+
     FindQuery::FindQuery(const QArray<int>& ints)
         : OSQLQuery(), m_uids(ints)
     {
     }
 
-    FindQuery::~FindQuery() 
+    FindQuery::~FindQuery()
     {
     }
 

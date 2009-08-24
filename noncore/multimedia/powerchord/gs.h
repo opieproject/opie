@@ -107,7 +107,7 @@ class gs : public QObject {
   void Fret(int position){initial_fret = position;};
   void Tuning(int t[6]);
   void note_start(int chan, int note, int octave);
-  
+
   // methods
   int Play();
   void fill_buffer();

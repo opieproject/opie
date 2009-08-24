@@ -449,7 +449,7 @@ bool LibMadPlugin::open( const QString& path ) {
   d->input.fileLength = stat.st_size;
     else
   d->input.fileLength = 0;
-    
+
 #if defined(HAVE_MMAP)
     if (S_ISREG(stat.st_mode) && stat.st_size > 0) {
         d->input.length = stat.st_size;
@@ -562,7 +562,7 @@ int LibMadPlugin::audioSamples( int ) {
    int samples = (d->input.fileLength / (d->frame.header.bitrate/8)) * d->frame.header.samplerate;
 
    //   qDebug( "LibMadPlugin::audioSamples: %i * %i * 8 / %i", (int)d->input.fileLength,
-   //           (int)d->frame.header.samplerate, (int)d->frame.header.bitrate ); 
+   //           (int)d->frame.header.samplerate, (int)d->frame.header.bitrate );
    //   qDebug( "LibMadPlugin::audioSamples: %i", samples );
 
    return samples;

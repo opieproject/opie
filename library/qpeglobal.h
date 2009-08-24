@@ -6,7 +6,7 @@
                =.
              .=l.
            .>+-=
- _;:,     .>    :=|.         This library is free software; you can 
+ _;:,     .>    :=|.         This library is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software

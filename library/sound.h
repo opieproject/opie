@@ -39,7 +39,7 @@ public:
     static void soundAlarm();
     //static void soundClick();
     //static void soundTap();
-    
+
 private:
     SoundData* d;
 };

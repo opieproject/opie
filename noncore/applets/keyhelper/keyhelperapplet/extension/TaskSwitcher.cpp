@@ -54,5 +54,5 @@ void TaskSwitcher::next()
 	++m_appit;
 	if(m_appit == m_applist.end()){
 		m_appit = m_applist.begin();
-	}	
+	}
 }

@@ -3,7 +3,7 @@
  *
  * (c) 2002 Mike Crawford
  *
- * This file is FREE SOFTWARE covered under the GUN General Public License.  
+ * This file is FREE SOFTWARE covered under the GUN General Public License.
  *
  *
 */
@@ -13,7 +13,7 @@
 #include <qlabel.h>
 #include <qframe.h>
 #include <qevent.h>
-#include <qsizepolicy.h> 
+#include <qsizepolicy.h>
 
 class PickerLabel: public QLabel {
 Q_OBJECT
@@ -56,7 +56,7 @@ Q_OBJECT
 
     public slots:
         void clear();
-    
+
     signals:
         void letterClicked( char );
 

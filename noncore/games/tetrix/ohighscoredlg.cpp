@@ -89,8 +89,8 @@ void OHighscore::getList()
 void OHighscore::checkIfItIsANewhighscore( int points)
 {
 	if ( points > lowest )
-		isNewhighscore = true; 
-	else 
+		isNewhighscore = true;
+	else
 		isNewhighscore = false;
 }
 
@@ -101,8 +101,8 @@ void OHighscore::insertData( QString name , int punkte , int playerLevel )
 	int index = 0;
 	int entryNumber = 1;
 
-        for ( Run=playerData.first(); 
-              Run != 0; 
+        for ( Run=playerData.first();
+              Run != 0;
               index ++, Run=playerData.next() ) {
 
 		if ( punkte > Run->points )
@@ -113,26 +113,26 @@ void OHighscore::insertData( QString name , int punkte , int playerLevel )
 			temp->level = playerLevel;
 
 			playerData.insert( index, temp );
-			
+
 			//now we have to delete the last entry
 			playerData.remove( playerData.count() );
-			
+
 		/////////////////////////////////////////
 		//this block just rewrites the highscore
-                        for ( t_playerData * Run2=playerData.first(); 
-                              Run2 != 0; 
+                        for ( t_playerData * Run2=playerData.first();
+                              Run2 != 0;
                               Run2=playerData.next() ) {
 				cfg.setGroup( QString::number( entryNumber ) );
 				cfg.writeEntry( "Name" , Run2->sName );
 				cfg.writeEntry( "Points" , Run2->points );
 				cfg.writeEntry( "Level" , Run2->level );
-				entryNumber++;	
+				entryNumber++;
 			}
-		////////////////////////////////////////	
+		////////////////////////////////////////
 
 			return;
 		}
-	} 
+	}
 }
 
 QString OHighscore::getName()
@@ -164,7 +164,7 @@ OHighscoreDialog::OHighscoreDialog(OHighscore *highscore, QWidget *parent, const
 	list->addColumn( tr( "Level" ));
 
 	createHighscoreListView();
-	
+
 	vbox_layout->addWidget( list );
 	QPEApplication::showDialog( this );
 }
@@ -175,8 +175,8 @@ void OHighscoreDialog::createHighscoreListView()
 	int points_ = 0;
 	int level_ = 0;
 
-        for ( t_playerData * Run = hs_->playerData.first(); 
-              Run != 0; 
+        for ( t_playerData * Run = hs_->playerData.first();
+              Run != 0;
               Run=hs_->playerData.next() )
         {
                 QListViewItem *item;

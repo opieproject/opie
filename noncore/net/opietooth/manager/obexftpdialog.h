@@ -24,8 +24,8 @@ namespace OpieTooth {
     class ObexFtpDialog : public ObexFtpDialogBase {
         Q_OBJECT
     public:
-        ObexFtpDialog(const QString& device = 0, int port = 0, 
-            QWidget* parent = 0, const char* name = 0, bool modal = TRUE, 
+        ObexFtpDialog(const QString& device = 0, int port = 0,
+            QWidget* parent = 0, const char* name = 0, bool modal = TRUE,
             WFlags fl = 0);
         ~ObexFtpDialog();
         void log(QString str);
@@ -34,8 +34,8 @@ namespace OpieTooth {
         void log(QString& str);
         void incProgress();
         void doneProgress();
-    protected:    
-        int cli_connect_uuid(const uint8_t *uuid, int uuid_len, 
+    protected:
+        int cli_connect_uuid(const uint8_t *uuid, int uuid_len,
             bool reconnect = FALSE);
         int errBox(QCString msg); //Error message box
         int errBox(QString msg); //Error message box
@@ -48,8 +48,8 @@ namespace OpieTooth {
         QString m_device; //device MAC address
         int m_port; //port
         int transport; //transport type
-        bool use_conn; 
-        bool use_path; 
+        bool use_conn;
+        bool use_path;
         obexftp_client_t* client; //Obex ftp client handler
         QString curdir; //Current directory on device
         QString localCurdir; //Local current directory
@@ -62,9 +62,9 @@ namespace OpieTooth {
     private slots:
         void slotBrowse();
         void slotCd(QListViewItem* item);
-        void getFile();    
-        void putFile();    
-        void delFile();    
+        void getFile();
+        void putFile();
+        void delFile();
         void updateDir(const QString& newdir);
         void slotSaveLog();
         void slotBrowseLog();

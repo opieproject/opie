@@ -379,7 +379,7 @@ public slots:
      * (changing the clipboard to the text we just had in the lineedit)
      */
     virtual void clear();
-    
+
 protected slots:
 
     /**

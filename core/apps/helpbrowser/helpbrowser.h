@@ -39,7 +39,7 @@ public:
 
 public slots:
     void setDocument( const QString &doc );
-    
+
 private slots:
     void appMessage(const QCString& msg, const QByteArray& data);
     void textChanged();
@@ -48,16 +48,16 @@ private slots:
     void bookmChosen( int );
     void addBookmark();
     void removeBookmark();
-    
+
 private:
     void init( const QString & );
     void readBookmarks();
-    
+
     QTextBrowser* browser;
     QAction *backAction;
     QAction *forwardAction;
     QString selectedURL;
-    struct Bookmark { 
+    struct Bookmark {
 	QString name;
 	QString file;
     };

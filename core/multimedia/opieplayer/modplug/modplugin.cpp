@@ -147,7 +147,7 @@ bool ModPlugin::audioReadSamples( short *output, int /*channels*/, long samples,
     // it can happen that our prediction about the total amount of samples
     // is wrong. The mediaplayer can't handle the situation of returning 0 read bytes
     // very well. So instead let's fill up the remaining bytes with zeroes.
-    if ( samplesRead == 0 ) 
+    if ( samplesRead == 0 )
     {
         memset( reinterpret_cast<char *>( output ), 0, totalAmountInBytes );
         samplesRead = samples;
@@ -191,19 +191,19 @@ long ModPlugin::videoGetFrame( int )
     return 0;
 }
 
-bool ModPlugin::videoReadFrame( unsigned char **, int, int, int, int, 
+bool ModPlugin::videoReadFrame( unsigned char **, int, int, int, int,
                                       ColorFormat, int )
 {
     return false;
 }
 
-bool ModPlugin::videoReadScaledFrame( unsigned char **, int, int, int, int, 
+bool ModPlugin::videoReadScaledFrame( unsigned char **, int, int, int, int,
                                             int, int, ColorFormat, int )
 {
     return false;
 }
 
-bool ModPlugin::videoReadYUVFrame( char *, char *, char *, int, int, int, 
+bool ModPlugin::videoReadYUVFrame( char *, char *, char *, int, int, int,
                                          int, int )
 {
     return false;

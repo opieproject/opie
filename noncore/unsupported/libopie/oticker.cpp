@@ -71,7 +71,7 @@ void OTicker::setText( const QString& text ) {
     pos = 0; // reset it everytime the text is changed
     scrollText = text;
 qDebug(scrollText);
- 
+
  int pixelLen = 0;
    bool bigger = false;
    int contWidth = contentsRect().width();
@@ -89,7 +89,7 @@ qDebug(scrollText);
     }
     QPixmap pm( pixelLen, contHeight);
 //    pm.fill( QColor( 167, 212, 167 ));
- 
+
     pm.fill(backgroundcolor);
     QPainter pmp( &pm );
     pmp.setPen(foregroundcolor );
@@ -111,7 +111,7 @@ void OTicker::timerEvent( QTimerEvent * ) {
 }
 
 void OTicker::drawContents( QPainter *p ) {
-    int pixelLen = scrollTextPixmap.width(); 
+    int pixelLen = scrollTextPixmap.width();
     p->drawPixmap( pos, contentsRect().y(), scrollTextPixmap );
     if ( pixelLen > contentsRect().width() ) // Scrolling
         p->drawPixmap( pos - pixelLen, contentsRect().y(), scrollTextPixmap );

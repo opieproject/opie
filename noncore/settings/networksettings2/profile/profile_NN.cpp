@@ -4,12 +4,12 @@
 
 #include "netnodeinterface.h"
 
-static const char * ProfileNeeds[] = 
-    { "connection", 
+static const char * ProfileNeeds[] =
+    { "connection",
       0
     };
-static const char * ProfileProvides[] = 
-    { "fullsetup", 
+static const char * ProfileProvides[] =
+    { "fullsetup",
       0
     };
 

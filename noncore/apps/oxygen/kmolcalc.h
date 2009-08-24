@@ -1,4 +1,4 @@
-/* 
+/*
  * kmolcalc.h
  *
  * Copyright (C) 2000 Tomislav Gountchev <tomi@idiom.com>
@@ -10,7 +10,7 @@
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif 
+#endif
 
 
 #include "kmolelements.h"
@@ -34,20 +34,20 @@ public:
 
   KMolCalc();
   ~KMolCalc();
-  
-  /** 
+
+  /**
    * Parse a string S and construct the ElementList ELEMENTS, representing the composition
    * of S. Returns "OK" if successful, or an error message if parsing failed.
    * The elements is S must be valid element or group symbols, as stored in ELSTABLE.
    * See help files for correct formula syntax.
    */
   QString readFormula(const QString& s);
-  
+
   /**
    * Calculate and return the molecular weight of the current chemical formula.
    */
   double getWeight();
-  
+
   /**
    * Return the elemental composition of the current formula, as a string of tab-separated
    * element - percentage pairs, separated by newlines.
@@ -61,7 +61,7 @@ public:
   QString getEmpFormula();
 
   /**
-   * Add a new element name - atomic weight record to the ELSTABLE hashtable. 
+   * Add a new element name - atomic weight record to the ELSTABLE hashtable.
    * Assumes NAME has valid syntax.
    */
   void defineElement(const QString& name, double weight);
@@ -96,7 +96,7 @@ public:
   void readMwfile(QFile& f);
   ElementList* elements;
 };
-    
+
 #endif
 
 

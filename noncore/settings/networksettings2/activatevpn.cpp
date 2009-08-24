@@ -42,7 +42,7 @@ void ActivateVPN::SLOT_ChangedVPNSetting( QListViewItem * I ) {
 
       MyCheckListItem * MI = (MyCheckListItem *)I;
 
-      printf( "%s : %d\n", 
+      printf( "%s : %d\n",
           MI->text(0).latin1(),
           MI->isOn() );
 }

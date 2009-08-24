@@ -22,12 +22,12 @@ namespace OpieTooth {
          * Constructor which creates an object
          */
         ObexPush();
-        
+
         /**
          * Public destructor
          */
         ~ObexPush();
-        
+
         /**
          * Function that sends a file
          * @param mac destination device MAC address
@@ -54,7 +54,7 @@ namespace OpieTooth {
          * @param status the finish status
          */
         void sendError(int);
-        
+
         /**
          * Informs that we have a string status update
          * @param str status string

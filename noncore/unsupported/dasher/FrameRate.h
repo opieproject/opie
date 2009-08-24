@@ -26,7 +26,7 @@ class CFrameRate {
 		const double Framerate() const {return m_dFr;}
 		void Reset(unsigned long Time);
 		void NewFrame(unsigned long Time);
-		
+
 		// TODO: These two shouldn't be the same thing:
 		void SetBitrate(double TargetRate);
 		void SetMaxBitrate(double MaxRate);
@@ -37,7 +37,7 @@ class CFrameRate {
 		int m_iFrames,m_iTime,m_iTime2,m_iSamples;
 		int m_iSteps;            // the 'Steps' parameter. See djw thesis.
 };
-	
+
 inline CFrameRate::CFrameRate() {
 
  // maxbitrate should be user-defined and/or adaptive. Currently it is not.
@@ -59,15 +59,15 @@ inline CFrameRate::CFrameRate() {
 	m_iTime=0; // Hmmm, User must reset framerate before starting.
 }
 
-inline void CFrameRate::NewFrame(unsigned long Time) 
+inline void CFrameRate::NewFrame(unsigned long Time)
 	// compute framerate if we have sampled enough frames
 {
-	
+
 	m_iFrames++;
 
 	if (m_iFrames==m_iSamples) {
 		m_iTime2=Time;
-		if (m_iTime2-m_iTime < 50) 
+		if (m_iTime2-m_iTime < 50)
 			m_iSamples++;      // increase sample size
 		else if (m_iTime2-m_iTime > 80) {
 			m_iSamples--;
@@ -85,7 +85,7 @@ inline void CFrameRate::NewFrame(unsigned long Time)
 	//	dchar debug[256];
 	//		_stprintf(debug,TEXT("fr %f Steps %d samples %d time2 %d rxmax %f\n"),fr,Steps,samples,time2,RXmax);
 	//	OutputDebugString(debug);
-	
+
 	}
 }
 

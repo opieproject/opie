@@ -36,7 +36,7 @@ public:
 
 public slots:
 	void install();
-	
+
 private:
 	QListView *listView;
 	QToolBar *bar;

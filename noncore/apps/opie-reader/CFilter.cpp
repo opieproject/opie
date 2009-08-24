@@ -88,7 +88,7 @@ void textfmt::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 			uselast = true;
 			ch = '*';
 		    }
-		    
+
 		}
 		break;
 	    case '_':
@@ -123,7 +123,7 @@ void textfmt::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 			uselast = true;
 			ch = '_';
 		    }
-		    
+
 		}
 		break;
 	}
@@ -166,7 +166,7 @@ void remap::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	case 0x2039:
 	    ch = '<';
 	    break;
-	case 0x0152:		
+	case 0x0152:
 	    offset = 0;
 	    q[0] = 'E';
 	    q[1] = 0;
@@ -551,9 +551,9 @@ HighlightFilter::HighlightFilter(QTReader* _p) : pReader(_p), lastpos(0), nextpo
 void HighlightFilter::refresh(unsigned long pos)
 {
   bkmks = pReader->Bkmklist();
-  
+
   red = green = blue = 255;
-  
+
   if (bkmks == NULL)
     {
       lastpos = 0;
@@ -737,7 +737,7 @@ void makeNegative::getch(tchar& ch, CStyle& sty, unsigned long& pos)
   int r,g,b;
   fg.rgb(&r,&g,&b);
   sty.setColour(r,g,b);
-  
+
   fg = QColor(sty.bRed(), sty.bGreen(), sty.bBlue());
   fg.hsv(&h,&s,&v);
   fg.setHsv(h,s,255-v);
@@ -851,7 +851,7 @@ void tableLink::getch(tchar& ch, CStyle& sty, unsigned long& pos)
       m_r = sty.Red(), m_g = sty.Green(), m_b = sty.Blue();
       sty.setColour(255, 0, 0);
     }
-  return;      
+  return;
 }
 
 void underlineLink::getch(tchar& ch, CStyle& sty, unsigned long& pos)

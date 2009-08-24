@@ -46,8 +46,8 @@ class MediaPlayerDecoder {
 
 public:
     virtual ~MediaPlayerDecoder() { };
-   
-    // About Plugin 
+
+    // About Plugin
     virtual const char *pluginName() = 0;
     virtual const char *pluginComment() = 0;
     virtual double pluginVersion() = 0;
@@ -99,7 +99,7 @@ public:
     virtual long getPlayTime() { return -1; }
 #ifdef IID_OpiePlayerPlugin
     virtual int audioBitsPerSample( int stream ) = 0;
-#endif    
+#endif
 };
 
 

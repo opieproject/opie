@@ -45,18 +45,18 @@ int main( int argc, char** argv )
     OInputSystem::DeviceIterator it = sys->iterator();
 
     OInputDevice* dev = 0;
-    
+
     while ( it.current() )
     {
         odebug << "DEMO: OInputSystem contains OInputDevice '" <<  it.current()->name() << "'" << oendl;
-        
+
         dev = it.current();
-        
+
         QString features;
         features += QString( "\nSynchronous:     " );
         if ( dev->hasFeature( OInputDevice::Synchronous ) ) features += "[ x ]"; else features += "[   ]";
         features += QString( "\nKeys or Buttons: " );
-        if ( dev->hasFeature( OInputDevice::Keys ) ) features += "[ x ]"; else features += "[   ]";   
+        if ( dev->hasFeature( OInputDevice::Keys ) ) features += "[ x ]"; else features += "[   ]";
         features += QString( "\nRelative Axes:   " );
         if ( dev->hasFeature( OInputDevice::Relative ) ) features += "[ x ]"; else features += "[   ]";
         features += QString( "\nAbsolute Axes:   " );
@@ -77,7 +77,7 @@ int main( int argc, char** argv )
         if ( dev->hasFeature( OInputDevice::PowerManagement ) ) features += "[ x ]"; else features += "[   ]";
         features += QString( "\nFeedbackStatus:  " );
         if ( dev->hasFeature( OInputDevice::ForceFeedbackStatus ) ) features += "[ x ]"; else features += "[   ]";
-        
+
         odebug << "========================================"
             << "\nDevice: " << dev->name()
             << "\nName: " << dev->identity()
@@ -85,15 +85,15 @@ int main( int argc, char** argv )
             << "\nUniq: " << dev->uniq()
             << features << "\n"
             << oendl;
-            
-        if ( dev->isHeld( OInputDevice::Key_LEFTSHIFT ) ) 
+
+        if ( dev->isHeld( OInputDevice::Key_LEFTSHIFT ) )
             odebug << "Left Shift is being held." << oendl;
         else odebug << "Left Shift is _not_ being held." << oendl;
-        
-        if ( dev->isHeld( OInputDevice::Button_LEFT ) ) 
+
+        if ( dev->isHeld( OInputDevice::Button_LEFT ) )
             odebug << "Left Mouse Button is being held." << oendl;
         else odebug << "Left Mouse Button is _not_ being held." << oendl;
-        
+
         odebug << "Global key mask: " << dev->globalKeyMask() << oendl;
         odebug << "Global switch mask: " << dev->globalSwitchMask() << oendl;
 

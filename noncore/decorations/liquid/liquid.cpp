@@ -4,10 +4,10 @@
 #include <qdrawutil.h>
 
 
-LiquidDecoInterface::LiquidDecoInterface ( ) 
+LiquidDecoInterface::LiquidDecoInterface ( )
 {
 }
-    
+
 LiquidDecoInterface::~LiquidDecoInterface ( )
 {
 }
@@ -23,8 +23,8 @@ QString LiquidDecoInterface::name ( ) const
 QPixmap LiquidDecoInterface::icon ( ) const
 {
 	return QPixmap ( );
-}            
-        
+}
+
 void LiquidDecoInterface::drawArea( Area a, QPainter *p, const WindowData *wd ) const
 {
 	QRect r = wd-> rect;
@@ -42,14 +42,14 @@ void LiquidDecoInterface::drawArea( Area a, QPainter *p, const WindowData *wd ) 
 		}
 		case WindowDecorationInterface::Title: {
 			const QColorGroup &cg = wd-> palette. active ( );
-			
+
 			QBrush titleBrush;
 			QPen   titleLines1, titleLines2;
 
 			titleBrush = cg. brush (( wd-> flags & WindowData::Active ) ? QColorGroup::Highlight : QColorGroup::Background );
 			titleLines1 = titleBrush. color ( ). dark ( 105 );
 			titleLines2 = titleBrush. color ( ). dark ( 103 );
-			
+
 			p-> fillRect ( r. x ( ), r. y ( ) - th, r. width ( ), th, titleBrush );
 			for ( int i = r.y()-th; i < r.y(); i += 4 ) {
 				p-> setPen ( titleLines1 );
@@ -67,37 +67,37 @@ void LiquidDecoInterface::drawArea( Area a, QPainter *p, const WindowData *wd ) 
 					shadecol = QColor ( 225, 225, 225 );
 				else
 					shadecol = QColor ( 30, 30, 30 );
-			}			
+			}
 			QColor fillcol = wd-> palette. active ( ). color (( wd-> flags & WindowData::Active ) ? QColorGroup::Highlight : QColorGroup::Background );
 			QColor bordercol = fillcol. dark ( 110 );
 			fillcol = fillcol. light ( 110 );
-			
+
 			QRect tr ( r.x ( ) + 3 + metric ( HelpWidth, wd ), r. top ( ) - th,
 				r. width ( ) - metric ( OKWidth, wd ) - metric ( CloseWidth, wd ), th );
 
 			QFont f = p-> font ( );
 			f. setWeight ( QFont::Bold );
-			p-> setFont ( f );                        
-						
+			p-> setFont ( f );
+
 			QRect br = p-> boundingRect ( tr, QPainter::AlignCenter, wd-> caption );
 			int trh2 = tr. height ( ) / 2;
-			
+
 			int align = QPainter::AlignCenter;
 
 			if ( br. width ( ) + 2 * trh2 > tr. width ( ) ) {
 				br. setLeft ( tr. left ( ) + trh2 );
 				br. setWidth ( tr. width ( ) - 2 * trh2 );
-			
+
 				align = QPainter::AlignLeft | QPainter::AlignVCenter;
 			}
-			
+
 			p-> setBrush ( fillcol );
 			p-> setPen ( bordercol /*Qt::NoPen*/ );
 			p->	drawChord ( br. left ( ) - trh2, tr. top ( ), 2 * trh2, tr. height ( ), 90*16, 180*16 );
 			p->	drawChord ( br. right ( ) + 1 - trh2, tr. top ( ), 2 * trh2, tr. height ( ), 90*16, -180*16 );
 
 			p-> fillRect ( br.left() - 1, tr. top ( ), br. width ( ) + 2, tr. height ( ), fillcol);
-				
+
 			p-> setPen ( shadecol );
 			p-> drawText ( br, align, wd-> caption );
 			p-> setPen ( textcol );
@@ -115,17 +115,17 @@ void LiquidDecoInterface::drawArea( Area a, QPainter *p, const WindowData *wd ) 
 QRESULT LiquidDecoInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
 {
 	*iface = 0;
-	
+
 	if ( uuid == IID_QUnknown )
 		*iface = this;
 	else if ( uuid == IID_WindowDecoration )
 		*iface = this;
 	else
 	    return QS_FALSE;
-	
+
 	if ( *iface )
 		(*iface)-> addRef ( );
-		
+
 	return QS_OK;
 }
 

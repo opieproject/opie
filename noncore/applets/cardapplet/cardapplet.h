@@ -96,7 +96,7 @@ class CardApplet : public QWidget
     QMap<int,QString> m_cardnames;
     QStringList m_check;
     QStringList m_umount;
-    
+
     int m_ejectMode;
     int m_ejectSocket;
     __dev_t m_rootdev;

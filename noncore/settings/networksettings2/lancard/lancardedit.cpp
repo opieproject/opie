@@ -83,7 +83,7 @@ void LanCardEdit::populateList( void ) {
     LanCards_LV->clear();
 
     for( QStringList::Iterator it = NN->addressesOfNIC().begin();
-         it != NN->addressesOfNIC().end(); 
+         it != NN->addressesOfNIC().end();
          ++it ) {
       CLI = new QCheckListItem( LanCards_LV, (*it), QCheckListItem::CheckBox );
 
@@ -98,7 +98,7 @@ void LanCardEdit::populateList( void ) {
         }
       }
 
-      CLI->setPixmap( 0, NSResources->getPixmap( 
+      CLI->setPixmap( 0, NSResources->getPixmap(
         (Found) ? "add" : "remove" ) );
     }
 }
@@ -114,7 +114,7 @@ void LanCardEdit::SLOT_ScanCards( void ) {
     for( QDictIterator<InterfaceInfo> It(S.interfaces());
          It.current();
          ++It ) {
-      Log(( "TEST %s %s\n", 
+      Log(( "TEST %s %s\n",
           It.current()->Name.latin1(),
           It.current()->MACAddress.latin1() ));
       if( R.match( It.current()->Name ) >= 0 &&
@@ -125,7 +125,7 @@ void LanCardEdit::SLOT_ScanCards( void ) {
           )
         ) {
         // old item ?
-        QCheckListItem * CLI = 
+        QCheckListItem * CLI =
                           (QCheckListItem *)LanCards_LV->firstChild();
         while( CLI ) {
           if( CLI->text(0) == It.current()->MACAddress ) {
@@ -136,13 +136,13 @@ void LanCardEdit::SLOT_ScanCards( void ) {
 
         if( ! CLI ) {
           // new item
-          CLI = new QCheckListItem( LanCards_LV, 
+          CLI = new QCheckListItem( LanCards_LV,
                 It.current()->MACAddress,
                 QCheckListItem::CheckBox );
         }
 
         // mark present
-        CLI->setPixmap( 0, NSResources->getPixmap( 
+        CLI->setPixmap( 0, NSResources->getPixmap(
                     "add" ) );
 
         if( NN->addressesOfNIC().findIndex( It.current()->MACAddress) < 0 ) {

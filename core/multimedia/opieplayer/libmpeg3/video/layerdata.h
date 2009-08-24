@@ -20,7 +20,7 @@
 #ifndef LAYERDATA_H
 #define LAYERDATA_H
 
-typedef struct 
+typedef struct
 {
 /* sequence header */
 	int intra_quantizer_matrix[64], non_intra_quantizer_matrix[64];

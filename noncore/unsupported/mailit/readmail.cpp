@@ -29,7 +29,7 @@ ReadMail::ReadMail( QWidget* parent,  const char* name, WFlags fl )
 	: QMainWindow(parent, name, fl)
 {
 	plainTxt = FALSE;
-	
+
 	init();
 	viewAtt = new ViewAtt(0, "View Attatchments");
 }
@@ -43,9 +43,9 @@ ReadMail::~ReadMail()
 void ReadMail::init()
 {
 	setToolBarsMovable(FALSE);
-	
+
 	QPopupMenu* mailaction=new QPopupMenu(this);
-	
+
 	bar = new QToolBar(this);
 	bar->setHorizontalStretchable( TRUE );
 
@@ -58,12 +58,12 @@ void ReadMail::init()
 	menu->insertItem( tr( "&Mail" ), mailMenu);
 
 	bar = new QToolBar(this);
-	
+
 	downloadButton = new QAction( tr( "Download" ), Resource::loadPixmap( "mailit/download" ),QString::null, 0, this, 0 );
 	connect(downloadButton, SIGNAL(activated()), this, SLOT(download()) );
   	downloadButton->setWhatsThis(tr("Click here to download the selected mail"));
-	
-		
+
+
 	previousButton = new QAction( tr( "Previous" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
 	connect( previousButton, SIGNAL( activated() ), this, SLOT( previous() ) );
 	previousButton->addTo(bar);
@@ -82,7 +82,7 @@ void ReadMail::init()
 	attachmentButton->addTo(bar);
 	attachmentButton->addTo(viewMenu);
 	attachmentButton->setWhatsThis(tr("Click here to add attachments to your mail"));
-	
+
 	plainTextButton = new QAction( tr( "Text Format" ), Resource::loadPixmap( "DocsIcon" ), QString::null, 0, this, 0, TRUE);
 	connect( plainTextButton, SIGNAL( activated() ), this, SLOT( shiftText() ) );
 	plainTextButton->addTo(bar);
@@ -96,19 +96,19 @@ void ReadMail::init()
 	replyButton = new QToolButton(Resource::loadPixmap("mailit/reply"),tr("reply"),tr("reply to mail"), this,SLOT(reply()),bar);
         QWhatsThis::add(replyButton,tr("Click here to reply to the selected mail\nPress and hold for more options."));
 	replyButton->setPopup(mailaction);
-		
+
 	replyAllButton = new QAction( tr( "Reply all" ), Resource::loadPixmap( "mailit/reply" ),QString::null, 0, this, 0 );
 	connect(replyAllButton, SIGNAL(activated()), this, SLOT(replyAll()));
 	replyAllButton->setWhatsThis(tr("Click here to reply to the selected mail to CC: addresses also"));
-	replyAllButton->addTo(mailaction);	
-	
+	replyAllButton->addTo(mailaction);
+
 	forwardButton = new QAction( tr( "Forward" ), Resource::loadPixmap( "mailit/forward" ),
 	QString::null, 0, this, 0 );
 	connect(forwardButton, SIGNAL(activated()), this, SLOT(forward()));
 	forwardButton->setWhatsThis(tr("Click here to forward the selected mail"));
 	forwardButton->addTo(mailaction);
-	
-	
+
+
 	deleteButton = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ), QString::null, 0, this, 0 );
 	connect( deleteButton, SIGNAL( activated() ), this, SLOT( deleteItem() ) );
 	deleteButton->addTo(bar);
@@ -116,9 +116,9 @@ void ReadMail::init()
 	deleteButton->setWhatsThis(tr("Click here to remove the selected mail"));
 
 	viewMenu->insertItem(Resource::loadPixmap("close"), "Close", this, SLOT(close()));
-		
+
 	emailView = new QTextView( this, "emailView" );
-	
+
 	setCentralWidget(emailView);
 
 	mime = new QMimeSourceFactory();
@@ -130,34 +130,34 @@ void ReadMail::updateView()
 	Enclosure *ePtr;
 	QString mailStringSize;
 	QString text, temp;
-	
+
 	mail->read = TRUE;			//mark as read
 	inbox = mail->received;
-	
+
 	replyButton->setEnabled(false);
 	/*replyButton->removeFrom(bar);
 	forwardButton->removeFrom(mailMenu);
 	forwardButton->removeFrom(bar);*/
 	downloadButton->removeFrom(bar);
-	
+
 	//downloadButton->setEnabled(!mail->downloaded);
-	
-		
+
+
 	if (inbox == TRUE) {
 		replyButton->setEnabled(true);
 		/*replyButton->addTo(mailMenu);
 		forwardButton->addTo(bar);
 		forwardButton->addTo(mailMenu);*/
 
-				
+
 		if (!mail->downloaded) {
-			
+
 			downloadButton->addTo(bar);
-			
+
 			//report currently viewed mail so that it will be
 			//placed first in the queue of new mails to download
 			emit viewingMail(mail);
-			
+
 			double mailSize = (double) mail->size;
 			if (mailSize < 1024) {
 				mailStringSize.setNum(mailSize);
@@ -173,14 +173,14 @@ void ReadMail::updateView()
 	}
 
 	QMimeSourceFactory *mime = emailView->mimeSourceFactory();
-	
+
 	if (! plainTxt) {						//use RichText, inline pics etc.
 		emailView->setTextFormat(QTextView::RichText);
 		text = "<b><big><center><font color=\"blue\">" + mail->subject
 			+"</font></center></big></b><br>";
 		text += "<b>From: </b>" + mail->from + " <i>" +
 			mail->fromMail + "</i><br>";
-	
+
 		text +="<b>To: </b>";
 	        for (QStringList::Iterator it = mail->recipients.begin();
 	        	it != mail->recipients.end(); ++it ) {
@@ -192,26 +192,26 @@ void ReadMail::updateView()
 	        	it != mail->carbonCopies.end(); ++it ) {
 			text += *it + " ";
 		}
-		
+
 		text += "<br>"  + mail->date;
-	
+
 		if (mail->files.count() > 0) {
 			text += "<br><b>Attatchments: </b>";
-			
+
 			for ( ePtr=mail->files.first(); ePtr != 0; ePtr=mail->files.next() ) {
 				text += ePtr->originalName + " ";
 			}
 			text += "<hr><br>" + mail->body;
-		
+
 			if (inbox) {
 				for ( ePtr=mail->files.first(); ePtr != 0; ePtr=mail->files.next() ) {
 
 					text += "<br><hr><b>Attatchment: </b>" +
 						ePtr->originalName + "<hr>";
-				
+
 					if (ePtr->contentType == "TEXT") {
 						QFile f(ePtr->path + ePtr->name);
-					
+
 						if (f.open(IO_ReadOnly) ) {
 							QTextStream t(&f);
 							temp = t.read();
@@ -220,7 +220,7 @@ void ReadMail::updateView()
 						} else {
 							text += "<b>Could not locate file</b><br>";
 						}
-					
+
 					}
 					if (ePtr->contentType == "IMAGE") {
 //						temp.setNum(emailView->width());	//get display width
@@ -250,14 +250,14 @@ void ReadMail::updateView()
 	        	it != mail->recipients.end(); ++it ) {
 			text += *it + " ";
 		}
-		
+
 		text += "\nCC: ";
 	        for (QStringList::Iterator it = mail->carbonCopies.begin();
 	        	it != mail->carbonCopies.end(); ++it ) {
 			text += *it + " ";
 		}
 
-				
+
 		text += "\nDate: " + mail->date + "\n";
 		if (mail->files.count() > 0) {
 			text += "Attatchments: ";
@@ -266,7 +266,7 @@ void ReadMail::updateView()
 			}
 			text += "\n\n";
 		} else text += "\n";
-		
+
 		if (!inbox) {
 			text += mail->body;
 		} else if (mail->downloaded) {
@@ -275,14 +275,14 @@ void ReadMail::updateView()
 			text += "\nAwaiting download\n";
 			text += "Size of mail: " + mailStringSize;
 		}
-		
+
 		emailView->setText(text);
 	}
-	
+
 	if (mail->files.count() == 0)
 		attachmentButton->setEnabled(FALSE);
 	else attachmentButton->setEnabled(TRUE);
-	
+
 	setCaption("Examining mail: " + mail->subject);
 }
 
@@ -293,7 +293,7 @@ void ReadMail::update(QListView *thisView, Email *mailIn)
 	item = (EmailListItem *) view->selectedItem();
 	mail = mailIn;
 	updateView();
-	updateButtons();	
+	updateButtons();
 }
 
 void ReadMail::mailUpdated(Email *mailIn)
@@ -339,9 +339,9 @@ void ReadMail::deleteItem()
 	temp = (EmailListItem *) item->nextSibling();	//trybelow
 	if (temp == NULL)
 		temp = (EmailListItem *) item->itemAbove(); //try above
-	
+
 	emit removeItem(item, inbox);
-	
+
 	item = temp;
 	if (item != NULL) {								//more items in list
 		mail = item->getMail();
@@ -353,12 +353,12 @@ void ReadMail::deleteItem()
 void ReadMail::updateButtons()
 {
 	EmailListItem *temp;
-	
+
 	temp = item;
 	if ((EmailListItem *) temp->nextSibling() == NULL)
 		nextButton->setEnabled(FALSE);
 	else nextButton->setEnabled(TRUE);
-	
+
 	temp = item;
 	if ((EmailListItem *) temp->itemAbove() == NULL)
 		previousButton->setEnabled(FALSE);

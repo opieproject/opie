@@ -54,7 +54,7 @@ signals:
     void gameOver( bool won );
     void gameStarted();
     void mineCount( int );
-    
+
 protected:
 
     void contentsMousePressEvent( QMouseEvent* );
@@ -62,7 +62,7 @@ protected:
     void keyPressEvent( QKeyEvent* );
     void keyReleaseEvent( QKeyEvent* );
     void drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph );
-    
+
     int getHint( int row, int col );
     void setHint( int r, int c );
     void updateMine( int row, int col );
@@ -71,7 +71,7 @@ protected:
     bool onBoard( int r, int c ) const { return r >= 0 && r < numRows && c >= 0 && c < numCols; }
     Mine *mine( int row, int col ) { return onBoard(row, col ) ? mines[row+numCols*col] : 0; }
     const Mine *mine( int row, int col ) const { return onBoard(row, col ) ? mines[row+numCols*col] : 0; }
-    
+
 protected slots:
     void cellPressed( int row, int col );
     void cellClicked( int row, int col );
@@ -80,7 +80,7 @@ protected slots:
 private:
     int findCellSize();
     void setCellSize( int );
-    
+
     State stat;
     void setState( State st );
     void placeMines();
@@ -90,7 +90,7 @@ private:
     int currRow;
     int currCol;
     int numRows, numCols;
-    
+
     int minecount;
     int mineguess;
     int nonminecount;

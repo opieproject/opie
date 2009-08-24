@@ -29,7 +29,7 @@ SearchResultsDlg::SearchResultsDlg( QWidget* parent,  const char* name, bool mod
     QGridLayout *layout = new QGridLayout( this );
     layout->setSpacing( 2);
     layout->setMargin( 2);
-    
+
     ListBox1 = new QListBox( this, "ListBox1" );
     outPutLabel=new QLabel( this, "outPutLabel" );
     statusLabel=new QLabel( this, "StatusLabel" );
@@ -42,13 +42,13 @@ SearchResultsDlg::SearchResultsDlg( QWidget* parent,  const char* name, bool mod
     layout->addMultiCellWidget( buttonCancel, 0, 0, 1, 1);
 
     layout->addMultiCellWidget( ListBox1, 1, 4, 0, 1);
-    
+
     outPutLabel->setMaximumHeight(30);
     statusLabel->setMaximumHeight(30);
 
     layout->addMultiCellWidget( outPutLabel, 5, 5, 0, 1);
     layout->addMultiCellWidget( statusLabel, 6, 6, 0, 1);
-    
+
 
     setCaption( tr( "Search Results"  ) );
     buttonOk->setText( tr( "&Download"  ) );

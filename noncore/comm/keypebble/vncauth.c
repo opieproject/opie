@@ -75,7 +75,7 @@ vncEncryptAndStorePasswd(char *passwd, char *fname)
     for (i = 0; i < 8; i++) {
 	putc(encryptedPasswd[i], fp);
     }
-  
+
     fclose(fp);
     return 0;
 }
@@ -131,7 +131,7 @@ vncRandomBytes(unsigned char *bytes)
 
     srandom(seed);
     for (i = 0; i < CHALLENGESIZE; i++) {
-	bytes[i] = (unsigned char)(random() & 255);    
+	bytes[i] = (unsigned char)(random() & 255);
     }
 }
 

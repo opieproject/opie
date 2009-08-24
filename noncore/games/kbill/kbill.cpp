@@ -31,7 +31,7 @@ KBill::KBill() : QMainWindow() {
 	//these are dissabled until I fix them
 	//file->insertItem(tr("Warp to level..."), this, SLOT(WarpTo()));
 	//file->insertItem(tr("View high scores"), this, SLOT(ViewHighScores()));
-	
+
 
 	help = new QPopupMenu();
 	help->insertItem(tr("Story of kBill"), this, SLOT(Story()));
@@ -123,6 +123,6 @@ void KBill::Rules() {
 	QString rulesStr = tr("<b>The Rules</b><p>kBill has been painstakingly designed and researched in order to make it as easy to use for the whole family as it is for little Sally. Years - nay - days of beta testing and consulting with the cheapest of human interface designers have resulted in a game that is easy to use, yet nothing at all like a Macintosh.<p><UL><LI>Whack the Bills (click)</LI><LI>Restart the computer (click)</LI><LI>Pick up stolen OSes & return (drag) them to their respective computers</LI><LI>Drag the bucket to extinguish sparks</LI><LI>Scoring is based on total uptime, with bonuses for killing Bills.</LI></UL><P>As for the rest, you can probably work it out for yourself.  We did, so it can't be too hard");
  	rulesDialog->TextBrowser1->setText(rulesStr);
  	rulesDialog->resize(200,200);
- 	rulesDialog->show(); 	
+ 	rulesDialog->show();
 	field->startTimer();
 }

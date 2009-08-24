@@ -209,14 +209,14 @@ void WirelessApplet::checkInterface()
     if ( interface )
     {
 #ifdef MDEBUG
-        odebug << "WIFIAPPLET: using interface '" << ( const char* ) interface->name() << "'" << oendl; 
+        odebug << "WIFIAPPLET: using interface '" << ( const char* ) interface->name() << "'" << oendl;
 #endif
 
     }
     else
     {
 #ifdef MDEBUG
-        odebug << "WIFIAPPLET: D'oh! No Wireless interface present... :(" << oendl; 
+        odebug << "WIFIAPPLET: D'oh! No Wireless interface present... :(" << oendl;
 #endif
         hide();
     }
@@ -225,7 +225,7 @@ void WirelessApplet::checkInterface()
 void WirelessApplet::renewDHCP()
 {
 #ifdef MDEBUG
-    odebug << "WIFIAPPLET: Going to request a DHCP configuration renew." << oendl; 
+    odebug << "WIFIAPPLET: Going to request a DHCP configuration renew." << oendl;
 #endif
 
     QString pidfile;
@@ -237,7 +237,7 @@ void WirelessApplet::renewDHCP()
 
     pidfile.sprintf( "/var/run/dhcpcd-%s.pid", ( const char* ) ifacename );
 #ifdef MDEBUG
-    odebug << "WIFIAPPLET: dhcpcd pidfile is '" << ( const char* ) pidfile << "'" << oendl; 
+    odebug << "WIFIAPPLET: dhcpcd pidfile is '" << ( const char* ) pidfile << "'" << oendl;
 #endif
     int pid;
     QFile pfile( pidfile );
@@ -247,7 +247,7 @@ void WirelessApplet::renewDHCP()
     {
         s >> pid;
 #ifdef MDEBUG
-        odebug << "WIFIAPPLET: sent SIGALARM to pid " << pid << "" << oendl; 
+        odebug << "WIFIAPPLET: sent SIGALARM to pid " << pid << "" << oendl;
 #endif
         kill( pid, SIGALRM );
         return ;
@@ -255,11 +255,11 @@ void WirelessApplet::renewDHCP()
 
     // No dhcpcd, so we are trying udhcpc
 #ifdef MDEBUG
-    odebug << "WIFIAPPLET: dhcpcd not available." << oendl; 
+    odebug << "WIFIAPPLET: dhcpcd not available." << oendl;
 #endif
     pidfile.sprintf( "/var/run/udhcpc.%s.pid", ( const char* ) ifacename );
 #ifdef MDEBUG
-    odebug << "WIFIAPPLET: udhcpc pidfile is '" << ( const char* ) pidfile << "'" << oendl; 
+    odebug << "WIFIAPPLET: udhcpc pidfile is '" << ( const char* ) pidfile << "'" << oendl;
 #endif
     QFile pfile2( pidfile );
     hasFile = pfile2.open( IO_ReadOnly );
@@ -268,7 +268,7 @@ void WirelessApplet::renewDHCP()
     {
         s2 >> pid;
 #ifdef MDEBUG
-        odebug << "WIFIAPPLET: sent SIGUSR1 to pid " << pid << "" << oendl; 
+        odebug << "WIFIAPPLET: sent SIGUSR1 to pid " << pid << "" << oendl;
 #endif
         kill( pid, SIGUSR1 );
         return ;
@@ -305,14 +305,14 @@ WirelessApplet::~WirelessApplet()
 void WirelessApplet::timerEvent( QTimerEvent* )
 {
 #ifdef MDEBUG
-    odebug << "WirelessApplet::timerEvent" << oendl; 
+    odebug << "WirelessApplet::timerEvent" << oendl;
 #endif
     if ( interface )
     {
         if ( !ONetwork::instance()->isPresent( (const char*) interface->name() ) )
         {
 #ifdef MDEBUG
-            odebug << "WIFIAPPLET: Interface no longer present." << oendl; 
+            odebug << "WIFIAPPLET: Interface no longer present." << oendl;
 #endif
             interface = 0L;
             mustRepaint();
@@ -322,7 +322,7 @@ void WirelessApplet::timerEvent( QTimerEvent* )
         if ( mustRepaint() )
         {
 #ifdef MDEBUG
-            odebug << "WIFIAPPLET: A value has changed -> repainting." << oendl; 
+            odebug << "WIFIAPPLET: A value has changed -> repainting." << oendl;
 #endif
             repaint();
         }
@@ -358,14 +358,14 @@ bool WirelessApplet::mustRepaint()
         if ( interface )
         {
 #ifdef MDEBUG
-            odebug << "WIFIAPPLET: We had no interface but now we have one! :-)" << oendl; 
+            odebug << "WIFIAPPLET: We had no interface but now we have one! :-)" << oendl;
 #endif
             show();
         }
         else
         {
 #ifdef MDEBUG
-            odebug << "WIFIAPPLET: We had a interface but now we don't have one! ;-(" << oendl; 
+            odebug << "WIFIAPPLET: We had a interface but now we don't have one! ;-(" << oendl;
 #endif
             hide();
             return true;
@@ -397,28 +397,28 @@ bool WirelessApplet::mustRepaint()
     if ( rocESSID && ( oldESSID != interface->SSID() ) )
     {
 #ifdef MDEBUG
-        odebug << "WIFIAPPLET: ESSID has changed." << oendl; 
+        odebug << "WIFIAPPLET: ESSID has changed." << oendl;
 #endif
         renewDHCP();
     }
     else if ( rocFREQ && ( oldFREQ != interface->frequency() ) )
     {
 #ifdef MDEBUG
-        odebug << "WIFIAPPLET: FREQ has changed." << oendl; 
+        odebug << "WIFIAPPLET: FREQ has changed." << oendl;
 #endif
         renewDHCP();
     }
     else if ( rocAP && ( oldAP != interface->associatedAP().toString() ) )
     {
 #ifdef MDEBUG
-        odebug << "WIFIAPPLET: AP has changed." << oendl; 
+        odebug << "WIFIAPPLET: AP has changed." << oendl;
 #endif
         renewDHCP();
     }
     else if ( rocMODE && ( oldMODE != interface->mode() ) )
     {
 #ifdef MDEBUG
-        odebug << "WIFIAPPLET: MODE has changed." << oendl; 
+        odebug << "WIFIAPPLET: MODE has changed." << oendl;
 #endif
         renewDHCP();
     }
@@ -452,7 +452,7 @@ int WirelessApplet::numberOfRings()
 {
     if ( !interface ) return -1;
     int qualityH = interface->signalStrength();
-    odebug << "quality = " << qualityH << "" << oendl; 
+    odebug << "quality = " << qualityH << "" << oendl;
     if ( qualityH < 1 ) return -1;
     if ( qualityH < 20 ) return 0;
     if ( qualityH < 40 ) return 1;
@@ -483,7 +483,7 @@ void WirelessApplet::paintEvent( QPaintEvent* )
         return;
     }
 
-    odebug << "WirelessApplet: painting " << rings << " rings" << oendl; 
+    odebug << "WirelessApplet: painting " << rings << " rings" << oendl;
     int radius = 2;
     int rstep = 4;
     int maxrings = w/rstep;

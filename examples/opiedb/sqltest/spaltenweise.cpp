@@ -16,12 +16,12 @@ int main( int argc,  char* argv[] ) {
     OSQLBackEnd::ValueList list = man.queryBackEnd();
 
     OSQLDriver *driver = man.standard();
-    owarn << "testmain" + driver->id() << oendl; 
+    owarn << "testmain" + driver->id() << oendl;
     driver->setUrl("/home/ich/spaltenweise");
     if ( driver->open() ) {
-        owarn << "could open" << oendl; 
+        owarn << "could open" << oendl;
     }else
-        owarn << "wasn't able to open" << oendl; 
+        owarn << "wasn't able to open" << oendl;
     OSQLRawQuery *raw = new OSQLRawQuery("create table todolist("
                                          "uid,categories,completed,"
                                          "progress,summary,HasDate,"

@@ -135,7 +135,7 @@ void ProfileEditorDialog::initUI()
 
 }
 
-ProfileEditorDialog::~ProfileEditorDialog() 
+ProfileEditorDialog::~ProfileEditorDialog()
 {
 
 }
@@ -186,7 +186,7 @@ QCString ProfileEditorDialog::profType() const
 /*
  * we need to switch the widget
  */
-void ProfileEditorDialog::slotConActivated( const QString& str ) 
+void ProfileEditorDialog::slotConActivated( const QString& str )
 {
     delete m_con;
 
@@ -202,7 +202,7 @@ void ProfileEditorDialog::slotConActivated( const QString& str )
         m_autoConnect->setChecked( true );
         m_prof.writeEntry("Terminal", Profile::Linux );
         slotTermActivated( m_fact->external (m_prof.terminalName() ) );
-    } 
+    }
     else {
         m_prof.writeEntry("Terminal", Profile::VT102 );
         slotTermActivated( m_fact->external (m_prof.terminalName() ) );
@@ -217,7 +217,7 @@ void ProfileEditorDialog::slotConActivated( const QString& str )
 /*
  * we need to switch the widget
  */
-void ProfileEditorDialog::slotTermActivated( const QString& str ) 
+void ProfileEditorDialog::slotTermActivated( const QString& str )
 {
     delete m_term;
 
@@ -229,7 +229,7 @@ void ProfileEditorDialog::slotTermActivated( const QString& str )
     }
 }
 
-void ProfileEditorDialog::slotKeyActivated(const QString &str) 
+void ProfileEditorDialog::slotKeyActivated(const QString &str)
 {
     delete m_key;
     m_key = m_fact->newKeyboardPlugin( str, m_tabKey );

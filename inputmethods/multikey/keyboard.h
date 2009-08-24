@@ -74,7 +74,7 @@ public:
     QImage *pix(const int row, const int col);
     int     numKeys(const int row);
     void    setKeysFromFile(const char *filename);
-    void    setKey(const int row, const int qcode, const ushort unicode, 
+    void    setKey(const int row, const int qcode, const ushort unicode,
                     const int width, QImage *pix);
     void    setPressed(const int row, const int col, const bool pressed);
     QString lang;
@@ -88,7 +88,7 @@ private:
 	    int width;  // not pixels but relative key width. normal key is 2
 
         // only needed for keys like ctrl that can have multiple keys pressed at once
-        bool *pressed; 
+        bool *pressed;
 	    QImage *pix;
     };
 
@@ -135,7 +135,7 @@ private slots:
     // used to redraw keyboard after edited colors
     void reloadKeyboard();
     void receive( const QCString &msg, const QByteArray &data );
-    
+
 private:
     int getKey( int &w, int j = -1 );
     void clearHighlight();
@@ -153,7 +153,7 @@ private:
     uint useLargeKeys:1;
     uint usePicks:1;
     uint useRepeat:1;
-    
+
     int pressedKeyRow;
     int pressedKeyCol;
 

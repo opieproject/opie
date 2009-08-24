@@ -82,7 +82,7 @@ class NetNodeInterface : public QUnknownInterface {
 
 public :
 
-      virtual QRESULT queryInterface( const QUuid& uuid, 
+      virtual QRESULT queryInterface( const QUuid& uuid,
                               QUnknownInterface **iface ) = 0;
 
       virtual void create_plugin( QList<ANetNode> & PNN ) = 0;
@@ -94,11 +94,11 @@ struct NetNodeInterface_T : public NetNodeInterface {
     QRESULT queryInterface(const QUuid& uuid, QUnknownInterface **iface) {
 	*iface = 0;
 
-	if( uuid == IID_QUnknown ) 
+	if( uuid == IID_QUnknown )
 	  *iface = this;
-	else if( uuid == IID_NetworkSettings2 ) 
+	else if( uuid == IID_NetworkSettings2 )
 	  *iface = this;
-	else 
+	else
 	  return QS_FALSE;
 
 	(*iface)->addRef();
@@ -120,7 +120,7 @@ template<class Node, class Tail>
 struct NetNodeInterface_T<Opie::Core::Typelist<Node, Tail> >
     : public NetNodeInterface {
 
-    QRESULT queryInterface( const QUuid& uuid, 
+    QRESULT queryInterface( const QUuid& uuid,
                             QUnknownInterface **iface) {
 
 	*iface = 0;

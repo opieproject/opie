@@ -32,37 +32,37 @@ struct mpeg3_III_sideinfo
 {
 	unsigned main_data_begin;
 	unsigned private_bits;
-	struct 
+	struct
 	{
     	struct gr_info_s gr[2];
 	} ch[2];
 };
 
 int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
-		int *scf, 
-		struct gr_info_s *gr_info, 
-		int ch, 
+		int *scf,
+		struct gr_info_s *gr_info,
+		int ch,
 		int gr)
 {
-	static unsigned char slen[2][16] = 
+	static unsigned char slen[2][16] =
 		{{0, 0, 0, 0, 3, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4},
 		 {0, 1, 2, 3, 0, 1, 2, 3, 1, 2, 3, 1, 2, 3, 2, 3}};
 	int numbits;
 	int num0 = slen[0][gr_info->scalefac_compress];
 	int num1 = slen[1][gr_info->scalefac_compress];
 
-    if (gr_info->block_type == 2) 
+    if (gr_info->block_type == 2)
 	{
 		int i = 18;
 		numbits = (num0 + num1) * 18;
 
-		if (gr_info->mixed_block_flag) 
+		if (gr_info->mixed_block_flag)
 		{
 			for(i = 8; i; i--)
 				*scf++ = mpeg3bits_getbits(audio->astream, num0);
 			i = 9;
 /* num0 * 17 + num1 * 18 */
-			numbits -= num0; 
+			numbits -= num0;
 		}
 
 		for( ; i; i--)
@@ -70,17 +70,17 @@ int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
 		for(i = 18; i; i--)
 			*scf++ = mpeg3bits_getbits(audio->astream, num1);
 /* short[13][0..2] = 0 */
-		*scf++ = 0; 
-		*scf++ = 0; 
-		*scf++ = 0; 
+		*scf++ = 0;
+		*scf++ = 0;
+		*scf++ = 0;
     }
-    else 
+    else
 	{
     	int i;
     	int scfsi = gr_info->scfsi;
 
     	if(scfsi < 0)
-		{ 
+		{
 /* scfsi < 0 => granule == 0 */
 			for(i = 11; i; i--)
 			{
@@ -91,10 +91,10 @@ int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
 			numbits = (num0 + num1) * 10 + num0;
 			*scf++ = 0;
     	}
-    	else 
+    	else
 		{
     		numbits = 0;
-    		if(!(scfsi & 0x8)) 
+    		if(!(scfsi & 0x8))
 			{
         		for(i = 0; i < 6; i++)
 				{
@@ -102,40 +102,40 @@ int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
 				}
         		numbits += num0 * 6;
     		}
-    		else 
+    		else
 			{
-        		scf += 6; 
+        		scf += 6;
     		}
 
-    		if(!(scfsi & 0x4)) 
+    		if(!(scfsi & 0x4))
 			{
         		for(i = 0; i < 5; i++)
         		  *scf++ = mpeg3bits_getbits(audio->astream, num0);
         		numbits += num0 * 5;
     		}
-    		else 
+    		else
 			{
 				scf += 5;
     		}
 
-    		if(!(scfsi & 0x2)) 
+    		if(!(scfsi & 0x2))
 			{
         	    for(i = 0; i < 5; i++)
         			*scf++ = mpeg3bits_getbits(audio->astream, num1);
         	    numbits += num1 * 5;
     		}
-    		else 
+    		else
 			{
-        	    scf += 5; 
+        	    scf += 5;
     		}
 
-    		if(!(scfsi & 0x1)) 
+    		if(!(scfsi & 0x1))
 			{
         	    for(i = 0; i < 5; i++)
         			*scf++ = mpeg3bits_getbits(audio->astream, num1);
         	    numbits += num1 * 5;
     		}
-    		else 
+    		else
 			{
         	    scf += 5;
     		}
@@ -153,24 +153,24 @@ int mpeg3audio_III_get_scale_factors_2(mpeg3audio_t *audio,
 	unsigned char *pnt;
 	int i, j, n = 0, numbits = 0;
 	unsigned int slen;
-	static unsigned char stab[3][6][4] = 
+	static unsigned char stab[3][6][4] =
 	{{{ 6, 5, 5,5 }, { 6, 5, 7,3 }, { 11,10,0,0},
       { 7, 7, 7,0 }, { 6, 6, 6,3 }, {  8, 8,5,0}},
 	 {{ 9, 9, 9,9 }, { 9, 9,12,6 }, { 18,18,0,0},
       {12,12,12,0 }, {12, 9, 9,6 }, { 15,12,9,0}},
 	 {{ 6, 9, 9,9 }, { 6, 9,12,6 }, { 15,18,0,0},
-      { 6,15,12,0 }, { 6,12, 9,6 }, {  6,18,9,0}}}; 
+      { 6,15,12,0 }, { 6,12, 9,6 }, {  6,18,9,0}}};
 
 /* i_stereo AND second channel -> do_layer3() checks this */
-	if(i_stereo) 
+	if(i_stereo)
       	slen = mpeg3_i_slen2[gr_info->scalefac_compress >> 1];
 	else
       	slen = mpeg3_n_slen2[gr_info->scalefac_compress];
 
   	gr_info->preflag = (slen >> 15) & 0x1;
 
-	n = 0;  
-	if(gr_info->block_type == 2 ) 
+	n = 0;
+	if(gr_info->block_type == 2 )
 	{
     	n++;
     	if(gr_info->mixed_block_flag)
@@ -183,19 +183,19 @@ int mpeg3audio_III_get_scale_factors_2(mpeg3audio_t *audio,
 	{
     	int num = slen & 0x7;
     	slen >>= 3;
-    	if(num) 
+    	if(num)
 		{
     		for(j = 0; j < (int)(pnt[i]); j++)
         	    *scf++ = mpeg3bits_getbits(audio->astream, num);
     		numbits += pnt[i] * num;
     	}
-    	else 
+    	else
 		{
     	    for(j = 0; j < (int)(pnt[i]); j++)
         		*scf++ = 0;
     	}
 	}
-  
+
 	n = (n << 1) + 1;
 	for(i = 0; i < n; i++)
 		*scf++ = 0;
@@ -244,52 +244,52 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
     	int region1  = gr_info->region1start;
     	int region2  = gr_info->region2start;
 
-    	l3 = ((576 >> 1) - bv) >> 1;   
+    	l3 = ((576 >> 1) - bv) >> 1;
 
 /*
- * we may lose the 'odd' bit here !! 
- * check this later again 
+ * we may lose the 'odd' bit here !!
+ * check this later again
  */
 
-    	if(bv <= region1) 
+    	if(bv <= region1)
 		{
-    	    l[0] = bv; 
-			l[1] = 0; 
+    	    l[0] = bv;
+			l[1] = 0;
 			l[2] = 0;
     	}
-    	else 
+    	else
 		{
     		l[0] = region1;
-    		if(bv <= region2) 
+    		if(bv <= region2)
 			{
         	    l[1] = bv - l[0];  l[2] = 0;
     		}
-    		else 
+    		else
 			{
-        	    l[1] = region2 - l[0]; 
+        	    l[1] = region2 - l[0];
 				l[2] = bv - region2;
     		}
     	}
 	}
- 
-  	if(gr_info->block_type == 2) 
+
+  	if(gr_info->block_type == 2)
 	{
 /*
- * decoding with short or mixed mode BandIndex table 
+ * decoding with short or mixed mode BandIndex table
  */
     	int i, max[4];
     	int step = 0, lwin = 3, cb = 0;
     	register mpeg3_real_t v = 0.0;
     	register int *m, mc;
 
-    	if(gr_info->mixed_block_flag) 
+    	if(gr_info->mixed_block_flag)
 		{
     		max[3] = -1;
     		max[0] = max[1] = max[2] = 2;
     		m = mpeg3_map[sfreq][0];
     		me = mpeg3_mapend[sfreq][0];
     	}
-    	else 
+    	else
 		{
     		max[0] = max[1] = max[2] = max[3] = -1;
 /* max[3] not floatly needed in this case */
@@ -298,25 +298,25 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
     	}
 
 		mc = 0;
-		for(i = 0; i < 2; i++) 
+		for(i = 0; i < 2; i++)
 		{
 			int lp = l[i];
 			struct newhuff *h = mpeg3_ht + gr_info->table_select[i];
-			for( ; lp; lp--, mc--) 
+			for( ; lp; lp--, mc--)
 			{
     			register int x,y;
-    			if(!mc) 
+    			if(!mc)
 				{
     				mc    = *m++;
     				xrpnt = ((mpeg3_real_t*)xr) + (*m++);
     				lwin  = *m++;
     				cb    = *m++;
-    				if(lwin == 3) 
+    				if(lwin == 3)
 					{
         				v = gr_info->pow2gain[(*scf++) << shift];
         				step = 1;
     				}
-    				else 
+    				else
 					{
         				v = gr_info->full_gain[lwin][(*scf++) << shift];
         				step = 3;
@@ -326,7 +326,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
         		{
         			register short *val = h->table;
         			REFRESH_MASK;
-        			while((y = *val++) < 0) 
+        			while((y = *val++) < 0)
 					{
             			if (mask < 0)
             				val -= y;
@@ -337,7 +337,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
         			y &= 0xf;
         		}
 
-        		if(x == 15 && h->linbits) 
+        		if(x == 15 && h->linbits)
 				{
         			max[lwin] = cb;
         			REFRESH_MASK;
@@ -350,8 +350,8 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
             			*xrpnt =  mpeg3_ispow[x] * v;
         			mask <<= 1;
         		}
-        		else 
-				if(x) 
+        		else
+				if(x)
 				{
         			max[lwin] = cb;
         			if(mask < 0)
@@ -365,7 +365,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
         			*xrpnt = 0.0;
 
         		xrpnt += step;
-        		if(y == 15 && h->linbits) 
+        		if(y == 15 && h->linbits)
 				{
         			max[lwin] = cb;
         			REFRESH_MASK;
@@ -378,8 +378,8 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
             			*xrpnt =  mpeg3_ispow[y] * v;
         			mask <<= 1;
         		}
-        		else 
-				if(y) 
+        		else
+				if(y)
 				{
         			max[lwin] = cb;
         			if(mask < 0)
@@ -395,41 +395,41 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
     		}
     	}
 
-    	for( ;l3 && (part2remain + num > 0); l3--) 
+    	for( ;l3 && (part2remain + num > 0); l3--)
 		{
     		struct newhuff *h = mpeg3_htc + gr_info->count1table_select;
     		register short *val = h->table, a;
 
     		REFRESH_MASK;
-    		while((a = *val++) < 0) 
+    		while((a = *val++) < 0)
 			{
         		if (mask < 0)
         			val -= a;
         		num--;
         		mask <<= 1;
     		}
-	        if(part2remain + num <= 0) 
+	        if(part2remain + num <= 0)
 			{
 				num -= part2remain + num;
 				break;
       		}
 
-    		for(i = 0; i < 4; i++) 
+    		for(i = 0; i < 4; i++)
 			{
-        		if(!(i & 1)) 
+        		if(!(i & 1))
 				{
-        			if(!mc) 
+        			if(!mc)
 					{
             			mc = *m++;
             			xrpnt = ((mpeg3_real_t*)xr) + (*m++);
             			lwin = *m++;
             			cb = *m++;
-            			if(lwin == 3) 
+            			if(lwin == 3)
 						{
             				v = gr_info->pow2gain[(*scf++) << shift];
             				step = 1;
             			}
-            			else 
+            			else
 						{
             				v = gr_info->full_gain[lwin][(*scf++) << shift];
             				step = 3;
@@ -437,14 +437,14 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
         			}
         			mc--;
         		}
-        		if((a & (0x8 >> i))) 
+        		if((a & (0x8 >> i)))
 				{
         			max[lwin] = cb;
-        			if(part2remain + num <= 0) 
+        			if(part2remain + num <= 0)
 					{
             			break;
         			}
-        			if(mask < 0) 
+        			if(mask < 0)
             			*xrpnt = -v;
         			else
             			*xrpnt = v;
@@ -457,17 +457,17 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
     		}
     	}
 
-    	if(lwin < 3) 
-		{ 
+    	if(lwin < 3)
+		{
 /* short band? */
-    		while(1) 
+    		while(1)
 			{
-        		for( ;mc > 0; mc--) 
+        		for( ;mc > 0; mc--)
 				{
 /* short band -> step=3 */
-        			*xrpnt = 0.0; 
-					xrpnt += 3; 
-        			*xrpnt = 0.0; 
+        			*xrpnt = 0.0;
+					xrpnt += 3;
+        			*xrpnt = 0.0;
 					xrpnt += 3;
         		}
         		if(m >= me)
@@ -476,9 +476,9 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
         		xrpnt = ((mpeg3_real_t*)xr) + *m++;
 /* optimize: field will be set to zero at the end of the function */
         		if(*m++ == 0)
-        			break; 
+        			break;
 /* cb */
-        		m++; 
+        		m++;
     		}
     	}
 
@@ -494,7 +494,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
     	}
 
 	}
-	else 
+	else
 	{
 /*
  * decoding with 'long' BandIndex table (block_type != 2)
@@ -509,16 +509,16 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 /*
  * long hash table values
  */
-    	for(i = 0; i < 3; i++) 
+    	for(i = 0; i < 3; i++)
 		{
     		int lp = l[i];
     		struct newhuff *h = mpeg3_ht + gr_info->table_select[i];
 
-    		for(; lp; lp--, mc--) 
+    		for(; lp; lp--, mc--)
 			{
         		int x, y;
 
-				if(!mc) 
+				if(!mc)
 				{
 					mc = *m++;
 					cb = *m++;
@@ -530,7 +530,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
     			{
     				register short *val = h->table;
     				REFRESH_MASK;
-    				while((y = *val++) < 0) 
+    				while((y = *val++) < 0)
 					{
         				if(mask < 0)
         					val -= y;
@@ -541,7 +541,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
     				y &= 0xf;
     			}
 
-        		if(x == 15 && h->linbits) 
+        		if(x == 15 && h->linbits)
 				{
         			max = cb;
 					REFRESH_MASK;
@@ -554,8 +554,8 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
             			*xrpnt++ =  mpeg3_ispow[x] * v;
         			mask <<= 1;
         		}
-        		else 
-				if(x) 
+        		else
+				if(x)
 				{
         			max = cb;
         			if(mask < 0)
@@ -568,7 +568,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
         		else
         			*xrpnt++ = 0.0;
 
-       			if(y == 15 && h->linbits) 
+       			if(y == 15 && h->linbits)
 				{
         			max = cb;
 					REFRESH_MASK;
@@ -581,8 +581,8 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
             			*xrpnt++ =  mpeg3_ispow[y] * v;
         			mask <<= 1;
         		}
-        		else 
-				if(y) 
+        		else
+				if(y)
 				{
         		  max = cb;
         		  if(mask < 0)
@@ -600,30 +600,30 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 /*
  * short (count1table) values
  */
-    	for( ; l3 && (part2remain + num > 0); l3--) 
+    	for( ; l3 && (part2remain + num > 0); l3--)
 		{
     		struct newhuff *h = mpeg3_htc + gr_info->count1table_select;
     		register short *val = h->table, a;
 
     		REFRESH_MASK;
-    		while((a = *val++) < 0) 
+    		while((a = *val++) < 0)
 			{
         		if(mask < 0)
         			val -= a;
         		num--;
         		mask <<= 1;
     		}
-    		if(part2remain + num <= 0) 
+    		if(part2remain + num <= 0)
 			{
 				num -= part2remain + num;
         		break;
     		}
 
-    		for(i = 0; i < 4; i++) 
+    		for(i = 0; i < 4; i++)
 			{
-        		if(!(i & 1)) 
+        		if(!(i & 1))
 				{
-        			if(!mc) 
+        			if(!mc)
 					{
             			mc = *m++;
             			cb = *m++;
@@ -637,7 +637,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
         		if((a & (0x8 >> i)))
 				{
         			max = cb;
-        			if(part2remain + num <= 0) 
+        			if(part2remain + num <= 0)
 					{
             			break;
         			}
@@ -666,7 +666,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 //printf("III_dequantize_sample 3 %d %04x\n", audio->astream->bit_number, mpeg3bits_showbits(audio->astream, 16));
 	num = 0;
 
-	while(xrpnt < &xr[SBLIMIT][0]) 
+	while(xrpnt < &xr[SBLIMIT][0])
       	*xrpnt++ = 0.0;
 
 	while(part2remain > 16)
@@ -678,8 +678,8 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 	{
       	mpeg3bits_getbits(audio->astream, part2remain);
 	}
-	else 
-	if(part2remain < 0) 
+	else
+	if(part2remain < 0)
 	{
       	fprintf(stderr,"mpeg3audio_III_dequantize_sample: Can't rewind stream %d bits!\n", -part2remain);
       	return 1; /* -> error */
@@ -703,7 +703,7 @@ int mpeg3audio_III_get_side_info(mpeg3audio_t *audio,
 	si->main_data_begin = mpeg3bits_getbits(audio->astream, tab[1]);
 	if(channels == 1)
 		si->private_bits = mpeg3bits_getbits(audio->astream, tab[2]);
-	else 
+	else
     	si->private_bits = mpeg3bits_getbits(audio->astream, tab[3]);
 	if(!lsf)
 	{
@@ -714,7 +714,7 @@ int mpeg3audio_III_get_side_info(mpeg3audio_t *audio,
 		}
 	}
 
-	for(gr = 0; gr < tab[0]; gr++) 
+	for(gr = 0; gr < tab[0]; gr++)
 	{
 		for(ch = 0; ch < channels; ch++)
 		{
@@ -722,7 +722,7 @@ int mpeg3audio_III_get_side_info(mpeg3audio_t *audio,
 
 			gr_info->part2_3_length = mpeg3bits_getbits(audio->astream, 12);
 			gr_info->big_values = mpeg3bits_getbits(audio->astream, 9);
-			if(gr_info->big_values > 288) 
+			if(gr_info->big_values > 288)
 			{
 				fprintf(stderr,"mpeg3_III_get_side_info: big_values too large!\n");
 				gr_info->big_values = 288;
@@ -732,7 +732,7 @@ int mpeg3audio_III_get_side_info(mpeg3audio_t *audio,
 				gr_info->pow2gain += 2;
 			gr_info->scalefac_compress = mpeg3bits_getbits(audio->astream, tab[4]);
 
-			if(mpeg3bits_getbits(audio->astream, 1)) 
+			if(mpeg3bits_getbits(audio->astream, 1))
 			{
 /* window switch flag  */
 				int i;
@@ -748,16 +748,16 @@ int mpeg3audio_III_get_side_info(mpeg3audio_t *audio,
         		for(i = 0; i < 3; i++)
         	    	gr_info->full_gain[i] = gr_info->pow2gain + (mpeg3bits_getbits(audio->astream, 3) << 3);
 
-        		if(gr_info->block_type == 0) 
+        		if(gr_info->block_type == 0)
 				{
         			fprintf(stderr,"Blocktype == 0 and window-switching == 1 not allowed.\n");
         			return 1;
         		}
 
-/* region_count/start parameters are implicit in this case. */       
+/* region_count/start parameters are implicit in this case. */
 				if(!lsf || gr_info->block_type == 2)
         	   		gr_info->region1start = 36 >> 1;
-				else 
+				else
 				{
 /* check this again for 2.5 and sfreq=8 */
         			if(sfreq == 8)
@@ -767,7 +767,7 @@ int mpeg3audio_III_get_side_info(mpeg3audio_t *audio,
         		}
         		gr_info->region2start = 576 >> 1;
 			}
-			else 
+			else
 			{
 				int i, r0c, r1c;
 				for(i = 0; i < 3; i++)
@@ -798,7 +798,7 @@ int mpeg3audio_III_hybrid(mpeg3audio_t *audio,
 	mpeg3_real_t *rawout1,*rawout2;
 	int bt, sb = 0;
 
-	
+
 	{
     	int b = audio->mp3_blc[ch];
     	rawout1 = audio->mp3_block[b][ch];
@@ -806,39 +806,39 @@ int mpeg3audio_III_hybrid(mpeg3audio_t *audio,
     	rawout2 = audio->mp3_block[b][ch];
     	audio->mp3_blc[ch] = b;
 	}
-  
-	if(gr_info->mixed_block_flag) 
+
+	if(gr_info->mixed_block_flag)
 	{
     	sb = 2;
     	mpeg3audio_dct36(fsIn[0], rawout1, rawout2, mpeg3_win[0], tspnt);
     	mpeg3audio_dct36(fsIn[1], rawout1 + 18, rawout2 + 18, mpeg3_win1[0], tspnt + 1);
-    	rawout1 += 36; 
-		rawout2 += 36; 
+    	rawout1 += 36;
+		rawout2 += 36;
 		tspnt += 2;
 	}
 
 	bt = gr_info->block_type;
-	if(bt == 2) 
+	if(bt == 2)
 	{
-    	for( ; sb < gr_info->maxb; sb += 2, tspnt += 2, rawout1 += 36, rawout2 += 36) 
+    	for( ; sb < gr_info->maxb; sb += 2, tspnt += 2, rawout1 += 36, rawout2 += 36)
 		{
     		mpeg3audio_dct12(fsIn[sb]  ,rawout1   ,rawout2   ,mpeg3_win[2] ,tspnt);
     		mpeg3audio_dct12(fsIn[sb + 1], rawout1 + 18, rawout2 + 18, mpeg3_win1[2], tspnt + 1);
     	}
 	}
-	else 
+	else
 	{
-    	for( ; sb < gr_info->maxb; sb += 2, tspnt += 2, rawout1 += 36, rawout2 += 36) 
+    	for( ; sb < gr_info->maxb; sb += 2, tspnt += 2, rawout1 += 36, rawout2 += 36)
 		{
     		mpeg3audio_dct36(fsIn[sb], rawout1, rawout2, mpeg3_win[bt], tspnt);
     		mpeg3audio_dct36(fsIn[sb + 1], rawout1 + 18, rawout2 + 18, mpeg3_win1[bt], tspnt + 1);
     	}
 	}
 
-	for( ; sb < SBLIMIT; sb++, tspnt++) 
+	for( ; sb < SBLIMIT; sb++, tspnt++)
 	{
     	int i;
-    	for(i = 0; i < SSLIMIT; i++) 
+    	for(i = 0; i < SSLIMIT; i++)
 		{
     		tspnt[i * SBLIMIT] = *rawout1++;
     		*rawout2++ = 0.0;
@@ -853,13 +853,13 @@ int mpeg3audio_III_antialias(mpeg3audio_t *audio,
 {
 	int sblim;
 
-	if(gr_info->block_type == 2) 
+	if(gr_info->block_type == 2)
 	{
-    	if(!gr_info->mixed_block_flag) 
+    	if(!gr_info->mixed_block_flag)
         	return 0;
-    	sblim = 1; 
+    	sblim = 1;
 	}
-	else 
+	else
 	{
         sblim = gr_info->maxb-1;
 	}
@@ -871,7 +871,7 @@ int mpeg3audio_III_antialias(mpeg3audio_t *audio,
     	int sb;
     	mpeg3_real_t *xr1 = (mpeg3_real_t*)xr[1];
 
-    	for(sb = sblim; sb; sb--, xr1 += 10) 
+    	for(sb = sblim; sb; sb--, xr1 += 10)
 		{
     		int ss;
     		mpeg3_real_t *cs, *ca;
@@ -881,7 +881,7 @@ int mpeg3audio_III_antialias(mpeg3audio_t *audio,
     		xr2 = xr1;
 
     		for(ss = 7; ss >= 0; ss--)
-    		{       
+    		{
 /* upper and lower butterfly inputs */
         		register mpeg3_real_t bu, bd;
         		bu = *--xr2;
@@ -894,10 +894,10 @@ int mpeg3audio_III_antialias(mpeg3audio_t *audio,
 	return 0;
 }
 
-/* 
+/*
  * III_stereo: calculate mpeg3_real_t channel values for Joint-I-Stereo-mode
  */
-int mpeg3audio_III_i_stereo(mpeg3audio_t *audio, 
+int mpeg3audio_III_i_stereo(mpeg3audio_t *audio,
 		mpeg3_real_t xr_buf[2][SBLIMIT][SSLIMIT],
 		int *scalefac,
    		struct gr_info_s *gr_info,
@@ -911,43 +911,43 @@ int mpeg3audio_III_i_stereo(mpeg3audio_t *audio,
 
     int tab;
 /* TODO: optimize as static */
-    static const mpeg3_real_t *tabs[3][2][2] = 
-	{ 
+    static const mpeg3_real_t *tabs[3][2][2] =
+	{
        { { mpeg3_tan1_1, mpeg3_tan2_1 }     , { mpeg3_tan1_2, mpeg3_tan2_2 } },
        { { mpeg3_pow1_1[0], mpeg3_pow2_1[0] } , { mpeg3_pow1_2[0], mpeg3_pow2_2[0] } } ,
-       { { mpeg3_pow1_1[1], mpeg3_pow2_1[1] } , { mpeg3_pow1_2[1], mpeg3_pow2_2[1] } } 
+       { { mpeg3_pow1_1[1], mpeg3_pow2_1[1] } , { mpeg3_pow1_2[1], mpeg3_pow2_2[1] } }
     };
 
     tab = lsf + (gr_info->scalefac_compress & lsf);
     tab1 = tabs[tab][ms_stereo][0];
     tab2 = tabs[tab][ms_stereo][1];
 
-    if(gr_info->block_type == 2) 
+    if(gr_info->block_type == 2)
 	{
     	int lwin,do_l = 0;
     	if(gr_info->mixed_block_flag)
         	do_l = 1;
 
-    	for(lwin = 0; lwin < 3; lwin++) 
-		{ 
+    	for(lwin = 0; lwin < 3; lwin++)
+		{
 /* process each window */
 /* get first band with zero values */
 /* sfb is minimal 3 for mixed mode */
-        	int is_p, sb, idx, sfb = gr_info->maxband[lwin];  
+        	int is_p, sb, idx, sfb = gr_info->maxband[lwin];
         	if(sfb > 3) do_l = 0;
 
-        	for( ; sfb < 12 ; sfb++) 
+        	for( ; sfb < 12 ; sfb++)
 			{
-/* scale: 0-15 */ 
-        		is_p = scalefac[sfb * 3 + lwin - gr_info->mixed_block_flag]; 
-        		if(is_p != 7) 
+/* scale: 0-15 */
+        		is_p = scalefac[sfb * 3 + lwin - gr_info->mixed_block_flag];
+        		if(is_p != 7)
 				{
             		mpeg3_real_t t1, t2;
             		sb  = bi->shortDiff[sfb];
             		idx = bi->shortIdx[sfb] + lwin;
-            		t1  = tab1[is_p]; 
+            		t1  = tab1[is_p];
 					t2 = tab2[is_p];
-            		for( ; sb > 0; sb--, idx += 3) 
+            		for( ; sb > 0; sb--, idx += 3)
 					{
             			mpeg3_real_t v = xr[0][idx];
             			xr[0][idx] = v * t1;
@@ -956,19 +956,19 @@ int mpeg3audio_III_i_stereo(mpeg3audio_t *audio,
         		}
 			}
 
-/* in the original: copy 10 to 11 , here: copy 11 to 12 
+/* in the original: copy 10 to 11 , here: copy 11 to 12
 maybe still wrong??? (copy 12 to 13?) */
 /* scale: 0-15 */
-        	is_p = scalefac[11 * 3 + lwin - gr_info->mixed_block_flag]; 
+        	is_p = scalefac[11 * 3 + lwin - gr_info->mixed_block_flag];
         	sb   = bi->shortDiff[12];
         	idx  = bi->shortIdx[12] + lwin;
-        	if(is_p != 7) 
+        	if(is_p != 7)
 			{
         		mpeg3_real_t t1, t2;
-        		t1 = tab1[is_p]; 
+        		t1 = tab1[is_p];
 				t2 = tab2[is_p];
-        		for( ; sb > 0; sb--, idx += 3) 
-				{  
+        		for( ; sb > 0; sb--, idx += 3)
+				{
             		mpeg3_real_t v = xr[0][idx];
             		xr[0][idx] = v * t1;
             		xr[1][idx] = v * t2;
@@ -977,51 +977,51 @@ maybe still wrong??? (copy 12 to 13?) */
     	} /* end for(lwin; .. ; . ) */
 
 /* also check l-part, if ALL bands in the three windows are 'empty'
-* and mode = mixed_mode 
+* and mode = mixed_mode
 */
-		if(do_l) 
+		if(do_l)
 		{
 			int sfb = gr_info->maxbandl;
 			int idx = bi->longIdx[sfb];
 
-			for ( ; sfb < 8; sfb++) 
+			for ( ; sfb < 8; sfb++)
 			{
 				int sb = bi->longDiff[sfb];
 /* scale: 0-15 */
-				int is_p = scalefac[sfb]; 
-				if(is_p != 7) 
+				int is_p = scalefac[sfb];
+				if(is_p != 7)
 				{
 					mpeg3_real_t t1, t2;
-					t1 = tab1[is_p]; 
+					t1 = tab1[is_p];
 					t2 = tab2[is_p];
-					for( ; sb > 0; sb--, idx++) 
+					for( ; sb > 0; sb--, idx++)
 					{
 						mpeg3_real_t v = xr[0][idx];
 						xr[0][idx] = v * t1;
 						xr[1][idx] = v * t2;
 					}
 				}
-				else 
+				else
 				   idx += sb;
 			}
-    	}     
-	} 
-    else 
-	{ 
+    	}
+	}
+    else
+	{
 /* ((gr_info->block_type != 2)) */
 		int sfb = gr_info->maxbandl;
 		int is_p, idx = bi->longIdx[sfb];
-		for( ; sfb < 21; sfb++) 
+		for( ; sfb < 21; sfb++)
 		{
 			int sb = bi->longDiff[sfb];
 /* scale: 0-15 */
-			is_p = scalefac[sfb]; 
-			if(is_p != 7) 
+			is_p = scalefac[sfb];
+			if(is_p != 7)
 			{
         		mpeg3_real_t t1, t2;
-        		t1 = tab1[is_p]; 
+        		t1 = tab1[is_p];
 				t2 = tab2[is_p];
-        		for( ; sb > 0; sb--, idx++) 
+        		for( ; sb > 0; sb--, idx++)
 				{
 					 mpeg3_real_t v = xr[0][idx];
             		 xr[0][idx] = v * t1;
@@ -1033,11 +1033,11 @@ maybe still wrong??? (copy 12 to 13?) */
       	}
 
     	is_p = scalefac[20];
-    	if(is_p != 7) 
-		{  
+    	if(is_p != 7)
+		{
 /* copy l-band 20 to l-band 21 */
         	int sb;
-        	mpeg3_real_t t1 = tab1[is_p], t2 = tab2[is_p]; 
+        	mpeg3_real_t t1 = tab1[is_p], t2 = tab2[is_p];
 
         	for(sb = bi->longDiff[21]; sb > 0; sb--, idx++)
 			{
@@ -1116,7 +1116,7 @@ int mpeg3audio_dolayer3(mpeg3audio_t *audio)
 	{
     	granules = 1;
   	}
-  	else 
+  	else
 	{
     	granules = 2;
   	}
@@ -1130,8 +1130,8 @@ int mpeg3audio_dolayer3(mpeg3audio_t *audio)
 
 	if(sideinfo.main_data_begin)
 	{
-		memcpy(audio->bsbuf + audio->ssize - sideinfo.main_data_begin, 
-			audio->bsbufold + audio->prev_framesize - sideinfo.main_data_begin, 
+		memcpy(audio->bsbuf + audio->ssize - sideinfo.main_data_begin,
+			audio->bsbufold + audio->prev_framesize - sideinfo.main_data_begin,
 			sideinfo.main_data_begin);
 		mpeg3bits_use_ptr(audio->astream, audio->bsbuf + audio->ssize - sideinfo.main_data_begin);
 	}
@@ -1158,11 +1158,11 @@ int mpeg3audio_dolayer3(mpeg3audio_t *audio)
 //printf("dolayer3 5 %04x\n", mpeg3bits_showbits(audio->astream, 16));
     	}
 
-      	if(channels == 2) 
+      	if(channels == 2)
 		{
     		struct gr_info_s *gr_info = &(sideinfo.ch[1].gr[gr]);
     		long part2bits;
-    		if(audio->lsf) 
+    		if(audio->lsf)
         		part2bits = mpeg3audio_III_get_scale_factors_2(audio, scalefacs[1], gr_info, i_stereo);
     		else
         		part2bits = mpeg3audio_III_get_scale_factors_1(audio, scalefacs[1], gr_info, 1, gr);
@@ -1191,15 +1191,15 @@ int mpeg3audio_dolayer3(mpeg3audio_t *audio)
     		if(i_stereo)
         		mpeg3audio_III_i_stereo(audio, hybridIn, scalefacs[1], gr_info, sfreq, ms_stereo, audio->lsf);
 
-    		if(ms_stereo || i_stereo || (single == 3)) 
+    		if(ms_stereo || i_stereo || (single == 3))
 			{
-        		if(gr_info->maxb > sideinfo.ch[0].gr[gr].maxb) 
+        		if(gr_info->maxb > sideinfo.ch[0].gr[gr].maxb)
         			sideinfo.ch[0].gr[gr].maxb = gr_info->maxb;
         		else
         			gr_info->maxb = sideinfo.ch[0].gr[gr].maxb;
     		}
 
-    		switch(single) 
+    		switch(single)
 			{
         		case 3:
         			{
@@ -1207,7 +1207,7 @@ int mpeg3audio_dolayer3(mpeg3audio_t *audio)
             			register mpeg3_real_t *in0 = (mpeg3_real_t*)hybridIn[0], *in1 = (mpeg3_real_t*)hybridIn[1];
 /* *0.5 done by pow-scale */
             			for(i = 0; i < SSLIMIT * gr_info->maxb; i++, in0++)
-            				*in0 = (*in0 + *in1++); 
+            				*in0 = (*in0 + *in1++);
         			}
         			break;
         		case 1:
@@ -1234,7 +1234,7 @@ int mpeg3audio_dolayer3(mpeg3audio_t *audio)
 			{
 				mpeg3audio_synth_mono(audio, hybridOut[0][ss], audio->pcm_sample, &(audio->pcm_point));
     		}
-    		else 
+    		else
 			{
         		int p1 = audio->pcm_point;
         		mpeg3audio_synth_stereo(audio, hybridOut[0][ss], 0, audio->pcm_sample, &p1);

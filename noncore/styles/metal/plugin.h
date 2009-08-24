@@ -8,13 +8,13 @@ class MetalInterface : public StyleInterface {
 public:
 	MetalInterface ( );
 	virtual ~MetalInterface ( );
-	
+
 	QRESULT queryInterface ( const QUuid &, QUnknownInterface ** );
 	Q_REFCOUNT
-        	
-	virtual QStyle *style ( );	
+
+	virtual QStyle *style ( );
 	virtual QString name ( ) const;
-	
+
 };
 
 #endif

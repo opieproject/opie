@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 				if(argv[i][1] == 'a') do_audio = 1;
 				else
 				if(argv[i][1] == 'v') do_video = 1;
-				
+
 				if(argv[i][2] != 0)
 				{
 					stream = argv[i][2] - 48;
@@ -66,13 +66,13 @@ int main(int argc, char *argv[])
 			continue;
 		}
 
-		if((mpeg3_has_audio(in) && in->is_audio_stream) || 
+		if((mpeg3_has_audio(in) && in->is_audio_stream) ||
 			(do_audio && !in->is_audio_stream && !in->is_video_stream))
 		{
 			do_audio = 1;
 /* Add audio stream to end */
-			while(!mpeg3_read_audio_chunk(in, buffer, 
-				&output_size, 
+			while(!mpeg3_read_audio_chunk(in, buffer,
+				&output_size,
 				BUFFER_SIZE,
 				stream))
 			{
@@ -94,19 +94,19 @@ int main(int argc, char *argv[])
 			unsigned long code;
 			float carry;
 			int i, offset;
-			
+
 			do_video = 1;
-			while(!mpeg3_read_video_chunk(in, 
-				buffer, 
-				&output_size, 
+			while(!mpeg3_read_video_chunk(in,
+				buffer,
+				&output_size,
 				BUFFER_SIZE,
 				stream) &&
 				output_size >= 4)
 			{
-				code = (unsigned long)buffer[output_size - 4] << 24; 
-				code |= (unsigned long)buffer[output_size - 3] << 16; 
-				code |= (unsigned long)buffer[output_size - 2] << 8; 
-				code |= (unsigned long)buffer[output_size - 1]; 
+				code = (unsigned long)buffer[output_size - 4] << 24;
+				code |= (unsigned long)buffer[output_size - 3] << 16;
+				code |= (unsigned long)buffer[output_size - 2] << 8;
+				code |= (unsigned long)buffer[output_size - 1];
 
 /* Got a frame at the end of this buffer. */
 				if(code == MPEG3_PICTURE_START_CODE)
@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 				{
 /* Skip the sequence start code */
 					i += 4;
-					while(i < output_size && 
+					while(i < output_size &&
 						code != MPEG3_GOP_START_CODE)
 					{
 						code <<= 8;
@@ -168,7 +168,7 @@ int main(int argc, char *argv[])
 
 					gop_frame = (long)(hour * 3600 * mpeg3_frame_rate(in, stream) +
 							minute * 60 * mpeg3_frame_rate(in, stream) +
-							second * mpeg3_frame_rate(in, stream) + 
+							second * mpeg3_frame_rate(in, stream) +
 							frame);
 /* fprintf(stderr, "old: %02d:%02d:%02d:%02d ", hour, minute, second, frame); */
 /* Write a new time code */
@@ -203,7 +203,7 @@ int main(int argc, char *argv[])
 			in = 0;
 			continue;
 		}
-		
+
 		mpeg3_close(in);
 		in = 0;
 		current_output_file++;

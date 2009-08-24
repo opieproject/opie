@@ -277,7 +277,7 @@ void TinyKate::slotCurrentChanged( QWidget * view)
 void TinyKate::slotNew( )
 {
     KateDocument *kd= new KateDocument(false, false, this,0,this);
-    
+
     kd->setDocName(tr("Unnamed %1").arg(nextUnnamed++));
     kd->setNewDoc(true);
     tabwidget->addTab(kd->createView(tabwidget,"Unnamed"),
@@ -303,13 +303,13 @@ bool TinyKate::checkSave() {
                 return saveDocument();
             }
             break;
-    
+
             case 1:
             {
                 return true;
             }
             break;
-    
+
             default:
             {
                 return false;

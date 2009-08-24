@@ -9,13 +9,13 @@ class USBRun  : public RuntimeInfo {
 
 public :
 
-      USBRun( ANetNodeInstance * NNI, 
-              USBData & Data ) : 
+      USBRun( ANetNodeInstance * NNI,
+              USBData & Data ) :
                 RuntimeInfo( NNI ),
                 Pat( "usb[0-9abcdef]" ) {
       }
 
-      virtual RuntimeInfo * device( void ) 
+      virtual RuntimeInfo * device( void )
         { return this; }
 
       bool handlesInterface( const QString & I );

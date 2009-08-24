@@ -17,18 +17,18 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 
-/* 
- *  Constructs a CameraBase which is a child of 'parent', with the 
- *  name 'name' and widget flags set to 'f' 
+/*
+ *  Constructs a CameraBase which is a child of 'parent', with the
+ *  name 'name' and widget flags set to 'f'
  */
 CameraBase::CameraBase( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
     if ( !name )
 	setName( "camera" );
-    resize( 311, 381 ); 
+    resize( 311, 381 );
     setCaption( tr( "Camera" ) );
-    cameraLayout = new QGridLayout( this ); 
+    cameraLayout = new QGridLayout( this );
     cameraLayout->setSpacing( 0 );
     cameraLayout->setMargin( 0 );
 
@@ -38,7 +38,7 @@ CameraBase::CameraBase( QWidget* parent,  const char* name, WFlags fl )
     Frame3->setLineWidth( 4 );
     Frame3->setMargin( 4 );
     Frame3->setMidLineWidth( 3 );
-    Frame3Layout = new QVBoxLayout( Frame3 ); 
+    Frame3Layout = new QVBoxLayout( Frame3 );
     Frame3Layout->setSpacing( 6 );
     Frame3Layout->setMargin( 4 );
 
@@ -61,7 +61,7 @@ CameraBase::CameraBase( QWidget* parent,  const char* name, WFlags fl )
     thumbs = new QFrame( this, "thumbs" );
     thumbs->setFrameShape( QFrame::NoFrame );
     thumbs->setFrameShadow( QFrame::Plain );
-    thumbsLayout = new QHBoxLayout( thumbs ); 
+    thumbsLayout = new QHBoxLayout( thumbs );
     thumbsLayout->setSpacing( 0 );
     thumbsLayout->setMargin( 0 );
 
@@ -83,7 +83,7 @@ CameraBase::CameraBase( QWidget* parent,  const char* name, WFlags fl )
     cameraLayout->addMultiCellWidget( thumbs, 2, 2, 0, 1 );
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 CameraBase::~CameraBase()

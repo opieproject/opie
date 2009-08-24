@@ -183,7 +183,7 @@ void VolumeApplet::paintEvent( QPaintEvent* )
   OMixerInterface* mixer = new OMixerInterface( this, "/dev/mixer" );
 
   int volPercent =   mixer->volume( "Vol" ) >> 8;
-  
+
   int pixelsWide =  volPercent  * ( width() - 4 ) / 100;
   p. fillRect ( 2, height() - 3, pixelsWide, 2, red );
   p. fillRect ( pixelsWide + 2, height() - 3, width() - 4 - pixelsWide, 2, lightGray );

@@ -217,7 +217,7 @@ private:
 // work (only qtmail seems to use it)   - sandman
 // DO NOT USE IT IN NEW CODE !!
 
-class DateBookMonthPopup : public QPopupMenu 
+class DateBookMonthPopup : public QPopupMenu
 {
     Q_OBJECT
 public:

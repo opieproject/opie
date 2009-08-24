@@ -318,7 +318,7 @@ bool OPimContactAccessBackend_XML::replace ( const OPimContact &contact )
         m_uidToContact.insert( QString().setNum( newCont->uid() ), newCont );
 
         return true;
-    } 
+    }
     else
         return false;
 }
@@ -335,7 +335,7 @@ bool OPimContactAccessBackend_XML::remove ( int uid )
         m_uidToContact.remove( QString().setNum( uid ) );
 
         return true;
-    } 
+    }
     else
         return false;
 }
@@ -364,7 +364,7 @@ bool OPimContactAccessBackend_XML::read( OPimXmlReader &rd )
     return true;
 }
 
-void OPimContactAccessBackend_XML::initDict( QAsciiDict<int> &dict ) const 
+void OPimContactAccessBackend_XML::initDict( QAsciiDict<int> &dict ) const
 {
     dict.setAutoDelete( TRUE );
     dict.insert( "Uid", new int(Qtopia::AddressUid) );
@@ -426,7 +426,7 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
     QMap<QString, QString>::Iterator customIt;
     QAsciiDict<int> dict( 47 );
     initDict( dict );
- 
+
     if(root != 0l ) { // start parsing
         /* Parse all XML-Elements and put the data into the
          * Contact-Class
@@ -438,7 +438,7 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
         while( element && !isJournal ) {
             if( element->tagName() != QString::fromLatin1("Contacts") ) {
                 element = element->nextChild();
-            } 
+            }
             else {
                 element = element->firstChild();
                 break;
@@ -587,7 +587,7 @@ void OPimContactXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, Q
     OPimContact contact( map );
     for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
         contact.setCustomField(it.key(), it.data() );
-    
+
     m_backend.addContact_p( contact );
 }
 

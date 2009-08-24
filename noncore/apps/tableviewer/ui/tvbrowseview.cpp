@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 #include "tvbrowseview.h"
 #include "browsekeyentry.h"
 #include <qtoolbutton.h>
@@ -30,18 +30,18 @@
     \brief The widget describing how to draw the browse view user interface
 
     This widget allows for the user to browse through the table, one element
-    at a time, or search on a single key.  Its main goal is to show a 
-    single element in a readable format and make it easy for the user to 
+    at a time, or search on a single key.  Its main goal is to show a
+    single element in a readable format and make it easy for the user to
     rapidly find specific elements in the table.
 */
 
 /*!
-    Constructs a new TVBrowseView widget 
+    Constructs a new TVBrowseView widget
 */
-TVBrowseView::TVBrowseView(TableState *t, QWidget* parent, const char *name, 
+TVBrowseView::TVBrowseView(TableState *t, QWidget* parent, const char *name,
   WFlags fl )
 {
-    if (!name) 
+    if (!name)
   setName("BrowseView");
 
 //      setSizePolicy(QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding, 0, 0, sizePolicy().hasHeightForWidth() ) );
@@ -60,11 +60,11 @@ TVBrowseView::TVBrowseView(TableState *t, QWidget* parent, const char *name,
         this, SIGNAL(sortChanged(int)));
 
     ts = t;
-    keyEntry->setTableState(t); 
+    keyEntry->setTableState(t);
 }
 
 /*!
-    Destroys the TVBrowseView widget 
+    Destroys the TVBrowseView widget
 */
 TVBrowseView::~TVBrowseView()
 {
@@ -91,7 +91,7 @@ void TVBrowseView::reset()
 }
 
 /*!
-    sets the data element to be displayed to element 
+    sets the data element to be displayed to element
 */
 void TVBrowseView::setDisplayText(const DataElem *element)
 {
@@ -102,7 +102,7 @@ void TVBrowseView::setDisplayText(const DataElem *element)
     while (it.current()) {
         if (element->hasValidValue(it.currentKey())) {
             if(it.currentKey() == ts->current_column) {
-                rep += "<A name=\"ckey\"></A><B><FONT COLOR=#FF0000>" 
+                rep += "<A name=\"ckey\"></A><B><FONT COLOR=#FF0000>"
                     + encodeAttr(it.current()->name())
                     + ":</FONT></B> ";
             } else {
@@ -117,7 +117,7 @@ void TVBrowseView::setDisplayText(const DataElem *element)
     textViewDisplay->scrollToAnchor("ckey");
 }
 
-void TVBrowseView::rebuildKeys() 
+void TVBrowseView::rebuildKeys()
 {
     keyEntry->rebuildKeys();
 }

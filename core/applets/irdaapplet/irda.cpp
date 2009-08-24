@@ -146,10 +146,10 @@ bool IrdaApplet::setIrdaStatus ( bool b )
 
     if ( m_sockfd < 0 )
         return false;
-    
+
     if ( ::ioctl ( m_sockfd, SIOCGIFFLAGS, &ifr ) < 0 ) {
         // Try to start irattach service
-        if ( ! QFile::exists("/etc/init.d/irattach") ) 
+        if ( ! QFile::exists("/etc/init.d/irattach") )
             return false;
         if (::system( "/etc/init.d/irattach start" ) != 0)
         return false;

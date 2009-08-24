@@ -11,9 +11,9 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QComboBox;
 class QLineEdit;
 class QListView;
@@ -21,7 +21,7 @@ class QListViewItem;
 class QToolButton;
 
 class ScQtFileDlg : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:

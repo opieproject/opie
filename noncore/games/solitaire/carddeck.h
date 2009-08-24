@@ -35,7 +35,7 @@ public:
     int getNumberOfCards();
     int getNumberOfDecks();
     int getNumberOfJokers();
-    
+
     virtual Card *newCard( eValue v, eSuit s, bool f );
     virtual void deal() { }
 

@@ -15,13 +15,13 @@ int mpeg3video_get_macroblock_address(mpeg3_slice_t *slice)
 	{
 /* Is not macroblock_stuffing */
     	if(code != 15)
-		{     
+		{
 /* Is macroblock_escape */
       		if(code == 8)
 			{
         		val += 33;
       		}
-      		else 
+      		else
 			{
 /*        		fprintf(stderr, "mpeg3video_get_macroblock_address: invalid macroblock_address_increment code\n"); */
         		slice->fault = 1;
@@ -101,15 +101,15 @@ static inline int mpeg3video_getsp_bmb_type(mpeg3_slice_t *slice)
 	mpeg3_slice_buffer_t *slice_buffer = slice->slice_buffer;
   	int code = mpeg3slice_showbits9(slice_buffer);
 
-  	if(code >= 64) 
+  	if(code >= 64)
 		p = &mpeg3_spBMBtab0[(code >> 5) - 2];
-  	else 
-	if(code >= 16) 
+  	else
+	if(code >= 16)
 		p = &mpeg3_spBMBtab1[(code >> 2) - 4];
-  	else 
-	if(code >= 8)  
+  	else
+	if(code >= 8)
 		p = &mpeg3_spBMBtab2[code - 8];
-  	else 
+  	else
 	{
 /*    	fprintf(stderr,"mpeg3video_getsp_bmb_type: invalid macroblock_type code\n"); */
     	slice->fault = 1;
@@ -226,7 +226,7 @@ int mpeg3video_get_mb_type(mpeg3_slice_t *slice, mpeg3video_t *video)
     		case P_TYPE: return video->pict_scal ? mpeg3video_getsp_pmb_type(slice) : mpeg3video_get_pmb_type(slice);
     		case B_TYPE: return video->pict_scal ? mpeg3video_getsp_bmb_type(slice) : mpeg3video_get_bmb_type(slice);
     		case D_TYPE: return mpeg3video_get_dmb_type(slice);
-    		default: 
+    		default:
 				/*fprintf(stderr, "mpeg3video_getmbtype: unknown coding type\n"); */
 				break;
 /* MPEG-1 only, not implemented */
@@ -236,15 +236,15 @@ int mpeg3video_get_mb_type(mpeg3_slice_t *slice, mpeg3video_t *video)
   	return 0;
 }
 
-int mpeg3video_macroblock_modes(mpeg3_slice_t *slice, 
-		mpeg3video_t *video, 
-		int *pmb_type, 
-		int *pstwtype, 
-		int *pstwclass, 
-		int *pmotion_type, 
-		int *pmv_count, 
-		int *pmv_format, 
-		int *pdmv, 
+int mpeg3video_macroblock_modes(mpeg3_slice_t *slice,
+		mpeg3video_t *video,
+		int *pmb_type,
+		int *pstwtype,
+		int *pstwclass,
+		int *pmotion_type,
+		int *pmv_count,
+		int *pmv_format,
+		int *pdmv,
 		int *pmvscale,
 		int *pdct_type)
 {
@@ -284,17 +284,17 @@ int mpeg3video_macroblock_modes(mpeg3_slice_t *slice,
   	if(mb_type & (MB_FORWARD | MB_BACKWARD))
 	{
     	if(video->pict_struct == FRAME_PICTURE)
-		{ 
+		{
 /* frame_motion_type */
       		motion_type = video->frame_pred_dct ? MC_FRAME : mpeg3slice_getbits2(slice_buffer);
     	}
-    	else 
-		{ 
+    	else
+		{
 /* field_motion_type */
       		motion_type = mpeg3slice_getbits2(slice_buffer);
     	}
   	}
-  	else 
+  	else
 	if((mb_type & MB_INTRA) && video->conceal_mv)
   	{
 /* concealment motion vectors */
@@ -319,9 +319,9 @@ int mpeg3video_macroblock_modes(mpeg3_slice_t *slice,
   	mvscale = ((mv_format == MV_FIELD) && (video->pict_struct == FRAME_PICTURE));
 
 /* get dct_type (frame DCT / field DCT) */
-  	dct_type = (video->pict_struct == FRAME_PICTURE) && 
-             	(!video->frame_pred_dct) && 
-             	(mb_type & (MB_PATTERN | MB_INTRA)) ? 
+  	dct_type = (video->pict_struct == FRAME_PICTURE) &&
+             	(!video->frame_pred_dct) &&
+             	(mb_type & (MB_PATTERN | MB_INTRA)) ?
              	mpeg3slice_getbit(slice_buffer) : 0;
 
 /* return values */

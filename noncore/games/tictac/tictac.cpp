@@ -79,7 +79,7 @@ TicTacGameBoard::TicTacGameBoard( int n, QWidget *parent, const char *name )
     }
     QTime t = QTime::currentTime();   // set random seed
     srand( t.hour()*12+t.minute()*60+t.second()*60 );
-		
+
 }
 
 TicTacGameBoard::~TicTacGameBoard()

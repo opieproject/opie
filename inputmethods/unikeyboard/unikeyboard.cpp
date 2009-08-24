@@ -39,7 +39,7 @@ typedef struct BlockMap {
 
 //# Start Code; Block Name
 
-static const BlockMap blockMap[] = 
+static const BlockMap blockMap[] =
 {
 {0x0000, 0x007F, "Basic Latin"},
 {0x0080, 0x00FF, "Latin-1 Supplement"},
@@ -151,7 +151,7 @@ UniScrollview::UniScrollview(QWidget* parent, const char* name, int f) :
     cellsize = fm.lineSpacing() + 2;
     resizeContents( cellsize*nw, cellsize*65536/nw );
     verticalScrollBar()->setLineStep(cellsize);
-    
+
     viewport()->setBackgroundMode( QWidget::PaletteBase );
 }
 
@@ -192,7 +192,7 @@ void UniScrollview::drawContents( QPainter *p, int /*cx*/, int cy, int /*cw*/, i
 	if ( row*nw%16 == 0 ) {
 	    p->setFont( smallFont );
 	    QString s;
-	    s.sprintf( "%03X", row*nw/16 ); 
+	    s.sprintf( "%03X", row*nw/16 );
 	    p->drawText( 0, y, xoff, cellsize, AlignLeft, s );
 	    p->setFont( font() );
 	}

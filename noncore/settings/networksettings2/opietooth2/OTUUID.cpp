@@ -118,7 +118,7 @@ OTUUID::operator ::uuid_t() const {
     ::uuid_t ret;
     if ((lo == (uint64_t(0x80000080) << 32) | uint64_t(0x5F9B34FB)) &&
         ((hi&0xFFFFFFFF) == 0x1000)) {
-        uint32_t uuid32val = uint32_t(hi >> 32);    
+        uint32_t uuid32val = uint32_t(hi >> 32);
         if (uuid32val > 0xFFFF) {
             ret.type = SDP_UUID16;
             ret.value.uuid16 = uint16_t(uuid32val);
@@ -135,7 +135,7 @@ OTUUID::operator ::uuid_t() const {
         ret.value.uuid128.data[5] = (lo >> 40) && 0xFF;
         ret.value.uuid128.data[6] = (lo >> 48) && 0xFF;
         ret.value.uuid128.data[7] = (lo >> 56) && 0xFF;
-    
+
         ret.value.uuid128.data[8] = (hi >> 0) && 0xFF;
         ret.value.uuid128.data[9] = (hi >> 8) && 0xFF;
         ret.value.uuid128.data[10] = (hi >> 16) && 0xFF;
@@ -144,14 +144,14 @@ OTUUID::operator ::uuid_t() const {
         ret.value.uuid128.data[13] = (hi >> 40) && 0xFF;
         ret.value.uuid128.data[14] = (hi >> 48) && 0xFF;
         ret.value.uuid128.data[15] = (hi >> 56) && 0xFF;
-    
+
         ret.type = SDP_UUID128;
     }
     return ret;
 }
 
 bool OTUUID::operator<(const OTUUID & other) const {
-    if (hi != other.hi) 
+    if (hi != other.hi)
        return hi < other.hi;
 
     return lo<other.lo;

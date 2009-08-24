@@ -16,7 +16,7 @@ public :
       QString generateSettings( void );
 
       bool isModified( void );
-      inline void setModified( bool M ) 
+      inline void setModified( bool M )
         { ForceModified = M; }
 
       QList<NetworkSetup> collectPossible( const QString & Interface );

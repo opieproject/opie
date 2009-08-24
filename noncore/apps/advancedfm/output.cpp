@@ -124,7 +124,7 @@ Output::Output( const QStringList commands, QWidget* parent,  const char* name, 
    QStringList cmmds;
 //   cmmds=QStringList::split( " ", commands, false);
    cmmds=commands;
-//   odebug << "count " << cmmds.count() << "" << oendl; 
+//   odebug << "count " << cmmds.count() << "" << oendl;
    if ( !name )
        setName( tr("Output"));
     resize( 196, 269 );
@@ -160,7 +160,7 @@ Output::Output( const QStringList commands, QWidget* parent,  const char* name, 
 
 //    * proc << commands.latin1();
       for ( QStringList::Iterator it = cmmds.begin(); it != cmmds.end(); ++it ) {
-         odebug << "" << (*it).latin1() << "" << oendl; 
+         odebug << "" << (*it).latin1() << "" << oendl;
          * proc << (*it).latin1();
       }
 
@@ -189,7 +189,7 @@ void Output::saveOutput() {
           filename+="/";
       QString name = fileDlg->LineEdit1->text();
       filename+="text/plain/"+name;
-      odebug << filename << oendl; 
+      odebug << filename << oendl;
 
       QFile f(filename);
       if ( !f.open( IO_WriteOnly ) )
@@ -200,16 +200,16 @@ void Output::saveOutput() {
           lnk.setFile(filename); //sets File property
           lnk.setType("text/plain");
           if(!lnk.writeLink()) {
-              odebug << "Writing doclink did not work" << oendl; 
+              odebug << "Writing doclink did not work" << oendl;
           }
       } else
-          owarn << "Could not write file" << oendl; 
+          owarn << "Could not write file" << oendl;
       f.close();
     }
 }
 
 void Output::commandStdout(OProcess*, char *buffer, int buflen) {
-    owarn << "received stdout " << buflen << " bytes" << oendl; 
+    owarn << "received stdout " << buflen << " bytes" << oendl;
 
 //     QByteArray data(buflen);
 //     data.fill(*buffer, buflen);
@@ -226,13 +226,13 @@ void Output::commandStdout(OProcess*, char *buffer, int buflen) {
 
 
 void Output::commandStdin( const QByteArray &data) {
-    owarn << "received stdin  " << data.size() << " bytes" << oendl; 
+    owarn << "received stdin  " << data.size() << " bytes" << oendl;
     // recieved data from the io layer goes to sz
     proc->writeStdin(data.data(), data.size());
 }
 
 void Output::commandStderr(OProcess*, char *buffer, int buflen) {
-    owarn << "received stderrt " << buflen << " bytes" << oendl; 
+    owarn << "received stderrt " << buflen << " bytes" << oendl;
 
     QString lineStr = buffer;
 //    lineStr=lineStr.left(lineStr.length()-1);

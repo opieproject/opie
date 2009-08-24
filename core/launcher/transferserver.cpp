@@ -308,7 +308,7 @@ bool SyncAuthentication::checkPassword( const QString& password )
 
 
 ServerPI::ServerPI( int socket, QObject *parent, const char* name )
-    : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ), 
+    : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ),
       waitvreader( 0 ), waitvwriter( 0 ), waitsocket( 0 ), storFileSize(-1)
 {
     state = Connected;
@@ -317,7 +317,7 @@ ServerPI::ServerPI( int socket, QObject *parent, const char* name )
 
     peerport = peerPort();
     peeraddress = peerAddress();
-    
+
     QString home = getenv( "HOME" );
     vfs.init( home );
 
@@ -398,10 +398,10 @@ void ServerPI::read()
 bool ServerPI::checkReadFile( const QString& file )
 {
     QString filename;
-    
+
     if ( file.length() == 1 && file[0] == "/" )
         filename = file;
-    else if ( file[0] != "/" ) 
+    else if ( file[0] != "/" )
         filename = directory.path() + "/" + file;
     else
         filename = file;
@@ -723,7 +723,7 @@ void ServerPI::process( const QString& message )
                     send( "250 Requested file action okay, completed" ); // No tr
                     QCopEnvelope e("QPE/System", "linkChanged(QString)" );
                     e << file.name();
-                } 
+                }
                 else
                     send( "550 Requested action not taken" ); // No tr
             }
@@ -812,10 +812,10 @@ void ServerPI::process( const QString& message )
         }
         else {
             // virtual
-            // We're not going to produce the file just to get the size, 
+            // We're not going to produce the file just to get the size,
             // so just send back something other than 0
             if ( vfs.canRead( filePath ) )
-                send( "213 1024" ); 
+                send( "213 1024" );
             else
                 send( "500 Invalid file" ); // No tr
         }
@@ -1032,7 +1032,7 @@ bool ServerPI::sendList( const QString& arg )
             ts << fileListing( info ) << endl;
             ++it;
         }
-        
+
         // List virtual files, if any
         vfs.fileListing( fi.absFilePath(), ts );
     }
@@ -1234,7 +1234,7 @@ ServerDTP::~ServerDTP()
             odebug << "STOR incomplete" << oendl;
             file.remove();
         }
-    } 
+    }
     else {
         file.close();
     }
@@ -1379,7 +1379,7 @@ void ServerDTP::connectionClosed()
     else if ( SendVirtual == mode ) {
         emit completed();
     }
-    
+
     // retrieve file mode
     else if ( RetrieveFile == mode ) {
         file.close();

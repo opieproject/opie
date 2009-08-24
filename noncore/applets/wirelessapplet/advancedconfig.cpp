@@ -23,12 +23,12 @@ AdvancedConfig::AdvancedConfig( QWidget* parent,  const char* name, bool modal, 
 {
     Config cfg( "qpe" );
     cfg.setGroup( "Wireless" );
-    
+
     bool rocESSID = cfg.readBoolEntry( "renew_dhcp_on_essid_change", false );
     bool rocFREQ = cfg.readBoolEntry( "renew_dhcp_on_freq_change", false );
     bool rocAP = cfg.readBoolEntry( "renew_dhcp_on_ap_change", false );
     bool rocMODE = cfg.readBoolEntry( "renew_dhcp_on_mode_change", false );
-    
+
     cbESSID->setChecked( rocESSID );
     cbFrequency->setChecked( rocFREQ );
     cbAccessPoint->setChecked( rocAP );
@@ -37,7 +37,7 @@ AdvancedConfig::AdvancedConfig( QWidget* parent,  const char* name, bool modal, 
 
 AdvancedConfig::~AdvancedConfig()
 {
-}    
+}
 
 void AdvancedConfig::accept()
 {

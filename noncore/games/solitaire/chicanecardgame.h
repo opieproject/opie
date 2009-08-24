@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**  
+**
 ** created on base of patiencecardgame by cam (C.A.Mader) 2002
 ** Rules for this game:
 **      use 2 decks = 104 cards
@@ -27,7 +27,7 @@
 **
 **********************************************************************/
 #ifndef CHICANE_CARD_GAME_H
-#define CHICANE_CARD_GAME_H 
+#define CHICANE_CARD_GAME_H
 
 
 #include "patiencecardgame.h"
@@ -51,7 +51,7 @@ public:
 };
 
 
-class ChicaneWorkingPile :  public PatienceWorkingPile 
+class ChicaneWorkingPile :  public PatienceWorkingPile
 {
 public:
     ChicaneWorkingPile(int x, int y, QCanvas *canvas) :
@@ -65,7 +65,7 @@ public:
  	         ((int)card->getValue() + 1 == (int)cardOnTop()->getValue()) &&
 	         (card->isRed() != cardOnTop()->isRed()) ) ) )
 	    return TRUE;
-        return FALSE;	
+        return FALSE;
     }
     virtual bool isAllowedToBeMoved(Card *card) {
 	if (!card->isFacing()) return FALSE;
@@ -115,12 +115,12 @@ public:
 	while ((card != c) && (card != NULL)) {
 	    if (card->isFacing()) {
 		int offsetDown = ( qt_screen->deviceWidth() < 200 ) ? 9 : 13;
-		y += offsetDown; 
+		y += offsetDown;
 	    } else {
 		x += 0;   					// no moving to the side
 		y += 3;
 	    }
-	    card = cardInfront(card); 
+	    card = cardInfront(card);
 	}
 	return QPoint( x, y );
     }
@@ -142,7 +142,7 @@ public:
     ChicaneCardGame(QCanvas *c, bool snap, QWidget *parent = 0);
 //    virtual ~ChicaneCardGame();
     virtual void deal(void);
-    virtual bool haveWeWon() { 
+    virtual bool haveWeWon() {
 	return ( discardPiles[0]->kingOnTop() &&
 		 discardPiles[1]->kingOnTop() &&
 		 discardPiles[2]->kingOnTop() &&

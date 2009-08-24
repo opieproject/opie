@@ -1,7 +1,7 @@
-#include "TaskSelector.h" 
+#include "TaskSelector.h"
 extern QWidget* g_Widget;
 
-static const char* defkeys = 
+static const char* defkeys =
 "QWERTYUIOPASDFGHJKLZXCVBNM1234567890";
 
 #define START_INDEX		1
@@ -11,7 +11,7 @@ TaskSelector::TaskSelector(const QString& kind) : m_kind(kind)
 	qDebug("TaskSelector::TaskSelector()");
 	m_pMenu = new QPopupMenuEx(g_Widget);
 	m_pMenu->installEventFilter(this);
-	
+
 	m_isShowing = false;
 	m_index = START_INDEX-1;
 	connect(m_pMenu, SIGNAL(activated(int)), this, SLOT(select(int)));

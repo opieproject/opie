@@ -35,7 +35,7 @@ extern int highestZ;
 class CanvasCardPile : public QCanvasRectangle
 {
 public:
-    CanvasCardPile( CanvasCardGame *ccg, QCanvas *canvas ) : QCanvasRectangle( canvas ), parent( ccg ) { 
+    CanvasCardPile( CanvasCardGame *ccg, QCanvas *canvas ) : QCanvasRectangle( canvas ), parent( ccg ) {
 	pile = new QPixmap( 0, 0 );
 	pileHeight = 0;
 	firstCard = NULL;
@@ -165,12 +165,12 @@ CanvasCardGame::~CanvasCardGame() {
 
 
 void CanvasCardGame::gameWon() {
-	
+
     srand(time(NULL));
-    
+
     QCanvasItemList list = canvas()->allItems();
     QCanvasItemList::Iterator it = list.begin();
- 
+
     for (; it != list.end(); ++it) {
 	if ( (*it)->rtti() == canvasCardId ) {
 	    // disperse the cards everywhere
@@ -188,19 +188,19 @@ void CanvasCardGame::contentsMousePressEvent(QMouseEvent *e) {
 	return;
 
     QCanvasItemList l = canvas()->collisions( e->pos() );
-    
+
     for (QCanvasItemList::Iterator it = l.begin(); it != l.end(); ++it) {
-	
+
 	if ( (*it)->rtti() == canvasCardId ) {
-	
+
 	    moving = (CanvasCard *)*it;
 
 	    if ( moving->animated() )
 		return;
-		
+
 	    cardXOff = (int)(e->pos().x() - moving->x());
 	    cardYOff = (int)(e->pos().y() - moving->y());
-	    
+
 	    if ( !mousePressCard( moving, e->pos() ) ) {
 		CanvasCard *card = moving;
 
@@ -220,15 +220,15 @@ void CanvasCardGame::contentsMousePressEvent(QMouseEvent *e) {
 
 		alphaCardPile->setZ( INT_MAX );
 
-		moved = TRUE;		
+		moved = TRUE;
 	    } else {
 		if ( alphaCardPile )
 		    alphaCardPile->hide();
 	    }
-	    return;	
+	    return;
 	}
     }
-    
+
     mousePress( e->pos() );
 }
 
@@ -245,7 +245,7 @@ void CanvasCardGame::contentsMouseDoubleClickEvent(QMouseEvent *e) {
 
 	    if ( card->animated() )
 		return;
-	    
+
 	    if ( card->getCardPile()->isAllowedToBeMoved(card) ) {
 		if (card->getCardPile()->cardInfront(card) == NULL) {
 		    CardPile *pile = first();
@@ -261,9 +261,9 @@ void CanvasCardGame::contentsMouseDoubleClickEvent(QMouseEvent *e) {
 */
 
 void CanvasCardGame::contentsMouseMoveEvent(QMouseEvent *e) {
-    
+
     QPoint p = e->pos();
-    
+
     if ( moving ) {
 
 	moved = TRUE;
@@ -271,7 +271,7 @@ void CanvasCardGame::contentsMouseMoveEvent(QMouseEvent *e) {
 	if (moving->isFacing() != TRUE)
 	    return;
 
-	int tx = (int)p.x() - cardXOff; 
+	int tx = (int)p.x() - cardXOff;
 	int ty = (int)p.y() - cardYOff;
 
 	if (snapOn == TRUE) {
@@ -287,26 +287,26 @@ void CanvasCardGame::contentsMouseMoveEvent(QMouseEvent *e) {
 	if ( alphaCardPile )
 	    alphaCardPile->move( tx, ty );
     }
-    
+
 }
 
 
 void CanvasCardGame::contentsMouseReleaseEvent(QMouseEvent *e)
-{ 
+{
     QPoint p = e->pos();
 
     Q_UNUSED(p);
 
     if ( moving ) {
-	
+
 	CanvasCard *item = moving;
 
 	if ( item->animated() )
 	    return;
-	
+
 	if ( alphaCardPile )
 	if ( moved ) {
-	    
+
 	    CardPile *pile = closestPile((int)alphaCardPile->x(), (int)alphaCardPile->y(), 30);
 
 	    if (pile && pile->isAllowedOnTop(item)) {
@@ -318,7 +318,7 @@ void CanvasCardGame::contentsMouseReleaseEvent(QMouseEvent *e)
 			    if ( oldPile ) {
 				c = oldPile->cardInfront(item);
 				oldPile->removeCard(item);
-			    }    
+			    }
 			    item->setCardPile(pile);
 			    //item->move( pile->getCardPos(item) );
 			    pile->addCardToTop(item);
@@ -333,13 +333,13 @@ void CanvasCardGame::contentsMouseReleaseEvent(QMouseEvent *e)
 				moving = NULL;
 				return;
 			    }
-			    
+
 			    if (oldPile) {
 				item = (CanvasCard *)c;
 			    } else {
 				item = NULL;
 			    }
-			}	
+			}
 			alphaCardPile->hide();
 			moving = NULL;
 			return;

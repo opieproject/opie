@@ -2,19 +2,19 @@
  *
  * librsync -- the library for network deltas
  * $Id: rdiff.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
- * 
+ *
  * Copyright (C) 1999, 2000, 2001 by Martin Pool <mbp@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -115,11 +115,11 @@ static void rdiff_no_more_args(poptContext opcon)
 static void bad_option(poptContext opcon, int error)
 {
     char       msgbuf[1000];
-    
+
     snprintf(msgbuf, sizeof msgbuf-1, "%s: %s: %s",
              PROGRAM, poptStrerror(error), poptBadOption(opcon, 0));
     rdiff_usage(msgbuf);
-    
+
     exit(RS_SYNTAX_ERROR);
 }
 
@@ -156,7 +156,7 @@ static void rdiff_show_version(void)
      * and all laws of politeness and good taste.
      */
     char const *bzlib = "", *zlib = "", *trace = "";
-    
+
 #ifdef HAVE_LIBZ
     zlib = ", gzip";
 #endif
@@ -168,7 +168,7 @@ static void rdiff_show_version(void)
 #ifndef DO_RS_TRACE
     trace = ", trace disabled";
 #endif
-   
+
     printf("rdiff (%s) [%s]\n"
            "Copyright (C) 1997-2001 by Martin Pool, Andrew Tridgell and others.\n"
            "http://rproxy.samba.org/\n"
@@ -188,7 +188,7 @@ static void rdiff_options(poptContext opcon)
 {
     int             c;
     char const      *a;
-    
+
     while ((c = poptGetNextOpt(opcon)) != -1) {
         switch (c) {
         case 'h':
@@ -203,7 +203,7 @@ static void rdiff_options(poptContext opcon)
             }
             rs_trace_set_level(RS_LOG_DEBUG);
             break;
-            
+
         case OPT_GZIP:
         case OPT_BZIP2:
             if ((a = poptGetOptArg(opcon))) {
@@ -220,7 +220,7 @@ static void rdiff_options(poptContext opcon)
             }
             rs_error("sorry, compression is not really implemented yet");
             exit(RS_UNIMPLEMENTED);
-            
+
         default:
             bad_option(opcon, c);
         }
@@ -236,17 +236,17 @@ static rs_result rdiff_sig(poptContext opcon)
     FILE            *basis_file, *sig_file;
     rs_stats_t      stats;
     rs_result       result;
-    
+
     basis_file = rs_file_open(poptGetArg(opcon), "rb");
     sig_file = rs_file_open(poptGetArg(opcon), "wb");
 
     rdiff_no_more_args(opcon);
-    
+
     result = rs_sig_file(basis_file, sig_file, block_len, strong_len, &stats);
     if (result != RS_DONE)
         return result;
 
-    if (show_stats) 
+    if (show_stats)
         rs_log_stats(&stats);
 
     return result;
@@ -277,7 +277,7 @@ static rs_result rdiff_delta(poptContext opcon)
     if (result != RS_DONE)
         return result;
 
-    if (show_stats) 
+    if (show_stats)
         rs_log_stats(&stats);
 
     if ((result = rs_build_hash_table(sumset)) != RS_DONE)
@@ -285,7 +285,7 @@ static rs_result rdiff_delta(poptContext opcon)
 
     result = rs_delta_file(sumset, new_file, delta_file, &stats);
 
-    if (show_stats) 
+    if (show_stats)
         rs_log_stats(&stats);
 
     return result;
@@ -315,7 +315,7 @@ static rs_result rdiff_patch(poptContext opcon)
 
     result = rs_patch_file(basis_file, delta_file, new_file, &stats);
 
-    if (show_stats) 
+    if (show_stats)
         rs_log_stats(&stats);
 
     return result;
@@ -328,15 +328,15 @@ static rs_result rdiff_action(poptContext opcon)
     const char      *action;
 
     action = poptGetArg(opcon);
-    if (!action) 
+    if (!action)
         ;
-    else if (isprefix(action, "signature")) 
+    else if (isprefix(action, "signature"))
         return rdiff_sig(opcon);
-    else if (isprefix(action, "delta")) 
+    else if (isprefix(action, "delta"))
         return rdiff_delta(opcon);
     else if (isprefix(action, "patch"))
         return rdiff_patch(opcon);
-    
+
     rdiff_usage("rdiff: You must specify an action: `signature', `delta', or `patch'.");
     return RS_SYNTAX_ERROR;
 }

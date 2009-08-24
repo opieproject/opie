@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags fl)
 	connect(configure, SIGNAL(activated()), SLOT(slotConfigure()));
 
 	// Added by Stefan Eilers to allow starting by addressbook..
-#if !defined(QT_NO_COP) 
+#if !defined(QT_NO_COP)
 // 	QCopChannel *addressChannel = new QCopChannel("QPE/Application/mail" , this );
 // 	connect (addressChannel, SIGNAL( received(const QCString&,const QByteArray&)),
 // 		 this, SLOT ( appMessage(const QCString&,const QByteArray&) ) );
@@ -58,7 +58,7 @@ void MainWindow::appMessage(const QCString &msg, const QByteArray &data)
 		qWarning("opie-mail:: Should send mail to %s with address %s", name.latin1(), email.latin1() );
 
 		slotCompose( name, email );
-		
+
 	}else{
 		QString str_message = msg;
 		qWarning("opie-mail:: Received unknown QCop-Message: %s", str_message.latin1() );

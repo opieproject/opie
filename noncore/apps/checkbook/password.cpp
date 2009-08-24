@@ -77,7 +77,7 @@ Password::Password( QWidget *parent, const char *caption, const char *prompt )
 	btn->setToggleButton( TRUE );
 	connect( btn, SIGNAL( toggled(bool) ), this, SLOT( slotTogglePassword(bool) ) );
 	layout->addWidget( btn, 1, 1 );
-	
+
 	password == "";
 }
 

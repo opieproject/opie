@@ -14,7 +14,7 @@ KRFBServer::KRFBServer()
   corre=0;
   rre=0;
   copyrect=1;
-    
+
   colors256=1;
   shared=0;
   readOnly=0;

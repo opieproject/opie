@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of VcprojGenerator class.
 **
@@ -190,8 +190,8 @@ QUuid VcprojGenerator::getProjectUUID(const QString &filename)
     // If still not valid, generate new one, and suggest adding to .pro
     if (uuid.isNull() || !validUUID) {
 	uuid = QUuid::createUuid();
-	fprintf(stderr, 
-	        "qmake couldn't create a GUID based on filepath, and we couldn't\nfind a valid GUID in the .pro file (Consider adding\n'GUID = %s'  to the .pro file)\n", 
+	fprintf(stderr,
+	        "qmake couldn't create a GUID based on filepath, and we couldn't\nfind a valid GUID in the .pro file (Consider adding\n'GUID = %s'  to the .pro file)\n",
 		uuid.toString().upper().latin1());
     }
 
@@ -241,7 +241,7 @@ void VcprojGenerator::writeSubDirs(QTextStream &t)
     QPtrList<VcsolutionDepend> solution_cleanup;
     solution_cleanup.setAutoDelete(TRUE);
 
-    
+
     QStringList subdirs = project->variables()["SUBDIRS"];
     QString oldpwd = QDir::currentDirPath();
 
@@ -358,7 +358,7 @@ nextfile:
     t << _slnSolutionConf;
     t << _slnProjDepBeg;
 
-    // Figure out dependencies 
+    // Figure out dependencies
     for(solution_cleanup.first(); solution_cleanup.current(); solution_cleanup.next()) {
 	if(solution_cleanup.current()->targetType == StaticLib)
 	    continue; // Shortcut, Static libs are not dep.
@@ -571,7 +571,7 @@ void VcprojGenerator::initConfiguration()
 	RConf.IntermediateDirectory =
 	RConf.compiler.AssemblerListingLocation =
 	RConf.compiler.ObjectFile = "Release\\";
-	RConf.librarian.OutputFile = 
+	RConf.librarian.OutputFile =
 	RConf.linker.OutputFile = RConf.IntermediateDirectory + "\\" + project->first("MSVCPROJ_TARGET");
 	RConf.linker.parseOptions(project->variables()["QMAKE_LFLAGS_RELEASE"]);
 	RConf.compiler.parseOptions(project->variables()["QMAKE_CFLAGS_RELEASE"]);
@@ -579,7 +579,7 @@ void VcprojGenerator::initConfiguration()
 	DConf.IntermediateDirectory =
 	DConf.compiler.AssemblerListingLocation =
 	DConf.compiler.ObjectFile = "Debug\\";
-	DConf.librarian.OutputFile = 
+	DConf.librarian.OutputFile =
 	DConf.linker.OutputFile = DConf.IntermediateDirectory + "\\" + project->first("MSVCPROJ_TARGET");
 	DConf.linker.DelayLoadDLLs.clear();
 	DConf.compiler.parseOptions(project->variables()["QMAKE_CFLAGS_DEBUG"]);
@@ -657,11 +657,11 @@ void VcprojGenerator::initCompilerTool()
     RConf.compiler.PreprocessorDefinitions += project->variables()["DEFINES"];
     RConf.compiler.PreprocessorDefinitions += project->variables()["PRL_EXPORT_DEFINES"];
     QStringList::iterator it;
-    for(it=RConf.compiler.PreprocessorDefinitions.begin(); 
-	it!=RConf.compiler.PreprocessorDefinitions.end(); 
+    for(it=RConf.compiler.PreprocessorDefinitions.begin();
+	it!=RConf.compiler.PreprocessorDefinitions.end();
 	++it)
 	(*it).replace('\"', "&quot;");
-    
+
     RConf.compiler.parseOptions( project->variables()["MSVCPROJ_INCPATH"] );
 }
 

@@ -149,7 +149,7 @@ void QIMPenProfile::loadData()
 			uint ch = it.current()->character();
 			if ( ch >= 'a' && ch <= 'z' )
 			    it.current()->setCharacter( QChar(ch).upper() );
-			}	
+			}
 		    if ( combining )
 			combining->addCombined( cs );
 		    sets.append( cs );

@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -65,7 +65,7 @@ private:
     DataManager *mgr;
 
     QWidgetStack *stack;
-    
+
     QToolBar *findBar;
     QToolBar *jumpBar;
     QLineEdit  *findEdit;
@@ -76,10 +76,10 @@ private:
     QAction    *actionUninstalled;
     QAction    *actionInstalled;
     QAction    *actionUpdated;
-    
+
     QPixmap iconDownload;
     QPixmap iconRemove;
-    
+
     int mnuShowUninstalledPkgsId;
     int mnuShowInstalledPkgsId;
     int mnuShowUpgradedPkgsId;
@@ -112,14 +112,14 @@ private:
     void downloadSelectedPackages();
     void downloadRemotePackage();
     InstallData *dealWithItem( QCheckListItem *item );
-    
+
     // Progress widget
     QWidget      *progressWindow;
     QLabel       *m_status;
     QProgressBar *m_progress;
-    
+
     void initProgressWidget();
-    
+
 public slots:
     void setDocument( const QString &doc );
     void displayFindBar();
@@ -159,16 +159,16 @@ class QuestionDlg : public QWidget
     Q_OBJECT
 public:
     QuestionDlg( const QString &caption, const QString &text, const QString &secondbtn );
-    
+
     int exec();
-    
+
 private:
     QPushButton *btn1;
     QPushButton *btn2;
-    
+
     bool executing;
     int  buttonpressed;
-    
+
 private slots:
     void slotButtonPressed();
 };

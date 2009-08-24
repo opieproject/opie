@@ -15,7 +15,7 @@ public :
 
       AGPRSDevice( GPRSNetNode * PNN );
 
-      RuntimeInfo * runtime( void ) 
+      RuntimeInfo * runtime( void )
         { return
            ( RT ) ? RT : ( RT = new GPRSRun( this, Data ) );
         }
@@ -27,7 +27,7 @@ public :
       virtual bool openFile( SystemFile & SF,
                              QStringList & SL );
 
-      virtual void * data( void ) 
+      virtual void * data( void )
         { return (void *)&Data; }
 
       virtual bool hasDataForFile( SystemFile & S );

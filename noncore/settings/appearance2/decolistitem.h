@@ -36,8 +36,8 @@
 
 class DecoListItem : public QListBoxPixmap {
 public:
-	DecoListItem ( const QString &t ) : QListBoxPixmap ( QPixmap ( ), t ) 
-	{ 
+	DecoListItem ( const QString &t ) : QListBoxPixmap ( QPixmap ( ), t )
+	{
 		m_lib = 0;
 		m_window_if = 0;
 //		m_settings_if = 0;
@@ -47,10 +47,10 @@ public:
 	{
 		m_lib = lib;
 		m_window_if = iface;
-		
-//		iface-> queryInterface ( IID_WindowDecoration, (QUnknownInterface **) &m_settings_if );		
+
+//		iface-> queryInterface ( IID_WindowDecoration, (QUnknownInterface **) &m_settings_if );
 	}
-	
+
 	virtual ~DecoListItem ( )
 	{
 //		if ( m_settings_if )
@@ -59,7 +59,7 @@ public:
 			m_window_if-> release ( );
 		delete m_lib;
 	}
-	
+
 	bool hasSettings ( ) const
 	{
 //		return ( m_settings_if );
@@ -71,12 +71,12 @@ public:
 //		return m_settings_if ? m_settings_if-> create ( parent ) : 0;
 		return 0;
 	}
-	
-	bool setSettings ( bool /*accepted*/ ) 
+
+	bool setSettings ( bool /*accepted*/ )
 	{
 //		if ( !m_settings_if )
 //			return false;
-	
+
 //		if ( accepted )
 //			return m_settings_if-> accept ( );
 //		else {
@@ -93,7 +93,7 @@ public:
 		else
 			return text ( );
 	}
-	
+
 	WindowDecorationInterface *interface ( )
 	{
 		return m_window_if;

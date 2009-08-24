@@ -283,15 +283,15 @@ static inline void rec_mmx(unsigned char *s, unsigned char *d, int lx2, int h)
 		"1:\t"
 			"movq ( %1 ),     	%%mm0\n"			/* 8 s */
 		    "movq 8( %1 ),    	%%mm2\n"			/* 16 s */
-		    "movq %%mm0,  		( %2 )\n"   
+		    "movq %%mm0,  		( %2 )\n"
 			"addl %3,			%1\n"
-		    "movq %%mm2,  		8( %2 )\n"   
-			"decl %0\n"		
+		    "movq %%mm2,  		8( %2 )\n"
+			"decl %0\n"
 		    "leal (%2, %3), %2\n"
-	 	"jnz    1b"            
-		: 
+	 	"jnz    1b"
+		:
 		: "c" (h), "r" (s), "r" (d), "r" (lx2)
-	);   
+	);
 }
 
 
@@ -302,13 +302,13 @@ static inline void recc_mmx(unsigned char *s, unsigned char *d, int lx2, int h)
 	    "1:\t"
 	    	"movq ( %1 ),     %%mm0\n"
 	      	"addl %3,   	  %1\n"
-	      	"movq %%mm0,  	  ( %2 )\n"   
+	      	"movq %%mm0,  	  ( %2 )\n"
 			"decl %0\n"
 	      	"leal (%2, %3), %2\n"
-	   	"jnz    1b"            
-		: 
+	   	"jnz    1b"
+		:
 		: "c" (h), "r" (s), "r" (d), "r" (lx2)
-	);   
+	);
 }
 
 
@@ -921,17 +921,17 @@ static inline void rec4ac(unsigned char *s,unsigned char  *d, int lx, int lx2, i
 }
 
 static inline
-void recon_comp(mpeg3video_t *video, 
-		unsigned char *src, 
-		unsigned char *dst, 
-		int lx, 
+void recon_comp(mpeg3video_t *video,
+		unsigned char *src,
+		unsigned char *dst,
+		int lx,
 		int lx2,
-		int w, 
-		int h, 
-		int x, 
-		int y, 
-		int dx, 
-		int dy, 
+		int w,
+		int h,
+		int x,
+		int y,
+		int dx,
+		int dy,
 		int addflag)
 {
 	int switcher;
@@ -939,7 +939,7 @@ void recon_comp(mpeg3video_t *video,
 
 /* half pel scaling */
 	switcher = (dx & 1) << 3 | (dy & 1) << 2 | w;
-	if(addflag) switcher |= 2; 
+	if(addflag) switcher |= 2;
 /* origins */
 	s = src + lx * (y + (dy >> 1)) + x + (dx >> 1);
 	d = dst + lx * y + x;
@@ -981,7 +981,7 @@ void recon_comp(mpeg3video_t *video,
 	}
 
 // Unaccelerated functions
-	switch(switcher) 
+	switch(switcher)
 	{
 		case 0xb: 	recha(s, d, lx2, h);      break;
 		case 0xa:	rechac(s, d, lx2, h);     break;
@@ -1003,45 +1003,45 @@ void recon_comp(mpeg3video_t *video,
 	int dx,dy;            * horizontal, vertical motion vector *
 	int addflag;          * add prediction error to prediction ? *
 */
-static void recon(mpeg3video_t *video, 
-		unsigned char *src[], 
-		int sfield, 
-	    unsigned char *dst[], 
-		int dfield, 
+static void recon(mpeg3video_t *video,
+		unsigned char *src[],
+		int sfield,
+	    unsigned char *dst[],
+		int dfield,
 		int lx,
 		int lx2,
-	    int w, 
-		int h, 
-		int x, 
-		int y, 
-		int dx, 
-		int dy, 
+	    int w,
+		int h,
+		int x,
+		int y,
+		int dx,
+		int dy,
 		int addflag)
 {
 
 /* Y */
-	recon_comp(video, (src[0] + (sfield ? (lx2 >> 1) : 0)), 
+	recon_comp(video, (src[0] + (sfield ? (lx2 >> 1) : 0)),
 	       dst[0] + (dfield ? (lx2 >> 1) : 0),
            lx, lx2, w, h, x, y, dx, dy, addflag);
 
 	if(video->chroma_format != CHROMA444)
 	{
-      	lx >>= 1; 
-		dx /= 2; 
-		lx2 >>= 1; 
-		w = 0; 
-		x >>= 1; 
+      	lx >>= 1;
+		dx /= 2;
+		lx2 >>= 1;
+		w = 0;
+		x >>= 1;
 	}
 
 	if(video->chroma_format == CHROMA420)
 	{
-      	h >>= 1; 
-		dy /= 2; 
-		y >>= 1; 
+      	h >>= 1;
+		dy /= 2;
+		y >>= 1;
 	}
 
 /* Cb */
-	recon_comp(video, (src[1] + (sfield ? (lx2 >> 1) : 0)), 
+	recon_comp(video, (src[1] + (sfield ? (lx2 >> 1) : 0)),
 	       dst[1] + (dfield ? (lx2 >> 1) : 0),
 	       lx, lx2, w, h, x, y, dx, dy, addflag);
 
@@ -1053,14 +1053,14 @@ static void recon(mpeg3video_t *video,
 
 #define WIDTH 1
 
-int mpeg3video_reconstruct(mpeg3video_t *video, 
-	int bx, 
-	int by, 
-	int mb_type, 
+int mpeg3video_reconstruct(mpeg3video_t *video,
+	int bx,
+	int by,
+	int mb_type,
 	int motion_type,
-	int PMV[2][2][2], 
-	int mv_field_sel[2][2], 
-	int dmvector[2], 
+	int PMV[2][2][2],
+	int mv_field_sel[2][2],
+	int dmvector[2],
 	int stwtype)
 {
 	int currentfield;
@@ -1101,14 +1101,14 @@ int mpeg3video_reconstruct(mpeg3video_t *video,
 /* bottom field prediction */
         		if(stwbot < 2)
         			recon(video, video->oldrefframe, mv_field_sel[1][0], video->newframe, 1,
-            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by >> 1, 
+            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by >> 1,
             			PMV[1][0][0], PMV[1][0][1] >> 1, stwbot);
     		}
     		else if(motion_type == MC_DMV)
-			{ 
+			{
 /* dual prime prediction */
 /* calculate derived motion vectors */
-        		mpeg3video_calc_dmv(video, 
+        		mpeg3video_calc_dmv(video,
 					DMV,
 					dmvector,
 					PMV[0][0][0],
@@ -1117,26 +1117,26 @@ int mpeg3video_reconstruct(mpeg3video_t *video,
         		if(stwtop < 2)
 				{
 /* predict top field from top field */
-        			recon(video, video->oldrefframe, 0, video->newframe, 0, 
-            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by>>1, 
+        			recon(video, video->oldrefframe, 0, video->newframe, 0,
+            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by>>1,
             			PMV[0][0][0], PMV[0][0][1] >> 1, 0);
 
 /* predict and add to top field from bottom field */
-        			recon(video, video->oldrefframe, 1, video->newframe, 0, 
-            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by>>1, 
+        			recon(video, video->oldrefframe, 1, video->newframe, 0,
+            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by>>1,
             			DMV[0][0], DMV[0][1], 1);
         		}
 
         		if(stwbot < 2)
         		{
 /* predict bottom field from bottom field */
-        			recon(video, video->oldrefframe, 1, video->newframe, 1, 
-            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by>>1, 
+        			recon(video, video->oldrefframe, 1, video->newframe, 1,
+            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by>>1,
             			PMV[0][0][0], PMV[0][0][1]>>1, 0);
 
 /* predict and add to bottom field from top field */
-        			recon(video, video->oldrefframe, 0, video->newframe, 1, 
-            			video->coded_picture_width << 1, video->coded_picture_width<<1, WIDTH, 8, bx, by>>1, 
+        			recon(video, video->oldrefframe, 0, video->newframe, 1,
+            			video->coded_picture_width << 1, video->coded_picture_width<<1, WIDTH, 8, bx, by>>1,
             			DMV[1][0], DMV[1][1], 1);
         		}
     		}
@@ -1145,7 +1145,7 @@ int mpeg3video_reconstruct(mpeg3video_t *video,
 /*        		fprintf(stderr, "reconstruct: invalid motion_type\n"); */
 				;
     	}
-      	else 
+      	else
       	{
 /* TOP_FIELD or BOTTOM_FIELD */
 /* field picture */
@@ -1166,13 +1166,13 @@ int mpeg3video_reconstruct(mpeg3video_t *video,
             			video->coded_picture_width << 1,video->coded_picture_width << 1,WIDTH,16,bx,by,
             			PMV[0][0][0],PMV[0][0][1],stwtop);
     		}
-    		else 
+    		else
 			if(motion_type == MC_16X8)
     		{
         		if(stwtop < 2)
         		{
-        			recon(video, predframe, mv_field_sel[0][0], video->newframe, 0, 
-            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by, 
+        			recon(video, predframe, mv_field_sel[0][0], video->newframe, 0,
+            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by,
             			PMV[0][0][0], PMV[0][0][1], stwtop);
 
         			/* determine which frame to use for lower half prediction */
@@ -1182,12 +1182,12 @@ int mpeg3video_reconstruct(mpeg3video_t *video,
         			else
             		  predframe = video->oldrefframe; /* previous frame */
 
-        			recon(video, predframe, mv_field_sel[1][0], video->newframe, 0, 
-            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by+8, 
+        			recon(video, predframe, mv_field_sel[1][0], video->newframe, 0,
+            			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by+8,
             			PMV[1][0][0], PMV[1][0][1], stwtop);
         		}
     		}
-    		else 
+    		else
 			if(motion_type == MC_DMV) /* dual prime prediction */
     		{
         		if(video->secondfield)
@@ -1196,20 +1196,20 @@ int mpeg3video_reconstruct(mpeg3video_t *video,
         		  	predframe = video->oldrefframe; /* previous frame */
 
 /* calculate derived motion vectors */
-        		mpeg3video_calc_dmv(video, 
+        		mpeg3video_calc_dmv(video,
 					DMV,
 					dmvector,
 					PMV[0][0][0],
 					PMV[0][0][1]);
 
 /* predict from field of same parity */
-        		recon(video, video->oldrefframe, currentfield, video->newframe, 0, 
-        			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 16, bx, by, 
+        		recon(video, video->oldrefframe, currentfield, video->newframe, 0,
+        			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 16, bx, by,
         			PMV[0][0][0], PMV[0][0][1], 0);
 
 /* predict from field of opposite parity */
-        		recon(video, predframe, !currentfield, video->newframe, 0, 
-        			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 16, bx, by, 
+        		recon(video, predframe, !currentfield, video->newframe, 0,
+        			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 16, bx, by,
         			DMV[0][0], DMV[0][1], 1);
     		}
     		else
@@ -1228,17 +1228,17 @@ int mpeg3video_reconstruct(mpeg3video_t *video,
     		{
 /* frame-based prediction */
         		if(stwtop < 2)
-        			recon(video, video->refframe, 0, video->newframe, 0, 
-            			video->coded_picture_width, video->coded_picture_width << 1, WIDTH, 8, bx, by, 
+        			recon(video, video->refframe, 0, video->newframe, 0,
+            			video->coded_picture_width, video->coded_picture_width << 1, WIDTH, 8, bx, by,
             			PMV[0][1][0], PMV[0][1][1], stwtop);
 
         		if(stwbot < 2)
-        			recon(video, video->refframe, 1, video->newframe, 1, 
-						video->coded_picture_width, video->coded_picture_width << 1, WIDTH, 8, bx, by, 
+        			recon(video, video->refframe, 1, video->newframe, 1,
+						video->coded_picture_width, video->coded_picture_width << 1, WIDTH, 8, bx, by,
 						PMV[0][1][0], PMV[0][1][1], stwbot);
     		}
-    		else 
-			{           
+    		else
+			{
 /* field-based prediction */
 /* top field prediction */
 				if(stwtop < 2)
@@ -1257,25 +1257,25 @@ int mpeg3video_reconstruct(mpeg3video_t *video,
 				}
     		}
     	}
-    	else 
+    	else
 		{
 /* TOP_FIELD or BOTTOM_FIELD */
 /* field picture */
     		if(motion_type == MC_FIELD)
 			{
 /* field-based prediction */
-        		recon(video, video->refframe, mv_field_sel[0][1], video->newframe, 0, 
-	    			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 16, bx, by, 
+        		recon(video, video->refframe, mv_field_sel[0][1], video->newframe, 0,
+	    			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 16, bx, by,
 	    			PMV[0][1][0], PMV[0][1][1], stwtop);
     		}
     		else if(motion_type==MC_16X8)
     		{
-        		recon(video, video->refframe, mv_field_sel[0][1], video->newframe, 0, 
-        			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by, 
+        		recon(video, video->refframe, mv_field_sel[0][1], video->newframe, 0,
+        			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by,
         			PMV[0][1][0], PMV[0][1][1], stwtop);
 
-        		recon(video, video->refframe, mv_field_sel[1][1], video->newframe, 0, 
-        			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by+8, 
+        		recon(video, video->refframe, mv_field_sel[1][1], video->newframe, 0,
+        			video->coded_picture_width << 1, video->coded_picture_width << 1, WIDTH, 8, bx, by+8,
         			PMV[1][1][0], PMV[1][1][1], stwtop);
     		}
     		else

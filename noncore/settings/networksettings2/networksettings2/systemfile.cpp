@@ -11,7 +11,7 @@
 #define TEMPLATEDIR "NS2templates/"
 QString TemplDir;
 
-SystemFile::SystemFile( const QString & N, 
+SystemFile::SystemFile( const QString & N,
                         const QString & P,
                         bool KDI ){
       Name = N;
@@ -30,11 +30,11 @@ SystemFile::SystemFile( const QString & N,
           TemplDir = "./" TEMPLATEDIR;
           FI.setFile( TemplDir );
           if( ! FI.isDir() ) {
-            hasPreSection = 
-              hasPostSection = 
-              hasPreNodeSection = 
-              hasPostNodeSection = 
-              hasPreDeviceSection = 
+            hasPreSection =
+              hasPostSection =
+              hasPreNodeSection =
+              hasPostNodeSection =
+              hasPreDeviceSection =
               hasPostDeviceSection = 0;
             return;
           }
@@ -70,11 +70,11 @@ SystemFile::SystemFile( const QString & N, bool KDI ){
       InAppend = 0;
       F =0;
       KnowsDeviceInstances = KDI;
-      hasPreSection = 
-        hasPostSection = 
-        hasPreNodeSection = 
-        hasPostNodeSection = 
-        hasPreDeviceSection = 
+      hasPreSection =
+        hasPostSection =
+        hasPreNodeSection =
+        hasPostNodeSection =
+        hasPreDeviceSection =
         hasPostDeviceSection = 0;
 }
 
@@ -137,7 +137,7 @@ bool SystemFile::close( void ) {
 
       if( ! InAppend ) {
         return ( rename( OldP.latin1(), Path.latin1() ) >= 0 );
-      } 
+      }
       return 1;
 }
 

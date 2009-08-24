@@ -24,7 +24,7 @@ public:
 private:
   bool hasWirelessExtensions;
   QString interface;
-  
+
   // Used in we calls
   struct iwreq iwr;
   int fd;

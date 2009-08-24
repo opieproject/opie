@@ -100,7 +100,7 @@ void TableView::initConfig()
 
 TableView::TableView( MainWindow* window, QWidget* wid, const QValueList<QPixmap> &pic_priority )
     : QTable(  wid ), TodoView( window ), m_pic_priority( pic_priority )
-{  
+{
     setName("TableView");
 
     // Load icons
@@ -172,7 +172,7 @@ int TableView::current()
 {
     if ( numRows() == 0 )
         return 0;
-    
+
     int uid = sorted().uidAt(currentRow() );
     return uid;
 }
@@ -183,7 +183,7 @@ int TableView::next()
         return 0;
     if ( currentRow() + 1 >= numRows() )
         return 0;
-    
+
     setCurrentCell( currentRow() +1, currentColumn()  );
     return sorted().uidAt( currentRow() );
 }
@@ -194,7 +194,7 @@ int TableView::prev()
         return 0;
     if ( currentRow() - 1 < 0 )
         return 0;
-    
+
     setCurrentCell( currentRow() -1, currentColumn()  );
     return sorted().uidAt( currentRow() );
 }

@@ -108,13 +108,13 @@ QPixmap OTIcons::serviceIcon( int serviceClass, bool & found ) {
     if ( iconName.isEmpty() ) {
       iconName = "unknown_16";
       found = 0 ;
-    } else 
+    } else
       found = 1 ;
     return loadPixmap( iconName, 1 );
 }
 
 QPixmap OTIcons::loadPixmap( const QString & name, bool Sub ) {
-    return( Resource::loadPixmap( "opietooth/" + 
-                                  QString( (Sub) ? "icons/" : "" ) + 
+    return( Resource::loadPixmap( "opietooth/" +
+                                  QString( (Sub) ? "icons/" : "" ) +
                                   name ) );
 }

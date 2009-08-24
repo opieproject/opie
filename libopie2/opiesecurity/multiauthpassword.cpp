@@ -54,8 +54,8 @@
 
 namespace Opie {
 namespace Security {
-    
-static bool authLock = false;    
+
+static bool authLock = false;
 
 /**
  * Tells if the users requires authentication (used internally to
@@ -118,7 +118,7 @@ void MultiauthPassword::authenticate(int lockMode)
             ) )
             return;
     }
-    
+
     authLock = true;
 
     /**
@@ -142,7 +142,7 @@ void MultiauthPassword::authenticate(int lockMode)
     QRect desk = qApp->desktop()->geometry();
     win.setGeometry( 0, 0, desk.width(), desk.height() );
 
-    // Check if the authentication has already succeeded (without 
+    // Check if the authentication has already succeeded (without
     // win interactions); if not, then show the window
     if ( !win.isAlreadyDone() ) {
         win.exec();
@@ -152,7 +152,7 @@ void MultiauthPassword::authenticate(int lockMode)
     if (lockMode != TestNow)
         QCopEnvelope e( "QPE/Desktop", "unlocked()" );
 #endif
-    
+
     authLock = false;
 }
 

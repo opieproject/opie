@@ -47,7 +47,7 @@ struct t_splitLine
 class TextParser: public QObject
 {
   Q_OBJECT
-  
+
 public:
   TextParser(const QString &in, const QString &lineBreak);
   TextParser(const QString &in, const QString &lineBreak, const QString &sep);
@@ -73,7 +73,7 @@ private:
   bool isSeparator(QChar chr);
   t_splitLine splitDone[MAX_LINES];
   int getLineReference(int pos, int *line, int *inLinePos);
-  
+
   int lineCount, linePos, totalElmCount;
   int separatorPos, wordPos;
   QString data, separators, lineSep;

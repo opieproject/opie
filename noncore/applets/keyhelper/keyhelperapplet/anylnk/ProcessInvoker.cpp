@@ -369,7 +369,7 @@ void ProcessInvoker::notifyFinish(int status, bool success)
 			result = "error";
 			code = -2;
 			qWarning("ProcessInvoker: unknown status");
-		}		
+		}
 	} else {
 		result = "error";
 		code = -1;

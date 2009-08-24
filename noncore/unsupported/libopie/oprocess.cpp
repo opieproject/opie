@@ -153,10 +153,10 @@ OProcess::setWorkingDirectory(const QString &dir)
 {
    if (!d)
       d = new OProcessPrivate;
-   d->wd = dir;   
-} 
+   d->wd = dir;
+}
 
-void 
+void
 OProcess::setupEnvironment()
 {
    if (d)
@@ -283,7 +283,7 @@ bool OProcess::start(RunMode runmode, Communication comm)
           qWarning( "Could not find a valid shell" );
               return false;
       }
-      
+
       arglist = static_cast<char **>(malloc( (4)*sizeof(char *)));
       for (i=0; i < n; i++) {
           shellCmd += arguments[i];
@@ -305,7 +305,7 @@ bool OProcess::start(RunMode runmode, Communication comm)
 
   if (!setupCommunication(comm))
       qWarning( "Could not setup Communication!");
-    
+
   // We do this in the parent because if we do it in the child process
   // gdb gets confused when the application runs from gdb.
   uid_t uid = getuid();
@@ -343,7 +343,7 @@ bool OProcess::start(RunMode runmode, Communication comm)
         // The child process
         if(!commSetupDoneC())
           qWarning( "Could not finish comm setup in child!" );
-          
+
         setupEnvironment();
 
         // Matthias
@@ -497,7 +497,7 @@ void OProcess::flushStdin ( )
 		return;
 
 	int d1, d2;
-	
+
 	do {
 		d1 = input_total - input_sent;
 		slotSendData ( 0 );

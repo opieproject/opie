@@ -40,7 +40,7 @@ public:
     bool copyFile( const AppLnk &src, const AppLnk &dest );
     bool copyFile( const QString & src, const QString & dest );
     bool renameFile( const QString &, const QString &);
- 
+
 // The caller must delete the return values.
     QIODevice* openFile( const DocLnk& );
     QIODevice* saveFile( const DocLnk& );

@@ -27,7 +27,7 @@ private:
 	const char *readPacket();
 	bool readFromFile(QFile &file, QStringList &strlist);
 	bool writeToFile(QFile &file, QStringList &strlist);
-	
+
 	struct sockaddr_un addr;
 	int fd;
 public:

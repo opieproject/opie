@@ -16,7 +16,7 @@ class QPushButton;
 class ConfigDlg : public QDialog
 {
 	Q_OBJECT
-	
+
     public:
 		ConfigDlg(QWidget *parent, const char *name, bool modal=FALSE );
 

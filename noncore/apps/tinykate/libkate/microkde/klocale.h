@@ -35,7 +35,7 @@ class KLocale
 
     bool use12Clock() const;
     bool weekStartsMonday() const;
-    
+
     QString weekDayName(int,bool=false) const;
     QString monthName(int,bool=false) const;
 

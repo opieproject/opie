@@ -37,7 +37,7 @@
 #include "addatt.h"
 
 class WriteMail : public QMainWindow
-{ 
+{
 	Q_OBJECT
 
 public:
@@ -52,7 +52,7 @@ signals:
 	void sendMailRequested(const Email &mail);
 	void cancelMail();
 
-	
+
 public slots:
 	void getAddress();
 	void attachFile();
@@ -66,17 +66,17 @@ private:
  	bool getRecipients(bool);
 	void init();
 	void addRecipients(bool);
-	
+
 	Email mail;
 	AddAtt *addAtt;
 	AddressList *addressList;
         bool showingAddressList;
-	
+
 	QToolBar *bar;
 	QMenuBar *menu;
 	QPopupMenu *addMenu, *mailMenu;
 	QListView *addressView;
-	
+
 	QToolButton *okButton;
 	QWidget *widget;
 	QAction *attachButton;

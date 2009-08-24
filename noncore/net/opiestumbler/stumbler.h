@@ -8,7 +8,7 @@
 class QString;
 class QTimer;
 namespace Opie {
-    namespace Net {        
+    namespace Net {
         class OWirelessNetworkInterface;
     }
 }

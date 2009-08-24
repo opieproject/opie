@@ -77,9 +77,9 @@ OLedBox::OLedBox ( const QColor &col, QWidget *parent, const char *name ) : QWid
 	m_readonly = true;
 
 	m_pix [ 0 ] = m_pix [ 1 ] = 0;
-	
+
 	setBackgroundMode ( PaletteBackground );
-	
+
 	if ( !s_border_pix )
 		s_border_pix = new QPixmap( ledborder_xpm );
 }
@@ -132,7 +132,7 @@ void OLedBox::setColor ( const QColor &col )
 
 void OLedBox::mousePressEvent ( QMouseEvent *e )
 {
-	if ( ! m_readonly && 
+	if ( ! m_readonly &&
 	     e-> button ( ) == LeftButton ) {
 		m_on = !m_on;
 		update ( );
@@ -246,9 +246,9 @@ void OLedBox::drawLed ( QPixmap *pix, const QColor &col )
 #ifndef QT_CAN_DRAW_ARCS
 	paint.drawPixmap ( 0, 0, *s_border_pix );
 	paint.end ( );
-	
+
 	pix->setMask ( pix-> createHeuristicMask ( ));
-	
+
 #else
 	pen.setWidth( 3 );
 	brush.setStyle( QBrush::NoBrush );              // Switch off the brush
@@ -292,7 +292,7 @@ void OLedBox::drawLed ( QPixmap *pix, const QColor &col )
 	mp. setBrush ( Qt::color1 );
 	mp. drawEllipse ( 0, 0, width + 2, width + 2 );
 	mp. end ( );
-	
+
 	pix-> setMask ( mask );
 #endif
 }

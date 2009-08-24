@@ -23,7 +23,7 @@
 class AdvancedConfig: public AdvancedConfigBase
 {
     Q_OBJECT
-    
+
 public:
     AdvancedConfig( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
     ~AdvancedConfig();

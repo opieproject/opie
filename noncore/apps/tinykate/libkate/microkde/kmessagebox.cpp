@@ -3,7 +3,7 @@
 
 #include <qmessagebox.h>
 
-void KMessageBox::sorry( QWidget *parent, 
+void KMessageBox::sorry( QWidget *parent,
          const QString &text,
          const QString &caption, bool )
 {
@@ -42,10 +42,10 @@ int KMessageBox::questionYesNo(QWidget *parent,
 
 
 
-int KMessageBox::warningContinueCancel( QWidget *parent, 
+int KMessageBox::warningContinueCancel( QWidget *parent,
               const QString &text,
               const QString &caption,
-              const QString &buttonContinue, 
+              const QString &buttonContinue,
               const QString &dontAskAgainName,
               bool notify )
 {
@@ -62,8 +62,8 @@ int KMessageBox::warningContinueCancel( QWidget *parent,
   return KMessageBox::Cancel;
 }
 
-void KMessageBox::error( QWidget *parent, 
-         const QString &text, 
+void KMessageBox::error( QWidget *parent,
+         const QString &text,
          const QString &caption, bool notify )
 {
   QString cap = caption;
@@ -75,10 +75,10 @@ void KMessageBox::error( QWidget *parent,
   QMessageBox::critical( parent, cap, text );
 }
 
-void KMessageBox::information( QWidget *parent, 
-                          const QString &text, 
+void KMessageBox::information( QWidget *parent,
+                          const QString &text,
                           const QString &caption,
-                          const QString &, 
+                          const QString &,
                           bool )
 {
   QString cap = caption;

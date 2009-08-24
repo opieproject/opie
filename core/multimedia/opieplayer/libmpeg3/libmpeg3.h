@@ -65,14 +65,14 @@ LIBMPEG_EXPORT int mpeg3_sample_rate(mpeg3_t *file, int stream);
 
 /* Total length obtained from the timecode. */
 /* For DVD files, this is unreliable. */
-LIBMPEG_EXPORT long mpeg3_audio_samples(mpeg3_t *file, int stream); 
+LIBMPEG_EXPORT long mpeg3_audio_samples(mpeg3_t *file, int stream);
 LIBMPEG_EXPORT int mpeg3_set_sample(mpeg3_t *file, long sample, int stream);    /* Seek to a sample */
 LIBMPEG_EXPORT long mpeg3_get_sample(mpeg3_t *file, int stream);    /* Tell current position */
 
 /* Read a PCM buffer of audio from 1 channel and advance the position. */
 /* Return a 1 if error. */
 /* Stream defines the number of the multiplexed stream to read. */
-LIBMPEG_EXPORT int mpeg3_read_audio(mpeg3_t *file, 
+LIBMPEG_EXPORT int mpeg3_read_audio(mpeg3_t *file,
 		mpeg3_real_t *output_f,      /* Pointer to pre-allocated buffer of floats */
 		short *output_i,      /* Pointer to pre-allocated buffer of int16's */
 		int sampleSpacing, // how many bytes to skip over inbetween samples
@@ -81,7 +81,7 @@ LIBMPEG_EXPORT int mpeg3_read_audio(mpeg3_t *file,
 		int stream);          /* Stream containing the channel */
 
 /* Reread the last PCM buffer from a different channel and advance the position */
-LIBMPEG_EXPORT int mpeg3_reread_audio(mpeg3_t *file, 
+LIBMPEG_EXPORT int mpeg3_reread_audio(mpeg3_t *file,
 		mpeg3_real_t *output_f,      /* Pointer to pre-allocated buffer of floats */
 		short *output_i,      /* Pointer to pre-allocated buffer of int16's */
 		int sampleSpacing, // how many bytes to skip over inbetween samples
@@ -92,9 +92,9 @@ LIBMPEG_EXPORT int mpeg3_reread_audio(mpeg3_t *file,
 /* Read the next compressed audio chunk.  Store the size in size and return a  */
 /* 1 if error. */
 /* Stream defines the number of the multiplexed stream to read. */
-LIBMPEG_EXPORT int mpeg3_read_audio_chunk(mpeg3_t *file, 
-		unsigned char *output, 
-		long *size, 
+LIBMPEG_EXPORT int mpeg3_read_audio_chunk(mpeg3_t *file,
+		unsigned char *output,
+		long *size,
 		long max_size,
 		int stream);
 
@@ -130,14 +130,14 @@ LIBMPEG_EXPORT double mpeg3_get_time(mpeg3_t *file);
 /* The frame is taken from the input area and scaled to fit the output frame in 1 step. */
 /* Stream defines the number of the multiplexed stream to read. */
 /* The last row of **output_rows must contain 4 extra bytes for scratch work. */
-LIBMPEG_EXPORT int mpeg3_read_frame(mpeg3_t *file, 
+LIBMPEG_EXPORT int mpeg3_read_frame(mpeg3_t *file,
 		unsigned char **output_rows, /* Array of pointers to the start of each output row */
 		int in_x,                    /* Location in input frame to take picture */
-		int in_y, 
-		int in_w, 
-		int in_h, 
+		int in_y,
+		int in_w,
+		int in_h,
 		int out_w,                   /* Dimensions of output_rows */
-		int out_h, 
+		int out_h,
 		int color_model,             /* One of the color model #defines */
 		int stream);
 
@@ -158,9 +158,9 @@ LIBMPEG_EXPORT int mpeg3_drop_frames(mpeg3_t *file, long frames, int stream);
 /* Read the next compressed frame including headers. */
 /* Store the size in size and return a 1 if error. */
 /* Stream defines the number of the multiplexed stream to read. */
-LIBMPEG_EXPORT int mpeg3_read_video_chunk(mpeg3_t *file, 
-		unsigned char *output, 
-		long *size, 
+LIBMPEG_EXPORT int mpeg3_read_video_chunk(mpeg3_t *file,
+		unsigned char *output,
+		long *size,
 		long max_size,
 		int stream);
 

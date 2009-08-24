@@ -253,14 +253,14 @@ void ScreenshotControl::performGrab()
 
                                         QImage img = pix.convertToImage().convertDepth( 16 ); // could make that also depth independent, if hh.org/scap can handle it
 
-                                        header = "POST %1?%2+%3+%4 HTTP/1.1\n"  // 1: path / 2: model / 3: user / 4: resolution 
+                                        header = "POST %1?%2+%3+%4 HTTP/1.1\n"  // 1: path / 2: model / 3: user / 4: resolution
                                                 "Content-length: %5\n"                     // 5: content length
                                                 "Content-Type: image/png\n"
                                                 "Host: %6\n"                               // 6: scap host
                                                 "\n";
 
-                                        QString imgres = QString("%1x%2").arg( QApplication::desktop()->width() ).arg( QApplication::desktop()->height() ); 
-                                        
+                                        QString imgres = QString("%1x%2").arg( QApplication::desktop()->width() ).arg( QApplication::desktop()->height() );
+
                                         header = header.arg( SCAP_capture_path ).arg( SCAP_model).arg( ::getenv( "USER" ) ).arg( imgres ).arg( img.numBytes() ).arg( SCAP_hostname );
                                         header.replace(QRegExp("%%%"), "%20");
                                         odebug << header << oendl;

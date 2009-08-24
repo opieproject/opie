@@ -8,7 +8,7 @@
 class QListViewItem;
 
 
-class RemapDlg : public RemapDlgBase { 
+class RemapDlg : public RemapDlgBase {
     Q_OBJECT
 
 public:
@@ -20,16 +20,16 @@ public:
 public slots:
 	virtual void itemChanged ( QListViewItem * );
 	virtual void textChanged ( const QString & );
-	
+
 private slots:
 	void delayedInit ( );
 
 private:
 	Opie::Core::OQCopMessage m_msg;
 	Opie::Core::OQCopMessage m_msg_preset;
-	
+
 	QListViewItem *m_current;
-	
+
 	QListViewItem *m_map_none;
 	QListViewItem *m_map_preset;
 	QListViewItem *m_map_custom;

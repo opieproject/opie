@@ -33,7 +33,7 @@ QStringList OPIE::languageList( const QString& _opieDir )const {
 
 
     return langs;
-#endif    
+#endif
 }
 QString OPIE::opieDir( const QString& _opieDir ) const{
     if (!_opieDir.isEmpty() ) return _opieDir;

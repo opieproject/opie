@@ -24,12 +24,12 @@
 dataWidgetUI::dataWidgetUI(const QStringList &list) : QWidget()
 {
 	names = list;
-	
+
 	this->setCaption( tr( "Chemical Data" ));
     QGridLayout *qgrid = new QGridLayout( this, 2,1 );
-    
+
     dataCombo = new QComboBox( this );
-    
+
     //read in all names of the 118 elements
 	int i = 0;
     for ( QStringList::ConstIterator it =  names.begin() ; it != names.end() ; ++it,i++)

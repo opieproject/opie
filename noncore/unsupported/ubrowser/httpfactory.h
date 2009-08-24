@@ -44,7 +44,7 @@ private:
 	QTextDrag *text;
 	QImageDrag *image;
 	QTextBrowser *browser;
-	
+
 	const QByteArray processResponse( int sockfd, bool &isText) const;
 	const QByteArray recieveNormal( int sockfd, int dataLen ) const;
 	const QByteArray recieveChunked( int sockfd ) const;

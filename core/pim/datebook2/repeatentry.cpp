@@ -283,7 +283,7 @@ void RepeatEntry::setupWeekly()
         cmdExtra5->setText( RepeatEntryBase::tr("Fri") );
         cmdExtra6->setText( RepeatEntryBase::tr("Sat") );
         cmdExtra7->setText( RepeatEntryBase::tr("Sun") );
-    } 
+    }
     else {
         cmdExtra1->setText( RepeatEntryBase::tr("Sun") );
         cmdExtra2->setText( RepeatEntryBase::tr("Mon") );
@@ -410,7 +410,7 @@ void RepeatEntry::updateEndDate()
 {
     if ( chkNoEnd->isChecked() ) {
         cmdEnd->setText( RepeatEntryBase::tr("No End Date") );
-    } 
+    }
     else {
         cmdEnd->setText( TimeString::shortDate(end) );
         repeatPicker->setDate( end.year(), end.month(), end.day() );
@@ -526,7 +526,7 @@ void RepeatEntry::slotWeekLabel()
                 else
                     str += tr( ", and " ) + *itStr;
             }
-        } 
+        }
         else {
             if ( bNeedCarriage )
                 str += ",\n" + *itStr;

@@ -89,7 +89,7 @@ void Calibrate::store()
 	t << cal.a[1] << " " << cal.a[2] << " " << cal.a[0] << " ";
 	t << cal.a[4] << " " << cal.a[5] << " " << cal.a[3] << " ";
 	t << cal.a[6] << endl;
-    } else	
+    } else
 #endif
     {
 	qDebug("Could not save calibration");
@@ -195,7 +195,7 @@ bool Calibrate::performCalculation(void)
 		cal.a[6]);
 
 	return true;
-}	
+}
 
 void Calibrate::moveCrosshair( QPoint pt )
 {

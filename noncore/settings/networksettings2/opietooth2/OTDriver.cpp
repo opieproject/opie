@@ -484,7 +484,7 @@ void OTDriver::changeAuthentication(bool _auth) {
 
     dr.dev_id  = devId();
     dr.dev_opt = _auth?AUTH_ENABLED:AUTH_DISABLED;
-   
+
     if (ioctl(fd(),HCISETAUTH,(unsigned long)&dr) < 0) {
       if( errno != EALREADY ) {
         emit error( tr( "Can't change authentication on %1. %2 : %3" ).
@@ -506,7 +506,7 @@ void OTDriver::changeEncryption(bool _encrypt) {
 
     dr.dev_id  = devId();
     dr.dev_opt = _encrypt?ENCRYPT_P2P:ENCRYPT_DISABLED;
-        
+
     if (ioctl(fd(),HCISETENCRYPT,(unsigned long)&dr) < 0) {
       if( errno != EALREADY ) {
         emit error( tr( "Can't change encryption on %1. %2 : %3" ).
@@ -520,7 +520,7 @@ void OTDriver::changeEncryption(bool _encrypt) {
     reinit();
 }
 
-void OTDriver::changeClass ( unsigned char service,  
+void OTDriver::changeClass ( unsigned char service,
                              unsigned char major,
                              unsigned char minor ) {
     unsigned long cod = 0;
@@ -541,7 +541,7 @@ void OTDriver::changeClass ( unsigned char service,
     }
 }
 
-void OTDriver::getClass( QString & service,  
+void OTDriver::getClass( QString & service,
                          QString & device ) {
     unsigned char cls[3];
 
@@ -685,10 +685,10 @@ QString OTDriver::getPeerName( const OTDeviceAddress & PAddr ) {
         return QString("N/A");
       }
 
-      if( hci_read_remote_name( fd(), 
-                                &(PAddr.getBDAddr()), 
-                                sizeof(name), 
-                                name, 
+      if( hci_read_remote_name( fd(),
+                                &(PAddr.getBDAddr()),
+                                sizeof(name),
+                                name,
                                 100000 ) < 0 ) {
         return QString( "N/A" );
       }

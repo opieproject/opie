@@ -25,7 +25,7 @@
 
 #include <stdlib.h>
 
-Target::Target(QCanvas* canvas) 
+Target::Target(QCanvas* canvas)
        : QCanvasSprite(0, canvas)
 {
    mouse = new QCanvasPixmapArray(Opie::Core::OResource::findPixmap("snake/mouse"));
@@ -47,7 +47,7 @@ void Target::newTarget()
      int y = rand() % (canvas()->height()-10);
      y = y - (y % 16) + 2;
      move(x, y);
-   } while (onTop());  
+   } while (onTop());
    show();
 }
 
@@ -56,7 +56,7 @@ bool Target::onTop()
    QCanvasItem* item;
    QCanvasItemList l= canvas()->allItems(); //collisions(FALSE);
    for (QCanvasItemList::Iterator it=l.begin(); it!=l.end(); ++it) {
-          item = *it; 
+          item = *it;
           if (item != this && item->collidesWith(this)) return true;
       }
    return false;

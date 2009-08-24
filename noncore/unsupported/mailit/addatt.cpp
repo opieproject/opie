@@ -29,15 +29,15 @@ FileItem::FileItem(QListView *parent, DocLnk* dl)
 {
 	/*file = fileInfo;
 	type = fileType;*/
-	
+
 	doclnk=dl;
 
 	setText(0, doclnk->name());
-	
+
 /*	if (fileType == "Picture") {
 		setPixmap(0, Resource::loadPixmap("pixmap"));
 	} else if (fileType == "Document") {
-		setPixmap(0, Resource::loadPixmap("txt"));	
+		setPixmap(0, Resource::loadPixmap("txt"));
 	} else if (fileType == "Sound") {
 		setPixmap(0, Resource::loadPixmap("play"));
 	} else if (fileType == "Movie") {
@@ -59,7 +59,7 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 	setCaption(tr("Adding attachments") );
 
 	QGridLayout *top = new QGridLayout(this, 1,1 );
-	
+
 	QHBox *buttons=new QHBox(this);
 	/*fileCategoryButton = new QPushButton(this);*/
 	attachButton = new QPushButton(tr("attach..."), buttons);
@@ -75,7 +75,7 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 
 	fileCategoryButton->setText("Document");
 	top->addWidget(fileCategoryButton, 0, 0);*/
-	
+
 
 	top->addWidget(buttons,1,0);
 	//buttons->addWidget(attachButton,0,0);
@@ -87,13 +87,13 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 		SLOT(addattachment()) );
 	connect(removeButton, SIGNAL(clicked()), this,
 		SLOT(removeattachment()) );
-	
+
 	/*listView = new QListView(this, "AttView");
 	listView->addColumn("Documents");*
 	connect(listView, SIGNAL(doubleClicked(QListViewItem*)), this,
 		SLOT(addattachment()) );*/
-	
-	
+
+
 	attView = new QListView(this, "Selected");
 	attView->addColumn(tr("Attached"));
 	attView->addColumn(tr("File type"));
@@ -102,9 +102,9 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 
 	//top->addWidget(ofs, 0,0);
 	top->addWidget(attView, 0,0);
-	
+
 	clear();
-	
+
 
 }
 
@@ -124,9 +124,9 @@ void AddAtt::clear()
 void AddAtt::addattachment()
 {	// ### FIXME wrong use -zecke
 	OFileDialog ofs("Attachments",this,0,0,"/root/Documents");
-	
+
 	ofs.showMaximized();
-	
+
 	if (ofs.exec()==QDialog::Accepted)
 	{
 		DocLnk* dl=new DocLnk(ofs.selectedDocument());
@@ -134,13 +134,13 @@ void AddAtt::addattachment()
 		fi->setPixmap(0,dl->pixmap());
 		fi->setText(1,dl->type());
 		attView->insertItem(fi);
-		modified = TRUE;	
+		modified = TRUE;
 	}
 }
 
 void AddAtt::removeattachment()
 {
-	if (attView->selectedItem() != NULL) 
+	if (attView->selectedItem() != NULL)
 	{
 		attView->takeItem(attView->selectedItem());
 	}
@@ -164,9 +164,9 @@ void AddAtt::accept()
 void AddAtt::getFiles()
 {
 	QString path, selected;
-	
+
 	/*listView->clear();
-	
+
 	selected = fileCategoryButton->text();
 	if (selected == "Picture") {
 		path = "../pics/";
@@ -196,10 +196,10 @@ QStringList AddAtt::returnattachedFiles()
 {
 	QFileInfo info;
 	QStringList list;
-	
+
 	item = (FileItem *) attView->firstChild();
-	
-	
+
+
 	while (item != NULL) {
 		DocLnk* dl=item->getDocLnk();
 		list+=dl->file();
@@ -213,9 +213,9 @@ QStringList AddAtt::returnattachedFiles()
 QStringList AddAtt::returnFileTypes()
 {
 	QStringList list;
-		
+
 	item = (FileItem *) attView->firstChild();
-			
+
 	while (item != NULL) {
 		list += item->getDocLnk()->type();
 		item = (FileItem *) item->nextSibling();

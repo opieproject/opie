@@ -76,7 +76,7 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 
 	m_busyani = new QCheckBox ( tr( "Enable animated busy indicator" ), this );
 	lay-> addMultiCellWidget ( m_busyani, 6, 6, 0, 1 );
-        
+
         m_staticbackground = new QCheckBox( tr( "Enable static background pixmap" ), this );
         lay->addMultiCellWidget( m_staticbackground, 7, 7, 0, 1 );
 
@@ -279,7 +279,7 @@ void TabsSettings::accept ( )
 	{
 		QCopEnvelope e ( "QPE/Launcher", "setStaticBackground(bool)" );
 		e << m_staticbackground->isChecked();
-	}        
+	}
 }
 
 void TabsSettings::newClicked ( )

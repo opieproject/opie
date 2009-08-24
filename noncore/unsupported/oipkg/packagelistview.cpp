@@ -30,7 +30,7 @@ PackageListView::PackageListView(QWidget *p, const char* n, PackageManagerSettin
   connect( this, SIGNAL( pressed(QListViewItem*) ),
 	   this, SLOT( setCurrent(QListViewItem*) ) );
   connect( this, SIGNAL( clicked(QListViewItem*) ),
-	   this, SLOT( stopTimer(QListViewItem*) ) );	
+	   this, SLOT( stopTimer(QListViewItem*) ) );
 
 }
 
@@ -44,7 +44,7 @@ void PackageListView::setCurrent( QListViewItem* p )
   activeItem = (ListViewItemOipkg*)p;
 
   if ( activeItem != 0 ) popupTimer->start( 750, true );
-  
+
 //  if ( activeItem->getType() != ListViewItemOipkg::Package ){
 //    qDebug("PackageListView::setCurrent !p ");
 //    activePackage = 0;
@@ -59,7 +59,7 @@ void PackageListView::setCurrent( QListViewItem* p )
 //      qDebug("PackageListView::setCurrent  if (!activePackage)");
 //      return;
 //    }
-  
+
 
   qDebug("PackageListView::setCurrent popupTimer->start");
 }
@@ -103,9 +103,9 @@ void PackageListView::display()
     pack = packlist->first();
     while( pack )
       {
-	item = new PackageListItem( rootItem, pack, settings );				
+	item = new PackageListItem( rootItem, pack, settings );
     	pack = packlist->next();
-      }	
+      }
     ++list;
   }
 }

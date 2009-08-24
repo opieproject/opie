@@ -62,46 +62,46 @@ public:
 	alphabet_map(uint InitialTableSize=255);
 	void Add(const std::string& Key, symbol Value);
 	symbol Get(const std::string& Key, bool* KeyIsPrefix=0) const;
-	
+
 private:
 	class Entry
 	{
 	public:
 		Entry(std::string Key, symbol Symbol, Entry* Next)
 			: Key(Key), KeyIsPrefix(false), Symbol(Symbol), Next(Next) {}
-		
+
 		std::string Key;
 		bool KeyIsPrefix;
 		symbol Symbol;
 		Entry* Next;
 	};
-	
+
 	void RecursiveAdd(const std::string& Key, symbol Value, bool PrefixFlag);
-	
+
 	// A standard hash -- could try and research something specific.
 	inline uint Hash(const std::string& Input) const {
 		uint Result = 0;
-	
+
 		typedef std::string::const_iterator CI;
 		CI Cur = Input.begin();
 		CI end = Input.end();
-		
+
 		while (Cur!=end) Result = (Result<<1)^*Cur++;
 		Result %= HashTable.size();
-		
+
 		return Result;
 		/*
 		if (Input.size()==1) // Speedup for ASCII text
 			return Input[0];
-		
+
 		for (int i=0; i<Input.size(); i++)
 			Result = (Result<<1)^Input[i];
 
-		
+
 		return Result%HashTable.size();
 		*/
 	}
-	
+
 	std::vector<Entry> Entries;
 	std::vector<Entry*> HashTable;
 	const symbol Undefined;

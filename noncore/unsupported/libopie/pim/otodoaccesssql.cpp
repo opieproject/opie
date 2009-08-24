@@ -125,7 +125,7 @@ namespace {
         qu += "create table todolist( uid PRIMARY KEY, categories, completed, ";
         qu += "description, summary, priority, DueDate, progress ,  state, ";
 	// This is the recurrance-stuff .. Exceptions are currently not supported (see ORecur.cpp) ! (eilers)
-	qu += "RType, RWeekdays, RPosition, RFreq, RHasEndDate, EndDate, Created, Exceptions, "; 
+	qu += "RType, RWeekdays, RPosition, RFreq, RHasEndDate, EndDate, Created, Exceptions, ";
 	qu += "reminders, alarms, maintainer, startdate, completeddate);";
 	qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
         return qu;
@@ -167,7 +167,7 @@ namespace {
 		sYear = sDate.year();
 		sMonth= sDate.month();
 		sDay  = sDate.day();
-	} 
+	}
 
 	int eYear = 0, eMonth = 0, eDay = 0;
 	if( m_todo.hasCompletedDate() ){
@@ -175,17 +175,17 @@ namespace {
 		eYear = eDate.year();
 		eMonth= eDate.month();
 		eDay  = eDate.day();
-	} 
+	}
         QString qu;
 	QMap<int, QString> recMap = m_todo.recurrence().toMap();
-        qu  = "insert into todolist VALUES(" 
-		+  QString::number( m_todo.uid() ) + "," 
+        qu  = "insert into todolist VALUES("
+		+  QString::number( m_todo.uid() ) + ","
 		+ "'" + m_todo.idsToString( m_todo.categories() ) + "'" + ","
-		+       QString::number( m_todo.isCompleted() )         + ","  
+		+       QString::number( m_todo.isCompleted() )         + ","
 		+ "'" + m_todo.description()                      + "'" + ","
-		+ "'" + m_todo.summary()                          + "'" + "," 
+		+ "'" + m_todo.summary()                          + "'" + ","
 		+       QString::number(m_todo.priority() )             + ","
-		+ "'" + QString::number(year) + "-" 
+		+ "'" + QString::number(year) + "-"
 		+       QString::number(month)
 		+       "-" + QString::number( day )              + "'" + ","
 		+       QString::number( m_todo.progress() )            + ","
@@ -198,10 +198,10 @@ namespace {
 		+ "'" + recMap[ ORecur::EndDate ]                 + "'" + ","
 		+ "'" + recMap[ ORecur::Created ]                 + "'" + ","
 		+ "'" + recMap[ ORecur::Exceptions ]              + "'" + ",";
-	
+
 	if ( m_todo.hasNotifiers() ) {
 		OPimNotifyManager manager = m_todo.notifiers();
-		qu += "'" + manager.remindersToString()           + "'" + ","		
+		qu += "'" + manager.remindersToString()           + "'" + ","
 			+ "'" + manager.alarmsToString()          + "'" + ",";
 	}
 	else{
@@ -210,7 +210,7 @@ namespace {
 	}
 
 	qu +=   QString( "''" )                             + QString( "," ) // Maintainers (cur. not supported !)
-		+ "'" + QString::number(sYear) + "-" 
+		+ "'" + QString::number(sYear) + "-"
 		+ QString::number(sMonth)
 		+ "-" + QString::number(sDay)                     + "'" + ","
 		+ "'" + QString::number(eYear) + "-"
@@ -559,7 +559,7 @@ OTodo OTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
 	    to.setStartDate( startDate );
     if ( hasCompletedDate )
 	    to.setCompletedDate( completedDate );
-    
+
     OPimNotifyManager& manager = to.notifiers();
     manager.alarmsFromString( item.data("alarms") );
     manager.remindersFromString( item.data("reminders") );
@@ -577,7 +577,7 @@ OTodo OTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
     recMap.insert( ORecur::EndDate    , item.data("EndDate") );
     recMap.insert( ORecur::Created    , item.data("Created") );
     recMap.insert( ORecur::Exceptions , item.data("Exceptions") );
-    
+
     ORecur recur;
     recur.fromMap( recMap );
     to.setRecurrence( recur );
@@ -684,7 +684,7 @@ QBitArray OTodoAccessBackendSQL::sup() const{
 	ar[OTodo::Reminders] = false;
 	ar[OTodo::Notifiers] = false;
 	ar[OTodo::Maintainer] = false;
-	
+
 	return ar;
 }
 

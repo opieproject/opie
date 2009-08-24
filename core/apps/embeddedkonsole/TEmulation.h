@@ -44,7 +44,7 @@ public slots: // signals incoming from TEWidget
   virtual void onHistoryCursorChange(int cursor);
   virtual void onHorzCursorChange(int cursor);
   virtual void onKeyPress(QKeyEvent*);
- 
+
   virtual void clearSelection();
   virtual void onSelectionBegin(const int x, const int y);
   virtual void onSelectionExtend(const int x, const int y);

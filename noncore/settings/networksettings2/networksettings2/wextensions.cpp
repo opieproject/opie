@@ -18,10 +18,10 @@ using namespace Opie::Core;
 
 /**
  * Constructor.  Sets hasWirelessExtensions
- */ 
+ */
 WExtensions::WExtensions(QString interfaceName): hasWirelessExtensions(false), interface(interfaceName) {
   fd = socket( AF_INET, SOCK_DGRAM, 0 );
-  if(fd == -1) 
+  if(fd == -1)
     return;
 
   const char* buffer[200];
@@ -29,7 +29,7 @@ WExtensions::WExtensions(QString interfaceName): hasWirelessExtensions(false), i
   iwr.u.essid.pointer = (caddr_t) buffer;
   iwr.u.essid.length = IW_ESSID_MAX_SIZE;
   iwr.u.essid.flags = 0;
-  
+
   // check if it is an IEEE 802.11 standard conform
   // wireless device by sending SIOCGIWESSID
   // which also gives back the Extended Service Set ID
@@ -43,7 +43,7 @@ WExtensions::WExtensions(QString interfaceName): hasWirelessExtensions(false), i
 
 /**
  * @return QString the station name of the access point.
- */ 
+ */
 QString WExtensions::station(){
   if(!hasWirelessExtensions)
     return QString();
@@ -60,7 +60,7 @@ QString WExtensions::station(){
 
 /**
  * @return QString the essid of the host 802.11 access point.
- */ 
+ */
 QString WExtensions::essid(){
   if(!hasWirelessExtensions)
     return QString();
@@ -77,7 +77,7 @@ QString WExtensions::essid(){
 
 /**
  * @return QString the mode of interface
- */ 
+ */
 QString WExtensions::mode(){
   if(!hasWirelessExtensions)
     return QString();
@@ -89,7 +89,7 @@ QString WExtensions::mode(){
 /**
  * Get the frequency that the interface is running at.
  * @return int the frequency that the interfacae is running at.
- */ 
+ */
 double WExtensions::frequency(){
   if(!hasWirelessExtensions)
     return 0;
@@ -101,13 +101,13 @@ double WExtensions::frequency(){
 /**
  * Get the channel that the interface is running at.
  * @return int the channel that the interfacae is running at.
- */ 
+ */
 int WExtensions::channel(){
   if(!hasWirelessExtensions)
     return 0;
   if ( 0 != ioctl( fd, SIOCGIWFREQ, &iwr ))
     return 0;
-  
+
   // http://www.elanix.com/pdf/an137e.pdf
 
   double num = (double( iwr.u.freq.m ) * pow( 10, iwr.u.freq.e ) / 1000000000);
@@ -119,14 +119,14 @@ int WExtensions::channel(){
     left += 0.005;
     right += 0.005;
   }
-  odebug << QString("Unknown frequency: %1, returning -1 for the channel.").arg(num).latin1() << oendl; 
+  odebug << QString("Unknown frequency: %1, returning -1 for the channel.").arg(num).latin1() << oendl;
   return -1;
 }
 
 /***
  * Get the current rate that the card is transmiting at.
  * @return double the rate, 0 if error.
- */ 
+ */
 double WExtensions::rate(){
   if(!hasWirelessExtensions)
     return 0;
@@ -139,7 +139,7 @@ double WExtensions::rate(){
 
 /**
  * @return QString the AccessPoint that the interface is connected to.
- */ 
+ */
 QString WExtensions::ap(){
   if(!hasWirelessExtensions)
     return QString();
@@ -163,7 +163,7 @@ QString WExtensions::ap(){
  * @param noise the noise level of the interface
  * @param quality the quality level of the interface
  * @return bool true if successful
- */ 
+ */
 bool WExtensions::stats(int &signal, int &noise, int &quality){
   // gather link quality from /proc/net/wireless
   if(!QFile::exists(PROCNETWIRELESS))
@@ -172,11 +172,11 @@ bool WExtensions::stats(int &signal, int &noise, int &quality){
   char c;
   QString status;
   QString name;
-  
+
   QFile wfile( PROCNETWIRELESS );
   if(!wfile.open( IO_ReadOnly ))
     return false;
-  
+
   QTextStream wstream( &wfile );
   wstream.readLine();  // skip the first two lines
   wstream.readLine();  // because they only contain headers
@@ -184,20 +184,20 @@ bool WExtensions::stats(int &signal, int &noise, int &quality){
     wstream >> name >> status >> quality >> c >> signal >> c >> noise;
     if(name == QString("%1:").arg(interface)){
       if ( quality > 92 )
-        odebug << "WIFIAPPLET: D'oh! Quality " << quality << " > estimated max!\n" << oendl; 
+        odebug << "WIFIAPPLET: D'oh! Quality " << quality << " > estimated max!\n" << oendl;
       if ( ( signal > IW_UPPER ) || ( signal < IW_LOWER ) )
-        odebug << "WIFIAPPLET: Doh! Strength " << signal << " > estimated max!\n" << oendl; 
+        odebug << "WIFIAPPLET: Doh! Strength " << signal << " > estimated max!\n" << oendl;
       if ( ( noise > IW_UPPER ) || ( noise < IW_LOWER ) )
-        odebug << "WIFIAPPLET: Doh! Noise " << noise << " > estimated max!\n" << oendl; 
-      //odebug << QString("q:%1, s:%2, n:%3").arg(quality).arg(signal).arg(noise).latin1() << oendl; 
+        odebug << "WIFIAPPLET: Doh! Noise " << noise << " > estimated max!\n" << oendl;
+      //odebug << QString("q:%1, s:%2, n:%3").arg(quality).arg(signal).arg(noise).latin1() << oendl;
       signal = ( ( signal-IW_LOWER ) * 100 ) / IW_UPPER;
       noise = ( ( noise-IW_LOWER ) * 100 ) / IW_UPPER;
       quality = ( quality*100 ) / 92;
       return true;
-    }  
+    }
   }
 
-  odebug << "WExtensions::statsCard no longer present." << oendl; 
+  odebug << "WExtensions::statsCard no longer present." << oendl;
   quality = -1;
   signal = IW_LOWER;
   noise = IW_LOWER;

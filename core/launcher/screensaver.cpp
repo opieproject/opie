@@ -258,7 +258,7 @@ void OpieScreenSaver::adjustBacklight( bool increase )
         bright = 0;
     else if( bright > 255 )
         bright = 255;
-    
+
     if (bright != m_backlight_current)
         setBacklight( bright );
 }

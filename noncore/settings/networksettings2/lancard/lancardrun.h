@@ -9,13 +9,13 @@ class LanCardRun  : public RuntimeInfo {
 
 public :
 
-      LanCardRun( ANetNodeInstance * NNI, 
+      LanCardRun( ANetNodeInstance * NNI,
                   LanCardData & D ) : RuntimeInfo( NNI ),
-                                      Pat( "eth[0-9]" ) { 
+                                      Pat( "eth[0-9]" ) {
         Data = &D;
       }
 
-      virtual RuntimeInfo * device( void ) 
+      virtual RuntimeInfo * device( void )
         { return this; }
 
       bool handlesInterface( const QString & I );

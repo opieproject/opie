@@ -158,7 +158,7 @@ protected slots:
     void fileBeamFinished( Ir *);
     bool copyDirectory( const QString & , const QString & );
     bool moveDirectory( const QString & , const QString & );
-	 
+
 private:
     MenuButton *menuButton;
     QString oldName, localViewDir, remoteViewDir;

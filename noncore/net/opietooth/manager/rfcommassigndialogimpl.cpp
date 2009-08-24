@@ -68,12 +68,12 @@ void RfcommAssignDialog::newDevice(const QString & mac, int channel)
         if ( it == confHandler->foundEntries().end() )
         {
             QDialog dialog( this,  "newdevice", true, WStyle_ContextHelp );
-            dialog.setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, 
+            dialog.setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7,
                 (QSizePolicy::SizeType)7, sizePolicy().hasHeightForWidth()));
             QVBoxLayout layout(&dialog);
             layout.setSpacing( 0 );
             layout.setMargin( 0 );
-            
+
             RfcommDialogItem newDev(&dialog);
             newDev.setIdent( i );
             newDev.setMac( mac );
@@ -90,7 +90,7 @@ void RfcommAssignDialog::newDevice(const QString & mac, int channel)
                 rfcomm->setChannel( newDev.channel() );
                 rfcomm->setComment( newDev.comment() );
                 rfcomm->setBind( newDev.isBind() );
-                odebug << "New device set up" << oendl; 
+                odebug << "New device set up" << oendl;
             }
             break;
         }
@@ -133,9 +133,9 @@ void RfcommAssignDialog::saveConfig()
         RfcommDialogItem *rfcomm = it.data();
         if (rfcomm->mac().isEmpty())
             continue;
-        outMap.insert(QString::number(it.key()), 
-            new RfCommConfObject(it.key(), 
-                rfcomm->mac(), rfcomm->channel(), rfcomm->comment(), 
+        outMap.insert(QString::number(it.key()),
+            new RfCommConfObject(it.key(),
+                rfcomm->mac(), rfcomm->channel(), rfcomm->comment(),
                 rfcomm->isBind()));
     }
     confHandler->save(outMap);

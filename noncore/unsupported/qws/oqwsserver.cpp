@@ -55,9 +55,9 @@ bool OQWSServer::eventFilter ( QObject *o, QEvent *e )
 #if 0
 	if ( e-> type ( ) == QEvent::KeyPress || e-> type ( ) == QEvent::KeyRelease ) {
 		QKeyEvent *ke = (QKeyEvent *) e;
-	
+
 		const ODeviceButton *db = ODevice::inst ( )-> buttonForKeycode ( ke-> key ( ));
-        
+
 		if ( db ) {
 			if (checkButtonAction ( db, ke-> key ( ), e-> type ( ) == QEvent::KeyPress, ke-> isAutoRepeat ( )))
 				return true;		//checkButtonAction retrune false if events should be routed through
@@ -80,7 +80,7 @@ bool OQWSServer::qwsEventFilter( QWSEvent *e )
 
 		if ( !loggedin && keycode != Key_F34 )
 			return true;
-			
+
 		bool press = ke-> simpleData. is_press;
 		bool autoRepeat = ke-> simpleData. is_auto_repeat;
 
@@ -89,7 +89,7 @@ bool OQWSServer::qwsEventFilter( QWSEvent *e )
 			// when user presses key, unless keyboard has been requested from app.
 			// will not send multiple repeats if user holds key
 			// i.e. one shot
-		 
+
 			if ( keycode != 0 && press && !autoRepeat ) {
 				for ( KeyRegisterList::Iterator it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it ) {
 					if (( *it ). getKeyCode ( ) == keycode ) {

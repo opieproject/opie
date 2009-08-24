@@ -2,24 +2,24 @@
                =.            This file is part of the OPIE Project
              .=l.            Copyright (c)  2002-2005  Kurt Korbatits <support@midget.net.au>
            .>+-=             Copyright (c)  2005  L. Potter <lpotter@trolltech.com>
- _;:,     .>    :=|.         This program is free software; you can 
+ _;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU General Public
 .="- .-=="i,     .._         License as published by the Free Software
  - .   .-<_>     .<>         Foundation; either version 2 of the License,
      ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.        
-    .i_,=:_.      -<s.       This program is distributed in the hope that  
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
     : ..    .:,     . . .    without even the implied warranty of
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
 ..}^=.=       =       ;      General Public License for more
 ++=   -.     .`     .:       details.
- :     =  ...= . :.=-        
+ :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
   -_. . .   )=.  =           General Public License along with
-    --        :-=`           this library; see the file COPYING.BIN. 
+    --        :-=`           this library; see the file COPYING.BIN.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -78,7 +78,7 @@ Qsmb::Qsmb( QWidget* parent,  const char* name, WFlags fl )
    mountpt->insertItem("/mnt/samba1",-1);
    mountpt->insertItem("/mnt/samba2",-1);
    mountpt->insertItem("/mnt/samba3",-1);
-   
+
    setTabOrder(BtnScan, username);
    setTabOrder(username, password);
    setTabOrder(password, CBHost);
@@ -86,7 +86,7 @@ Qsmb::Qsmb( QWidget* parent,  const char* name, WFlags fl )
    setTabOrder(TextViewOutput, mountpt);
    setTabOrder(mountpt, DoItBtn);
    setTabOrder(DoItBtn, UnmountBtn);
-   
+
    top_element = NULL;
    scanning = false;
 }
@@ -95,22 +95,22 @@ Qsmb::~Qsmb()
 {
 }
 
-void Qsmb::clear() 
+void Qsmb::clear()
 {
    if (scanning) return;
-   ListViewScan->clear();	
+   ListViewScan->clear();
    TextViewOutput->setText("");
    CBHost->clear();
-   top_element = NULL;	
+   top_element = NULL;
 }
 
-void Qsmb::scanClicked() 
+void Qsmb::scanClicked()
 {
    if (scanning) return;
    pthread_create(&tpid, NULL, runit, (void *)this);
 }
 
-void Qsmb::DoItClicked() 
+void Qsmb::DoItClicked()
 {
 
    if( !ListViewScan->selectedItem()) {
@@ -121,21 +121,21 @@ void Qsmb::DoItClicked()
    pthread_create(&tpid, NULL, runitm, (void *)this);
 }
 
-void* runit(void* arg) 
+void* runit(void* arg)
 {
    Qsmb* caller = (Qsmb*)arg;
    caller->scan();
    return(0);
 }
 
-void* runitm(void* arg) 
+void* runitm(void* arg)
 {
    Qsmb* caller = (Qsmb*)arg;
    caller->DoIt();
    return(0);
 }
 
-void Qsmb::scan() 
+void Qsmb::scan()
 {
    clear();
 //   if (scanning) return;
@@ -161,7 +161,7 @@ void Qsmb::scan()
    QTextStream lms(&lmhosts);
    lmhosts.open(IO_WriteOnly);
    lms << "127.0.0.1 localhost\n";
-    
+
    /* parse output and display in ListViewScan */
    ccmd = "smbfind";
 	 runCommand(ccmd);
@@ -208,7 +208,7 @@ void Qsmb::hostSelected(int /*index*/ )
    ccmd << "-L";
    ccmd << CBHost->currentText();
    ccmd << "-N";
-   
+
    if(username->text().isEmpty()) {
       //do nothing
    } else {
@@ -223,7 +223,7 @@ void Qsmb::hostSelected(int /*index*/ )
       QString comment;
       QString mount;
       QString tmp = s.readLine();
-      
+
       if( tmp.find("$") == -1 && tmp.find("Disk") != -1) {
          QStringList token = QStringList::split(' ',  tmp );
          share = token[0];
@@ -257,7 +257,7 @@ void Qsmb::hostSelected(int /*index*/ )
 //       /* put result into TextViewOutput */
 //       TextViewOutput->append(result);
 
-//       if( strchr(result, '$') == NULL ) { 
+//       if( strchr(result, '$') == NULL ) {
 //          char share[256], *ptr1;
 
 //          strcpy(share,result);
@@ -300,7 +300,7 @@ void Qsmb::hostSelected(int /*index*/ )
 
 void Qsmb::DoIt()
 {
-   
+
    QListViewItem *element;
    element = ListViewScan->selectedItem();
    if(!element) {
@@ -316,7 +316,7 @@ void Qsmb::DoIt()
       TextViewOutput->append(mount +" is already mounted");
       return;
    }
-   
+
    bool noerr = false;
 
    QString share;
@@ -346,7 +346,7 @@ void Qsmb::DoIt()
       mount = QDir::currentDirPath()+"/"+mount;
    mount = mount.stripWhiteSpace();
    ccmd.clear();
-   
+
    ccmd << "/usr/bin/smbmount";
    ccmd << "//"+ service+"/"+share;
    ccmd << mount;
@@ -363,7 +363,7 @@ void Qsmb::DoIt()
    }
 
    noerr = runCommand(ccmd);
-   
+
    LScan->setText("");
 
    if(noerr && isMounted(mount)) {

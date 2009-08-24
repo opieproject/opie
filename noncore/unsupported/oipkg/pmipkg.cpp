@@ -153,7 +153,7 @@ QStringList* PmIpkg::getList( QString packFileName, QString d )
   while ( !t.eof() )
     {
       *fileList += t.readLine();
-    }	
+    }
   f.close();
   return fileList;
 }
@@ -174,7 +174,7 @@ void PmIpkg::processFileList( QStringList *fileList, QString d )
       QString dest = settings->getDestinationUrlByName( d );
 		 	dest = dest==""?d:dest;
       processLinkDir( (*fileList)[i], dest );
-    }	
+    }
 }
 
 
@@ -188,7 +188,7 @@ void PmIpkg::processLinkDir( QString file, QString dest )
 	file = dest+"/"+file;
  	if (file == dest) return;
 //  if (linkOpp==createLink) out( "\ncreating links\n" );
-//  if (linkOpp==removeLink) out( "\nremoving links\n" );  				
+//  if (linkOpp==removeLink) out( "\nremoving links\n" );
   QFileInfo fileInfo( file );
   if ( fileInfo.isDir() )
   {
@@ -203,7 +203,7 @@ void PmIpkg::processLinkDir( QString file, QString dest )
     while ( (fi=it.current()) )
     {
     	pvDebug(4, "processLinkDir "+fi->absFilePath());
-  		processLinkDir( fi->absFilePath(), dest );      			
+  		processLinkDir( fi->absFilePath(), dest );
 			++it;
     }
   } else
@@ -224,14 +224,14 @@ void PmIpkg::processLinkDir( QString file, QString dest )
     	if ( !QFile::exists( file ) && toRemoveLink.isSymLink() )
      	{
 	      pvDebug(4,"removing "+destFile+" no "+file);
-     		unlink( linkFile ); 	
+     		unlink( linkFile );
       }
     }
   }
 }
 
 void PmIpkg::loadList( PackageList *pl )
-{   	
+{
   for( OipkgPackage *pack = pl->first();pack ; (pack = pl->next())  )
   {
   	if ( pack && (pack->name() != "") && pack)
@@ -245,16 +245,16 @@ void PmIpkg::loadList( PackageList *pl )
 }
 
 void PmIpkg::commit()
-{   	
+{
   int sizecount = 0;
-  installDialog = new InstallDialog(settings,0,0,true); 	
+  installDialog = new InstallDialog(settings,0,0,true);
   installDialog->toRemoveItem->setOpen( true );
 	installDialog->toInstallItem->setOpen( true );
   for (uint i=0; i < to_remove.count(); i++)
   {
   	sizecount += 1;
     installDialog->toRemoveItem->insertItem( new PackageListItem(installDialog->ListViewPackages, to_remove.at(i),settings) );
- 	} 	
+ 	}
   for (uint i=0; i < to_install.count(); i++)
   {
   	sizecount += to_install.at(i)->size().toInt();
@@ -294,7 +294,7 @@ void PmIpkg::remove()
 	QStringList *fileList = new QStringList;
   for (uint i=0; i < to_remove.count(); i++)
   {
-		if ( to_remove.at(i)->link() ) fileList = getList( to_remove.at(i)->name(), to_remove.at(i)->dest() );     	
+		if ( to_remove.at(i)->link() ) fileList = getList( to_remove.at(i)->name(), to_remove.at(i)->dest() );
     if ( runIpkg("remove " + to_remove.at(i)->installName(), to_remove.at(i)->dest() ))
     {
       runwindow->progress->setProgress( 1 );
@@ -305,7 +305,7 @@ void PmIpkg::remove()
       		processFileList( fileList, to_remove.at(i)->dest() );
      	//pvDebug(3,"take "+QString::number(i)+" of "+QString::number(to_remove.count()));
      	//if ( to_remove.at(i) ) to_remove.take( i );
-          	
+
       out("\n");
  		}else{
      	out(tr("Error while removing ")+to_remove.at(i)->name()+"\n");
@@ -324,7 +324,7 @@ void PmIpkg::remove()
 void PmIpkg::install()
 {
  	if ( to_install.count() == 0 ) return;
-	out(tr("Installing")+"\n"+tr("please wait")+"\n"); 	
+	out(tr("Installing")+"\n"+tr("please wait")+"\n");
   for (uint i=0; i < to_install.count(); i++)
   {
   	qDebug("install loop %i of %i installing %s",i,to_install.count(),to_install.at(i)->installName().latin1()); //pvDebug
@@ -343,7 +343,7 @@ void PmIpkg::install()
 	   	symlink( rd, ld );
   	}
 	  if ( runIpkg("install " + to_install.at(i)->installName(), to_install.at(i)->dest() ))
-		{    	
+		{
     	runwindow->progress->setProgress( to_install.at(i)->size().toInt() + runwindow->progress->progress());
      	to_install.at(i)->processed();
 	    linkOpp = createLink;

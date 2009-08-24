@@ -86,7 +86,7 @@ SFCave :: SFCave( int argc, char *argv[] )
 
 	maxFPS = 50;
 	showFps = false;
-	
+
 	setupOK = true;
 }
 
@@ -174,7 +174,7 @@ void SFCave :: mainEventLoop()
 {
     if ( !setupOK )
         return;
-        
+
 	// Wait for a keystroke
 	finish = false;
 	state = 0;

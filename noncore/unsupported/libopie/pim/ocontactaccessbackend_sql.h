@@ -75,7 +75,7 @@ class OContactAccessBackend_SQL : public OContactAccessBackend {
 	// FIXME: Add lookahead-cache support !
 	//OContact find(int uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
 
-	QArray<int> queryByExample ( const OContact &query, int settings, 
+	QArray<int> queryByExample ( const OContact &query, int settings,
 				     const QDateTime& d );
 
 	QArray<int> matchRegexp(  const QRegExp &r ) const;

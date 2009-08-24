@@ -106,7 +106,7 @@ private:
 
 private slots:
     void setDocument( const QString &ipkFile );
-    
+
     void initPackageInfo();
     void slotWidgetStackShow( QWidget *widget );
 

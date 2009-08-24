@@ -23,10 +23,10 @@
 	                       If not, write to the Free Software Foundation,
                             Inc., 59 Temple Place - Suite 330,
                             Boston, MA 02111-1307, USA.
-                                                       
+
 */
-                                                                                       
-                                                                                       
+
+
 
 #ifndef __OPIE_ROTATE_APPLET_H__
 #define __OPIE_ROTATE_APPLET_H__
@@ -48,7 +48,7 @@ public:
     Q_REFCOUNT
 
     virtual int position() const;
-    
+
     virtual QString name ( ) const;
     virtual QIconSet icon ( ) const;
     virtual QString text ( ) const;

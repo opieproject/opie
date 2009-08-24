@@ -79,7 +79,7 @@ OpenTextDlg::OpenTextDlg( QWidget *parent, sword::SWMgr *swordMgr, QPixmap *bibl
                     icon = lexiconIcon;
                     parent = m_lexicons;
                 }
-    
+
                 parent->insertItem( new QListViewItem( parent, QString::null, it->first.c_str() ) );
             }
         }

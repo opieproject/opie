@@ -142,9 +142,9 @@ void OPimNotifyManager::alarmsFromString( const QString& str )
         for (QStringList::Iterator it = als.begin(); it != als.end(); ++it ) {
 		QStringList alarm = QStringList::split(":", (*it), TRUE ); // allow empty
 		qWarning("alarm: %s", alarm.join("___").latin1() );
-		qWarning("alarm[0]: %s %s", alarm[0].latin1(), 
+		qWarning("alarm[0]: %s %s", alarm[0].latin1(),
 			 OConversion::dateTimeFromString( alarm[0] ).toString().latin1() );
-		OPimAlarm al( alarm[2].toInt(), OConversion::dateTimeFromString( alarm[0] ), 
+		OPimAlarm al( alarm[2].toInt(), OConversion::dateTimeFromString( alarm[0] ),
 			      alarm[1].toInt() );
 		add( al );
         }
@@ -158,5 +158,5 @@ void OPimNotifyManager::remindersFromString( const QString& str )
 		OPimReminder rem( (*it).toInt() );
 		add( rem );
         }
-	
+
 }

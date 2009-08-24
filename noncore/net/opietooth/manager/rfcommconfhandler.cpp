@@ -11,7 +11,7 @@ using namespace OpieTooth;
 // move to lib
 
 
-RfCommConfObject::RfCommConfObject(int number, QString mac, int channel, 
+RfCommConfObject::RfCommConfObject(int number, QString mac, int channel,
     QString comment, bool bind) {
     m_number = number;
     m_mac = mac;
@@ -110,7 +110,7 @@ void RfCommConfHandler::load()  {
         bool bbind;
         QString number;
 
-        for (QStringList::Iterator line = list.begin(); 
+        for (QStringList::Iterator line = list.begin();
             line != list.end(); line++)  {
 
             QString tmpLine = (*line).simplifyWhiteSpace();
@@ -120,27 +120,27 @@ void RfCommConfHandler::load()  {
                 odebug << tmpLine << oendl;
                 odebug << "device " << number << oendl;
             } else if ( tmpLine.startsWith( "}" ) ) {
-                m_foundEntries.insert(number, 
-                    new RfCommConfObject(number.toInt(), mac, channel.toInt(), 
+                m_foundEntries.insert(number,
+                    new RfCommConfObject(number.toInt(), mac, channel.toInt(),
                     comment, bbind));
             } else if ( tmpLine.startsWith(k_device) )  {
-                mac = tmpLine.mid(k_device.length(), 
+                mac = tmpLine.mid(k_device.length(),
                     tmpLine.find(';') - k_device.length());
                 odebug << "mac " + mac << oendl;
             } else if ( tmpLine.startsWith(k_channel) ) {
-                channel = tmpLine.mid(k_channel.length(), 
+                channel = tmpLine.mid(k_channel.length(),
                     tmpLine.find(';') - k_channel.length());
                 odebug << "Channel: " << channel << oendl;
             } else if ( tmpLine.startsWith(k_comment) ) {
-                comment = tmpLine.mid(k_comment.length(), 
+                comment = tmpLine.mid(k_comment.length(),
                     tmpLine.find(';') - k_comment.length());
-                if (comment.left(1) == "\"") 
+                if (comment.left(1) == "\"")
                     comment.remove(0, 1);
-                if (comment.right(1) == "\"") 
+                if (comment.right(1) == "\"")
                     comment.remove(comment.length() - 1, 1);
                 odebug << "Comment: " + comment << oendl;
             } else if ( tmpLine.startsWith(k_bind) ) {
-                bind = tmpLine.mid(k_bind.length(), 
+                bind = tmpLine.mid(k_bind.length(),
                     tmpLine.find(';') - k_bind.length());
                 if (bind == "no")
                     bbind = false;

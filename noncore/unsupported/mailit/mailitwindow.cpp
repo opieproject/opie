@@ -34,7 +34,7 @@ MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags /*fl*/)
   readMail = new ReadMail(views, "reading");
 
   views->raiseWidget(emailClient);
-                        
+
   connect(emailClient, SIGNAL(composeRequested()),
     this, SLOT(compose()) );
   connect(emailClient, SIGNAL(viewEmail(QListView*,Email*)), this,
@@ -47,7 +47,7 @@ MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags /*fl*/)
       SLOT(showEmailClient()) );
   connect(writeMail, SIGNAL(sendMailRequested(const Email&)), emailClient,
       SLOT(enqueMail(const Email&)) );
-  
+
   connect(readMail, SIGNAL(cancelView()), this, SLOT(showEmailClient()) );
   connect(readMail, SIGNAL(replyRequested(Email&,bool&)), this,
     SLOT(composeReply(Email&,bool&)) );
@@ -58,13 +58,13 @@ MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags /*fl*/)
     SLOT(deleteMail(EmailListItem*,bool&)) );
   connect(readMail, SIGNAL(viewingMail(Email*)), emailClient,
     SLOT(moveMailFront(Email*)) );
-  
+
   connect(emailClient, SIGNAL(newCaption(const QString&)),
     this, SLOT(updateCaption(const QString&)) );
-    
+
   connect(readMail, SIGNAL(download(Email*)), emailClient, SLOT(download(Email*)) );
-  
-  viewingMail = FALSE;  
+
+  viewingMail = FALSE;
 }
 
 MailItWindow::~MailItWindow()
@@ -87,7 +87,7 @@ void MailItWindow::compose()
   readMail->hide();
   views->raiseWidget(writeMail);
   writeMail->setAddressList(emailClient->getAdrListRef());
-  writeMail->newMail();  
+  writeMail->newMail();
   setCaption( tr( "Write mail"  ) );
 }
 
@@ -117,11 +117,11 @@ void MailItWindow::viewMail(QListView *view, Email *mail)
 {
   viewingMail = TRUE;
   emailClient->hide();
-  
+
   int result=0;
-  
+
   if ((mail->received)&&(!mail->downloaded))
-  {   
+  {
     QMessageBox mb( tr("Mail not downloaded"),
                     tr("The mail you have clicked \n"
         "has not been downloaded yet.\n "
@@ -129,15 +129,15 @@ void MailItWindow::viewMail(QListView *view, Email *mail)
                     QMessageBox::Information,
                     QMessageBox::Yes | QMessageBox::Default,
                     QMessageBox::No | QMessageBox::Escape,0 );
-     
+
   result=mb.exec();
-  
+
   if (result==QMessageBox::Yes)
   {
     emailClient->download(mail);
   }
   }
-  
+
   readMail->update(view, mail);
   views->raiseWidget(readMail);
   setCaption( tr( "Read Mail"  ) );
@@ -162,7 +162,7 @@ void MailItWindow::setDocument(const QString &_address)
     QString address = _address;
     if (address.startsWith("mailto:"))
         address = address.mid(6);
- 
+
     compose();
     writeMail->setRecipient(address);
 }

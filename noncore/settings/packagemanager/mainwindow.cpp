@@ -336,7 +336,7 @@ void MainWindow::setDocument( const QString &ipkFile )
     DocLnk lnk( ipkFile );
     if ( lnk.isValid() )
         file = lnk.file();
-    
+
     installLocalPackage( file );
 }
 
@@ -573,7 +573,7 @@ void MainWindow::slotCloseDlg()
     QCopEnvelope e("QPE/System", "linkChanged(QString)");
     QString lf = QString::null;
     e << lf;
-    
+
     // Reapply any filters previously set
     if ( m_actionShowNotInstalled->isOn() )
         slotShowNotInstalled();

@@ -15,14 +15,14 @@ public :
 
       APPP( PPPNetNode * PNN );
 
-      RuntimeInfo * runtime( void ) 
+      RuntimeInfo * runtime( void )
         { return (RT) ? RT : (RT = new PPPRun( this, Data ) ); }
 
       QWidget * edit( QWidget * parent );
       QString acceptable( void );
       void commit( void );
 
-      virtual void * data( void ) 
+      virtual void * data( void )
         { return (void *)&Data; }
 
       virtual bool openFile( SystemFile & Sf, QStringList &SL );

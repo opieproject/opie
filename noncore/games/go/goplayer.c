@@ -86,7 +86,7 @@ genBord(color)
 		legal[koX][koY] = FALSE;
 	}
 
-	if (! nomoves) 
+	if (! nomoves)
 		genState();
 	else
 		initGPUtils();
@@ -128,11 +128,11 @@ short *x, *y;
    else
       saveNLibs = FALSE;
    genBord(color);
-   if (getMove(x, y)) 
+   if (getMove(x, y))
       return TRUE;
    return FALSE;
 }
-   
+
 short checkPos(x, y, field)
 short x, y, field;
 {
@@ -253,7 +253,7 @@ short *x, *y;
              (value > -5) &&       /* or a reasonable gap in his */
              (bord[2][i + 1] == 0) && /* not in contact with any stones */
              (bord[2][i - 1] == 0))
-            if (value < lowest) 
+            if (value < lowest)
               {
                 lowest = value;     /* lowest gets the smallest value */
                 *x = 2;              /* that was seen along all the 3-lines */
@@ -265,10 +265,10 @@ short *x, *y;
         {
           value = claim[i][2];
           if ((value < 7) &&
-             (value > -5) && 
+             (value > -5) &&
              (bord[i + 1][2] == 0) &&
              (bord[i - 1][2] == 0))
-            if (value < lowest) 
+            if (value < lowest)
               {
                 lowest = value;
                 *x = i;
@@ -280,10 +280,10 @@ short *x, *y;
         {
           value = claim[18 - 2][i];
           if ((value < 7) &&
-             (value > -5) && 
+             (value > -5) &&
              (bord[18 - 2][i + 1] == 0) &&
              (bord[18 - 2][i - 1] == 0))
-            if (value < lowest) 
+            if (value < lowest)
               {
                 lowest = value;
                 *x = 18 - 2;
@@ -295,10 +295,10 @@ short *x, *y;
         {
           value = claim[i][18 - 2];
           if ((value < 7) &&
-             (value > -5) && 
+             (value > -5) &&
              (bord[i + 1][18 - 2] == 0) &&
              (bord[i - 1][18 - 2] == 0))
-            if (value < lowest) 
+            if (value < lowest)
               {
                 lowest = value;
                 *x = i;
@@ -363,7 +363,7 @@ lookForKill(x, y)
 	playReason = "lookForKill";
 	for (i = 1; i <= maxGroupID; i++)       /* scan the group list */
 		if ((gList[i].libC == 1) &&
-				(ndbord[gList[i].lx][gList[i].ly] == -1)) 
+				(ndbord[gList[i].lx][gList[i].ly] == -1))
 	{    /* we found a live enemy group with one liberty */
 		/* find the liberty */
 		spanGroup(gList[i].lx, gList[i].ly, &pList);
@@ -408,7 +408,7 @@ short *x, *y;
                           restoreState();
                         }
                 }
-          } 
+          }
     return FALSE;
   } /* doubleAtari */
 
@@ -421,7 +421,7 @@ short *x, *y;
         if ((! gList[i].isLive) &&
            (gList[i].libC > 1) &&
            (gList[i].libC <= (treeLibLim + 1)) &&
-           (ndbord[gList[i].lx][gList[i].ly] == -1)) 
+           (ndbord[gList[i].lx][gList[i].ly] == -1))
               {
                 if (killable(gList[i].lx, gList[i].ly, &tx, &ty)) /* can we kill it? */
                   {
@@ -1112,7 +1112,7 @@ short *x, *y;
     playReason = "atariAnyway";
     for (i = 1; i <= maxGroupID; i++)       /* scan the group list */
         if ((gList[i].libC == 2) &&
-           (ndbord[gList[i].lx][gList[i].ly] == -1)) 
+           (ndbord[gList[i].lx][gList[i].ly] == -1))
               {
                 spanGroup(gList[i].lx, gList[i].ly, &pList);
                   if (legal[pList.p[1].px][pList.p[1].py] &&

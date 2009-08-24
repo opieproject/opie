@@ -430,9 +430,9 @@ void CPlucker_base::UnZip(UInt8* compressedbuffer, size_t reclen, UInt8* tgtbuff
   zstream.zalloc = Z_NULL;
   zstream.zfree = Z_NULL;
   zstream.opaque = Z_NULL;
-  
+
   //  printf("Initialising\n");
-  
+
   inflateInit(&zstream);
   int err = 0;
   do {
@@ -746,8 +746,8 @@ int CPlucker_base::OpenFile(const char *src)
   gotorecordnumber(0);
   fread(&hdr0, 1, 6, fin);
   qDebug("Compression type:%u", ntohs(hdr0.version));
- 
- 
+
+
   switch (ntohs(hdr0.version))
     {
     case 2:
@@ -907,7 +907,7 @@ QImage* CPlucker_base::getimg(UInt16 tgt)
 
       UInt32 imgsize = thishdr_size;
       UInt8* imgbuffer = new UInt8[imgsize];
-    
+
       Expand(reclen, thishdr_type, imgbuffer, imgsize);
 
       return imagefromdata(imgbuffer, imgsize);
@@ -1014,7 +1014,7 @@ linkType CPlucker_base::hyperlink(unsigned int n, unsigned int offset, QString& 
       expand(thisrec);
       unsigned int paraoffset = offset;
       //      unsigned int noff = 0;
-      if (n != 0) 
+      if (n != 0)
 	{
 	  if (n >= m_nParas)
 	    {

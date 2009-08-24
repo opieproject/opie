@@ -36,7 +36,7 @@ ListViewItemConfFile::~ListViewItemConfFile()
 
 void ListViewItemConfFile::displayText()
 {
-  setText(0,(_changed?"*":"")+confFileInfo->fileName());	
+  setText(0,(_changed?"*":"")+confFileInfo->fileName());
 }
 
 QString ListViewItemConfFile::fileName()
@@ -84,7 +84,7 @@ void ListViewItemConfFile::parseFile()
       item = new ListViewItemConfigEntry(this, group, s );
       groupItem->insertItem( item );
     }
-  }	
+  }
   confFile.close();
   setExpandable( _valid );
   //odebug << "ListViewItemConfFile::parseFile END" << oendl;

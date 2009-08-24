@@ -110,7 +110,7 @@ BOOL CSoundFile::ReadFAR(const BYTE *lpStream, DWORD dwMemLength)
 		Order[iorder] = (iorder <= pmh2->snglen) ? pmh2->orders[iorder] : 0xFF;
 	}
 	m_nRestartPos = pmh2->loopto;
-	// Reading Patterns	
+	// Reading Patterns
 	dwMemPos += headerlen - (869 + pmh1->stlen);
 	if (dwMemPos >= dwMemLength) return TRUE;
 

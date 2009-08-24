@@ -22,7 +22,7 @@
 #include "qlibrary_p.h"
 
 // uncomment this to get error messages
-//#define QT_DEBUG_COMPONENT 1 
+//#define QT_DEBUG_COMPONENT 1
 // uncomment this to get error and success messages
 //#define QT_DEBUG_COMPONENT 2
 

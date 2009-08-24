@@ -3,7 +3,7 @@
 #include "mobilemsgbase.h"
 
 class MobileMsg : public MobileMsgBase
-{ 
+{
     Q_OBJECT
 
 public:

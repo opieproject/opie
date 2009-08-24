@@ -36,7 +36,7 @@ unsigned char _rc2_pitable[] = { 0xd9, 0x78, 0xf9, 0xc4, 0x19, 0xdd, 0xb5, 0xed,
 			    0xbb, 0x48, 0x0c, 0x5f, 0xb9, 0xb1, 0xcd, 0x2e,
 			    0xc5, 0xf3, 0xdb, 0x47, 0xe5, 0xa5, 0x9c, 0x77,
 			    0x0a, 0xa6, 0x20, 0x68, 0xfe, 0x7f, 0xc1, 0xad };
-	
+
 unsigned char _rc2_expkey[128];	/* Expanded Key */
 int _rc2_counter;				/* global integer variable used in mixing */
 int _rc2_s[] = {1, 2, 3, 5};
@@ -52,24 +52,24 @@ Krc2::~Krc2()
 void Krc2::rc2_expandkey(char key[], int length, int ekl)
 {
 	int ekl8, keymask, i;
-	
+
 	/* Put supplied key into first length - 1 bytes of the key buffer */
 	for (i = 0; i < length; i++) {
 		_rc2_expkey[i] = key[i];
 	}
-	
+
 	ekl8 = (ekl + 7) / 8;
 	i = _rc2_pow(2, (8 + ekl - 8 * ekl8));
 	keymask = 255 % i;
-	
+
 	/* First expansion step */
 	for (i = length; i < 128; i++) {
 		_rc2_expkey[i] = _rc2_pitable[(_rc2_expkey[i - 1] + _rc2_expkey[i - length]) % 256];
 	}
-	
+
 	/* Expansion intermediate step */
 	_rc2_expkey[128 - ekl8] = _rc2_pitable[_rc2_expkey[128 - ekl8] & keymask];
-	
+
 	/* Third Expansion step */
 	for (i = 127 - ekl8; i >= 0; i--) {
 		_rc2_expkey[i] = _rc2_pitable[_rc2_expkey[i + 1] ^ _rc2_expkey[i + ekl8]];
@@ -79,7 +79,7 @@ void Krc2::rc2_expandkey(char key[], int length, int ekl)
 void Krc2::rc2_encrypt(unsigned short input[4])
 {
 	int i;
-	
+
 	_rc2_counter = 0;
 	for (i = 0; i < 5; i++) {
 		_rc2_mix(input);
@@ -97,7 +97,7 @@ void Krc2::rc2_encrypt(unsigned short input[4])
 void Krc2::_rc2_mix(unsigned short input[])
 {
 	unsigned short K, i;
-	
+
 	for (i = 0; i < 4; i++) {
 		K = _rc2_expkey[_rc2_counter * 2] + 256 * _rc2_expkey[_rc2_counter * 2 + 1];
 		input[i] = input[i] + K + (input[(i + 3) % 4] & input[(i + 2) % 4]) + ((~input[(i + 3) % 4]) & input[(i + 1) % 4]);
@@ -109,7 +109,7 @@ void Krc2::_rc2_mix(unsigned short input[])
 void Krc2::_rc2_mash(unsigned short input[])
 {
 	unsigned short K, i, x;
-	
+
 	for (i = 0; i < 4; i++) {
 		x = input[(i + 3) % 4] & 63;
 		K = _rc2_expkey[2 * x] + 256 * _rc2_expkey[2 * x + 1];
@@ -120,7 +120,7 @@ void Krc2::_rc2_mash(unsigned short input[])
 void Krc2::rc2_decrypt(unsigned short input[4])
 {
 	int i;
-	
+
 	_rc2_counter = 63;
 	for (i = 0; i < 5; i++) {
 		_rc2_rmix(input);
@@ -152,7 +152,7 @@ void Krc2::_rc2_rmash(unsigned short input[])
 {
 	unsigned short K, x;
 	int i;
-	
+
 	for (i = 3; i >= 0; i--) {
 		x = input[(i + 3) % 4] & 63;
 		K = _rc2_expkey[2 * x] + 256 * _rc2_expkey[2 * x + 1];
@@ -177,7 +177,7 @@ int Krc2::_rc2_pow(int base, int exponent)
 unsigned short Krc2::_rc2_rol(unsigned short input, int places)
 {
 	unsigned short temp, i;
-	
+
 	for (i = 0; i < places; i++) {
 		temp = input & 0x8000;
 		input = input << 1;

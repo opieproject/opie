@@ -13,7 +13,7 @@ Edit_Title::Edit_Title( QWidget* parent,  const char* name, bool modal, WFlags f
 {
     if ( !name )
   setName( "Edit_Title" );
-    resize( 240, 110 ); 
+    resize( 240, 110 );
     setMaximumSize( QSize( 240, 110 ) );
     setCaption( tr( "Edit Title" ) );
 
@@ -21,14 +21,14 @@ Edit_Title::Edit_Title( QWidget* parent,  const char* name, bool modal, WFlags f
     LineEdit1->setGeometry( QRect( 5, 22, 230, 22 ) );
     newTitle=name;
     LineEdit1->setText(newTitle);
-    
+
     PushButton_Cancel = new QPushButton( this, "PushButton_Cancel" );
-    PushButton_Cancel->setGeometry( QRect( 180, 80, 50, 20 ) ); 
+    PushButton_Cancel->setGeometry( QRect( 180, 80, 50, 20 ) );
     PushButton_Cancel->setText( tr( "Cancel" ) );
 
     PushButton_Apply = new QPushButton( this, "PushButton_Apply" );
     PushButton_Apply->setGeometry( QRect( 120, 80, 50, 20 ) );
-    
+
     PushButton_Apply->setText( tr( "Apply" ) );
 
     // signals and slots connections
@@ -36,7 +36,7 @@ Edit_Title::Edit_Title( QWidget* parent,  const char* name, bool modal, WFlags f
     connect( PushButton_Apply, SIGNAL( released() ), this, SLOT( onApply() ) );
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 Edit_Title::~Edit_Title()

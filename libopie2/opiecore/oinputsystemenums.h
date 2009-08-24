@@ -14,7 +14,7 @@
         PowerManagement = EV_PWR,
         ForceFeedbackStatus = EV_FF_STATUS,
     };
-    
+
     enum Bus
     {
         PCI             = BUS_PCI,
@@ -32,7 +32,7 @@
         I2C             = BUS_I2C,
         HOST            = BUS_HOST,
     };
-    
+
     enum Switch
     {
         Switch0          = SW_0,

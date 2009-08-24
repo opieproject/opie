@@ -18,6 +18,6 @@ public :
       QStringList PostUp_SL;
       QStringList PreDown_SL;
       QStringList PostDown_SL;
-} ; 
+} ;
 
 #endif

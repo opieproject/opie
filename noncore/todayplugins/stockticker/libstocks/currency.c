@@ -32,8 +32,8 @@
 /* returns the currency exchange rate of "from" currency into                */
 /* "into" currency.                                                          */
 /*****************************************************************************/
-libstocks_return_code get_currency_exchange(char *from, 
-					    char *into, 
+libstocks_return_code get_currency_exchange(char *from,
+					    char *into,
 					    float *exchange)
 {
   char *symbol;
@@ -50,10 +50,10 @@ libstocks_return_code get_currency_exchange(char *from,
   strcpy(symbol, from);
   strcat(symbol, into);
   strcat(symbol, "=X");
-  
+
   error = get_stocks(symbol, &data);
   free(symbol);
-  if (error) 
+  if (error)
     {
       *exchange = 0;
       return error;
@@ -62,5 +62,5 @@ libstocks_return_code get_currency_exchange(char *from,
   *exchange = data->CurrentPrice;
   free_stocks(data);
   return error;
- 
+
 }

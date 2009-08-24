@@ -103,7 +103,7 @@ int Aportis::OpenFile(const char *src)
 
   if (peanutfile)
   {
-      
+
       PeanutHeader hdr0;
       gotorecordnumber(0);
       fread(&hdr0, sizeof(hdr0), 1, fin);
@@ -161,7 +161,7 @@ int Aportis::OpenFile(const char *src)
 	      }
       }
   }
-   
+
   qDebug("Mobi image rec:%u", mobiimagerec);
 
   // this is the main record buffer

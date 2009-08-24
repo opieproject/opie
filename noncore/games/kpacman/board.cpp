@@ -16,7 +16,7 @@ Board::Board(int size) : QArray<int> (size)
 {
     sz = size;                          // set size of board
 
-    map = "";                   
+    map = "";
     mapName = "";                       // no map loaded so far
 
     init(None);                         // initialize varibales
@@ -62,13 +62,13 @@ void Board::init(Image image, QString levelName)
                 printf("%s\n", msg.data());
             } else {
                 map.fill(' ', BoardHeight*BoardWidth);
-                int height = 0; 
+                int height = 0;
 
                 QTextStream levelStream(&levelFile);
                 while (!levelStream.eof() && height < BoardHeight) {
                     QString line = levelStream.readLine();
-                
-                    if (line.find(QRegExp("^ *;")) == -1) {     
+
+                    if (line.find(QRegExp("^ *;")) == -1) {
 
                         line.replace(QRegExp(";.*"), "");       // strip off comments
                         line.replace(QRegExp("\" *$"), "");     // strip off trailing "
@@ -145,7 +145,7 @@ void Board::set(int pos, Square sq, int m)
                                break;
             case energizer   : at(pos) |= energizerBit;
                                for (int e = 0; e < numEnergizers; e++) {
-                                   if (energizerPosition[e] == pos)     
+                                   if (energizerPosition[e] == pos)
                                        pos = OUT;
                                }
                                if (pos != OUT) {
@@ -155,13 +155,13 @@ void Board::set(int pos, Square sq, int m)
                                break;
             case fruit       : at(pos) |= fruitBit; fruitPosition = pos; break;
             case pacman      : at(pos) |= pacmanBit; pacmanPosition = pos; break;
-            case monster     : at(pos) |= (monsterBit << m); 
+            case monster     : at(pos) |= (monsterBit << m);
                                monsterPosition[m] = pos; break;
             case prisonentry : prisonEntry = pos; at(pos) = empty; break;
             case prisonexit  : prisonExit = pos; at(pos) = empty; break;
             case fruithome   : fruitHome = pos; at(pos) = empty; break;
             case pacmanhome  : pacmanHome = pos; at(pos) = empty; break;
-            case monsterhome : monsterHome[m] = pos; at(pos) = empty; 
+            case monsterhome : monsterHome[m] = pos; at(pos) = empty;
                                if (m == 0 && prisonExit == OUT)
                                    prisonExit = pos;
                                if (m == 1 && prisonEntry == OUT)
@@ -183,7 +183,7 @@ void Board::reset(int pos, Square sq, int m)
                              for (int e = 0; e < numEnergizers; e++) {          // delete the position of the eaten
                                  if (found)                                     // energizer in the position array
                                      energizerPosition[e-1] = energizerPosition[e];
-                                 if (energizerPosition[e] == pos)               
+                                 if (energizerPosition[e] == pos)
                                      found = TRUE;
                              }
                              energizerPosition[numEnergizers--] = OUT;
@@ -303,7 +303,7 @@ bool Board::isWay(int pos, int dir, Square sq) {
         p3 = move(p1, S);
     }
     switch (sq) {
-        case out    : return isOut(p1) | isOut(p2) | isOut(p3); 
+        case out    : return isOut(p1) | isOut(p2) | isOut(p3);
         case empty  : return isEmpty(p1) & isEmpty(p2) & isEmpty(p3);
         case brick  : return isBrick(p1) | isBrick(p2) | isBrick(p3);
         case prison : return isPrison(p1) | isPrison(p2) | isPrison(p3);

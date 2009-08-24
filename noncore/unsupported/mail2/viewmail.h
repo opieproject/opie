@@ -7,7 +7,7 @@
 #include "imapresponse.h"
 #include "mailtable.h"
 
-class AttachItemStore 
+class AttachItemStore
 {
 public:
 	void setMimeType(QString mimeType) { _mimeType = mimeType; }

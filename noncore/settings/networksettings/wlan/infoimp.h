@@ -18,7 +18,7 @@ private slots:
 private:
   //WExtensions *wExtensions;
   QTimer *timer;
-  
+
 };
 
 #endif

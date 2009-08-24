@@ -29,11 +29,11 @@
 **
 **********************************************************************/
 #include "teeclubcardgame.h"
-  
- 
+
+
 extern int highestZ;
- 
- 
+
+
 TeeclubCardGame::TeeclubCardGame(QCanvas *c, bool snap, QWidget *parent) : CanvasCardGame(*c, snap, parent, 2)	// Use 2 Decks
 {
     highestZ = 0;
@@ -71,7 +71,7 @@ void TeeclubCardGame::deal(void)
 	    highestZ++;
 	}
     }
-    
+
     for ( ; t < getNumberOfCards(); t++) {
 	Card *card = cards[t];
 	faceDownDealingPile->addCardToTop(card);
@@ -89,7 +89,7 @@ void TeeclubCardGame::deal(void)
 void TeeclubCardGame::resizePiles()
 {
     beginDealing();
-    for (int i = 0; i < 9; i++) {    
+    for (int i = 0; i < 9; i++) {
         while ((workingPiles[i]->getCardPos(NULL).y() > 230) && (workingPiles[i]->getOffsetDown()>1)) {
             // resize the pile
             workingPiles[i]->setOffsetDown(workingPiles[i]->getOffsetDown()-1);
@@ -168,7 +168,7 @@ bool TeeclubCardGame::mousePressCard( Card *card, QPoint p )
 	if ((item->x() == 2) && ((int)item->y() == 10)) {		// Deal 1 card
 	    // Move 8 cards, one to each workingPile
 	    beginDealing();
-	    CanvasCard *card =  (CanvasCard *)faceDownDealingPile->cardOnTop(); 
+	    CanvasCard *card =  (CanvasCard *)faceDownDealingPile->cardOnTop();
             card->setZ(highestZ);
             highestZ++;
 	    faceDownDealingPile->removeCard(card);

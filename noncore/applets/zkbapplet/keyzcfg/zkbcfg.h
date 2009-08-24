@@ -44,13 +44,13 @@ protected:
 	// stuff for map tag
 	Action* currentAction;
 
-	virtual bool startKeymapElement(int ardelay, int arperiod, 
+	virtual bool startKeymapElement(int ardelay, int arperiod,
 		const QString& author);
-	virtual bool startIncludeElement(const QString& file, 
+	virtual bool startIncludeElement(const QString& file,
 		const QString& prfix);
-	virtual bool startLabelElement(const QString& label, 
+	virtual bool startLabelElement(const QString& label,
 		const QString& state);
-	virtual bool startStateElement(const QString& name, 
+	virtual bool startStateElement(const QString& name,
 		const QString& parent, bool dflt);
 	virtual bool startMapElement(int key, bool pressed);
 	virtual bool startEventElement(int keycode, int unicode, int modifiers,

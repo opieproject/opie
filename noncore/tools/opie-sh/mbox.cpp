@@ -26,15 +26,15 @@ MBox::MBox(int w, int h, int type, QString title, QString message, QString *btex
 	QHBoxLayout *hlayout2 = new QHBoxLayout(this);
 
 	int x, y;
-	
+
 	layout->addLayout(hlayout1);
 	layout->addLayout(hlayout2);
-	
+
 	setCaption(title);
 
 	QLabel *image = new QLabel(this, "image");
 	QLabel *text = new QLabel(message, this, "text");
-	
+
 	switch (type)
 	{
 	case 0:
@@ -51,7 +51,7 @@ MBox::MBox(int w, int h, int type, QString title, QString message, QString *btex
 	hlayout1->addWidget(image);
 	hlayout1->addSpacing(5);
 	hlayout1->addWidget(text);
-	
+
 	if(!btext0->isNull())
 	{
 		QPushButton *button0 = new QPushButton((const QString)*btext0, this, "button0");
@@ -68,7 +68,7 @@ MBox::MBox(int w, int h, int type, QString title, QString message, QString *btex
 		hlayout2->addSpacing(5);
 		connect(button0, SIGNAL(clicked()), this, SLOT(b0pressed()) );
 	}
-	
+
 	if(!btext1->isNull())
 	{
 		QPushButton *button1 = new QPushButton((const QString)*btext1, this, "button1");
@@ -76,7 +76,7 @@ MBox::MBox(int w, int h, int type, QString title, QString message, QString *btex
 		hlayout2->addSpacing(5);
 		connect(button1, SIGNAL(clicked()), this, SLOT(b1pressed()) );
 	}
-	
+
 	if(!btext2->isNull())
 	{
 		QPushButton *button2 = new QPushButton((const QString)*btext2, this, "button2");
@@ -84,7 +84,7 @@ MBox::MBox(int w, int h, int type, QString title, QString message, QString *btex
 		hlayout2->addSpacing(5);
 		connect(button2, SIGNAL(clicked()), this, SLOT(b2pressed()) );
 	}
-	
+
 	x=(w/2)-(width()/2);
 	y=(h/2)-(height()/2);
 

@@ -24,7 +24,7 @@ extern int mpeg3_tabsel_123[2][3][16];
 
 extern long mpeg3_freqs[9];
 
-struct mpeg3_bandInfoStruct 
+struct mpeg3_bandInfoStruct
 {
 	int longIdx[23];
 	int longDiff[22];

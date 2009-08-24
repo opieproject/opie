@@ -7,7 +7,7 @@ class KFontDialog
 {
   public:
     enum { Accepted };
-    
+
     static int getFont( const QFont & );
 };
 

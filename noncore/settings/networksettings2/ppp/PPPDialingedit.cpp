@@ -6,7 +6,7 @@
 #include <GUIUtils.h>
 #include "PPPDialingedit.h"
 
-PPPDialingEdit::PPPDialingEdit( QWidget * Parent ) : 
+PPPDialingEdit::PPPDialingEdit( QWidget * Parent ) :
                               PPPDialingGUI( Parent ){
 
       // populate widget stack

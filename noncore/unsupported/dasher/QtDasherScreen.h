@@ -45,19 +45,19 @@ class QtDasherScreen : public QWidget, public Dasher::CDasherScreen
 #warning QtDasherScreen::GetFontSize() not implemented
       return (Dasher::Opts::Normal);
     }
-  
+
   void TextSize(symbol , int* Width, int* Height, int ) const
-    { 
+    {
       // should probably use QPainter::boundingRect()
       *Width = *Height = font.pixelSize();
-      
+
     }
   void DrawText(symbol Character, int x1, int y1, int Size) const
     {
       //      QFont font = QFont (fontname.c_str(), Size);
       //      font.setPixelSize(Size);
       QPoint point = QPoint(x1, y1+Size/2);
-  
+
       painter->setFont (font);
       painter->drawText (point,
 			 QString(interface->GetDisplayText(Character).c_str()));
@@ -91,10 +91,10 @@ class QtDasherScreen : public QWidget, public Dasher::CDasherScreen
 
   void mousePressEvent (QMouseEvent *e);
   void mouseReleaseEvent (QMouseEvent *e);
-  
+
  protected:
   QColor getColor(int Color, const Opts::ColorSchemes ColorScheme) const;
-  
+
   long QtDasherScreen::get_time();
 
   CDasherInterface* interface;

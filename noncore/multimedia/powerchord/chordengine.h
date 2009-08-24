@@ -40,7 +40,7 @@ class ChordEngine {
   int span_size;
   int variation;
   int tuning;
-  
+
   int string[6];
   const char *notename[6];
 
@@ -109,7 +109,7 @@ class ChordEngine {
   void calculate();
 
   const char *label(){return label_text;};
-  
+
   int finger(int string); // returns fret position or MUTED
 
 };

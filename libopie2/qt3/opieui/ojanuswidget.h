@@ -102,7 +102,7 @@ class OJanusWidget : public QWidget
   Q_OBJECT
 
   private:
-    
+
     class IconListBox : public QListBox
     {
       public:
@@ -120,7 +120,7 @@ class OJanusWidget : public QWidget
     };
 
   public:
-    
+
     enum Face
     {
       TreeList = 0,
@@ -206,7 +206,7 @@ class OJanusWidget : public QWidget
      * as children to this widget. In most cases you must create a layout
      * manager and associate it with this widget as well.
 	 *
-	 * Deleting the returned frame will cause the listitem or tab to be 
+	 * Deleting the returned frame will cause the listitem or tab to be
 	 * removed (you can re-add a page with the same name later.
      *
      * @param item String used in the list or Tab item.
@@ -230,10 +230,10 @@ class OJanusWidget : public QWidget
      * Note: This does yet only work for the TreeList face. Later this may
      * be added for the IconList face too. In other faces than the
      * TreeList, all the strings except the last one is ignored.
-   	 * Deleting the returned frame will cause the listitem or tab to be 
+   	 * Deleting the returned frame will cause the listitem or tab to be
 	 * removed (you can re-add a page with the same name later.
      *
-	 * Deleting the returned frame will cause the listitem or tab to be 
+	 * Deleting the returned frame will cause the listitem or tab to be
 	 * removed (you can re-add a page with the same name later.
      **/
      virtual QFrame *addPage(const QStringList &items, const QString &header=QString::null,
@@ -246,7 +246,7 @@ class OJanusWidget : public QWidget
      * so it contains a QVBoxLayout layout that lines up the child widgets
      * are vertically.
      *
-	 * Deleting the returned frame will cause the listitem or tab to be 
+	 * Deleting the returned frame will cause the listitem or tab to be
 	 * removed (you can re-add a page with the same name later.
      *
      * @param item String used in the list or Tab item.
@@ -271,7 +271,7 @@ class OJanusWidget : public QWidget
      * be added for the IconList face too. In other faces than the
      * TreeList, all the strings except the last one is ignored.
      *
-     * Deleting the returned frame will cause the listitem or tab to be 
+     * Deleting the returned frame will cause the listitem or tab to be
      * removed (you can re-add a page with the same name later.
      **/
     virtual QVBox *addVBoxPage( const QStringList &items,
@@ -285,7 +285,7 @@ class OJanusWidget : public QWidget
      * so it contains a QHBoxLayout layout that lines up the child widgets
      * are horizontally.
      *
-     * Deleting the returned frame will cause the listitem or tab to be 
+     * Deleting the returned frame will cause the listitem or tab to be
      * removed (you can re-add a page with the same name later.
      *
      * @param item String used in the list or Tab item.
@@ -311,7 +311,7 @@ class OJanusWidget : public QWidget
      * be added for the IconList face too. In other faces than the
      * TreeList, all the strings except the last one is ignored.
      *
-     * Deleting the returned frame will cause the listitem or tab to be 
+     * Deleting the returned frame will cause the listitem or tab to be
      * removed (you can re-add a page with the same name later.
      **/
     virtual QHBox *addHBoxPage( const QStringList &items,
@@ -325,7 +325,7 @@ class OJanusWidget : public QWidget
      * so it contains a QGridLayout layout that places up the child widgets
      * in a grid.
      *
-     * Deleting the returned frame will cause the listitem or tab to be 
+     * Deleting the returned frame will cause the listitem or tab to be
      * removed (you can re-add a page with the same name later.
      *
      * @param n Specifies the number of columns if 'dir' is QGrid::Horizontal
@@ -355,7 +355,7 @@ class OJanusWidget : public QWidget
      * be added for the IconList face too. In other faces than the
      * TreeList, all the strings except the last one is ignored.
      *
-     * Deleting the returned frame will cause the listitem or tab to be 
+     * Deleting the returned frame will cause the listitem or tab to be
      * removed (you can re-add a page with the same name later.
      **/
     virtual QGrid *addGridPage( int n, Orientation dir,
@@ -542,7 +542,7 @@ class OJanusWidget : public QWidget
 
   public:
     class IconListItem;
-  
+
   private:
     class OJanusWidgetPrivate;
     OJanusWidgetPrivate *d;

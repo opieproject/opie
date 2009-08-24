@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of MetrowerksMakefileGenerator class.
 **
@@ -79,13 +79,13 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
     //..grrr.. libs!
     QStringList extra_objs;
     bool do_libs = TRUE;
-    if(project->first("TEMPLATE") == "app") 
+    if(project->first("TEMPLATE") == "app")
 	extra_objs += project->variables()["QMAKE_CRT_OBJECTS"];
     else if(project->first("TEMPLATE") == "lib" && project->isActiveConfig("staticlib"))
 	do_libs = FALSE;
     if(do_libs)
 	extra_objs += project->variables()["QMAKE_LIBS"];
-    for(QStringList::Iterator val_it = extra_objs.begin(); 
+    for(QStringList::Iterator val_it = extra_objs.begin();
 	val_it != extra_objs.end(); ++val_it) {
 	if((*val_it).startsWith("-L")) {
 	    QString dir((*val_it).right((*val_it).length() - 2));
@@ -94,11 +94,11 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 	       project->variables()["INCLUDEPATH"].findIndex(dir) == -1)
 		project->variables()["INCLUDEPATH"].append(dir);
 	} else if((*val_it).startsWith("-l")) {
-	    QString lib("lib" + (*val_it).right((*val_it).length() - 2)  + "." + 
+	    QString lib("lib" + (*val_it).right((*val_it).length() - 2)  + "." +
 			project->first("QMAKE_EXTENSION_SHLIB"));
 	    if(project->variables()["LIBRARIES"].findIndex(lib) == -1)
 		project->variables()["LIBRARIES"].append(lib);
-	} else 
+	} else
 	    if((*val_it) == "-framework") {
 	    ++val_it;
 	    if(val_it == extra_objs.end())
@@ -146,15 +146,15 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 		QString tmpd=dir, tmpv;
 		if(fixifyToMacPath(tmpd, tmpv)) {
 		    bool add_in = TRUE;
-		    QString deps[] = { QString("DEPENDPATH"), 
-				     QString("INCLUDEPATH"), QString::null }, 
+		    QString deps[] = { QString("DEPENDPATH"),
+				     QString("INCLUDEPATH"), QString::null },
 				     dd, dv;
 		    for(int yy = 0; deps[yy] != QString::null; yy++) {
 			QStringList &l2 = project->variables()[deps[yy]];
-			for(QStringList::Iterator val_it2 = l2.begin(); 
+			for(QStringList::Iterator val_it2 = l2.begin();
 			    val_it2 != l2.end(); ++val_it2) {
 			    QString dd= (*val_it2), dv;
-			    if(!fixifyToMacPath(dd, dv)) 
+			    if(!fixifyToMacPath(dd, dv))
 				continue;
 			    if(dd == tmpd && tmpv == dv) {
 				add_in = FALSE;
@@ -162,7 +162,7 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 			    }
 			}
 		    }
-		    if(add_in) 
+		    if(add_in)
 			project->variables()["INCLUDEPATH"].append(dir);
 		}
 	    }
@@ -179,7 +179,7 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
     QString xmlfile = findTemplate(project->first("QMAKE_XML_TEMPLATE"));
     QFile file(xmlfile);
     if(!file.open(IO_ReadOnly )) {
-	fprintf(stderr, "Cannot open XML file: %s\n", 
+	fprintf(stderr, "Cannot open XML file: %s\n",
 		project->first("QMAKE_XML_TEMPLATE").latin1());
 	return FALSE;
     }
@@ -196,7 +196,7 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 
 	    t << line.left(rep); //output the left side
 	    line = line.right(line.length() - (rep + torep.length())); //now past the variable
-	    if(variable == "CODEWARRIOR_HEADERS" || variable == "CODEWARRIOR_SOURCES" || 
+	    if(variable == "CODEWARRIOR_HEADERS" || variable == "CODEWARRIOR_SOURCES" ||
 	       variable == "CODEWARRIOR_LIBRARIES" || variable == "CODEWARRIOR_QPREPROCESS" ||
 		variable == "CODEWARRIOR_QPREPROCESSOUT") {
 		QString outcmd=variable.right(variable.length() - variable.findRev('_') - 1);
@@ -222,7 +222,7 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 				    debug = FALSE;
 				} else {
 				    for(QStringList::Iterator hit = Option::h_ext.begin(); hit != Option::h_ext.end(); ++hit) {
-					if((*it).endsWith((*hit))) { 
+					if((*it).endsWith((*hit))) {
 					    debug = FALSE;
 					    break;
 					}
@@ -241,12 +241,12 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 			}
 		    }
 		}
-	    } else if(variable == "CODEWARRIOR_SOURCES_LINKORDER" || 
+	    } else if(variable == "CODEWARRIOR_SOURCES_LINKORDER" ||
 		      variable == "CODEWARRIOR_HEADERS_LINKORDER" ||
-		      variable == "CODEWARRIOR_LIBRARIES_LINKORDER" || 
+		      variable == "CODEWARRIOR_LIBRARIES_LINKORDER" ||
 		      variable == "CODEWARRIOR_QPREPROCESS_LINKORDER" ||
 		      variable == "CODEWARRIOR_QPREPROCESSOUT_LINKORDER") {
-		QString outcmd=variable.mid(variable.find('_')+1, 
+		QString outcmd=variable.mid(variable.find('_')+1,
 					    variable.findRev('_')-(variable.find('_')+1));
 		QStringList args;
 		if(outcmd == "QPREPROCESS")
@@ -268,12 +268,12 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 			}
 		    }
 		}
-	    } else if(variable == "CODEWARRIOR_HEADERS_GROUP" || 
+	    } else if(variable == "CODEWARRIOR_HEADERS_GROUP" ||
 		      variable == "CODEWARRIOR_SOURCES_GROUP" ||
-		      variable == "CODEWARRIOR_LIBRARIES_GROUP" || 
+		      variable == "CODEWARRIOR_LIBRARIES_GROUP" ||
 		      variable == "CODEWARRIOR_QPREPROCESS_GROUP" ||
 		      variable == "CODEWARRIOR_QPREPROCESSOUT_GROUP") {
-		QString outcmd = variable.mid(variable.find('_')+1, 
+		QString outcmd = variable.mid(variable.find('_')+1,
 					      variable.findRev('_')-(variable.find('_')+1));
 		QStringList args;
 		if(outcmd == "QPREPROCESS")
@@ -288,7 +288,7 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 			QStringList &list = project->variables()[arg];
 			for(QStringList::Iterator it = list.begin(); it != list.end(); ++it) {
 			    t << "\t\t\t\t<FILEREF>" << endl
-			      << "\t\t\t\t\t<TARGETNAME>" << var("TARGET_STEM") << "</TARGETNAME>" 
+			      << "\t\t\t\t\t<TARGETNAME>" << var("TARGET_STEM") << "</TARGETNAME>"
 			      << endl
 			      << "\t\t\t\t\t<PATHTYPE>Name</PATHTYPE>" << endl
 			      << "\t\t\t\t\t<PATH>" << (*it) << "</PATH>" << endl
@@ -311,7 +311,7 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 		    }
 		}
 	    } else if(variable == "CODEWARRIOR_DEPENDPATH" || variable == "CODEWARRIOR_INCLUDEPATH" ||
-		variable == "CODEWARRIOR_FRAMEWORKPATH") {	
+		variable == "CODEWARRIOR_FRAMEWORKPATH") {
 		QString arg=variable.right(variable.length()-variable.find('_')-1);
 		QStringList list;
 		if(arg == "INCLUDEPATH") {
@@ -355,7 +355,7 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 		    if(p.startsWith("recursive--")) {
 			p = p.right(p.length() - 11);
 			recursive = "true";
-		    } 
+		    }
 		    if(!fixifyToMacPath(p, v))
 			continue;
 		    if(arg == "FRAMEWORKPATH")
@@ -374,7 +374,7 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 		      << "\t\t\t\t\t</SETTING>" << endl;
 		}
 	    } else if(variable == "CODEWARRIOR_WARNING" || variable == "!CODEWARRIOR_WARNING") {
-		bool b = ((!project->isActiveConfig("warn_off")) && 
+		bool b = ((!project->isActiveConfig("warn_off")) &&
 			  project->isActiveConfig("warn_on"));
 		if(variable.startsWith("!"))
 		    b = !b;
@@ -395,10 +395,10 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 		if(project->first("TEMPLATE") == "app" && !project->isActiveConfig("console"))
 		    outdir += var("TARGET") + ".app/Contents/MacOS/";
 		if(fixifyToMacPath(outdir, volume, FALSE)) {
-                    t << "\t\t\t<SETTING><NAME>Path</NAME><VALUE>" << outdir << "</VALUE></SETTING>" 
+                    t << "\t\t\t<SETTING><NAME>Path</NAME><VALUE>" << outdir << "</VALUE></SETTING>"
 		      << endl
 		      << "\t\t\t<SETTING><NAME>PathFormat</NAME><VALUE>MacOS</VALUE></SETTING>" << endl
-		      << "\t\t\t<SETTING><NAME>PathRoot</NAME><VALUE>" << volume << "</VALUE></SETTING>" 
+		      << "\t\t\t<SETTING><NAME>PathRoot</NAME><VALUE>" << volume << "</VALUE></SETTING>"
 		      << endl;
 		}
 	    } else if(variable == "CODEWARRIOR_PACKAGER_PANEL") {
@@ -411,11 +411,11 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 			t << "\t\t<SETTING><NAME>MWMacOSPackager_UsePackager</NAME>"
 			  << "<VALUE>1</VALUE></SETTING>" << "\n"
 			  << "\t\t<SETTING><NAME>MWMacOSPackager_FolderToPackage</NAME>" << "\n"
-			  << "\t\t\t<SETTING><NAME>Path</NAME><VALUE>" << outdir 
+			  << "\t\t\t<SETTING><NAME>Path</NAME><VALUE>" << outdir
 			  << "</VALUE></SETTING>" << "\n"
-			  << "\t\t\t<SETTING><NAME>PathFormat</NAME><VALUE>MacOS</VALUE></SETTING>" 
+			  << "\t\t\t<SETTING><NAME>PathFormat</NAME><VALUE>MacOS</VALUE></SETTING>"
 			  << "\n"
-			  << "\t\t\t<SETTING><NAME>PathRoot</NAME><VALUE>" << volume 
+			  << "\t\t\t<SETTING><NAME>PathRoot</NAME><VALUE>" << volume
 			  << "</VALUE></SETTING>" << "\n"
 			  << "\t\t</SETTING>" << "\n"
 			  << "\t\t<SETTING><NAME>MWMacOSPackager_CreateClassicAlias</NAME>"
@@ -426,9 +426,9 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 			  << "<VALUE></VALUE></SETTING>" << "\n"
 			  << "\t\t<SETTING><NAME>MWMacOSPackager_CreatePkgInfo</NAME>"
 			  << "<VALUE>1</VALUE></SETTING>" << "\n"
-			  << "\t\t<SETTING><NAME>MWMacOSPackager_PkgCreatorType</NAME>" 
+			  << "\t\t<SETTING><NAME>MWMacOSPackager_PkgCreatorType</NAME>"
 			  << "<VALUE>CUTE</VALUE></SETTING>" << "\n"
-			  << "\t\t<SETTING><NAME>MWMacOSPackager_PkgFileType</NAME>" 
+			  << "\t\t<SETTING><NAME>MWMacOSPackager_PkgFileType</NAME>"
 			  << "<VALUE>APPL</VALUE></SETTING>" << endl;
 		    }
 		}
@@ -450,7 +450,7 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
     t << endl;
     file.close();
 
-    if(mocAware()) { 
+    if(mocAware()) {
 	QString mocs = project->first("MOCS");
 	QFile mocfile(mocs);
 	if(!mocfile.open(IO_WriteOnly)) {
@@ -469,7 +469,7 @@ MetrowerksMakefileGenerator::writeMakeParts(QTextStream &t)
 	}
     }
 
-    if(!project->isEmpty("FORMS")) { 
+    if(!project->isEmpty("FORMS")) {
 	QString uics = project->first("UICS");
 	QFile uicfile(uics);
 	if(!uicfile.open(IO_WriteOnly)) {
@@ -519,25 +519,25 @@ MetrowerksMakefileGenerator::init()
 	return;
     init_flag = TRUE;
 
-    if ( project->isEmpty("QMAKE_XML_TEMPLATE") ) 
+    if ( project->isEmpty("QMAKE_XML_TEMPLATE") )
 	project->variables()["QMAKE_XML_TEMPLATE"].append("mwerkstmpl.xml");
 
     QStringList &configs = project->variables()["CONFIG"];
     if(project->isActiveConfig("qt")) {
 	if(configs.findIndex("moc")) configs.append("moc");
 	if ( !( (project->first("TARGET") == "qt") || (project->first("TARGET") == "qte") ||
-		(project->first("TARGET") == "qt-mt") ) ) 
+		(project->first("TARGET") == "qt-mt") ) )
 	    project->variables()["QMAKE_LIBS"] += project->variables()["QMAKE_LIBS_QT"];
-	if(configs.findIndex("moc")) 
+	if(configs.findIndex("moc"))
 	    configs.append("moc");
-	if ( !project->isActiveConfig("debug") ) 
+	if ( !project->isActiveConfig("debug") )
 	    project->variables()["DEFINES"].append("QT_NO_DEBUG");
     }
 
     //version handling
     if(project->variables()["VERSION"].isEmpty())
-	project->variables()["VERSION"].append("1.0." + 
-					       (project->isEmpty("VER_PAT") ? QString("0") : 
+	project->variables()["VERSION"].append("1.0." +
+					       (project->isEmpty("VER_PAT") ? QString("0") :
 						project->first("VER_PAT")) );
     QStringList ver = QStringList::split('.', project->first("VERSION"));
     ver << "0" << "0"; //make sure there are three
@@ -572,7 +572,7 @@ MetrowerksMakefileGenerator::init()
 	if ( (project->first("TARGET") == "qt") || (project->first("TARGET") == "qte") ||
 	     (project->first("TARGET") == "qt-mt") )
 	    project->variables()["QMAKE_LIBS"] += project->variables()["QMAKE_LIBS_OPENGL_QT"];
-	else 
+	else
 	    project->variables()["QMAKE_LIBS"] += project->variables()["QMAKE_LIBS_OPENGL"];
     }
 
@@ -607,8 +607,8 @@ QString
 MetrowerksMakefileGenerator::findTemplate(const QString &file)
 {
     QString ret;
-    if(!QFile::exists(ret = file) && 
-       !QFile::exists((ret = Option::mkfile::qmakespec + QDir::separator() + file)) && 
+    if(!QFile::exists(ret = file) &&
+       !QFile::exists((ret = Option::mkfile::qmakespec + QDir::separator() + file)) &&
        !QFile::exists((ret = QString(getenv("QTDIR")) + "/mkspecs/mac-mwerks/" + file)) &&
        !QFile::exists((ret = (QString(getenv("HOME")) + "/.tmake/" + file))))
 	return "";
@@ -635,11 +635,11 @@ MetrowerksMakefileGenerator::createFork(const QString &f)
 	if(!o)
 	    return FALSE;
 	if(FSPathMakeRef((const UInt8 *)f.latin1(), &fref, NULL) == noErr) {
-	    if(FSGetCatalogInfo(&fref, kFSCatInfoNone, NULL, NULL, &fileSpec, NULL) == noErr) 
+	    if(FSGetCatalogInfo(&fref, kFSCatInfoNone, NULL, NULL, &fileSpec, NULL) == noErr)
 		FSpCreateResFile(&fileSpec, 'CUTE', 'TEXT', smSystemScript);
-	    else 
+	    else
 		qDebug("bogus %d", __LINE__);
-	} else 
+	} else
 	    qDebug("bogus %d", __LINE__);
 	fclose(o);
 	if(perms)
@@ -682,7 +682,7 @@ MetrowerksMakefileGenerator::fixifyToMacPath(QString &p, QString &v, bool )
     fixEnvVariables(p);
     if(p.startsWith("\"") && p.endsWith("\""))
 	p = p.mid(1, p.length() - 2);
-    if(p.isEmpty()) 
+    if(p.isEmpty())
 	return FALSE;
     if(!p.endsWith("/"))
 	p += "/";
@@ -698,10 +698,10 @@ MetrowerksMakefileGenerator::fixifyToMacPath(QString &p, QString &v, bool )
 	    if(fi.convertToAbs()) //strange
 		return FALSE;
 	    p = fi.filePath();
-	} 
-    } 
+	}
+    }
     p = QDir::cleanDirPath(p);
-    if(!volume.isEmpty()) 
+    if(!volume.isEmpty())
 	v = volume;
     p.replace("/", ":");
     if(p.right(1) != ":")
@@ -734,7 +734,7 @@ MetrowerksMakefileGenerator::processPrlFiles()
 			    if(processPrlFile(prl)) {
 				if(prl.startsWith(mdd->local_dir))
 				    prl.replace(0, mdd->local_dir.length(), mdd->real_dir);
-				QRegExp reg("^.*lib(" + lib + "[^.]*)\\." + 
+				QRegExp reg("^.*lib(" + lib + "[^.]*)\\." +
 					    project->first("QMAKE_EXTENSION_SHLIB") + "$");
 				if(reg.exactMatch(prl))
 				    prl = "-l" + reg.cap(1);
@@ -781,7 +781,7 @@ MetrowerksMakefileGenerator::processPrlVariable(const QString &var, const QStrin
 		    append = out.findIndex((*it)) == -1;
 		} else if((*it).startsWith("-framework")) {
 		    ++it;
-		    for(QStringList::ConstIterator outit = out.begin(); 
+		    for(QStringList::ConstIterator outit = out.begin();
 			outit != out.end(); ++it) {
 			if((*outit) == "-framework") {
 			    ++outit;
@@ -813,7 +813,7 @@ MetrowerksMakefileGenerator::openOutput(QFile &file) const
 	if(fi.isDir())
 	    outdir = file.name() + QDir::separator();
     }
-    if(!outdir.isEmpty() || file.name().isEmpty()) 
+    if(!outdir.isEmpty() || file.name().isEmpty())
 	file.setName(outdir + project->first("TARGET") + ".xml");
     return MakefileGenerator::openOutput(file);
 }

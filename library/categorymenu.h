@@ -31,7 +31,7 @@ class CategoryMenu : public QPopupMenu
 {
     Q_OBJECT
 public:
-    CategoryMenu( const QString &appName, bool, QWidget *parent = 0, 
+    CategoryMenu( const QString &appName, bool, QWidget *parent = 0,
 	    const char *name = 0 );
     ~CategoryMenu();
 

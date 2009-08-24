@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef CANVAS_CARD_WINDOW_H 
+#ifndef CANVAS_CARD_WINDOW_H
 #define CANVAS_CARD_WINDOW_H
 
 

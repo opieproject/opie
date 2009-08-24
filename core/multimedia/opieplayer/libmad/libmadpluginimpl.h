@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef LIBMAD_PLUGIN_IMPL_H 
+#ifndef LIBMAD_PLUGIN_IMPL_H
 #define LIBMAD_PLUGIN_IMPL_H
 
 #include <qpe/mediaplayerplugininterface.h>

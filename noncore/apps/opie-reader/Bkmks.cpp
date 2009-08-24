@@ -123,7 +123,7 @@ Bkmk::~Bkmk()
     if (m_anno != NULL)
 	delete [] m_anno;
 }
- 
+
 Bkmk& Bkmk::operator=(const Bkmk& rhs)
 {
     if (m_name != NULL)
@@ -420,7 +420,7 @@ Bkmk* BkmkFile::read07(BkmkFile* _this, FILE* f)
 	  b->m_namelen = ln;
 	  b->m_name = new unsigned char[b->m_namelen];
 	  fread(b->m_name,1,b->m_namelen,f);
-	  
+
 	  fread(&(b->m_annolen),sizeof(b->m_annolen),1,f);
 	  if (b->m_annolen > 0)
 	    {

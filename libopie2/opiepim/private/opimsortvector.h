@@ -147,7 +147,7 @@ inline int OPimSortVector<T>::testTime( const QTime& left,
     if ( !right.isValid() ) ret--;
 
     if ( left.isValid() && right.isValid() ){
-	    ret += left < right ? -1 : 1;    
+	    ret += left < right ? -1 : 1;
     }
 
     return ret;
@@ -161,7 +161,7 @@ inline int OPimSortVector<T>::testDateTime( const QDateTime& left,
     if ( !right.isValid() ) ret--;
 
     if ( left.isValid() && right.isValid() ){
-	    ret += left < right ? -1 : 1;    
+	    ret += left < right ? -1 : 1;
     }
 
     return ret;

@@ -60,7 +60,7 @@ public:
     void remove(const QString &);
     void deleteFile(const QString &);
     void close();
-    
+
 public slots:
 
 protected:
@@ -68,9 +68,9 @@ protected:
 private:
   QFile f;
 private slots:
-        
 
-};    
+
+};
 
 #endif// M3U_H
 

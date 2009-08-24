@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of MakefileGenerator class.
 **
@@ -605,7 +605,7 @@ MakefileGenerator::generateDependencies(QPtrList<MakefileDependDir> &dirs, const
 	for(QStringList::Iterator fnit = fndeps.begin(); fnit != fndeps.end(); ++fnit) {
 	    generateDependencies(dirs, (*fnit), recurse);
 	    QStringList &deplist = findDependencies((*fnit));
-	    for(QStringList::Iterator it = deplist.begin(); it != deplist.end(); ++it) 
+	    for(QStringList::Iterator it = deplist.begin(); it != deplist.end(); ++it)
 		if(fndeps.findIndex((*it)) == -1 && (*it) != fn)
 		    fndeps.append((*it));
 	}
@@ -866,7 +866,7 @@ MakefileGenerator::init()
 	}
 	if(!noIO()) {
 	    QString sources[] = { QString("OBJECTS"), QString("LEXSOURCES"), QString("YACCSOURCES"),
-				  QString("HEADERS"), QString("SOURCES"), QString("FORMS"), 
+				  QString("HEADERS"), QString("SOURCES"), QString("FORMS"),
 				  QString("PRECOMPILED_HEADER"), QString::null };
 	    depHeuristics.clear();
 	    bool write_cache = FALSE, read_cache = QFile::exists(cache_file);
@@ -1293,7 +1293,7 @@ MakefileGenerator::processPrlFile(QString &file)
 	    if(!libinfo.readLib(f)) {
 		fprintf(stderr, "Error processing meta file: %s\n", real_meta_file.latin1());
 	    } else if(project->isActiveConfig("no_read_prl_" + libinfo.type().lower())) {
-		debug_msg(2, "Ignored meta file %s [%s]", real_meta_file.latin1(), libinfo.type().latin1()); 
+		debug_msg(2, "Ignored meta file %s [%s]", real_meta_file.latin1(), libinfo.type().latin1());
 	    } else {
 		ret = TRUE;
 		QMap<QString, QStringList> &vars = libinfo.variables();
@@ -1471,19 +1471,19 @@ MakefileGenerator::usePlatformDir()
     QString slashPltDir = sep + pltDir;
 
     QString filePath = project->first("DESTDIR");
-    project->variables()["DESTDIR"] = filePath 
+    project->variables()["DESTDIR"] = filePath
 				    + (filePath.isEmpty() ? pltDir : slashPltDir);
 
     filePath = project->first("DLLDESTDIR");
-    project->variables()["DLLDESTDIR"] = filePath 
+    project->variables()["DLLDESTDIR"] = filePath
 				       + (filePath.isEmpty() ? pltDir : slashPltDir);
 
     filePath = project->first("OBJECTS_DIR");
-    project->variables()["OBJECTS_DIR"] = filePath 
+    project->variables()["OBJECTS_DIR"] = filePath
 					+ (filePath.isEmpty() ? pltDir : slashPltDir);
 
     filePath = project->first("QMAKE_LIBDIR_QT");
-    project->variables()["QMAKE_LIBDIR_QT"] = filePath 
+    project->variables()["QMAKE_LIBDIR_QT"] = filePath
 					    + (filePath.isEmpty() ? pltDir : slashPltDir);
 
     filePath = project->first("QMAKE_LIBS_QT");
@@ -1494,7 +1494,7 @@ MakefileGenerator::usePlatformDir()
         project->variables()["QMAKE_LIBS_QT"] = filePath.left(fpi)
 					      + slashPltDir
 					      + filePath.mid(fpi);
-    
+
     filePath = project->first("QMAKE_LIBS_QT_THREAD");
     fpi = filePath.findRev(sep);
     if (fpi == -1)
@@ -1641,7 +1641,7 @@ MakefileGenerator::writeMocObj(QTextStream &t, const QString &obj, const QString
     QString stringSrc("$src"), stringObj("$obj");
     for( ;sit != srcl.end() && oit != objl.end(); oit++, sit++) {
 	QString hdr = findMocSource((*sit));
-	t << (*oit) << ": " 
+	t << (*oit) << ": "
 	  << (*sit) << " " << findDependencies((*sit)).join(" \\\n\t\t") << " "
 	  << hdr << " " << findDependencies(hdr).join(" \\\n\t\t");
 	bool use_implicit_rule = !project->isEmpty("QMAKE_RUN_CXX_IMP");
@@ -1711,7 +1711,7 @@ MakefileGenerator::writeYaccSrc(QTextStream &t, const QString &src)
 	QString yaccflags = "$(YACCFLAGS)", mangle = "y";
 	if(!project->isActiveConfig("yacc_no_name_mangle")) {
 	    mangle = fi.baseName(TRUE);
-	    if(!project->isEmpty("QMAKE_YACCFLAGS_MANGLE")) 
+	    if(!project->isEmpty("QMAKE_YACCFLAGS_MANGLE"))
 		yaccflags += " " + var("QMAKE_YACCFLAGS_MANGLE").replace(stringBase, mangle);
 	    else
 		yaccflags += " -p " + mangle;
@@ -2348,7 +2348,7 @@ void MakefileGenerator::logicWarn(const QString &f, const QString &w)
     }
 }
 
-QString 
+QString
 MakefileGenerator::dependencyKey(const QString &file) const
 {
      QString key = file;
@@ -2358,13 +2358,13 @@ MakefileGenerator::dependencyKey(const QString &file) const
      return key;
 }
 
-void 
+void
 MakefileGenerator::setProcessedDependencies(const QString &file, bool b)
 {
     depProcessed[dependencyKey(file)] = b;
 }
 
-bool 
+bool
 MakefileGenerator::processedDependencies(const QString &file)
 {
     QString key = dependencyKey(file);

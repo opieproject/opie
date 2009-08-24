@@ -96,7 +96,7 @@ void QCopBridge::authorizeConnections()
         if ( !it.current()->verifyAuthorised() ) {
             disconnect ( it.current(), SIGNAL( connectionClosed(QCopBridgePI*) ), this, SLOT( closed(QCopBridgePI*) ) );
             openConnections.removeRef( it.current() );
-        } 
+        }
         else
             ++it;
     }
@@ -193,22 +193,22 @@ void QCopBridge::sendDesktopMessageOld( const QCString& command, const QByteArra
             QString str;
             if ( *it == "QString" ) {
                 stream >> str;
-            } 
+            }
             else if ( *it == "QCString" ) {
                 QCString cstr;
                 stream >> cstr;
                 str = QString::fromLocal8Bit( cstr );
-            } 
+            }
             else if ( *it == "int" ) {
                 int i;
                 stream >> i;
                 str = QString::number( i );
-            } 
+            }
             else if ( *it == "bool" ) {
                 int i;
                 stream >> i;
                 str = QString::number( i );
-            } 
+            }
             else {
                 odebug << " cannot route the argument type " << (*it) << " throught the qcop bridge" << oendl;
                 return;
@@ -269,7 +269,7 @@ QCopBridgePI::QCopBridgePI( int socket, QObject *parent, const char* name )
     if ( !SyncAuthentication::isAuthorized(peeraddress) ) {
         state = Forbidden;
         close();
-    } 
+    }
     else
 #endif
     {

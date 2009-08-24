@@ -47,7 +47,7 @@ public:
     void savePos(void) { savedX = (int)x(); savedY = (int)y(); }
     void moveToPile(int p) { Q_UNUSED(p); }
     void setCardBack(int b);
-    
+
     /*virtual*/ void flipTo(int x, int y, int steps = 8);
     /*virtual*/ void setPos( int x, int y, int z ) { setX( x ); setY( y ); setZ( z ); }
     /*virtual*/ void showCard(void) { show(); }

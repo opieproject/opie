@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
-              =.             
+              =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -71,7 +71,7 @@ namespace Datebook {
 
         DateBookHoliday *holiday();
 
-        static bool nextOccurrence( const OPimEvent &ev, const QDateTime &start, QDateTime &dt ); 
+        static bool nextOccurrence( const OPimEvent &ev, const QDateTime &start, QDateTime &dt );
         QDate findRealStart( const OPimOccurrence &occ );
         OPimEvent find( const QString &str, bool caseSensitive, QDateTime &dt );
 

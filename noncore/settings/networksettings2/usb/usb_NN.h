@@ -14,7 +14,7 @@ public:
     USBNetNode();
     virtual ~USBNetNode();
 
-    virtual const QString pixmapName() 
+    virtual const QString pixmapName()
       { return "Devices/usb"; }
 
     virtual const QString nodeDescription() ;

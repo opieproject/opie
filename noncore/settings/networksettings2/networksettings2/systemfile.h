@@ -11,10 +11,10 @@ class SystemFile : public QTextStream {
 
 public :
 
-    SystemFile( const QString & Name, 
+    SystemFile( const QString & Name,
                 const QString & Path,
                 bool KnowsDevicesInstances );
-    SystemFile( const QString & Name, 
+    SystemFile( const QString & Name,
                 bool KnowsDevicesInstances = 0 );
     ~SystemFile( void );
 

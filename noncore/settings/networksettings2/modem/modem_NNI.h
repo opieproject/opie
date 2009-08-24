@@ -14,8 +14,8 @@ public :
 
       AModem( ModemNetNode * PNN );
 
-      RuntimeInfo * runtime( void ) 
-        {  return 
+      RuntimeInfo * runtime( void )
+        {  return
            ( RT ) ? RT : ( RT = new ModemRun( this, Data ) );
         }
 
@@ -23,7 +23,7 @@ public :
       QString acceptable( void );
       void commit( void );
 
-      virtual void * data( void ) 
+      virtual void * data( void )
         { return (void *)&Data; }
 
 protected :

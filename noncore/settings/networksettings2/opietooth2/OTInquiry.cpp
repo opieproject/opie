@@ -38,18 +38,18 @@ OTInquiry::OTInquiry( OTDriver * Drv ) : QObject( Drv ) {
 
     InquiryTimeoutTimer = new QTimer(this);
 
-    connect( InquiryTimeoutTimer, 
+    connect( InquiryTimeoutTimer,
              SIGNAL(timeout()),
-             this, 
+             this,
              SLOT(slotInquiryTimeout()));
 
     Driver = Drv;
     Socket = Drv->openSocket();
     Socket->open();
 
-    connect( Socket, 
+    connect( Socket,
              SIGNAL( event(unsigned char, QByteArray)),
-             this, 
+             this,
              SLOT(slotHCIEvent(unsigned char, QByteArray)));
 }
 
@@ -106,7 +106,7 @@ bool OTInquiry::isInquiring() {
 bool OTInquiry::isFinished() {
     return SuccessfullyStarted && SuccessfullyEnded;
 }
-      
+
 void OTInquiry::reset() {
 
     SuccessfullyStarted = false;
@@ -127,9 +127,9 @@ void OTInquiry::slotInquiryTimeout() {
 void OTInquiry::slotHCIEvent(unsigned char eventCode, QByteArray buf) {
 
     odebug << "OTInquiry: hci packet received: eventCode="
-          << (unsigned int)eventCode 
+          << (unsigned int)eventCode
           << " packetLength="
-          << (unsigned int)buf.size() 
+          << (unsigned int)buf.size()
           << oendl;
 
     unsigned char *data = (unsigned char*)buf.data();
@@ -164,7 +164,7 @@ void OTInquiry::slotHCIEvent(unsigned char eventCode, QByteArray buf) {
             Addr.setBDAddr( results[n].bdaddr );
 
             odebug << "INQUIRY_RESULT: "
-                  << Addr.toString() 
+                  << Addr.toString()
                   << oendl;
 
             P = Driver->gateway()->findPeer( Addr );
@@ -189,7 +189,7 @@ void OTInquiry::slotHCIEvent(unsigned char eventCode, QByteArray buf) {
                                  (results[n].dev_class[1] << 8) |
                                  (results[n].dev_class[2] << 0) );
               // infoQueue.push_back(info);
-              P->setName( Driver->getPeerName( Addr ) ); 
+              P->setName( Driver->getPeerName( Addr ) );
             }
 
             // call the handler. Emits a signal if not overwritten
@@ -203,12 +203,12 @@ void OTInquiry::slotHCIEvent(unsigned char eventCode, QByteArray buf) {
         { int status = data[0];
           int numHciCmdPkts = data[1];
           int cmdOpcode = *((uint16_t*)(data+2));
-          odebug << "EVT_CMD_STATUS status=" 
+          odebug << "EVT_CMD_STATUS status="
                 << status
-                << " numPkts=" 
-                << numHciCmdPkts 
+                << " numPkts="
+                << numHciCmdPkts
                 << " cmdOpcode="
-                << cmdOpcode 
+                << cmdOpcode
                 << oendl;
           if (cmdOpcode == OCF_INQUIRY) {
 

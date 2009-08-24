@@ -44,7 +44,7 @@ typedef mpeg3_real_t mpeg3ac3_stream_samples_t[6][256];
 typedef struct
 {
 /* Bit stream identification == 0x8 */
-	int bsid;	
+	int bsid;
 /* Bit stream mode */
 	int bsmod;
 /* Audio coding mode */
@@ -108,7 +108,7 @@ typedef struct
 	int nfchans;
 } mpeg3_ac3bsi_t;
 
-typedef struct 
+typedef struct
 {
 /* block switch bit indexed by channel num */
 	unsigned short blksw[5];
@@ -199,14 +199,14 @@ typedef struct
 		int lfefsnroffst;
 /* lfe fast gain code */
 		int lfefgaincod;
-	
+
 /* Coupling leak info */
 	int cplleake;
 /* coupling fast leak initialization */
 		int cplfleak;
 /* coupling slow leak initialization */
 		int cplsleak;
-	
+
 /* delta bit allocation info */
 	int deltbaie;
 /* coupling delta bit allocation exists */
@@ -260,7 +260,7 @@ typedef struct
 /* Number of coupling exponent groups
  * Derived from cplbegf, cplendf, cplexpstr */
 	int ncplgrps;
-			
+
 /* End mantissa numbers of fbw channels */
 	unsigned short endmant[5];
 

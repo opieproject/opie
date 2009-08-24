@@ -379,7 +379,7 @@ ODirection HTC::direction() const
     ODirection dir;
 
     switch ( d->m_model ) {
-        case Model_HTC_Universal: 
+        case Model_HTC_Universal:
             {
                 OHingeStatus hs = readHingeSensor();
                 if ( hs == CASE_PORTRAIT ) dir = CCW;
@@ -387,7 +387,7 @@ ODirection HTC::direction() const
                 else dir = CW;
             }
             break;
-        default: 
+        default:
             dir = d->m_direction;
             break;
     }

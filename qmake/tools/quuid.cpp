@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of QUuid class
 **
@@ -306,9 +306,9 @@ QUuid::Version QUuid::version() const
 {
     // Check the 4 MSB of data3
     Version ver = (Version)(data3>>12);
-    if ( isNull() 
+    if ( isNull()
 	 || (variant() != DCE)
-	 || ver < Time 
+	 || ver < Time
 	 || ver > Random )
 	return VerUnknown;
     return ver;

@@ -239,12 +239,12 @@ void FormatterApp::doFormat()
             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
             sleep(1);
-            odebug << "Command is "+umountS << oendl; 
+            odebug << "Command is "+umountS << oendl;
             fp = popen(  (const char *) umountS, "r");
-            //          odebug << "" << fp << "" << oendl; 
+            //          odebug << "" << fp << "" << oendl;
             if ( !fp )
             {
-                odebug << "Could not execute '" + umountS + "'! err=" << err << "\n" +(QString)strerror(errno) << oendl; 
+                odebug << "Could not execute '" + umountS + "'! err=" << err << "\n" +(QString)strerror(errno) << oendl;
                 QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
                 pclose(fp);
                 return;
@@ -257,7 +257,7 @@ void FormatterApp::doFormat()
                 {
                     if( ((QString)line).find("busy",0,TRUE) != -1)
                     {
-                        odebug << "Could not find '" + umountS << oendl; 
+                        odebug << "Could not find '" + umountS << oendl;
                         QMessageBox::warning( this, tr("Formatter"), tr("Could not umount.\nDevice is busy!"), tr("&OK") );
                         pclose(fp);
                         return;
@@ -273,7 +273,7 @@ void FormatterApp::doFormat()
             }
             pclose(fp);
 
-            odebug << "Command would be: "+cmd << oendl; 
+            odebug << "Command would be: "+cmd << oendl;
             outDlg->OutputEdit->append( tr("Trying to format.") );
             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
@@ -282,7 +282,7 @@ void FormatterApp::doFormat()
             {
                 if( ((QString)line).find("No such device",0,TRUE) != -1)
                 {
-                    odebug << "No such device '" + umountS << oendl; 
+                    odebug << "No such device '" + umountS << oendl;
                     QMessageBox::warning( this, tr("Formatter"), tr("No such device!"), tr("&OK") );
                     pclose(fp);
                     //               outDlg->OutputEdit->append("No such device");
@@ -306,7 +306,7 @@ void FormatterApp::doFormat()
             fp = popen(  (const char *) remountS, "r");
             if ( !fp)
             {
-                odebug << "Could not execute '" + remountS + "'! err=" << err << "\n" +(QString)strerror(errno) << oendl; 
+                odebug << "Could not execute '" + remountS + "'! err=" << err << "\n" +(QString)strerror(errno) << oendl;
                 QMessageBox::warning( this, tr("Formatter"), tr("Card mount failed!"), tr("&OK") );
 
             }
@@ -381,7 +381,7 @@ void FormatterApp::storageComboSelected(int index )
     currentText = currentText.right( currentText.length() - currentText.find(" -> ",0,TRUE) - 4);
 
     QString fsType = getFileSystemType((const QString &) currentText);
-    //    odebug << fsType << oendl; 
+    //    odebug << fsType << oendl;
     for(int i = 0; i < fileSystemsCombo->count(); i++)
     {
         if( fsType == fileSystemsCombo->text(i))
@@ -465,7 +465,7 @@ void FormatterApp::parsetab(const QString &fileName)
                         & filesystemType.find("auto",0,TRUE) == -1)
                     fsList << filesystemType;
                 deviceList << deviceName;
-                odebug << deviceName+"::"+filesystemType << oendl; 
+                odebug << deviceName+"::"+filesystemType << oendl;
                 fileSystemTypeList << deviceName+"::"+filesystemType;
             }
         }
@@ -507,7 +507,7 @@ QString FormatterApp::getFileSystemType(const QString &currentText)
         if( temp.find( currentText,0,TRUE) != -1)
         {
             return temp.right( temp.length() - temp.find("::",0,TRUE) - 2);
-            //                odebug << fsType << oendl; 
+            //                odebug << fsType << oendl;
         }
     }
     return "";
@@ -534,7 +534,7 @@ bool FormatterApp::doFsck()
 
     QString fsType = getFileSystemType((const QString &)selectedDevice);
     QString cmd;
-    odebug << selectedDevice +" "+ fsType << oendl; 
+    odebug << selectedDevice +" "+ fsType << oendl;
     if(fsType == "vfat") cmd = "dosfsck -vy ";
     if(fsType == "ext2") cmd = "e2fsck -cpvy ";
     cmd += selectedDevice + " 2>&1";
@@ -548,12 +548,12 @@ bool FormatterApp::doFsck()
     outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
     sleep(1);
-    //          odebug << "Command is "+umountS << oendl; 
+    //          odebug << "Command is "+umountS << oendl;
     fp = popen(  (const char *) umountS, "r");
-    //          odebug << "" << fp << "" << oendl; 
+    //          odebug << "" << fp << "" << oendl;
     if ( !fp )
     {
-        odebug << "Could not execute '" + umountS + "'!\n" +(QString)strerror(errno) << oendl; 
+        odebug << "Could not execute '" + umountS + "'!\n" +(QString)strerror(errno) << oendl;
         QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
         pclose(fp);
         return false;
@@ -566,7 +566,7 @@ bool FormatterApp::doFsck()
         {
             if( ((QString)line).find("busy",0,TRUE) != -1)
             {
-                odebug << "Could not find '" + umountS << oendl; 
+                odebug << "Could not find '" + umountS << oendl;
                 QMessageBox::warning( this, tr("Formatter"),
                                       tr("Could not umount.\nDevice is busy!"), tr("&OK") );
                 pclose(fp);
@@ -588,7 +588,7 @@ bool FormatterApp::doFsck()
     {
         if( ((QString)line).find("No such device",0,TRUE) != -1)
         {
-            odebug << "No such device '" + umountS << oendl; 
+            odebug << "No such device '" + umountS << oendl;
             QMessageBox::warning( this, tr("Formatter"), tr("No such device!"), tr("&OK") );
             pclose(fp);
             //               outDlg->OutputEdit->append("No such device");

@@ -1,4 +1,4 @@
-/* décodage arithmétique 
+/* décodage arithmétique
  * optimisé pour une arithmétique 16 bits
  */
 #include <stdlib.h>
@@ -13,22 +13,22 @@
 void ArithClass::Arith_DecodeInit(PPM_ReadBuf* readbuf,UCHAR *buf,UINT bufsize) {
 
 	 /* gestion buffer */
-	 
+
 	 ainbuf=buf;
 	 ainbufsize=bufsize;
 	 areadbuf=readbuf;
 	 aendinbuf=ainbuf+ainbufsize;
 	 areadbuf->readbuf(ainbuf,ainbufsize);
 	 apinbuf=ainbuf;
-	 
+
 	 /* intervalle et position dans l'intervalle */
 	 alow=0;
 	 ahigh=0xFFFF;
 	 avalue=(*apinbuf++)<<8;
 	 avalue|=(*apinbuf++);
-	 
+
 	 /* remplissage du buffer 16 bits */
-	 
+
 	 abitbuf=(*apinbuf++)<<8;
 	 abitbuf|=(*apinbuf++);
 	 abitcnt=16;
@@ -69,7 +69,7 @@ void ArithClass::Arith_Decode(UINT amin,UINT amax,UINT asize) {
 			if ( alow>=0x4000 && ahigh<0xC000 ) {
 				 avalue -= 0x4000;  alow -= 0x4000;  ahigh -= 0x4000;
 			} else if ( ahigh>=0x8000 && alow<0x8000 ) break;
-			
+
 			alow+=alow;
 			ahigh+=ahigh+1;
 			avalue=(avalue<<1)|( (abitbuf&0x8000)!=0 );

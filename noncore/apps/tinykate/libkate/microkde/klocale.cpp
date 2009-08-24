@@ -116,7 +116,7 @@ QString KLocale::formatTime(const QTime &pTime, bool includeSecs) const
   QString ret( buffer, index );
   delete [] buffer;
   return ret;
-}    
+}
 
 QString KLocale::formatDate(const QDate &pDate, bool shortFormat) const
 {

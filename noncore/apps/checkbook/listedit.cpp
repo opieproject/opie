@@ -313,7 +313,7 @@ void ListEdit::slotClick(QListViewItem *itm, const QPoint &pnt, int col)
         }
         _stack->raiseWidget(_box);
     } else {
-        odebug << "Unsupported column type for column " << (const char *)pDef->getName() << "" << oendl; 
+        odebug << "Unsupported column type for column " << (const char *)pDef->getName() << "" << oendl;
         _typeEdit->setText("");
         _stack->raiseWidget(_typeEdit);
     }

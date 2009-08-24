@@ -5,11 +5,11 @@ class ModemRun  : public RuntimeInfo {
 
 public :
 
-      ModemRun( ANetNodeInstance * NNI, 
+      ModemRun( ANetNodeInstance * NNI,
                 ModemData & Data ) : RuntimeInfo ( NNI )
         { }
 
-      virtual RuntimeInfo * line( void ) 
+      virtual RuntimeInfo * line( void )
         { return this; }
 
       virtual QString deviceFile( void )

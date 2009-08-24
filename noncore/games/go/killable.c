@@ -53,7 +53,7 @@ short tx, ty, gx, gy, *escape, tkMark;
           undoTo(tkMark);
 /*          for (i = 1; i <= depth - 1; i++)
             {
-              sClearChar(sChar, rXor); 
+              sClearChar(sChar, rXor);
             } */
           depth = 1;
 	  return FALSE;

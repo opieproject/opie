@@ -27,12 +27,12 @@ Obstacle::Obstacle(QCanvas* canvas, int y)
          : QCanvasSprite(0,canvas)
 {
     newObstacle(y);
-} 
+}
 
 void Obstacle::newObstacle(int y)
 {
    QPixmap obstaclePix( Opie::Core::OResource::findPixmap("snake/wall") );
-   
+
    if ( obstaclePix.width() > canvas()->width()*3/5 ) {
        int w = canvas()->width()*3/5;
        w = w - w % 16;
@@ -45,10 +45,10 @@ void Obstacle::newObstacle(int y)
    QPoint nullp;
    QList<QPoint> pl;
    pl.append( &nullp );
-   
+
    QCanvasPixmapArray* obstaclearray = new QCanvasPixmapArray(pixl, pl);
    setSequence(obstaclearray);
-   
+
    int x = ( canvas()->width() - obstaclePix.width() )/2;
    x = x - x % 16;
    y = y - y % 16;
@@ -57,7 +57,7 @@ void Obstacle::newObstacle(int y)
    show();
    canvas()->update();
 }
- 
+
 int Obstacle::rtti() const
 {
    return obstacle_rtti;

@@ -17,9 +17,9 @@ Output::Output( QWidget* parent,  const char* name, bool modal, WFlags fl )
 {
     if ( !name )
   setName( "Output" );
-    resize( 196, 269 ); 
+    resize( 196, 269 );
     setCaption( name );
-    OutputLayout = new QGridLayout( this ); 
+    OutputLayout = new QGridLayout( this );
     OutputLayout->setSpacing( 6 );
     OutputLayout->setMargin( 11 );
 
@@ -28,7 +28,7 @@ Output::Output( QWidget* parent,  const char* name, bool modal, WFlags fl )
     OutputLayout->addWidget( OutputEdit, 0, 0 );
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 Output::~Output()

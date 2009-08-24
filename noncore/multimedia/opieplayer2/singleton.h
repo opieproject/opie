@@ -34,7 +34,7 @@ struct NullSingletonCreator
     static Product *create() { return 0; }
 };
 
-template 
+template
 <
     class T,
     template <class> class Creator = DefaultSingletonCreator

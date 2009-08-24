@@ -42,7 +42,7 @@ signals:
 private:
     void paintEvent( QPaintEvent * );
     void resizeEvent( QResizeEvent * );
-    
+
     int      blockWidth,blockHeight;
     int      xOffset,yOffset;
 };
@@ -60,12 +60,12 @@ public slots:
     void setup();
     void gameOver();
     void quit();
-    
+
     void setNext( int x, int y, QColor *color );
 //    void setScore( int score );
 //    void setLevel( int level );
 //    void setLines( int lines );
-    
+
 private:
     void keyPressEvent( QKeyEvent *e ) { board->keyPressEvent(e); }
     void resizeEvent( QResizeEvent * );

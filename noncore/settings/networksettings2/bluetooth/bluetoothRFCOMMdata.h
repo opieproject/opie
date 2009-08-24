@@ -10,13 +10,13 @@ public :
       QString BDAddress;
       QString Name;
       int     Channel;
-}; 
+};
 
 class BluetoothRFCOMMData {
 
 public :
 
       QVector<RFCOMMChannel> Devices;
-}; 
+};
 
 #endif

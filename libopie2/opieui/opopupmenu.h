@@ -95,7 +95,7 @@ protected:
 
     QString titleStr;
     QPixmap miniicon;
-    
+
     // Remove in KDE4
     OPixmapEffect::GradientType grType;
     QPixmap fill;
@@ -247,7 +247,7 @@ protected:
 protected slots:
     /// @since 3.1
     QString underlineText(const QString& text, uint length);
-    /// @since 3.1 
+    /// @since 3.1
     void resetKeyboardVars(bool noMatches = false);
     void itemHighlighted(int whichItem);
     void showCtxMenu(QPoint pos);

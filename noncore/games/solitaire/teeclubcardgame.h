@@ -29,7 +29,7 @@
 **
 **********************************************************************/
 #ifndef TEECLUB_CARD_GAME_H
-#define TEECLUB_CARD_GAME_H 
+#define TEECLUB_CARD_GAME_H
 
 
 #include "patiencecardgame.h"
@@ -47,7 +47,7 @@ public:
 class TeeclubDiscardPile : public CardPile, public CanvasRoundRect
 {
 public:
-    TeeclubDiscardPile(int x, int y, QCanvas *canvas) 
+    TeeclubDiscardPile(int x, int y, QCanvas *canvas)
         : CardPile(x, y), CanvasRoundRect(x, y, canvas) { }
     virtual bool isAllowedOnTop(Card *card) {
         if ( card->isFacing() && ( card->getCardPile()->cardInfront(card) == NULL ) &&
@@ -65,7 +65,7 @@ public:
 };
 
 
-class TeeclubWorkingPile :  public PatienceWorkingPile 
+class TeeclubWorkingPile :  public PatienceWorkingPile
 {
 public:
     TeeclubWorkingPile(int x, int y, QCanvas *canvas) :
@@ -74,12 +74,12 @@ public:
     virtual bool isAllowedOnTop(Card *card) {
 	if ( card->isFacing() &&
 //	     ( ( ( cardOnTop() == NULL ) && (card->getValue() == king) ) ||		// use this if only Kings are allowed on empty places
-	     ( (cardOnTop() == NULL) ||							// each card can use an empty place 
+	     ( (cardOnTop() == NULL) ||							// each card can use an empty place
 	       ( (cardOnTop() != NULL) &&
  	         ((int)card->getValue() + 1 == (int)cardOnTop()->getValue()) 		// you can append every color on every color
 	     ) ) )
 	    return TRUE;
-        return FALSE;	
+        return FALSE;
     }
 
     virtual bool isAllowedToBeMoved(Card *card) {
@@ -144,13 +144,13 @@ public:
 	Card *card = cardOnBottom();
 	while ((card != c) && (card != NULL)) {
 	    if (card->isFacing()) {
-		int offsetDown = card->getCardPile()->getOffsetDown(); 			   
-		y += offsetDown; 
+		int offsetDown = card->getCardPile()->getOffsetDown();
+		y += offsetDown;
 	    } else {
-		x += 0;   					// no moving to the side 
+		x += 0;   					// no moving to the side
 		y += 3;
 	    }
-	    card = cardInfront(card); 
+	    card = cardInfront(card);
 	}
 	return QPoint( x, y );
     }
@@ -159,7 +159,7 @@ public:
         return QPoint( getNextX(), getNextY() );
     }
 
-    virtual void cardAddedToTop(Card *c) { 
+    virtual void cardAddedToTop(Card *c) {
 	Q_UNUSED(c);
         setNextX( getCardPos(NULL).x() );
         setNextY( getCardPos(NULL).y() );
@@ -195,7 +195,7 @@ public:
     TeeclubCardGame(QCanvas *c, bool snap, QWidget *parent = 0);
 //    virtual ~TeeclubCardGame();
     virtual void deal(void);
-    virtual bool haveWeWon() { 
+    virtual bool haveWeWon() {
 	return ( discardPiles[0]->kingOnTop() &&
 		 discardPiles[1]->kingOnTop() &&
 		 discardPiles[2]->kingOnTop() &&

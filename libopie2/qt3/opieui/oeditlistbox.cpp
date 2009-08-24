@@ -297,7 +297,7 @@ void OEditListBox::addItem()
     }
 }
 
-int OEditListBox::currentItem() const 
+int OEditListBox::currentItem() const
 {
     int nr = m_listBox->currentItem();
     #if QT_VERSION >= 0x030000

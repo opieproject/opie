@@ -3,8 +3,8 @@
  * File:        calckeypad.h
  *
  * Description: Header file for the class KeyPad
- *              
- *               
+ *
+ *
  * Authors:     Eric Santonacci <Eric.Santonacci@talc.fr>
  *
  * Requirements:    Qt
@@ -27,7 +27,7 @@ class KeyPad : public QGrid {
 Q_OBJECT
 public:
     KeyPad(LCDDisplay *LCD, QWidget *parent=0, const char *name=0 );
-    
+
 public slots:
     void enterDigits(int);
     void operatorPressed(int);
@@ -59,7 +59,7 @@ private:
     QPushButton *btnDot;
 
     QPushButton *btnClear;
- 
+
     QPushButton *btnPlus;
     QPushButton *btnMinus;
     QPushButton *btnMultiply;
@@ -68,7 +68,7 @@ private:
     QPushButton *btnPercent;
     QPushButton *btnF1;
     QPushButton *btnAbout;
- 
+
     QButtonGroup *grpbtnOperators;
 
     void setAppearance(void);

@@ -10,7 +10,7 @@ unsigned int mpeg3bits_next_startcode(mpeg3_bits_t* stream)
 	mpeg3bits_byte_align(stream);
 
 /* Perform search */
-	while((mpeg3bits_showbits32_noptr(stream) >> 8) != MPEG3_PACKET_START_CODE_PREFIX && 
+	while((mpeg3bits_showbits32_noptr(stream) >> 8) != MPEG3_PACKET_START_CODE_PREFIX &&
 		!mpeg3bits_eof(stream))
 	{
 		mpeg3bits_getbyte_noptr(stream);
@@ -21,7 +21,7 @@ unsigned int mpeg3bits_next_startcode(mpeg3_bits_t* stream)
 /* Line up on the beginning of the next code. */
 int mpeg3video_next_code(mpeg3_bits_t* stream, unsigned int code)
 {
-	while(!mpeg3bits_eof(stream) && 
+	while(!mpeg3bits_eof(stream) &&
 		mpeg3bits_showbits32_noptr(stream) != code)
 	{
 		mpeg3bits_getbyte_noptr(stream);
@@ -32,7 +32,7 @@ int mpeg3video_next_code(mpeg3_bits_t* stream, unsigned int code)
 /* Line up on the beginning of the previous code. */
 int mpeg3video_prev_code(mpeg3_bits_t* stream, unsigned int code)
 {
-	while(!mpeg3bits_bof(stream) && 
+	while(!mpeg3bits_bof(stream) &&
 		mpeg3bits_showbits_reverse(stream, 32) != code)
 	{
 		mpeg3bits_getbits_reverse(stream, 8);
@@ -44,7 +44,7 @@ long mpeg3video_goptimecode_to_frame(mpeg3video_t *video)
 {
 /*  printf("mpeg3video_goptimecode_to_frame %d %d %d %d %f\n",  */
 /*  	video->gop_timecode.hour, video->gop_timecode.minute, video->gop_timecode.second, video->gop_timecode.frame, video->frame_rate); */
-	return (long)(video->gop_timecode.hour * 3600 * video->frame_rate + 
+	return (long)(video->gop_timecode.hour * 3600 * video->frame_rate +
 		video->gop_timecode.minute * 60 * video->frame_rate +
 		video->gop_timecode.second * video->frame_rate +
 		video->gop_timecode.frame) - 1 - video->first_frame;
@@ -72,7 +72,7 @@ int mpeg3video_match_refframes(mpeg3video_t *video)
 
     		if(i == 0)
 				size = video->coded_picture_width * video->coded_picture_height + 32 * video->coded_picture_width;
-    		else 
+    		else
 				size = video->chrom_width * video->chrom_height + 32 * video->chrom_width;
 
 			memcpy(dst, src, size);
@@ -144,8 +144,8 @@ int mpeg3video_seek(mpeg3video_t *video)
 				{
 					mpeg3_t *file = video->file;
 					mpeg3_vtrack_t *track = video->track;
-					long byte = (long)((float)(mpeg3demuxer_total_bytes(vstream->demuxer) / 
-						track->total_frames) * 
+					long byte = (long)((float)(mpeg3demuxer_total_bytes(vstream->demuxer) /
+						track->total_frames) *
 						frame_number);
 					long minimum = 65535;
 					int done = 0;
@@ -163,13 +163,13 @@ int mpeg3video_seek(mpeg3video_t *video)
 						this_gop_start = mpeg3video_goptimecode_to_frame(video);
 
 //printf("wanted %ld guessed %ld byte %ld result %d\n", frame_number, this_gop_start, byte, result);
-						if(labs(this_gop_start - frame_number) >= labs(minimum)) 
+						if(labs(this_gop_start - frame_number) >= labs(minimum))
 							done = 1;
 						else
 						{
 							minimum = this_gop_start - frame_number;
-							byte += (long)((float)(frame_number - this_gop_start) * 
-								(float)(mpeg3demuxer_total_bytes(vstream->demuxer) / 
+							byte += (long)((float)(frame_number - this_gop_start) *
+								(float)(mpeg3demuxer_total_bytes(vstream->demuxer) /
 								track->total_frames));
 							if(byte < 0) byte = 0;
 						}

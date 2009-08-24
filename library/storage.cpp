@@ -52,7 +52,7 @@ static bool isCF(const QString& m)
     bool matched = false;
     if(m.startsWith("/dev/")) {
         QString blockdev = m.mid(5);
-                        
+
         QDir pcmciadir("/sys/bus/pcmcia/devices");
         pcmciadir.setFilter( QDir::Dirs );
 
@@ -69,7 +69,7 @@ static bool isCF(const QString& m)
         if(!pcmciadevs.isEmpty()) {
             QDir blockdir("/sys/block");
             blockdir.setFilter( QDir::Dirs );
-    
+
             for ( unsigned int i=0; i<blockdir.count(); i++ ) {
                 if(blockdir[i][0] == '.') continue;
                 QString fpath = "/sys/block/" + blockdir[i];
@@ -98,7 +98,7 @@ static bool isCF(const QString& m)
 
 /*! \class StorageInfo storage.h
   \brief The StorageInfo class describes the disks mounted on the file system.
- 
+
   This class provides access to the mount information for the Linux
   filesystem. Each mount point is represented by the FileSystem class.
   To ensure this class has the most up to date size information, call
@@ -128,7 +128,7 @@ const FileSystem *StorageInfo::fileSystemOf( const QString &filename )
 {
     const FileSystem *fs = 0;
     unsigned int maxlen = 0;
-    
+
     for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i)
     {
         const QString &path = (*i)->path();
@@ -378,12 +378,12 @@ void FileSystem::update()
 
 /*! \class FileSystem storage.h
   \brief The FileSystem class describes a single mount point.
- 
+
   This class simply returns information about a mount point, including
   file system name, mount point, human readable name, size information
   and mount options information.
   \ingroup qtopiaemb
- 
+
   \sa StorageInfo
 */
 

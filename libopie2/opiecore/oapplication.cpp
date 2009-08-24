@@ -63,7 +63,7 @@ OApplication::OApplication( int& argc, char** argv, Type type )
 	     _config( 0 )
 {
     init();
-}	
+}
 
 OApplication::OApplication( int& argc, char** argv, const QCString& rAppName )
              :QPEApplication( argc, argv ),

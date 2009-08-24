@@ -15,7 +15,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -50,16 +50,16 @@ public:
 	~ButtonUtils ( );
 
 	static ButtonUtils *inst ( );
-	
+
 	qCopInfo messageToInfo ( const Opie::Core::OQCopMessage & );
 
 	void insertActions ( QListViewItem *here );
 	void insertAppLnks ( QListViewItem *here );
-		
+
 private:
 	ButtonUtils ( );
 	static void cleanup ( );
-	
+
 private:
 	AppLnkSet *m_apps;
 };

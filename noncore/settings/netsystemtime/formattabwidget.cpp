@@ -52,7 +52,7 @@ FormatTabWidget::FormatTabWidget( QWidget *parent )
 	sv->setFrameStyle( QFrame::NoFrame );
 	QWidget *container = new QWidget( sv->viewport() );
 	sv->addChild( container );
-    
+
 	QGridLayout *layout = new QGridLayout( container );
 	layout->setMargin( 2 );
 	layout->setSpacing( 4 );
@@ -144,7 +144,7 @@ void FormatTabWidget::saveSettings( bool commit )
 		config.writeEntry( "LongOrder", df.longOrder() );
 		config.writeEntry( "ClockApplet", appletformat );
 	}
-	
+
 	// Make rest of system aware of new settings
 	QCopEnvelope setClock( "QPE/System", "clockChange(bool)" );
 	setClock << ampm;

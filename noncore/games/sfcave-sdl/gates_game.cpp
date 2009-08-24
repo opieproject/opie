@@ -49,7 +49,7 @@ void GatesGame :: init()
         {
             // Read custom difficulty settings for this game
             gapHeight = parent->loadIntSetting( "Gates_custom_gapHeight", 75 );
-        
+
             double thrust = parent->loadDoubleSetting( "Gates_custom_player_thrust", 0.4 );
             double gravity = parent->loadDoubleSetting( "Gates_custom_player_gravity", 0.6 );
             double maxUp = parent->loadDoubleSetting( "Gates_custom_player_maxupspeed", 4.0 );

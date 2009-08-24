@@ -26,7 +26,7 @@ using namespace OpieTooth;
 DunPopup::DunPopup( const Services& service,
     BTDeviceItem* item ) : QPopupMenu(), m_service(service) {
 
-    owarn << "DunPopup c'tor" << oendl; 
+    owarn << "DunPopup c'tor" << oendl;
 
     m_item = item;
     QAction *a, *b, *c;

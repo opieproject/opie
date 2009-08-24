@@ -55,7 +55,7 @@ private:
     GuardedWidget inFocus;
     GuardedWidget oldFocus;
     static QPEMenuToolFocusManager *me;
-    
+
 private: // Sharp ROM compatibility
 	void setMenukeyEnabled ( bool b );
 };
@@ -77,7 +77,7 @@ protected:
      */
     void activateItem( int index );
     void goodbye();
-    
+
     // This is a special "lineo" add-on for the Sharp ROM
     // nobody knows, what it does, though ...
 	int getOldFocus ( );

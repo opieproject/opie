@@ -14,7 +14,7 @@ public :
 
       AProfile( ProfileNetNode * PNN );
 
-      RuntimeInfo * runtime( void ) 
+      RuntimeInfo * runtime( void )
         { return
             ( RT ) ? RT : ( RT = new ProfileRun( this, Data ) );
         }
@@ -23,20 +23,20 @@ public :
       QString acceptable( void );
       void commit( void );
 
-      virtual void * data( void ) 
+      virtual void * data( void )
         { return (void *)&Data; }
 
       virtual short generateFileEmbedded( SystemFile & TS,
                                          long DevNr );
 
-      const QString & description( void ) 
+      const QString & description( void )
         { return Data.Description; }
 
 protected :
 
       virtual void setSpecificAttribute( QString & Attr, QString & Value );
       virtual void saveSpecificAttribute( QTextStream & TS );
-      
+
 private :
 
       ProfileEdit * GUI;

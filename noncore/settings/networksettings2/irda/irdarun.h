@@ -5,11 +5,11 @@ class IRDARun  : public RuntimeInfo {
 
 public :
 
-      IRDARun( ANetNodeInstance * NNI, 
+      IRDARun( ANetNodeInstance * NNI,
                IRDAData & Data ) : RuntimeInfo( NNI )
         { }
 
-      virtual RuntimeInfo * line( void ) 
+      virtual RuntimeInfo * line( void )
         { return this; }
 
       virtual QString deviceFile( void )

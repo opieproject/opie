@@ -30,6 +30,6 @@ void StumblerSettings::accept()
 {
     m_config->writeEntry("interface", m_interface->text());
     m_config->write();
-    
+
     QDialog::accept();
 }

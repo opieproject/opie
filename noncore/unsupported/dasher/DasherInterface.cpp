@@ -26,26 +26,26 @@ const string CDasherInterface::EmptyString = "";
 
 CDasherInterface::CDasherInterface()
 	: m_Alphabet(0),
-	  m_LanguageModel(0), 
-	  m_DasherModel(0), 
-	  m_DashEditbox(0), 
-	  m_DasherScreen(0), 
-	  m_DasherView(0), 
-	  m_SettingsStore(0), 
+	  m_LanguageModel(0),
+	  m_DasherModel(0),
+	  m_DashEditbox(0),
+	  m_DasherScreen(0),
+	  m_DasherView(0),
+	  m_SettingsStore(0),
 	  m_SettingsUI(0),
-	  m_AlphIO(0), 
-	  TrainContext(0), 
-	  AlphabetID(""), 
-	  LanguageModelID(-1), 
+	  m_AlphIO(0),
+	  TrainContext(0),
+	  AlphabetID(""),
+	  LanguageModelID(-1),
 	  ViewID(-1),
-	  m_MaxBitRate(-1), 
+	  m_MaxBitRate(-1),
 	  m_DrawKeyboard(false),
-	  m_Orientation(Opts::LeftToRight), 
-	  m_UserLocation("usr_"), 
-	  m_SystemLocation("sys_"), 
+	  m_Orientation(Opts::LeftToRight),
+	  m_UserLocation("usr_"),
+	  m_SystemLocation("sys_"),
 	  m_TrainFile(""),
-	  m_DasherFont(""), 
-	  m_EditFont(""), 
+	  m_DasherFont(""),
+	  m_EditFont(""),
 	  m_EditFontSize(0)
 {
 }
@@ -179,7 +179,7 @@ void CDasherInterface::ChangeAlphabet(const std::string& NewAlphabetID)
 		m_SettingsUI->ChangeAlphabet(NewAlphabetID);
 	if (m_SettingsStore!=0)
 		m_SettingsStore->SetStringOption(Keys::ALPHABET_ID, NewAlphabetID);
-	
+
 	AlphabetID = NewAlphabetID;
 	if (!m_AlphIO)
 		m_AlphIO = new CAlphIO(m_SystemLocation, m_UserLocation);
@@ -187,11 +187,11 @@ void CDasherInterface::ChangeAlphabet(const std::string& NewAlphabetID)
 
 	CAlphabet* old = m_Alphabet;
 	m_Alphabet = new CCustomAlphabet(Info);
-	
+
 	// Apply options from alphabet
 
 	m_TrainFile = m_UserLocation + m_Alphabet->GetTrainingFile();
-	
+
 	// Recreate widgets and language model
 	if (m_DashEditbox!=0)
 		m_DashEditbox->SetInterface(this);
@@ -218,7 +218,7 @@ void CDasherInterface::ChangeAlphabet(const std::string& NewAlphabetID)
 void CDasherInterface::ChangeMaxBitRate(double NewMaxBitRate)
 {
 	m_MaxBitRate = NewMaxBitRate;
-	
+
 	if (m_DasherModel!=0)
 		m_DasherModel->SetMaxBitrate(m_MaxBitRate);
 	if (m_SettingsUI!=0)
@@ -470,7 +470,7 @@ void CDasherInterface::SetDasherDimensions(bool Value)
 	}
 	if (m_SettingsUI!=0) {
 	         m_SettingsUI->SetDasherDimensions(Value);
-	}	  
+	}
 }
 
 
@@ -530,7 +530,7 @@ const std::string& CDasherInterface::GetTrainFile()
 void CDasherInterface::GetAlphabets(std::vector< std::string >* AlphabetList)
 {
 	if (!m_AlphIO)
-		m_AlphIO = new CAlphIO(m_SystemLocation, m_UserLocation);	
+		m_AlphIO = new CAlphIO(m_SystemLocation, m_UserLocation);
 	m_AlphIO->GetAlphabets(AlphabetList);
 }
 
@@ -539,7 +539,7 @@ const CAlphIO::AlphInfo& CDasherInterface::GetInfo(const std::string& AlphID)
 {
 	if (!m_AlphIO)
 		m_AlphIO = new CAlphIO(m_SystemLocation, m_UserLocation);
-	
+
 	return m_AlphIO->GetInfo(AlphID);
 }
 
@@ -548,7 +548,7 @@ void CDasherInterface::SetInfo(const CAlphIO::AlphInfo& NewInfo)
 {
 	if (!m_AlphIO)
 		m_AlphIO = new CAlphIO(m_SystemLocation, m_UserLocation);
-	
+
 	m_AlphIO->SetInfo(NewInfo);
 }
 
@@ -557,7 +557,7 @@ void CDasherInterface::DeleteAlphabet(const std::string& AlphID)
 {
 	if (!m_AlphIO)
 		m_AlphIO = new CAlphIO(m_SystemLocation, m_UserLocation);
-	
+
 	m_AlphIO->Delete(AlphID);
 }
 
@@ -601,16 +601,16 @@ void CDasherInterface::TrainFile(string Filename)
 {
 	if (Filename=="")
 		return;
-	
+
 	FILE* InputFile;
 	if ( (InputFile = fopen(Filename.c_str(), "r")) == (FILE*)0)
 		return;
-	
+
 	const int BufferSize = 1024;
 	char InputBuffer[BufferSize];
 	string StringBuffer;
 	int NumberRead;
-	
+
 	do {
 		NumberRead = fread(InputBuffer, 1, BufferSize-1, InputFile);
 		InputBuffer[NumberRead] = '\0';
@@ -637,7 +637,7 @@ void CDasherInterface::GetFontSizes(std::vector<int> *FontSizes)
   FontSizes->push_back(56);
   FontSizes->push_back(44);
 }
-  
+
 
 double CDasherInterface::GetCurCPM()
 {

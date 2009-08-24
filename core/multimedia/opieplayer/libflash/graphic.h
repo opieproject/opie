@@ -1,21 +1,21 @@
 /////////////////////////////////////////////////////////////
 // Flash Plugin and Player
 // Copyright (C) 1998 Olivier Debon
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-// 
+//
 ///////////////////////////////////////////////////////////////
 #ifndef _GRAPHIC_H_
 #define _GRAPHIC_H_
@@ -44,13 +44,13 @@ struct Gradient {
 
 struct FillStyleDef {
     FillType	 type;	// See enum FillType
-    
+
     // Solid
     Color		 color;
-    
+
     // Gradient
     Gradient	 gradient;
-    
+
     // Bitmap
     Bitmap		*bitmap;
     Matrix              bitmap_matrix;
@@ -73,7 +73,7 @@ struct Segment {
     int		 aa;
     long		 dX;
     long		 X;
-    
+
     struct Segment *next;
     struct Segment *nextValid;
 };
@@ -118,7 +118,7 @@ private:
 	Segment * progressSegments(Segment * curSegs, long y);
 	Segment * newSegments(Segment *curSegs, Segment *newSegs);
 	void      renderScanLine(long y, Segment *curSegs);
-		
+
 protected:
 	long	 clip(long &y, long &start, long &end);
 
@@ -153,7 +153,7 @@ public:
                             FillStyleDef *f0,
                             FillStyleDef *f1,
                             int aa);
-        
+
         void     drawPolygon(void);
 
 	void	 updateClippingRegion(Rect *);

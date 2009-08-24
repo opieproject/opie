@@ -181,7 +181,7 @@ void QIMPenMatch::processMatches( QIMPenCharMatchList &ml )
     } else {
 	if ( !ml.count() ) {
 #ifdef DEBUG_QIMPEN
-	    odebug << "** Failed" << oendl; 
+	    odebug << "** Failed" << oendl;
 #endif
 	    canErase = FALSE;
 	} else {

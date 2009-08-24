@@ -11,7 +11,7 @@ class ConfigDlg: public ConfigDlg_Base
     Q_OBJECT
 public:
     ConfigDlg( QWidget *parent = 0, const char *name = 0 );
-    
+
     // Search Settings
     void setConfig( const AbConfig& cnf );
     AbConfig getConfig();

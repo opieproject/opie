@@ -987,7 +987,7 @@ void Screen::setSelExtentXY(const int x, const int y)
 
 QString Screen::getSelText(const BOOL preserve_line_breaks)
 {
-  if (sel_begin == -1) 
+  if (sel_begin == -1)
      return QString::null; // Selection got clear while selecting.
 
   int *m;			// buffer to fill.
@@ -1017,7 +1017,7 @@ QString Screen::getSelText(const BOOL preserve_line_breaks)
 	    {
 	      eol = sel_BR % columns + 1;
 	    }
-	  
+
 	  while (hX < eol)
 	    {
 	      m[d++] = hist.getCell(hY, hX++).c;
@@ -1114,7 +1114,7 @@ QString Screen::getSelText(const BOOL preserve_line_breaks)
     {
       qc[i] = m[i];
     }
-  
+
   QString res(qc, d);
 
   delete m;

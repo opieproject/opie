@@ -453,7 +453,7 @@ void MainWindow::fileOpen()
 
 void MainWindow::fileRevert()
 {
-    odebug << "QMainWindow::fileRevert needs to be done" << oendl; 
+    odebug << "QMainWindow::fileRevert needs to be done" << oendl;
 }
 
 void MainWindow::fileNew()
@@ -465,7 +465,7 @@ void MainWindow::fileNew()
 
 void MainWindow::insertTable()
 {
-    odebug << "MainWindow::insertTable() needs to be done" << oendl; 
+    odebug << "MainWindow::insertTable() needs to be done" << oendl;
 }
 
 void MainWindow::newFile( const DocLnk &dl )
@@ -484,7 +484,7 @@ void MainWindow::openFile( const DocLnk &dl )
     FileManager fm;
     QString txt;
     if ( !fm.loadFile( dl, txt ) )
-  odebug << "couldn't open file" << oendl; 
+  odebug << "couldn't open file" << oendl;
     clear();
     editorStack->raiseWidget( editor );
     editor->viewport()->setFocus();

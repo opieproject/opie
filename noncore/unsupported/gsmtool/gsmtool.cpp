@@ -18,9 +18,9 @@
 using namespace gsmlib;
 
 
-/* 
- *  Constructs a GSMTool which is a child of 'parent', with the 
- *  name 'name' and widget flags set to 'f' 
+/*
+ *  Constructs a GSMTool which is a child of 'parent', with the
+ *  name 'name' and widget flags set to 'f'
  */
 GSMTool::GSMTool( QWidget* parent,  const char* name, WFlags fl )
     : GSMToolBase( parent, name, fl )
@@ -41,10 +41,10 @@ GSMTool::GSMTool( QWidget* parent,  const char* name, WFlags fl )
 	connect(SMSStoreList, SIGNAL(activated(int)), this, SLOT(doSMSStoreChanged()));
 	connect(SMSViewType, SIGNAL(activated(int)), this, SLOT(doSMSTypeChanged()));
 	connect(SMSList, SIGNAL(selectionChanged(QListViewItem*)), this, SLOT(doSelectedSMSChanged(QListViewItem*)));
-	timerid = -1; // Is this not possible normally? 
+	timerid = -1; // Is this not possible normally?
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 GSMTool::~GSMTool()
@@ -90,7 +90,7 @@ void GSMTool::doTabChanged()
 {
 	int index = TabWidget2->currentPageIndex();
 	qDebug("tab changed to %d", index);
-	
+
 	if (index == 1) {
 		timerid = startTimer(5000);
 		timerEvent(NULL);
@@ -141,7 +141,7 @@ void GSMTool::timerEvent( QTimerEvent * )
 			dB->setEnabled(TRUE);
 			SigStrLabel->setEnabled(TRUE);
 		}
-	}	
+	}
 }
 
 void GSMTool::doSMSStoreChanged()
@@ -159,7 +159,7 @@ void GSMTool::doSMSStoreChanged()
 		sms_store = NULL;
 		qDebug("get store failed");
 	}
-	
+
 	SMSList->setEnabled(!(sms_store == NULL));
 	NewSMSSaveButton->setEnabled(!(sms_store == NULL));
 	doSMSTypeChanged();
@@ -171,7 +171,7 @@ void GSMTool::doSMSTypeChanged()
 	qDebug("direction %s\n", direction?"outgoing":"incoming");
 	if (direction)
 		SMSSendButton->setText("Send");
-	else 
+	else
 		SMSSendButton->setText("Reply");
 
 	SMSList->clear();
@@ -189,15 +189,15 @@ void GSMTool::doSMSTypeChanged()
 		qDebug("Status %d", e->status());
 		SMSMessageRef message = e->message();
 		qDebug("Got message.");
-		
+
 		//		qDebug(message->toString().c_str());
 		if (direction == message->messageType()) {
 			qDebug("yes\n");
 			char buf[3];
 			snprintf(buf, 3,  "%d", e->index());
 			new QListViewItem(SMSList, message->address()._number.c_str(), message->serviceCentreTimestamp().toString().c_str(), buf);
-		} 
-	}		
+		}
+	}
 }
 
 void GSMTool::doSelectedSMSChanged(QListViewItem *item)
@@ -212,9 +212,9 @@ void GSMTool::doSelectedSMSChanged(QListViewItem *item)
 		return;
 	}
 	/* ARGH. This sucks. Surely there's an app-private pointer in the
-	   QListViewItem that I've failed to notice? 
+	   QListViewItem that I've failed to notice?
 
-	SMSMessageRef message = *(SMSMessageRef*)item->private;   
+	SMSMessageRef message = *(SMSMessageRef*)item->private;
 	*/
 	qDebug("item %p\n", item);
 
@@ -248,7 +248,7 @@ void GSMTool::doSMSSendButton()
 
 	if (direction)
 		NewSMSText->setText(message->userData().c_str());
-	else 
+	else
 		NewSMSText->setText("");
 	NewSMSToBox->insertItem(message->address()._number.c_str(), 0);
 	TabWidget2->setCurrentPage(3);
@@ -274,7 +274,7 @@ void GSMTool::doNewSMSSaveButton()
         SMSMessageRef m = new SMSSubmitMessage (msgtext, dest);
 	sms_store->insert(m);
 	free((void *)msgtext);
-		
+
 }
 void GSMTool::doNewSMSSendButton()
 {
@@ -290,14 +290,14 @@ void GSMTool::doNewSMSSendButton()
 	try {
 		m.setAt(new GsmAt(*me));
 		m.send();
-		
+
 		NewSMSStatusLabel->setText("Message sent.");
 	} catch (GsmException &ge) {
 		NewSMSStatusLabel->setText("Failed.");
 		qDebug(ge.what());
 	}
 	free((void *)msgtext);
-		
+
 
 }
 
@@ -318,7 +318,7 @@ void GSMTool::doSMSDeleteButton()
 	if (e != sms_store->end()) {
 		qDebug("message is %s\n", e->message()->userData().c_str());
 			sms_store->erase(e);
-		
+
 	}
 	doSMSTypeChanged();
 }
@@ -341,7 +341,7 @@ void GSMTool::doScanButton()
 		new QListViewItem(NetworkList, "Scan failed...");
 		return;
 	}
-	
+
 	NetworkList->clear();
 	for (vector<OPInfo>::iterator i = opis.begin(); i != opis.end(); ++i) {
 		char *statustext;
@@ -350,8 +350,8 @@ void GSMTool::doScanButton()
 		case UnknownOPStatus:
 			statustext = "unknown";
 			break;
-			
-		case CurrentOPStatus: 
+
+		case CurrentOPStatus:
 			statustext = "current";
 			break;
 
@@ -362,7 +362,7 @@ void GSMTool::doScanButton()
 		case ForbiddenOPStatus:
 			statustext = "forbidden";
 			break;
-		       
+
 		default:
 			statustext = "(ERROR)";
 		}
@@ -399,7 +399,7 @@ void GSMTool::doConnectButton()
 		qDebug("lockDevice() failed\n");
 		MfrText->setText("Lock port failed");
 	};
-	
+
 	qDebug("Device name is %s\n", devicename);
 
 	try {

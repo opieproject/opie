@@ -158,7 +158,7 @@ void DateBookSettings::setViews( QList<Opie::Datebook::View> *views )
             viewstabLayout->addWidget( widget );
         m_viewConfigs.append( widget ); // must add even if null
         comboDefaultView->insertItem( it.current()->name() );
-    }    
+    }
     QSpacerItem* spacer_3 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     viewstabLayout->addItem( spacer_3 );
 }
@@ -171,7 +171,7 @@ void DateBookSettings::saveViews()
         if(widget)
             it.current()->readConfigWidget( widget );
         i++;
-    }    
+    }
 }
 
 void DateBookSettings::setManagers( const DescriptionManager &descMan, const LocationManager &locMan )
@@ -251,7 +251,7 @@ void DateBookSettings::slot12Hour( int i )
         if ( spinStart->suffix().contains( tr("AM"), FALSE ) ) {
             if ( oldtime == 12 && i == 11 || oldtime == 11 && i == 12 )
                 spinStart->setSuffix( tr(":00 PM") );
-        } 
+        }
         else {
             if ( oldtime == 12 && i == 11 || oldtime == 11 && i == 12 )
                 spinStart->setSuffix( tr(":00 AM") );
@@ -268,7 +268,7 @@ void DateBookSettings::init()
         spinStart->setValue( 12 );
         spinStart->setSuffix( tr(":00 AM") );
         oldtime = 12;
-    } 
+    }
     else {
         spinStart->setMinValue( 0 );
         spinStart->setMaxValue( 23 );
@@ -283,7 +283,7 @@ void DateBookSettings::slotChangeClock( bool whichClock )
     if ( ampm && spinStart->suffix().contains( tr("AM"), FALSE ) ) {
         if ( saveMe == 12 )
             saveMe = 0;
-    } 
+    }
     else if ( ampm && spinStart->suffix().contains( tr("PM"), FALSE )  ) {
         if ( saveMe != 12 )
             saveMe += 12;

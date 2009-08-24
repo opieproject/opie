@@ -70,12 +70,12 @@ TVEditView::TVEditView(TableState *s, DataElem *d, QWidget* parent,
 #endif
 }
 
-TVEditView::~TVEditView() 
+TVEditView::~TVEditView()
 {
 }
 
 /*! set up the widgets in the grid, Set up initial values */
-void TVEditView::setData(TableState *t, DataElem *d) 
+void TVEditView::setData(TableState *t, DataElem *d)
 {
 
     /* TODO need to somehow clear old children... a delete of each
@@ -177,7 +177,7 @@ void TVEditView::toggleEnabled(int i) {
     }
 }
 
-bool TVEditView::openEditItemDialog(TableState *ts, DataElem *d, 
+bool TVEditView::openEditItemDialog(TableState *ts, DataElem *d,
 					QWidget *parent)
 {
     int i;

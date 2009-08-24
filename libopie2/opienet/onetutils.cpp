@@ -8,7 +8,7 @@
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
  - .   .-<_>     .<>         Foundation; version 2 of the License.
-     ._= =}       :           
+     ._= =}       :
     .%`+i>       _;_.
     .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;

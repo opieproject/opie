@@ -35,7 +35,7 @@ State_t USBRun::detectState( void ) {
           }
         }
       }
-    } 
+    }
 
     Log(("Assigned %p\n", NC->assignedInterface() ));
 

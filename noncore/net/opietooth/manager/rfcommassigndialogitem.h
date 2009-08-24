@@ -8,18 +8,18 @@
 namespace OpieTooth {
 
     class RfcommDialogItem : public RfcommDialogItemBase {
-	
+
 	Q_OBJECT
 
     public:
 	RfcommDialogItem( QWidget* parent = 0,  const char* name = 0, WFlags fl = 0 );
 	~RfcommDialogItem();
-        
+
 	// number if the rfcomm device
 	int ident();
 	// devices mac address
 	QString mac();
-	int channel();	
+	int channel();
 	QString comment();
     bool isBind();
 
@@ -33,7 +33,7 @@ namespace OpieTooth {
 
 
 	int m_ident;
-   
+
 };
 
 

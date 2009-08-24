@@ -109,7 +109,7 @@ OPimBackendOccurrence::List ODateBookAccessBackend_Holiday::occurrences( const Q
 }
 
 OPimBackendOccurrence::List ODateBookAccessBackend_Holiday::effectiveNonRepeatingEvents( const QDate& from,
-                                                                                 const QDate& to )const 
+                                                                                 const QDate& to )const
 {
     OPimBackendOccurrence::List boc_lst;
     QMap<QDate,QStringList> items;

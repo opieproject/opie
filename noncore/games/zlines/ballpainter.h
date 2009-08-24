@@ -28,13 +28,13 @@ email                : Roman.Razilov@gmx.de
 class BallPainter : public QObject
 {
 Q_OBJECT
-	
+
 	enum Pixmaps {
 		Field,
 		Balls,
 		Fire
 	};
-	QPixmap *pixmap( enum Pixmaps ); 
+	QPixmap *pixmap( enum Pixmaps );
 	QPixmap* imgCash[NCOLORS][PIXTIME + FIREBALLS + BOOMBALLS + 1];
 	QPixmap* backgroundPix;
 	QPixmap* firePix[FIREPIX];
@@ -42,7 +42,7 @@ Q_OBJECT
 	void createPixmap();
 
 public:
-	
+
 	BallPainter();
 	~BallPainter();
 

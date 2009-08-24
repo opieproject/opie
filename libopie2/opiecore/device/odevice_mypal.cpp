@@ -245,7 +245,7 @@ bool MyPal::setDisplayStatus ( bool on )
             res = ( ::write( fd, &buf[0], 2 ) == 0 );
             ::close( fd );
         }
-    } 
+    }
     else {
         res = OAbstractMobileDevice::setDisplayStatus(on);
     }

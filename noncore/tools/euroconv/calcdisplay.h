@@ -3,8 +3,8 @@
  * File:        calcdisplay.h
  *
  * Description: Header file for the class LCDDisplay
- *              
- *               
+ *
+ *
  * Authors:     Eric Santonacci <Eric.Santonacci@talc.fr>
  *
  * Requirements:    Qt
@@ -29,7 +29,7 @@ class LCDDisplay : public QHBox{
 Q_OBJECT
 public:
     LCDDisplay( QWidget *parent=0, const char *name=0 );
-    
+
 public slots:
     void setValue(double);
     void swapLCD(void);
@@ -43,11 +43,11 @@ private:
     QHGroupBox  *grpbxTop;
     QComboBox   *cbbxTop;
     QLCDNumber  *lcdTop;
-    
+
     QHGroupBox  *grpbxBottom;
     QComboBox   *cbbxBottom;
     QLCDNumber  *lcdBottom;
-    
+
     QPushButton *btnSwap;
 
     int iCurrentLCD; // 0=top, 1=bottom
@@ -55,7 +55,7 @@ private:
     double  Euro2x(int iIndex, double dValue);
     double  x2Euro(int iIndex, double dValue);
 
-    
+
 };
 
 #endif // CALCDISPLAY_H

@@ -38,13 +38,13 @@ public:
 
  signals:
      void editEvent( const EffectiveEvent &e );
-     
+
 private slots:
     void editEventSlot( const EffectiveEvent &e );
     void editMe();
 
  private:
-  
+
     QString ampmTime( QTime );
     QString differDate( QDate date );
     const EffectiveEvent event;

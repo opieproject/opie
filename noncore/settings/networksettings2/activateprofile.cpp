@@ -12,7 +12,7 @@ ActivateProfile::ActivateProfile( const char * Interface ) :
     for( NetworkSetup * NC = Possible.first();
          NC;
          NC = Possible.next() ) {
-      Profiles_LB->insertItem( NC->devicePixmap(), 
+      Profiles_LB->insertItem( NC->devicePixmap(),
                                NC->name() );
     }
 }

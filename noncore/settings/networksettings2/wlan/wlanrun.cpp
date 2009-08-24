@@ -35,7 +35,7 @@ State_t WLanRun::detectState( void ) {
           }
         }
       }
-    } 
+    }
 
     if( ( Run = NC->assignedInterface() ) ) {
       // we already have an interface assigned -> still present ?

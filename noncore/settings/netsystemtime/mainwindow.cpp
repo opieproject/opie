@@ -374,7 +374,7 @@ void MainWindow::slotNtpFinished( OProcess *p )
         QString grpname = QString( "lookup_" ).append( QString::number( lookupCount ) );
         config.setGroup( grpname );
         lookupCount++;
-        
+
         if(predictTab)
         {
             predictTab->setShiftPerSec( (int)(timeShift / secsSinceLast) );

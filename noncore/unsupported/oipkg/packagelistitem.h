@@ -28,8 +28,8 @@ class PackageListItem : public ListViewItemOipkg
 public:
   PackageListItem(ListViewItemOipkg *parent, QString name, Type ittype);
   PackageListItem(
-		  ListViewItemOipkg *parent, 
-		  OipkgPackage *pack, 
+		  ListViewItemOipkg *parent,
+		  OipkgPackage *pack,
 		  PackageManagerSettings *s);
   PackageListItem(QListView*, OipkgPackage*, PackageManagerSettings*);
   ~PackageListItem();

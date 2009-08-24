@@ -121,7 +121,7 @@ void BtObex::send( const QString& fileName, const QString& bdaddr) {
  */
 void BtObex::slotFoundServices(const QString&, Services::ValueList svcList)
 {
-    QValueList<OpieTooth::Services>::Iterator it; 
+    QValueList<OpieTooth::Services>::Iterator it;
     QMap<int, QString> classList; //The classes list
     QMap<int, QString>::Iterator classIt; //Iterator in the class list
     int portNum = -1; //The desired port number
@@ -129,7 +129,7 @@ void BtObex::slotFoundServices(const QString&, Services::ValueList svcList)
     if (svcList.isEmpty()) {
         QMessageBox::critical(NULL, tr("Object send"), tr("No services found"));
         emit error(-1);
-        return;    
+        return;
     }
     for (it = svcList.begin(); it != svcList.end(); it++) {
         classList = (*it).classIdList();
@@ -138,13 +138,13 @@ void BtObex::slotFoundServices(const QString&, Services::ValueList svcList)
             continue;
 ////We really need symbolic names for service IDs
         //Ok, we have found the object push service
-        if (classIt.key() == 4357) { 
+        if (classIt.key() == 4357) {
             portNum = (*it).protocolDescriptorList().last().port();
             break;
         }
     }
     if (portNum == -1) {
-        QMessageBox::critical(NULL, tr("Object send"), 
+        QMessageBox::critical(NULL, tr("Object send"),
             tr("No OBEX Push service"));
         emit error(-1);
         return;
@@ -192,11 +192,11 @@ void BtObex::sendNow(){
 }
 
 void BtObex::slotExited(OProcess* proc ){
-    odebug << proc->name() << " exited with result " 
+    odebug << proc->name() << " exited with result "
            << proc->exitStatus() << oendl;
     if (proc == m_rec )  // receive process
         received();
-    
+
 }
 void BtObex::slotStdOut(OProcess* proc, char* buf, int len){
     if ( proc == m_rec ) { // only receive

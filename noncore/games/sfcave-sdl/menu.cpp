@@ -137,7 +137,7 @@ Menu :: Menu( SFCave *p )
 	item = sounds->addMenuOption( "Back", MENU_BACK );
 	item->setNextMenu( options, false );
 	soundsMenu->setNextMenu( sounds );
-	
+
 	// Custom Menu
 	Menu *custom = new Menu( gameDifficulty );
 	Menu *updown = new Menu( custom );

@@ -38,7 +38,7 @@
 //  -------------
 //
 // This file is not part of the Qt API.  It exists for the convenience
-// of qapplication_qws.cpp and qgfxvnc_qws.cpp.  This header file may 
+// of qapplication_qws.cpp and qgfxvnc_qws.cpp.  This header file may
 // change from version to version without notice, or even be removed.
 //
 // We mean it.

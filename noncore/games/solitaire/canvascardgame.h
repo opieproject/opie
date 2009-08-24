@@ -45,7 +45,7 @@ public:
 	CardGame(0,numOfDecks),
 	moved(FALSE),
 	moving(NULL),
-	alphaCardPile( NULL ), 
+	alphaCardPile( NULL ),
 	cardXOff(0), cardYOff(0),
 	snapOn(snap),
 	numberToDraw(1) { }
@@ -62,7 +62,7 @@ public:
     virtual void gameWon();
     virtual bool haveWeWon() { return FALSE; }
 
-    virtual bool mousePressCard(Card *card, QPoint p) { Q_UNUSED(card); Q_UNUSED(p); return FALSE; }  
+    virtual bool mousePressCard(Card *card, QPoint p) { Q_UNUSED(card); Q_UNUSED(p); return FALSE; }
     virtual void mouseReleaseCard(Card *card, QPoint p) { Q_UNUSED(card); Q_UNUSED(p); }
 
     void cancelMoving() { moving = NULL; }

@@ -33,8 +33,8 @@
 #include <qvaluelist.h>
 
 class QVBoxLayout;
-class QHBoxLayout; 
-class QGridLayout; 
+class QHBoxLayout;
+class QGridLayout;
 class QListView;
 class QListViewItem;
 class QPushButton;
@@ -46,9 +46,9 @@ typedef struct {
    QString year;
    QString file;
 } etext;
-   
 
-class LibraryDialog : public QDialog { 
+
+class LibraryDialog : public QDialog {
     Q_OBJECT
 
 public:
@@ -71,26 +71,26 @@ public:
     int i_binary;
     bool useSmallInterface;
 bool indexLoaded;
-    QPushButton *cancel,*DownloadAll;     
-    QCheckBox *checkBox,*httpBox,*authBox;    
-//    QCheckBox * httpBox;    
-    
+    QPushButton *cancel,*DownloadAll;
+    QCheckBox *checkBox,*httpBox,*authBox;
+//    QCheckBox * httpBox;
+
     QString filename;
     QString downDir;
     int ftpNumb;
     int i;
-    QString year,title,number,file,author;   
+    QString year,title,number,file,author;
     QString DlglistItemNumber,DlglistItemFile,DlglistItemYear,DlglistItemTitle,NewlistItemFile;
-    QString m_getFilePath;        
-    QString Edir;     
-            
+    QString m_getFilePath;
+    QString Edir;
+
     QString index;
     QString IDontKnowWhy;
     QString local_library;
     QString local_index;
     QString File_Name;
     QString proxy_http;
-    int doitAll;      
+    int doitAll;
     QString texter;
 //    CConfigFile *config;
     void parseSearchResults( QString resultStr);
@@ -113,15 +113,15 @@ public slots:
     void saveConfig();
     bool download_Etext();
 		bool download_newEtext();
-		
+
     void onButtonSearch();
     bool onButtonDownload();
 
 //    bool UnzipIt( QString fileName);
-   void comboSelect(int index);        
+   void comboSelect(int index);
 protected slots:
-    
-    
+
+
 protected:
 
   QValueList<etext> etextLibrary;

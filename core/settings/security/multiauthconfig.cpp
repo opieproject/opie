@@ -83,9 +83,9 @@ class ToolButton : public QToolButton {
     m_skipTime->setSuffix( tr(" min") );
     m_skipTime->setMinValue(1);
     m_skipTime->setMaxValue(99);
-    boxLayout->addWidget( hb );     
+    boxLayout->addWidget( hb );
     connect(m_skipEnabled, SIGNAL(toggled(bool)), this, SLOT(toggleResumeOptions(bool)));
-    
+
     m_nbBox = new QGroupBox(0, Qt::Vertical, tr("Multiple plugin authentication"), this, "nb box");
     vb->addWidget(m_nbBox);
     QHBoxLayout *nbBoxLayout = new QHBoxLayout( m_nbBox->layout() );
@@ -215,16 +215,16 @@ static void test_and_start() {
         m_mainTW->addTab(m_generalConfig, "SettingsIcon", tr( "Authentication") );
 
     }
-    
+
     m_loginAvailable = QFile::exists( QPEApplication::qpeDir() + "bin/opie-login" );
-    
+
     if( m_loginAvailable ) {
         // login settings page
         m_loginWidget = new LoginBase(m_mainTW, "login config widget");
         if ( m_loginAvailable )
             m_mainTW->addTab(m_loginWidget, "security/users", tr( "Login") );
     }
-        
+
     // sync settings page
     m_syncWidget = new SyncBase( m_mainTW, "sync config widget" );
     m_mainTW->addTab(m_syncWidget, "security/sync", tr( "Sync") );
@@ -306,16 +306,16 @@ bool MultiauthConfig::validate( bool testing )
     int count = countEnabledPlugins();
     if( count == 0 && ( m_generalConfig->m_onStart->isChecked() || m_generalConfig->m_onResume->isChecked() ) ) {
         QString msg;
-        msg = tr( "<p>Authentication is enabled, but no individual plugins have been enabled.</p>" ); 
+        msg = tr( "<p>Authentication is enabled, but no individual plugins have been enabled.</p>" );
         if( testing )
             msg += tr( "<p>Please enable one or more authentication plugins.</p>" );
         else
             msg += tr( "<p>Please enable one or more authentication plugins, or turn off authentication on start / resume.</p>" );
-            
+
         QMessageBox::critical( this, tr( "No plugins enabled" ), msg );
         return false;
-    }   
-    
+    }
+
     return true;
 }
 
@@ -377,7 +377,7 @@ void MultiauthConfig::readConfig()
         m_generalConfig->m_explanScreens->setChecked( pcfg->readBoolEntry( "explanScreens", true ) );
         m_generalConfig->m_skipEnabled->setChecked( pcfg->readBoolEntry( "suspendTime", false ) );
         m_generalConfig->m_skipTime->setValue( pcfg->readNumEntry( "suspendTimeMins", 2 ) );
-        
+
         pcfg->setGroup( "Plugins" );
         m_excludePlugins = pcfg->readListEntry( "ExcludePlugins", ',' );
         m_allPlugins = pcfg->readListEntry( "AllPlugins", ',' );
@@ -576,7 +576,7 @@ int MultiauthConfig::countEnabledPlugins() {
 
 void MultiauthConfig::checkMultiEnabled() {
     int count = countEnabledPlugins();
-    m_generalConfig->m_nbBox->setEnabled( count > 1 );    
+    m_generalConfig->m_nbBox->setEnabled( count > 1 );
 }
 
 /// loads each multiauth plugin

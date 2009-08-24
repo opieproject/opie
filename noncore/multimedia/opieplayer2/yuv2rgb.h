@@ -112,7 +112,7 @@ struct yuv2rgb_s {
   void             *table_mmx;
 
   uint8_t          *cmap;
-  scale_line_func_t scale_line;  
+  scale_line_func_t scale_line;
 } ;
 
 /*
@@ -122,7 +122,7 @@ struct yuv2rgb_s {
 struct yuv2rgb_factory_s {
   yuv2rgb_t* (*create_converter) (yuv2rgb_factory_t *this);
 
-  /* 
+  /*
    * set color space conversion levels
    * for all converters produced by this factory
    */
@@ -158,7 +158,7 @@ struct yuv2rgb_factory_s {
 
 yuv2rgb_factory_t *yuv2rgb_factory_init (int mode, int swapped, uint8_t *colormap);
 
-                   
+
 /*
  * internal stuff below this line
  */

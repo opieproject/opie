@@ -107,7 +107,7 @@ private:
 
     MineState st;
     MineField *field;
-    
+
     static QPixmap* knownField;
     static QPixmap* unknownField;
     static QPixmap* flag_pix;
@@ -292,7 +292,7 @@ MineField::MineField( QWidget* parent, const char* name )
     setState( GameOver );
 
     setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Maximum ) );
-    
+
     setFocusPolicy( QWidget::NoFocus );
 
     holdTimer = new QTimer( this );
@@ -354,7 +354,7 @@ void MineField::setup( int level )
     for ( i = 0; i < numCols*numRows; i++ )
 	mines[i] = new Mine( this );
 
-    
+
     nonminecount = numRows*numCols - minecount;
     mineguess = minecount;
     emit mineCount( mineguess );
@@ -368,13 +368,13 @@ void MineField::setup( int level )
     updateGeometry();
 }
 
-void MineField::drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph ) 
+void MineField::drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph )
 {
     int c1 = clipx / cellSize;
     int c2 = ( clipx + clipw - 1 ) / cellSize;
     int r1 = clipy / cellSize;
     int r2 = ( clipy + cliph - 1 ) / cellSize;
-    
+
     for ( int c = c1; c <= c2 ; c++ ) {
 	for ( int r = r1; r <= r2 ; r++ ) {
 	    int x = c * cellSize;
@@ -411,7 +411,7 @@ int MineField::findCellSize()
     int w = availableRect.width() - 2;
     int h = availableRect.height() - 2;
     int cellsize;
-    
+
     cellsize = QMIN( w/numCols, h/numRows );
     cellsize = QMIN( QMAX( cellsize, minGrid ), maxGrid );
     return cellsize;
@@ -421,10 +421,10 @@ int MineField::findCellSize()
 void MineField::setCellSize( int cellsize )
 {
     int b = 2;
-    
+
     int w2 = cellsize*numCols;
     int h2 = cellsize*numRows;
-    
+
     int w = QMIN( availableRect.width(), w2+b );
     int h = QMIN( availableRect.height(), h2+b );
 
@@ -439,7 +439,7 @@ void MineField::setCellSize( int cellsize )
 	 availableRect.width() - w > style().scrollBarExtent().width() ) {
 	w += style().scrollBarExtent().width();
     }
-    
+
     setGeometry( availableRect.x() + (availableRect.width()-w)/2,
 	    availableRect.y() + (availableRect.height()-h)/2, w, h );
     cellSize = cellsize;
@@ -485,8 +485,8 @@ void MineField::contentsMouseReleaseEvent( QMouseEvent* e )
     int r = e->pos().y() / cellSize;
     if ( onBoard( r, c ) && c == currCol && r == currRow )
 	cellClicked( r, c );
-    
-    
+
+
     if ( flagAction == FlagNext ) {
 	flagAction = NoAction;
     }
@@ -497,11 +497,11 @@ void MineField::contentsMouseReleaseEvent( QMouseEvent* e )
 /*
  state == Waiting means no "hold"
 
- 
+
 */
 void MineField::cellPressed( int row, int col )
 {
-    if ( state() == GameOver ) 
+    if ( state() == GameOver )
 	return;
     currRow = row;
     currCol = col;
@@ -607,7 +607,7 @@ void MineField::updateMine( int row, int col )
 
     bool wasFlagged = m->state() == Mine::Flagged;
     bool wasEmpty =  m->state() == Mine::Empty;
-    
+
     m->activate( flagAction == NoAction );
 
     if ( m->state() == Mine::Exploded ) {

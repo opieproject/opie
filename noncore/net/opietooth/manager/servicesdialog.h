@@ -17,7 +17,7 @@ namespace OpieTooth {
         Q_OBJECT
     public:
         ServicesDialog(const QString& conf,
-            QWidget* parent = 0, const char* name = 0, bool modal = TRUE, 
+            QWidget* parent = 0, const char* name = 0, bool modal = TRUE,
             WFlags fl = 0);
         ~ServicesDialog();
     public:

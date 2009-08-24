@@ -23,8 +23,8 @@ public:
 
     DocLnk file() const {
         return fl;
-    } 
-    
+    }
+
 
     signals:
     void clicked(const DocLnk &);
@@ -32,13 +32,13 @@ public:
 protected:
     void paintEvent( QPaintEvent * );
     void resizeEvent(QResizeEvent *);
-    
+
     void mouseReleaseEvent(QMouseEvent* event);
 
 private:
     QPixmap pixmap;
     QLabel  *description;
-    DocLnk fl;    
+    DocLnk fl;
 };
 
 
@@ -52,7 +52,7 @@ public:
 
     DocLnk file() const {
         return fl;
-    } 
+    }
 private:
     DocLnk fl;
 };
@@ -119,7 +119,7 @@ private:
     void updateSizes();
 
 
-    CURRENT_VIEW    cView;  
+    CURRENT_VIEW    cView;
     int     count;
 
     QListView   *detailed;

@@ -64,7 +64,7 @@ BOOL CSoundFile::ReadSTM(const BYTE *lpStream, DWORD dwMemLength)
 {
 	STMHEADER *phdr = (STMHEADER *)lpStream;
 	DWORD dwMemPos = 0;
-	
+
 	if ((!lpStream) || (dwMemLength < sizeof(STMHEADER))) return FALSE;
 	if ((phdr->filetype != 2) || (phdr->unused != 0x1A)
 	 || ((strnicmp(phdr->trackername, "!SCREAM!", 8))

@@ -119,7 +119,7 @@ CLayoutPrefs::CLayoutPrefs( QWidget* parent,  const char* name, WFlags fl )
     //    Inverse->setText( tr( "Inverse" ) );
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 CLayoutPrefs::~CLayoutPrefs()
@@ -132,7 +132,7 @@ CLayoutPrefs::~CLayoutPrefs()
 CLayoutPrefs2::CLayoutPrefs2( int w, QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
-    
+
     QVBoxLayout* vb = new QVBoxLayout(this);
     QGridLayout* gl = new QGridLayout(vb, 4, 5);
 
@@ -274,7 +274,7 @@ CLayoutPrefs2::CLayoutPrefs2( int w, QWidget* parent,  const char* name, WFlags 
 CLayoutPrefs2::CLayoutPrefs2( int w, QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
-    
+
     QVBoxLayout* vb = new QVBoxLayout(this);
     QGridLayout* gl = new QGridLayout(vb, 4, 3);
 
@@ -488,7 +488,7 @@ CLayoutPrefs2::CLayoutPrefs2( QWidget* parent,  const char* name, WFlags fl )
     vb->addStretch();
 }
 */
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 CLayoutPrefs2::~CLayoutPrefs2()
@@ -500,7 +500,7 @@ CLayoutPrefs2::~CLayoutPrefs2()
 CPluckerPrefs::CPluckerPrefs( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
-    Layout11 = new QVBoxLayout(this); 
+    Layout11 = new QVBoxLayout(this);
     Layout11->setMargin( 0 );
 
     Depluck = new QCheckBox( this, "Depluck" );
@@ -527,7 +527,7 @@ CMiscPrefs::CMiscPrefs( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
 
-    QVBoxLayout* Layout11 = new QVBoxLayout(this); 
+    QVBoxLayout* Layout11 = new QVBoxLayout(this);
     Layout11->setMargin( 0 );
 
 

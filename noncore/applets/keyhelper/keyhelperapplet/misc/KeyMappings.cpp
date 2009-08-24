@@ -131,7 +131,7 @@ void KeyMappings::assignUnicode(const QString& kind, const QString& ch)
 
 void KeyMappings::assignUnicode(int unicode)
 {
-	(*m_it).unicode = (*m_it).shift_unicode = 
+	(*m_it).unicode = (*m_it).shift_unicode =
 		(*m_it).ctrl_unicode = unicode;
 }
 

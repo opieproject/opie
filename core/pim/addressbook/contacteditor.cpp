@@ -1103,7 +1103,7 @@ void ContactEditor::slotName() {
 
     // Preserve suffix, since we don't use it in the full name box at the moment
     suffix = txtSuffix->text();
-    
+
     if ( QPEApplication::execDialog( dlgName ) ) {
          if ( txtLastName->text().contains( ' ', true ) )
              tmpName =  txtLastName->text() + ", " + txtFirstName->text() + " " + txtMiddleName->text();

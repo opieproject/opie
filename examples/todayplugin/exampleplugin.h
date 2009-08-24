@@ -31,7 +31,7 @@ public:
     bool excludeFromRefresh() const;
     void refresh();
     void reinitialize();
-private:    
+private:
     ExamplePluginWidget *m_widget;
 };
 

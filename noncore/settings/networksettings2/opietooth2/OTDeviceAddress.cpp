@@ -20,11 +20,11 @@ using namespace Opietooth2;
 //const bdaddr_t OTDeviceAddress::bdaddr_any = {{0,0,0,0,0,0}};
 //const bdaddr_t OTDeviceAddress::bdaddr_local = {{0, 0, 0, 0xff, 0xff, 0xff}};
 
-const OTDeviceAddress OTDeviceAddress::invalid = 
+const OTDeviceAddress OTDeviceAddress::invalid =
                 OTDeviceAddress();
-const OTDeviceAddress OTDeviceAddress::any = 
+const OTDeviceAddress OTDeviceAddress::any =
                 OTDeviceAddress("00:00:00:00:00:00");
-const OTDeviceAddress OTDeviceAddress::local =  
+const OTDeviceAddress OTDeviceAddress::local =
                 OTDeviceAddress("00:00:00:FF:FF:FF");
 
 OTDeviceAddress::OTDeviceAddress() {
@@ -33,7 +33,7 @@ OTDeviceAddress::OTDeviceAddress() {
     memset( &BDaddr, 0, sizeof( BDaddr ) );
 }
 
-OTDeviceAddress::OTDeviceAddress( const bdaddr_t& bdaddr, 
+OTDeviceAddress::OTDeviceAddress( const bdaddr_t& bdaddr,
                                   bool networkbyteorder) {
     setBDAddr( bdaddr, networkbyteorder );
 }
@@ -58,7 +58,7 @@ QString OTDeviceAddress::toString() const {
 
 }
 
-void OTDeviceAddress::setBDAddr( const bdaddr_t& bdaddr, 
+void OTDeviceAddress::setBDAddr( const bdaddr_t& bdaddr,
                                  bool networkbyteorder) {
     if (networkbyteorder) {
         baswap(&BDaddr, &bdaddr);
@@ -88,22 +88,22 @@ bool OTDeviceAddress::operator<(const OTDeviceAddress& b) const {
     else if ( IsValid && ! b.IsValid )
         return true;
 
-    if (BDaddr.b[5] != b.BDaddr.b[5]) 
+    if (BDaddr.b[5] != b.BDaddr.b[5])
         return (BDaddr.b[5] < b.BDaddr.b[5]);
 
-    if (BDaddr.b[4] != b.BDaddr.b[4]) 
+    if (BDaddr.b[4] != b.BDaddr.b[4])
         return (BDaddr.b[4] < b.BDaddr.b[4]);
 
-    if (BDaddr.b[3] != b.BDaddr.b[3]) 
+    if (BDaddr.b[3] != b.BDaddr.b[3])
         return (BDaddr.b[3] < b.BDaddr.b[3]);
 
-    if (BDaddr.b[2] != b.BDaddr.b[2]) 
+    if (BDaddr.b[2] != b.BDaddr.b[2])
         return (BDaddr.b[2] < b.BDaddr.b[2]);
 
-    if (BDaddr.b[1] != b.BDaddr.b[1]) 
+    if (BDaddr.b[1] != b.BDaddr.b[1])
         return (BDaddr.b[1] < b.BDaddr.b[1]);
 
-    if (BDaddr.b[0] != b.BDaddr.b[0]) 
+    if (BDaddr.b[0] != b.BDaddr.b[0])
         return (BDaddr.b[0] < b.BDaddr.b[0]);
 
     return false;

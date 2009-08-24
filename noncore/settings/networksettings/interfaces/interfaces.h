@@ -24,10 +24,10 @@ class Interfaces {
 public:
   Interfaces(QString useInterfacesFile = "/etc/network/interfaces");
   QStringList getInterfaceList();
-  
+
   bool isAuto(const QString &interface) const ;
   bool setAuto(const QString &interface, bool setAuto);
-  
+
   bool removeInterface();
   bool addInterface(const QString &interface, const QString &family, const QString &method);
   bool copyInterface(const QString &oldInterface, const QString &newInterface);
@@ -39,12 +39,12 @@ public:
   bool setInterfaceFamily(const QString &newName);
   QString getInterfaceMethod(bool &error);
   bool setInterfaceMethod(const QString &newName);
-  QString getInterfaceOption(const QString &option, bool &error); 
+  QString getInterfaceOption(const QString &option, bool &error);
   bool setInterfaceOption(const QString &option, const QString &value);
   bool removeInterfaceOption(const QString &option);
   bool removeInterfaceOption(const QString &option, const QString &value);
   bool removeAllInterfaceOptions();
-  
+
   bool setMapping(const QString &interface);
   bool removeMapping();
   void addMapping(const QString &options);
@@ -53,9 +53,9 @@ public:
   QString getMap(const QString &map, bool &error);
   bool setScript(const QString &argument);
   QString getScript(bool &error);
-		  
+
   bool write();
-  
+
 private:
   bool setStanza(const QString &stanza, const QString &option, QStringList::Iterator &iterator);
   bool removeStanza(QStringList::Iterator &stanza);
@@ -64,7 +64,7 @@ private:
   bool removeOption(const QStringList::Iterator &start, const QString &option);
   bool removeOption(const QStringList::Iterator &start, const QString &option, const QString &value);
   QString getOption(const QStringList::Iterator &start, const QString &option, bool &error);
-  
+
   QString interfacesFile;
   QStringList interfaces;
   QStringList::Iterator currentIface;

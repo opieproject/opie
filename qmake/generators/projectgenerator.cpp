@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of ProjectGenerator class.
 **
@@ -41,12 +41,12 @@
 #include <qregexp.h>
 
 QString project_builtin_regx() //calculate the builtin regular expression..
-{ 
+{
     QString ret;
     QStringList builtin_exts(".c");
     builtin_exts << Option::ui_ext << Option::yacc_ext << Option::lex_ext << ".ts";
     builtin_exts += Option::h_ext + Option::cpp_ext;
-    for(QStringList::Iterator ext_it = builtin_exts.begin(); 
+    for(QStringList::Iterator ext_it = builtin_exts.begin();
 	ext_it != builtin_exts.end(); ++ext_it) {
 	if(!ret.isEmpty())
 	    ret += "; ";
@@ -103,7 +103,7 @@ ProjectGenerator::init()
 			QDir d(dir);
 			d.setFilter(QDir::Dirs);
 			for(int i = 0; i < (int)d.count(); i++) {
-			    if(d[i] != "." && d[i] != "..") 
+			    if(d[i] != "." && d[i] != "..")
 				dirs.append(dir + d[i] + QDir::separator() + builtin_regex);
 			}
 		    }
@@ -131,7 +131,7 @@ ProjectGenerator::init()
 		    QDir d(dir);
 		    d.setFilter(QDir::Dirs);
 		    for(int i = 0; i < (int)d.count(); i++) {
-			if(d[i] != "." && d[i] != "..") 
+			if(d[i] != "." && d[i] != "..")
 			    dirs.append(dir + d[i] + QDir::separator() + regex);
 		    }
 		}
@@ -146,7 +146,7 @@ ProjectGenerator::init()
 	    }
 	    if(add_depend && !dir.isEmpty() && !v["DEPENDPATH"].contains(dir)) {
 		QFileInfo fi(dir);
-		if(fi.absFilePath() != QDir::currentDirPath()) 
+		if(fi.absFilePath() != QDir::currentDirPath())
 		    v["DEPENDPATH"] += fileFixify(dir);
 	    }
 	}
@@ -177,7 +177,7 @@ ProjectGenerator::init()
 				nd += QDir::separator();
 			    nd += d[i];
 			    fileFixify(nd);
-			    if(d[i] != "." && d[i] != ".." && !subdirs.contains(nd) && !out_file.endsWith(nd)) 
+			    if(d[i] != "." && d[i] != ".." && !subdirs.contains(nd) && !out_file.endsWith(nd))
 				subdirs.append(nd);
 			}
 		    }
@@ -261,7 +261,7 @@ ProjectGenerator::init()
 			if(no_qt_files && file_no_path.find(QRegExp("^q[a-z_0-9].h$")) != -1)
 			    no_qt_files = FALSE;
 			QString h_ext;
-			for(QStringList::Iterator hit = Option::h_ext.begin(); 
+			for(QStringList::Iterator hit = Option::h_ext.begin();
 			    hit != Option::h_ext.end(); ++hit) {
 			    if((*dep_it).endsWith((*hit))) {
 				h_ext = (*hit);
@@ -276,12 +276,12 @@ ProjectGenerator::init()
 			    }
 			    for(QStringList::Iterator cppit = Option::cpp_ext.begin();
 				cppit != Option::cpp_ext.end(); ++cppit) {
-				QString src((*dep_it).left((*dep_it).length() - h_ext.length()) + 
+				QString src((*dep_it).left((*dep_it).length() - h_ext.length()) +
 					    (*cppit));
 				if(QFile::exists(src)) {
 				    bool exists = FALSE;
 				    QStringList &srcl = v["SOURCES"];
-				    for(QStringList::Iterator src_it = srcl.begin(); 
+				    for(QStringList::Iterator src_it = srcl.begin();
 					src_it != srcl.end(); ++src_it) {
 					if((*src_it).lower() == src.lower()) {
 					    exists = TRUE;
@@ -359,10 +359,10 @@ ProjectGenerator::writeMakefile(QTextStream &t)
 	  << getWritableVar("INCLUDEPATH") << endl;
 
 	t << "# Input" << "\n";
-	t << getWritableVar("HEADERS") 
-	  << getWritableVar("INTERFACES") 
-	  << getWritableVar("LEXSOURCES") 
-	  << getWritableVar("YACCSOURCES") 
+	t << getWritableVar("HEADERS")
+	  << getWritableVar("INTERFACES")
+	  << getWritableVar("LEXSOURCES")
+	  << getWritableVar("YACCSOURCES")
 	  << getWritableVar("SOURCES")
 	  << getWritableVar("TRANSLATIONS");
     }
@@ -456,7 +456,7 @@ ProjectGenerator::getWritableVar(const QString &v, bool fixPath)
 	for(unsigned int i = 0; i < ret.length(); i++)
 	    spaces += " ";
 	join = vals.join(" \\\n" + spaces);
-    } 
+    }
 #if 0
     // ### Commented out for now so that project generation works.
     // Sam: it had to do with trailing \'s (ie considered continuation lines)

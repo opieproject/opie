@@ -13,9 +13,9 @@
 //#include <qdialog.h>
 #include <qmainwindow.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QComboBox;
 class QLabel;
 class QLineEdit;
@@ -26,7 +26,7 @@ class QStringList;
 
 class FormatterApp : public QMainWindow
 //public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
@@ -50,7 +50,7 @@ protected:
     bool doFdisk();
     int formatCheck(const QString &);
     int runCommand(const QString &);
-    
+
 protected slots:
     void cleanUp();
     void doFormat();
@@ -58,7 +58,7 @@ protected slots:
     bool doFsck();
     bool doFsckCheck();
 
-    void fsComboSelected(int); 
+    void fsComboSelected(int);
     void storageComboSelected(int );
     void deviceComboSelected(int );
 };

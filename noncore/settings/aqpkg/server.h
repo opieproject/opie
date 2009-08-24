@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -55,7 +55,7 @@ public:
     QString toString();
     QList<Package> &getPackageList();
     bool isServerActive() { return active; }
-    
+
     void setServerName( const QString &name ) { serverName = name; }
     void setServerUrl( const QString &url )   { serverUrl = url; }
     void setActive( bool val )             { active = val; }

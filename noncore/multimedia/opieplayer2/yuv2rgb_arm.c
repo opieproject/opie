@@ -68,7 +68,7 @@ static void arm_rgb16 (yuv2rgb_t *this, uint8_t * _dst,
 //		printf( "calling arm (%dx%d)\n", this-> dest_width, this-> dest_height );
 
 		convert_yuv420_rgb565 ( &d, _dst, this->dest_width, this->dest_height );
-		
+
 //		printf ( "arm done\n" );
     }
     else {
@@ -85,7 +85,7 @@ static void arm_rgb16 (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width >> 1, this->step_dx);
 		  scale_line (_pv, this->v_buffer,
 		this->dest_width >> 1, this->step_dx);
-		  scale_line (_py, this->y_buffer, 
+		  scale_line (_py, this->y_buffer,
 		this->dest_width, this->step_dx);
 
 		  dy = 0;
@@ -105,7 +105,7 @@ static void arm_rgb16 (yuv2rgb_t *this, uint8_t * _dst,
 
 		 RGB(1);
 		 DST1(1);
-		    
+
 		 RGB(2);
 		 DST1(2);
 
@@ -123,7 +123,7 @@ static void arm_rgb16 (yuv2rgb_t *this, uint8_t * _dst,
 
 		    while (--dst_height > 0 && dy < 32768) {
 
-		    xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*2); 
+		    xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*2);
 
 		    dy += this->step_dy;
 		    _dst += this->rgb_stride;
@@ -136,30 +136,30 @@ static void arm_rgb16 (yuv2rgb_t *this, uint8_t * _dst,
 		        dy -= 32768;
 		        _py += this->y_stride;
 
-		        scale_line (_py, this->y_buffer, 
+		        scale_line (_py, this->y_buffer,
 		                    this->dest_width, this->step_dx);
 
 		        if (height & 1) {
 		            _pu += this->uv_stride;
 		            _pv += this->uv_stride;
-		 
+
 		            scale_line (_pu, this->u_buffer,
 		                        this->dest_width >> 1, this->step_dx);
 		            scale_line (_pv, this->v_buffer,
 		                        this->dest_width >> 1, this->step_dx);
-		 
+
 		        }
 		        height++;
 		    } while( dy>=32768);
 		  }
     }
 }
-                       
+
 
 
 void yuv2rgb_init_arm (yuv2rgb_factory_t *this) {
 
-  if (this->swapped) 
+  if (this->swapped)
     return; /*no swapped pixel output upto now*/
 
   switch (this->mode) {

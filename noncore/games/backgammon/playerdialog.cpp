@@ -13,7 +13,7 @@ PlayerDialog::PlayerDialog(QWidget* parent,const char* name,bool modal,WFlags f)
 
     QGroupBox* player1_box=new QGroupBox("Player 1",this);
     player1_box->setGeometry(10,30,220,60);
-    
+
     manual_button1=new QRadioButton("Human",player1_box);
     connect(manual_button1,SIGNAL(clicked()),this,SLOT(button_manual1()));
     manual_button1->setGeometry(10,20,100,20);
@@ -24,7 +24,7 @@ PlayerDialog::PlayerDialog(QWidget* parent,const char* name,bool modal,WFlags f)
 
     QGroupBox* player2_box=new QGroupBox("Player 2",this);
     player2_box->setGeometry(10,150,220,60);
-    
+
     manual_button2=new QRadioButton("Human",player2_box);
     connect(manual_button2,SIGNAL(clicked()),this,SLOT(button_manual2()));
     manual_button2->setGeometry(10,20,100,20);

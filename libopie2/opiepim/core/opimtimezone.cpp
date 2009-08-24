@@ -112,7 +112,7 @@ static time_t to_Time_t( const QDateTime& utc, const QString& str )
     broken.tm_wday = d.dayOfWeek() - 1;
     broken.tm_yday = d.dayOfYear() - 1;
     broken.tm_isdst = -1;
-    
+
 #ifndef Q_OS_MACX   // Following line causes bus errors on Mac
     QString old = setTimeZone( str );
     time_t ti = ::mktime( &broken );

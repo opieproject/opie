@@ -42,7 +42,7 @@ friend class IRCMessageParser;
 public:
     IRCSession(QObject *parent, IRCServer *server);
     ~IRCSession();
-    
+
     void join(QString channel);
     void quit(QString message);
     void quit();

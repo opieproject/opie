@@ -23,20 +23,20 @@ ExampleBoard::ExampleBoard(QWidget* par, WFlags fl )
 	connect(box1,SIGNAL(toggled(bool)),
 			this,SLOT(slotCtrl(bool)));
 	m_ctrl = box1;
-			
+
 	QSignalMapper *map = new QSignalMapper(this);
 	QPushButton *btn = new QPushButton("a",this);
 	map->setMapping(btn,0);
 	connect(btn,SIGNAL(clicked()),map,SLOT(map()));
-	
+
 	btn = new QPushButton("b",this);
 	map->setMapping(btn,1);
 	connect(btn,SIGNAL(clicked()),map,SLOT(map()));
-	
+
 	btn = new QPushButton("c",this);
 	map->setMapping(btn,2);
 	connect(btn,SIGNAL(clicked()),map,SLOT(map()));
-	
+
 	connect(map,SIGNAL(mapped(int)),
 			this,SLOT(slotKey(int)));
 	resetState();
@@ -52,16 +52,16 @@ void ExampleBoard::resetState(){
 	m_alt->setChecked(false);
 }
 
-void ExampleBoard::slotKey(int _ke){	
+void ExampleBoard::slotKey(int _ke){
 	int ke = _ke + 0x61; // 0 + 65 = 0x41 == A
-	if(m_state & ShiftButton )	
+	if(m_state & ShiftButton )
 		ke -= 0x20;
-	
+
 	/*
 	 *  Send the key
 	 * ke is the unicode
 	 * _ke + 0x41 is the keycode
-	 *  m_state Normally the state 
+	 *  m_state Normally the state
 	 * down/up
 	 * auto repeat
 	 */
@@ -73,7 +73,7 @@ void ExampleBoard::slotShift(bool b){
 	if(b)
 		m_state |= ShiftButton;
 	else
-		m_state &= ~ShiftButton;	
+		m_state &= ~ShiftButton;
 }
 
 void ExampleBoard::slotAlt(bool b){

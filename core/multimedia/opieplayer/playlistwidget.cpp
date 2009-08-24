@@ -1535,7 +1535,7 @@ bool PlayListWidget::readpodcast( const QString &filename )
                     if(i == 0) { //this assumes that the latest is the first
                         latestPodCast << attList[2]; //this is our mp3 url
                         latestPodCast << rssHandler.getItems().at(i)->title;
-                        latestPodCast << rssHandler.getItems().at(i)->description;   
+                        latestPodCast << rssHandler.getItems().at(i)->description;
                         latestPodCast << rssHandler.getItems().at(i)->pubdate;
                     }
                 }

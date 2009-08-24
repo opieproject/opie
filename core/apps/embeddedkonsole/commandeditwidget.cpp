@@ -32,16 +32,16 @@
 #include "playlistselection.h"
 #include <qlayout.h>
 
-/* 
- *  Constructs a Form1 which is a child of 'parent', with the 
- *  name 'name' and widget flags set to 'f' 
+/*
+ *  Constructs a Form1 which is a child of 'parent', with the
+ *  name 'name' and widget flags set to 'f'
  */
 Form1::Form1( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
     if ( !name )
-    resize( 596, 480 ); 
-    Form1Layout = new QGridLayout( this ); 
+    resize( 596, 480 );
+    Form1Layout = new QGridLayout( this );
     Form1Layout->setSpacing( 6 );
     Form1Layout->setMargin( 11 );
 
@@ -50,7 +50,7 @@ Form1::Form1( QWidget* parent,  const char* name, WFlags fl )
     Form1Layout->addWidget( MyCustomWidget1, 0, 0 );
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 Form1::~Form1()

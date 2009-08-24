@@ -30,7 +30,7 @@ InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags
  * return the current text(input)
  */
 QString InputDialog::text() const {
-   return LineEdit1->text(); 
+   return LineEdit1->text();
 }
 /*
  *  Destroys the object and frees any allocated resources

@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qcanvas.h> 
+#include <qcanvas.h>
 #include <qdatetime.h>
 
 class Target : public QCanvasSprite
@@ -28,7 +28,7 @@ public:
    ~Target();
    void newTarget();
    void done();
-   void createMouse(); 
+   void createMouse();
    bool onTop();
    int rtti() const;
 

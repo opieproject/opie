@@ -18,7 +18,7 @@ AccountEditor::AccountEditor(Account account, QWidget *parent, const char *name,
 	TabWidget2->removePage(sslTab);
 	showPasswd->setPixmap(Resource::loadPixmap("mail/showpasswd"));
 
-	connect(showPasswd, SIGNAL(toggled(bool)), 
+	connect(showPasswd, SIGNAL(toggled(bool)),
 		SLOT(showPasswdToggled(bool)));
 
 	fillValues();
@@ -26,7 +26,7 @@ AccountEditor::AccountEditor(Account account, QWidget *parent, const char *name,
 
 void AccountEditor::showPasswdToggled(bool toggled)
 {
-	if (toggled) 
+	if (toggled)
 		pass->setEchoMode(QLineEdit::Normal);
 	else
 		pass->setEchoMode(QLineEdit::Password);

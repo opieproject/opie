@@ -2,18 +2,18 @@
 ** Copyright (C) 2000-2005 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the Qtopia Environment.
-** 
+**
 ** This program is free software; you can redistribute it and/or modify it
 ** under the terms of the GNU General Public License as published by the
 ** Free Software Foundation; either version 2 of the License, or (at your
 ** option) any later version.
-** 
-** A copy of the GNU GPL license version 2 is included in this package as 
+**
+** A copy of the GNU GPL license version 2 is included in this package as
 ** LICENSE.GPL.
 **
 ** This program is distributed in the hope that it will be useful, but
 ** WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ** See the GNU General Public License for more details.
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
@@ -77,13 +77,13 @@ int doqcopimpl (int argc, char *argv[])
 #else
 	    setenv("LOGNAME", argv[2], 1);
 #endif
-	    
+
 	    argc -= 2;
 	    for ( int i = 1; i < argc; i++ ) {
 		argv[i] = argv[i+2];
 	    }
 	}
-		      
+
     }
 
     if ( argc < 3 ) {
@@ -92,7 +92,7 @@ int doqcopimpl (int argc, char *argv[])
     }
 
     QApplication app( argc, argv );
-    
+
     QString channel = argv[1];
     QString command = argv[2];
     command.stripWhiteSpace();

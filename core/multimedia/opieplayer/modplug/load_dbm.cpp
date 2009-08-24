@@ -103,7 +103,7 @@ BOOL CSoundFile::ReadDBM(const BYTE *lpStream, DWORD dwMemLength)
 	DBMFILEHEADER *pfh = (DBMFILEHEADER *)lpStream;
 	DWORD dwMemPos;
 	UINT nOrders, nSamples, nInstruments, nPatterns;
-	
+
 	if ((!lpStream) || (dwMemLength <= sizeof(DBMFILEHEADER)) || (!pfh->channels)
 	 || (pfh->dbm_id != DBM_FILE_MAGIC) || (!pfh->songs) || (pfh->song_id != DBM_ID_SONG)
 	 || (pfh->name_id != DBM_ID_NAME) || (pfh->name_len != DBM_NAMELEN)
@@ -131,7 +131,7 @@ BOOL CSoundFile::ReadDBM(const BYTE *lpStream, DWORD dwMemLength)
 		DWORD chunk_id = ((LPDWORD)(lpStream+dwMemPos))[0];
 		DWORD chunk_size = bswapBE32(((LPDWORD)(lpStream+dwMemPos))[1]);
 		DWORD chunk_pos;
-		
+
 		dwMemPos += 8;
 		chunk_pos = dwMemPos;
 		if ((dwMemPos + chunk_size > dwMemLength) || (chunk_size > dwMemLength)) break;
@@ -201,13 +201,13 @@ BOOL CSoundFile::ReadDBM(const BYTE *lpStream, DWORD dwMemLength)
 		if (chunk_id == DBM_ID_VENV)
 		{
 			UINT nEnvelopes = lpStream[chunk_pos+1];
-			
+
 			chunk_pos += 2;
 			for (UINT iEnv=0; iEnv<nEnvelopes; iEnv++)
 			{
 				DBMENVELOPE *peh;
 				UINT nins;
-				
+
 				if (chunk_pos + sizeof(DBMENVELOPE) > dwMemPos) break;
 				peh = (DBMENVELOPE *)(lpStream+chunk_pos);
 				nins = bswapBE16(peh->instrument);

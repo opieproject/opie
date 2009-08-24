@@ -23,7 +23,7 @@
 #include "kbounce.h"
 #include "game.h"
 
-KJezzball::KJezzball(QWidget *p, const char* n, WFlags f) 
+KJezzball::KJezzball(QWidget *p, const char* n, WFlags f)
     : QMainWindow(p,n,f), m_gameWidget( 0 )
 {
 	setCaption(tr("Bounce"));

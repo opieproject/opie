@@ -48,15 +48,15 @@ public:
     /** Closes the HCI socket. */
     virtual void close();
 
-    bool sendCommand( unsigned char ogf, 
+    bool sendCommand( unsigned char ogf,
                       unsigned short ocf,
                       QByteArray buf
                     );
-    bool readStatus( unsigned char ogf, 
-                     unsigned short ocf, 
-                     int *status, 
+    bool readStatus( unsigned char ogf,
+                     unsigned short ocf,
+                     int *status,
                      int timeout_ms = 1000);
-    
+
     /** Reads whole HCI packet.
     @param packetType [out] The packet type. Should always be ...
     @param eventCode [out] The event code.
@@ -77,7 +77,7 @@ public:
     /** Returns the internal socket */
     int socket( void );
 
-    inline QSocketDevice & socketDevice() 
+    inline QSocketDevice & socketDevice()
       { return HCISocket; }
 
     inline OTDriver * driver() const
@@ -97,7 +97,7 @@ private:
     QGuardedPtr<QSocketNotifier> HCIReadNotifier;
     QSocketDevice                HCISocket;
     OTDriver *                   Driver ;
-    
+
     bool                         BStatusSet;
     unsigned short               LastStatusOcf;
     unsigned char                LastStatusOgf;

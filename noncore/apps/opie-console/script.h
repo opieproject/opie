@@ -10,7 +10,7 @@ class Script {
 public:
     /* Construct an empty script */
     Script();
-    
+
     /* Load a script from a text file */
     Script(const QString fileName);
 

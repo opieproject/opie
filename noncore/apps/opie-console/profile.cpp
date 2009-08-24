@@ -49,7 +49,7 @@ QMap<QString, QString> Profile::conf() const
     return m_conf;
 }
 
-QString Profile::name()const 
+QString Profile::name()const
 {
     return m_name;
 }

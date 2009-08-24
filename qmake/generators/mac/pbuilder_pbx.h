@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Definition of ProjectBuilderMakefileGenerator class.
 **

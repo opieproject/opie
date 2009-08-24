@@ -4,14 +4,14 @@
 #include "plugin.h"
 
 
-MetalInterface::MetalInterface ( ) 
+MetalInterface::MetalInterface ( )
 {
 }
-    
+
 MetalInterface::~MetalInterface ( )
 {
 }
-        
+
 QStyle *MetalInterface::style ( )
 {
 	return new MetalStyle ( );
@@ -26,17 +26,17 @@ QString MetalInterface::name ( ) const
 QRESULT MetalInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
 {
 	*iface = 0;
-	
+
 	if ( uuid == IID_QUnknown )
 		*iface = this;
 	else if ( uuid == IID_Style )
 		*iface = this;
 	else
 	    return QS_FALSE;
-	
+
 	if ( *iface )
 		(*iface)-> addRef ( );
-		
+
 	return QS_OK;
 }
 

@@ -17,7 +17,7 @@
  */
 
 #ifndef BUZZWORD_H
-#define BUZZWORD_H 
+#define BUZZWORD_H
 
 #include <qmainwindow.h>
 #include <qmenubar.h>
@@ -26,7 +26,7 @@
 
 class QGrid;
 
-class BuzzLabel : public QLabel 
+class BuzzLabel : public QLabel
 {
 	Q_OBJECT
 

@@ -77,7 +77,7 @@ using namespace std;
 
 // Constants for player values
 #define PLAYER_THRUST           0
-#define PLAYER_GRAVITY          1  
+#define PLAYER_GRAVITY          1
 #define PLAYER_MAX_SPEED_UP     2
 #define PLAYER_MAX_SPEED_DOWN   3
 

@@ -3,7 +3,7 @@
 
 //  7-Jul-2005 mbh@sdgsystems.com: replace hand coded form with one
 //             generated via QT2 Designer.  The new form supports
-//             selection of target devices, as opposed to sending to 
+//             selection of target devices, as opposed to sending to
 //             all.
 
 #include <qstring.h>

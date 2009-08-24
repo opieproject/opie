@@ -2,20 +2,20 @@
  *
  * librsync -- library for network deltas
  * $Id: sumset.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
- * 
+ *
  * Copyright (C) 1999, 2000, 2001 by Martin Pool <mbp@samba.org>
  * Copyright (C) 1999 by Andrew Tridgell
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -62,8 +62,8 @@ rs_sumset_dump(rs_signature_t const *sums)
 {
         int i;
         char        strong_hex[RS_MD4_LENGTH * 3];
-    
-        rs_log(RS_LOG_INFO, 
+
+        rs_log(RS_LOG_INFO,
                 "sumset info: block_len=%d, file length=%lu, "
                 "number of chunks=%d, remainder=%d",
                 sums->block_len,

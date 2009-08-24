@@ -93,21 +93,21 @@ struct OPimBase {
 	/** Ignore the Case  */
         IgnoreCase = 0x0002,
 	/** Do a Regular Expression match */
-        RegExp     = 0x0004, 
+        RegExp     = 0x0004,
 	/** It needs to exactly match     */
-        ExactMatch = 0x0008, 
+        ExactMatch = 0x0008,
 	/** Only one Entry must match */
-        MatchOne   = 0x0010, 
+        MatchOne   = 0x0010,
 	/** Find all entries from today until given date */
-        DateDiff   = 0x0020, 
+        DateDiff   = 0x0020,
 	/** The year matches */
-        DateYear   = 0x0040, 
+        DateYear   = 0x0040,
 	/** The month matches */
-        DateMonth  = 0x0080, 
+        DateMonth  = 0x0080,
 	/** The day matches */
-        DateDay    = 0x0100, 
+        DateDay    = 0x0100,
 	/** The last possible name matches */
-        LastItem   = 0xffff  
+        LastItem   = 0xffff
     };
 
     /**
@@ -119,11 +119,11 @@ struct OPimBase {
 	/** Sort by Category */
         SortByCategory = 1,
 	/** Sort by Date */
-        SortByDate = 2, 
+        SortByDate = 2,
 	/** The First available sort number for the OPimAccessTemplates */
         SortCustom  = 10,
 	/** make this enum 16bit large */
-        LastSortOrderBase = 0xffff 
+        LastSortOrderBase = 0xffff
     };
 
     /**
@@ -139,7 +139,7 @@ struct OPimBase {
 	/** Use given Categories for filter */
         FilterCategory = 1,
 	/** The first available custom filter defined in the specialized frontends */
-        FilterCustom = 1024, 
+        FilterCustom = 1024,
         LastSortFilterBase = 0xffffffff
     };
 

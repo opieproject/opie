@@ -19,7 +19,7 @@
 **********************************************************************/
 // L.J.Potter added changes Fri 02-15-2002
 
-#ifndef WAV_PLUGIN_H 
+#ifndef WAV_PLUGIN_H
 #define WAV_PLUGIN_H
 
 #include <qstring.h>
@@ -52,7 +52,7 @@ public:
 
     // If decoder doesn't support audio then return 0 here
     int audioStreams();
-    int audioChannels( int stream ); 
+    int audioChannels( int stream );
     int audioFrequency( int stream );
 /*     int audioBitsPerSample( int stream ); */
     int audioSamples( int stream );

@@ -61,18 +61,18 @@ void FixIt::fixIt() {
     }
     file.close();
     ::kill( SIGHUP, 1 );
-    
+
     #else
     setuid(0);
     OProcess m_kill;
     m_kill << QPEApplication::qpeDir() + "share/opie-console/sl6000_embedix_kill_0_1.sh";
 
-    
+
     if ( !m_kill.start(OProcess::DontCare,OProcess::NoCommunication) ) {
-      owarn << "could not execute kill script" << oendl; 
+      owarn << "could not execute kill script" << oendl;
     }  else {
       Global::statusMessage( QObject::tr("Fixing up Embedix"));
-    }       
+    }
 
     #endif
 }
@@ -83,11 +83,11 @@ void FixIt::breakIt() {
 
          m_restart << QPEApplication::qpeDir() + "share/opie-console/sl6000_embedix_restart_0_1.sh";
 
-            
+
      if ( !m_restart.start(OProcess::DontCare,OProcess::NoCommunication) ) {
-            owarn << "could not execute restart script" << oendl; 
+            owarn << "could not execute restart script" << oendl;
      }
-  
+
 	#endif
 }
 

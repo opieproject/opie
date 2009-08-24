@@ -166,7 +166,7 @@ void GenericTetrix::fillRandom(int line)
     if (holes == 0)                // Full line, make a random hole:
         board(TetrixPiece::randomValue(width),line) = 0;
     if (holes == width)            // Empty line, make a random square:
-        board(TetrixPiece::randomValue(width),line) = 
+        board(TetrixPiece::randomValue(width),line) =
                                     TetrixPiece::randomValue(6) + 1;
     for(j = 0 ; j < width ; j++)
         draw(j,i,board(j,i));
@@ -277,7 +277,7 @@ void GenericTetrix::pieceDropped(int)
     newPiece();
 }
 
-void GenericTetrix::updateRemoved(int) 
+void GenericTetrix::updateRemoved(int)
 {
 }
 
@@ -293,7 +293,7 @@ void GenericTetrix::removeFullLines()
 {
     int i,j,k;
     int nFullLines;
-    
+
     for(i = 0 ; i < height - nClearLines ; i++) {
         for(j = 0 ; j < width ; j++)
             if (board(j,i) == 0)
@@ -307,7 +307,7 @@ void GenericTetrix::removeFullLines()
 		if (j == width) {
 		    nFullLines++;
 		} else {
-                    for(j = 0 ; j < width ; j++) {			
+                    for(j = 0 ; j < width ; j++) {
 		        if (board(j,k - nFullLines) != board(j,k)) {
 			    board(j,k - nFullLines) = board(j,k);
 			    draw(      j,k - nFullLines,
@@ -380,7 +380,7 @@ void GenericTetrix::gluePiece()
 
     if (currentLine == -1)
         return;
-    
+
     for(int i = 0 ; i < 4 ; i++) {
         currentPiece.getCoord(i,x,y);
         board(currentPos + x,currentLine - y) = currentPiece.getType();

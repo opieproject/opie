@@ -36,15 +36,15 @@ State_t BluetoothRFCOMMRun::detectState( void ) {
         return Available;
       }
 
-      odebug << "Bluetooth " 
+      odebug << "Bluetooth "
             << OT->isEnabled()
             << oendl;
 
       return ( OT->isEnabled() ) ? Off : Unavailable;
 }
 
-QString BluetoothRFCOMMRun::setMyState( NetworkSetup *, 
-                                      Action_t A, 
+QString BluetoothRFCOMMRun::setMyState( NetworkSetup *,
+                                      Action_t A,
                                       bool ) {
 
       if( OT ) {
@@ -55,18 +55,18 @@ QString BluetoothRFCOMMRun::setMyState( NetworkSetup *,
         // from OFF to Available
         RFCOMMChannel * Ch = getChannel( );
         System & Sys = NSResources->system();
- 
+
         if( Ch ) {
           // connect to this peer
           DeviceNr = OT->getFreeRFCommDevice();
           QStringList S;
 
-          S << "rfcomm" 
+          S << "rfcomm"
             << "bind"
             << QString().setNum( DeviceNr )
             << Ch->BDAddress
             << QString().setNum( Ch->Channel );
- 
+
           // no longer needed
           delete Ch;
 
@@ -113,15 +113,15 @@ RFCOMMChannel * BluetoothRFCOMMRun::getChannel( void ) {
         Ch->Channel = Channel;
         return Ch;
       }
-      
+
       return 0;
     }
 
     QDialog * Dlg = new QDialog( qApp->mainWidget(), 0, TRUE );
     QVBoxLayout * V = new QVBoxLayout( Dlg );
 
-    QLabel * L = new QLabel( 
-      qApp->translate( "BluetoothRFCOMMRun", 
+    QLabel * L = new QLabel(
+      qApp->translate( "BluetoothRFCOMMRun",
                        "Select device to connect to"),
                        Dlg );
     QListBox * LB = new QListBox( Dlg );
@@ -137,7 +137,7 @@ RFCOMMChannel * BluetoothRFCOMMRun::getChannel( void ) {
     V->addWidget( LB );
 
     Dlg->resize( 100, 100 );
-    Dlg->move( 20, 
+    Dlg->move( 20,
                (qApp->desktop()->height()-100)/2 );
 
     if( Dlg->exec() == QDialog::Accepted ) {
@@ -175,15 +175,15 @@ int BluetoothRFCOMMRun::deviceNrOfNetworkSetup( void ) {
 
     DeviceNr = -1;
     for( unsigned int i = 0; i < Data->Devices.count(); i ++ ) {
-      odebug << "Check for rfcomm on " 
+      odebug << "Check for rfcomm on "
             << Data->Devices[i]->BDAddress
             << " "
             << Data->Devices[i]->Channel
             << oendl;
-      if( ( DeviceNr = OT->connectedToRFCommChannel( 
+      if( ( DeviceNr = OT->connectedToRFCommChannel(
               OTDeviceAddress( Data->Devices[i]->BDAddress ),
               Data->Devices[i]->Channel ) ) >= 0 ) {
-        odebug << "Up " 
+        odebug << "Up "
               << oendl;
         break;
       }

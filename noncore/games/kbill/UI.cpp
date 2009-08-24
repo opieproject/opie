@@ -163,7 +163,7 @@ int UI::MainLoop() {
 }
 
 void UI::update_hsbox(char *str) {
-	highscorestr = str;	
+	highscorestr = str;
 }
 
 void UI::update_scorebox(int level, int score) {

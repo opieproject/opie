@@ -19,7 +19,7 @@ class ExamplePluginWidget : public QWidget {
 public:
     ExamplePluginWidget( QWidget *parent,  const char *name );
     ~ExamplePluginWidget();
-    
+
     void refresh();
 
 private slots:

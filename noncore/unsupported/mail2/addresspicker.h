@@ -11,7 +11,7 @@ public:
 	static QString getNames();
 
 protected:
-	AddressPicker(QWidget *parent = 0, const char *name = 0, 
+	AddressPicker(QWidget *parent = 0, const char *name = 0,
 		bool modal = false, WFlags fl = 0);
 
 	QString selectedNames;

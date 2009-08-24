@@ -20,7 +20,7 @@
 
 #include <opie2/oresource.h>
 
-#include "codes.h"  
+#include "codes.h"
 #include "cannon.h"
 
 Cannon::Cannon(QCanvas* canvas) :
@@ -122,7 +122,7 @@ double Cannon::shootAngle()
 void Cannon::shoot()
 {
     setCoords();
-    Bullet* bullet = new Bullet(canvas(), shootAngle(), cannonx, cannony); 
+    Bullet* bullet = new Bullet(canvas(), shootAngle(), cannonx, cannony);
     connect(bullet, SIGNAL(score(int)), this, SIGNAL(score(int)));
 	shotsfired++;
 }

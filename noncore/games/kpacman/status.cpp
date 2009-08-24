@@ -23,7 +23,7 @@ using namespace Opie::Core;
 Status::Status( QWidget *parent, const char *name, int Scheme, int Mode ) :
     QWidget( parent, name )
 {
-    owarn << "Status::Status" << oendl; 
+    owarn << "Status::Status" << oendl;
     actualLifes = 0;
     actualLevel = 0;
 
@@ -82,7 +82,7 @@ QList<QPixmap> *Status::loadPixmap(QWidget *parent, QString pixmapName,
 void Status::paintEvent( QPaintEvent *)
 {
     for (int x = 0; x < actualLifes && !lifesPix->isEmpty(); x++)
-        bitBlt(this, lifesPix->at(0)->width()+(lifesPix->at(0)->width()*x), 
+        bitBlt(this, lifesPix->at(0)->width()+(lifesPix->at(0)->width()*x),
                (height()-lifesPix->at(0)->height())/2,
                lifesPix->at(0), 0, 0,
                lifesPix->at(0)->width(), lifesPix->at(0)->height());

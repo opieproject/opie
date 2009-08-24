@@ -446,7 +446,7 @@ QString OContact::toRichText() const
     // name, jobtitle and company
     if ( !(value = fullName()).isEmpty() )
 	text += "<b><h3><img src=\"addressbook/AddressBook\"> " + Qtopia::escapeString(value) + "</h3></b>";
-    
+
     if ( !(value = jobTitle()).isEmpty() )
 	text += Qtopia::escapeString(value) + " ";
 
@@ -485,7 +485,7 @@ QString OContact::toRichText() const
 	    if ( !(value = businessZip()).isEmpty() ){
 		    text += "<br>" + Qtopia::escapeString(value) + " ";
 		    marker = true;
-		    
+
 	    }
 	    if ( !(value = businessCity()).isEmpty() ) {
 		    marker = true;
@@ -500,7 +500,7 @@ QString OContact::toRichText() const
 	    }
 	    break;
     }
-    case City_State_Zip:{ // City, State Zip_Code 
+    case City_State_Zip:{ // City, State Zip_Code
 	    state =  businessState();
 	    if ( !(value = businessCity()).isEmpty() ) {
 		    marker = true;
@@ -596,7 +596,7 @@ QString OContact::toRichText() const
 	    }
 	    break;
     }
-    case City_State_Zip:{ // City, State Zip_Code 
+    case City_State_Zip:{ // City, State Zip_Code
 	    state =  homeState();
 	    if ( !(value = homeCity()).isEmpty() ) {
 		    marker = true;
@@ -614,7 +614,7 @@ QString OContact::toRichText() const
 	    break;
     }
     }
-	    
+
     if ( !(value = homeCountry()).isEmpty() ){
 	text += "<br>" + Qtopia::escapeString(value);
 	marker = true;

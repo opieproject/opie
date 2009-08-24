@@ -8,14 +8,14 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QLineEdit;
 class QPushButton;
 
 class Edit_Title : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
@@ -28,7 +28,7 @@ public:
     QString newTitle;
 public slots:
     void onCancel();
-    void onApply(); 
+    void onApply();
 };
 
 #endif // EDIT_TITLE_H

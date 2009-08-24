@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of UnixMakefileGenerator class.
 **
@@ -826,7 +826,7 @@ UnixMakefileGenerator::defaultInstall(const QString &t)
 	QString src_targ = target;
 	if(!destdir.isEmpty())
 	    src_targ = Option::fixPathToTargetOS(destdir + target, FALSE);
-	QString dst_targ = root + fileFixify(targetdir + target, 
+	QString dst_targ = root + fileFixify(targetdir + target,
 					     QDir::currentDirPath(), Option::output_dir);
 	if(!ret.isEmpty())
 	    ret += "\n\t";

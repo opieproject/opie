@@ -68,7 +68,7 @@ class Document;
 class View : public QWidget
 {
   Q_OBJECT
-		
+
 public:
   /**
    * Create a new view to the given document. The document must be non-null.
@@ -120,7 +120,7 @@ signals:
    * particular lines such as breakpoints etc.
    */
   void scrollValueChanged( int value );
-  
+
 private:
   class ViewPrivate;
   ViewPrivate *d;
@@ -200,7 +200,7 @@ signals:
   /**
    */
   void deleted( int startLine, int endLine );
-  
+
   /**
    */
   void inserted( int startLine, int endLine );
@@ -221,7 +221,7 @@ protected:
   QList<View> m_views;
 
 private slots:
-		
+
   /**
    * The view emits a destroyed() signal which is connected to this slot
    * and removed from our internal list. Note: The view* is obtained from

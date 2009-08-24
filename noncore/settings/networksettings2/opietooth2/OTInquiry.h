@@ -70,7 +70,7 @@ public:
     with a maximum of 61.44 sec.
     @param lap
     */
-    bool inquire( double timeout = 8.0, 
+    bool inquire( double timeout = 8.0,
                   int numResponses = 0,
                   int lap = GIAC);
 
@@ -91,9 +91,9 @@ public:
     @param lap
     */
     /*
-    void inquirePeriodically( double minduration, 
+    void inquirePeriodically( double minduration,
                               double maxduration,
-                              double timeout = 8.0, 
+                              double timeout = 8.0,
                               int numResponses = 0,
                               int lap = LIAC
                             );
@@ -109,18 +109,18 @@ public:
     /** This function returns true after after an inquiry was
     started, results were received and the inquiry ended successfully.
     This can be the case without calling inquiry() at all, because
-    results of inquiries started by other programs are also processed. 
+    results of inquiries started by other programs are also processed.
     */
     bool isFinished();
-      
-    /** Resets the list of received results and sets 
+
+    /** Resets the list of received results and sets
     isInquiryComplete() to false.
     */
     void reset();
 
     inline OTDriver * driver() const
       { return Driver; }
-      
+
 protected:
 
     /** Called when a new neighbour was found. The default
@@ -166,7 +166,7 @@ private:
     // std::deque<InquiryInfo> infoQueue;
     bool SuccessfullyStarted;
     bool SuccessfullyEnded;
-    
+
 private slots:
 
     void slotInquiryTimeout();

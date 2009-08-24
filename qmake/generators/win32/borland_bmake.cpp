@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** NmakeMakefileGenerator of BorlandMakefileGenerator class.
 **

@@ -25,7 +25,7 @@
 
 class Field : public QWidget  {
    Q_OBJECT
-public: 
+public:
 	Field(QWidget *parent=0, const char *name=0);
 	~Field();
 	void stopTimer();

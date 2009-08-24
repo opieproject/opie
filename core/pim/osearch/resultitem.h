@@ -2,7 +2,7 @@
 //
 // C++ Interface: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003

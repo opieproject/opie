@@ -19,7 +19,7 @@ namespace MediumMountSetting {
   enum Checks { ENABLE_CHECKS  = 0, DISABLE_CHECKS  };
 
   class MediumGlobalWidget : public QWidget {
-    Q_OBJECT 
+    Q_OBJECT
   public:
     MediumGlobalWidget(QWidget *parent = 0, const char *name =0 );
     ~MediumGlobalWidget();

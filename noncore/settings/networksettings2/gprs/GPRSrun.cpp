@@ -7,7 +7,7 @@
 #include <netnode.h>
 #include "GPRSrun.h"
 
-State_t GPRSRun::detectState( void ) { 
+State_t GPRSRun::detectState( void ) {
 
       // is pppd still running ?
       // is rfcomm still active
@@ -55,14 +55,14 @@ State_t GPRSRun::detectState( void ) {
           } else {
             // pppd is down
             PPPPid = 0;
-          } 
+          }
         } // else pppd is down
       }
       NC->assignInterface( 0 );
       return Unknown;
 }
 
-QString GPRSRun::setMyState( NetworkSetup * NC, Action_t A , bool ) { 
+QString GPRSRun::setMyState( NetworkSetup * NC, Action_t A , bool ) {
 
     if( A == Up ) {
       // start ppp on deviceFile

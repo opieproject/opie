@@ -6,12 +6,12 @@
 
 #include "netnodeinterface.h"
 
-static const char * NetworkNeeds[] = 
-    { "device", 
+static const char * NetworkNeeds[] =
+    { "device",
       0
     };
 
-static const char * NetworkProvides[] = 
+static const char * NetworkProvides[] =
     { "connection",
       0
     };
@@ -47,10 +47,10 @@ bool NetworkNetNode::hasDataForFile( SystemFile & S ) {
       return S.name() == "interfaces";
 }
 
-short NetworkNetNode::generateFile( SystemFile & SF, 
+short NetworkNetNode::generateFile( SystemFile & SF,
                                    ANetNodeInstance * NNI,
                                    long DevNr ) {
-                                   
+
       if( DevNr < 0 ) {
         // generate device specific but common part
         return 1;
@@ -61,17 +61,17 @@ short NetworkNetNode::generateFile( SystemFile & SF,
       if( SF.name() == "interfaces" ) {
         Log(("Generate entry for %s in %s\n", NIC.latin1(), SF.name().latin1() ));
         // generate mapping stanza for this interface
-        SF << "# check if " 
-           << NIC 
-           << " can be brought UP" 
+        SF << "# check if "
+           << NIC
+           << " can be brought UP"
            << endl;
-        SF << "mapping " 
-           << NIC 
+        SF << "mapping "
+           << NIC
            << endl;
         SF << "  script "
            << QPEApplication::qpeDir()
-           << "bin/networksettings2-request" 
-           << endl 
+           << "bin/networksettings2-request"
+           << endl
            << endl;
         return 0;
       }

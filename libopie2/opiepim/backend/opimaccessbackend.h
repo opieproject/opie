@@ -67,8 +67,8 @@ public:
     //@}
 
     //@{
-    // FIXME: Uncommented some of the abstract functions below. This should be removed as they are implemented in 
-    // all typespecifc backenends (eilers) 
+    // FIXME: Uncommented some of the abstract functions below. This should be removed as they are implemented in
+    // all typespecifc backenends (eilers)
     /**
      *  Return all possible settings for queryByExample()
      *  @return All settings provided by the current backend
@@ -89,7 +89,7 @@ public:
     //@{
     virtual UIDArray allRecords()const = 0;
     virtual UIDArray matchRegexp(const QRegExp &r) const;
-    virtual UIDArray queryByExample( const UIDArray&, const T& t, 
+    virtual UIDArray queryByExample( const UIDArray&, const T& t,
 				     int settings, const QDateTime& d = QDateTime() )const = 0;
     virtual UIDArray queryByExample( const T& t, int settings, const QDateTime& d = QDateTime() )const;
     virtual UIDArray queryByExample( const OPimRecord* rec, int settings, const QDateTime& d = QDateTime() )const;

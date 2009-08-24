@@ -12,6 +12,6 @@ public :
       short StopBits;
       bool HardwareControl;
       bool SoftwareControl;
-} ; 
+} ;
 
 #endif

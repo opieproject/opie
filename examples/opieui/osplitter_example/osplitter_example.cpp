@@ -21,14 +21,14 @@ OSplitterExample::OSplitterExample( QWidget *w,const char* n,WFlags f )
     QVBoxLayout * lay = new QVBoxLayout(this);
     OSplitter * splitter = new OSplitter( Horizontal, this );
     lay->addWidget( splitter );
-    
+
     OFileSelector *selector = new OFileSelector( splitter, OFileSelector::FileSelector,
 						OFileSelector::Normal, QDir::homeDirPath(),
 						QString::null );
     splitter->addWidget( selector, "zoom", tr("Selector 1") );
-    
+
     selector = new OFileSelector( splitter, OFileSelector::FileSelector, OFileSelector::Normal,
 				QDir::homeDirPath(), QString::null );
     splitter->addWidget( selector, "zoom", tr("Selector 2") );
-    
+
 }

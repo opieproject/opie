@@ -22,7 +22,7 @@ public:
   bool corre;
   bool rre;
   bool copyrect;
-    
+
   bool colors256;
   bool shared;
   bool readOnly;

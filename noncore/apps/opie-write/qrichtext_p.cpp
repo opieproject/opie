@@ -140,7 +140,7 @@ void QTextCursor::gotoPosition( QTextParagraph* p, int index )
     para = p;
     if ( index < 0 || index >= para->length() ) {
 #if defined(QT_CHECK_RANGE)
-	owarn << "QTextCursor::gotoParagraph Index: " << index << " out of range" << oendl; 
+	owarn << "QTextCursor::gotoParagraph Index: " << index << " out of range" << oendl;
 #endif
 	index = index < 0 ? 0 : para->length() - 1;
     }
@@ -480,7 +480,7 @@ bool QTextParagraph::fullSelected( int id ) const
 int QTextParagraph::lineY( int l ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
-	owarn << "QTextParagraph::lineY: line " << l << " out of range!" << oendl; 
+	owarn << "QTextParagraph::lineY: line " << l << " out of range!" << oendl;
 	return 0;
     }
 
@@ -496,7 +496,7 @@ int QTextParagraph::lineY( int l ) const
 int QTextParagraph::lineBaseLine( int l ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
-	owarn << "QTextParagraph::lineBaseLine: line " << l << " out of range!" << oendl; 
+	owarn << "QTextParagraph::lineBaseLine: line " << l << " out of range!" << oendl;
 	return 10;
     }
 
@@ -512,7 +512,7 @@ int QTextParagraph::lineBaseLine( int l ) const
 int QTextParagraph::lineHeight( int l ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
-	owarn << "QTextParagraph::lineHeight: line " << l << " out of range!" << oendl; 
+	owarn << "QTextParagraph::lineHeight: line " << l << " out of range!" << oendl;
 	return 15;
     }
 
@@ -528,8 +528,8 @@ int QTextParagraph::lineHeight( int l ) const
 void QTextParagraph::lineInfo( int l, int &y, int &h, int &bl ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
-	owarn << "QTextParagraph::lineInfo: line " << l << " out of range!" << oendl; 
-	odebug << "" << (int)lineStarts.count() - 1 << " " << l << "" << oendl; 
+	owarn << "QTextParagraph::lineInfo: line " << l << " out of range!" << oendl;
+	odebug << "" << (int)lineStarts.count() - 1 << " " << l << "" << oendl;
 	y = 0;
 	h = 15;
 	bl = 10;

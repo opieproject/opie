@@ -56,11 +56,11 @@ void PackageListLocal::parseStatus()
 void PackageListLocal::parseList()
 {
   QStringList srvs = settings->getActiveServers();
-	
+
   for ( QStringList::Iterator it = srvs.begin(); it != srvs.end(); ++it )
     {
       pvDebug( 2, "List: "+listsDir+"/"+*it);
-      readFileEntries( listsDir+"/"+*it );  	
+      readFileEntries( listsDir+"/"+*it );
     }
 }
 

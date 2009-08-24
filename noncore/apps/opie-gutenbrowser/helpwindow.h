@@ -48,7 +48,7 @@ private slots:
 private:
     void readHistory();
     void readBookmarks();
-    
+
     QTextBrowser* browser;
     QComboBox *pathCombo;
     int backwardId, forwardId;
@@ -56,7 +56,7 @@ private:
     QStringList history, bookmarks;
     QMap<int, QString> mHistory, mBookmarks;
     QPopupMenu *hist, *bookm;
-    
+
 };
 
 

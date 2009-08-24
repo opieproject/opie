@@ -60,23 +60,23 @@ class OSeparator : public QFrame
    * @param orientation Set the orientation of the separator.
    * Possible values are HLine or Horizontal and VLine or Vertical.
    **/
-  OSeparator(int orientation, QWidget* parent=0, const char* name=0, 
+  OSeparator(int orientation, QWidget* parent=0, const char* name=0,
 	     WFlags f=0);
-  
+
   /**
    * Returns the orientation of the separator.
    *
    * Possible values are VLine and HLine.
    **/
   int orientation() const;
-  
+
   /**
    * Set the orientation of the separator to @p orient
    *
    * Possible values are VLine and HLine.
    */
   void setOrientation(int orient);
-  
+
   /**
    * The recommended height (width) for a horizontal (vertical) separator.
    **/

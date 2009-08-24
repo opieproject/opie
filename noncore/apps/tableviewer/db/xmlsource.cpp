@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 #include "xmlsource.h"
 #include "../xmlencodeattr.h"
 
@@ -31,10 +31,10 @@ using namespace Opie::Core;
 /* STD */
 #include <stdlib.h>
 
-DBXml::DBXml(DBStore *d) 
+DBXml::DBXml(DBStore *d)
 {
     dstore = d;
-} 
+}
 
 QString DBXml::type()
 {
@@ -45,17 +45,17 @@ bool DBXml::openSource(QIODevice *inDev)
 {
     bool ok;
 
-    DBXmlHandler h(dstore); 
+    DBXmlHandler h(dstore);
 
     QTextStream tsIn(inDev);
-    QXmlInputSource source(tsIn); 
-    QXmlSimpleReader reader; 
-    reader.setContentHandler(&h); 
-    reader.setErrorHandler(&h); 
-    ok = reader.parse(source); 
+    QXmlInputSource source(tsIn);
+    QXmlSimpleReader reader;
+    reader.setContentHandler(&h);
+    reader.setErrorHandler(&h);
+    ok = reader.parse(source);
 
     return ok;
-} 
+}
 
 bool DBXml::saveSource(QIODevice *outDev)
 {
@@ -67,14 +67,14 @@ bool DBXml::saveSource(QIODevice *outDev)
 
     outstream << "<database name=\"" << dstore->getName() << "\">" << endl;
     outstream << "<header>" << endl;
-    
+
     k = dstore->getKeys();
     KeyListIterator it(*k);
     while(it.current()) {
         if (!it.current()->delFlag()) {
             outstream << "<key name=\"KEYID" << it.currentKey() << "\" ";
-            outstream << "type=\"" 
-                      << TVVariant::typeToName(it.current()->type()) 
+            outstream << "type=\""
+                      << TVVariant::typeToName(it.current()->type())
                       << "\">";
             outstream << encodeAttr(it.current()->name()) << "</key>" << endl;
         }
@@ -98,7 +98,7 @@ bool DBXml::saveSource(QIODevice *outDev)
                 if (dstore->getKeyType(i) == TVVariant::Date) {
                     // dates in files are different from displayed dates
                     QDate date = elem->getField(i).toDate();
-                    outstream << date.day() << "/" 
+                    outstream << date.day() << "/"
                               << date.month() << "/"
                               << date.year();
                 } else {
@@ -110,7 +110,7 @@ bool DBXml::saveSource(QIODevice *outDev)
         }
         outstream << "</record>" << endl;
     } while(dstore->next());
-    
+
     outstream << "</database>" << endl;
     return TRUE;
 }
@@ -127,7 +127,7 @@ DBXml::~DBXml() {}
     dataparser.h
 */
 
-/*! 
+/*!
     Constructs a new DBXmlHandler, and sets that the table should be
     constructed in the DBStore pointed to by ds.
 */
@@ -146,7 +146,7 @@ DBXmlHandler::~DBXmlHandler()
 
 QString DBXmlHandler::errorProtocol()
 {
-    owarn << "Error reading file" << oendl; 
+    owarn << "Error reading file" << oendl;
 	return errorProt;
 }
 
@@ -157,7 +157,7 @@ bool DBXmlHandler::startDocument()
 	return TRUE;
 }
 
-bool DBXmlHandler::startElement(const QString&, const QString&, 
+bool DBXmlHandler::startElement(const QString&, const QString&,
 						const QString& qName, const QXmlAttributes& atts)
 {
 	if (state == StateInit && qName == "database") {
@@ -178,7 +178,7 @@ bool DBXmlHandler::startElement(const QString&, const QString&,
         last_key_type = TVVariant::String;
         key = atts.value("name");
         if (key.isEmpty()) {
-            owarn << "empty key name" << oendl; 
+            owarn << "empty key name" << oendl;
             return FALSE;
         }
         if(!atts.value("type").isEmpty())
@@ -196,17 +196,17 @@ bool DBXmlHandler::startElement(const QString&, const QString&,
         /* the qName is the name of a key */
         if (!keyIndexList[qName]) {
             /* invalid key, we failed */
-            owarn << "Invalid key in record" << oendl; 
+            owarn << "Invalid key in record" << oendl;
             return FALSE;
         }
         keyIndex = *keyIndexList[qName];
 		return TRUE;
 	}
-    owarn << "Unable to determine tag type" << oendl; 
+    owarn << "Unable to determine tag type" << oendl;
 	return FALSE;
 }
 
-bool DBXmlHandler::endElement(const QString&, const QString&, 
+bool DBXmlHandler::endElement(const QString&, const QString&,
 								const QString& qName)
 {
 	switch(state) {
@@ -227,11 +227,11 @@ bool DBXmlHandler::endElement(const QString&, const QString&,
 		state = StateDocument;
 		break;
 	case StateDocument:
-		// we are done... 
+		// we are done...
 		break;
 	default:
 		// should only get a 'endElement' from one of the above states.
-        owarn << "Invalid end tag" << oendl; 
+        owarn << "Invalid end tag" << oendl;
 		return FALSE;
 		break;
 	}
@@ -259,8 +259,8 @@ bool DBXmlHandler::characters(const QString& ch)
         current_data->setField(keyIndex, ch_simplified);
 		return TRUE;
 	}
-	
-    owarn << "Junk characters found... ignored" << oendl; 
+
+    owarn << "Junk characters found... ignored" << oendl;
     return TRUE;
 }
 
@@ -276,7 +276,7 @@ bool DBXmlHandler::warning(const QXmlParseException& exception)
 	.arg(exception.lineNumber())
 	.arg(exception.columnNumber());
 
-    owarn << errorProt << oendl; 
+    owarn << errorProt << oendl;
     return QXmlDefaultHandler::fatalError(exception);
 }
 
@@ -287,7 +287,7 @@ bool DBXmlHandler::error(const QXmlParseException& exception)
 	.arg(exception.lineNumber())
 	.arg(exception.columnNumber());
 
-    owarn << errorProt << oendl; 
+    owarn << errorProt << oendl;
     return QXmlDefaultHandler::fatalError(exception);
 }
 
@@ -298,6 +298,6 @@ bool DBXmlHandler::fatalError(const QXmlParseException& exception)
 	.arg(exception.lineNumber())
 	.arg(exception.columnNumber());
 
-    owarn << errorProt << oendl; 
+    owarn << errorProt << oendl;
     return QXmlDefaultHandler::fatalError(exception);
 }

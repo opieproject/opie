@@ -207,9 +207,9 @@ void OLineEdit::setReadOnly(bool readOnly)
 void OLineEdit::keyPressEvent( QKeyEvent *e )
 {
     qDebug( "OLineEdit::keyPressEvent()" );
-    
+
     /*
-    
+
     KKey key( e );
 
     if ( KStdAccel::copy().contains( key ) ) {
@@ -252,7 +252,7 @@ void OLineEdit::keyPressEvent( QKeyEvent *e )
         return;
     }
     */
-    
+
     // Filter key-events if EchoMode is normal &
     // completion mode is not set to CompletionNone
     if ( echoMode() == QLineEdit::Normal &&
@@ -398,7 +398,7 @@ void OLineEdit::keyPressEvent( QKeyEvent *e )
                 return;
             }
         } */
-    }   
+    }
 
     // Let QLineEdit handle any other keys events.
     QLineEdit::keyPressEvent ( e );

@@ -51,7 +51,7 @@ public:
      * @see SortFilterBase in OPimBase
      */
     enum SortFilter {
-	    
+
     };
 
     /**

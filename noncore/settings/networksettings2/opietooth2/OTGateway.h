@@ -88,7 +88,7 @@ public :
 
       OTDriverList & getDriverList()
         { return AllDrivers; }
-      OTDriver * driver( int nr ) 
+      OTDriver * driver( int nr )
         { return AllDrivers.count() == 0 ? 0 : AllDrivers[nr]; }
       void updateDrivers();
 
@@ -97,8 +97,8 @@ public :
       // scan neighbourhood using device
       void scanNeighbourhood( OTDriver * D = 0 );
       void stopScanOfNeighbourhood(void );
-      void setScanWith( OTDriver * D = 0 ) 
-        { ScanWith = (D) ? D : 
+      void setScanWith( OTDriver * D = 0 )
+        { ScanWith = (D) ? D :
             (AllDrivers.count() ) ? AllDrivers[0] : 0; }
       OTDriver * scanWith( void )
         { return ScanWith; }
@@ -157,7 +157,7 @@ signals :
 
       // sent when bluetooth on device is enabled
       void deviceEnabled( bool );
-      
+
       // sent when a (new if bool = TRUE) peer is detected
       void detectedPeer( OTPeer *, bool );
 

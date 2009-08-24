@@ -37,9 +37,9 @@
 class DBStore;
 
 /* helper classes to common classes */
-class QStringVector : public QVector<QString> 
-{ 
-public: 
+class QStringVector : public QVector<QString>
+{
+public:
     int compareItems(Item a, Item b);
 };
 
@@ -50,14 +50,14 @@ public:
 
 class TVVariantPrivate;
 
-class TVVariant 
+class TVVariant
 {
 public:
     enum KeyType {
         Invalid = 0,
-        Int,     
-        String, 
-        Date, 
+        Int,
+        String,
+        Date,
         Time,
     };
 
@@ -113,19 +113,19 @@ private:
 
 class TVVariantPrivate : public QShared
 {
-    public: 
-        TVVariantPrivate(); 
-        TVVariantPrivate(TVVariantPrivate *); 
+    public:
+        TVVariantPrivate();
+        TVVariantPrivate(TVVariantPrivate *);
 
-        ~TVVariantPrivate(); 
-        
-        void clear(); 
-        
-        TVVariant::KeyType typ; 
-        
-        union { 
-            int i; 
-            void *ptr; 
+        ~TVVariantPrivate();
+
+        void clear();
+
+        TVVariant::KeyType typ;
+
+        union {
+            int i;
+            void *ptr;
         } value;
 };
 
@@ -221,13 +221,13 @@ public:
     DataElem(DBStore *container);
     ~DataElem();
 
-    int getNumFields() const; 
+    int getNumFields() const;
     KeyList getKeys() const;
 
-    bool hasValidValue(int) const; 
-    bool hasValidValue(QString) const; 
-    TVVariant::KeyType getFieldType(int) const; 
-    TVVariant::KeyType getFieldType(QString) const; 
+    bool hasValidValue(int) const;
+    bool hasValidValue(QString) const;
+    TVVariant::KeyType getFieldType(int) const;
+    TVVariant::KeyType getFieldType(QString) const;
     TVVariant getField(int) const;
     TVVariant getField(QString) const;
 
@@ -254,7 +254,7 @@ public:
        is determined by the containing DBStores of each element. */
     static int compare(const TVVariant, const TVVariant, int i);
 
-    /* False, second element's primary key is closer to target. 
+    /* False, second element's primary key is closer to target.
      * True, first element's primary key is a closer match to target */
     static bool closer(DataElem*, DataElem *, TVVariant, int column);
 private:

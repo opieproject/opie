@@ -19,7 +19,7 @@ MailTableItem::MailTableItem(QListView *parent, IMAPResponseFETCH fetch)
 	for (it = flags.begin(); it != flags.end(); it++) {
 		if (*it == IMAPResponseEnums::Draft) _draft = true;
 		else if (*it == IMAPResponseEnums::Recent) _new = true;
-		else if (*it == IMAPResponseEnums::Seen) _unseen = false; 
+		else if (*it == IMAPResponseEnums::Seen) _unseen = false;
 	}
 
 	setText(0, fetch.envelope().from()[0].name().isEmpty() ? QObject::tr("(no from)") : fetch.envelope().from()[0].name());

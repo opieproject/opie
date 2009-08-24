@@ -293,7 +293,7 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     // and just use the MineField as the central widget. I tried
     // this though and it didn't work. - Paul Eggleton 15 Nov 2007
     mainframe->setFrameStyle( QFrame::NoFrame );
-    
+
     field = new MineField( mainframe );
     field->setLineWidth(1);
     mainframe->setField( field );

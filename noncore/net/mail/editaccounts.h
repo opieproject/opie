@@ -31,9 +31,9 @@ class EditAccounts : public EditAccountsUI
 {
     Q_OBJECT
 
-public: 
+public:
     EditAccounts( Settings *s, QWidget *parent = 0, const char *name = 0, bool modal = 0, WFlags flags = 0 );
-    
+
 public slots:
     void slotNewAccount( const QString &type );
     void slotEditAccount( Account *account );
@@ -52,7 +52,7 @@ protected slots:
 
 private:
     Settings *settings;
-    
+
 };
 
 class SelectMailType : public SelectMailTypeUI
@@ -83,7 +83,7 @@ public slots:
 protected slots:
     void slotConnectionToggle( int index );
     void accept();
- 
+
 private:
     IMAPaccount *data;
 
@@ -95,7 +95,7 @@ class POP3config : public POP3configUI
 
 public:
     POP3config( POP3account *account, QWidget *parent = 0, const char *name = 0, bool modal = 0, WFlags flags = 0 );
-    
+
 public slots:
     void fillValues();
 

@@ -20,8 +20,8 @@ namespace OpieTooth {
         Q_OBJECT
 
     public:
-        ObexDialog( const QString& device = 0, int port = 0, 
-            QWidget* parent = 0, const char* name = 0, 
+        ObexDialog( const QString& device = 0, int port = 0,
+            QWidget* parent = 0, const char* name = 0,
             bool modal = TRUE, WFlags fl = 0);
         ~ObexDialog();
 
@@ -32,7 +32,7 @@ private slots:
         void slotPushStatus(QCString&);
         void slotPushComplete(int);
         void slotPushError(int);
-        
+
     protected:
         QVBoxLayout* layout;
         QLineEdit* cmdLine;

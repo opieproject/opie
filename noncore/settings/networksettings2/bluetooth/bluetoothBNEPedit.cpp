@@ -11,7 +11,7 @@ BluetoothBNEPEdit::BluetoothBNEPEdit( QWidget * Parent ) : BluetoothBNEPGUI( Par
 }
 
 QString BluetoothBNEPEdit::acceptable( void ) {
-    if( ( ! AnyPAN_CB->isChecked() ) && 
+    if( ( ! AnyPAN_CB->isChecked() ) &&
           BTPANServers_LV->firstChild() == 0 ) {
       return tr("<p>No bluetooth device addresses specified</p>");
     }
@@ -33,8 +33,8 @@ void BluetoothBNEPEdit::showData( BluetoothBNEPData & Data ) {
       QListViewItem * lvit;
       BTPANServers_LV->clear();
 
-      for ( QStringList::Iterator it = Data.BDAddress.begin(); 
-            it != Data.BDAddress.end(); 
+      for ( QStringList::Iterator it = Data.BDAddress.begin();
+            it != Data.BDAddress.end();
             ++it ) {
         lvit = new QListViewItem(BTPANServers_LV);
         lvit->setText( 0, (*it) );

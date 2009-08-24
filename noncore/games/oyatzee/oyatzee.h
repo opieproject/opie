@@ -36,13 +36,13 @@ class OYatzee : public QMainWindow {
 		DiceWidget *dw;
 		Scoreboard *sb;
 
-		QValueListInt posibilities;		
+		QValueListInt posibilities;
 		playerList ps;
-		
+
 		void setPlayerNumber( const int num );
 		void setRoundsNumber( const int num );
-		
-		enum {  Ones = 1, 
+
+		enum {  Ones = 1,
 				Twos = 2,
 				Threes = 3,
 				Fours = 4,
@@ -79,7 +79,7 @@ class OYatzee : public QMainWindow {
 		void displayPossibilites();
 
 		int getPoints( const int , QValueListInt );
-		
+
 		void startGame();
 		void stopGame();
 
@@ -104,7 +104,7 @@ class Dice : public QFrame
 
 	signals:
 		void selected();
-	
+
 	protected:
 		void paintEvent( QPaintEvent *e );
 		void paintNumber( QPainter *p );
@@ -127,11 +127,11 @@ class Board : public QWidget
 	Q_OBJECT
 	public:
 		Board( QWidget *parent = 0, const char* name = 0 );
-	
+
 	signals:
 		void clicked( QPoint );
 		void item( int );
-	
+
 	protected:
 		virtual void mousePressEvent( QMouseEvent* );
 };
@@ -145,7 +145,7 @@ class Possibilityboard : public Board
 
 		QValueListInt list;
 		void setIntlist( QValueListInt& );
-	
+
 	private:
 		QStringList begriffe;
 
@@ -185,12 +185,12 @@ class Scoreboard : public QWidget
 		Possibilityboard *pb;
 		resultboardList rbList;
 		playerList ps_;
-		
+
 		void createResultboards(const int);
 
 		Resultboard* nextRB(int);
 
-		
+
 	protected:
 		void paintEvent(  QPaintEvent *e );
 };
@@ -209,7 +209,7 @@ class Player
 		int turn;
 
 		void updateTotalPoints( QMap<int,int> );
-		
+
 	private:
 		QValueListInt pResults; /* the individual results of the player */
 

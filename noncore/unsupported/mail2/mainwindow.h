@@ -3,7 +3,7 @@
 
 #include "mainwindowbase.h"
 
-#include <qstring.h> 
+#include <qstring.h>
 
 class IMAPHandler;
 class IMAPResponseFETCH;

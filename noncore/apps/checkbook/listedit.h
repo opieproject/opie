@@ -52,7 +52,7 @@ class ListEdit : public QWidget, public TableDef
         QComboBox *_box;
         QListViewItem *_currentItem;
         int _currentColumn;
-        
+
         // resolves dups and empty entries
         void fixTypes();
         void fixTypes(int iColumn);

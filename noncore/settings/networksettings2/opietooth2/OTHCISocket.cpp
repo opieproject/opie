@@ -96,9 +96,9 @@ bool OTHCISocket::open() {
     HCIReadNotifier = new QSocketNotifier(
                   s, QSocketNotifier::Read, this);
 
-    connect( HCIReadNotifier, 
+    connect( HCIReadNotifier,
              SIGNAL(activated(int)),
-             this, 
+             this,
              SLOT(slotSocketActivated())
            );
 
@@ -125,7 +125,7 @@ void OTHCISocket::slotSocketActivated() {
 
     QSocketDevice::Error err = HCISocket.error();
 
-    if( (err == QSocketDevice::NoError ) && 
+    if( (err == QSocketDevice::NoError ) &&
         ( HCISocket.isValid() ) ) {
       //kdDebug() << "HCI socket ready read." << endl;
 
@@ -155,7 +155,7 @@ void OTHCISocket::slotSocketActivated() {
               << psize
               << ")-3 != dataSize("
               << len
-              << ")" 
+              << ")"
               << oendl;
       }
     } else if (err == QSocketDevice::NoError) {
@@ -195,7 +195,7 @@ void OTHCISocket::readEvent() {
 }
 
 bool OTHCISocket::sendCommand( unsigned char ogf,
-                               unsigned short ocf, 
+                               unsigned short ocf,
                                QByteArray buf
                              ) {
     QBuffer packet;
@@ -214,14 +214,14 @@ bool OTHCISocket::sendCommand( unsigned char ogf,
     stream << pType << opcode << buflen;
     stream.writeRawBytes(buf.data(), buflen);
     packet.close();
-    HCISocket.writeBlock((const char*)packet.buffer(), 
+    HCISocket.writeBlock((const char*)packet.buffer(),
                          packet.buffer().size());
     return true;
 }
 
-bool OTHCISocket::readStatus( unsigned char ogf, 
-                              unsigned short ocf, 
-                              int *status, 
+bool OTHCISocket::readStatus( unsigned char ogf,
+                              unsigned short ocf,
+                              int *status,
                               int timeout_ms) {
     QTimer timer;
 
@@ -242,8 +242,8 @@ bool OTHCISocket::readStatus( unsigned char ogf,
           slotSocketActivated();
         }
 
-        if( BStatusSet == true && 
-            ogf == LastStatusOgf && 
+        if( BStatusSet == true &&
+            ogf == LastStatusOgf &&
             ocf == LastStatusOcf) {
             *status = LastStatus;
             odebug << "OTHCISocket::readStatus(ogf="

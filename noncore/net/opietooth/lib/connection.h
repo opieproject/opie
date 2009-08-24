@@ -8,11 +8,11 @@
 
 namespace OpieTooth {
 
-	
+
 
 
     /**
-     * Parent class for all kinds of starting connection 
+     * Parent class for all kinds of starting connection
      * subclasses
      *
      */

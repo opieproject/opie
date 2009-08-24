@@ -611,8 +611,8 @@ QStringList OGenericPluginLoader::languageList() {
         int pos = str.find( '@' );
 	if( pos > 0 )
 	    m_languages += str.left( pos );
-	
-	
+
+
 	pos = str.find( '.' );
         if ( pos > 0 )
             m_languages += str.left( pos );
@@ -643,8 +643,8 @@ void OGenericPluginLoader::installTranslators(const QString& type) {
         /*
          * If loaded then install else clean up and don't leak
          */
-        if ( trans->load( tfn ) ) 
-            qApp->installTranslator( trans );	
+        if ( trans->load( tfn ) )
+            qApp->installTranslator( trans );
         else
             delete trans;
     }

@@ -112,17 +112,17 @@ Opie::Core::OKeyConfigManager* TestMainWindow::manager() {
  * So this is only for demo purposes
  */
 void TestMainWindow::keyPressEvent( QKeyEvent* ev ) {
-    owarn << "String is "+ m_manager->handleKeyEvent( ev ).text() << oendl; 
-    owarn << "Id was " << m_manager->handleKeyEventId( ev ) << " " << ev->key() << " " << ev->state() << " " << ev->ascii() << "" << oendl; 
+    owarn << "String is "+ m_manager->handleKeyEvent( ev ).text() << oendl;
+    owarn << "Id was " << m_manager->handleKeyEventId( ev ) << " " << ev->key() << " " << ev->state() << " " << ev->ascii() << "" << oendl;
     ev->ignore();
 }
 
 void TestMainWindow::slotDelete( QWidget* wid, QKeyEvent* ev ) {
-    owarn << "Slot Delete " << wid << " " << ev->key() << " " << ev->state() << "" << oendl; 
+    owarn << "Slot Delete " << wid << " " << ev->key() << " " << ev->state() << "" << oendl;
 }
 
 void TestMainWindow::slotAction( QWidget* wid, QKeyEvent* ev, const Opie::Core::OKeyConfigItem& item) {
-    owarn << "Slot Action " << wid << " " << ev->key() << " " << ev->state() << " " << item.text() << " " << item.id() << "" << oendl; 
+    owarn << "Slot Action " << wid << " " << ev->key() << " " << ev->state() << " " << item.text() << " " << item.id() << "" << oendl;
 }
 
 #include "testwidget.moc"

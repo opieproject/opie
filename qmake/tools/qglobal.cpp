@@ -344,13 +344,13 @@ static const int QT_BUFFER_LENGTH = 8196;	// internal buffer length
 #ifdef Q_OS_MAC
 QString cfstring2qstring(CFStringRef str)
 {
-    CFIndex length = CFStringGetLength(str); 
-    if(const UniChar *chars = CFStringGetCharactersPtr(str)) 
+    CFIndex length = CFStringGetLength(str);
+    if(const UniChar *chars = CFStringGetCharactersPtr(str))
 	return QString((QChar *)chars, length);
-    UniChar *buffer = (UniChar*)malloc(length * sizeof(UniChar)); 
-    CFStringGetCharacters(str, CFRangeMake(0, length), buffer); 
+    UniChar *buffer = (UniChar*)malloc(length * sizeof(UniChar));
+    CFStringGetCharacters(str, CFRangeMake(0, length), buffer);
     QString ret((QChar *)buffer, length);
-    free(buffer); 
+    free(buffer);
     return ret;
 }
 

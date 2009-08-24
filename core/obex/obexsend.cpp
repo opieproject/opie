@@ -1,6 +1,6 @@
 //  7-Jul-2005 mbh@sdgsystems.com: replace hand coded form with one
 //             generated via QT2 Designer.  The new form supports
-//             selection of target devices, as opposed to sending to 
+//             selection of target devices, as opposed to sending to
 //             all.
 
 #include "obex.h"
@@ -134,7 +134,7 @@ void SendWidget::setReceiverStatus( int id, const QString& status ) {
 }
 
 void SendWidget::slotIrDaDevices( const QStringList& list) {
-    for (QStringList::ConstIterator it = list.begin(); 
+    for (QStringList::ConstIterator it = list.begin();
         it != list.end(); ++it ) {
         int id = addReceiver(*it, "obex/irda.png");
         m_irDa.insert( id, (*it) );
@@ -146,7 +146,7 @@ void SendWidget::slotIrDaDevices( const QStringList& list) {
 
 void SendWidget::slotBTDevices( const QMap<QString, QString>& str ) {
 #ifdef BLUETOOTH
-    for(QMap<QString, QString>::ConstIterator it = str.begin(); 
+    for(QMap<QString, QString>::ConstIterator it = str.begin();
         it != str.end(); ++it ) {
         int id = addReceiver(it.key(), "obex/bt.png");
         m_bt.insert( id, Pair( it.key(), it.data() ) );
@@ -187,7 +187,7 @@ void SendWidget::slotIrTry(unsigned int trI) {
     setReceiverStatus(m_irDaIt.key(), tr("Try %1").arg( QString::number( trI ) ));
 }
 void SendWidget::slotStartIrda() {
-    if ( !m_irDa.count() ) 
+    if ( !m_irDa.count() )
         return;
     if ( m_irDaIt == m_irDa.end() || !receiverSelected(m_irDaIt.key())) {
         irdaStatus->setText(tr("complete."));
@@ -208,7 +208,7 @@ void SendWidget::dispatchBt( const QCString& str, const QByteArray& ar ) {
     }
 }
 void SendWidget::slotBtError( int ) {
-    btStatus->setText(tr("error :("));    
+    btStatus->setText(tr("error :("));
 }
 void SendWidget::slotBtSent( bool b) {
 #ifdef BLUETOOTH
@@ -230,7 +230,7 @@ void SendWidget::slotBtTry(unsigned int trI) {
 void SendWidget::slotStartBt() {
 #ifdef BLUETOOTH
     // skip past unselected receivers
-    if ( !m_bt.count() ) 
+    if ( !m_bt.count() )
         return;
     while((m_btIt != m_bt.end()) && !receiverSelected(m_btIt.key()))
         ++m_btIt;

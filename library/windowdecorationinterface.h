@@ -29,7 +29,7 @@
 #include <qpalette.h>
 #include <qwsmanager_qws.h>
 
-// {11A45864-4CBA-4DDA-9846-FF234FD307CC} 
+// {11A45864-4CBA-4DDA-9846-FF234FD307CC}
 #ifndef IID_WindowDecoration
 #define IID_WindowDecoration QUuid( 0x11a45864, 0x4cba, 0x4dda, 0x98, 0x46, 0xff, 0x23, 0x4f, 0xd3, 0x07, 0xcc)
 #endif

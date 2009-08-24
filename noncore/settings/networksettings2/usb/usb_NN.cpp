@@ -4,11 +4,11 @@
 
 #include "netnodeinterface.h"
 
-static const char * USBNeeds[] = 
+static const char * USBNeeds[] =
     { 0
     };
 
-static const char * USBProvides[] = 
+static const char * USBProvides[] =
     { "device",
       0
     };
@@ -48,7 +48,7 @@ const char ** USBNetNode::provides( void ) {
 }
 
 QString USBNetNode::genNic( long ) {
-    return QString( "usbf" ); 
+    return QString( "usbf" );
 }
 
 void USBNetNode::setSpecificAttribute( QString & , QString & ) {

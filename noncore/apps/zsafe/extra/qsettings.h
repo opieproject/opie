@@ -27,7 +27,7 @@ public:
 		User,
 		Global
 	};
-	
+
 	QSettings(const QString &file=0);
 	~QSettings();
 

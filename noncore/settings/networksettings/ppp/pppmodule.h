@@ -1,13 +1,13 @@
 #ifndef PPP_MODULE_H
 #define PPP_MODULE_H
- 
+
 #include "module.h"
 
 class PPPModule : Module {
 
 signals:
     void updateInterface(Interface *i);
-	
+
 public:
   PPPModule();
   ~PPPModule();

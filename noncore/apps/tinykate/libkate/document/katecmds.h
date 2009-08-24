@@ -43,7 +43,7 @@ public:
 };
 
 /**
- * -- Charles Samuels <charles@kde.org> 
+ * -- Charles Samuels <charles@kde.org>
  * Support vim/sed find and replace
  * s/search/replace/ find search, replace with replace on this line
  * %s/search/replace/ do the same to the whole file

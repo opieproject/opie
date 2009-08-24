@@ -21,14 +21,14 @@
 #define SETTINGS_H
 
 
-#include <qstrlist.h> 
+#include <qstrlist.h>
 #include <qasciidict.h>
 #include "languagesettingsbase.h"
 
 class QPEDialogListener;
 
 class LanguageSettings : public LanguageSettingsBase
-{ 
+{
     Q_OBJECT
 
 public:

@@ -84,7 +84,7 @@ public:
 	// Does this device use beginType3Char/endType3Char?  Otherwise,
 	// text in Type 3 fonts will be drawn with drawChar/drawString.
 	virtual GBool interpretType3Chars() { return gFalse; }
-       
+
 	// Does this device need non-text content?
 	virtual GBool needNonText() { return gFalse; }
 
@@ -150,7 +150,7 @@ public:
 	// of page.  If found, sets the text bounding rectange and returns
 	// true; otherwise returns false.
 	GBool findText ( Unicode *s, int len, GBool top, GBool bottom, int *xMin, int *yMin, int *xMax, int *yMax );
-	
+
 	//----- special QT access
 
 	bool findText ( const QString &str, int &l, int &t, int &w, int &h, bool top = 0, bool bottom = 0 );
@@ -169,7 +169,7 @@ private:
 
 	TextPage *m_text;		// text from the current page
 
-private:	
+private:
 	QFont matchFont ( GfxFont *, fp_t m11, fp_t m12, fp_t m21, fp_t m22 );
 
 	void updateLineAttrs ( GfxState *state, GBool updateDash );

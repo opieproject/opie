@@ -19,7 +19,7 @@ CCustomAlphabet::CCustomAlphabet(const CAlphIO::AlphInfo& AlphInfo)
 	SetOrientation(AlphInfo.Orientation);
 	SetLanguage(AlphInfo.Type);
 	SetTrainingFile(AlphInfo.TrainingFile);
-	
+
 	// Add all the characters.
 	for (unsigned int i=0; i<AlphInfo.Groups.size(); i++) { // loop groups
 		for (unsigned int j=0; j<AlphInfo.Groups[i].Characters.size(); j++) { // loop characters
@@ -27,7 +27,7 @@ CCustomAlphabet::CCustomAlphabet(const CAlphIO::AlphInfo& AlphInfo)
 		}
 		StartNewGroup();
 	}
-	
+
 	// Set Space character if requested
 
 	// This line makes it a bit easier for our WindowsCE compiler

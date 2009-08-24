@@ -106,7 +106,7 @@ QBidiContext::~QBidiContext()
 */
 static inline const QChar *prevChar( const QString &str, int pos )
 {
-    //odebug << "leftChar: pos=" << pos << "" << oendl; 
+    //odebug << "leftChar: pos=" << pos << "" << oendl;
     pos--;
     const QChar *ch = str.unicode() + pos;
     while( pos > -1 ) {
@@ -124,7 +124,7 @@ static inline const QChar *nextChar( const QString &str, int pos)
     int len = str.length();
     const QChar *ch = str.unicode() + pos;
     while( pos < len ) {
-	//odebug << "rightChar: " << pos << " isLetter=" << ch.isLetter() << ", joining=" << ch.joining() << "" << oendl; 
+	//odebug << "rightChar: " << pos << " isLetter=" << ch.isLetter() << ", joining=" << ch.joining() << "" << oendl;
 	if( !ch->isMark() )
 	    return ch;
 	// assume it's a transparent char, this might not be 100% correct

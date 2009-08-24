@@ -9,12 +9,12 @@ class WLanRun  : public RuntimeInfo {
 
 public :
 
-      WLanRun( ANetNodeInstance * NNI, WLanData & Data ) : 
+      WLanRun( ANetNodeInstance * NNI, WLanData & Data ) :
                RuntimeInfo( NNI ),
                Pat( "wlan[0-9]" ) {
       }
 
-      virtual RuntimeInfo * device( void ) 
+      virtual RuntimeInfo * device( void )
         { return this; }
 
       bool handlesInterface( const QString & I );

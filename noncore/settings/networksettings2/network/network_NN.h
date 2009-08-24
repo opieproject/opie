@@ -16,10 +16,10 @@ public:
 
       virtual bool hasDataForFile( SystemFile & S );
 
-      virtual short generateFile( SystemFile & TS, 
+      virtual short generateFile( SystemFile & TS,
                                  ANetNodeInstance * NNI,
                                  long DevNr );
-      virtual const QString pixmapName() 
+      virtual const QString pixmapName()
         { return "Devices/tcpip"; }
 
       virtual const QString nodeDescription() ;

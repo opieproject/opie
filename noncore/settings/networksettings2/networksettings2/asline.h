@@ -10,7 +10,7 @@ class AsLine : public RuntimeInfo {
 public :
 
     AsLine( ANetNodeInstance * NNI ) :
-        RuntimeInfo( NNI ) { 
+        RuntimeInfo( NNI ) {
     }
 
     virtual QString deviceFile( void ) = 0;

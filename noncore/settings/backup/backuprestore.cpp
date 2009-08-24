@@ -568,7 +568,7 @@ void BackupAndRestore::rescanFolder(QString directory, __dev_t origdev)
         {
             if(filename != ".." && filename != ".")
             {
-                if ( origdev == getDeviceOf(filename) ) 
+                if ( origdev == getDeviceOf(filename) )
                 {
                     filename = directory + "/" + filename;
                     rescanFolder(filename, origdev);

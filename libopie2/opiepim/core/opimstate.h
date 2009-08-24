@@ -56,7 +56,7 @@ class OPimState {
     OPimState &operator=( const OPimState& );
     void setState( int state);
     int state()const;
-    
+
   private:
     void deref();
     inline void copyInternally();

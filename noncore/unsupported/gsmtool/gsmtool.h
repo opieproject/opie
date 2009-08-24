@@ -8,7 +8,7 @@
 #include <gsmlib/gsm_sorted_sms_store.h>
 
 class GSMTool : public GSMToolBase
-{ 
+{
     Q_OBJECT
 
 public:
@@ -38,7 +38,7 @@ private:
  gsmlib::MeTa *me;
  gsmlib::SortedSMSStoreRef sms_store;
 
- char *devicename; 
+ char *devicename;
  speed_t baudrate;
 
  int lockDevice( );

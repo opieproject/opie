@@ -127,9 +127,9 @@ void DateEntry::setEvent( const OPimEvent &event ) {
     if(!event.location().isEmpty())
         addOrPick( comboLocation, event.location() );
     checkAllDay->setChecked( event.isAllDay() );
-    if(!event.note().isEmpty()) 
+    if(!event.note().isEmpty())
         noteStr=event.note();
-    else 
+    else
         noteStr="";
     setAlarmFromEvent( event );
     if ( event.hasRecurrence() ) {
@@ -407,7 +407,7 @@ void DateEntry::startTimePicked( const QTime &t ) {
     if(m_showStart) {
         startTimeChanged(t);
         updateTimeEdit(true,true);
-    } 
+    }
     else {
         endTimeChanged(t);
         updateTimeEdit(false, true );
@@ -669,11 +669,11 @@ bool DateEntryEditor::showDialog( QString caption, OPimEvent& event ) {
 
     de->comboLocation->clear();
     de->comboLocation->insertItem("");
-    de->comboLocation->insertStringList( locations().names() );    
+    de->comboLocation->insertStringList( locations().names() );
 
     de->comboDescription->clear();
     de->comboDescription->insertItem("");
-    de->comboDescription->insertStringList( descriptions().names() );    
+    de->comboDescription->insertStringList( descriptions().names() );
 
     de->setEvent( event );
 

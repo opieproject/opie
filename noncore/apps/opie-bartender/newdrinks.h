@@ -15,15 +15,15 @@
 #include <qwidget.h>
 #include <qdialog.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QLabel;
 class QLineEdit;
 class QMultiLineEdit;
 
 class New_Drink : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
@@ -39,7 +39,7 @@ protected:
     QGridLayout* Layout5;
     QHBoxLayout* Layout4;
     QString drinkName;
-    
+
 };
 
 #endif // NEW_DRINK_H

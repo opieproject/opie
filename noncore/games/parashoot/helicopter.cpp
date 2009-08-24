@@ -84,7 +84,7 @@ void Helicopter::checkCollision()
 
 void Helicopter::dropman()
 {
-    (void)new Man(canvas(), 15, 25); 
+    (void)new Man(canvas(), 15, 25);
     (void)new Man(canvas(), 35, 25);
     takeOff();
 }
