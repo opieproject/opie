@@ -43,6 +43,7 @@
 #include <opie2/ocontactaccessbackend_vcard.h>
 #include <opie2/odatebookaccessbackend_xml.h>
 #include <opie2/odatebookaccessbackend_vcal.h>
+#include <opie2/omemoaccessbackend_text.h>
 #include <opie2/odebug.h>
 
 #ifdef __USE_SQL
@@ -165,6 +166,8 @@ database << oendl;
 					 return (T*) new ODateBookAccessBackend_VCal( appName, filename );
 					 break;
 				 }
+             case OPimGlobal::NOTES:
+                 return (T*) new OPimMemoAccessBackend_Text( appName, filename );
 			 default:
 				 return (T*) NULL;
 			 }
