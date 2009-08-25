@@ -116,7 +116,7 @@ OTUUID::operator ::uuid_t() const {
 
     //kdDebug() << "uuid_t() -> " << QString(*this) << endl;
     ::uuid_t ret;
-    if ((lo == (uint64_t(0x80000080) << 32) | uint64_t(0x5F9B34FB)) &&
+    if ((lo == ((uint64_t(0x80000080) << 32) | uint64_t(0x5F9B34FB))) &&
         ((hi&0xFFFFFFFF) == 0x1000)) {
         uint32_t uuid32val = uint32_t(hi >> 32);
         if (uuid32val > 0xFFFF) {
