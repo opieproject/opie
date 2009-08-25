@@ -55,7 +55,7 @@ struct OPimMemo::OPimMemoData : public QShared
   Creates a new, empty contact.
 */
 OPimMemo::OPimMemo()
-    : OPimRecord(), data( 0 )
+    : OPimRecord(), data( new OPimMemoData() )
 {
 }
 
