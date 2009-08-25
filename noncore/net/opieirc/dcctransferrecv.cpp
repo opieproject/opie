@@ -18,7 +18,8 @@ DCCTransferRecv::DCCTransferRecv(Q_UINT32 ip4Addr, Q_UINT16 port, const QString 
     connect(m_socket, SIGNAL(readyRead()), this, SLOT(slotProcess()));
     connect(m_socket, SIGNAL(connectionClosed()), this, SLOT(slotFinished()));
 
-    m_file->open(IO_WriteOnly);
+    if ( !m_file->open(IO_WriteOnly) )
+	odebug << "File " << m_file->name() << " could not be opened" << oendl;
 }
 
 

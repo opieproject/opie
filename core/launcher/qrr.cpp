@@ -83,7 +83,8 @@ QueuedRequestRunner::QueuedRequestRunner( QFile *f, QWidget *parent )
 	progressBar->setTotalSteps( totalSteps );
 	progressBar->setProgress( 0 );
     }
-    file->open( IO_ReadOnly );
+    if ( !file->open( IO_ReadOnly ) )
+        qDebug( "Failed to open %s", file->name().latin1() );
 }
 
 QueuedRequestRunner::~QueuedRequestRunner()
@@ -108,7 +109,9 @@ int QueuedRequestRunner::countSteps()
 {
     int totalSteps = 0;
     bool more = TRUE;
-    file->open( IO_ReadOnly );
+    if ( !file->open( IO_ReadOnly ) )
+        return -1;
+
     while ( more ) {
 	steps = 0;
 	more = process( TRUE );

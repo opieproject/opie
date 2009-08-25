@@ -44,9 +44,13 @@ int ppm_expander::OpenFile(const char* infile)
 
 void ppm_expander::sizes(unsigned long& file, unsigned long& text)
 {
-  struct stat _stat;
-  fstat(fileno(my_file_in),&_stat);
-  file = _stat.st_size;
+  struct stat fileStat;
+  if (fstat(fileno(my_file_in),&fileStat) == -1) {
+      file = 0;
+      text = 0;
+      return;
+  }
+  file = fileStat.st_size;
   text = numblocks*blocksize;
 }
 

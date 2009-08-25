@@ -187,12 +187,13 @@ void System::SLOT_ProcessExited( MyProcess * P ) {
 }
 
 void System::refreshStatistics( InterfaceInfo & I ) {
-    if( ! ProcDevNet ) {
-      return;
-    }
+    if( ! ProcDevNet )
+        return;
+
     // cannot seek on dev
     ProcDevNet->close();
-    ProcDevNet->open( IO_ReadOnly );
+    if ( !ProcDevNet->open( IO_ReadOnly ) )
+        return;
 
     QString line;
     QTextStream procTs(ProcDevNet);
@@ -204,71 +205,70 @@ void System::refreshStatistics( InterfaceInfo & I ) {
     line = procTs.readLine();
     // get version
     if( line.find("compressed") )
-      version = 3;
+        version = 3;
     else if( line.find( "bytes" ) )
-      version = 2;
+        version = 2;
     else
-      version = 1;
+        version = 1;
     while((line = procTs.readLine().simplifyWhiteSpace()) != QString::null) {
-      if( (loc = line.find(":") ) == -1) {
-        continue;
-      }
+        if( (loc = line.find(":") ) == -1)
+            continue;
 
-      if( I.Name != line.left(loc) )
-        continue;
+        if( I.Name != line.left(loc) )
+            continue;
 
-      // tokenize
-      SL = QStringList::split( ' ', line.mid(loc+1), FALSE );
+        // tokenize
+        SL = QStringList::split( ' ', line.mid(loc+1), FALSE );
 
-      // update data
-      switch( version ) {
-        case 1 :
-          I.RcvBytes = "";
-          I.RcvPackets = SL[0];
-          I.RcvErrors = SL[1];
-          I.RcvDropped = SL[2];
+        // update data
+        switch( version ) {
+            case 1 :
+                I.RcvBytes = "";
+                I.RcvPackets = SL[0];
+                I.RcvErrors = SL[1];
+                I.RcvDropped = SL[2];
 
-          I.SndBytes = "";
-          I.SndPackets = SL[5];
-          I.SndErrors = SL[6];
-          I.SndDropped = SL[7];
+                I.SndBytes = "";
+                I.SndPackets = SL[5];
+                I.SndErrors = SL[6];
+                I.SndDropped = SL[7];
 
-          I.Collisions = SL[9];
-          break;
-        case 2 :
-          I.RcvBytes = SL[0];
-          I.RcvPackets = SL[1];
-          I.RcvErrors = SL[2];
-          I.RcvDropped = SL[3];
+                I.Collisions = SL[9];
+                break;
+            case 2 :
+                I.RcvBytes = SL[0];
+                I.RcvPackets = SL[1];
+                I.RcvErrors = SL[2];
+                I.RcvDropped = SL[3];
 
-          I.SndBytes = SL[6];
-          I.SndPackets = SL[7];
-          I.SndErrors = SL[8];
-          I.SndDropped = SL[9];
+                I.SndBytes = SL[6];
+                I.SndPackets = SL[7];
+                I.SndErrors = SL[8];
+                I.SndDropped = SL[9];
 
-          I.Collisions = SL[11];
-          break;
-        case 3 :
-          I.RcvBytes = SL[0];
-          I.RcvPackets = SL[1];
-          I.RcvErrors = SL[2];
-          I.RcvDropped = SL[3];
+                I.Collisions = SL[11];
+                break;
+            case 3 :
+                I.RcvBytes = SL[0];
+                I.RcvPackets = SL[1];
+                I.RcvErrors = SL[2];
+                I.RcvDropped = SL[3];
 
-          I.SndBytes = SL[8];
-          I.SndPackets = SL[9];
-          I.SndErrors = SL[10];
-          I.SndDropped = SL[11];
+                I.SndBytes = SL[8];
+                I.SndPackets = SL[9];
+                I.SndErrors = SL[10];
+                I.SndDropped = SL[11];
 
-          I.Collisions = SL[13];
-          break;
-      }
-      break;
+                I.Collisions = SL[13];
+                break;
+        }
+        break;
     }
 }
 
 //
-// THIS UPDATES THE LIST -> INTERFACES ARE NOT DELETED BUT
-// FLAGGED AS ! 'IsUp' IF NO LONGER PRESENT
+// This updates the list -> interfaces aren't deleted but
+// flagged as ! 'IsUp' if no longer present
 //
 
 void System::probeInterfaces( void ) {
@@ -282,8 +282,9 @@ void System::probeInterfaces( void ) {
     // flag all as 'down'
     for( QDictIterator<InterfaceInfo> it( ProbedInterfaces );
          it.current();
-         ++it ) {
-      it.current()->IsUp = 0;
+         ++it )
+    {
+        it.current()->IsUp = 0;
     }
 
     sockfd = socket(PF_INET, SOCK_DGRAM, 0);

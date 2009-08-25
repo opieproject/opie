@@ -398,7 +398,8 @@ OPimXmlFileReader::OPimXmlFileReader( const QString &file )
 void OPimXmlFileReader::read( OPimXmlStreamParser &parser )
 {
     QFile f( QFile::encodeName( m_file ) );
-    f.open( IO_ReadOnly );
+    if ( !f.open( IO_ReadOnly ) )
+        return;
 
     QCString cstr;
     cstr.resize(11);

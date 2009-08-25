@@ -406,14 +406,17 @@ OConfig* OGlobal::qpe_config()
 
 bool OGlobal::truncateFile( QFile &f, off_t size )
 {
-    /* or should we let enlarge Files? then remove this
+    /* XXX or should we let enlarge Files? then remove this
        f.size()< part! - Alwin
     */
-    if (!f.exists()||f.size()<(unsigned)size) return false;
+    if (!f.exists()||f.size()<(unsigned)size)
+        return false;
+
     bool closeit=false;
     if (!f.isOpen()) {
         closeit=true;
-        f.open(IO_Raw | IO_ReadWrite | IO_Append);
+        if (!f.open(IO_Raw | IO_ReadWrite | IO_Append))
+            return false;
     }
     if (!f.isOpen()) { return false; }
     int r = ftruncate(f.handle(),size);

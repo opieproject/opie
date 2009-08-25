@@ -1605,7 +1605,8 @@ QCString &QCString::remove( uint index, uint len )
     } else if ( len != 0 ) {
 	detach();
 	memmove( data()+index, data()+index+len, olen-index-len+1 );
-	QByteArray::resize(olen-len+1, QByteArray::SpeedOptim );
+	if ( !QByteArray::resize(olen-len+1, QByteArray::SpeedOptim ) )
+            return *this; // out of memory
     }
     return *this;
 }
