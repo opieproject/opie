@@ -62,6 +62,11 @@ OQCopMessage::OQCopMessage ( const OQCopMessage &copy )
     init ( copy. channel(), copy. message(), copy. data());
 }
 
+OQCopMessage::~OQCopMessage()
+{
+    delete d;
+}
+
 OQCopMessage &OQCopMessage::operator = ( const OQCopMessage &assign )
 {
     init ( assign. channel(), assign. message(), assign. data());

@@ -39,17 +39,17 @@ class Category
 {
     public:
         // --- Constructor:
-        Category(QString &sName, bool bIncome=false) { _sName=sName; _bIncome=bIncome; }
+        Category(QString &sName, bool bIncome=false) { m_Name=sName; m_Income=bIncome; }
 
         // members
-        QString &getName() { return(_sName); }
-        bool isIncome() { return(_bIncome); }
-        void setName(QString &sName) { _sName=sName; }
-        void setIncome(bool bIncome) { _bIncome=bIncome; }
+        QString &getName() { return m_Name; }
+        bool isIncome() { return m_Income; }
+        void setName(QString &sName) { m_Name=sName; }
+        void setIncome(bool bIncome) { m_Income=bIncome; }
 
     private:
-        QString _sName;
-        bool _bIncome;
+        QString m_Name;
+        bool m_Income;
 };
 
 class CategoryList : public QList<Category>
@@ -64,72 +64,59 @@ class CategoryList : public QList<Category>
 class Cfg
 {
     public:
-        // --- Constructor
         Cfg();
+        ~Cfg();
 
-        // --- members
-        bool getUseSmallFont() { return(_useSmallFont); }
-        void setUseSmallFont(bool n) { _useSmallFont=n; }
-        bool getShowLocks() { return(_showLocks); }
-        void setShowLocks(bool n) { _showLocks=n; }
-        bool getShowBalances() { return(_showBalances); }
-        void setShowBalances(bool n) { _showBalances=n; }
-        QString &getCurrencySymbol() { return(_currencySymbol); }
-        void setCurrencySymbol(QString n) {_currencySymbol= n; }
-        void setCurrencySymbol(const char *n) { _currencySymbol=n; }
-        QStringList &getAccountTypes() { return(_AccountTypes); }
+        bool getUseSmallFont() { return(m_useSmallFont); }
+        void setUseSmallFont(bool n) { m_useSmallFont=n; }
+        bool getShowLocks() { return(m_showLocks); }
+        void setShowLocks(bool n) { m_showLocks=n; }
+        bool getShowBalances() { return(m_showBalances); }
+        void setShowBalances(bool n) { m_showBalances=n; }
+        QString &getCurrencySymbol() { return(m_currencySymbol); }
+        void setCurrencySymbol(QString n) {m_currencySymbol= n; }
+        void setCurrencySymbol(const char *n) { m_currencySymbol=n; }
+        QStringList &getAccountTypes() { return(m_AccountTypes); }
 
-        // --- Payees
-        QStringList &getPayees() { return(_Payees); }
-        bool getSavePayees() { return(_bSavePayees); }
-        void setSavePayees(bool bSave) { _bSavePayees=bSave; }
+        QStringList &getPayees() { return(m_Payees); }
+        bool getSavePayees() { return(m_SavePayees); }
+        void setSavePayees(bool bSave) { m_SavePayees=bSave; }
 
-        // --- Categories
         QStringList getCategories();
         void setCategories(QStringList &lst);
-        CategoryList *getCategoryList() { return(_pCategories); }
+        CategoryList *getCategoryList() { return(m_Categories); }
 
-        // --- last book
-        void setOpenLastBook(bool openLastBook) { _openLastBook=openLastBook; }
-        bool isOpenLastBook() { return(_openLastBook); }
-        void setLastBook(const QString &lastBook) { _sLastBook=lastBook; }
-        QString &getLastBook() { return(_sLastBook); }
+        void setOpenLastBook(bool openLastBook) { m_openLastBook=openLastBook; }
+        bool isOpenLastBook() { return(m_openLastBook); }
+        void setLastBook(const QString &lastBook) { m_LastBook=lastBook; }
+        QString &getLastBook() { return(m_LastBook); }
 
-        // --- last tab
-        void setShowLastTab(bool showLastTab) { _showLastTab=showLastTab; }
-        bool isShowLastTab() { return(_showLastTab); }
+        void setShowLastTab(bool showLastTab) { m_showLastTab=showLastTab; }
+        bool isShowLastTab() { return(m_showLastTab); }
 
-        // --- reads data from config file
         void readConfig(Config &cfg);
 
-        // --- writes data to config file
         void writeConfig(Config &cfg);
 
-        // --- dirty flag
-        bool isDirty() { return(_bDirty); }
-        void setDirty(bool bDirty) { _bDirty=bDirty; }
+        bool isDirty() { return(m_Dirty); }
+        void setDirty(bool bDirty) { m_Dirty=bDirty; }
 
     protected:
-        // --- reads list from config file
         static void readStringList(Config &cfg, const char *sKey, QStringList &lst);
-
-        // --- writes list in configuration file
         static void writeStringList(Config &cfg, const char *sKey, QStringList &lst);
 
     private:
-        QString  _currencySymbol;
-		bool _useSmallFont;
-		bool _showLocks;
-		bool _showBalances;
-        bool _openLastBook;
-        bool _showLastTab;
-        bool _bDirty;
-        bool _bSavePayees;
-        QString _sLastBook;
-        QStringList _AccountTypes;
-        CategoryList *_pCategories;
-        QStringList _Payees;
-
+        QString m_currencySymbol;
+        bool m_useSmallFont;
+        bool m_showLocks;
+        bool m_showBalances;
+        bool m_openLastBook;
+        bool m_showLastTab;
+        bool m_Dirty;
+        bool m_SavePayees;
+        QString m_LastBook;
+        QStringList m_AccountTypes;
+        CategoryList *m_Categories;
+        QStringList m_Payees;
 };
-
 #endif

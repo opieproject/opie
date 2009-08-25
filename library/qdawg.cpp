@@ -232,7 +232,7 @@ public:
 	    ds.readBytes(nn,n);
 
 	    // #### endianness problem ignored.
-	    node = (QDawg::Node*)nn;
+	    node = (QDawg::Node*)(nn);
 	    nodes = n / sizeof(QDawg::Node);
 	} else {
 	    node = 0;
@@ -272,6 +272,8 @@ public:
 	    delete club;
 	}
     }
+
+    ~QDawgPrivate() { delete node; }
 
     bool write(QIODevice* dev)
     {
@@ -518,7 +520,7 @@ bool QDawg::readFile(const QString& filename)
     if ( f < 0 )
 	return FALSE;
     struct stat st;
-    if ( !fstat( f, &st ) ) {
+    if ( fstat( f, &st ) == 0 ) {
 	char * tmp = (char*)mmap( 0, st.st_size, // any address, whole file
                        PROT_READ, // read-only memory
                        MAP_FILE | MAP_PRIVATE, // swap-backed map from file

@@ -89,22 +89,22 @@ public:
 
     /*! gets the number of fields defined in the database */
     inline int getNumFields() {
-       return kRep->getNumFields();
+       return m_Rep->getNumFields();
     }
 
     /*! gets the index of a key given its name */
     inline int getKeyIndex(QString qs) {
-        return kRep->getKeyIndex(qs);
+        return m_Rep->getKeyIndex(qs);
     }
 
     /*! gets the type of a key given its index */
     inline TVVariant::KeyType getKeyType(int i) {
-        return kRep->getKeyType(i);
+        return m_Rep->getKeyType(i);
     }
 
     /*! gets the name of a key given its index */
     inline QString getKeyName(int i) {
-        return kRep->getKeyName(i);
+        return m_Rep->getKeyName(i);
     }
 
 // Access functions.. iterator type stuff
@@ -125,7 +125,7 @@ private:
     QVector<DataElem> master_table;
     DBAccess *archive;
 
-    KeyList *kRep;
+    KeyList *m_Rep;
 
     unsigned int number_elems;
     unsigned int table_size; /* should always be a power of 2 */

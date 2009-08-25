@@ -55,7 +55,7 @@ DBStore::DBStore()
     name = "";
     number_elems = 0;
     full = false;
-    kRep = new KeyList();
+    m_Rep = new KeyList();
     master_table.resize(INIT_TABLE_SIZE);
     table_size = INIT_TABLE_SIZE;
 
@@ -75,7 +75,7 @@ void DBStore::freeTable()
         delete archive;
         archive = 0;
     }
-    kRep->clear(); /* clear the current key list */
+    m_Rep->clear(); /* clear the current key list */
 
     number_elems = 0;
     table_size = INIT_TABLE_SIZE;
@@ -90,6 +90,7 @@ void DBStore::freeTable()
 DBStore::~DBStore()
 {
     freeTable();
+    delete m_Rep;
 }
 
 /*!
@@ -222,7 +223,7 @@ QString DBStore::getName()
 */
 KeyList *DBStore::getKeys()
 {
-    return kRep;
+    return m_Rep;
 }
 
 /*!
@@ -231,7 +232,7 @@ KeyList *DBStore::getKeys()
 */
 void DBStore::setKeys(KeyList *k)
 {
-    kRep = k;
+    m_Rep = k;
 }
 
 /*!

@@ -35,13 +35,22 @@
 
 // --- Cfg --------------------------------------------------------------------
 Cfg::Cfg()
+    : m_currencySymbol("$")
+    , m_useSmallFont(true)
+    , m_showLocks(false)
+    , m_showBalances(false)
+    , m_openLastBook(false)
+    , m_showLastTab(false)
+    , m_Dirty(false)
+    , m_SavePayees(false)
+    , m_LastBook()
+    , m_Categories(new CategoryList())
 {
-    _currencySymbol="$";
-    _useSmallFont=TRUE;
-    _showLocks=FALSE;
-    _showBalances=FALSE;
-    _pCategories=new CategoryList();
-    _bDirty=false;
+}
+
+Cfg::~Cfg()
+{
+    delete m_Categories;
 }
 
 // --- readStringList ---------------------------------------------------------
@@ -62,7 +71,7 @@ void Cfg::readStringList(Config &cfg, const char *sKey, QStringList &lst)
     for(int i=1; i<=iCount; i++) {
         sEntry.sprintf("%s%d", sKey, i);
         QString sType=cfg.readEntry(sEntry);
-        if( sType!=NULL )
+        if( sType )
             lst.append(sType);
     }
 }
@@ -77,30 +86,30 @@ void Cfg::readConfig(Config &config)
     config.setGroup( "Config" );
 
     // read scalars
-	_currencySymbol = config.readEntry( "CurrencySymbol", "$" );
-	_useSmallFont = config.readBoolEntry( "UseSmallFont", TRUE );
-	_showLocks = config.readBoolEntry( "ShowLocks", FALSE );
-	_showBalances = config.readBoolEntry( "ShowBalances", FALSE );
-    _openLastBook = config.readBoolEntry( "OpenLastBook", FALSE );
-    _sLastBook = config.readEntry("LastBook", "");
-    _showLastTab = config.readBoolEntry( "ShowLastTab", FALSE );
-    _bSavePayees = config.readBoolEntry( "SavePayees", FALSE );
+    m_currencySymbol = config.readEntry( "CurrencySymbol", "$" );
+    m_useSmallFont = config.readBoolEntry( "UseSmallFont", true );
+    m_showLocks = config.readBoolEntry( "ShowLocks", false );
+    m_showBalances = config.readBoolEntry( "ShowBalances", false );
+    m_openLastBook = config.readBoolEntry( "OpenLastBook", false );
+    m_LastBook = config.readEntry("LastBook", "");
+    m_showLastTab = config.readBoolEntry( "ShowLastTab", false );
+    m_SavePayees = config.readBoolEntry( "SavePayees", false );
 
     // Account types
-    readStringList(config, "AccType", _AccountTypes);
-    if( _AccountTypes.isEmpty() ) {
-        _AccountTypes+= (const char *)QWidget::tr("Savings");
-        _AccountTypes+= (const char *)QWidget::tr("Checking");
-	    _AccountTypes+= (const char *)QWidget::tr("CD");
-	    _AccountTypes+= (const char *)QWidget::tr("Money market");
-	    _AccountTypes+= (const char *)QWidget::tr("Mutual fund");
-	    _AccountTypes+= (const char *)QWidget::tr("Other");
-        writeStringList(config, "AccType", _AccountTypes);
+    readStringList(config, "AccType", m_AccountTypes);
+    if( m_AccountTypes.isEmpty() ) {
+        m_AccountTypes+= (const char *)QWidget::tr("Savings");
+        m_AccountTypes+= (const char *)QWidget::tr("Checking");
+        m_AccountTypes+= (const char *)QWidget::tr("CD");
+        m_AccountTypes+= (const char *)QWidget::tr("Money market");
+        m_AccountTypes+= (const char *)QWidget::tr("Mutual fund");
+        m_AccountTypes+= (const char *)QWidget::tr("Other");
+        writeStringList(config, "AccType", m_AccountTypes);
         config.write();
     }
 
     // Payees
-    readStringList(config, "Payee", _Payees);
+    readStringList(config, "Payee", m_Payees);
 
     // Read Categories
     QStringList lst;
@@ -108,34 +117,33 @@ void Cfg::readConfig(Config &config)
     if( lst.isEmpty() ) {
         QString type=QWidget::tr("Expense");
         lst += QWidget::tr( "Automobile" )+";"+type;
-	    lst += QWidget::tr( "Bills" )+";"+type;
-	    lst += QWidget::tr( "CDs" )+";"+type;
-	    lst += QWidget::tr( "Clothing" )+";"+type;
-	    lst += QWidget::tr( "Computer" )+";"+type;
-	    lst += QWidget::tr( "DVDs" )+";"+type;
-	    lst += QWidget::tr( "Electronics" )+";"+type;
-	    lst += QWidget::tr( "Entertainment" )+";"+type;
-	    lst += QWidget::tr( "Food" )+";"+type;
-	    lst += QWidget::tr( "Gasoline" )+";"+type;
-	    lst += QWidget::tr( "Misc" )+";"+type;
-	    lst += QWidget::tr( "Movies" )+";"+type;
-	    lst += QWidget::tr( "Rent" )+";"+type;
-	    lst += QWidget::tr( "Travel" )+";"+type;
+        lst += QWidget::tr( "Bills" )+";"+type;
+        lst += QWidget::tr( "CDs" )+";"+type;
+        lst += QWidget::tr( "Clothing" )+";"+type;
+        lst += QWidget::tr( "Computer" )+";"+type;
+        lst += QWidget::tr( "DVDs" )+";"+type;
+        lst += QWidget::tr( "Electronics" )+";"+type;
+        lst += QWidget::tr( "Entertainment" )+";"+type;
+        lst += QWidget::tr( "Food" )+";"+type;
+        lst += QWidget::tr( "Gasoline" )+";"+type;
+        lst += QWidget::tr( "Misc" )+";"+type;
+        lst += QWidget::tr( "Movies" )+";"+type;
+        lst += QWidget::tr( "Rent" )+";"+type;
+        lst += QWidget::tr( "Travel" )+";"+type;
 
         type=QWidget::tr( "Income" );
-	    lst += QWidget::tr( "Work" )+";"+type;
-	    lst += QWidget::tr( "Family Member" )+";"+type;
-	    lst += QWidget::tr( "Misc. Credit" )+";"+type;
+        lst += QWidget::tr( "Work" )+";"+type;
+        lst += QWidget::tr( "Family Member" )+";"+type;
+        lst += QWidget::tr( "Misc. Credit" )+";"+type;
 
         setCategories(lst);
         writeStringList(config, "Category", lst);
         config.write();
-    } else {
+    } else
         setCategories(lst);
-    }
 
     // not dirty
-    _bDirty=false;
+    m_Dirty = false;
 }
 
 
@@ -165,20 +173,20 @@ void Cfg::writeConfig(Config &config)
     config.setGroup( "Config" );
 
     // write scalars
-    config.writeEntry( "CurrencySymbol", _currencySymbol );
-    config.writeEntry( "UseSmallFont", _useSmallFont );
-    config.writeEntry( "ShowLocks", _showLocks );
-    config.writeEntry( "ShowBalances", _showBalances );
-    config.writeEntry( "OpenLastBook", _openLastBook );
-    config.writeEntry( "LastBook", _sLastBook );
-    config.writeEntry( "ShowLastTab", _showLastTab );
-    config.writeEntry( "SavePayees", _bSavePayees );
+    config.writeEntry( "CurrencySymbol", m_currencySymbol );
+    config.writeEntry( "UseSmallFont", m_useSmallFont );
+    config.writeEntry( "ShowLocks", m_showLocks );
+    config.writeEntry( "ShowBalances", m_showBalances );
+    config.writeEntry( "OpenLastBook", m_openLastBook );
+    config.writeEntry( "LastBook", m_LastBook );
+    config.writeEntry( "ShowLastTab", m_showLastTab );
+    config.writeEntry( "SavePayees", m_SavePayees );
 
     // write account types
-    writeStringList(config, "AccType", _AccountTypes);
+    writeStringList(config, "AccType", m_AccountTypes);
 
     // write payees
-    writeStringList(config, "Payee", _Payees);
+    writeStringList(config, "Payee", m_Payees);
 
     // write categories
     QStringList lst=getCategories();
@@ -186,7 +194,7 @@ void Cfg::writeConfig(Config &config)
 
     // commit write
     config.write();
-    _bDirty=false;
+    m_Dirty=false;
 }
 
 
@@ -194,25 +202,28 @@ void Cfg::writeConfig(Config &config)
 QStringList Cfg::getCategories()
 {
     QStringList ret;
-    for(Category *itr=_pCategories->first(); itr; itr=_pCategories->next() ) {
-        QString sEntry;
-        sEntry.sprintf("%s;%s", (const char *)itr->getName(), (const char *)(itr->isIncome() ? QWidget::tr("Income") : QWidget::tr("Expense")) );
-        ret.append(sEntry);
+    for(Category *itr=m_Categories->first(); itr; itr=m_Categories->next() ) {
+        QString Entry = itr->getName() + ";" + (itr->isIncome() ?
+						    QWidget::tr( "Income" ) :
+						    QWidget::tr( "Expense" ) ) ;
+        ret.append( Entry );
     }
-    return(ret);
+    return ret;
 }
 
 
 // --- setCategories ----------------------------------------------------------
 void Cfg::setCategories(QStringList &lst)
 {
-    _pCategories->clear();
+    m_Categories->clear();
     QStringList::Iterator itr;
     for(itr=lst.begin(); itr!=lst.end(); itr++) {
         QStringList split=QStringList::split(";", *itr, true);
-        if( split.count()<2 ) continue;
-        bool bIncome= (split[1]==QWidget::tr("Income"));
-        _pCategories->append( new Category(split[0], bIncome) );
+        if( split.count()<2 )
+            continue;
+
+        bool bIncome = (split[1]==QWidget::tr("Income"));
+        m_Categories->append( new Category(split[0], bIncome) );
     }
 }
 

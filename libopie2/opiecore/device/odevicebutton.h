@@ -36,6 +36,7 @@ public:
     OQCopMessage ( );
     OQCopMessage ( const OQCopMessage &copy );
     OQCopMessage ( const QCString &m_channel, const QCString &message, const QByteArray &args = QByteArray ( ));
+    ~OQCopMessage ( );
 
     OQCopMessage &operator = ( const OQCopMessage &assign );
 

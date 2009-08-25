@@ -28,6 +28,7 @@ struct FKey {
         if (!f.isEmpty())
             pix = new QPixmap ( Opie::Core::OResource::loadPixmap("console/keys/" + f ) );
     }
+//    Let Qt clean up the QPixmap. If you enable this dtor, it will cause crashing
 //    ~FKey() { if (pix) delete pix; }
 
     QString label;

@@ -20,22 +20,30 @@
  */
 KMolCalc::KMolCalc() {
   elements = new ElementList;
-  elstable = NULL;
+  elstable = 0;
   readElstable();
 }
 
 KMolCalc::~KMolCalc() {
+  if (elstable)
+    delete elstable;
+
   delete elements;
 }
 
 void KMolCalc::readElstable() {
   weight = -1; // not calculated yet
-  if (elstable) delete elstable;
+  if (elstable)
+    delete elstable;
+
   elstable = new QDict<SubUnit> (197, TRUE);
+  // Setting this to auto delete will only auto-delete the
+  // objects w/in the collection
   elstable->setAutoDelete(TRUE);
-  mwfile =  QPEApplication::qpeDir() +"share/oxygen/kmolweights";
+  mwfile = QPEApplication::qpeDir() + "share/oxygen/kmolweights";
   QFile f(mwfile);
-  if (f.exists()) readMwfile(f);
+  if (f.exists())
+    readMwfile(f);
 }
 
 
@@ -48,21 +56,28 @@ void KMolCalc::readElstable() {
  */
 QString KMolCalc::readFormula(const QString& s) {
   weight = -1;
-  if (elements) delete elements;
+  if (elements)
+    delete elements;
+
   elements = new ElementList;
   return KMolCalc::readGroup(s, elements);
 }
 
 // read a formula group recursively. Called by readFormula.
 QString KMolCalc::readGroup(const QString& s, ElementList* els) {
-    if (s.isEmpty()) return QString ("Enter a formula."); //ERROR
+    if (s.isEmpty())
+      return QString ("Enter a formula."); //ERROR
+
     int sl = s.length();
     int i = 0;
     QString errors ("OK");
     bool ok = TRUE;
     while (i < sl && ((s[i] <= '9' && s[i] >= '0') || s[i] == '.')) i++;
+
     double prefix = (i == 0 ? 1 : s.left(i).toDouble(&ok));
-    if (! ok || i == sl || prefix == 0) return QString ("Bad formula."); // ERROR
+    if (!ok || i == sl || prefix == 0)
+      return QString ("Bad formula."); // ERROR
+
     ElementList* elstemp = new ElementList;
     while (i < sl) {
         int j = i;
@@ -82,8 +97,9 @@ QString KMolCalc::readGroup(const QString& s, ElementList* els) {
             errors = KMolCalc::readGroup(s.mid(j+1, i-j-1), inner);
             j = ++i;
             while (i < sl && ((s[i] <= '9' && s[i] >= '0') || s[i] == '.')) i++;
+
             double suffix = (i == j ? 1 : s.mid(j, i-j).toDouble(&ok));
-            if (! ok || suffix == 0) {
+            if (!ok || suffix == 0) {
                 delete inner;
                 delete elstemp;
                 return QString ("Bad formula."); // ERROR
@@ -93,12 +109,14 @@ QString KMolCalc::readGroup(const QString& s, ElementList* els) {
             inner = NULL;
         } else if ((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z')) {
             while (++i < sl && ((s[i] >= 'a' && s[i] <= 'z') || s[i] == '*' ||
-                        s[i] == '\''));
+                                s[i] == '\''));
+
             QString elname = s.mid(j, i-j);
             j = i;
             while (i < sl && ((s[i] <= '9' && s[i] >= '0') || s[i] == '.')) i++;
+
             double suffix = (i == j ? 1 : s.mid(j, i-j).toDouble(&ok));
-            if (! ok || suffix == 0) {
+            if (!ok || suffix == 0) {
                 delete elstemp;
                 return QString ("Bad formula."); // ERROR
             }
@@ -131,7 +149,9 @@ QString KMolCalc::readGroup(const QString& s, ElementList* els) {
  * Calculate and return the molecular weight of the current chemical formula.
  */
 double KMolCalc::getWeight() {
-  if (weight == -1) weight = elements->getWeight(elstable);
+  if (weight == -1)
+    weight = elements->getWeight(elstable);
+
   return weight;
 }
 
@@ -140,8 +160,12 @@ double KMolCalc::getWeight() {
  * element - percentage pairs, separated by newlines.
  */
 QString KMolCalc::getEA() {
-  if (weight == -1) weight = elements->getWeight(elstable);
-  if (weight == -1) return QString("ERROR: Couldn't get Mw..."); // ERROR
+  if (weight == -1)
+    weight = elements->getWeight(elstable);
+
+  if (weight == -1)
+    return QString("ERROR: Couldn't get Mw..."); // ERROR
+
   return elements->getEA(elstable, weight);
 }
 
@@ -154,13 +178,15 @@ QString KMolCalc::getEmpFormula() {
 
 // Read the element definition file.
 void KMolCalc::readMwfile(QFile& f) {
-  if (! f.open(IO_ReadOnly)) return; //ERROR
+  if (!f.open(IO_ReadOnly))
+    return; //ERROR
+
   QTextStream fs (&f);
   QString line;
-  while (! fs.eof()) {
+  while (!fs.eof()) {
     line = fs.readLine();
     SubUnit* s = SubUnit::makeSubUnit(line);
-	elstable->replace(s->getName(), s);
+    elstable->replace(s->getName(), s);
   }
   f.close();
 }
@@ -189,8 +215,12 @@ void KMolCalc::defineElement (const QString& name, double weight) {
 QString KMolCalc::defineGroup (const QString& grpname, const QString& formula) {
   ElementList* els = new ElementList(grpname);
   QString error = readGroup(formula, els);
-  if (error != "OK") return error;
-  if (els->contains(grpname)) return QString("Can't define a group recursively!\n");
+  if (error != "OK")
+    return error;
+
+  if (els->contains(grpname))
+    return QString("Can't define a group recursively!\n");
+
   elstable->replace(grpname, els);
   return QString("OK");
 }
