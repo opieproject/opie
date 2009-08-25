@@ -683,7 +683,7 @@ void KRFBDecoder::gotServerCut()
 
 void KRFBDecoder::gotServerCutLength()
 {
-  assert( currentState = AwaitingServerCutLength );
+  assert( currentState == AwaitingServerCutLength );
   disconnect( con, SIGNAL( gotEnoughData() ),
               this, SLOT( gotServerCutLength() ) );
 
@@ -700,7 +700,7 @@ void KRFBDecoder::gotServerCutLength()
 
 void KRFBDecoder::gotServerCutText()
 {
-  assert( currentState = AwaitingServerCutText );
+  assert( currentState == AwaitingServerCutText );
 
   disconnect( con, SIGNAL( gotEnoughData() ),
               this, SLOT( gotServerCutText() ) );
