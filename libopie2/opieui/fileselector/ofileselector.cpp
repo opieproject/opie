@@ -471,10 +471,10 @@ void OFileViewFileListView::reread( bool all )
     int filter;
     filter = QDir::Dirs;
     if ( selector()->mode() != OFileSelector::DIRECTORYSELECTOR )
-        filter = filter | QDir::Files | QDir::All;
+        filter |= QDir::Files | QDir::All;
 
     if ( m_all )
-        filter = filter | QDir::Hidden;
+        filter |= QDir::Hidden;
 
     dir.setFilter( filter );
 
