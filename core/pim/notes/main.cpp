@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 
+using namespace Opie::Notes;
+
 int main(int argc, char* argv[])
 {
     QPEApplication a(argc, argv);

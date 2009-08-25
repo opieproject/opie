@@ -1,5 +1,8 @@
 #include "editwindow.h"
 
+using namespace Opie;
+using namespace Opie::Notes;
+
 editWindowWidget::editWindowWidget( QWidget* parent,  const char* name, bool modal, WFlags fl ) : QDialog( parent, name, modal, fl )
 {
     setCaption( tr( "Information:" ) );
@@ -11,47 +14,17 @@ editWindowWidget::editWindowWidget( QWidget* parent,  const char* name, bool mod
     showMaximized();
 }
 
-void editWindowWidget::loadFile(QString fileName)
-{
-    QFileInfo fileinfo(fileName);
-    setCaption(fileinfo.fileName());
-
-    QFile file(fileName);
-
-    if (file.exists())
-    {
-        if (!file.open(IO_ReadOnly))
-        {
-            QMessageBox::warning(0, tr("File i/o error"), fileName.sprintf(tr("Could not read file '%s'"), fileName));
-        }
-        else
-        {
-            QTextStream inStream(&file);
-            inStream.setEncoding(QTextStream::UnicodeUTF8);
-            editArea->setText(inStream.read());
-            file.close();
-        }
-    }
-}
-
-void editWindowWidget::saveFile(QString fileName)
-{
-    QFile file(fileName);
-
-    if(!file.open(IO_WriteOnly))
-    {
-        QMessageBox::warning(0, tr("File i/o error"), fileName.sprintf(tr("Could not write file '%s'"), fileName));
-    }
-    else
-    {
-        QTextStream outStream(&file);
-        outStream.setEncoding(QTextStream::UnicodeUTF8);
-        outStream << editArea->text();
-        file.close();
-        this->accept();
-    }
-}
-
 editWindowWidget::~editWindowWidget()
 {
 }
+
+void editWindowWidget::readMemo( const OPimMemo &memo )
+{
+    editArea->setText( memo.text() );
+}
+
+void editWindowWidget::writeMemo( OPimMemo &memo )
+{
+    memo.setText( editArea->text() );
+}
+

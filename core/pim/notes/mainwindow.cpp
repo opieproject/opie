@@ -33,7 +33,14 @@
 
 #include "mainwindow.h"
 #include "editwindow.h"
+
+#include <opie2/omemoaccess.h>
+#include <opie2/omemoaccessbackend_text.h>
+
 #include <qpe/ir.h>
+
+using namespace Opie;
+using namespace Opie::Notes;
 
 mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
     : Opie::OPimMainWindow( "Notes", "Notes", tr( "Note" ), "notes",
@@ -43,10 +50,13 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
     notesList = new QListBox(this, "notesList");
     setCentralWidget(notesList);
 
-    documentsDirName = QPEApplication::documentDir() + "/text/plain/";
+    QString documentsDirName = QPEApplication::documentDir() + "/text/plain/";
 
-    fileList.setPath(documentsDirName);
+    QDir fileList( documentsDirName );
 
+    m_access = new OPimMemoAccess();
+    m_access->load();
+    
     if(!fileList.exists())
     {
         fileList.setPath(QPEApplication::documentDir() + "/text/");
@@ -57,7 +67,7 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
 
             if(!fileList.mkdir(fileList.absPath()))
             {
-                QMessageBox::critical(0, tr("i/o error"), text.sprintf(tr("Could not create directory '%s'"), fileList.absPath()));
+                QMessageBox::critical(0, tr("i/o error"), tr("Could not create directory '%1'").arg( fileList.absPath() ) );
             }
             else
             {
@@ -65,7 +75,7 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
 
                 if(!fileList.mkdir(fileList.absPath()))
                 {
-                    QMessageBox::critical(0, tr("i/o error"), text.sprintf(tr("Could not create directory '%s'"), fileList.absPath()));
+                    QMessageBox::critical(0, tr("i/o error"), tr("Could not create directory '%1'").arg( fileList.absPath() ) );
                 }
             }
         }
@@ -80,16 +90,21 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
     initBars();
 }
 
+mainWindowWidget::~mainWindowWidget()
+{
+    delete m_access;
+}
+
 void mainWindowWidget::deleteFile()
 {
     if( notesList->count() > 0 )
     {
         switch (QMessageBox::warning(0, tr("Delete note"), tr("Really delete\n'") + notesList->currentText() + "'?",
-                    QMessageBox::Yes, QMessageBox::No))
+                    QMessageBox::Yes, QMessageBox::No)) 
         {
             case QMessageBox::Yes:
                 this->selected = notesList->currentItem();
-                QFile::remove(documentsDirName + fileList[notesList->currentItem()]);
+                m_access->remove( m_notes[notesList->currentItem()] );
                 refreshList();
                 break;
 
@@ -100,20 +115,24 @@ void mainWindowWidget::deleteFile()
     }
 }
 
-void mainWindowWidget::editFile(QString filename, int create)
+void mainWindowWidget::editMemo( OPimMemo &memo, bool create )
 {
     editWindowWidget *editWindow = new editWindowWidget(0, "editWindow", true);
 
-    editWindow->loadFile(filename);
+    editWindow->readMemo(memo);
 
     if(QPEApplication::execDialog(editWindow) == QDialog::Accepted)
     {
-        editWindow->saveFile(filename);
-        if( create )
-        {
+        editWindow->writeMemo( memo );
+        
+        if( create ) {
+            m_access->add( memo );
             // the new selection will be always at the end and count is already
             // 1 bigger than selected
             this->selected = notesList->count();
+        }
+        else {
+            m_access->replace( memo );
         }
     }
 
@@ -125,60 +144,36 @@ int mainWindowWidget::create()
     QString name;
     int now = time(0);
 
-    this->editFile(name.sprintf(documentsDirName + "%d.txt", now), true );
+    OPimMemo memo;
+    memo.setUid( now );
+    this->editMemo( memo, true );
 
     return 0;   //FIXME
 }
 
-void mainWindowWidget::slotItemEdit()
+void mainWindowWidget::slotItemEdit() 
 {
     openFile();
 }
 
-void mainWindowWidget::slotItemDelete()
+void mainWindowWidget::slotItemDelete() 
 {
     deleteFile();
 }
 
-void mainWindowWidget::slotItemNew()
+void mainWindowWidget::slotItemNew() 
 {
     create();
 }
 
 void mainWindowWidget::slotItemDuplicate()
 {
-    QString fileName = documentsDirName + fileList[notesList->currentItem()];
-    int now = time(0);
-
-    QFile fileOld(fileName);
-
-    if (fileOld.exists())
-    {
-        if (!fileOld.open(IO_ReadOnly))
-        {
-            QMessageBox::warning(0, tr("File i/o error"), fileName.sprintf(tr("Could not read file '%s'"), fileName));
-        }
-        else
-        {
-            QFile fileNew(documentsDirName + fileName.sprintf("%d.txt", now));
-
-            if (!fileNew.exists())
-            {
-                if(fileNew.open(IO_WriteOnly))
-                {
-                    QTextStream inStream(&fileOld);
-                    inStream.setEncoding(QTextStream::UnicodeUTF8);
-
-                    QTextStream outStream(&fileNew);
-                    outStream.setEncoding(QTextStream::UnicodeUTF8);
-                    outStream << inStream.read();
-
-                    fileOld.close();
-                    fileNew.close();
-                    refreshList();
-                }
-            }
-        }
+    int number = notesList->currentItem();
+    if( number > -1 ) {
+        OPimMemo memo = m_notes[number];
+        int now = time(0);
+        memo.setUid( now );
+        this->editMemo( memo, true );
     }
 }
 
@@ -189,54 +184,30 @@ void mainWindowWidget::openFile()
     if( notesList->count() > 0 )
     {
         this->selected = number;
-        this->editFile(documentsDirName + fileList[number], false);
+        OPimMemo memo = m_notes[number];
+        this->editMemo( memo, false );
     }
 }
 
 void mainWindowWidget::refreshList()
 {
-    unsigned int item;
     QString title;
 
     notesList->clear();
 
-    fileList.setPath(documentsDirName);
-    fileList.setFilter(QDir::Files);
-    fileList.setSorting(QDir::Name);
-
-    for (item = 0; item < fileList.count(); item++)
-    {
-        QFile file(documentsDirName + fileList[item]);
-
-        if (!file.open(IO_ReadOnly))
-        {
-            QMessageBox::warning(0, tr("File i/o error"), title.sprintf(tr("Could not read file '%s'"), fileList[item]));
-        }
+    m_notes = m_access->allRecords();
+    for ( OPimMemoAccess::List::Iterator it = m_notes.begin(); it != m_notes.end(); ++it ) {
+        if ( (*it).text().isEmpty() )
+            title = tr("<empty file>");
         else
-        {
-            QTextStream inStream(&file);
-            inStream.setEncoding(QTextStream::UnicodeUTF8);
+            title = (*it).description();
 
-            if (!inStream.atEnd())
-            {
-                title = inStream.readLine();
-            }
-            else
-            {
-                title = tr("<empty file>");
-            }
-
-            if (title.length() < 1)
-            {
-                title = tr("<no caption>");
-            }
-
-            file.close();
-
-            notesList->insertItem(title);
-        }
+        if (title.length() < 1)
+            title = tr("<no title>");
+        
+        notesList->insertItem( title );
     }
-
+    
     if( notesList->count() > 0 )
     {
         if( this->selected == -1 )
@@ -263,11 +234,27 @@ void mainWindowWidget::refreshList()
 
 }
 
+static const char * beamfile = "/tmp/obex/memo.txt";
+
 void mainWindowWidget::slotItemBeam()
 {
     Ir obex;
 
-    obex.send(documentsDirName + fileList[notesList->currentItem()], "test", "text/plain");
+    int number = notesList->currentItem();
+    if( number > -1 ) {
+        OPimMemo memo = m_notes[number];
+    
+        odebug << "trying to beam" << oendl;
+        QDir tmpdir( "/tmp/obex/" );
+        tmpdir.mkdir( "/tmp/obex/" );
+        tmpdir.remove( beamfile ); // delete if exists
+        OPimMemoAccessBackend_Text *backend = new OPimMemoAccessBackend_Text( "notes", QString::fromLatin1(beamfile) );
+        OPimMemoAccess acc( QString::null, QString::null, backend );
+        acc.load();
+        acc.add( memo );
+        acc.save();
+        obex.send( beamfile, memo.description(), "text/plain" );
+    }
 }
 
 void mainWindowWidget::slotItemFind()           { toBeDone();}
