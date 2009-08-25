@@ -591,9 +591,8 @@ int Modem::lockdevice() {
   QString lockfile = LOCK_DIR"/LCK..";
   lockfile += _pppdata->modemDevice().mid(5); // append everything after /dev/
 
-  if(access(QFile::encodeName(lockfile), F_OK) == 0) {
-//    if ((fd = Requester::rq->
-if ((fd = openLockfile(QFile::encodeName(lockfile), O_RDONLY)) >= 0) {
+  if (access(QFile::encodeName(lockfile), F_OK) == 0) {
+    if ((fd = openLockfile(QFile::encodeName(lockfile), O_RDONLY)) >= 0) {
       // Mario: it's not necessary to read more than lets say 32 bytes. If
       // file has more than 32 bytes, skip the rest
       char oldlock[33]; // safe
@@ -649,19 +648,17 @@ void Modem::unlockdevice() {
   }
 }
 
-int Modem::openLockfile( QString lockfile, int flags)
+int Modem::openLockfile(QString lockfile, int flags)
 {
     int fd;
-    int mode;
+    int mode = ( flags == ( O_WRONLY | O_TRUNC | O_CREAT ) ? 0644 : 0 );
     flags = O_RDONLY;
-    if(flags == O_WRONLY|O_TRUNC|O_CREAT)
-        mode = 0644;
-    else
-        mode = 0;
 
-    lockfile = LOCK_DIR;
-    lockfile += "/LCK..";
-    lockfile += device.right( device.length() - device.findRev("/") -1 );
+    if (lockfile.isEmpty()) {
+        lockfile = LOCK_DIR;
+        lockfile += "/LCK..";
+        lockfile += device.right( device.length() - device.findRev("/") -1 );
+    }
     odebug << "lockfile >" << lockfile.latin1() << "<" << oendl;
     // TODO:
     //   struct stat st;
@@ -675,10 +672,13 @@ int Modem::openLockfile( QString lockfile, int flags)
     //   }
     if ((fd = open(lockfile, flags, mode)) == -1) {
         odebug << "error opening lockfile!" << oendl;
-        lockfile = QString::null;
-        fd = open(DEVNULL, O_RDONLY);
-    } else
-        fchown(fd, 0, 0);
+	return -1;
+    } else {
+        if (fchown(fd, 0, 0) == -1) {
+            close(fd);
+            return -1;
+        }
+    }
     return fd;
 }
 

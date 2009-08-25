@@ -99,14 +99,14 @@ private:
   enum { MaxPathLen = 30, MaxStrLen = 40, MaxArgs = 100 };
   enum { Original=0x100, New=0x200, Old=0x400 } Version;
 
-  const char* authFile(Auth method, int version = Original );
+  const char* authFile(Auth method, int version = Original);
   bool createAuthFile(Auth method,const char *username,const char *password);
   bool removeAuthFile(Auth method);
   bool execpppd(const char *arguments);
   bool killpppd();
   void parseargs(char* buf, char** args);
   void escape_to_command_mode();
-  int openLockfile(QString,int);
+  int openLockfile(QString, int);
 
 private:
   QString device;
