@@ -46,7 +46,7 @@ UIDArray OPimMemoAccessBackend::queryByExample( const UIDArray& uid_array, const
     return UIDArray();
 }
 
-const uint OPimMemoAccessBackend::querySettings() const
+uint OPimMemoAccessBackend::querySettings() const
 {
     return ( OPimMemoAccess::WildCards
          | OPimMemoAccess::IgnoreCase
