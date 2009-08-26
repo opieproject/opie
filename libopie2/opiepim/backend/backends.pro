@@ -39,7 +39,8 @@ contains( ENABLE_SQL_PIM_BACKEND, y ) {
                    backend/odatebookaccessbackend_sql.h 
 	SOURCES += backend/otodoaccesssql.cpp            \
 		   backend/ocontactaccessbackend_sql.cpp \
-		   backend/odatebookaccessbackend_sql.cpp
+		   backend/odatebookaccessbackend_sql.cpp \
+           backend/omemoaccessbackend_sql.cpp
 }
 
 !contains( ENABLE_SQL_PIM_BACKEND, y ) {

@@ -50,6 +50,7 @@
 #include <opie2/otodoaccesssql.h>
 #include <opie2/ocontactaccessbackend_sql.h>
 #include <opie2/odatebookaccessbackend_sql.h>
+#include <opie2/omemoaccessbackend_sql.h>
 #endif
 
 #include <qpe/config.h>
@@ -167,7 +168,20 @@ database << oendl;
 					 break;
 				 }
              case OPimGlobal::NOTES:
-                 return (T*) new OPimMemoAccessBackend_Text( appName, filename );
+                 switch ( use_database ){
+                 default: // Use SQL if something weird is given.
+                     // Fall through !!
+                 case OPimGlobal::SQL:
+#ifdef __USE_SQL
+                     return (T*) new OPimMemoAccessBackend_SQL( appName, filename );
+                     break;
+#else
+                     owarn << "OBackendFactory:: sql Backend for NOTES not implemented! Using text instead!" << oendl;
+                     // Fall through !!
+#endif
+                 case OPimGlobal::XML:
+                    return (T*) new OPimMemoAccessBackend_Text( appName, filename );
+                 }
 			 default:
 				 return (T*) NULL;
 			 }
