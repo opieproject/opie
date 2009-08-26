@@ -288,7 +288,7 @@ template <class T>
 OPimRecordListIterator<T>::OPimRecordListIterator( const QArray<int> uids,
         const Base* t )
         : m_uids( uids ), m_current( 0 ), m_temp( t ), m_end( false ),
-        m_direction( false )
+        m_direction( true )
 {
     /* if the list is empty we're already at the end of the list */
     if ( uids.count() == 0 )
