@@ -91,6 +91,11 @@ class OPimAccessFactory
 		        base = new ODateBookAccess( OBackendFactory<ODateBookAccessBackend>::create( type, dbStyle,
 												     appName, fileName ) );
                         break;
+        case OPimGlobal::NOTES:
+                base = new OPimMemoAccess( QString::null, QString::null,
+                                           OBackendFactory<OPimMemoAccessBackend>::create( type, dbStyle,
+                                                     appName, fileName ) );
+                        break;
 		default:
 			return 0l;
 		}

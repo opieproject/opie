@@ -64,6 +64,7 @@ class OPimGlobal{
 		XML,
 		SQL,
 		VCARD,        // Also used for VCAL !
+        TEXT,         // Plain text (memos only)
 		_END_DatabaseStyle
 	};
 

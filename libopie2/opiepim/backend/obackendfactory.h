@@ -180,6 +180,7 @@ database << oendl;
                      // Fall through !!
 #endif
                  case OPimGlobal::XML:
+                 case OPimGlobal::TEXT:
                     return (T*) new OPimMemoAccessBackend_Text( appName, filename );
                  }
 			 default:
@@ -205,6 +206,9 @@ database << oendl;
 			 case OPimGlobal::DATEBOOK:
 				 group_name = "datebook";
 				 break;
+             case OPimGlobal::NOTES:
+                 group_name = "notes";
+                 break;
 			 default:
 				 group_name = "unknown";
 			 }
@@ -219,6 +223,7 @@ database << oendl;
 			 dictDbTypes.insert( "xml", new int (OPimGlobal::XML) );
 			 dictDbTypes.insert( "sql", new int (OPimGlobal::SQL) );
 			 dictDbTypes.insert( "vcard", new int (OPimGlobal::VCARD) );
+             dictDbTypes.insert( "text", new int (OPimGlobal::TEXT) );
 
 			 int* db_find = dictDbTypes[ db_String ];
 
