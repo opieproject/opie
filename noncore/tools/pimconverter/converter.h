@@ -56,6 +56,7 @@ private:
         ADDRESSBOOK = 0,
         TODOLIST    = 1,
         DATEBOOK    = 2,
+        NOTES       = 3
     };
 
     enum DbFormats{

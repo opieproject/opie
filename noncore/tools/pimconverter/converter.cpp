@@ -95,6 +95,13 @@ void Converter::loadPimAccess()
         m_todoFormatSelector->setCurrentItem( 1 );
     else
         m_todoFormatSelector->setCurrentItem( 0 );
+
+    config.setGroup( "notes" );
+    dbtype = config.readEntry( "usebackend", "text" );
+    if( dbtype == "sql" )
+        m_notesFormatSelector->setCurrentItem( 1 );
+    else
+        m_notesFormatSelector->setCurrentItem( 0 );
 }
 
 void Converter::savePimAccess()
@@ -118,10 +125,26 @@ void Converter::savePimAccess()
         config.writeEntry( "usebackend", "sql" );
     else
         config.writeEntry( "usebackend", "xml" );
+
+    config.setGroup( "notes" );
+    if( m_notesFormatSelector->currentItem() == 1 )
+        config.writeEntry( "usebackend", "sql" );
+    else
+        config.writeEntry( "usebackend", "text" );
 }
 
 void Converter::selectedDatabase( int num )
 {
+    if( num == 3 ) {
+        // Memos
+        m_sourceFormatSelector->changeItem( tr("Plain text"), 0 );
+        m_destFormatSelector->changeItem( tr("Plain text"), 0 );
+    }
+    else {
+        // Everything else
+        m_sourceFormatSelector->changeItem( tr("XML"), 0 );
+        m_destFormatSelector->changeItem( tr("XML"), 0 );
+    }
     m_selectedDatabase = num;
 }
 
@@ -170,6 +193,11 @@ void Converter::start_conversion()
                         sourceDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::XML, "converter" );
                     }
                     break;
+                case NOTES:
+                    {
+                        sourceDB = OPimAccessFactory<OPimMemoAccess>::create( OPimGlobal::NOTES, OPimGlobal::TEXT, "converter" );
+                    }
+                    break;
                 default:
                     owarn << "Unknown database selected (" << m_selectedDatabase << ")" << oendl;
                     return;
@@ -191,6 +219,11 @@ void Converter::start_conversion()
                 case DATEBOOK:
                     {
                         sourceDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::SQL, "converter" );
+                    }
+                    break;
+                case NOTES:
+                    {
+                        sourceDB = OPimAccessFactory<OPimMemoAccess>::create( OPimGlobal::NOTES, OPimGlobal::SQL, "converter" );
                     }
                     break;
                 default:
@@ -222,6 +255,10 @@ void Converter::start_conversion()
                         destDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::XML, "converter" );
                     }
                     break;
+                case NOTES:
+                    {
+                        destDB = OPimAccessFactory<OPimMemoAccess>::create( OPimGlobal::NOTES, OPimGlobal::TEXT, "converter" );
+                    }
                 default:
                     owarn << "Unknown database selected (" << m_selectedDatabase << ")" << oendl;
                     return;
@@ -243,6 +280,11 @@ void Converter::start_conversion()
                 case DATEBOOK:
                     {
                         destDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::SQL, "converter" );
+                    }
+                    break;
+                case NOTES:
+                    {
+                        destDB = OPimAccessFactory<OPimMemoAccess>::create( OPimGlobal::NOTES, OPimGlobal::SQL, "converter" );
                     }
                     break;
                 default:
@@ -303,6 +345,10 @@ void Converter::start_conversion()
         case DATEBOOK:
             delete static_cast<ODateBookAccess*> (sourceDB);
             delete static_cast<ODateBookAccess*> (destDB);
+            break;
+        case NOTES:
+            delete static_cast<OPimMemoAccess*> (sourceDB);
+            delete static_cast<OPimMemoAccess*> (destDB);
             break;
         default:
             owarn << "Unknown database selected (" << m_selectedDatabase << ")" << oendl;

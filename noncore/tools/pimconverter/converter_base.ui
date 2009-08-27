@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>254</width>
+            <width>251</width>
             <height>340</height>
         </rect>
     </property>
@@ -108,6 +108,12 @@
                                     <property>
                                         <name>text</name>
                                         <string>Datebook</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>Notes</string>
                                     </property>
                                 </item>
                                 <property stdset="1">
@@ -327,7 +333,7 @@
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>4</number>
+                        <number>2</number>
                     </property>
                     <widget>
                         <class>QGroupBox</class>
@@ -348,11 +354,11 @@
                         <grid>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>8</number>
+                                <number>11</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
-                                <number>4</number>
+                                <number>6</number>
                             </property>
                             <widget row="2"  column="0" >
                                 <class>QLabel</class>
@@ -363,25 +369,6 @@
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Todo</string>
-                                </property>
-                            </widget>
-                            <widget row="2"  column="1" >
-                                <class>QComboBox</class>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>XML</string>
-                                    </property>
-                                </item>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>SQL (SQLite)</string>
-                                    </property>
-                                </item>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>m_todoFormatSelector</cstring>
                                 </property>
                             </widget>
                             <widget row="0"  column="1" >
@@ -442,6 +429,55 @@
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>m_datebookFormatSelector</cstring>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="1" >
+                                <class>QComboBox</class>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>XML</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>SQL (SQLite)</string>
+                                    </property>
+                                </item>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>m_todoFormatSelector</cstring>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel2_2_2_2_3_2_2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Notes</string>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="1" >
+                                <class>QComboBox</class>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>Plain text</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>SQL (SQLite)</string>
+                                    </property>
+                                </item>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>m_notesFormatSelector</cstring>
                                 </property>
                             </widget>
                         </grid>
