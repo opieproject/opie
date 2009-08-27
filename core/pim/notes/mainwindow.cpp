@@ -105,6 +105,7 @@ void mainWindowWidget::deleteFile()
             case QMessageBox::Yes:
                 this->selected = notesList->currentItem();
                 m_access->remove( m_notes[notesList->currentItem()] );
+                m_access->save();
                 refreshList();
                 break;
 
@@ -135,6 +136,8 @@ void mainWindowWidget::editMemo( OPimMemo &memo, bool create )
             m_access->replace( memo );
         }
     }
+
+    m_access->save();
 
     refreshList();
 }
