@@ -75,7 +75,7 @@ public:
      *  (i.e.: query_WildCards & query_IgnoreCase)
      *  See implementation in the specific backends for contacts, todo and dates.
      */
-    virtual const uint querySettings() const = 0;
+    virtual uint querySettings() const = 0;
 
     /**
      * Check whether settings are correct for queryByExample()

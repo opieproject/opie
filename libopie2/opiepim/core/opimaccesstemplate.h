@@ -93,7 +93,7 @@ public:
      * (i.e.: WildCards & IgnoreCase)
      * @see QuerySettings in OPimBase for details of the parameter, queryByExample()
      */
-    const uint querySettings();
+    uint querySettings();
 
     /**
      * Check whether settings are correct for queryByExample().
@@ -324,7 +324,7 @@ QArray<int> OPimAccessTemplate<T>::records()const {
 }
 
 template <class T>
-const uint OPimAccessTemplate<T>::querySettings(){
+uint OPimAccessTemplate<T>::querySettings(){
 	return m_backEnd->querySettings();
 }
 

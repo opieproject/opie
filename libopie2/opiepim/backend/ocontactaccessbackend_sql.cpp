@@ -714,7 +714,7 @@ UIDArray OPimContactAccessBackend_SQL::matchRegexp( const QRegExp &r ) const
 #endif
 }
 
-const uint OPimContactAccessBackend_SQL::querySettings() const
+uint OPimContactAccessBackend_SQL::querySettings() const
 {
     return OPimContactAccess::IgnoreCase
         | OPimContactAccess::WildCards

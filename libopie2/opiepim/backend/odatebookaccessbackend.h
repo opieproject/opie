@@ -99,7 +99,7 @@ public:
      *  @return All settings provided by the current backend
      * (i.e.: query_WildCards & query_IgnoreCase)
      */
-    const uint querySettings() const;
+    uint querySettings() const;
 
     /**
      * Check whether settings are correct.

@@ -42,7 +42,7 @@ OPimTodoAccessBackend::~OPimTodoAccessBackend() {
 
 }
 
-const uint OPimTodoAccessBackend::querySettings() const
+uint OPimTodoAccessBackend::querySettings() const
 {
 	return 0;
 }

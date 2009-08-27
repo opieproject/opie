@@ -176,7 +176,7 @@ UIDArray OPimContactAccessBackend::queryByExample( const UIDArray& uid_array, co
 
 }
 
-const uint OPimContactAccessBackend::querySettings() const
+uint OPimContactAccessBackend::querySettings() const
 {
     return ( OPimContactAccess::WildCards
          | OPimContactAccess::IgnoreCase
