@@ -55,12 +55,16 @@ struct OPimMemo::OPimMemoData : public QShared
   Creates a new, empty contact.
 */
 OPimMemo::OPimMemo()
-    : OPimRecord(), data( new OPimMemoData() )
+    : OPimRecord()
+    , d( 0 )
+    , data( new OPimMemoData() )
 {
 }
 
 OPimMemo::OPimMemo( const OPimMemo &memo )
-        : OPimRecord( memo ), data( memo.data )
+    : OPimRecord( memo )
+    , d( 0 )
+    , data( memo.data )
 {
     data->ref();
 }
@@ -81,10 +85,10 @@ OPimMemo::OPimMemo( const QString &text,
                     const QArray<int> &category,
                     int uid )
     : OPimRecord( uid )
+    , d( 0 )
+    , data( new OPimMemoData )
 {
     setCategories( category );
-
-    data = new OPimMemoData;
 
     data->text = text;
 }

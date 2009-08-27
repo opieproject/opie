@@ -37,7 +37,7 @@
 #include <qdatetime.h>
 
 namespace Opie {
-OPimMemoAccessBackend::OPimMemoAccessBackend() {}
+OPimMemoAccessBackend::OPimMemoAccessBackend() : d( 0 ) {}
 
 UIDArray OPimMemoAccessBackend::queryByExample( const UIDArray& uid_array, const OPimMemo& query, int settings,
                            const QDateTime& d )const
