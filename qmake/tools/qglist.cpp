@@ -321,6 +321,7 @@ QLNode *QGList::locate( uint index )
 {
     if ( index == (uint)curIndex )		// current node ?
 	return curNode;
+
     if ( !curNode && firstNode ) {		// set current node
 	curNode	 = firstNode;
 	curIndex = 0;
@@ -349,10 +350,10 @@ QLNode *QGList::locate( uint index )
 	forward = FALSE;
     }
     if ( forward ) {				// now run through nodes
-	while ( distance-- )
+	while ( node && distance-- )
 	    node = node->next;
     } else {
-	while ( distance-- )
+	while ( node && distance-- )
 	    node = node->prev;
     }
     curIndex = index;				// must update index

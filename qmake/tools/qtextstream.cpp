@@ -420,9 +420,13 @@ Q_LONG QStringBuffer::readBlock( char *p, Q_ULONG len )
 Q_LONG QStringBuffer::writeBlock( const char *p, Q_ULONG len )
 {
 #if defined(QT_CHECK_NULL)
-    if ( p == 0 && len != 0 )
+    if ( !p && len != 0 ) {
 	qWarning( "QStringBuffer::writeBlock: Null pointer error" );
+	return -1;
+    }
 #endif
+    if ( len == 0 )
+	return 0;
 #if defined(QT_CHECK_STATE)
     if ( !isOpen() ) {                          // buffer not open
 	qWarning( "QStringBuffer::writeBlock: Buffer not open" );

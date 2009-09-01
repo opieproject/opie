@@ -17697,7 +17697,7 @@ QDataStream &operator<<( QDataStream &s, const QString &str )
 	    }
 	    int l = str.length();
 	    char *c=b;
-	    while ( l-- ) {
+	    while ( ub && l-- ) {
 		if ( byteOrder == QDataStream::BigEndian ) {
 		    *c++ = (char)ub->row();
 		    *c++ = (char)ub->cell();

@@ -177,13 +177,13 @@ NodePtr QMapPrivateBase::removeAndRebalance( NodePtr z, NodePtr& root,
 	if ( leftmost == z ) {
 	    if (z->right == 0)
 		leftmost = z->parent;
-	    else
+	    else if (x)
 		leftmost = x->minimum();
 	}
 	if (rightmost == z) {
 	    if (z->left == 0)
 		rightmost = z->parent;
-	    else
+	    else if (x)
 		rightmost = x->maximum();
 	}
     }

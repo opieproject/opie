@@ -666,19 +666,13 @@ void RBPage::readchunk()
 void RBPage::setoffset(UInt32 pos, size_t _cp, bool _isCompressed, UInt32 _len, UInt32 _offset)
 {
   if (m_pageno != _cp)
-    {
-      initpage(pos, _cp, _isCompressed, _len);
-    }
+    initpage(pos, _cp, _isCompressed, _len);
   else
     {
       if (m_Compressed)
-	{
-	  chunkpos = filepos + sizeof(nochunks) + sizeof(m_pagelen) + 4*nochunks;
-	}
+	chunkpos = filepos + sizeof(nochunks) + sizeof(m_pagelen) + 4*nochunks;
       else
-	{
-	  chunkpos = filepos;
-	}
+	chunkpos = filepos;
     }
 
   currentchunk = _offset/m_blocksize;
@@ -686,21 +680,18 @@ void RBPage::setoffset(UInt32 pos, size_t _cp, bool _isCompressed, UInt32 _len, 
   if (m_Compressed)
     {
       for (int i = 0; i < currentchunk; ++i)
-	{
-	  chunkpos += chunklist[i];
-	}
+	chunkpos += chunklist[i];
     }
   else
-    {
-      chunkpos += pageoffset;
-    }
+    chunkpos += pageoffset;
+
   readchunk();
   chunkoffset = _offset - pageoffset;
 }
 
 void CReb::start2endSection()
 {
-  if (m_pagedetails != NULL)
+  if (m_pagedetails)
     {
       if (nojoins > 0)
 	{
@@ -708,13 +699,10 @@ void CReb::start2endSection()
 	  while (jh > jl+1)
 	    {
 	      if (joins[jm] > currentpage.offset())
-		{
-		  jh = jm;
-		}
+		jh = jm;
 	      else
-		{
-		  jl = jm;
-		}
+		jl = jm;
+
 	      jm = (jl+jh)/2;
 	    }
 
@@ -725,8 +713,7 @@ void CReb::start2endSection()
       m_currentend = m_pagedetails[currentpage.pageno()].pagestart+currentpage.m_endoff;
     }
   else
-    {
-      m_currentstart = m_currentend = 0;
-    }
-  qDebug("s2e:[%u, %u, %u]", m_currentstart, locate(), m_currentend);
+    m_currentstart = m_currentend = 0;
+
+  qDebug("s2e:[%u, %u, %u]", m_currentstart, m_pagedetails ? locate() : 0, m_currentend);
 }
