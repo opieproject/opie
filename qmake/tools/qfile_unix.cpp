@@ -523,8 +523,10 @@ bool QFile::at( Offset pos )
 Q_LONG QFile::readBlock( char *p, Q_ULONG len )
 {
 #if defined(QT_CHECK_NULL)
-    if ( !p && len != 0 )
+    if ( !p && len != 0 ) {
 	qWarning( "QFile::readBlock: Null pointer error" );
+	return -1;
+    }
 #endif
     if ( len == 0 )
 	return 0;
