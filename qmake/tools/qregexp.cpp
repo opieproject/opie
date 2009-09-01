@@ -2694,7 +2694,8 @@ int QRegExpEngine::getEscape()
 #ifndef QT_NO_REGEXP_BACKREF
 	    val = prevCh - '0';
 	    while ( yyCh >= '0' && yyCh <= '9' ) {
-		val = ( ( val *= 10 ) | ( yyCh - '0' ) );
+		val *= 10;
+		val |= yyCh - '0';
 		yyCh = getChar();
 	    }
 	    return Tok_BackRef | val;

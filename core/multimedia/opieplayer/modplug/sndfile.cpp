@@ -1365,8 +1365,10 @@ UINT CSoundFile::ReadSample(MODINSTRUMENT *pIns, UINT nFlags, LPCSTR lpMemFile, 
 				*pSample++ = delta8;
 			}
 			WORD *pSampleW = (WORD *)pIns->pSample;
-			for (UINT j=0; j<len; j+=2)   // swaparoni!
-			        *pSampleW = (bswapLE16(*pSampleW))++;
+			for (UINT j=0; j<len; j+=2) { // swaparoni!
+				*pSampleW = bswapLE16(*pSampleW);
+			        (*pSampleW)++;
+			}
 		}
 		break;
 
