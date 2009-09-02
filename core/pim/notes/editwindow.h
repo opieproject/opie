@@ -1,12 +1,11 @@
 #include <opie2/opimmemo.h>
 
+#include <qpe/categoryselect.h>
+
 #include <qdialog.h>
 #include <qlayout.h>
 #include <qmultilineedit.h>
 #include <qmessagebox.h>
-#include <qtextstream.h>
-#include <qfile.h>
-#include <qfileinfo.h>
 
 namespace Opie {
 namespace Notes {
@@ -23,6 +22,7 @@ class editWindowWidget : public QDialog
 
     private:
         QMultiLineEdit *m_editArea;
+        CategorySelect *m_catSelect;
 
 };
 
