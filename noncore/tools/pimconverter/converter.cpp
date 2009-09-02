@@ -259,6 +259,7 @@ void Converter::start_conversion()
                     {
                         destDB = OPimAccessFactory<OPimMemoAccess>::create( OPimGlobal::NOTES, OPimGlobal::TEXT, "converter" );
                     }
+                    break;
                 default:
                     owarn << "Unknown database selected (" << m_selectedDatabase << ")" << oendl;
                     return;

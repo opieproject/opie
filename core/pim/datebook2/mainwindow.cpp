@@ -823,13 +823,14 @@ void MainWindow::slotChangeView() {
     }
     m_currView = selected;
 
-    if( m_currView && m_currView->date() != lastDate ) {
-        odebug << "*** calling showDay" << oendl;
-        m_currView->showDay(lastDate);
-    }
-    else {
-        odebug << "*** reschedule only" << oendl;
-        m_currView->reschedule();
+    if( m_currView) {
+       	if( m_currView->date() != lastDate ) {
+            odebug << "*** calling showDay" << oendl;
+            m_currView->showDay(lastDate);
+        } else {
+            odebug << "*** reschedule only" << oendl;
+            m_currView->reschedule();
+        }
     }
 
     raiseCurrentView();

@@ -850,6 +850,13 @@ QImage& OImageEffect::modulate(QImage &image, QImage &modImage, bool reverse,
 //======================================================================
 
 
+#ifdef WORDS_BIGENDIAN
+    static const unsigned short AlphaSkip = 1;
+#else
+    static const unsigned short AlphaSkip = 0;
+#endif
+
+
 // Nice and fast direct pixel manipulation
 QImage& OImageEffect::blend(const QColor& clr, QImage& dst, float opacity)
 {
@@ -869,14 +876,9 @@ QImage& OImageEffect::blend(const QColor& clr, QImage& dst, float opacity)
     int rcol, gcol, bcol;
     clr.rgb(&rcol, &gcol, &bcol);
 
-#ifdef WORDS_BIGENDIAN   // ARGB (skip alpha)
-    register unsigned char *data = (unsigned char *)dst.bits() + 1;
-#else                    // BGRA
-    register unsigned char *data = (unsigned char *)dst.bits();
-#endif
+    register unsigned char *data = (unsigned char *)dst.bits() + AlphaSkip;
 
-    for (register int i=0; i<pixels; i++)
-    {
+    for (register int i=0; i<pixels; i++) {
 #ifdef WORDS_BIGENDIAN
 	*(data++) += (unsigned char)((rcol - *data) * opacity);
 	*(data++) += (unsigned char)((gcol - *data) * opacity);
@@ -896,6 +898,7 @@ QImage& OImageEffect::blend(QImage& src, QImage& dst, float opacity)
 {
     if (src.width() <= 0 || src.height() <= 0)
         return dst;
+
     if (dst.width() <= 0 || dst.height() <= 0)
         return dst;
 
@@ -909,31 +912,25 @@ QImage& OImageEffect::blend(QImage& src, QImage& dst, float opacity)
         return dst;
     }
 
-    if (src.depth() != 32) src = src.convertDepth(32);
-    if (dst.depth() != 32) dst = dst.convertDepth(32);
+    if (src.depth() != 32)
+        src = src.convertDepth(32);
+
+    if (dst.depth() != 32)
+        dst = dst.convertDepth(32);
 
     int pixels = src.width() * src.height();
-#ifdef WORDS_BIGENDIAN   // ARGB (skip alpha)
-    register unsigned char *data1 = (unsigned char *)dst.bits() + 1;
-    register unsigned char *data2 = (unsigned char *)src.bits() + 1;
-#else                    // BGRA
-    register unsigned char *data1 = (unsigned char *)dst.bits();
-    register unsigned char *data2 = (unsigned char *)src.bits();
-#endif
+    register unsigned char *dst_data = (unsigned char *)dst.bits() + AlphaSkip;
+    register unsigned char *src_data = (unsigned char *)src.bits() + AlphaSkip;
 
-    for (register int i=0; i<pixels; i++)
-    {
-#ifdef WORDS_BIGENDIAN
-	*(data1++) += (unsigned char)((*(data2++) - *data1) * opacity);
-	*(data1++) += (unsigned char)((*(data2++) - *data1) * opacity);
-	*(data1++) += (unsigned char)((*(data2++) - *data1) * opacity);
-#else
-	*(data1++) += (unsigned char)((*(data2++) - *data1) * opacity);
-	*(data1++) += (unsigned char)((*(data2++) - *data1) * opacity);
-	*(data1++) += (unsigned char)((*(data2++) - *data1) * opacity);
-#endif
-	data1++; // skip alpha
-	data2++;
+    for (register int i=0; i<pixels; i++) {
+	src_data++;
+	*(dst_data++) += (unsigned char)((*src_data - *dst_data) * opacity);
+	src_data++;
+	*(dst_data++) += (unsigned char)((*src_data - *dst_data) * opacity);
+	src_data++;
+	*(dst_data++) += (unsigned char)((*src_data - *dst_data) * opacity);
+	dst_data++; // skip alpha
+	src_data++;
     }
 
     return dst;

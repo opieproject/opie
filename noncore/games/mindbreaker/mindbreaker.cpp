@@ -209,9 +209,10 @@ Peg::Peg(QCanvas *canvas , int t, int g, int p)
 }
 
 void Peg::advance(int phase) {
-    if (phase == 0)
-        aniStep = ((++aniStep) % 6);
-    else {
+    if (phase == 0) {
+	++aniStep;
+        aniStep = aniStep % 6;
+    } else {
         hide();
         show();
     }

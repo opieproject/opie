@@ -79,7 +79,8 @@ OWait::OWait( QWidget *parent, const char* msg, bool dispIcon )
 
 void OWait::timerEvent( QTimerEvent * )
 {
-    frame = ( ( ++frame ) % 4 );
+    ++frame;
+    frame = ( frame % 4 );
     repaint();
 }
 
