@@ -40,12 +40,13 @@
 
 namespace Opie {
 
-OPimResolver* OPimResolver::m_self = 0l;
+OPimResolver* OPimResolver::m_self = 0;
 
 OPimResolver::OPimResolver() {
     /* the built in channels */
     m_builtIns << "Todolist" << "Addressbook" << "Datebook" << "Memo";
 }
+
 OPimResolver* OPimResolver::self() {
     if (!m_self)
         m_self = new OPimResolver();
@@ -57,39 +58,40 @@ OPimResolver* OPimResolver::self() {
  * FIXME use a cache here too
  */
 OPimRecord* OPimResolver::record( const QString& service, int uid ) {
-    OPimRecord* rec = 0l;
+    OPimRecord* rec = 0;
     OPimBase* base = backend( service );
 
     if ( base )
         rec = base->record( uid );
+
     delete base;
 
     return rec;
 }
+
 OPimRecord* OPimResolver::record( const QString& service ) {
     return record( serviceId( service ) );
 }
+
 OPimRecord* OPimResolver::record( int rtti ) {
-    OPimRecord* rec = 0l;
+    OPimRecord* rec = 0;
     switch( rtti ) {
-    case 1: /* todolist */
-        rec = new OPimTodo();
-    case 2: /* contact  */
-        rec = new OPimContact();
-    default:
-        break;
+        case 1: /* todolist */
+            rec = new OPimTodo();
+            break;
+        case 2: /* contact  */
+            rec = new OPimContact();
+            break;
+        default:
+            break;
     }
-    /*
-     * FIXME resolve externally
-     */
-    if (!rec ) {
-        ;
-    }
-    return 0l;
+    return rec;
 }
+
 bool OPimResolver::isBuiltIn( const QString& str) const{
     return m_builtIns.contains( str );
 }
+
 QCString OPimResolver::qcopChannel( enum BuiltIn& built)const {
     QCString str("QPE/");
     switch( built ) {
@@ -111,11 +113,13 @@ QCString OPimResolver::qcopChannel( enum BuiltIn& built)const {
 
     return str;
 }
+
 QCString OPimResolver::qcopChannel( const QString& service )const {
     QCString str("QPE/");
     str += service.latin1();
     return str;
 }
+
 /*
  * Implement services!!
  * FIXME
@@ -139,6 +143,7 @@ QCString OPimResolver::applicationChannel( enum BuiltIn& built)const {
 
     return str;
 }
+
 QCString OPimResolver::applicationChannel( const QString& service )const {
     QCString str("QPE/Application/");
 
@@ -151,14 +156,16 @@ QCString OPimResolver::applicationChannel( const QString& service )const {
             str += "addressbook";
         else if ( service == "Notes" )
             str += "notes";
-    }else
-        ; // FIXME for additional stuff
+    }
+    // FIXME Add Support for 3rd party
 
     return str;
 }
+
 QStringList OPimResolver::services()const {
     return m_builtIns;
 }
+
 QString OPimResolver::serviceName( int rtti ) const{
     QString str;
     switch ( rtti ) {
@@ -178,8 +185,9 @@ QString OPimResolver::serviceName( int rtti ) const{
         break;
     }
     return str;
-    // FIXME me for 3rd party
+    // FIXME Add support for 3rd party
 }
+
 int OPimResolver::serviceId( const QString& service ) {
     int rtti = 0;
     if ( service == "Todolist" )
@@ -193,8 +201,9 @@ int OPimResolver::serviceId( const QString& service ) {
 
     return rtti;
 }
+
 /**
- * check if the 'service' is registered and if so we'll
+ * Check if the 'service' is registered and if so we'll
  */
 bool OPimResolver::add( const QString& service,  const OPimRecord& rec) {
     if ( QCopChannel::isRegistered( applicationChannel( service ) ) ) {
@@ -238,9 +247,7 @@ OPimBase* OPimResolver::backend( int rtti ) {
     default:
         break;
     }
-    // FIXME for 3rd party
-    if (!base )
-        ;
+    // FIXME Add support for 3rd party
 
     return base;
 }

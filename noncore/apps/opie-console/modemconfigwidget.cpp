@@ -104,6 +104,7 @@ void ModemConfigWidget::load( const Profile& prof ) {
         break;
     case 1200:
     	m_base->setSpeed( IOLayerBase::Baud_1200 );
+	break;
     case 9600:
     default:
         m_base->setSpeed( IOLayerBase::Baud_9600 );
