@@ -189,7 +189,7 @@ namespace {
         qu  += "insert into notes VALUES( " +
             QString::number( m_memo.uid() );
 
-        qu += QString( ",\"%1\"" ).arg( m_memo.categoryNames( "Notes" ).join( ", " ) );
+        qu += QString( ",\"%1\"" ).arg( OPimMemo::idsToString( m_memo.categories() ) );
         qu += QString( ",\"%1\"" ).arg( m_memo.text() ); // FIXME escape quotes
         qu += " );";
 
@@ -655,7 +655,8 @@ OPimMemo OPimMemoAccessBackend_SQL::readMemo( const OSQLResultItem& resultItem )
 
     memo.setUid( resultItem.data( "uid" ).toInt() );
     memo.setText( resultItem.data( "text" ) );
-    memo.setCategoryNames( resultItem.data( "categories" ), "Notes" );
+    QString categories = resultItem.data( "categories" );
+    memo.setCategories( OPimMemo::idsFromString( categories ) );
 
     return memo;
 }
