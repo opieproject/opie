@@ -42,6 +42,18 @@
 using namespace Opie;
 using namespace Opie::Notes;
 
+
+MemoListItem::MemoListItem ( QListBox *listbox, const QString &text, int uid )
+    : QListBoxText( listbox, text ), m_uid( uid )
+{
+}
+
+int MemoListItem::uid()
+{
+    return m_uid;
+}
+
+
 mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
     : Opie::OPimMainWindow( "Notes", "Notes", tr( "Note" ), "notes",
             parent, name, WType_TopLevel | WStyle_ContextHelp )
@@ -54,9 +66,9 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
 
     QDir fileList( documentsDirName );
 
-    m_access = new OPimMemoAccess();
-    m_access->load();
+    m_manager.load();
     
+    // FIXME this should be moved to the text memo backend
     if(!fileList.exists())
     {
         fileList.setPath(QPEApplication::documentDir() + "/text/");
@@ -87,12 +99,23 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
     QObject::connect(notesList, SIGNAL(returnPressed(QListBoxItem*)), this, SLOT(slotItemEdit()));
     QObject::connect(notesList, SIGNAL(doubleClicked(QListBoxItem*)), this, SLOT(slotItemEdit()));
 
+    connect( this, SIGNAL(categorySelected(const QString&)),
+            this, SLOT(slotCategoryChanged(const QString&)) );
+
     initBars();
 }
 
 mainWindowWidget::~mainWindowWidget()
 {
-    delete m_access;
+}
+
+void mainWindowWidget::slotCategoryChanged( const QString &category )
+{
+    m_curCat = category;
+    if ( m_curCat == tr( "All" ) )
+        m_curCat = QString::null;
+
+    refreshList();
 }
 
 void mainWindowWidget::deleteFile()
@@ -104,8 +127,8 @@ void mainWindowWidget::deleteFile()
         {
             case QMessageBox::Yes:
                 this->selected = notesList->currentItem();
-                m_access->remove( m_notes[notesList->currentItem()] );
-                m_access->save();
+                m_manager.remove( currentMemoUid() );
+                m_manager.save();
                 refreshList();
                 break;
 
@@ -114,6 +137,27 @@ void mainWindowWidget::deleteFile()
                 break;
         }
     }
+}
+
+int mainWindowWidget::currentMemoUid()
+{
+    int number = notesList->currentItem();
+    if( number > -1 ) {
+        MemoListItem *item = (MemoListItem *)notesList->item( number );
+        return item->uid();
+    }
+    else
+        return 0;
+}
+
+OPimMemo mainWindowWidget::currentMemo()
+{
+    OPimMemo memo;
+    int uid = currentMemoUid();
+    if( uid != 0 ) {
+        memo = m_manager.memo( uid );
+    }
+    return memo;
 }
 
 void mainWindowWidget::editMemo( OPimMemo &memo, bool create )
@@ -127,17 +171,17 @@ void mainWindowWidget::editMemo( OPimMemo &memo, bool create )
         editWindow->writeMemo( memo );
         
         if( create ) {
-            m_access->add( memo );
+            m_manager.add( memo );
             // the new selection will be always at the end and count is already
             // 1 bigger than selected
             this->selected = notesList->count();
         }
         else {
-            m_access->replace( memo );
+            m_manager.update( memo.uid(), memo );
         }
     }
 
-    m_access->save();
+    m_manager.save();
 
     refreshList();
 }
@@ -171,9 +215,8 @@ void mainWindowWidget::slotItemNew()
 
 void mainWindowWidget::slotItemDuplicate()
 {
-    int number = notesList->currentItem();
-    if( number > -1 ) {
-        OPimMemo memo = m_notes[number];
+    OPimMemo memo = currentMemo();
+    if( memo.uid() != 0 ) {
         int now = time(0);
         memo.setUid( now );
         this->editMemo( memo, true );
@@ -182,12 +225,9 @@ void mainWindowWidget::slotItemDuplicate()
 
 void mainWindowWidget::openFile()
 {
-    int number = notesList->currentItem();
-
-    if( notesList->count() > 0 )
-    {
-        this->selected = number;
-        OPimMemo memo = m_notes[number];
+    OPimMemo memo = currentMemo();
+    if( memo.uid() != 0 ) {
+        this->selected = notesList->currentItem();
         this->editMemo( memo, false );
     }
 }
@@ -195,11 +235,21 @@ void mainWindowWidget::openFile()
 void mainWindowWidget::refreshList()
 {
     QString title;
+    int cat = 0;
 
     notesList->clear();
 
-    m_notes = m_access->allRecords();
-    for ( OPimMemoAccess::List::Iterator it = m_notes.begin(); it != m_notes.end(); ++it ) {
+    if ( m_curCat != tr( "All" ) )
+        cat = currentCatId();
+    if ( m_curCat == tr( "Unfiled" ) )
+        cat = -1;
+
+    int filter = OPimMemoAccess::FilterCategory;
+
+    OPimMemoAccess::List notes = m_manager.sorted( true, 0, filter, cat );
+    
+    //notes = m_access->allRecords();
+    for ( OPimMemoAccess::List::Iterator it = notes.begin(); it != notes.end(); ++it ) {
         if ( (*it).text().isEmpty() )
             title = tr("<empty file>");
         else
@@ -208,7 +258,7 @@ void mainWindowWidget::refreshList()
         if (title.length() < 1)
             title = tr("<no title>");
         
-        notesList->insertItem( title );
+        new MemoListItem( notesList, title, (*it).uid() );
     }
     
     if( notesList->count() > 0 )
@@ -237,16 +287,19 @@ void mainWindowWidget::refreshList()
 
 }
 
+int mainWindowWidget::currentCatId()
+{
+    return m_manager.catId( m_curCat );
+}
+
 static const char * beamfile = "/tmp/obex/memo.txt";
 
 void mainWindowWidget::slotItemBeam()
 {
     Ir obex;
 
-    int number = notesList->currentItem();
-    if( number > -1 ) {
-        OPimMemo memo = m_notes[number];
-    
+    OPimMemo memo = currentMemo();
+    if( memo.uid() != 0 ) {
         odebug << "trying to beam" << oendl;
         QDir tmpdir( "/tmp/obex/" );
         tmpdir.mkdir( "/tmp/obex/" );

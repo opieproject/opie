@@ -4,14 +4,23 @@
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qmessagebox.h>
+#include <notesmanager.h>
 
 #include <opie2/opimmainwindow.h>
 #include <opie2/owidgetstack.h>
 #include <opie2/opimmemo.h>
-#include <opie2/omemoaccess.h>
 
 namespace Opie {
 namespace Notes {
+    
+class MemoListItem : public QListBoxText
+{
+public:
+    MemoListItem ( QListBox *listbox, const QString &text, int uid );
+    int uid();
+private:
+    int m_uid;
+};
     
 class mainWindowWidget : public Opie::OPimMainWindow
 {
@@ -30,11 +39,14 @@ class mainWindowWidget : public Opie::OPimMainWindow
 
     private:
         int  selected;
-        OPimMemoAccess *m_access;
-        OPimMemoAccess::List m_notes;
+        NotesManager m_manager;
+        QString m_curCat;
         
         void editMemo( OPimMemo &memo, bool create );
         void toBeDone(void);
+        int currentCatId();
+        int currentMemoUid();
+        OPimMemo currentMemo();
 
     private slots:
         void slotItemNew();
@@ -44,6 +56,7 @@ class mainWindowWidget : public Opie::OPimMainWindow
         void slotItemBeam();
         void slotItemFind();
         void slotConfigure();
+        void slotCategoryChanged( const QString& );
 
     protected slots:
         void flush();
