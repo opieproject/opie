@@ -38,7 +38,7 @@ class mainWindowWidget : public Opie::OPimMainWindow
         void deleteFile();
 
     private:
-        int  selected;
+        int m_selected;
         NotesManager m_manager;
         QString m_curCat;
         

@@ -7,9 +7,9 @@ editWindowWidget::editWindowWidget( QWidget* parent,  const char* name, bool mod
 {
     setCaption( tr( "Information:" ) );
     QGridLayout *gridLayout = new QGridLayout(this, 1, 1, 5, 5);
-    editArea = new QMultiLineEdit(this, "editArea");
-    gridLayout->addWidget(editArea, 0, 0);
-    editArea->setWordWrap(QMultiLineEdit::WidgetWidth);
+    m_editArea = new QMultiLineEdit(this, "m_editArea");
+    gridLayout->addWidget(m_editArea, 0, 0);
+    m_editArea->setWordWrap(QMultiLineEdit::WidgetWidth);
 
     showMaximized();
 }
@@ -20,11 +20,11 @@ editWindowWidget::~editWindowWidget()
 
 void editWindowWidget::readMemo( const OPimMemo &memo )
 {
-    editArea->setText( memo.text() );
+    m_editArea->setText( memo.text() );
 }
 
 void editWindowWidget::writeMemo( OPimMemo &memo )
 {
-    memo.setText( editArea->text() );
+    memo.setText( m_editArea->text() );
 }
 

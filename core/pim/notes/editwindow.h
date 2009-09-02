@@ -22,7 +22,7 @@ class editWindowWidget : public QDialog
         void writeMemo( OPimMemo &memo );
 
     private:
-        QMultiLineEdit *editArea;
+        QMultiLineEdit *m_editArea;
 
 };
 

@@ -93,7 +93,7 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
         }
     }
 
-    this->selected = -1;
+    m_selected = -1;
     refreshList();
 
     QObject::connect(notesList, SIGNAL(returnPressed(QListBoxItem*)), this, SLOT(slotItemEdit()));
@@ -126,7 +126,7 @@ void mainWindowWidget::deleteFile()
                     QMessageBox::Yes, QMessageBox::No)) 
         {
             case QMessageBox::Yes:
-                this->selected = notesList->currentItem();
+                m_selected = notesList->currentItem();
                 m_manager.remove( currentMemoUid() );
                 m_manager.save();
                 refreshList();
@@ -173,8 +173,8 @@ void mainWindowWidget::editMemo( OPimMemo &memo, bool create )
         if( create ) {
             m_manager.add( memo );
             // the new selection will be always at the end and count is already
-            // 1 bigger than selected
-            this->selected = notesList->count();
+            // 1 bigger than m_selected
+            m_selected = notesList->count();
         }
         else {
             m_manager.update( memo.uid(), memo );
@@ -227,7 +227,7 @@ void mainWindowWidget::openFile()
 {
     OPimMemo memo = currentMemo();
     if( memo.uid() != 0 ) {
-        this->selected = notesList->currentItem();
+        m_selected = notesList->currentItem();
         this->editMemo( memo, false );
     }
 }
@@ -263,15 +263,15 @@ void mainWindowWidget::refreshList()
     
     if( notesList->count() > 0 )
     {
-        if( this->selected == -1 )
+        if( m_selected == -1 )
         {
             notesList->setCurrentItem( 0 );
         }
         else
         {
-            if( notesList->count() > this->selected  )
+            if( notesList->count() > m_selected  )
             {
-                notesList->setCurrentItem( this->selected );
+                notesList->setCurrentItem( m_selected );
             }
             else
             {
@@ -282,7 +282,7 @@ void mainWindowWidget::refreshList()
     }
     else
     {
-        this->selected = -1;
+        m_selected = -1;
     }
 
 }
