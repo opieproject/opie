@@ -8,7 +8,6 @@ using namespace Opie::Notes;
 editWindowWidget::editWindowWidget( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ), m_changed( false )
 {
-    setCaption( tr( "Information:" ) );
     QGridLayout *gridLayout = new QGridLayout(this, 2, 1, 5, 5);
     m_editArea = new QMultiLineEdit(this, "m_editArea");
     gridLayout->addWidget(m_editArea, 0, 0);

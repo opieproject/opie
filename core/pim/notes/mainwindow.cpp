@@ -136,6 +136,10 @@ void mainWindowWidget::editMemo( OPimMemo &memo, bool create )
     editWindowWidget *editWindow = new editWindowWidget(0, "editWindow", true);
 
     editWindow->readMemo(memo);
+    if( create )
+        editWindow->setCaption( tr( "Add note" ) );
+    else
+        editWindow->setCaption( tr( "Edit note" ) );
 
     if(QPEApplication::execDialog(editWindow) == QDialog::Accepted)
     {
