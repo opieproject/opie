@@ -19,12 +19,12 @@ OListView::OListView(QWidget *parent, const char *name )
   : QListView(parent,name)
 {
 
-	setRootIsDecorated( true );
-	addColumn(tr("Results"),qApp->desktop()->width() - 9 );
-	//setColumnWidthMode(0, Manual);
+    setRootIsDecorated( true );
+    addColumn(tr("Results"),qApp->desktop()->width() - 9 );
+    //setColumnWidthMode(0, Manual);
 
-	setSorting( -1 );
- 	connect( this, SIGNAL(expanded(QListViewItem*)), SLOT(expand(QListViewItem*)));
+    setSorting( -1 );
+    connect( this, SIGNAL(expanded(QListViewItem*)), SLOT(expand(QListViewItem*)));
 }
 
 
@@ -34,6 +34,6 @@ OListView::~OListView()
 
 void OListView::expand(QListViewItem *item)
 {
- 	((OListViewItem*)item)->expand();
+    ((OListViewItem*)item)->expand();
 }
 

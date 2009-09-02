@@ -19,12 +19,12 @@
 class QDir;
 
 class OListView : public QListView  {
-   Q_OBJECT
+    Q_OBJECT
 public:
-	OListView(QWidget *parent=0, const char *name=0);
-	~OListView();
+    OListView(QWidget *parent=0, const char *name=0);
+    ~OListView();
 protected slots:
-	void expand(QListViewItem*);
+    void expand(QListViewItem*);
 };
 
 #endif

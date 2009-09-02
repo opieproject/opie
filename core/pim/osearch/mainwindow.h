@@ -44,44 +44,44 @@ class MainWindow : public QMainWindow
 
 
 public:
-  MainWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
-  ~MainWindow();
-  static QString appName() { return QString::fromLatin1("osearch"); }
+    MainWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
+    ~MainWindow();
+    static QString appName() { return QString::fromLatin1("osearch"); }
 
 public slots:
-  void setCurrent(QListViewItem*);
-  void setSearch( const QString& );
-  void searchAll();
+    void setCurrent(QListViewItem*);
+    void setSearch( const QString& );
+    void searchAll();
 
 protected slots:
-  void slotAction(int);
-  void showPopup();
-  void stopTimer( QListViewItem* );
-  void searchStringChanged();
-  void optionChanged(int);
+    void slotAction(int);
+    void showPopup();
+    void stopTimer( QListViewItem* );
+    void searchStringChanged();
+    void optionChanged(int);
 
 private:
-  QHBox *buttonBox;
-  QMap<int, QButton*> buttonMap;
-  QSignalMapper* signalMapper;
-  OListView *resultsList;
-  QTextView *richEdit;
-  OListViewItem *_currentItem;
-  QVBoxLayout *mainLayout;
-  QFrame *detailsFrame;
-  QTimer *popupTimer;
-  QTimer *searchTimer;
-  QToolButton* ClearSearchText;
-  QLabel* LabelEnterText;
+    QHBox *buttonBox;
+    QMap<int, QButton*> buttonMap;
+    QSignalMapper* signalMapper;
+    OListView *resultsList;
+    QTextView *richEdit;
+    OListViewItem *_currentItem;
+    QVBoxLayout *mainLayout;
+    QFrame *detailsFrame;
+    QTimer *popupTimer;
+    QTimer *searchTimer;
+    QToolButton* ClearSearchText;
+    QLabel* LabelEnterText;
 
-  QString _searchString;
-  QList<SearchGroup> searches;
-  QAction *SearchAllAction;
-  QAction *actionCaseSensitiv;
-  QAction *actionWildcards;
-  //QAction *actionWholeWordsOnly;
-  uint _buttonCount;
-  void makeMenu();
+    QString _searchString;
+    QList<SearchGroup> searches;
+    QAction *SearchAllAction;
+    QAction *actionCaseSensitiv;
+    QAction *actionWildcards;
+    //QAction *actionWholeWordsOnly;
+    uint _buttonCount;
+    void makeMenu();
 };
 
 #endif

@@ -31,7 +31,7 @@ HEADERS += mainwindow.h \
            doclnkitem.h \
            doclnksearch.h 
 
-TARGET	= osearch
+TARGET = osearch
 
 INCLUDEPATH = $(OPIEDIR)/include
 DEPENDPATH += $(OPIEDIR)/include

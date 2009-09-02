@@ -16,16 +16,16 @@
 class OListViewItem : public QListViewItem
 {
 public:
-	enum {Raw, Searchgroup, Result, Contact, Todo, Event};
-	OListViewItem(OListViewItem *parent);
-	OListViewItem(OListViewItem *parent, QString name);
-	OListViewItem(QListView *parent, QString name);
-	~OListViewItem();
+    enum {Raw, Searchgroup, Result, Contact, Todo, Event};
+    OListViewItem(OListViewItem *parent);
+    OListViewItem(OListViewItem *parent, QString name);
+    OListViewItem(QListView *parent, QString name);
+    ~OListViewItem();
 
-  	virtual void expand(){};
-	virtual int rtti() { return Raw;}
-	virtual QPopupMenu* popupMenu() { return 0;};
-	void clearList();
+    virtual void expand() {};
+    virtual int rtti() { return Raw; }
+    virtual QPopupMenu* popupMenu() { return 0; };
+    void clearList();
 
 };
 

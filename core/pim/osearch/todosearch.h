@@ -33,9 +33,9 @@ public:
     virtual QPopupMenu* popupMenu();
 
 protected:
-	virtual void load();
-	virtual int search();
-	virtual void insertItem( void* );
+    virtual void load();
+    virtual int search();
+    virtual void insertItem( void* );
 
 private:
     Opie::OPimTodoAccess *_todos;

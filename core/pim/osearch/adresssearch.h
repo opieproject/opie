@@ -26,9 +26,9 @@ public:
     ~AdressSearch();
 
 protected:
-	virtual void load();
-	virtual int search();
-	virtual void insertItem( void* );
+    virtual void load();
+    virtual int search();
+    virtual void insertItem( void* );
 
 private:
     Opie::OPimContactAccess *_contacts;

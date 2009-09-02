@@ -35,7 +35,7 @@ public:
 
 
 private:
-	void setIcon();
+    void setIcon();
     Opie::OPimContact *_contact;
 
 };

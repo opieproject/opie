@@ -24,57 +24,56 @@ using namespace Opie;
 TodoSearch::TodoSearch(QListView* parent, QString name)
 : SearchGroup(parent, name), _todos(0), _popupMenu(0)
 {
-//	AppLnkSet als(QPEApplication::qpeDir());
-//	setPixmap( 0, als.findExec("todolist")->pixmap() );
+//    AppLnkSet als(QPEApplication::qpeDir());
+//    setPixmap( 0, als.findExec("todolist")->pixmap() );
     setPixmap( 0, Opie::Core::OResource::loadPixmap( "todo/TodoList", Opie::Core::OResource::SmallIcon ) );
 
-	actionShowCompleted = new QAction( QObject::tr("Show completed tasks"),QString::null,  0, 0, 0, true );
-	Config cfg( "osearch", Config::User );
-   	cfg.setGroup( "todo_settings" );
-   	actionShowCompleted->setOn( cfg.readBoolEntry( "show_completed_tasks", false ) );
-
+    actionShowCompleted = new QAction( QObject::tr("Show completed tasks"),QString::null,  0, 0, 0, true );
+    Config cfg( "osearch", Config::User );
+    cfg.setGroup( "todo_settings" );
+    actionShowCompleted->setOn( cfg.readBoolEntry( "show_completed_tasks", false ) );
 }
 
 
 TodoSearch::~TodoSearch()
 {
-	Config cfg( "osearch", Config::User );
-   	cfg.setGroup( "todo_settings" );
-   	cfg.writeEntry( "show_completed_tasks", actionShowCompleted->isOn() );
-	delete _popupMenu;
-	delete actionShowCompleted;
-	delete _todos;
+    Config cfg( "osearch", Config::User );
+    cfg.setGroup( "todo_settings" );
+    cfg.writeEntry( "show_completed_tasks", actionShowCompleted->isOn() );
+    delete _popupMenu;
+    delete actionShowCompleted;
+    delete _todos;
 }
 
 
 void TodoSearch::load()
 {
-	 _todos = new OPimTodoAccess();
-	 _todos->load();
+    _todos = new OPimTodoAccess();
+    _todos->load();
 }
 
 int TodoSearch::search()
 {
-	OPimRecordList<OPimTodo> results = _todos->matchRegexp(_search);
-	for (uint i = 0; i < results.count(); i++)
-		insertItem( new OPimTodo( results[i] ));
-	return _resultCount;
+    OPimRecordList<OPimTodo> results = _todos->matchRegexp(_search);
+    for (uint i = 0; i < results.count(); i++)
+        insertItem( new OPimTodo( results[i] ));
+    return _resultCount;
 }
 
 void TodoSearch::insertItem( void *rec )
 {
-	OPimTodo *todo = (OPimTodo*)rec;
-	if (!actionShowCompleted->isOn() &&
-		todo->isCompleted() ) return;
-	(void)new TodoItem( this, todo );
-	_resultCount++;
+    OPimTodo *todo = (OPimTodo*)rec;
+    if (!actionShowCompleted->isOn() &&
+        todo->isCompleted() ) return;
+    (void)new TodoItem( this, todo );
+    _resultCount++;
 }
 
 QPopupMenu* TodoSearch::popupMenu()
 {
-	if (!_popupMenu){
-		_popupMenu = new QPopupMenu( 0 );
- 		actionShowCompleted->addTo( _popupMenu );
-	}
-	return _popupMenu;
+    if (!_popupMenu){
+        _popupMenu = new QPopupMenu( 0 );
+        actionShowCompleted->addTo( _popupMenu );
+    }
+    return _popupMenu;
 }

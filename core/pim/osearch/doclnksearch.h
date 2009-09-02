@@ -30,12 +30,12 @@ public:
     virtual QPopupMenu* popupMenu();
 
 protected:
-	virtual void load();
-	virtual bool searchFile(AppLnk*);
-	virtual void insertItem( void* );
+    virtual void load();
+    virtual bool searchFile(AppLnk*);
+    virtual void insertItem( void* );
 private:
-	QAction *actionSearchInFiles;
-	QPopupMenu *_popupMenu;
+    QAction *actionSearchInFiles;
+    QPopupMenu *_popupMenu;
 
 };
 

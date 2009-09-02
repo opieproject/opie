@@ -10,17 +10,17 @@
 #include "olistviewitem.h"
 
 OListViewItem::OListViewItem(OListViewItem *parent)
-	: QListViewItem(parent)
+    : QListViewItem(parent)
 {
 }
 
 OListViewItem::OListViewItem(OListViewItem *parent, QString name)
-	: QListViewItem(parent,name)
+    : QListViewItem(parent,name)
 {
 }
 
 OListViewItem::OListViewItem(QListView *parent, QString name)
-	: QListViewItem(parent, name)
+    : QListViewItem(parent, name)
 {
 }
 
@@ -30,12 +30,12 @@ OListViewItem::~OListViewItem()
 
 void OListViewItem::clearList()
 {
-	QListViewItem *item = firstChild();
-	QListViewItem *toDel;
-	while ( item != 0 ) {
-		toDel = item;
-		item = item->nextSibling();
-	 	delete toDel;
-	}
+    QListViewItem *item = firstChild();
+    QListViewItem *toDel;
+    while ( item != 0 ) {
+        toDel = item;
+        item = item->nextSibling();
+        delete toDel;
+    }
 }
 

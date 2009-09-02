@@ -18,11 +18,11 @@
 #include <qpe/qcopenvelope_qws.h>
 
 AppLnkItem::AppLnkItem(OListViewItem* parent, AppLnk *app)
-	: ResultItem(parent)
+    : ResultItem(parent)
 {
-	_app = app;
-	setText(0, _app->name() );
-	setPixmap(0, _app->pixmap() );
+    _app = app;
+    setText(0, _app->name() );
+    setPixmap(0, _app->pixmap() );
 }
 
 
@@ -44,18 +44,21 @@ QString AppLnkItem::toRichText()
 
 void AppLnkItem::action( int act )
 {
-	if (!_app->isValid()) odebug << "INVALID" << oendl;
-	if (act == 0) _app->execute();
-	else if (act == 1){
- 		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");
-		e << _app->linkFile();
-	}
+    if (!_app->isValid())
+        odebug << "INVALID" << oendl;
+    
+    if (act == 0)
+        _app->execute();
+    else if (act == 1) {
+        QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");
+        e << _app->linkFile();
+    }
 }
 
 QIntDict<QString> AppLnkItem::actions()
 {
-	QIntDict<QString> result;
-	result.insert( 0, new QString( QObject::tr("execute") ) );
-	result.insert( 1, new QString( QObject::tr("open in filemanager") ) );
-	return result;
+    QIntDict<QString> result;
+    result.insert( 0, new QString( QObject::tr("execute") ) );
+    result.insert( 1, new QString( QObject::tr("open in filemanager") ) );
+    return result;
 }
