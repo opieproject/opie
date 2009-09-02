@@ -1,4 +1,4 @@
-2008-??-??  Opie 1.2.5
+2009-??-??  Opie 1.2.5
 	
 	
 	New Features
@@ -7,14 +7,24 @@
 	* Todo: add snooze capability for alarms
 	* OpieRec: rewrote major parts of this application. Now uses ALSA, writes .wav files correctly with compression enabled, and is much more stable.
 	* VMemo: also rewritten, now sharing the same recording code as OpieRec.
+	* Kbddcontrol: new settings application and applet for configuring external keyboards using kbdd.
 	* TextEdit: add undo/redo
+	* Opie-Notes: add category handling and SQLite backend support
+	* Lots of additional minor features added (see list below)
 
 	Fixed Bugs
 	----------
 	* #1171 - Datebook2: add ability to delay alarm popups
-	* #0767 - Datebook2: allow editing entries for location/event
+	* #1845 - Datebook2: save and restore selected timezone
+	* #0605 - Datebook2: allow changing timezone of existing event
+	* #0767 - Datebook2: allow editing drop-down lists for location/event
 	* #1688 - Datebook2: allow alarm time in days or hours as well as minutes
 	* #0995 - Datebook2: select correct default repeat end date
+	* n.a.  - Contacts: allow editing Department field
+	* n.a.  - Todo: allow pressing enter in quick bar
+	* n.a.  - Todo: allow using all 5 priority values in quick bar
+	* #1888 - Opie-Notes: convert over to Opie PIM libraries and support storing notes in SQLite
+	* #1577 - All PIM apps: greatly improve compatibility when receiving/importing vCard/vCalendar files
 	* #1927 - OpieRec: change to use ALSA
 	* #1452 - Date/Time Settings: enable access to network settings prior to setting time from network
 	* n.a.  - Date/Time Settings: hide AM/PM box when 24-hour time format set
@@ -27,13 +37,28 @@
 	* n.a.  - TextEdit: improve Delete function behaviour (and safety)
 	* n.a.  - Opie-rdesktop: fix crash on connect
 	* n.a.  - Opie-rdesktop: fix not loading settings for the first configuration entry
+	* #0817 - Security: add option to skip authentication if suspended for less than a specified time
+	* #1915 - Security: fix authentication on resume if system not suspended within Opie (eg. by power button)
+	* #1796 - Security: allow auto-suspend to work when authentication system is showing
+	* #1796 - Security: allow the alarm dialog to appear on top of the authentication system
+	* n.a.  - Security: fix manual lock with lock applet interfering with automatic locking on resume
+	* n.a.  - Security: show "please wait" message during penalty time
 	* n.a.  - Security: fix using default IP mask in transferserver that was different to Security settings
 	* n.a.  - SysInfo: improve distribution detection
 	* n.a.  - SysInfo: show better device icons for Zaurus clamshell devices
+	* n.a.  - AutoRotateApplet: fix showing as disabled when actually enabled (until first set)
+	* n.a.  - VolumeApplet: enable tapping on muting LEDs
+	* n.a.  - BatteryApplet: retrieve battery status from sysfs (with fallback to old APM method)
+	* #1560 - Opie-Console: fix unexpected changes when editing default profile
+	* #1436 - Opie-Console: close tab on Ctrl+D / exit (or application if last tab)
+	* n.a.  - OpieIRC: fix "Received unhandled numeric command: 328" warning (implement RPL_CHANNEL_URL)
+	* n.a.  - OpieIRC: don't output handled server messages (eg. "Names for #xxxx")
+	* n.a.  - Allow typing file name and pressing enter in standard file dialog
 	* #1923 - Remove usage of deprecated PCMCIA ioctls
 
 	Internal
 	--------
+	* libopiepim2 code improvements - serialization, timezone fixes, refactoring etc.
 	* qcop command line client now supports QDate parameters
 	* Various code style fixes and tidy-ups
 	
