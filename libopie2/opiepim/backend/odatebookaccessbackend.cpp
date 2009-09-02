@@ -140,7 +140,7 @@ OPimBackendOccurrence::List ODateBookAccessBackend::effectiveNonRepeatingEvents(
     return filterOccurrences( day,dt );
 }
 
-const uint ODateBookAccessBackend::querySettings() const
+uint ODateBookAccessBackend::querySettings() const
 {
 	return 0;
 }

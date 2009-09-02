@@ -455,7 +455,7 @@ UIDArray OPimMemoAccessBackend_SQL::matchRegexp( const QRegExp &r ) const
     return extractUids( res );
 }
 
-const uint OPimMemoAccessBackend_SQL::querySettings() const
+uint OPimMemoAccessBackend_SQL::querySettings() const
 {
     return OPimMemoAccess::IgnoreCase
         | OPimMemoAccess::WildCards

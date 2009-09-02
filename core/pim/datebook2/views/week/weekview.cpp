@@ -244,6 +244,7 @@ void WeekView::slotShowEvent( const OPimOccurrence &ev )
 //     }
 
     QString strLocation = ev.location();
+    where = strLocation.find( "<" );
     while ( where != -1 ) {
         strLocation.remove( where, 1 );
         strLocation.insert( where, "&#60;" );

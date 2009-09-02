@@ -123,8 +123,10 @@ int QGDict::hashKeyString( const QString &key )
 int QGDict::hashKeyAscii( const char *key )
 {
 #if defined(QT_CHECK_NULL)
-    if ( key == 0 )
+    if ( !key ) {
 	qWarning( "QGDict::hashAsciiKey: Invalid null key" );
+	return -1;
+    }
 #endif
     register const char *k = key;
     register uint h=0;

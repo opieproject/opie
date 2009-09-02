@@ -76,7 +76,7 @@ using namespace Datebook;
 MainWindow::MainWindow()
     : OPimMainWindow( "Datebook", 0, 0, 0, 0, 0, WType_TopLevel | WStyle_ContextHelp ), m_descMan( "Descriptions" ),  m_locMan( "Locations" ) /* no tr */
 {
-    m_currView = NULL;
+    m_currView = 0;
     m_initialDate = QDate::currentDate();
     m_inSearch = false;
 
@@ -86,7 +86,7 @@ MainWindow::MainWindow()
     initViews();
     initManagers();
 
-    m_edit = NULL;
+    m_edit = 0;
 
     setCaption( tr("Calendar") );
     setIcon( Opie::Core::OResource::loadPixmap( "datebook_icon" ) );
@@ -807,7 +807,7 @@ void MainWindow::slotChangeView() {
     else
         lastDate = m_initialDate;
 
-    View *selected = NULL;
+    View *selected = 0;
     QObjectListIt itact( *(m_viewsGroup->children()) );
     QAction *a;
     while ( (a=(QAction *)itact.current()) ) {
@@ -823,7 +823,7 @@ void MainWindow::slotChangeView() {
     }
     m_currView = selected;
 
-    if( m_currView->date() != lastDate ) {
+    if( m_currView && m_currView->date() != lastDate ) {
         odebug << "*** calling showDay" << oendl;
         m_currView->showDay(lastDate);
     }

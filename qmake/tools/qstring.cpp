@@ -14510,7 +14510,7 @@ QString QString::section( const QString &sep, int start, int end, int flags ) co
     const QChar *last = end < 0 ? uc + n : uc;
     if(end == -1) {
 	int c = 0;
-	for(const QChar *tmp = end < 0 ? last - sep_len : last;
+	for(const QChar *tmp = last - sep_len;
 	    c < sep_len && tmp < uc + n && tmp >= uc; tmp++, c++) {
 	    if(flags & SectionCaseInsensitiveSeps) {
 		if( ::lower( *tmp ) != *(uc_sep + c))
@@ -17697,7 +17697,7 @@ QDataStream &operator<<( QDataStream &s, const QString &str )
 	    }
 	    int l = str.length();
 	    char *c=b;
-	    while ( l-- ) {
+	    while ( ub && l-- ) {
 		if ( byteOrder == QDataStream::BigEndian ) {
 		    *c++ = (char)ub->row();
 		    *c++ = (char)ub->cell();

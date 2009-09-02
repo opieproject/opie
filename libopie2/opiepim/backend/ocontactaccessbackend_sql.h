@@ -80,7 +80,7 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 
 	UIDArray matchRegexp(  const QRegExp &r ) const;
 
-	const uint querySettings() const;
+	uint querySettings() const;
 
 	bool hasQuerySettings (uint querySettings) const;
 

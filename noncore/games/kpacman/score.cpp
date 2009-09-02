@@ -447,7 +447,7 @@ void Score::read()
                      hallOfFame[i].moment >> name;
                 hallOfFame[i].name = QString::fromLatin1(name);
 		if (name)
-                    delete name;
+                    delete [] name;
 
 		name = 0;
             }

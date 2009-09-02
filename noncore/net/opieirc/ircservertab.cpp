@@ -358,11 +358,13 @@ void IRCServerTab::display(IRCOutput output) {
                 if (channel) {
                     IRCChannelTab *channelTab = getTabForChannel(channel);
                     if (channelTab) {
-                        channelTab->appendText("<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
+                        channelTab->appendText("<font color=\"" + m_notificationColor + "\">" + output.htmlMessage()
+                                               + "</font><br>");
                         return;
                     }
+                    IRCChannelTab::enqueue(channel->channelname(),
+                                           "<font color=\"" + m_notificationColor + "\">" + output.htmlMessage() + "</font><br>");
                 }
-                IRCChannelTab::enqueue(channel->channelname(), "<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
             }
             break;
         case OUTPUT_QUIT: {
