@@ -551,7 +551,8 @@ int LibMadPlugin::audioSamples( int ) {
    debugMsg( "LibMadPlugin::audioSamples" );
 
    long t; short t1[5]; audioReadSamples( t1, 2, 1, t, 0 );
-   mad_header_decode( (struct mad_header *)&d->frame.header, &d->stream );
+   if ( mad_header_decode( (struct mad_header *)&d->frame.header, &d->stream ) == -1 )
+       return -1;
 /*
   qDebug( "LibMadPlugin::audioSamples: %i*%i", d->frame.header.duration.seconds,
   d->frame.header.samplerate );
