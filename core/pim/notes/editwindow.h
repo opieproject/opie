@@ -20,9 +20,14 @@ class editWindowWidget : public QDialog
         void readMemo( const OPimMemo &memo );
         void writeMemo( OPimMemo &memo );
 
+    protected slots:
+        void closeEvent( QCloseEvent *e );
+        void slotChanged();
+        
     private:
         QMultiLineEdit *m_editArea;
         CategorySelect *m_catSelect;
+        bool m_changed;
 
 };
 
