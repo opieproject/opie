@@ -23,13 +23,11 @@
 #  include "libmad_config.h"
 # endif
 
-# include "libmad_global.h"
+#include "libmad_global.h"
 
-# include <stdio.h>
+#include <stdio.h>
 
-# ifdef HAVE_ASSERT_H
-#  include <assert.h>
-# endif
+#include <assert.h>
 
 # include "timer.h"
 

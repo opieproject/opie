@@ -48,6 +48,7 @@
 # endif
 
 # if !defined(HAVE_ASSERT_H)
+#  define HAVE_ASSERT_H 1
 #  if defined(NDEBUG)
 #   define assert(x)	/* nothing */
 #  else
