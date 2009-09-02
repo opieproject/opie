@@ -481,11 +481,15 @@ void LoopControl::setMute( bool on ) {
     if ( on != isMuted ) {
         isMuted = on;
         if ( !on ) {
-              // Force an update of the position
+            // Force an update of the position
             mediaPlayerState->setPosition( mediaPlayerState->position() + 1 );
             mediaPlayerState->setPosition( mediaPlayerState->position() - 1 );
-              // Resume playing audio
-            moreAudio = TRUE;
+            // Resume playing audio
+	    {
+	        audioMutex->lock();
+                moreAudio = TRUE;
+	        audioMutex->unlock();
+	    }
         }
     }
 }
