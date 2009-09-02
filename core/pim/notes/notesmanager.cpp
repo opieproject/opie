@@ -36,8 +36,8 @@ using namespace Opie::Notes;
 
 NotesManager::NotesManager( QObject *obj )
     : QObject( obj )
+    , m_db( 0 )
 {
-    m_db = 0l;
     m_cat.load( categoryFileName() );
 }
 
