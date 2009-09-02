@@ -20,11 +20,13 @@
  * so by contacting: Underbit Technologies, Inc. <info@underbit.com>
  */
 
-# ifdef __cplusplus
+#ifdef __cplusplus
 extern "C" {
-# endif
+#endif
 
-# define FPM_INTEL
+#ifndef FPM_INTEL
+#   define FPM_INTEL
+#endif
 
 
 
