@@ -24,9 +24,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#ifdef __WINDOWS__
 #include <stdlib.h>
-#endif
 
 #include "stocks.h"
 #include "lists.h"
