@@ -76,6 +76,7 @@ public:
     bool reload();
 
 private:
+    bool checkCreateDirectory() const;
     bool loadMemo( int uid, OPimMemo &memo ) const;
     bool saveMemo( const OPimMemo &memo, bool mustExist = false ) const;
 

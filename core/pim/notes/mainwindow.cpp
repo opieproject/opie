@@ -62,37 +62,8 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
     notesList = new QListBox(this, "notesList");
     setCentralWidget(notesList);
 
-    QString documentsDirName = QPEApplication::documentDir() + "/text/plain/";
-
-    QDir fileList( documentsDirName );
-
     m_manager.load();
     
-    // FIXME this should be moved to the text memo backend
-    if(!fileList.exists())
-    {
-        fileList.setPath(QPEApplication::documentDir() + "/text/");
-
-        if(!fileList.exists())
-        {
-            QString text;
-
-            if(!fileList.mkdir(fileList.absPath()))
-            {
-                QMessageBox::critical(0, tr("i/o error"), tr("Could not create directory '%1'").arg( fileList.absPath() ) );
-            }
-            else
-            {
-                fileList.setPath(documentsDirName);
-
-                if(!fileList.mkdir(fileList.absPath()))
-                {
-                    QMessageBox::critical(0, tr("i/o error"), tr("Could not create directory '%1'").arg( fileList.absPath() ) );
-                }
-            }
-        }
-    }
-
     m_selected = -1;
     refreshList();
 

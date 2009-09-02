@@ -141,16 +141,19 @@ bool OPimMemoAccessBackend_Text::loadMemo( int uid, OPimMemo &memo ) const
 
 bool OPimMemoAccessBackend_Text::saveMemo( const OPimMemo &memo, bool mustExist ) const
 {
+    if( !checkCreateDirectory() )
+        return false;
+
     QString fileName = m_path + QString::number( memo.uid() ) + ".txt";
 
     QFile file( fileName );
     if( mustExist && !file.exists() ) {
-        odebug << "saveMemo: file '" << fileName << "' was expected to exist and doesn't" << oendl;
+        oerr << "saveMemo: file '" << fileName << "' was expected to exist and doesn't" << oendl;
         return false;
     }
     
     if ( !file.open( IO_WriteOnly ) ) {
-        odebug << "saveMemo: could not open file '" << fileName << "' for writing" << oendl;
+        oerr << "saveMemo: could not open file '" << fileName << "' for writing" << oendl;
         return false;
     }
     else {
@@ -162,6 +165,17 @@ bool OPimMemoAccessBackend_Text::saveMemo( const OPimMemo &memo, bool mustExist 
     return true;
 }
 
+bool OPimMemoAccessBackend_Text::checkCreateDirectory() const
+{
+    QDir fileList( m_path );
+    if( !fileList.exists() ) {
+        if( !fileList.mkdir( fileList.absPath() ) ) {
+            oerr << "checkCreateDirectory: failed to create directory " << fileList.absPath() << oendl;
+            return false;
+        }
+    }
+    return true;
+}
 
 
 OPimMemo OPimMemoAccessBackend_Text::find ( int uid ) const
