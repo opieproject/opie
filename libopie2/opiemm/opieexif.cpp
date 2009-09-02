@@ -876,7 +876,7 @@ QImage ExifData::getThumbnail() {
   switch (Orientation) {  // notice intentional fallthroughs
     case 2: dest = flip_image( dest ); break;
     case 4: dest = flip_image( dest );
-    case 3: dest =rotate_180( dest ); break;
+    case 3: dest = rotate_180( dest ); break;
     case 5: dest = flip_image( dest );
     case 6: dest = rotate_90( dest ); break;
     case 7: dest = flip_image( dest );

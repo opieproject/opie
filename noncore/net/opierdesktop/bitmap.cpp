@@ -145,8 +145,10 @@ bitmap_decompress(unsigned char *output, int width, int height, unsigned char *i
 					insertmix = True;
 				break;
 			case 8:	/* Bicolour */
-				colour1 = cvalx(&input, Bpp);
 			case 3:	/* Colour */
+				if (opcode == 8)
+				    colour1 = cvalx(&input, Bpp);
+
 				colour2 = cvalx(&input, Bpp);
 				break;
 			case 6:	/* SetMix/Mix */

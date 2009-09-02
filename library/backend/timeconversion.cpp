@@ -173,10 +173,14 @@ QDateTime TimeConversion::fromISO8601( const QCString &s )
 
     switch( date.length() ) {
 	case 8:
-	    thetime.tm_mday = date.right( 2 ).toInt();
 	case 6:
-	    thetime.tm_mon = date.mid( 4, 2 ).toInt() - 1;
 	case 4:
+	    if( date.length() == 8 )
+	        thetime.tm_mday = date.right( 2 ).toInt();
+
+	    if( date.length() >= 6 )
+	        thetime.tm_mon = date.mid( 4, 2 ).toInt() - 1;
+
 	    thetime.tm_year = date.left( 4 ).toInt();
 	    thetime.tm_year -= 1900;
 	    break;
@@ -202,8 +206,10 @@ QDateTime TimeConversion::fromISO8601( const QCString &s )
 	    int tzoffmin = 0;
 	    switch( off.length() ) {
 		case 5:
-		    tzoffmin = off.mid(3).toInt();
 		case 3:
+		    if ( off.length() == 5)
+		        tzoffmin = off.mid(3).toInt();
+
 		    tzoffhour = off.left(3).toInt();
 		default:
 		    break;
@@ -216,10 +222,14 @@ QDateTime TimeConversion::fromISO8601( const QCString &s )
     // get the time:
     switch( timestr.length() ) {
 	case 6:
-	    thetime.tm_sec = timestr.mid( 4 ).toInt();
 	case 4:
-	    thetime.tm_min = timestr.mid( 2, 2 ).toInt();
 	case 2:
+	    if( timestr.length() == 6 )
+	        thetime.tm_sec = timestr.mid( 4 ).toInt();
+
+	    if( timestr.length() >= 4 )
+	        thetime.tm_min = timestr.mid( 2, 2 ).toInt();
+
 	    thetime.tm_hour = timestr.left( 2 ).toInt();
 	default:
 	    break;

@@ -131,25 +131,17 @@ tchar CPlucker::getch(bool fast)
     if (EOPPhase > 0)
     {
 	int ch = 10;
-	switch (EOPPhase)
-	{
-	    case 4:
-		if (!fast) mystyle.setPicture(false, hRule(100,5));
-		mystyle.setCentreJustify();
-		ch = '#';
-		break;
-	    case 3:
-		mystyle.setFontSize(3);
-		ch = 10;
-		break;
-	    case 2:
-		ch = 10;
-		break;
-	    case 1:
-		mystyle.unset();
-	    default:
-		ch = 10;
-	}
+	if (EOPPhase == 4) {
+	    if (!fast)
+		mystyle.setPicture(false, hRule(100,5));
+
+	    mystyle.setCentreJustify();
+	    ch = '#';
+	} else if (EOPPhase == 3)
+	    mystyle.setFontSize(3);
+	else if (EOPPhase == 1)
+	    mystyle.unset();
+
 	EOPPhase--;
 	return ch;
     }

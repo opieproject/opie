@@ -723,10 +723,14 @@ void CSoundFile::CheckNNA(UINT nChn, UINT instr, int note, BOOL bForceCut)
 			// Key Off the note
 			switch(pChn->nNNA)
 			{
-			case NNA_NOTEOFF:	KeyOff(n); break;
-			case NNA_NOTECUT:
-				p->nFadeOutVol = 0;
-			case NNA_NOTEFADE:	p->dwFlags |= CHN_NOTEFADE; break;
+				case NNA_NOTEOFF:	KeyOff(n); break;
+				case NNA_NOTECUT:
+				case NNA_NOTEFADE:
+					if (pChn->nNNA == NNA_NOTECUT)
+						p->nFadeOutVol = 0;
+
+					p->dwFlags |= CHN_NOTEFADE;
+					break;
 			}
 			if (!p->nVolume)
 			{

@@ -130,11 +130,22 @@ void DebugBackend::debug(unsigned short level, unsigned int, const QString& data
     QString lev;
     switch( level )
     {
-        case ODEBUG_INFO: lev = "(Info)"; caption = "Info"; priority = LOG_INFO; break;
-        case ODEBUG_WARN: lev = "(Warn)"; caption = "Warning"; priority = LOG_WARNING; break;
-        case ODEBUG_FATAL: lev = "(Fatal)"; caption = "Fatal Error"; priority = LOG_CRIT; break;
-        default: qDebug( "oDebugBackend: Warning: Unknown debug level! - defaulting to ODEBUG_ERROR." );
-        case ODEBUG_ERROR: lev = "(Error)"; caption = "Error"; priority = LOG_ERR; break;
+        case ODEBUG_INFO:
+            lev = "(Info)"; caption = "Info"; priority = LOG_INFO;
+            break;
+        case ODEBUG_WARN:
+            lev = "(Warn)"; caption = "Warning"; priority = LOG_WARNING;
+            break;
+        case ODEBUG_FATAL:
+            lev = "(Fatal)"; caption = "Fatal Error"; priority = LOG_CRIT;
+            break;
+        default:
+        case ODEBUG_ERROR:
+            if( level != ODEBUG_ERROR )
+                qDebug( "oDebugBackend: Warning: Unknown debug level! - defaulting to ODEBUG_ERROR." );
+
+            lev = "(Error)"; caption = "Error"; priority = LOG_ERR;
+            break;
     }
 
     if (!oApp && (m_outp == 1)) {

@@ -1265,13 +1265,13 @@ QToolBar* QTReaderApp::filebar()
 		fileBar = menubar;
 		break;
 #endif
-	    default:
-		qDebug("Incorrect toolbar policy set");
 	    case cesMenuTool:
 	    case cesMultiple:
 //		qDebug("Creating new file bar");
 		fileBar = new QToolBar("File", this, m_tbposition);
 		break;
+	    default:
+		qDebug("Incorrect toolbar policy set");
 	}
 //	fileBar->setHorizontalStretchable( true );
     }
@@ -1286,14 +1286,14 @@ QToolBar* QTReaderApp::viewbar()
 	    case cesMultiple:
 		viewBar = new QToolBar("View", this, m_tbposition);
 		break;
-	    default:
-		qDebug("Incorrect toolbar policy set");
 #ifdef USEQPE
 	    case cesSingle:
 #endif
 	    case cesMenuTool:
 		viewBar = fileBar;
 		break;
+	    default:
+		qDebug("Incorrect toolbar policy set");
 	}
     }
     return viewBar;
@@ -1308,8 +1308,6 @@ QToolBar* QTReaderApp::navbar()
 //		qDebug("Creating new nav bar");
 		navBar = new QToolBar("Navigation", this, m_tbposition);
 		break;
-	    default:
-		qDebug("Incorrect toolbar policy set");
 #ifdef USEQPE
 	    case cesSingle:
 #endif
@@ -1317,6 +1315,8 @@ QToolBar* QTReaderApp::navbar()
 		navBar = fileBar;
 //		qDebug("Setting navbar to filebar");
 		break;
+	    default:
+		qDebug("Incorrect toolbar policy set");
 	}
     }
     return navBar;
@@ -1330,14 +1330,14 @@ QToolBar* QTReaderApp::markbar()
 	    case cesMultiple:
 		markBar = new QToolBar("Marks", this, m_tbposition);
 		break;
-	    default:
-		qDebug("Incorrect toolbar policy set");
 #ifdef USEQPE
 	    case cesSingle:
 #endif
 	    case cesMenuTool:
 		markBar = fileBar;
 		break;
+	    default:
+		qDebug("Incorrect toolbar policy set");
 	}
     }
     return markBar;

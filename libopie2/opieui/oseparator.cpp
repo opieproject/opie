@@ -71,7 +71,6 @@ void OSeparator::setOrientation(int orientation)
 
       default:
          owarn << "OSeparator::setOrientation(): invalid orientation, using default orientation HLine" << oendl;
-
       case Horizontal:
       case HLine:
          setFrameStyle( QFrame::HLine | QFrame::Sunken );

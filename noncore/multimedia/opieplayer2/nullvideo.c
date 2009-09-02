@@ -459,36 +459,24 @@ static void null_overlay_blend ( vo_driver_t *this_gen, vo_frame_t *frame_gen,
       null_overlay_clut_yuv2rgb(this,overlay,frame);
 
     switch(this->bpp) {
-	case 16:
-	    blend_rgb16(frame->data,
-			overlay,
-			frame->sc.output_width,
-			frame->sc.output_height,
-			frame->sc.delivered_width,
-			frame->sc.delivered_height,
-			&this->alphablend_extra_data);
+      case 16:
+        blend_rgb16(frame->data, overlay, frame->sc.output_width,
+		    frame->sc.output_height, frame->sc.delivered_width,
+		    frame->sc.delivered_height, &this->alphablend_extra_data);
 	break;
 	case 24:
-	    blend_rgb24(frame->data,
-			overlay,
-			frame->sc.output_width,
-			frame->sc.output_height,
-			frame->sc.delivered_width,
-			frame->sc.delivered_height,
-			&this->alphablend_extra_data);
+	  blend_rgb24(frame->data, overlay, frame->sc.output_width,
+		      frame->sc.output_height, frame->sc.delivered_width,
+		      frame->sc.delivered_height, &this->alphablend_extra_data);
 	break;
 	case 32:
-	    blend_rgb32(frame->data,
-			overlay,
-			frame->sc.output_width,
-			frame->sc.output_height,
-			frame->sc.delivered_width,
-			frame->sc.delivered_height,
-			&this->alphablend_extra_data);
+	  blend_rgb32(frame->data, overlay, frame->sc.output_width,
+		      frame->sc.output_height, frame->sc.delivered_width,
+		      frame->sc.delivered_height, &this->alphablend_extra_data);
 	break;
 	default:
-        /* It should never get here */
-	    break;
+          /* It should never get here */
+	  break;
     }
   }
 }
@@ -539,11 +527,11 @@ static void null_get_property_min_max( vo_driver_t* self,
 				       int property, int *min,
 				       int *max ){
  if(property == VO_PROP_BRIGHTNESS) {
-     *min = -100;
-     *max = +100;
- }else {
-     *min = 0;
-     *max = 0;
+   *min = -100;
+   *max = +100;
+ } else {
+   *min = 0;
+   *max = 0;
  }
 }
 static int null_gui_data_exchange( vo_driver_t* self,
@@ -567,7 +555,8 @@ xine_video_port_t* init_video_out_plugin( xine_t *xine,
 					  void* video,
 					  display_xine_frame_t frameDisplayFunc,
 					  void *userData, vo_scale_cb frame_cb,
-					  dest_size_cb dest_cb) {
+					  dest_size_cb dest_cb)
+{
   null_driver_t *vo;
   vo = (null_driver_t*)xine_xmalloc(sizeof(null_driver_t ));
   vo->xine = xine;
@@ -585,26 +574,26 @@ xine_video_port_t* init_video_out_plugin( xine_t *xine,
   vo->m_show_video = 0; // false
 
   /* install callback handlers*/
-  vo->vo_driver.get_capabilities    = null_get_capabilities;
-  vo->vo_driver.alloc_frame         = null_alloc_frame;
-  vo->vo_driver.update_frame_format = null_update_frame_format;
-  vo->vo_driver.display_frame       = null_display_frame;
-  vo->vo_driver.overlay_begin       = 0;
-  vo->vo_driver.overlay_blend       = null_overlay_blend;
-  vo->vo_driver.overlay_end         = 0;
-  vo->vo_driver.get_property        = null_get_property;
-  vo->vo_driver.set_property        = null_set_property;
-  vo->vo_driver.get_property_min_max= null_get_property_min_max;
-  vo->vo_driver.gui_data_exchange   = null_gui_data_exchange;
-  vo->vo_driver.dispose             = null_dispose;
-  vo->vo_driver.redraw_needed       = null_redraw_needed;
+  vo->vo_driver.get_capabilities     = null_get_capabilities;
+  vo->vo_driver.alloc_frame          = null_alloc_frame;
+  vo->vo_driver.update_frame_format  = null_update_frame_format;
+  vo->vo_driver.display_frame        = null_display_frame;
+  vo->vo_driver.overlay_begin        = 0;
+  vo->vo_driver.overlay_blend        = null_overlay_blend;
+  vo->vo_driver.overlay_end          = 0;
+  vo->vo_driver.get_property         = null_get_property;
+  vo->vo_driver.set_property         = null_set_property;
+  vo->vo_driver.get_property_min_max = null_get_property_min_max;
+  vo->vo_driver.gui_data_exchange    = null_gui_data_exchange;
+  vo->vo_driver.dispose              = null_dispose;
+  vo->vo_driver.redraw_needed        = null_redraw_needed;
 
   /* capabilities */
   vo->yuv2rgb_mode       = MODE_16_RGB;
   vo->yuv2rgb_brightness = 0;
-  vo->yuv2rgb_factory = yuv2rgb_factory_init (vo->yuv2rgb_mode,
-					      vo->yuv2rgb_swap,
-					      vo->yuv2rgb_cmap);
+  vo->yuv2rgb_factory = yuv2rgb_factory_init(vo->yuv2rgb_mode,
+					     vo->yuv2rgb_swap,
+					     vo->yuv2rgb_cmap);
   vo->yuv2rgb_factory->set_csc_levels(vo->yuv2rgb_factory,
 				      vo->yuv2rgb_brightness,
 				      128,128);
@@ -619,10 +608,6 @@ xine_video_port_t* init_video_out_plugin( xine_t *xine,
 /* this is special for this device */
 /**
  * We know that we will be controled by the XINE LIB++
- */
-
-/**
- *
  */
 int null_is_showing_video( xine_vo_driver_t* self ){
   null_driver_t* this = (null_driver_t*)self->driver;
@@ -643,53 +628,52 @@ void null_set_mode( xine_vo_driver_t* self, int depth,  int rgb  ) {
 
   switch ( this->depth ) {
   case 32:
-    if( rgb == 0 )
-      this->yuv2rgb_mode = MODE_32_RGB;
-    else
-      this->yuv2rgb_mode = MODE_32_BGR;
   case 24:
     if( this->bpp == 32 ) {
-      if( rgb == 0 ) {
-  this->yuv2rgb_mode = MODE_32_RGB;
-      } else {
-  this->yuv2rgb_mode = MODE_32_BGR;
-      }
-    }else{
       if( rgb == 0 )
-  this->yuv2rgb_mode = MODE_24_RGB;
+        this->yuv2rgb_mode = MODE_32_RGB;
       else
-  this->yuv2rgb_mode = MODE_24_BGR;
-    };
+        this->yuv2rgb_mode = MODE_32_BGR;
+
+      if( rgb == 0 )
+        this->yuv2rgb_mode = MODE_32_RGB;
+      else
+        this->yuv2rgb_mode = MODE_32_BGR;
+    } else {
+      if( rgb == 0 )
+        this->yuv2rgb_mode = MODE_24_RGB;
+      else
+        this->yuv2rgb_mode = MODE_24_BGR;
+    }
     break;
   case 16:
-    if( rgb == 0 ) {
+    if( rgb == 0 )
       this->yuv2rgb_mode = MODE_16_RGB;
-    } else {
+    else
       this->yuv2rgb_mode = MODE_16_BGR;
-    }
+
     break;
   case 15:
-    if( rgb == 0 ) {
+    if( rgb == 0 )
       this->yuv2rgb_mode = MODE_15_RGB;
-    } else {
+    else
       this->yuv2rgb_mode = MODE_15_BGR;
-    }
+
     break;
   case 8:
-    if( rgb == 0 ) {
+    if( rgb == 0 )
       this->yuv2rgb_mode = MODE_8_RGB;
-    } else {
+    else
       this->yuv2rgb_mode = MODE_8_BGR;
-    }
+
     break;
-  };
-};
+  }
+}
 
 void null_display_handler( xine_vo_driver_t* self, display_xine_frame_t t,
-			   void* user_data ) {
+			   void* user_data )
+{
   null_driver_t* this = (null_driver_t*) self->driver;
   this->userData = user_data;
   this->frameDis = t;
 }
-
-

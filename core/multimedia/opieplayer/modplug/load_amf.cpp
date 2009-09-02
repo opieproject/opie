@@ -103,15 +103,27 @@ VOID AMF_Unpack(MODCOMMAND *pPat, const BYTE *pTrack, UINT nRows, UINT nChannels
 			// 0x02: Volume Slide
 			// 0x0A: Tone Porta + Vol Slide
 			// 0x0B: Vibrato + Vol Slide
-			case 0x02:	command = CMD_VOLUMESLIDE;
-			case 0x0A:	if (command == 0x0A) command = CMD_TONEPORTAVOL;
-			case 0x0B:	if (command == 0x0B) command = CMD_VIBRATOVOL;
-						if (param & 0x80) param = (-(signed char)param)&0x0F;
-						else param = (param&0x0F)<<4;
-						break;
+			case 0x02:
+			case 0x0A:
+			case 0x0B:
+				if (command == 0x02)
+				 	command = CMD_VOLUMESLIDE;
+
+				if (command == 0x0A)
+				 	command = CMD_TONEPORTAVOL;
+
+				if (command == 0x0B)
+					command = CMD_VIBRATOVOL;
+
+				if (param & 0x80)
+					param = (-(signed char)param)&0x0F;
+				else
+					param = (param&0x0F)<<4;
+
+				break;
 			// 0x04: Porta Up/Down
 			case 0x04:	if (param & 0x80) { command = CMD_PORTAMENTOUP; param = -(signed char)param; }
-						else { command = CMD_PORTAMENTODOWN; } break;
+					else { command = CMD_PORTAMENTODOWN; } break;
 			// 0x06: Tone Portamento
 			case 0x06:	command = CMD_TONEPORTAMENTO; break;
 			// 0x07: Tremor
@@ -129,18 +141,20 @@ VOID AMF_Unpack(MODCOMMAND *pPat, const BYTE *pTrack, UINT nRows, UINT nChannels
 			// 0x10: Offset
 			case 0x10:	command = CMD_OFFSET; break;
 			// 0x11: Fine Volume Slide
-			case 0x11:	if (param) { command = CMD_VOLUMESLIDE;
+			case 0x11:	if (param) {	command = CMD_VOLUMESLIDE;
 							if (param & 0x80) param = 0xF0|((-(signed char)param)&0x0F);
 							else param = 0x0F|((param&0x0F)<<4);
-						} else command = 0; break;
+					} else		command = 0;
+					break;
 			// 0x12: Fine Portamento
 			// 0x16: Extra Fine Portamento
 			case 0x12:
-			case 0x16:	if (param) { int mask = (command == 0x16) ? 0xE0 : 0xF0;
+			case 0x16:	if (param) {	int mask = (command == 0x16) ? 0xE0 : 0xF0;
 							command = (param & 0x80) ? CMD_PORTAMENTOUP : CMD_PORTAMENTODOWN;
 							if (param & 0x80) param = mask|((-(signed char)param)&0x0F);
 							else param |= mask;
-						} else command = 0; break;
+					} else command = 0;
+					break;
 			// 0x13: Note Delay
 			case 0x13:	command = CMD_S3MCMDEX; param = 0xD0|(param & 0x0F); break;
 			// 0x14: Note Cut
@@ -149,8 +163,12 @@ VOID AMF_Unpack(MODCOMMAND *pPat, const BYTE *pTrack, UINT nRows, UINT nChannels
 			case 0x15:	command = CMD_TEMPO; break;
 			// 0x17: Panning
 			case 0x17:	param = (param+64)&0x7F;
-						if (m->command) { if (!m->volcmd) { m->volcmd = VOLCMD_PANNING;  m->vol = param/2; } command = 0; }
-						else { command = CMD_PANNING8; }
+					if (m->command) {
+						if (!m->volcmd) {
+							m->volcmd = VOLCMD_PANNING;  m->vol = param/2;
+						}
+						command = 0;
+					} else { command = CMD_PANNING8; }
 			// Unknown effects
 			default:	command = param = 0;
 			}
