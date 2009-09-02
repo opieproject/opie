@@ -18,6 +18,7 @@
 #include "datebooksearch.h"
 #include "applnksearch.h"
 #include "doclnksearch.h"
+#include "memosearch.h"
 #include "mainwindow.h"
 
 #include <opie2/odebug.h>
@@ -91,6 +92,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f )
     searches.append( new TodoSearch( resultsList, tr("Todo List") ) );
     searches.append( new DatebookSearch( resultsList, tr("Calendar") ) );
     searches.append( new AdressSearch( resultsList, tr("Contacts") ) );
+    searches.append( new MemoSearch( resultsList, tr("Notes") ) );
 
     setCentralWidget( mainFrame );
 

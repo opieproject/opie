@@ -14,7 +14,9 @@ SOURCES += main.cpp \
            applnksearch.cpp \
            applnkitem.cpp \
            doclnkitem.cpp \
-           doclnksearch.cpp 
+           doclnksearch.cpp \
+           memoitem.cpp \
+           memosearch.cpp
 HEADERS += mainwindow.h \
            olistview.h \
            olistviewitem.h \
@@ -29,7 +31,9 @@ HEADERS += mainwindow.h \
            applnksearch.h \
            applnkitem.h \
            doclnkitem.h \
-           doclnksearch.h 
+           doclnksearch.h \
+           memoitem.h \
+           memosearch.h
 
 TARGET = osearch
 
