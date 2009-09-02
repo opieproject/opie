@@ -520,13 +520,22 @@ UIDArray OPimMemoAccessBackend_SQL::sorted( const UIDArray& ar, bool asc, int so
 
     if ( filter != OPimBase::FilterOff ){
         if ( filter & OPimBase::FilterCategory ){
-            query += " AND (";
-            for ( uint i = 0; i < categories.count(); i++ ){
-                query += "\"Categories\" LIKE";
-                query += QString( " '%" ) + QString::number( categories[i] ) + "%' OR";
+            QString cat_query = "";
+            for ( uint cat_nu = 0; cat_nu < categories.count(); ++cat_nu ) {
+                int cat = categories[cat_nu];
+                if( cat == -1 ) {
+                    cat_query += " categories = '' OR";
+                    break;
+                }
+                else if( cat != 0 ) {
+                    cat_query += " categories LIKE '%" + QString::number( cat ) + "%' OR";
+                    break;
+                }
             }
-            query.remove( query.length()-2, 2 ); // Hmmmm..
-            query += ")";
+            if( !cat_query.isEmpty() ) {
+                cat_query.remove( cat_query.length()-2, 2 );
+                query += "AND (" + cat_query + ")";
+            }
         }
     }
 
