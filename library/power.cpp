@@ -80,7 +80,10 @@ bool PowerStatusManager::getSysFsStatus()
     props += "type";
     props += "charge_full";
     props += "charge_now";
+    props += "energy_full";
+    props += "energy_now";
     props += "current_now";
+    props += "power_now";
     props += "status";
     props += "online";
 
@@ -104,8 +107,17 @@ bool PowerStatusManager::getSysFsStatus()
                 ok = true;
                 if( propmap["type"] == "Battery" ) {
                     int charge_full = propmap["charge_full"].toInt();
-                    int charge_now = propmap["charge_now"].toInt();
-                    int current_now = propmap["current_now"].toInt();
+                    int charge_now = 0, current_now = 0;
+                    if( charge_full == 0 ) {
+                        charge_full = propmap["energy_full"].toInt();
+                        charge_now = propmap["energy_now"].toInt();
+                        current_now = propmap["power_now"].toInt();
+                    }
+                    else {
+                        charge_now = propmap["charge_now"].toInt();
+                        current_now = propmap["current_now"].toInt();
+                    }
+                    
                     int pc;
 
                     if( current_now > 0 )
