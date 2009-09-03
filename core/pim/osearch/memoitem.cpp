@@ -54,12 +54,7 @@ QString MemoItem::toRichText()
 
 void MemoItem::action( int act )
 {
-    // FIXME this probably won't work yet
     if ( act == 0 ) {
-        QCopEnvelope e("QPE/Application/opie-notes", "show(int)");
-        e << _memo->uid();
-    }
-    else if ( act == 1 ) {
         QCopEnvelope e("QPE/Application/opie-notes", "edit(int)");
         e << _memo->uid();
     }
@@ -68,8 +63,7 @@ void MemoItem::action( int act )
 QIntDict<QString> MemoItem::actions()
 {
     QIntDict<QString> result;
-    result.insert( 0, new QString( QObject::tr("show") ) );
-    result.insert( 1, new QString( QObject::tr("edit") ) );
+    result.insert( 0, new QString( QObject::tr("edit") ) );
     return result;
 }
 
