@@ -317,6 +317,14 @@ void mainWindowWidget::slotItemBeam()
     }
 }
 
+void mainWindowWidget::edit( int uid )    
+{ 
+    OPimMemo memo = m_manager.memo( uid );
+    if( memo.uid() != 0 ) {
+        this->editMemo( memo, false );
+    }
+}
+
 void mainWindowWidget::slotItemFind()           { toBeDone();}
 void mainWindowWidget::slotConfigure()          { toBeDone();}
 void mainWindowWidget::flush()                  { toBeDone();}
@@ -324,7 +332,6 @@ void mainWindowWidget::reload()                 { toBeDone();}
 bool mainWindowWidget::remove( int /*uid*/ )    { toBeDone(); return false; }
 void mainWindowWidget::beam(   int /*uid*/ )    { toBeDone();}
 void mainWindowWidget::show(   int /*uid*/ )    { toBeDone();}
-void mainWindowWidget::edit(   int /*uid*/ )    { toBeDone();}
 void mainWindowWidget::add( const Opie::OPimRecord& ) { toBeDone();}
 
 void mainWindowWidget::toBeDone(void)
