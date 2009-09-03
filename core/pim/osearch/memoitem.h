@@ -36,7 +36,7 @@
 
 
 /**
-@author Patrick S. Vogt
+@author Paul Eggleton
 */
 class MemoItem : public ResultItem
 {
