@@ -65,7 +65,6 @@ namespace Notes {
         void setSortASC( bool );
         void sort();
 
-        OPimMemoAccess* memoDB();
         bool saveAll();
 
 

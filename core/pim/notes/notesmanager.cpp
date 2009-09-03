@@ -75,12 +75,6 @@ OPimMemoAccess::List::Iterator NotesManager::query( const OPimMemo& ev, int quer
     return m_it;
 }
 
-OPimMemoAccess* NotesManager::memoDB()
-{
-    // FIXME this shouldn't need to be accessible
-    return m_db;
-}
-
 void NotesManager::add( const OPimMemo& ev )
 {
     m_db->add( ev );
