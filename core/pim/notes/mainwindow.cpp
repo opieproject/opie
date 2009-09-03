@@ -68,6 +68,8 @@
 
 #include <qpe/ir.h>
 
+#include <qaction.h>
+
 using namespace Opie;
 using namespace Opie::Notes;
 
@@ -103,6 +105,11 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
             this, SLOT(slotCategoryChanged(const QString&)) );
 
     initBars();
+
+    // We don't have any configuration options at the moment,
+    // so remove the configuration menu item
+    delete m_configureAction;
+    m_configureAction = NULL;
 }
 
 mainWindowWidget::~mainWindowWidget()
