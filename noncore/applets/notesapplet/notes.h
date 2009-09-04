@@ -56,7 +56,6 @@ private:
     void load(const QString&);
 
 private slots:
-    void slotSearch();
     void slotShowMax();
     void slotBeamButton();
     void slotBeamFinished( Ir*);

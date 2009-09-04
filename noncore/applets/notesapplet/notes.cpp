@@ -233,7 +233,6 @@ void NotesControl::showMenu()
 {
     QPopupMenu *m = new QPopupMenu(0);
     m->insertItem( tr( "Beam Out" ), this,  SLOT( slotBeamButton() ));
-    m->insertItem( tr( "Search For..." ), this,  SLOT( slotSearch() ));
     m->insertItem( tr( "Toggle Maximized" ), this,  SLOT( slotShowMax() ));
     m->insertSeparator();
     m->insertItem( tr( "Delete" ), this,  SLOT( slotDeleteButton() ));
@@ -405,14 +404,6 @@ void NotesControl::slotShowMax()
      cfg.writeEntry("ShowMax", showMax);
      cfg.write();
      hide();
-}
-
-void NotesControl::slotSearch()
-{
-    int boxCount = box->count();
-    for(int i=0;i< boxCount;i++) {
-
-    }
 }
 
 //===========================================================================
