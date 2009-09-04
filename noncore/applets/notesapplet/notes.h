@@ -31,6 +31,7 @@ class QPushButton;
 class QMultiLineEdit;
 class QListBox;
 class QListBoxItem;
+
 class NotesControl : public QVBox {
     Q_OBJECT
 public:
@@ -48,11 +49,12 @@ public:
     void load();
 
 private:
-      QTimer menuTimer;
-      DocLnk *doc;
-      QString oldDocName;
-      void focusOutEvent( QFocusEvent * );
-      void load(const QString&);
+    QTimer menuTimer;
+    DocLnk *doc;
+    QString oldDocName;
+    void focusOutEvent( QFocusEvent * );
+    void load(const QString&);
+
 private slots:
     void slotSearch();
     void slotShowMax();
@@ -67,7 +69,6 @@ private slots:
     void loadDoc( const DocLnk &);
     void slotViewEdited();
     void slotBoxSelected(const QString &);
-//    void keyReleaseEvent( QKeyEvent *);
 
 };
 
