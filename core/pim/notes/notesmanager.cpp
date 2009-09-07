@@ -90,11 +90,6 @@ bool NotesManager::remove( int uid )
     return m_db->remove( uid );
 }
 
-void NotesManager::removeAll()
-{
-    m_db->clear();
-}
-
 void NotesManager::save()
 {
     m_db->save();
@@ -122,12 +117,6 @@ QStringList NotesManager::categories()
 int NotesManager::catId( const QString& cats )
 {
     return m_cat.id( "Notes", cats );
-}
-
-void NotesManager::remove( const QArray<int>& ids)
-{
-    for ( uint i=0; i < ids.size(); i++ )
-        remove( ids[i] );
 }
 
 bool NotesManager::isLoaded()const

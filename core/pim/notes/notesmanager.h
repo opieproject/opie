@@ -76,9 +76,7 @@ namespace Notes {
         void add( const OPimMemo& );
         void update( int uid, const OPimMemo& );
         bool remove( int uid );
-        void remove( const QArray<int>& );
 
-        void removeAll();
         void reload();
         void save();
 
