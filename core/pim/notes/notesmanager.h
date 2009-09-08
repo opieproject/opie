@@ -57,6 +57,7 @@ namespace Notes {
         /** returns the iterator sorted if set sorted*/
         OPimMemoAccess::List list() const;
         OPimMemoAccess::List sorted( bool asc, int so, int f,  int cat );
+        OPimMemoAccess::List find( QString regex );
 
         OPimMemoAccess::List::Iterator query( const OPimMemo& ev, int query );
 

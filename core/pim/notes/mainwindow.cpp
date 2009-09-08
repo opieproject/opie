@@ -65,14 +65,18 @@
 
 #include <opie2/omemoaccess.h>
 #include <opie2/omemoaccessbackend_text.h>
+#include <opie2/oresource.h>
 
 #include <qpe/ir.h>
 
 #include <qaction.h>
+#include <qlineedit.h>
+#include <qlayout.h>
 
 using namespace Opie;
 using namespace Opie::Notes;
 
+///////////////////////////////////////////////////////////////////////////////
 
 MemoListItem::MemoListItem ( QListBox *listbox, const QString &text, int uid )
     : QListBoxText( listbox, text ), m_uid( uid )
@@ -84,6 +88,33 @@ int MemoListItem::uid()
     return m_uid;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
+class FindDialog : public QDialog
+{
+    public:
+        FindDialog( QWidget *parent );
+        QString text();
+    protected:
+        QLineEdit *m_findText;
+};
+
+FindDialog::FindDialog( QWidget *parent )
+    : QDialog( parent, 0, TRUE, 0 )
+{
+    QVBoxLayout *layout = new QVBoxLayout( this );
+    m_findText = new QLineEdit( this );
+    layout->addWidget( m_findText );
+    setCaption( tr( "Search" ) );
+    connect( m_findText, SIGNAL( returnPressed() ), this, SLOT( accept() ));
+}
+
+QString FindDialog::text()
+{
+    return m_findText->text();
+}
+
+///////////////////////////////////////////////////////////////////////////////
 
 mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
     : Opie::OPimMainWindow( "Notes", "Notes", tr( "Note" ), "notes",
@@ -106,6 +137,14 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
 
     initBars();
 
+    // Add search
+    QActionGroup *agrp = new QActionGroup( this, QString::null, false );
+    QAction *action = new QAction( tr( "Search" ),
+                                  Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
+                                  QString::null, 0, agrp, 0 );
+    connect( action, SIGNAL(activated()), this, SLOT(slotFind()) );
+    insertViewMenuItems( agrp );
+    
     // We don't have any configuration options at the moment,
     // so remove the configuration menu item
     delete m_configureAction;
@@ -245,10 +284,7 @@ void mainWindowWidget::openFile()
 
 void mainWindowWidget::refreshList()
 {
-    QString title;
     int cat = 0;
-
-    notesList->clear();
 
     if ( m_curCat != tr( "All" ) )
         cat = currentCatId();
@@ -258,9 +294,16 @@ void mainWindowWidget::refreshList()
     int filter = OPimMemoAccess::FilterCategory;
 
     OPimMemoAccess::List notes = m_manager.sorted( true, 0, filter, cat );
-    
-    //notes = m_access->allRecords();
-    for ( OPimMemoAccess::List::Iterator it = notes.begin(); it != notes.end(); ++it ) {
+    populateList( notes );
+}
+
+void mainWindowWidget::populateList( OPimMemoAccess::List &list )
+{
+    QString title;
+
+    notesList->clear();
+
+    for ( OPimMemoAccess::List::Iterator it = list.begin(); it != list.end(); ++it ) {
         if ( (*it).text().isEmpty() )
             title = tr("<empty file>");
         else
@@ -268,34 +311,26 @@ void mainWindowWidget::refreshList()
 
         if (title.length() < 1)
             title = tr("<no title>");
-        
+
         new MemoListItem( notesList, title, (*it).uid() );
     }
-    
-    if( notesList->count() > 0 )
-    {
-        if( m_selected == -1 )
-        {
+
+    if( notesList->count() > 0 ) {
+        if( m_selected == -1 ) {
             notesList->setCurrentItem( 0 );
         }
-        else
-        {
-            if( notesList->count() > m_selected  )
-            {
+        else {
+            if( notesList->count() > m_selected  ) {
                 notesList->setCurrentItem( m_selected );
             }
-            else
-            {
+            else {
                 notesList->setCurrentItem( notesList->count() - 1 );
             }
-
         }
     }
-    else
-    {
+    else {
         m_selected = -1;
     }
-
 }
 
 int mainWindowWidget::currentCatId()
@@ -332,7 +367,15 @@ void mainWindowWidget::edit( int uid )
     }
 }
 
-void mainWindowWidget::slotItemFind()           { toBeDone();}
+void mainWindowWidget::slotFind()
+{
+    FindDialog *fd = new FindDialog( this );
+    if( fd->exec() == QDialog::Accepted ) {
+        OPimMemoAccess::List notes = m_manager.find( fd->text() );
+        populateList( notes );
+    }
+}
+
 void mainWindowWidget::slotConfigure()          { toBeDone();}
 void mainWindowWidget::flush()                  { toBeDone();}
 void mainWindowWidget::reload()                 { toBeDone();}

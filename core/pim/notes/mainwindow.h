@@ -71,6 +71,7 @@ class mainWindowWidget : public Opie::OPimMainWindow
         NotesManager m_manager;
         QString m_curCat;
         
+        void populateList( OPimMemoAccess::List &list );
         void editMemo( OPimMemo &memo, bool create );
         void toBeDone(void);
         int currentCatId();
@@ -83,7 +84,7 @@ class mainWindowWidget : public Opie::OPimMainWindow
         void slotItemDuplicate();
         void slotItemDelete();
         void slotItemBeam();
-        void slotItemFind();
+        void slotFind();
         void slotConfigure();
         void slotCategoryChanged( const QString& );
 

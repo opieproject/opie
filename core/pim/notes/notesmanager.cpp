@@ -75,6 +75,11 @@ OPimMemoAccess::List::Iterator NotesManager::query( const OPimMemo& ev, int quer
     return m_it;
 }
 
+OPimMemoAccess::List NotesManager::find( QString regex )
+{
+    return m_db->matchRegexp( regex );
+}
+
 void NotesManager::add( const OPimMemo& ev )
 {
     m_db->add( ev );
