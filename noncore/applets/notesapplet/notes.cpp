@@ -19,65 +19,67 @@
 #include <opie2/odebug.h>
 #include <opie2/otaskbarapplet.h>
 #include <opie2/oresource.h>
-#include <qpe/filemanager.h>
+#include <opie2/opimmemo.h>
+
 #include <qpe/qpeapplication.h>
-#include <qpe/timestring.h>
 #include <qpe/applnk.h>
 #include <qpe/ir.h>
 #include <qpe/config.h>
-using namespace Opie::Core;
-using namespace Opie::Ui;
+
+using namespace Opie;
+using namespace Opie::Notes;
 
 /* QT */
 #include <qmultilineedit.h>
 #include <qlistbox.h>
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
-#include <qapplication.h>
 #include <qdir.h>
 #include <qfile.h>
 #include <qpoint.h>
 #include <qpushbutton.h>
-#include <qpainter.h>
 #include <qlayout.h>
 #include <qframe.h>
 #include <qpixmap.h>
 #include <qstring.h>
-#include <qstringlist.h>
 #include <qtimer.h>
 
-/* STD */
-#include <stdlib.h>
+//===========================================================================
+
+MemoListItem::MemoListItem ( QListBox *listbox, const QString &text, int uid )
+    : QListBoxText( listbox, text ), m_uid( uid )
+{
+}
+
+int MemoListItem::uid()
+{
+    return m_uid;
+}
+
+//===========================================================================
 
 NotesControl::NotesControl( QWidget *, const char * )
         : QVBox( 0, "NotesControl",/* WDestructiveClose | */WStyle_StaysOnTop )
 //        : QFrame( parent, name, WDestructiveClose | WStyle_StaysOnTop | WType_Popup )
 {
-    QDir d( QDir::homeDirPath()+"/notes");
-    if( !d.exists() ) {
-        odebug << "make dir" << oendl;
-        if(!d.mkdir( QDir::homeDirPath()+"/notes", true))
-            odebug << "<<<<<<<<<<<<<<<<<<<<<<<<<<<make dir failed" << oendl;
-    }
     Config cfg("Notes");
     cfg.setGroup("Options");
     showMax = cfg.readBoolEntry("ShowMax", false);
 
     setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
-    loaded=false;
-    edited=false;
-    doPopulate=true;
-    isNew=false;
+    m_loaded = false;
+    m_edited = false;
+    m_doPopulate = true;
     QVBox *vbox = new QVBox( this, "Vlayout" );
     QHBox  *hbox = new QHBox( this, "HLayout" );
 
-    view = new QMultiLineEdit( vbox, "OpieNotesView" );
+    m_editArea = new QMultiLineEdit( vbox, "OpieNotesView" );
 
-    box = new QListBox( vbox, "OpieNotesBox" );
+    m_notesList = new QListBox( vbox, "OpieNotesBox" );
 
-    QPEApplication::setStylusOperation( box->viewport(), QPEApplication::RightOnHold );
+    QPEApplication::setStylusOperation( m_notesList->viewport(), QPEApplication::RightOnHold );
 
-    box->setFixedHeight( 50 );
+    m_notesList->setFixedHeight( 50 );
 
     vbox->setMargin( 6 );
     vbox->setSpacing( 3 );
@@ -95,95 +97,76 @@ NotesControl::NotesControl( QWidget *, const char * )
     deleteButton->setText(tr("Delete"));
 
 
-    connect( box, SIGNAL( mouseButtonPressed(int,QListBoxItem*,const QPoint&)),
+    connect( m_notesList, SIGNAL( mouseButtonPressed(int,QListBoxItem*,const QPoint&)),
              this,SLOT( boxPressed(int,QListBoxItem*,const QPoint&)) );
 
-    connect( box, SIGNAL(highlighted(const QString&)), this, SLOT(slotBoxSelected(const QString&)));
+    connect( m_notesList, SIGNAL(highlighted(const QString&)), this, SLOT(slotBoxSelected(const QString&)));
 
     connect( &menuTimer, SIGNAL( timeout() ), SLOT( showMenu() ) );
 
-    connect( view,SIGNAL( textChanged() ), this, SLOT(slotViewEdited() ) );
+    connect( m_editArea,SIGNAL( textChanged() ), this, SLOT(slotViewEdited() ) );
 
     connect( newButton, SIGNAL(clicked()), this, SLOT(slotNewButton()) );
     connect( saveButton, SIGNAL(clicked()), this, SLOT(slotSaveButton()) );
-    connect( deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteButtonClicked()) );
+    connect( deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteButton()) );
 
-    populateBox();
-    load();
+    m_manager.load();
+    m_selected = -1;
     setCaption("Notes");
-      //  parent->setFocus();
+}
+
+int NotesControl::selectedMemoUid()
+{
+    int number = m_notesList->currentItem();
+    if( number > -1 ) {
+        MemoListItem *item = (MemoListItem *)m_notesList->item( number );
+        return item->uid();
+    }
+    else
+        return 0;
 }
 
 void NotesControl::slotSaveButton()
 {
-    slotNewButton();
-    populateBox();
-}
-
-void NotesControl::slotDeleteButtonClicked()
-{
-    switch ( QMessageBox::warning(this,tr("Delete?")
-                                  ,tr("Do you really want to<BR><B> delete</B> this note ?")
-                                  ,tr("Yes"),tr("No"),0,1,1) ) {
-        case 0:
-            slotDeleteButton();
-            break;
-    };
+    save();
+    refreshList();
 }
 
 void NotesControl::slotDeleteButton()
 {
-    QString selectedText = box->currentText();
-    odebug << "deleting " + selectedText << oendl;
+    if( m_notesList->count() > 0 && m_loaded ) {
+        switch (QMessageBox::warning(this, tr("Delete note"), tr("Really delete\n'") + m_notesList->currentText() + "'?",
+                    QMessageBox::Yes, QMessageBox::No))
+        {
+            case QMessageBox::Yes:
+                m_selected = m_notesList->currentItem();
+                m_manager.remove( selectedMemoUid() );
+                m_manager.save();
+                refreshList();
+                load();
+                break;
 
-    if( !selectedText.isEmpty() ) {
-
-        Config cfg("Notes");
-        cfg.setGroup("Docs");
-        int noOfFiles = cfg.readNumEntry( "NumberOfFiles", 0 );
-        QString entryName, entryName2;;
-        for ( int i = 0; i < noOfFiles; i++ ) {
-            entryName.sprintf( "File%i", i + 1 );
-            if(selectedText == cfg.readEntry( entryName )) {
-                odebug << "removing " << selectedText.latin1() << ", " << i << "" << oendl;
-                for ( int j = i; j < noOfFiles; j++ ) {
-                    entryName.sprintf( "File%i", i + 1  );
-                    entryName2.sprintf( "File%i", i + 2 );
-                    QString temp = cfg.readEntry( entryName2 );
-                    odebug << "move "+temp << oendl;
-                    cfg.writeEntry( entryName, temp );
-                    i++;
-                }
-                cfg.writeEntry( "NumberOfFiles", noOfFiles-1 );
-                entryName.sprintf( "File%i", noOfFiles );
-                cfg.removeEntry(entryName);
-                cfg.write();
-                DocLnk nf(selectedText);
-                nf.removeFiles();
-                QString fi = QPEApplication::documentDir()+"/text/plain/"+selectedText+".desktop";
-                odebug << fi << oendl;
-
-                QFile f( fi);
-                if( !f.remove() )
-                    odebug << ".desktop file not removed" << oendl;
-
-            }
+            case QMessageBox::No:
+                // don't delete
+                break;
         }
-        view->clear();
-
-        populateBox();
     }
 }
 
 void NotesControl::slotNewButton()
 {
-    if(edited)
+    if( m_edited ) {
         save();
+        refreshList();
+    }
 
-    view->clear();
-    view->setFocus();
-    edited = false;
-    isNew = false;
+    m_selected = -1;
+    m_editArea->clear();
+    m_editArea->setFocus();
+    m_notesList->clearSelection();
+    m_currentMemo = OPimMemo();
+    m_edited = false;
+    m_loaded = false;
 }
 
 void NotesControl::slotBeamButton()
@@ -191,7 +174,7 @@ void NotesControl::slotBeamButton()
     Ir ir;
     if(ir.supported()){
         this->hide();
-        QString selectedText = box->currentText();
+        QString selectedText = m_notesList->currentText();
         if( !selectedText.isEmpty()) {
             QString file = QDir::homeDirPath() + "/" +selectedText;
             QFile f(file);
@@ -218,14 +201,13 @@ void NotesControl::boxPressed(int mouse, QListBoxItem *, const QPoint&)
     };
 }
 
-void NotesControl::slotBoxSelected(const QString &itemString)
+void NotesControl::slotBoxSelected( const QString & )
 {
-    if( edited ) {
+    if( m_edited ) {
         save();
     }
-    loaded = false;
-    edited = false;
-    load(itemString);
+
+    load();
 }
 
 
@@ -247,8 +229,8 @@ void NotesControl::focusOutEvent ( QFocusEvent * e )
     if( e->reason() == QFocusEvent::Popup )
         save();
     else {
-        if(!loaded) {
-            populateBox();
+        if(!m_loaded) {
+            refreshList();
             load();
         }
     }
@@ -257,142 +239,131 @@ void NotesControl::focusOutEvent ( QFocusEvent * e )
 
 void NotesControl::save()
 {
-    Config cfg("Notes");
-    cfg.setGroup("Docs");
-    if( edited) {
-//        odebug << "is edited" << oendl;
-        QString rt = view->text();
-        if( rt.length()>1) {
-            QString pt = rt.simplifyWhiteSpace();
-            int i = pt.find( ' ', pt.find( ' ' )+2 );
-            QString docname = pt;
-            if ( i > 0 )
-                docname = pt.left(i);
-              // remove "." at the beginning
-            while( docname.startsWith( "." ) )
-                docname = docname.mid( 1 );
-            docname.replace( QRegExp("/"), "_" );
-              // cut the length. filenames longer than that don't make sense
-              // and something goes wrong when they get too long.
-            if ( docname.length() > 40 )
-                docname = docname.left(40);
-            if ( docname.isEmpty() )
-                docname = "Empty Text";
-//            odebug << docname << oendl;
-
-            if( oldDocName != docname) {
-                int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
-                QString entryName;
-                entryName.sprintf( "File%i", noOfFiles + 1 );
-                cfg.writeEntry( entryName,docname );
-                cfg.writeEntry("NumberOfFiles", noOfFiles+1 );
-                cfg.write();
-            }
-//             else
-//                 odebug << "oldname equals docname" << oendl;
-
-            doc = new DocLnk(docname);
-            if( QFile(doc->linkFile()).exists() )
-               odebug << "puppie" << oendl;
-            doc->setType("text/plain");
-            doc->setName(docname);
-            QString temp = docname.replace( QRegExp(" "), "_" );
-            doc->setFile( QDir::homeDirPath()+"/notes/"+temp);
-            FileManager fm;
-            if ( !fm.saveFile( *doc, rt ) ) {
-            }
-
-            oldDocName = docname;
-            edited = false;
-//            odebug << "save" << oendl;
-            if (doPopulate)
-                populateBox();
+//X    Config cfg("Notes");
+//X    cfg.setGroup("Docs");
+    if( m_edited ) {
+        if( m_loaded ) {
+            odebug << "save: LOADED" << oendl;
+            m_currentMemo.setText( m_editArea->text() );
+            m_manager.update( m_currentMemo.uid(), m_currentMemo );
         }
-        cfg.writeEntry( "LastDoc", oldDocName );
-        cfg.write();
+        else {
+            odebug << "save: NOTLOADED" << oendl;
+            int now = time(0);
+            m_currentMemo.setUid( now );
+            m_currentMemo.setText( m_editArea->text() );
+            m_manager.add( m_currentMemo );
+        }
+        m_manager.save();
+        
+        m_edited = false;
+
+        if (m_doPopulate)
+            refreshList();
+
+//X        cfg.writeEntry( "LastDoc", oldDocName );
+//X        cfg.write();
 
     }
+    else
+        odebug << "Save:: NOTEDITED" << oendl;
 }
 
-void NotesControl::populateBox()
+void NotesControl::refreshList()
 {
-    box->clear();
-//    odebug << "populate" << oendl;
-    Config cfg("Notes");
-    cfg.setGroup("Docs");
-    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
-    QStringList list;
-    QString entryName;
-    for ( int i = 0; i < noOfFiles; i++ ) {
-        entryName.sprintf( "File%i", i + 1 );
-        list.append( cfg.readEntry( entryName ) );
-    }
-    list.sort();
-    box->insertStringList(list,-1);
-    doPopulate = false;
+    int cat = 0;
+
+/*    if ( m_curCat != tr( "All" ) )
+        cat = currentCatId();
+    if ( m_curCat == tr( "Unfiled" ) )
+        cat = -1;
+
+    int filter = OPimMemoAccess::FilterCategory;*/
+    int filter = 0;
+
+    OPimMemoAccess::List notes = m_manager.sorted( true, 0, filter, cat );
+    populateList( notes );
+    
+    m_doPopulate = false;
     update();
+}
+
+void NotesControl::populateList( OPimMemoAccess::List &list )
+{
+    QString title;
+    int uid = 0;
+    int currentUid = m_currentMemo.uid();
+
+    m_notesList->clear();
+
+    for ( OPimMemoAccess::List::Iterator it = list.begin(); it != list.end(); ++it ) {
+        if ( (*it).text().isEmpty() )
+            title = tr("<empty file>");
+        else
+            title = (*it).description();
+
+        if (title.length() < 1)
+            title = tr("<no title>");
+
+        uid = (*it).uid();
+
+        new MemoListItem( m_notesList, title, uid );
+        if( m_selected == -1 && uid == currentUid )
+            m_selected = m_notesList->count() - 1;
+    }
+
+    if( m_notesList->count() > 0 ) {
+        if( m_selected == -1 ) {
+            m_notesList->setCurrentItem( 0 );
+        }
+        else {
+            if( m_notesList->count() > m_selected  ) {
+                m_notesList->setCurrentItem( m_selected );
+            }
+            else {
+                m_notesList->setCurrentItem( m_notesList->count() - 1 );
+            }
+        }
+    }
+    else {
+        m_selected = -1;
+    }
 }
 
 void NotesControl::load()
 {
-    if( !loaded ) {
+/*X    if( !m_loaded ) {
         Config cfg("Notes");
         cfg.setGroup("Docs");
-        QString lastDoc=cfg.readEntry( "LastDoc","notes");
+        QString lastDoc = cfg.readEntry( "LastDoc", "notes" );
         DocLnk nf;
         nf.setType("text/plain");
         nf.setFile(lastDoc);
 
         loadDoc(nf);
-        loaded = true;
+        m_loaded = true;
         oldDocName=lastDoc;
-        cfg.writeEntry( "LastDoc",oldDocName );
+        cfg.writeEntry( "LastDoc", oldDocName );
         cfg.write();
-    }
-}
+    }*/
 
-void NotesControl::load(const QString & file)
-{
-    odebug << "loading "+file << oendl;
-    QString name = file;
-    QString temp;
-    if( !QFile( QDir::homeDirPath()+"/"+file).exists() )
-        temp =  QDir::homeDirPath()+"/notes/"+ name.replace( QRegExp(" "), "_" );
-    else
-        temp = name;
-
-    if( !loaded ) {
-        DocLnk nf;
-        nf.setType("text/plain");
-        nf.setFile( temp);
-        if( !temp.isEmpty() )
-            loadDoc(nf);
-        loaded = true;
+    int uid = selectedMemoUid();
+    if( uid != 0 ) {
+        m_currentMemo = m_manager.memo( uid );
+        m_editArea->setText( m_currentMemo.text() );
+        m_loaded = true;
+        m_edited = false;
     }
-//    view->setFocus();
-    oldDocName=file;
-    Config cfg("Notes");
-    cfg.setGroup("Docs");
-    cfg.writeEntry( "LastDoc", oldDocName );
-    cfg.write();
-}
-
-void NotesControl::loadDoc( const DocLnk &f)
-{
-    FileManager fm;
-    QString txt;
-    if ( !fm.loadFile( f, txt ) ) {
-        odebug << "could not load file "+f.file() << oendl;
-        return;
+    else {
+        m_editArea->clear();
+        m_loaded = false;
+        m_edited = false;
     }
-    view->setText(txt);
 }
 
 void NotesControl::slotViewEdited()
 {
-     if( loaded ) {
-         edited = true;
-     }
+    m_edited = true;
 }
 
 
@@ -430,7 +401,7 @@ int NotesApplet::position()
 void NotesApplet::mousePressEvent( QMouseEvent *)
 {
     if( !vc->isHidden()) {
-        vc->doPopulate = false;
+        vc->m_doPopulate = false;
         vc->save();
         vc->close();
     }
@@ -450,14 +421,14 @@ void NotesApplet::mousePressEvent( QMouseEvent *)
 //             vc->move(  (( wid->width() / 2) - ( vc->width() / 2 ))-4, 28);
         }
         vc->show();
-        vc->doPopulate=true;
-        vc->populateBox();
-        vc->doPopulate=false;
-        vc->loaded=false;
+        vc->m_doPopulate=true;
+        vc->refreshList();
+        vc->m_doPopulate=false;
+        vc->m_loaded=false;
 
         vc->load();
 //        this->setFocus();
-        vc->view->setFocus();
+        vc->m_editArea->setFocus();
     }
 }
 

@@ -15,7 +15,12 @@
 #ifndef __NOTES_APPLET_H__
 #define __NOTES_APPLET_H__
 
+#include "notesmanager.h"
+
+#include <opie2/omemoaccess.h>
+
 #include <qwidget.h>
+#include <qlistbox.h>
 #include <qvbox.h>
 #include <qpixmap.h>
 #include <qguardedptr.h>
@@ -29,31 +34,45 @@ class QCheckBox;
 class QSpinBox;
 class QPushButton;
 class QMultiLineEdit;
-class QListBox;
-class QListBoxItem;
+
+namespace Opie {
+namespace Notes {
+
+class MemoListItem : public QListBoxText
+{
+public:
+    MemoListItem ( QListBox *listbox, const QString &text, int uid );
+    int uid();
+private:
+    int m_uid;
+};
+
 
 class NotesControl : public QVBox {
     Q_OBJECT
 public:
     NotesControl( QWidget *parent=0, const char *name=0 );
 
-    QPixmap notes;
-    QMultiLineEdit *view;
-    QListBox *box;
+    QMultiLineEdit *m_editArea;
+    QListBox *m_notesList;
     QPushButton *saveButton, *deleteButton, *newButton;
-    QString FileNamePath;
-    bool loaded, edited, doPopulate, isNew;
+    bool m_loaded, m_edited, m_doPopulate;
     bool showMax;
     void save();
-    void populateBox();
+    void refreshList();
     void load();
 
 private:
     QTimer menuTimer;
     DocLnk *doc;
     QString oldDocName;
+    NotesManager m_manager;
+    int m_selected;
+    OPimMemo m_currentMemo;
+
     void focusOutEvent( QFocusEvent * );
-    void load(const QString&);
+    void populateList( OPimMemoAccess::List &list );
+    int selectedMemoUid();
 
 private slots:
     void slotShowMax();
@@ -61,11 +80,9 @@ private slots:
     void slotBeamFinished( Ir*);
     void slotDeleteButton();
     void slotSaveButton();
-    void slotDeleteButtonClicked();
     void slotNewButton();
     void boxPressed(int, QListBoxItem *, const QPoint&);
     void showMenu();
-    void loadDoc( const DocLnk &);
     void slotViewEdited();
     void slotBoxSelected(const QString &);
 
@@ -89,6 +106,9 @@ private slots:
 
 
 };
+
+}
+}
 
 #endif // __NOTES_APPLET_H__
 
