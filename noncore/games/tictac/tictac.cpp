@@ -131,12 +131,13 @@ void TicTacGameBoard::buttonClicked()
     if ( st != HumansTurn )     // not ready
         return;
     int i = buttons->findRef( (TicTacButton*)sender() );
-    TicTacButton *b = buttons->at(i);   // get piece that was pressed
-    if ( b->type() == TicTacButton::Blank ) { // empty piece?
+    TicTacButton *b = i >= 0 ? buttons->at(i) : 0; // get piece that was pressed
+    if ( b && b->type() == TicTacButton::Blank ) { // empty piece?
         btArray->at(i) = TicTacButton::Circle;
         updateButtons();
         if ( checkBoard( btArray ) == 0 ) // not a winning move?
             computerMove();
+
         int s = checkBoard( btArray );
         if ( s ) {        // any winners yet?
             st = s == TicTacButton::Circle ? HumanWon : ComputerWon;
