@@ -139,6 +139,14 @@ void NotesControl::showEvent( QShowEvent *e )
     QVBox::showEvent( e );
 }
 
+void NotesControl::closeEvent( QCloseEvent *e )
+{
+    if( m_edited )
+        save();
+
+    QVBox::closeEvent( e );
+}
+
 int NotesControl::selectedMemoUid()
 {
     int number = m_notesList->currentItem();
@@ -411,10 +419,8 @@ int NotesApplet::position()
 
 void NotesApplet::mousePressEvent( QMouseEvent *)
 {
-    if( !vc->isHidden()) {
-        vc->save();
+    if( !vc->isHidden() )
         vc->close();
-    }
     else
         vc->showAutoMax();
 }

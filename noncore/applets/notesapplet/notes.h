@@ -69,6 +69,7 @@ private:
     OPimMemo m_currentMemo;
 
     void showEvent ( QShowEvent * );
+    void closeEvent ( QCloseEvent * );
     void focusOutEvent( QFocusEvent * );
     void populateList( OPimMemoAccess::List &list );
     int selectedMemoUid();
