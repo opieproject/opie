@@ -329,7 +329,7 @@ void System::probeInterfaces( void ) {
       NicName = line.left(loc);
 
       // set name for ioctl
-      strncpy( ifrs.ifr_name, NicName.latin1(), 16 );
+      strncpy( ifrs.ifr_name, NicName.latin1(), IFNAMSIZ - 1 );
 
       if ( ! ( IFI = ProbedInterfaces.find( NicName ) ) ) {
         // new nic

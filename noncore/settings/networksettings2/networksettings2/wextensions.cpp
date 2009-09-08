@@ -36,7 +36,7 @@ WExtensions::WExtensions(QString interfaceName): hasWirelessExtensions(false), i
   // (see IEEE 802.11 for more information)
 
   const char* iname = interface.latin1();
-  strncpy( iwr.ifr_ifrn.ifrn_name,  (const char *)iname, 16 );
+  strncpy( iwr.ifr_ifrn.ifrn_name,  (const char *)iname, IFNAMSIZ - 1 );
   if ( 0 == ioctl( fd, SIOCGIWESSID, &iwr ) )
     hasWirelessExtensions = true;
 }
