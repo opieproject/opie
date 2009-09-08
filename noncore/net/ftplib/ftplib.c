@@ -175,7 +175,7 @@ static int socket_wait(netbuf *ctl)
             {
                 rv = 0;
                 strncpy(ctl->ctrl->response, strerror(errno),
-                        sizeof(ctl->ctrl->response));
+                        sizeof(ctl->ctrl->response) - 1);
                 break;
             }
           else if (rv > 0)
@@ -799,7 +799,7 @@ static int FtpAcceptConnection(netbuf *nData, netbuf *nControl)
     if (i == -1)
       {
           strncpy(nControl->response, strerror(errno),
-                  sizeof(nControl->response));
+                  sizeof(nControl->response) - 1);
           net_close(nData->handle);
           nData->handle = 0;
           rv = 0;
@@ -827,7 +827,7 @@ static int FtpAcceptConnection(netbuf *nData, netbuf *nControl)
                 else
                   {
                       strncpy(nControl->response, strerror(i),
-                              sizeof(nControl->response));
+                              sizeof(nControl->response) - 1);
                       nData->handle = 0;
                       rv = 0;
                   }
@@ -1168,7 +1168,7 @@ static int FtpXfer(const char *localfile, const char *path,
           if (local == NULL)
             {
                 strncpy(nControl->response, strerror(errno),
-                        sizeof(nControl->response));
+                        sizeof(nControl->response) - 1);
                 return 0;
             }
       }
