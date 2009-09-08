@@ -120,10 +120,10 @@ public:
 
 #ifdef DESKTOP
 // #ifndef WIN32
-    QSettings *conf;
+    QSettings *m_conf;
 // #endif
 #else
-    Config *conf;
+    Config *m_conf;
 #endif
     bool expandTree;
     QPopupMenu *file;

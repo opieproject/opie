@@ -302,12 +302,11 @@ static const char* const general_data[] = {
 // save the configuration into the file
   void ZSafe::saveConf ()
   {
-    if (conf)
+    if (m_conf)
     {
-       delete conf;
-
-       conf = new Config ("zsafe");
-       conf->setGroup ("zsafe");
+       delete m_conf;
+       m_conf = new Config ("zsafe");
+       m_conf->setGroup ("zsafe");
     }
   }
 
@@ -335,11 +334,11 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
 
     QString qpeDir = QPEApplication::qpeDir();
 
-    conf = new Config ("zsafe");
-    conf->setGroup ("zsafePrefs");
+    m_conf = new Config ("zsafe");
+    m_conf->setGroup ("zsafePrefs");
 
-    expandTree = conf->readNumEntry(APP_KEY+"expandTree", 0);
-    conf->setGroup ("zsafe");
+    expandTree = m_conf->readNumEntry(APP_KEY+"expandTree", 0);
+    m_conf->setGroup ("zsafe");
 
     QPixmap new_img = Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon );
     QPixmap edit_img = Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon );
@@ -367,7 +366,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
    setCaption( tr( "ZSafe" ) );
    QString zsafeAppDirPath = QDir::homeDirPath() + "/Documents/application/zsafe";
 
-   filename = conf->readEntry(APP_KEY+"document");
+   filename = m_conf->readEntry(APP_KEY+"document");
    if ( !QFileInfo(filename).exists() || !QDir(zsafeAppDirPath).exists() )
    {
     // check if the directory application exists, if not
@@ -405,7 +404,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
     filename = zsafeAppDirPath + "/passwords.zsf";
 
     // save the current filename to the config file
-    conf->writeEntry(APP_KEY+"document", filename);
+    m_conf->writeEntry(APP_KEY+"document", filename);
     saveConf();
 	 }
    //if (filename == "INVALIDPWD")
@@ -853,9 +852,9 @@ QString ZSafe::getFieldLabel (QListViewItem *_item, QString field, QString def)
 
    QString app_key = APP_KEY;
 
-   conf->setGroup( "fieldDefs" );
-   QString label = conf->readEntry(app_key+category+"-field"+field,def);
-   conf->setGroup ("zsafe");
+   m_conf->setGroup( "fieldDefs" );
+   QString label = m_conf->readEntry(app_key+category+"-field"+field,def);
+   m_conf->setGroup ("zsafe");
    return label;
 }
 
@@ -863,13 +862,13 @@ QString ZSafe::getFieldLabel (QString category, QString field, QString def)
 {
    QString app_key = APP_KEY;
 // #ifndef Q_WS_WIN
-   conf->setGroup( "fieldDefs" );
-   QString label = conf->readEntry(app_key+category+"-field"+field,
+   m_conf->setGroup( "fieldDefs" );
+   QString label = m_conf->readEntry(app_key+category+"-field"+field,
                                    def);
 // #else
    // QString label(def);
 // #endif
-   conf->setGroup ("zsafe");
+   m_conf->setGroup ("zsafe");
    return label;
 }
 
@@ -1248,7 +1247,7 @@ void ZSafe::readAllEntries()
          QString fullIconPath;
          QPixmap *pix;
 // #ifndef Q_WS_WIN
-         icon = conf->readEntry(APP_KEY+category);
+         icon = m_conf->readEntry(APP_KEY+category);
 // #endif
          bool isIconAv = false;
          if (!icon.isEmpty() && !icon.isNull())
@@ -1462,7 +1461,7 @@ void ZSafe::readAllEntries()
          QString fullIconPath;
          QPixmap *pix;
 // #ifndef Q_WS_WIN
-         icon = conf->readEntry(APP_KEY+category);
+         icon = m_conf->readEntry(APP_KEY+category);
 // #endif
          bool isIconAv = false;
          if (!icon.isEmpty() && !icon.isNull())
@@ -1534,38 +1533,34 @@ void ZSafe::resume(int)
 
 bool ZSafe::openDocument(const char* _filename, const char* )
 {
-	QString name= _filename;
-	qWarning("openDocument "+name);
-     int retval;
-     char* entry[FIELD_SIZE];
-// #ifndef Q_WS_WIN
-     int validationFlag = conf->readNumEntry(APP_KEY+"valzsafe", 1);
-// #else
-     // int validationFlag = 1;
-// #endif
+    QString name= _filename;
+    qWarning("openDocument "+name);
+    int retval;
+    char* entry[FIELD_SIZE];
+    int validationFlag = m_conf->readNumEntry(APP_KEY+"valzsafe", 1);
 
-     int pwdOk = 0;
-     int numberOfTries = 3;
-     for (int i=0; i < numberOfTries; i++)
-     {
-        QFile f(_filename);
-        if (f.exists())
-        {
+    int pwdOk = 0;
+    int numberOfTries = 3;
+    for (int i=0; i < numberOfTries; i++)
+    {
+       QFile f(_filename);
+       if (f.exists())
+       {
            // ask with a dialog for the password
-       if (m_password.isEmpty())
-          getDocPassword(tr("Enter Password"));
-       if (m_password.isEmpty() && validationFlag == 0)
+           if (m_password.isEmpty())
+               getDocPassword(tr("Enter Password"));
+
+           if (m_password.isEmpty() && validationFlag == 0)
            {
-              QMessageBox::critical( 0, tr("ZSafe"),
-                  tr("Wrong password.\n\nZSafe will now exit.") );
-              exitZs (1);
+               QMessageBox::critical( 0, tr("ZSafe"),
+	 			      tr("Wrong password.\n\n"
+				 	 "ZSafe will now exit.") );
+              exitZs( 1 );
            }
 
-       retval = loadInit(_filename, m_password);
-       if (retval != PWERR_GOOD)
-           {
-								return false;
-       }
+           retval = loadInit(_filename, m_password);
+           if (retval != PWERR_GOOD)
+		return false;
         }
         else
         {
@@ -1578,16 +1573,14 @@ bool ZSafe::openDocument(const char* _filename, const char* )
                     ) )
            {
            case 1: // No
-           return false;
-                 break;
+               return false;
+               break;
            case 0:  // Yes
-							 newDocument();
-					 return false;
-           break;
+               newDocument();
+               return false;
+               break;
            }
-
         }
-
 
         // load the validation entry
         if (validationFlag == 0)
@@ -1596,7 +1589,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
             break;
         }
 
-    retval = loadEntry(entry);
+        retval = loadEntry(entry);
         if (retval == 1 &&
             !strcmp (entry[0], "ZSAFECATEGORY") &&
             !strcmp (entry[1], "name") &&
@@ -1604,155 +1597,151 @@ bool ZSafe::openDocument(const char* _filename, const char* )
             !strcmp (entry[3], "password") &&
             !strcmp (entry[4], "comment") )
         {
-        for (int count = 0; count < FIELD_SIZE; count++) free(entry[count]);
+            for (int count = 0; count < FIELD_SIZE; count++)
+		free(entry[count]);
+
             pwdOk = 1;
             break;
         }
         else
-       // for (int count = 0; count < FIELD_SIZE; count++) free(entry[count]);
-    fclose (fd);
+            // for (int count = 0; count < FIELD_SIZE; count++) free(entry[count]);
+            fclose (fd);
+
         m_password = "";
 
         if (i < numberOfTries - 1)
         {
-           switch( QMessageBox::warning( this, tr("ZSafe"),
-                    tr("Wrong password.\nEnter again?"),
-                    tr("&Yes"), tr("&No."),
-                    0
-                    ) )
-           {
-           case 1: // No
-                 exitZs (1);
-                 break;
-           case 0:  // Yes
-                 continue;
-           }
+            switch( QMessageBox::warning( this, tr("ZSafe"),
+					  tr("Wrong password.\nEnter again?"),
+					  tr("&Yes"), tr("&No."), 0) )
+            {
+            case 1: // No
+                exitZs (1);
+                break;
+            case 0:  // Yes
+                continue;
+            }
         }
-     }
-     if (pwdOk == 0)
-     {
+    }
+    if (pwdOk == 0)
+    {
         // unset the document entry
-        conf->writeEntry(APP_KEY+"document", "INVALIDPWD");
-        if (conf)
-           delete conf;
-
-        exitZs (1);
-     }
-
+        if (m_conf)
+        {
+            m_conf->writeEntry(APP_KEY+"document", "INVALIDPWD");
+            delete m_conf;
+	    m_conf = 0;
+	}
+        exitZs( 1 );
+    }
 
     retval = loadEntry(entry);
 
-        int numberOfEntries=0;
-    while (retval == 1) {
+    int numberOfEntries=0;
+    while (retval == 1)
+    {
+	QString category( QString::fromUtf8(entry[0]) );
+	QString name( QString::fromUtf8(entry[1]) );
+	QString user( QString::fromUtf8(entry[2]) );
+	QString password( QString::fromUtf8(entry[3]) );
+	QString comment( QString::fromUtf8(entry[4]) );
+	QString field5( QString::fromUtf8(entry[5]) );
+	QString field6( QString::fromUtf8(entry[6]) );
 
-                QString category( QString::fromUtf8(entry[0]) );
-                QString name( QString::fromUtf8(entry[1]) );
-                QString user( QString::fromUtf8(entry[2]) );
-                QString password( QString::fromUtf8(entry[3]) );
-                QString comment( QString::fromUtf8(entry[4]) );
-                QString field5( QString::fromUtf8(entry[5]) );
-                QString field6( QString::fromUtf8(entry[6]) );
-                // add the subitems to the categories
+	// add the subitems to the categories
+	Category *cat= categories.find (category);
+	if (cat)
+	{
+	    // use the existend item
+	    QListViewItem *catItem = cat->getListItem();
+	    if (catItem)
+	    {
+		QListViewItem * item = new ShadedListItem( 0, catItem );
+		item->setText( 0, tr( name ) );
+		item->setText( 1, tr( user ) );
+		item->setText( 2, tr( password ) );
+		item->setText( 3, tr( comment ) );
+		item->setText( 4, tr( field5 ) );
+		item->setText( 5, tr( field6 ) );
 
-                Category *cat= categories.find (category);
-                if (cat)
-                {
-                   // use the existend item
-                   QListViewItem *catItem = cat->getListItem();
-                   if (catItem)
-                   {
-                      QListViewItem * item = new ShadedListItem( 0, catItem );
-                      item->setText( 0, tr( name ) );
-                      item->setText( 1, tr( user ) );
-                      item->setText( 2, tr( password ) );
-                      item->setText( 3, tr( comment ) );
-                      item->setText( 4, tr( field5 ) );
-                      item->setText( 5, tr( field6 ) );
+		if (expandTree)
+		    catItem->setOpen( TRUE );
+                    numberOfEntries++;
+	    }
+	}
+	else
+	{
+	    QListViewItem *catI = new ShadedListItem( 1, ListView );
+	    // create and insert a new item
+	    QListViewItem * item = new ShadedListItem( 0, catI );
 
-                      if (expandTree)
-                         catItem->setOpen( TRUE );
-                      numberOfEntries++;
-                   }
-                }
-                else
-                {
-                   QListViewItem *catI = new ShadedListItem( 1, ListView );
-                   // create and insert a new item
-                   QListViewItem * item = new ShadedListItem( 0, catI );
+	    item->setText( 0, tr( name ) );
+	    item->setText( 1, tr( user ) );
+	    item->setText( 2, tr( password ) );
+	    item->setText( 3, tr( comment ) );
+	    item->setText( 4, tr( field5 ) );
+	    item->setText( 5, tr( field6 ) );
 
-                   item->setText( 0, tr( name ) );
-                   item->setText( 1, tr( user ) );
-                   item->setText( 2, tr( password ) );
-                   item->setText( 3, tr( comment ) );
-                   item->setText( 4, tr( field5 ) );
-                   item->setText( 5, tr( field6 ) );
+	    if (expandTree)
+		catI->setOpen( TRUE );
 
-                   if (expandTree)
-                      catI->setOpen( TRUE );
+	    Category *c1 = new Category();
+	    c1->setCategoryName(category);
 
-                   Category *c1 = new Category();
-                   c1->setCategoryName(category);
-
-                   QString icon;
-                   QString fullIconPath;
-                   QPixmap *pix;
+	    QString icon;
+	    QString fullIconPath;
+	    QPixmap *pix;
 // #ifndef Q_WS_WIN
-                   icon = conf->readEntry(APP_KEY+category);
+	    icon = m_conf->readEntry(APP_KEY+category);
 // #endif
-                   bool isIconAv = false;
-                   if (!icon.isEmpty() && !icon.isNull())
-                   {
-                      // build the full path
-                      fullIconPath = iconPath + icon;
-                      pix = new QPixmap (fullIconPath);
-                      if (!pix->isNull())
-                      {
-                         QImage img = pix->convertToImage();
-                         pix->convertFromImage(img.smoothScale(14,14));
-                         c1->setIconName (icon);
-                         c1->setIcon (*pix);
-                         isIconAv = true;
-                      }
-                   }
-                   if (!isIconAv)
-                   {
-                      c1->setIcon (*getPredefinedIcon(category));
-                   }
+	    bool isIconAv = false;
+	    if (!icon.isEmpty() && !icon.isNull())
+	    {
+		// build the full path
+		fullIconPath = iconPath + icon;
+		pix = new QPixmap (fullIconPath);
+		if (!pix->isNull())
+		{
+		    QImage img = pix->convertToImage();
+		    pix->convertFromImage(img.smoothScale(14,14));
+		    c1->setIconName (icon);
+		    c1->setIcon (*pix);
+		    isIconAv = true;
+		}
+	    }
+	    if (!isIconAv)
+		c1->setIcon (*getPredefinedIcon(category));
 
-                   c1->setListItem (catI);
-                   c1->initListItem();
-                   categories.insert (c1->getCategoryName(), c1);
-                   numberOfEntries++;
-                }
+	    c1->setListItem (catI);
+	    c1->initListItem();
+ 	    categories.insert (c1->getCategoryName(), c1);
+	    numberOfEntries++;
+	}
 
-        for (int count = 0; count < FIELD_SIZE; count++) {
+        for (int count = 0; count < FIELD_SIZE; count++)
             free(entry[count]);
-        }
+
         retval = loadEntry(entry);
-        if (retval == 2) {
-            // m_parent->slotStatusHelpMsg("Last entry loaded");
-        }
+//        if (retval == 2)
+//            m_parent->slotStatusHelpMsg("Last entry loaded");
+
     } // end while
 
-        if (numberOfEntries == 0)
-        {
-
-           switch( QMessageBox::warning( this, tr("ZSafe"),
-                 tr("Empty document or\nwrong password.\nContinue?"),
-                 tr("&No"), tr("&Yes."),
-                 0
-                 ) ) {
-           case 0: // No
-          retval = loadFinalize();
-              exitZs (1);
-              break;
-           case 1:  // Yes
-              break;
-           }
+    if (numberOfEntries == 0)
+    {
+	switch( QMessageBox::warning( this, tr("ZSafe"),
+				      tr("Empty document or\nwrong password.\n"
+					 "Continue?"), tr("&No"), tr("&Yes."), 0) )
+	{
+            case 0: // No
+                retval = loadFinalize();
+                exitZs (1);
+                break;
+            case 1:  // Yes
+                break;
+	}
     }
-
     retval = loadFinalize();
-
     return true;
 }
 
@@ -1988,7 +1977,7 @@ bool ZSafe::saveDocument(const char* _filename,
               return false;
            }
 // #ifndef Q_WS_WIN
-           conf->writeEntry(APP_KEY+"valzsafe", 1);
+           m_conf->writeEntry(APP_KEY+"valzsafe", 1);
 // #endif
            saveConf();
         }
@@ -2396,7 +2385,7 @@ void ZSafe::addCategory()
                {
                   // save the full pixmap name into the config file
 // #ifndef Q_WS_WIN
-                  conf->writeEntry(APP_KEY+category, icon);
+                  m_conf->writeEntry(APP_KEY+category, icon);
 // #endif
                   saveConf();
                   QImage img = pix->convertToImage();
@@ -2448,7 +2437,7 @@ void ZSafe::delCategory()
           modified = true;
           categories.remove (selectedItem->text(0));
 // #ifndef Q_WS_WIN
-          conf->removeEntry (selectedItem->text(0));
+          m_conf->removeEntry (selectedItem->text(0));
 // #endif
           saveConf();
 
@@ -2496,7 +2485,7 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog)
          icon = cat->getIconName();
       }
       else
-         icon = conf->readEntry(APP_KEY+selectedItem->text(0));
+         icon = m_conf->readEntry(APP_KEY+selectedItem->text(0));
    }
    else
    {
@@ -2559,7 +2548,7 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
       icon = cat->getIconName();
    }
    else
-      icon = conf->readEntry(APP_KEY+category);
+      icon = m_conf->readEntry(APP_KEY+category);
 
     QDir d(QPEApplication::qpeDir() + "pics/");
     d.setFilter( QDir::Files);
@@ -2596,18 +2585,18 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
 void ZSafe::saveCategoryDialogFields(CategoryDialog *dialog)
 {
    QString app_key = APP_KEY;
-   conf->setGroup( "fieldDefs" );
+   m_conf->setGroup( "fieldDefs" );
    QString category = dialog->CategoryField->currentText();
 // #ifndef Q_WS_WIN
-   conf->writeEntry(app_key+category+"-field1", dialog->Field1->text());
-   conf->writeEntry(app_key+category+"-field2", dialog->Field2->text());
-   conf->writeEntry(app_key+category+"-field3", dialog->Field3->text());
-   conf->writeEntry(app_key+category+"-field4", dialog->Field4->text());
-   conf->writeEntry(app_key+category+"-field5", dialog->Field5->text());
-   conf->writeEntry(app_key+category+"-field6", dialog->Field6->text());
+   m_conf->writeEntry(app_key+category+"-field1", dialog->Field1->text());
+   m_conf->writeEntry(app_key+category+"-field2", dialog->Field2->text());
+   m_conf->writeEntry(app_key+category+"-field3", dialog->Field3->text());
+   m_conf->writeEntry(app_key+category+"-field4", dialog->Field4->text());
+   m_conf->writeEntry(app_key+category+"-field5", dialog->Field5->text());
+   m_conf->writeEntry(app_key+category+"-field6", dialog->Field6->text());
 // #endif
    saveConf();
-   conf->setGroup ("zsafe");
+   m_conf->setGroup ("zsafe");
 }
 
 void ZSafe::editCategory()
@@ -2771,7 +2760,7 @@ void ZSafe::editCategory()
            {
               categories.remove (category);
 // #ifndef Q_WS_WIN
-              conf->removeEntry(category);
+              m_conf->removeEntry(category);
 // #endif
               saveConf();
            }
@@ -2791,7 +2780,7 @@ void ZSafe::editCategory()
                   {
                      // save the full pixmap name into the config file
 // #ifndef Q_WS_WIN
-                     conf->writeEntry(APP_KEY+category, icon);
+                     m_conf->writeEntry(APP_KEY+category, icon);
 // #endif
                      saveConf();
                      QImage img = pix->convertToImage();
@@ -2803,7 +2792,7 @@ void ZSafe::editCategory()
               else
               {
 // #ifndef Q_WS_WIN
-                 conf->removeEntry (category);
+                 m_conf->removeEntry (category);
 // #endif
                  saveConf();
                  cat->setIcon (*getPredefinedIcon(category));
@@ -2949,8 +2938,8 @@ void ZSafe::newDocument()
        filename = newFile;
 
        // save the current filename to the config file
-       conf->setGroup("zsafe");
-       conf->writeEntry(APP_KEY+"document", filename);
+       m_conf->setGroup("zsafe");
+       m_conf->writeEntry(APP_KEY+"document", filename);
        saveConf();
        QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
        this->setCaption(tr("ZSafe: ") + ti);
@@ -3014,8 +3003,8 @@ void ZSafe::loadDocument()
        filename = newFile;
 
        // save the current filename to the config file
-       conf->setGroup("zsafe");
-       conf->writeEntry(APP_KEY+"document", filename);
+       m_conf->setGroup("zsafe");
+       m_conf->writeEntry(APP_KEY+"document", filename);
        saveConf();
        QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
        this->setCaption(tr("ZSafe: ") + ti);
@@ -3039,8 +3028,8 @@ QString newFile = zsaveDialog();
        filename = newFile;
 
        // save the current filename to the config file
-       conf->setGroup("zsafe");
-       conf->writeEntry(APP_KEY+"document", filename);
+       m_conf->setGroup("zsafe");
+       m_conf->writeEntry(APP_KEY+"document", filename);
        saveConf();
        QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
        this->setCaption(tr("ZSafe: ") + ti);
@@ -3066,9 +3055,9 @@ void ZSafe::setExpandFlag()
 {
    expandTree = !expandTree;
    file->setItemChecked('o', expandTree);
-   conf->setGroup ("zsafePrefs");
+   m_conf->setGroup ("zsafePrefs");
 // #ifndef Q_WS_WIN
-   conf->writeEntry (APP_KEY+"expandTree", expandTree);
+   m_conf->writeEntry (APP_KEY+"expandTree", expandTree);
 // #endif
    saveConf();
 
@@ -3127,8 +3116,8 @@ void ZSafe::setDocument(const QString& fileref)
          filename = fileref;
      }
      // save the current filename to the config file
-     conf->setGroup("zsafe");
-     conf->writeEntry(APP_KEY+"document", filename);
+     m_conf->setGroup("zsafe");
+     m_conf->writeEntry(APP_KEY+"document", filename);
      saveConf();
      QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
      this->setCaption(tr("ZSafe: ") + ti);
