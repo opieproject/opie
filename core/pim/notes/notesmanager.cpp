@@ -29,8 +29,6 @@
 
 #include <opie2/odebug.h>
 
-#include <qpe/categoryselect.h>
-
 #include "notesmanager.h"
 
 using namespace Opie;
@@ -53,26 +51,9 @@ OPimMemo NotesManager::memo(int uid )
     return m_db->find( uid );
 }
 
-void NotesManager::updateList()
-{
-    m_list = m_db->allRecords();
-}
-
-OPimMemoAccess::List NotesManager::list() const
-{
-    return m_list;
-}
-
 OPimMemoAccess::List NotesManager::sorted( bool asc, int so, int f, int cat )
 {
     return m_db->sorted( asc, so, f, cat );
-}
-
-OPimMemoAccess::List::Iterator NotesManager::query( const OPimMemo& ev, int query )
-{
-    m_list = m_db->queryByExample( ev, query );
-    m_it = m_list.begin();
-    return m_it;
 }
 
 OPimMemoAccess::List NotesManager::find( QString regex )

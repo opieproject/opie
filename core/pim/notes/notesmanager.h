@@ -53,21 +53,10 @@ namespace Notes {
         int catId(const QString&);
         OPimMemo memo(int uid );
 
-        void updateList();
-        /** returns the iterator sorted if set sorted*/
-        OPimMemoAccess::List list() const;
         OPimMemoAccess::List sorted( bool asc, int so, int f,  int cat );
         OPimMemoAccess::List find( QString regex );
 
-        OPimMemoAccess::List::Iterator query( const OPimMemo& ev, int query );
-
-        void setCategory( bool sort, int category = -1);
-        void setSortOrder( int sortOrder );
-        void setSortASC( bool );
-        void sort();
-
         bool saveAll();
-
 
     signals:
         void update();
@@ -83,16 +72,7 @@ namespace Notes {
 
     private:
         OPimMemoAccess* m_db;
-        OPimMemoAccess::List m_list;
-        OPimMemoAccess::List::Iterator m_it;
-        OPimMemoAccess::List m_sorted;
         Categories m_cat;
-        int m_ca;
-        /* sort cat */
-        bool m_shCat;
-        int m_sortOrder;
-        bool m_asc;
-
 };
 
 }
