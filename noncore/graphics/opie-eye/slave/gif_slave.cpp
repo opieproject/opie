@@ -147,12 +147,15 @@ void dumpcomment(FILE *src, QCString& str)
         unsigned char   size;
 
         pos=ftell(src);
-        (void)fread((void *)&size,1,1,src);
-        if (debug)
+	if (pos != -1) {
+            fread((void *)&size,1,1,src);
+            if (debug)
                 dump(pos,&size,1);
-        str.resize( size+1 );
-        (void)fread((void *)str.data(),size,1,src);
-        (void)fseek(src,(long int)pos,SEEK_SET);
+
+            str.resize( size+1 );
+            fread((void *)(str.data()),size,1,src);
+            fseek(src,(long int)(pos),SEEK_SET);
+	}
 }
 
 
