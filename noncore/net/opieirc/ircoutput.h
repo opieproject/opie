@@ -49,7 +49,7 @@ enum IRCOutputType {
     OUTPUT_TITLE          = 18   /* parameters : channel (IRCChannel) */
 };
 
-typedef struct IRCOutputEscapeSecuences {
+struct IRCOutputEscapeSecuences {
     char escape;
     char *open;
     char *close;

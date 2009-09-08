@@ -32,19 +32,19 @@ class IRCMessageParser;
 typedef void (IRCMessageParser::*IRCMessageParseProc)(IRCMessage *);
 
 /* Struct representing a literal command handler */
-typedef struct IRCLiteralMessageParserStruct {
+struct IRCLiteralMessageParserStruct {
     char *commandName;
     IRCMessageParseProc proc;
 };
 
 /* Struct representing a ctcp command handler */
-typedef struct IRCCTCPMessageParserStruct {
+struct IRCCTCPMessageParserStruct {
     char *commandName;
     IRCMessageParseProc proc;
 };
 
 /* Struct representing a numerical command handler */
-typedef struct IRCNumericalMessageParserStruct {
+struct IRCNumericalMessageParserStruct {
     unsigned short commandNumber;
     char *message;
     char *params;
