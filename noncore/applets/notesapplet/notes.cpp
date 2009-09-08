@@ -64,12 +64,11 @@ NotesControl::NotesControl( QWidget *, const char * )
 {
     Config cfg("Notes");
     cfg.setGroup("Options");
-    showMax = cfg.readBoolEntry("ShowMax", false);
+    m_showMax = cfg.readBoolEntry("ShowMax", false);
 
     setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
     m_loaded = false;
     m_edited = false;
-    m_doPopulate = true;
     QVBox *vbox = new QVBox( this, "Vlayout" );
     QHBox  *hbox = new QHBox( this, "HLayout" );
 
@@ -113,6 +112,31 @@ NotesControl::NotesControl( QWidget *, const char * )
     m_manager.load();
     m_selected = -1;
     setCaption("Notes");
+}
+
+void NotesControl::showAutoMax()
+{
+    if( m_showMax ) {
+        odebug << "show max" << oendl;
+        showMaximized();
+    }
+    else {
+        odebug << "no show max" << oendl;
+        QWidget *wid = QPEApplication::desktop();
+        QRect rect = QApplication::desktop()->geometry();
+        setGeometry( ( wid->width() / 2) - ( width() / 2 ) , 28 , wid->width() -10 , 180);
+        move ( (rect.center()/2) - (this->rect().center()/2));
+        show();
+    }
+}
+
+void NotesControl::showEvent( QShowEvent *e )
+{
+    refreshList();
+    load();
+    m_editArea->setFocus();
+
+    QVBox::showEvent( e );
 }
 
 int NotesControl::selectedMemoUid()
@@ -239,8 +263,6 @@ void NotesControl::focusOutEvent ( QFocusEvent * e )
 
 void NotesControl::save()
 {
-//X    Config cfg("Notes");
-//X    cfg.setGroup("Docs");
     if( m_edited ) {
         if( m_loaded ) {
             odebug << "save: LOADED" << oendl;
@@ -258,9 +280,8 @@ void NotesControl::save()
         
         m_edited = false;
 
-        if (m_doPopulate)
-            refreshList();
-
+//X    Config cfg("Notes");
+//X    cfg.setGroup("Docs");
 //X        cfg.writeEntry( "LastDoc", oldDocName );
 //X        cfg.write();
 
@@ -284,7 +305,6 @@ void NotesControl::refreshList()
     OPimMemoAccess::List notes = m_manager.sorted( true, 0, filter, cat );
     populateList( notes );
     
-    m_doPopulate = false;
     update();
 }
 
@@ -332,17 +352,8 @@ void NotesControl::populateList( OPimMemoAccess::List &list )
 
 void NotesControl::load()
 {
-/*X    if( !m_loaded ) {
-        Config cfg("Notes");
+/*X     Config cfg("Notes");
         cfg.setGroup("Docs");
-        QString lastDoc = cfg.readEntry( "LastDoc", "notes" );
-        DocLnk nf;
-        nf.setType("text/plain");
-        nf.setFile(lastDoc);
-
-        loadDoc(nf);
-        m_loaded = true;
-        oldDocName=lastDoc;
         cfg.writeEntry( "LastDoc", oldDocName );
         cfg.write();
     }*/
@@ -371,8 +382,8 @@ void NotesControl::slotShowMax()
 {
      Config cfg("Notes");
      cfg.setGroup("Options");
-     showMax = !showMax;
-     cfg.writeEntry("ShowMax", showMax);
+     m_showMax = !m_showMax;
+     cfg.writeEntry("ShowMax", m_showMax);
      cfg.write();
      hide();
 }
@@ -384,7 +395,7 @@ NotesApplet::NotesApplet( QWidget *parent, const char *name )
 {
     setFixedHeight( AppLnk::smallIconSize() );
     setFixedWidth( AppLnk::smallIconSize() );
-    notesPixmap = Opie::Core::OResource::loadImage( "edit", Opie::Core::OResource::SmallIcon );
+    m_notesPixmap = Opie::Core::OResource::loadImage( "edit", Opie::Core::OResource::SmallIcon );
     vc = new NotesControl;
 }
 
@@ -401,41 +412,17 @@ int NotesApplet::position()
 void NotesApplet::mousePressEvent( QMouseEvent *)
 {
     if( !vc->isHidden()) {
-        vc->m_doPopulate = false;
         vc->save();
         vc->close();
     }
-    else {
-//    vc = new NotesControl;
-//    QPoint curPos = mapToGlobal( rect().topLeft() );
-         if(vc->showMax) {
-             odebug << "show max" << oendl;
-             vc->showMaximized();
-         }
-         else {
-             odebug << "no show max" << oendl;
-             QWidget *wid = QPEApplication::desktop();
-             QRect rect = QApplication::desktop()->geometry();
-             vc->setGeometry( ( wid->width() / 2) - ( vc->width() / 2 ) , 28 , wid->width() -10 , 180);
-             vc->move ( (rect.center()/2) - (vc->rect().center()/2));
-//             vc->move(  (( wid->width() / 2) - ( vc->width() / 2 ))-4, 28);
-        }
-        vc->show();
-        vc->m_doPopulate=true;
-        vc->refreshList();
-        vc->m_doPopulate=false;
-        vc->m_loaded=false;
-
-        vc->load();
-//        this->setFocus();
-        vc->m_editArea->setFocus();
-    }
+    else
+        vc->showAutoMax();
 }
 
 void NotesApplet::paintEvent( QPaintEvent* )
 {
     QPainter p(this);
-    p.drawPixmap( 0, 2, notesPixmap );
+    p.drawPixmap( 0, 2, m_notesPixmap );
 }
 
 

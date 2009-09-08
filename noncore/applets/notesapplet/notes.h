@@ -25,7 +25,6 @@
 #include <qpixmap.h>
 #include <qguardedptr.h>
 #include <qtimer.h>
-#include <qpe/filemanager.h>
 #include <qpe/ir.h>
 #include <qstring.h>
 
@@ -53,23 +52,23 @@ class NotesControl : public QVBox {
 public:
     NotesControl( QWidget *parent=0, const char *name=0 );
 
-    QMultiLineEdit *m_editArea;
-    QListBox *m_notesList;
-    QPushButton *saveButton, *deleteButton, *newButton;
-    bool m_loaded, m_edited, m_doPopulate;
-    bool showMax;
     void save();
     void refreshList();
     void load();
+    void showAutoMax();
 
 private:
     QTimer menuTimer;
-    DocLnk *doc;
-    QString oldDocName;
+    QMultiLineEdit *m_editArea;
+    QListBox *m_notesList;
+    QPushButton *saveButton, *deleteButton, *newButton;
     NotesManager m_manager;
     int m_selected;
+    bool m_loaded, m_edited;
+    bool m_showMax;
     OPimMemo m_currentMemo;
 
+    void showEvent ( QShowEvent * );
     void focusOutEvent( QFocusEvent * );
     void populateList( OPimMemoAccess::List &list );
     int selectedMemoUid();
@@ -95,15 +94,12 @@ public:
     ~NotesApplet();
     static int position();
     NotesControl *vc;
-public slots:
 private:
     void mousePressEvent( QMouseEvent * );
     void paintEvent( QPaintEvent* );
 
 private:
-    QPixmap notesPixmap;
-private slots:
-
+    QPixmap m_notesPixmap;
 
 };
 
