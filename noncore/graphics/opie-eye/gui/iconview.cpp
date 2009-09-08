@@ -40,7 +40,7 @@ const int PIconView::sMAX_ICON_SIZE = 128;
 const int PIconView::sMIN_ICON_SIZE = 12;
 const int PIconView::sDEF_ICON_SIZE = 64;
 
-/*
+/**
  * The Icons, Request Cache and IconViewItem for the IconView
  */
 namespace {
@@ -75,22 +75,11 @@ namespace {
         bool m_NameOnly:1;
         bool m_Pixset:1;
     };
-    class TextViewItem : public IconViewItem {
-        TextViewItem( QIconView*, const QString& path, const QString& name, int a_iconsize , bool isDir = false);
-        QPixmap *pixmap()const;
-        void setText( const QString& );
-    };
-    class ThumbViewItem : public IconViewItem {
-        ThumbViewItem( QIconView*, const QString& path, const QString& name, int a_iconsize, bool isDir = false );
-        QPixmap *pixmap()const;
-        void setText( const QString& );
-    };
 
-
-/*
- * If we request an Image or String
- * we add it to the map
- */
+    /**
+     * If we request an Image or String
+     * we add it to the map
+     */
     static QMap<QString, IconViewItem*> g_stringInf;
     static QMap<QString, IconViewItem*> g_stringPix;
 
