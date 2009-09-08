@@ -77,7 +77,7 @@ void IRCChannelPerson::setNick(const QString &nickname)
     m_person->setNick(nickname);
 }
 
-const unsigned int IRCChannelPerson::flags()
+unsigned int IRCChannelPerson::flags()
 {
     return m_flags;
 }

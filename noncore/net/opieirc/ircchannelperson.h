@@ -43,7 +43,7 @@ public:
     QString setOp(const QString &nickname, bool set);
     QString setVoice(const QString &nickname, bool set);
     QString nick();
-    const unsigned int flags();
+    unsigned int flags();
     void setFlags(int flags);
     void setNick(const QString &nickname);
 
