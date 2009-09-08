@@ -33,6 +33,7 @@
  *  based on NoteZ 1.1.0 by Henning Holtschneider <hh@holtschneider.com>
  *
  *  moved to OPIE Pim framework by Marcin Juszkiewicz <openembedded@hrw.one.pl>
+ *  further backend work by Paul Eggleton <bluelightning@bluelightning.org>
  *
  *  History:
  *  - 2005.10.12 - started work
@@ -52,11 +53,11 @@
  *  - 2005.10.26 - version 0.4:
  *                 - added check does Documents/text/plain exist and create it if not
  *
- *  ToDo:
- *  - beaming
- *  - moving to SQLite database
- *  - category support
- *  - searching
+ *  - 2009.09.07 - transition to first-class Opie PIM application
+ *                 - moved to OPim* backend storage (with SQLite backend)
+ *                 - category support
+ *                 - searching
+ *                 - beaming
  *
  */
 
