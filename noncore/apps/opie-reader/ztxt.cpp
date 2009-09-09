@@ -108,35 +108,34 @@ void ztxt::locate(unsigned int n)
 
 void ztxt::home()
 {
-unsuspend();
-    if (bInit)
-    {
-	inflateEnd(&zstream);
-    }
-    bInit = true;
-    size_t reclen = recordlength(1);
-    gotorecordnumber(1);
-    fread(compressedtextbuffer, reclen, sizeof(char), fin);
+  unsuspend();
+  if (bInit)
+    inflateEnd(&zstream);
 
-    zstream.next_in = compressedtextbuffer;
-    zstream.next_out = expandedtextbuffer;
-    zstream.avail_out = buffersize;
-    zstream.avail_in = reclen;
+  bInit = true;
+  size_t reclen = recordlength(1);
+  gotorecordnumber(1);
+  fread(compressedtextbuffer, reclen, sizeof(char), fin);
 
-    zstream.zalloc = Z_NULL;
-    zstream.zfree = Z_NULL;
-    zstream.opaque = Z_NULL;
+  zstream.next_in = compressedtextbuffer;
+  zstream.next_out = expandedtextbuffer;
+  zstream.avail_out = buffersize;
+  zstream.avail_in = reclen;
+
+  zstream.zalloc = Z_NULL;
+  zstream.zfree = Z_NULL;
+  zstream.opaque = Z_NULL;
 
 //  printf("Initialising\n");
 
-    inflateInit(&zstream);
+  inflateInit(&zstream);
 
-    int ret = inflate(&zstream, Z_SYNC_FLUSH);
+  int ret = inflate(&zstream, Z_SYNC_FLUSH);
 //  printf("Inflate : %d\n", ret);
-    bufferpos = 0;
-    bufferrec = 1;
-    currentpos = 0;
-    buffercontent = buffersize - zstream.avail_out;
+  bufferpos = 0;
+  bufferrec = 1;
+  currentpos = 0;
+  buffercontent = buffersize - zstream.avail_out;
 //	printf("buffercontent:%u\n", buffercontent);
 }
 
@@ -146,11 +145,15 @@ CList<Bkmk>* ztxt::getbkmklist()
 
 //  printf("Bookmarks - record %d contains %d\n", recno, ntohs(hdr0.numBookmarks));
 
-  if (recno == 0) return NULL;
+  if (recno == 0)
+    return 0;
+
+  unsuspend();
+  long cur = ftell(fin);
+  if (cur == -1)
+    return 0;
 
   CList<Bkmk>* t = new CList<Bkmk>;
-  unsuspend();
-  size_t cur = ftell(fin);
   gotorecordnumber(recno);
   for (int i = 0; i < ntohs(hdr0.numBookmarks); i++)
   {
