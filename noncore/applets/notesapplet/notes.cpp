@@ -109,7 +109,6 @@ NotesControl::NotesControl( QWidget *, const char * )
     connect( saveButton, SIGNAL(clicked()), this, SLOT(slotSaveButton()) );
     connect( deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteButton()) );
 
-    m_manager.load();
     m_selected = -1;
     setCaption("Notes");
 }
@@ -300,8 +299,10 @@ void NotesControl::save()
 
 void NotesControl::refreshList()
 {
+    if( !m_manager.isLoaded() )
+        m_manager.load();
+    
     int cat = 0;
-
 /*    if ( m_curCat != tr( "All" ) )
         cat = currentCatId();
     if ( m_curCat == tr( "Unfiled" ) )
