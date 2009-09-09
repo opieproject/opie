@@ -18,41 +18,44 @@ void Aportis::dePeanut(int& ch)
 
 CList<Bkmk>* Aportis::getbkmklist()
 {
-  if (bCompressed != 4) return NULL;
-  CList<Bkmk>* t = new CList<Bkmk>;
+  if (bCompressed != 4)
+    return 0;
   unsuspend();
-  size_t cur = ftell(fin);
+  long cur = ftell(fin);
+  if (cur == -1)
+    return 0;
+
+  CList<Bkmk>* t = new CList<Bkmk>;
   for (int i = 0; i < nRecs2; i++)
+  {
+    DWORD dwPos;
+    fseek(fin, 0x56 + 8*i, SEEK_SET);
+    fread(&dwPos, 4, 1, fin);
+    dwPos = SwapLong(dwPos);
+    fseek(fin,dwPos,SEEK_SET);
+    unsigned char ch;
+    fread(&ch,1,1,fin);
+    if (ch != 241)
     {
-      DWORD dwPos;
-      fseek(fin, 0x56 + 8*i, SEEK_SET);
-      fread(&dwPos, 4, 1, fin);
-      dwPos = SwapLong(dwPos);
+      char name[17];
+      name[16] = '\0';
       fseek(fin,dwPos,SEEK_SET);
-      unsigned char ch;
-      fread(&ch,1,1,fin);
-      if (ch != 241)
-      {
-	char name[17];
-	name[16] = '\0';
-	fseek(fin,dwPos,SEEK_SET);
-	fread(name,1,16,fin);
-	unsigned long lcn;
-	fread(&lcn,sizeof(lcn),1,fin);
-	lcn = SwapLong(lcn);
+      fread(name,1,16,fin);
+      unsigned long lcn;
+      fread(&lcn,sizeof(lcn),1,fin);
+      lcn = SwapLong(lcn);
 #ifdef _UNICODE
-	tchar tname[17];
-	memset(tname, 0, sizeof(tname));
-	for (int i = 0; name[i] != 0; i++)
-	{
+      tchar tname[17];
+      memset(tname, 0, sizeof(tname));
+      for (int i = 0; name[i] != 0; i++)
 	    tname[i] = name[i];
-	}
-	t->push_back(Bkmk(tname, NULL, lcn));
+
+      t->push_back(Bkmk(tname, NULL, lcn));
 #else
-	t->push_back(Bkmk(name,lcn));
+      t->push_back(Bkmk(name,lcn));
 #endif
-      }
     }
+  }
   fseek(fin, cur, SEEK_SET);
   return t;
 }
@@ -312,19 +315,24 @@ unsuspend();
 unsigned int Aportis::locate()
 {
   if (bCompressed == 4)
+  {
+    unsuspend();
+    long cur = ftell(fin);
+    if (cur == -1)
+      return 0;
+
+    unsigned int clen = 0;
+    for (unsigned int i = 0; i < currentrec-1; i++)
     {
-unsuspend();
-      size_t cur = ftell(fin);
-      unsigned int clen = 0;
-      for (unsigned int i = 0; i < currentrec-1; i++)
-	{
-	  unsigned int bs = GetBS(i);
-	  if (bs == 0) break;
-	  clen += bs;
-	}
-      fseek(fin,cur,SEEK_SET);
-      return clen+currentpos;
+      unsigned int bs = GetBS(i);
+      if (bs == 0)
+	break;
+
+      clen += bs;
     }
+    fseek(fin,cur,SEEK_SET);
+    return clen+currentpos;
+  }
   else
     return (currentrec-1)*BlockSize+currentpos;
 }
@@ -402,10 +410,15 @@ bool Aportis::refreshbuffer()
 
 QImage* Aportis::getPicture(unsigned long tgt)
 {
-unsuspend();
+  unsuspend();
   unsigned short tgtrec = tgt+mobiimagerec;
-  if (tgtrec > nRecs2) return NULL;
-  size_t cur = ftell(fin);
+  if (tgtrec > nRecs2)
+    return 0;
+
+  long cur = ftell(fin);
+  if (cur == -1)
+    return 0;
+
   unsigned short reclen = recordlength(tgtrec);
   gotorecordnumber(tgtrec);
   UInt8* imgbuffer = new UInt8[reclen];
