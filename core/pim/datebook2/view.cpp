@@ -45,7 +45,7 @@ View::~View() {
 }
 
 QDate View::dateFromWeek( int week, int year, bool startOnMon ) {
-
+    return QDate();
 }
 
 // For Weeks that start on Monday... (EASY!)

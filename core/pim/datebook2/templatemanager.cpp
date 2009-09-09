@@ -88,7 +88,7 @@ namespace {
     }
 
     OPimEvent TemplateItem::event()const {
-
+        return OPimEvent();
     }
 
     class  InputDialog : public QDialog{
