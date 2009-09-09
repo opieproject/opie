@@ -293,11 +293,11 @@ void HlEditDialog::newDocument()
   QStringList list=dirs->findAllResources("data","kate/syntax/syntax.template",false,true);
   for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
       {
-        HlData data("","",*it);
+        HlData data("", "", *it);
         loadFromDocument(&data);
-        return;
+//        return;
       }
-  KMessageBox::error(this,i18n("Can't find template file"));
+//  KMessageBox::error(this,i18n("Can't find template file"));
 }
 
 
