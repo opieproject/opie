@@ -1964,11 +1964,13 @@ void QTextEdit::handleMouseMove( const QPoint& pos )
 void QTextEdit::placeCursor( const QPoint &pos, QTextCursor *c, bool link )
 {
     if ( !c )
-    c = cursor;
+        c = cursor;
 
     c->restoreState();
     QTextParagraph *s = doc->firstParagraph();
-    c->place( pos, s, link );
+    if ( !c->place( pos, s, link ) )
+	return;
+
     updateMicroFocusHint();
 }
 
