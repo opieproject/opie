@@ -47,8 +47,11 @@ public:
 
     QString description()
     {
-	if ( desc.isEmpty() )
-	    desc = QPEApplication::tr("%1 document").arg(apps.first()->name());
+	if ( desc.isEmpty() ) {
+	    AppLnk* lnk = apps.first();
+	    if ( lnk )
+	        desc = QPEApplication::tr("%1 document").arg(lnk->name());
+	}
 	return desc;
     }
 
@@ -85,8 +88,10 @@ private:
 	    }
 	    if ( icon.isNull() ) {
 		AppLnk* lnk = apps.first();
-		regicon = lnk->pixmap();
-		bigicon = lnk->bigPixmap();
+		if ( lnk ) {
+		    regicon = lnk->pixmap();
+		    bigicon = lnk->bigPixmap();
+		}
 	    } else {
 		QImage unscaledIcon = Resource::loadImage( icon );
 		regicon.convertFromImage( unscaledIcon.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
