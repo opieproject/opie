@@ -44,7 +44,7 @@
  */
 class ConfigPrivate {
 public:
-    ConfigPrivate() : multilang(FALSE) {}
+    ConfigPrivate() : multilang(false) {}
     ConfigPrivate(const ConfigPrivate& o) :
         trfile(o.trfile),
         trcontext(o.trcontext),
@@ -325,7 +325,7 @@ Config::~Config()
 bool Config::hasKey( const QString &key ) const
 {
     if ( groups.end() == git )
-	return FALSE;
+	return false;
     ConfigGroup::ConstIterator it = ( *git ).find( key );
     if ( it == ( *git ).end() ) {
         if ( d && !d->trcontext.isNull() ) {
@@ -353,7 +353,7 @@ void Config::setGroup( const QString &gname )
     QMap< QString, ConfigGroup>::Iterator it = groups.find( gname );
     if ( it == groups.end() ) {
 	git = groups.insert( gname, ConfigGroup() );
-	changed = TRUE;
+	changed = true;
 	return;
     }
     git = it;
@@ -382,7 +382,7 @@ void Config::writeEntry( const QString &key, const QString &value )
     }
     if ( (*git)[key] != value ) {
 	( *git ).insert( key, value );
-	changed = TRUE;
+	changed = true;
     }
 }
 
@@ -443,7 +443,7 @@ void Config::writeEntryCrypt( const QString &key, const QString &value )
     QString evalue = encipher(value);
     if ( (*git)[key] != evalue ) {
 	( *git ).insert( key, evalue );
-	changed = TRUE;
+	changed = true;
     }
 }
 
@@ -501,7 +501,7 @@ void Config::removeEntry( const QString &key )
 	return;
     }
     ( *git ).remove( key );
-    changed = TRUE;
+    changed = true;
 }
 
 /*!
@@ -665,7 +665,7 @@ void Config::clearGroup()
     }
     if ( !(*git).isEmpty() ) {
 	( *git ).clear();
-	changed = TRUE;
+	changed = true;
     }
 }
 
@@ -723,7 +723,7 @@ void Config::write( const QString &fn )
     ConfigCache::instance()->insert( filename, groups, d );
     setGroup( oldGroup );
 #endif
-    changed = FALSE;
+    changed = false;
 }
 
 /*!
@@ -739,20 +739,20 @@ bool Config::isValid() const
 */
 void Config::read()
 {
-    changed = FALSE;
+    changed = false;
 
     QString readFilename(filename);
 
     if ( !QFile::exists(filename) ) {
-        bool failed = TRUE;
+        bool failed = true;
         QFileInfo fi(filename);
         QString settingsDir = QDir::homeDirPath() + "/Settings";
-        if (fi.dirPath(TRUE) == settingsDir) {
+        if (fi.dirPath(true) == settingsDir) {
         // User setting - see if there is a default in $OPIEDIR/etc/default/
             QString dftlFile = QPEApplication::qpeDir() + "etc/default/" + fi.fileName();
             if (QFile::exists(dftlFile)) {
                 readFilename = dftlFile;
-                failed = FALSE;
+                failed = false;
             }
         }
         if (failed) {
@@ -809,10 +809,10 @@ bool Config::parse( const QString &l )
         git = groups.insert( gname, ConfigGroup() );
     } else if ( !line.isEmpty() ) {
         if ( git == groups.end() )
-            return FALSE;
+            return false;
         int eq = line.find( '=' );
         if ( eq == -1 )
-            return FALSE;
+            return false;
         QString key = line.left(eq).stripWhiteSpace();
         QString value = line.mid(eq+1).stripWhiteSpace();
 
@@ -826,9 +826,9 @@ bool Config::parse( const QString &l )
                     d = new ConfigPrivate;
                 d->trcontext = value.latin1();
             } else if ( key.startsWith("Comment") ) {
-                return TRUE; // ignore comment for ts file
+                return true; // ignore comment for ts file
             } else {
-                return FALSE; // Unrecognized
+                return false; // Unrecognized
             }
         }
 
@@ -838,16 +838,16 @@ bool Config::parse( const QString &l )
             if ( !d )
                 d = new ConfigPrivate;
             if ( !d->multilang ) {
-                QStringList l = Global::languageList();
-                lang = l[0];
-                glang = l[1];
-                d->multilang = TRUE;
+                QStringList locLanguageList = Global::languageList();
+                lang  = locLanguageList[0];
+                glang = locLanguageList[1];
+                d->multilang = true;
             }
         }
 
         ( *git ).insert( key, value );
     }
-    return TRUE;
+    return true;
 }
 
 
@@ -917,7 +917,7 @@ void Config::removeGroup()
 
     groups.remove(git.key());
     git = groups.end();
-    changed = TRUE;
+    changed = true;
 }
 
 /*!
@@ -976,7 +976,7 @@ QStringList Config::readListEntry( const QString &key ) const
     QString value = readEntry( key, QString::null );
     QStringList l;
     QString s;
-    bool esc=FALSE;
+    bool esc=false;
     for (int i=0; i<(int)value.length(); i++) {
         if ( esc ) {
             if ( value[i] == 'e' ) { // end-of-string
@@ -987,9 +987,9 @@ QStringList Config::readListEntry( const QString &key ) const
             } else {
                 s.append(value[i]);
             }
-            esc = FALSE;
+            esc = false;
         } else if ( value[i] == '^' ) {
-            esc = TRUE;
+            esc = true;
         } else {
             s.append(value[i]);
             if ( i == (int)value.length()-1 )
