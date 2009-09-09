@@ -35,47 +35,48 @@ class fileBrowser : public QDialog
 {
   Q_OBJECT
 
-    public:
-  void populateList();
-  fileBrowser( bool allownew, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0, const QString iPath=0);
-  ~fileBrowser();
+  public:
+    void populateList();
+    fileBrowser( bool allownew, QWidget* parent = 0, const char* name = 0,
+                 bool modal = false, WFlags fl = 0 ,const QString filter=0,
+                 const QString iPath = 0 );
+    ~fileBrowser();
 
-  QPushButton* buttonOk;
-  QPushButton* buttonShowHidden;
-  QtrListView* ListView;
-  QPushButton* buttonCancel;
-  QLabel *dirLabel;
-  QString selectedFileName, filterStr;
-  QDir currentDir;
-  QFile file;
-  QString getCurrentFile();
-  QLineEdit* m_filename;
-  int filterspec;
-  //    QDir::FilterSpec filterspec;
+    QPushButton* buttonOk;
+    QPushButton* buttonShowHidden;
+    QtrListView* ListView;
+    QPushButton* buttonCancel;
+    QLabel *dirLabel;
+    QString selectedFileName, filterStr;
+    QDir currentDir;
+    QFile file;
+    QString getCurrentFile();
+    QLineEdit* m_fileNameLineEdit;
+    int filterspec;
 
-  //QListViewItem * item;
   public slots:
 
- private:
-  QString filename;
+  private:
+    QString m_fileName;
+
   private slots:
     void upDir();
-  void listDoubleClicked(QListViewItem *);
-  void listClicked(QListViewItem *);
-  void OnRoot();
-  void OnCancel();
-  void setHidden(bool);
-  void onReturn();
-  void onCF();
-  void onSD();
-  void onHome();
+    void listDoubleClicked(QListViewItem *);
+    void listClicked(QListViewItem *);
+    void OnRoot();
+    void OnCancel();
+    void setHidden(bool);
+    void onReturn();
+    void onCF();
+    void onSD();
+    void onHome();
 
   protected slots:
 
- protected:
-  void OnOK();
-  virtual void resizeEvent(QResizeEvent* e);
-  void setdir(const QString& s);
+  protected:
+    void OnOK();
+    virtual void resizeEvent(QResizeEvent* e);
+    void setdir(const QString& s);
 };
 
 #endif // FILEBROWSER_H

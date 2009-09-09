@@ -91,13 +91,13 @@ fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, boo
     grid->addWidget(ListView,1);
     if (allownew)
     {
-	m_filename = new QLineEdit(this);
-	grid->addWidget(m_filename);
-	connect( m_filename, SIGNAL( returnPressed() ), this, SLOT( onReturn() ));
+	m_fileNameLineEdit = new QLineEdit(this);
+	grid->addWidget(m_fileNameLineEdit);
+	connect( m_fileNameLineEdit, SIGNAL( returnPressed() ), this, SLOT( onReturn() ));
     }
     else
     {
-	m_filename = NULL;
+	m_fileNameLineEdit = NULL;
     }
 
     if (QFileInfo(iPath).exists())
@@ -122,6 +122,7 @@ fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, boo
 
 void fileBrowser::resizeEvent(QResizeEvent* e)
 {
+    Q_UNUSED( e );
     ListView->setColumnWidth(1,(ListView->width())/4);
     ListView->setColumnWidth(0,ListView->width()-20-ListView->columnWidth(1));
 }
@@ -150,7 +151,7 @@ void fileBrowser::populateList()
     {
 	if (fi->fileName() != ".")
 	{
-	    fileS.sprintf( "%10li", fi->size() );
+	    fileS.sprintf( "%10u", fi->size() );
 	    fileL.sprintf( "%s",fi->fileName().data() );
 	    if( fi->isDir() )
 	    {
@@ -176,7 +177,9 @@ void fileBrowser::upDir()
 
 void fileBrowser::listClicked(QListViewItem *selectedItem)
 {
-    if (selectedItem == NULL) return;
+    if (!selectedItem)
+        return;
+
     QString strItem=selectedItem->text(0);
 
 ////    qDebug("%s", (const char*)strItem);
@@ -185,8 +188,6 @@ void fileBrowser::listClicked(QListViewItem *selectedItem)
     QString strSize=selectedItem->text(1);
 
     strSize.stripWhiteSpace();
-
-    bool ok;
 
     QFileInfo fi(strItem);
     while (fi.isSymLink()) fi.setFile(fi.readLink());
@@ -199,32 +200,30 @@ void fileBrowser::listClicked(QListViewItem *selectedItem)
 	    currentDir.cd(strItem, TRUE);
 	    populateList();
 	}
-    } else
+    }
+    else
     {
-	QListViewItem *selectedItem = ListView->selectedItem();
-	if (selectedItem == NULL)
-	{
-	    filename = "";
-	}
+	QListViewItem *selectedItemFromListView = ListView->selectedItem();
+	if (selectedItemFromListView == NULL)
+	    m_fileName.truncate(0);
 	else
-	{
-	    filename = QDir::cleanDirPath(currentDir.canonicalPath()+"/"+selectedItem->text(0));
-	}
+	    m_fileName = QDir::cleanDirPath(currentDir.canonicalPath() + '/'
+                                            + selectedItemFromListView->text(0));
+
         OnOK();
     }
     chdir(strItem.latin1());
-//
-
 }
 
 // you may want to switch these 2 functions. I like single clicks
 void fileBrowser::listDoubleClicked(QListViewItem *selectedItem)
 {
+    Q_UNUSED(selectedItem);
 }
 
 QString fileBrowser::getCurrentFile()
 {
-    return filename;
+    return m_fileName;
 }
 
 void fileBrowser::OnOK()
@@ -255,13 +254,10 @@ void fileBrowser::onReturn()
 {
     QListViewItem *selectedItem = ListView->selectedItem();
     if (selectedItem == NULL)
-    {
-	filename = m_filename->text();
-    }
+	m_fileName = m_fileNameLineEdit->text();
     else
-    {
-	filename = QDir::cleanDirPath(currentDir.canonicalPath()+"/"+m_filename->text());
-    }
+	m_fileName = QDir::cleanDirPath(currentDir.canonicalPath()+"/"+m_fileNameLineEdit->text());
+
     OnOK();
 }
 
