@@ -851,8 +851,8 @@ typedef struct OFile {
     char *s;
     int len;
     int limit;
-    int alloc:1;
-    int fail:1;
+    unsigned int alloc:1;
+    unsigned int fail:1;
     } OFile;
 
 #if 0
