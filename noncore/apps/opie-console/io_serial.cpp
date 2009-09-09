@@ -50,7 +50,7 @@ bool IOSerial::open() {
         if (m_fd < 0) {
             emit error(CouldNotOpen, strerror(errno));
             m_fd = 0;
-            return FALSE;
+            return false;
         }
         tcgetattr(m_fd, &tty);
 
@@ -58,6 +58,7 @@ bool IOSerial::open() {
         int speed = baud(m_baud);
         if (speed == -1) {
             emit error(Refuse, tr("Invalid baud rate"));
+	    return false;
         }
         cfsetospeed(&tty, speed);
         cfsetispeed(&tty, speed);
@@ -119,11 +120,11 @@ bool IOSerial::open() {
         connect(m_read, SIGNAL(activated(int)), this, SLOT(dataArrived()));
         connect(m_error, SIGNAL(activated(int)), this, SLOT(errorOccured()));
         m_connected = false;
-        return TRUE;
+        return true;
     } else {
         emit error(Refuse, tr("Device is already connected"));
         m_fd = 0;
-        return FALSE;
+        return false;
     }
 }
 
