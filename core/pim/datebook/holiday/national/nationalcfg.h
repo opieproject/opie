@@ -31,7 +31,7 @@ public:
     void setMonth(const QString&);
     const QString&month()const;
     void setOffet(int);
-    const int offset()const;
+    int offset()const;
 
 protected:
     entry_type m_Type;

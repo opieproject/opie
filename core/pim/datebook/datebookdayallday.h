@@ -56,7 +56,7 @@ public:
     ~DatebookdayAllday();
     DatebookAlldayDisp* addEvent(const EffectiveEvent&e);
     DatebookAlldayDisp* addHoliday(const QString&e);
-    const unsigned int items()const{return item_count;}
+    unsigned int items()const{return item_count;}
 
 public slots:
     void removeAllEvents();
