@@ -38,12 +38,12 @@
 #include <qtable.h>
 #include <qstack.h>
 
-typedef struct typeCellBorders
+struct typeCellBorders
 {
     QPen right, bottom;
 };
 
-typedef struct typeCellData
+struct typeCellData
 {
     int col, row;
     typeCellBorders borders;

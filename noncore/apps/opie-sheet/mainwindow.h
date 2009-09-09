@@ -51,7 +51,7 @@
 #include <qcombobox.h>
 #include <qtoolbutton.h>
 
-typedef struct typeSheet
+struct typeSheet
 {
     QString name;
     QList<typeCellData> data;
