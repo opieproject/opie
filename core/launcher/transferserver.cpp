@@ -1427,8 +1427,8 @@ void ServerDTP::bytesWritten( int bytes )
         else if( !file.atEnd() ) {
             QCString s;
             s.resize( block_size );
-            int bytes = file.readBlock( s.data(), block_size );
-            writeBlock( s.data(), bytes );
+            int bytesRead = file.readBlock( s.data(), block_size );
+            writeBlock( s.data(), bytesRead );
         }
     }
 

@@ -117,8 +117,8 @@ void RunningAppBar::mouseReleaseEvent(QMouseEvent *e)
 	return;
     if ( selectedAppIndex >= 0 ) {
 	QString app = appList.at(selectedAppIndex)->exec();
-	QCopEnvelope e("QPE/System", "raise(QString)");
-	e << app;
+	QCopEnvelope envelope("QPE/System", "raise(QString)");
+	envelope << app;
 	selectedAppIndex = -1;
 	update();
     }
