@@ -456,9 +456,11 @@ bool CRegExpFilt::addch(tchar ch)
     {
       if (len == patlength)
 	{
-	  tchar ch = word[cur];
-	  if (ch == 10) ch = ' ';
-	  m_outQueue.push(ch);
+	  tchar curr_ch = word[cur];
+	  if (curr_ch == 10)
+              curr_ch = ' ';
+
+	  m_outQueue.push(curr_ch);
 	}
       return false;
     }
