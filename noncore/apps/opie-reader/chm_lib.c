@@ -532,13 +532,26 @@ static int _unmarshal_lzxc_reset_table(unsigned char **pData,
         return 0;
 
     /* unmarshal fields */
-    _unmarshal_uint32    (pData, pDataLen, &dest->version);
-    _unmarshal_uint32    (pData, pDataLen, &dest->block_count);
-    _unmarshal_uint32    (pData, pDataLen, &dest->unknown);
-    _unmarshal_uint32    (pData, pDataLen, &dest->table_offset);
-    _unmarshal_uint64    (pData, pDataLen, &dest->uncompressed_len);
-    _unmarshal_uint64    (pData, pDataLen, &dest->compressed_len);
-    _unmarshal_uint64    (pData, pDataLen, &dest->block_len);
+    if (!_unmarshal_uint32(pData, pDataLen, &dest->version))
+	return 0;
+
+    if (!_unmarshal_uint32(pData, pDataLen, &dest->block_count))
+	return 0;
+
+    if (!_unmarshal_uint32(pData, pDataLen, &dest->unknown))
+	return 0;
+
+    if (!_unmarshal_uint32(pData, pDataLen, &dest->table_offset))
+	return 0;
+
+    if (!_unmarshal_uint64(pData, pDataLen, &dest->uncompressed_len))
+	return 0;
+    
+    if (!_unmarshal_uint64(pData, pDataLen, &dest->compressed_len))
+	return 0;
+
+    if (!_unmarshal_uint64(pData, pDataLen, &dest->block_len))
+	return 0;
 
     /* check structure */
     if (dest->version != 2)
@@ -656,13 +669,23 @@ struct chmFile
  * utility functions local to this module
  */
 
+#ifdef CHM_USE_IO64
+#  define CHM_OFF_T off64_t
+#  define CHM_LSEEK(x, y, z) lseek64(x, y, z);
+#  define CHM_PREAD(w, x, y, z) pread64(w, x, (long)y, z)
+#else
+#  define CHM_OFF_T off_t
+#  define CHM_LSEEK(x, y, z) lseek(x, y, z);
+#  define CHM_PREAD(w, x, y, z) pread(w, x, (long)y, (unsigned long)z)
+#endif
 /* utility function to handle differences between {pread,read}(64)? */
 static Int64 _chm_fetch_bytes(struct chmFile *h,
                               UChar *buf,
                               UInt64 os,
                               Int64 len)
 {
-    Int64 readLen=0, oldOs=0;
+    Int64 readLen=0;
+    CHM_OFF_T oldOs = 0;
     if (h->fd  ==  CHM_NULL_FD)
         return readLen;
 
@@ -695,23 +718,15 @@ static Int64 _chm_fetch_bytes(struct chmFile *h,
     }
 #else
 #ifdef CHM_USE_PREAD
-#ifdef CHM_USE_IO64
-    readLen = pread64(h->fd, buf, (long)len, os);
+    readLen = CHM_PREAD(h->fd, buf, len, os);
 #else
-    readLen = pread(h->fd, buf, (long)len, (unsigned long)os);
-#endif
-#else
-#ifdef CHM_USE_IO64
-    oldOs = lseek64(h->fd, 0, SEEK_CUR);
-    lseek64(h->fd, os, SEEK_SET);
+    oldOs = CHM_LSEEK(h->fd, 0, SEEK_CUR);
+    if (oldOs == -1)
+	return -1LL;
+
+    CHM_LSEEK(h->fd, os, SEEK_SET);
     readLen = read(h->fd, buf, len);
-    lseek64(h->fd, oldOs, SEEK_SET);
-#else
-    oldOs = lseek(h->fd, 0, SEEK_CUR);
-    lseek(h->fd, (long)os, SEEK_SET);
-    readLen = read(h->fd, buf, len);
-    lseek(h->fd, (long)oldOs, SEEK_SET);
-#endif
+    CHM_LSEEK(h->fd, oldOs, SEEK_SET);
 #endif
 #endif
     CHM_RELEASE_LOCK(h->mutex);
