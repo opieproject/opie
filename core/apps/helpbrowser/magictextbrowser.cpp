@@ -81,7 +81,7 @@ QString MagicTextBrowser::generateQpe(const QString& name) const {
     AppLnk* lnk;
     QString r;
     for (QListIterator<AppLnk> it(lnkset.children()); (lnk=it.current()); ++it) {
-        QString name = lnk->name();
+        QString lnkName = lnk->name();
         QString icon = lnk->icon();
 	QString exec = lnk->exec();
         QString helpFile = exec+".html";
@@ -97,7 +97,7 @@ QString MagicTextBrowser::generateQpe(const QString& name) const {
         }
 
         if ( helpExists ) {
-            r += "<h3><a href="+helpFile+"><img src="+icon+">"+name+"</a></h3>\n";
+            r += "<h3><a href="+helpFile+"><img src="+icon+">"+lnkName+"</a></h3>\n";
         }
     }
     return r;
