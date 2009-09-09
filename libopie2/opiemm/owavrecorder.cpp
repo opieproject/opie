@@ -49,29 +49,28 @@ bool OWavRecorder::setup( const QString &filename, OWavFileParameters fileparams
 bool OWavRecorder::setupFile()
 {
     char pointer[] = "/tmp/opierec-XXXXXX";
-    int fd = 0;
+    int fd;
 
     QString actualFile;
     if( m_filename.find("/mnt",0,true) == -1
-        && m_filename.find("/tmp",0,true) == -1 ) {
+        && m_filename.find("/tmp",0,true) == -1 )
+    {
         // if destination file is most likely in flash (assuming jffs2)
         // we have to write to a different filesystem first
-
-        if(( fd = mkstemp( pointer)) < 0 ) {
+        mode_t currentMask = umask(S_IRWXG | S_IRWXO);
+        fd = mkstemp(pointer);
+        umask(currentMask);
+        if(fd < 0 ) {
             perror("mkstemp failed");
             return false;
         }
-
         actualFile = (QString)pointer;
-    }
-    else {
+    } else {
         // just use regular file.. no moving
         actualFile = m_filename;
     }
 
-    m_wavfile = new OWavFile(actualFile,
-                            m_fileparams,
-                            m_bufsize/2);
+    m_wavfile = new OWavFile(actualFile, m_fileparams, m_bufsize/2);
 
     fd = m_wavfile->createFile();
     if(fd == -1)
@@ -91,6 +90,10 @@ void OWavRecorder::record( OWavRecorderCallback *callback )
 
         int samplesPerBlock = m_bufsize/2;
         int fd = m_wavfile->getfd();
+	if (fd == -1) {
+	    free(buffer);
+	    return;
+	}
 
         int adpcm_outsize = lsx_ima_bytes_per_block( m_fileparams.channels, samplesPerBlock );
         unsigned char adpcm_outbuf[ adpcm_outsize ];
