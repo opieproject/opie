@@ -58,7 +58,7 @@ public:
             QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
     ~DatebookdayAllday();
     DatebookAlldayDisp* addEvent(const Opie::OPimOccurrence &e);
-    const unsigned int items()const{return item_count;}
+    unsigned int items()const{return item_count;}
     void popup( const Opie::OPimOccurrence &e, const QPoint &pos );
     const Opie::OPimOccurrence *selectedEvent();
 

@@ -367,7 +367,7 @@ void NHentry::setOffet(int aOffset)
     m_Offset = aOffset;
 }
 
-const int NHentry::offset()const
+int NHentry::offset()const
 {
     return m_Offset;
 }
