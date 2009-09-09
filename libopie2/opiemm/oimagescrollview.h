@@ -131,7 +131,7 @@ public:
     /**
      * return the current display intensity
      */
-    virtual const int Intensity()const;
+    virtual int Intensity()const;
 
 
 public slots:

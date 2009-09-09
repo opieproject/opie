@@ -417,7 +417,7 @@ void OImageScrollView::apply_gamma(int aValue)
     delete [] segTbl;
 }
 
-const int OImageScrollView::Intensity()const
+int OImageScrollView::Intensity()const
 {
     return _intensity;
 }
