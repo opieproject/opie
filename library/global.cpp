@@ -90,7 +90,7 @@ StartingAppList::StartingAppList( QObject *parent, const char* name )
     connect( qwsServer, SIGNAL( newChannel(const QString&)),
          this, SLOT( handleNewChannel(const QString&)) );
 #endif
-    dict.setAutoDelete( TRUE );
+    dict.setAutoDelete( true );
 }
 
 void StartingAppList::add( const QString& name )
@@ -110,16 +110,16 @@ bool StartingAppList::isStarting( const QString name )
     if ( appl ) {
     QTime *t  = appl->dict.find( "QPE/Application/" + name );
     if ( !t )
-        return FALSE;
+        return false;
     if ( t->elapsed() > 10000 ) {
         // timeout in case of crash or something
         appl->dict.remove( "QPE/Application/" + name );
-        return FALSE;
+        return false;
     }
-    return TRUE;
+    return true;
     }
 #endif
-    return FALSE;
+    return false;
 }
 
 void StartingAppList::handleNewChannel( const QString & name )
@@ -129,7 +129,7 @@ void StartingAppList::handleNewChannel( const QString & name )
 #endif
 }
 
-static bool docDirCreated = FALSE;
+static bool docDirCreated = false;
 static QDawg* fixed_dawg = 0;
 static QDict<QDawg> *named_dawg = 0;
 
@@ -356,7 +356,7 @@ QString Global::applicationFileName(const QString& appname, const QString& filen
 void Global::createDocDir()
 {
     if ( !docDirCreated ) {
-    docDirCreated = TRUE;
+    docDirCreated = true;
     mkdir( QPEApplication::documentDir().latin1(), 0755 );
     }
 }
@@ -447,13 +447,13 @@ void Global::hideInputMethod()
 bool Global::isBuiltinCommand( const QString &name )
 {
     if(!builtin)
-    return FALSE; // yes, it can happen
+    return false; // yes, it can happen
     for (int i = 0; builtin[i].file; i++) {
     if ( builtin[i].file == name ) {
-        return TRUE;
+        return true;
     }
     }
-    return FALSE;
+    return false;
 }
 
 Global::Command* Global::builtin=0;
@@ -497,14 +497,14 @@ void Global::setDocument( QWidget* receiver, const QString& document )
 bool Global::terminateBuiltin( const QString& n )
 {
     if (!builtin)
-    return FALSE;
+    return false;
     for (int i = 0; builtin[i].file; i++) {
     if ( builtin[i].file == n ) {
         delete running[i];
-        return TRUE;
+        return true;
     }
     }
-    return FALSE;
+    return false;
 }
 
 /*!
@@ -819,9 +819,13 @@ QStringList Global::helpPath()
  */
 bool Global::truncateFile(QFile &f, int size){
     if (!f.isOpen())
-      return FALSE;
+      return false;
 
-    return ::ftruncate(f.handle(), size) != -1;
+    int fileHandle = f.handle();
+    if (fileHandle == -1)
+	return false;
+
+    return ::ftruncate(fileHandle, size) != -1;
 }
 
 
