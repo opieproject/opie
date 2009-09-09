@@ -107,8 +107,8 @@ bool CfgParser::load(QString file, CfgFile& cfg) {
 
     QMap<QString, QString>::Iterator fit, lit;
     for(uint i = 0; i < includeList.count(); i++) {
-        QString file = *includeList.at(i);
-        fit = includes.find(file);
+        QString fileName = *includeList.at(i);
+        fit = includes.find(fileName);
         QString prefix = fit.data();
         QString label = "";
 
@@ -118,7 +118,7 @@ bool CfgParser::load(QString file, CfgFile& cfg) {
             label = lit.data();
         }
 
-        cfg.replaceEntry(file, label);
+        cfg.replaceEntry(fileName, label);
     }
 
     if (ardelay != -1) {
