@@ -159,7 +159,7 @@ bool ONetwork::isPresent( const char* name ) const
     int sfd = socket( AF_INET, SOCK_STREAM, 0 );
     struct ifreq ifr;
     memset( &ifr, 0, sizeof( struct ifreq ) );
-    strncpy( (char*) &ifr.ifr_name, name, IF_NAMESIZE  );
+    strncpy( (char*) &ifr.ifr_name, name, IF_NAMESIZE - 1  );
     int result = ::ioctl( sfd, SIOCGIFFLAGS, &ifr );
     return result != -1;
 }
@@ -170,7 +170,7 @@ bool ONetwork::isWirelessInterface( const char* name ) const
     int sfd = socket( AF_INET, SOCK_STREAM, 0 );
     struct iwreq iwr;
     memset( &iwr, 0, sizeof( struct iwreq ) );
-    strncpy( (char*) &iwr.ifr_name, name, IF_NAMESIZE );
+    strncpy( (char*) &iwr.ifr_name, name, IF_NAMESIZE - 1 );
     int result = ::ioctl( sfd, SIOCGIWNAME, &iwr );
     return result != -1;
 }
@@ -1235,7 +1235,7 @@ bool OWirelessNetworkInterface::wioctl( int call, struct iwreq& iwreq ) const
 
 bool OWirelessNetworkInterface::wioctl( int call ) const
 {
-    strncpy( _iwr.ifr_name, name(), IF_NAMESIZE );
+    strncpy( _iwr.ifr_name, name(), IF_NAMESIZE - 1 );
     return wioctl( call, _iwr );
 }
 
