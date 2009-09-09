@@ -172,8 +172,8 @@ private:
 
     QString descript, locat, categ;
     Type typ : 4;
-    bool startTimeDirty : 1;
-    bool endTimeDirty : 1;
+    bool startTimeDirty;
+    bool endTimeDirty;
     time_t startUTC, endUTC;
     QString tz;
     bool hAlarm, hRepeat;
@@ -185,7 +185,7 @@ private:
     // ADDITION
     int mRid;   // Recode ID
     int mRinfo; // Recode Info
-    //
+
     EventPrivate *d;
 
 };

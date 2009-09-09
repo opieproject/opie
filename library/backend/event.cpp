@@ -320,14 +320,24 @@ Qtopia::UidGen Event::sUidGen( Qtopia::UidGen::Qtopia );
 /*!
   Creates a new, empty event.
 */
-Event::Event() : Record()
+Event::Event()
+    : Record()
+    , descript()
+    , locat()
+    , categ()
+    , typ( Normal )
+    , startTimeDirty( false )
+    , tz()
+    , hAlarm( false )
+    , hRepeat( false )
+    , aMinutes( 0 )
+    , aSound( Silent )
+    , note()
+    , mRid( 0 )
+    , mRinfo( 0 )
+    , d( 0 )
 {
     startUTC = endUTC = time( 0 );
-    typ = Normal;
-    hAlarm = FALSE;
-    hRepeat = FALSE;
-    aMinutes = 0;
-    aSound = Silent;
     pattern.type = NoRepeat;
     pattern.frequency = -1;
 }
