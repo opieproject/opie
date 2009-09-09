@@ -42,7 +42,9 @@ class QDialog;
 class Ir;
 class QAction;
 class LetterPicker;
-class Opie::OPimRecord;
+namespace Opie {
+    class OPimRecord;
+}
 
 class AddressbookWindow: public Opie::OPimMainWindow
 {
