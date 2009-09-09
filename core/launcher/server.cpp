@@ -277,7 +277,7 @@ void Server::activate(const ODeviceButton* button, bool held)
 
 #ifdef Q_WS_QWS
 
-typedef struct KeyOverride {
+struct KeyOverride {
     ushort scan_code;
     QWSServer::KeyMap map;
 };
