@@ -32,9 +32,11 @@
 #include <opie2/odatebookaccessbackend_xml.h>
 #include <opie2/ocontactaccessbackend_xml.h>
 #include <opie2/otodoaccessxml.h>
+#include <opie2/omemoaccessbackend_xml.h>
 #include <opie2/ocontactaccess.h>
 #include <opie2/odatebookaccess.h>
 #include <opie2/otodoaccess.h>
+#include <opie2/omemoaccess.h>
 
 using namespace Opie;
 
@@ -86,6 +88,9 @@ void VirtualFS::init( const QString &basedir )
     m_files.append( new VirtualFile( basedir + "/Applications/todolist/todolist.xml",
                                      new VirtualTodoListReader(),
                                      new VirtualTodoListWriter() ) );
+    m_files.append( new VirtualFile( basedir + "/Applications/notes/notes.xml",
+                                     new VirtualNotesReader(),
+                                     new VirtualNotesWriter() ) );
 }
 
 void VirtualFS::fileListing( const QString &path, QTextStream &stream )
@@ -357,10 +362,61 @@ void VirtualTodoListWriter::write( OPimXmlReader &reader )
 
     // Copy items from source to destination
     QArray<int> uidList = source.allRecords();
-    odebug << "Try to move data for contacts.. (" << uidList.count() << " items) " << oendl;
+    odebug << "Try to move data for todolist.. (" << uidList.count() << " items) " << oendl;
     for ( uint i = 0; i < uidList.count(); ++i ) {
         odebug << "Adding uid: " << uidList[i] << "" << oendl;
         OPimTodo todo = source.find( uidList[i] );
+        destDB->add( todo );
+    }
+
+    // Write the changes
+    destDB->save();
+    delete destDB;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+void VirtualNotesReader::read( QTextStream &stream )
+{
+    OPimMemoAccess *sourceDB = new OPimMemoAccess();
+    sourceDB->load();
+    OPimMemoAccessBackend_XML dest;
+
+    // Copy items from source to destination
+    QArray<int> uidList = sourceDB->records();
+    odebug << "Try to move data for notes.. (" << uidList.count() << " items) " << oendl;
+    for ( uint i = 0; i < uidList.count(); ++i ) {
+        odebug << "Adding uid: " << uidList[i] << "" << oendl;
+        OPimRecord* rec = sourceDB->record( uidList[i] );
+        dest.add( *OPimMemo::safeCast( rec ) );
+        delete rec;
+    }
+
+    delete sourceDB;
+
+    // Write out the stream
+    OTextStreamWriter wr( &stream );
+    dest.write( wr );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+void VirtualNotesWriter::write( OPimXmlReader &reader )
+{
+    OPimMemoAccess *destDB = new OPimMemoAccess();
+    destDB->load(); // need to call this or internal opened flag won't be set
+    destDB->clear();
+    OPimMemoAccessBackend_XML source;
+
+    // FIXME return code
+    source.read( reader );
+
+    // Copy items from source to destination
+    QArray<int> uidList = source.allRecords();
+    odebug << "Try to move data for notes.. (" << uidList.count() << " items) " << oendl;
+    for ( uint i = 0; i < uidList.count(); ++i ) {
+        odebug << "Adding uid: " << uidList[i] << "" << oendl;
+        OPimMemo todo = source.find( uidList[i] );
         destDB->add( todo );
     }
 

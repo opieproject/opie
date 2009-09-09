@@ -125,4 +125,16 @@ public:
     void write( OPimXmlReader &reader );
 };
 
+class VirtualNotesReader: public VirtualReader
+{
+public:
+    void read( QTextStream &stream );
+};
+
+class VirtualNotesWriter: public VirtualWriter
+{
+public:
+    void write( OPimXmlReader &reader );
+};
+
 #endif
