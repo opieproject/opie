@@ -242,26 +242,26 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
   QDir d = QDir::home();                      // "/"
   d.cd(APPDIR);
   QFileInfo fi(d, ".keymap");
-  FILE* f = fopen((const char *)fi.absFilePath(), "r");
+  FILE* keymapFile = fopen((const char *)fi.absFilePath(), "r");
 #else /* USEQPE */
-  FILE* f = fopen((const char *)Global::applicationFileName(APPDIR,".keymap"), "r");
+  FILE* keymapFile = fopen((const char *)Global::applicationFileName(APPDIR,".keymap"), "r");
 #endif /* USEQPE */
   if (f != NULL)
     {
       uint cnt;
-      if ((fread(&cnt, sizeof(cnt), 1, f) != 0) && (cnt == KEYMAPVERSION))
+      if ((fread(&cnt, sizeof(cnt), 1, keymapFile) != 0) && (cnt == KEYMAPVERSION))
 	{
-	  if (fread(&cnt, sizeof(cnt), 1, f) == 0) cnt = 0;
+	  if (fread(&cnt, sizeof(cnt), 1, keymapFile) == 0) cnt = 0;
 	  for (uint i = 0; i != cnt; i++)
 	    {
 	      orKey key;
 	      int data;
-	      fread(&key, sizeof(key), 1, f);
-	      fread(&data, sizeof(data), 1, f);
+	      fread(&key, sizeof(key), 1, keymapFile);
+	      fread(&data, sizeof(data), 1, keymapFile);
 	      kmap[key] = data;
 	    }
 	}
-      fclose(f);
+      fclose(keymapFile);
     }
   }
 
@@ -931,18 +931,19 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     m_fontSelector = new QComboBox(false, m_fontBar);
     m_fontBar->setStretchableWidget( m_fontSelector );
     {
-	QFontDatabase f;
-	QStringList flist = f.families();
+	QFontDatabase fontDB;
+	QStringList flist = fontDB.families();
 	bool realfont = false;
 	for (QStringList::Iterator nm = flist.begin(); nm != flist.end(); nm++)
 	{
 	    if (reader->m_fontname == *nm)
-	    {
 		realfont = true;
-	    }
-	    if ((*nm).contains(FIXEDFONT,false)) reader->m_fontControl.hasCourier(true, *nm);
+
+	    if ((*nm).contains(FIXEDFONT,false))
+                reader->m_fontControl.hasCourier(true, *nm);
 	}
-	if (!realfont) reader->m_fontname = flist[0];
+	if (!realfont)
+            reader->m_fontname = flist[0];
     } // delete the FontDatabase!!!
     connect( m_fontSelector, SIGNAL( activated(const QString& ) ),
 	     this, SLOT( do_setfont(const QString&) ) );
