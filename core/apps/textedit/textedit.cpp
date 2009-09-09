@@ -40,7 +40,9 @@
 
 /* STD */
 #include <unistd.h>
+#include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 #include <stdlib.h> //getenv
 
 using namespace Opie::Core;
@@ -730,22 +732,28 @@ bool TextEdit::save()
 
     QString rt = editor->text();
     if( !rt.isEmpty() ) {
-        if(name.isEmpty()) {
+        if(name.isEmpty())
             saveAs();
-        }
         else {
             currentFileName = name;
             odebug << "saveFile "+currentFileName << oendl;
 
             if(doc) {
+                int docFd;
                 // Save file permissions
                 struct stat buf;
                 mode_t mode;
                 bool setmode = true;
-                if(stat(file, &buf))
+                if((docFd = open(file, 0)) < 0)
                     setmode = false;
-                else
-                    mode = buf.st_mode;
+
+                if(setmode) {
+		    if (fstat(docFd, &buf)) {
+                        close(docFd);
+                        setmode = false;
+                    } else
+                        mode = buf.st_mode;
+		}
 
                 doc->setName(name);
                 FileManager fm;
@@ -755,17 +763,17 @@ bool TextEdit::save()
                 }
 
                 // Restore file permissions
-                if(setmode)
-                    chmod( file, mode );
-            }
-            else {
+                if(setmode) {
+                    fchmod(docFd, mode);
+                    close(docFd);
+                }
+            } else {
                 odebug << "regular save file" << oendl;
                 QFile f(file);
                 if( f.open(IO_WriteOnly)) {
                     QCString crt = rt.utf8();
                     f.writeBlock(crt,crt.length());
-                }
-                else {
+                } else {
                     QMessageBox::message(tr("Text Edit"),tr("Write Failed"));
                     return false;
                 }
