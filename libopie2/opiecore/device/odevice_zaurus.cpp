@@ -773,15 +773,24 @@ void Zaurus::initHingeSensor()
 
 void Zaurus::hingeSensorTriggered()
 {
-    qDebug( "Zaurus::hingeSensorTriggered() - got event" );
+    qDebug( "%s - got event", __PRETTY_FUNCTION__ );
     struct input_event e;
+    int hingeFd = m_hinge.handle();
+    if (hingeFd == -1)
+    {
+	qDebug( "%s - No file descriptor for the hinge", __PRETTY_FUNCTION__);
+	return;
+    }
+
     if ( ::read( m_hinge.handle(), &e, sizeof e ) > 0 )
     {
-        qDebug( "Zaurus::hingeSensorTriggered() - event has type %d, code %d, value %d", e.type, e.code, e.value );
-        if ( e.type != EV_SW ) return;
+        qDebug( "%s - event has type %d, code %d, value %d", __PRETTY_FUNCTION__, e.type, e.code, e.value );
+        if ( e.type != EV_SW )
+	    return;
+
         if ( readHingeSensor() != CASE_UNKNOWN )
         {
-            qDebug( "Zaurus::hingeSensorTriggered() - got valid switch event, calling rotateDefault()" );
+            qDebug( "%s - got valid switch event, calling rotateDefault()", __PRETTY_FUNCTION__ );
             QCopChannel::send( "QPE/Rotation", "rotateDefault()" );
         }
     }

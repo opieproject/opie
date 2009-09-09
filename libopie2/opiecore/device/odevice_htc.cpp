@@ -454,15 +454,24 @@ void HTC::initHingeSensor()
 
 void HTC::hingeSensorTriggered()
 {
-    qDebug( "HTC::hingeSensorTriggered() - got event" );
+    qDebug( "%s - got event", __PRETTY_FUNCTION__ );
     struct input_event e;
-    if ( ::read( m_hinge.handle(), &e, sizeof e ) > 0 )
+    int hingeFd = m_hinge.handle();
+    if (hingeFd == -1)
     {
-        qDebug( "HTC::hingeSensorTriggered() - event has type %d, code %d, value %d", e.type, e.code, e.value );
-        if ( e.type != EV_SW ) return;
+	qDebug( "%s - No file descriptor for the hinge", __PRETTY_FUNCTION__);
+	return;
+    }
+
+    if ( ::read( hingeFd, &e, sizeof e ) > 0 )
+    {
+        qDebug( "%s - event has type %d, code %d, value %d", __PRETTY_FUNCTION__, e.type, e.code, e.value );
+        if ( e.type != EV_SW )
+	    return;
+
         if ( readHingeSensor() != CASE_UNKNOWN )
         {
-            qDebug( "HTC::hingeSensorTriggered() - got valid switch event, calling rotateDefault()" );
+            qDebug( "%s - got valid switch event, calling rotateDefault()", __PRETTY_FUNCTION__ );
             QCopChannel::send( "QPE/Rotation", "rotateDefault()" );
         }
     }
@@ -470,9 +479,8 @@ void HTC::hingeSensorTriggered()
 
 void HTC::systemMessage( const QCString &msg, const QByteArray & )
 {
-    if ( msg == "deviceButtonMappingChanged()" ) {
+    if ( msg == "deviceButtonMappingChanged()" )
         reloadButtonMapping();
-    }
 }
 
 /*
