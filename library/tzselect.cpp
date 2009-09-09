@@ -60,12 +60,12 @@ TZCombo::TZCombo( QWidget *p, const char* n )
         }
     }
     if ( !tz.isNull() ) {
-        int n = 0, index = 0;
+        int count = 0, index = 0;
         for ( QStringList::Iterator it=identifiers.begin();
                 it!=identifiers.end(); ++it) {
             if ( *it == tz )
-                index = n;
-            n++;
+                index = count;
+            count++;
         }
         setCurrentItem(index);
     }

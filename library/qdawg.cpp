@@ -383,9 +383,9 @@ private:
 		n->islast = 0;
 		n->offset = appendToArray(s);
 		if ( n->offset ) {
-		    int t = n->offset-here;
-		    n->offset=t;
-		    if ( n->offset != t )
+		    int there = n->offset-here;
+		    n->offset=there;
+		    if ( n->offset != there )
 			qWarning("Overflow: too many words");
 		}
 		here++;

@@ -1072,8 +1072,8 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 {
     if ( !d->notbusysent && e->type == QWSEvent::Focus ) {
         if ( qApp->type() != QApplication::GuiServer ) {
-            QCopEnvelope e( "QPE/System", "notBusy(QString)" );
-            e << d->appName;
+            QCopEnvelope envelope( "QPE/System", "notBusy(QString)" );
+            envelope << d->appName;
         }
         d->notbusysent = TRUE;
     }
@@ -1166,8 +1166,8 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
                     QApplication::sendEvent ( which, &qke );
                 }
                 else { // we didn't grab the keyboard, so send the event to the launcher
-                    QCopEnvelope e ( "QPE/Launcher", "deviceButton(int,int,int)" );
-                    e << int( ke-> simpleData.keycode ) << int( ke-> simpleData. is_press ) << int( ke-> simpleData.is_auto_repeat );
+                    QCopEnvelope envelope ( "QPE/Launcher", "deviceButton(int,int,int)" );
+                    envelope << int( ke-> simpleData.keycode ) << int( ke-> simpleData. is_press ) << int( ke-> simpleData.is_auto_repeat );
                 }
             }
             return true;
@@ -1500,18 +1500,18 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
         if ( type() == GuiServer ) {
             QDateTime when;
             QCString channel, message;
-            int data;
-            stream >> when >> channel >> message >> data;
-            AlarmServer::addAlarm( when, channel, message, data );
+            int alarmData;
+            stream >> when >> channel >> message >> alarmData;
+            AlarmServer::addAlarm( when, channel, message, alarmData );
         }
     }
     else if ( msg == "deleteAlarm(QDateTime,QCString,QCString,int)" ) {
         if ( type() == GuiServer ) {
             QDateTime when;
             QCString channel, message;
-            int data;
-            stream >> when >> channel >> message >> data;
-            AlarmServer::deleteAlarm( when, channel, message, data );
+            int alarmData;
+            stream >> when >> channel >> message >> alarmData;
+            AlarmServer::deleteAlarm( when, channel, message, alarmData );
         }
     }
     else if ( msg == "clockChange(bool)" ) {
