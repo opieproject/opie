@@ -73,13 +73,17 @@ int OWavFile::openFile() {
     closeFile();
 
     if(!track.open(IO_ReadOnly)) {
-        QString errorMsg = (QString)strerror(errno);
+        QString errorMsg = strerror(errno);
         odebug << "<<<<<<<<<<< " << errorMsg << oendl;
         QMessageBox::message("Note", "Error opening file.\n" + errorMsg);
         return -1;
     }
 
-    parseWavHeader( track.handle());
+    int trackFd = track.handle();
+    if (trackFd == -1)
+	return -1;
+
+    parseWavHeader(trackFd);
     return track.handle();
 }
 
@@ -91,7 +95,11 @@ int OWavFile::createFile() {
         return -1;
     }
 
-    setWavHeader( track.handle() );
+    int trackFd = track.handle();
+    if (trackFd == -1)
+	return -1;
+
+    setWavHeader( trackFd );
     return track.handle();
 }
 
@@ -161,6 +169,8 @@ bool OWavFile::adjustHeaders(unsigned long total) {
         hdrsize = 36;
 
     int fd = track.handle();
+    if (fd == -1)
+	return false;
 
     // RIFF size
     lseek(fd, 4, SEEK_SET);
