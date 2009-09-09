@@ -151,7 +151,7 @@ void StartMenu::createAppEntry( QPopupMenu *menu, QDir dir, QString file )
        	} else {
             QPixmap pixmap = OResource::loadPixmap( applnk->icon(), OResource::SmallIcon );
                 // Insert items ordered lexically
-		int current, left = 0, right = currentItem;
+		int current = 0, left = 0, right = currentItem;
                 while( left != right ) {
                     current = ( left + right ) / 2;
                     if ( menu->text(menu->idAt( ( current ) ) ) < applnk->name() )
