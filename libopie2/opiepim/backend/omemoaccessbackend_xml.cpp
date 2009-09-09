@@ -52,8 +52,11 @@ namespace {
             const QString &value = it.data();
             int key = it.key();
             if ( !value.isEmpty() ) {
-                buf += " " + *revdict[ key ];
-                buf += "=\"" + Qtopia::escapeString( value ) + "\"";
+                QString *name = revdict[ key ];
+                if( name ) {
+                    buf += " " + *name;
+                    buf += "=\"" + Qtopia::escapeString( value ) + "\"";
+                }
             }
         }
 

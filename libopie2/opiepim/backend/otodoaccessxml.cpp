@@ -312,8 +312,11 @@ QString OPimTodoAccessXML::toString( const OPimTodo& ev, const QIntDict<QString>
         const QString &value = it.data();
         int key = it.key();
         if ( !value.isEmpty() ) {
-            str += " " + *revdict[ key ];
-            str += "=\"" + Qtopia::escapeString( value ) + "\"";
+            QString *name = revdict[ key ];
+            if( name ) {
+                str += " " + *name;
+                str += "=\"" + Qtopia::escapeString( value ) + "\"";
+            }
         }
     }
     if( str[0] == ' ' )
