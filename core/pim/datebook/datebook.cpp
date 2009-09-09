@@ -725,14 +725,14 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 
         QValueList<EffectiveEvent> list = db->getEffectiveEvents(when.addSecs(warn*60));
         if ( list.count() > 0 ) {
-            QString msg;
+            QString labelMsg;
             bool bSound = FALSE;
             int stopTimer = 0;
             bool found = FALSE;
             for ( QValueList<EffectiveEvent>::ConstIterator it=list.begin(); it!=list.end(); ++it ) {
                 if ( (*it).event().hasAlarm() ) {
                     found = TRUE;
-                    msg += "<CENTER><B>" + (*it).description() + "</B>"
+                    labelMsg += "<CENTER><B>" + (*it).description() + "</B>"
                     + "<BR>" + (*it).location() + "<BR>"
                     + TimeString::dateString((*it).event().start(),ampm)
                     + (warn
@@ -757,7 +757,7 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
                 QScrollView *view = new QScrollView( &dlg, "scrollView");
                 view->setResizePolicy( QScrollView::AutoOneFit );
                 vb->addWidget( view );
-                QLabel *lblMsg = new QLabel( msg, &dlg );
+                QLabel *lblMsg = new QLabel( labelMsg, &dlg );
                 view->addChild( lblMsg );
                 QPushButton *cmdOk = new QPushButton( tr("OK"), &dlg );
                 connect( cmdOk, SIGNAL(clicked()), &dlg, SLOT(accept()) );
@@ -767,15 +767,15 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 
                 if ( bSound )
                     killTimer( stopTimer );
-                }
             }
-        } else if ( msg == "nextView()" ) {
-                    needShow = true;
-            if ( !qApp-> activeWindow ( )) {
-                needShow = TRUE;
-            } else {
-                QWidget* cur = views->visibleWidget();
-                if ( cur ) {
+        }
+    } else if ( msg == "nextView()" ) {
+        needShow = true;
+        if ( !qApp-> activeWindow ( ))
+            needShow = TRUE;
+        else {
+            QWidget* cur = views->visibleWidget();
+            if ( cur ) {
                 if ( cur == dayView )
                     viewWeek();
                 else if ( cur == weekView )
@@ -811,16 +811,8 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
         needShow = true;
     }
 
-    if ( needShow ) {
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-//      showMaximized();
-#else
-//      show();
-#endif
-//      raise();
+    if ( needShow )
         QPEApplication::setKeepRunning();
-//      setActiveWindow();
-    }
 }
 
 void DateBook::reload()
@@ -1149,15 +1141,15 @@ Event DateBookDBHack::eventByUID(int uid) {
 
     QValueList<Event>::ConstIterator it;
 
-    for (it = myEventList.begin(); it != myEventList.end(); it++) {
-    if ((*it).uid() == uid) return *it;
-    }
-    for (it = myRepeatEvents.begin(); it != myRepeatEvents.end(); it++) {
-    if ((*it).uid() == uid) return *it;
-    }
+    for (it = myEventList.begin(); it != myEventList.end(); it++)
+        if ((*it).uid() == uid)
+            return *it;
 
-    Event ev;
-    return ev; // return at least
+    for (it = myRepeatEvents.begin(); it != myRepeatEvents.end(); it++)
+        if ((*it).uid() == uid)
+            return *it;
+
+    return Event();
 }
 
 DateBookHoliday::DateBookHoliday()
