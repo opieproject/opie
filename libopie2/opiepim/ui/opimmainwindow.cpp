@@ -133,11 +133,13 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         edit( uid );
     }else if ( cmd == "add(int,QByteArray)" ) {
         int rtti;
-        QByteArray array;
+        QByteArray byteArray;
         stream >> rtti;
-        stream >> array;
-        m_fallBack = record(rtti, array );
-        if (!m_fallBack) return;
+        stream >> byteArray;
+        m_fallBack = record(rtti, byteArray );
+        if (!m_fallBack)
+            return;
+
         add( *m_fallBack );
         delete m_fallBack;
     }else if ( cmd == "alarm(QDateTime,int)" ) {
@@ -148,6 +150,7 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         QDateTime current = QDateTime::currentDateTime();
         if ( current.time().hour() != dt.time().hour() && current.time().minute() != dt.time().minute() )
             return;
+
         needShow = doAlarm( dt, uid );
     }
 

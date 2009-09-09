@@ -2753,14 +2753,13 @@ QImage OImageEffect::implode(QImage &src, double factor,
                 x_distance = x_scale*(x-x_center);
                 distance= x_distance*x_distance+y_distance*y_distance;
                 if(distance < (radius*radius)){
-                    double factor;
                     // Implode the pixel.
-                    factor=1.0;
+                    double implodeFactor=1.0;
                     if(distance > 0.0)
-                        factor=
+                        implodeFactor=
                             pow(sin(0.5000000000000001*M_PI*sqrt(distance)/radius),-amount);
-                    destData[x] = interpolateColor(&src, factor*x_distance/x_scale+x_center,
-                                                   factor*y_distance/y_scale+y_center,
+                    destData[x] = interpolateColor(&src, implodeFactor*x_distance/x_scale+x_center,
+                                                   implodeFactor*y_distance/y_scale+y_center,
                                                    background);
                 }
             }
@@ -2780,14 +2779,13 @@ QImage OImageEffect::implode(QImage &src, double factor,
                 x_distance = x_scale*(x-x_center);
                 distance= x_distance*x_distance+y_distance*y_distance;
                 if(distance < (radius*radius)){
-                    double factor;
                     // Implode the pixel.
-                    factor=1.0;
+                    double implodeFactor = 1.0;
                     if(distance > 0.0)
-                        factor=
+                        implodeFactor=
                             pow(sin(0.5000000000000001*M_PI*sqrt(distance)/radius),-amount);
-                    destData[x] = interpolateColor(&src, factor*x_distance/x_scale+x_center,
-                                                   factor*y_distance/y_scale+y_center,
+                    destData[x] = interpolateColor(&src, implodeFactor*x_distance/x_scale+x_center,
+                                                   implodeFactor*y_distance/y_scale+y_center,
                                                    background);
                 }
             }
