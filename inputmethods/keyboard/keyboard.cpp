@@ -409,7 +409,7 @@ enum { BSCode = 0x80, TabCode, CapsCode, RetCode,
        Divide, Multiply, Add, Subtract, Decimal, Equal,
        Percent, Sqrt, Inverse, Escape };
 
-typedef struct SpecialMap {
+struct SpecialMap {
     int qcode;
     ushort unicode;
     const char * label;

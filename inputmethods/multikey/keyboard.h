@@ -75,21 +75,21 @@ public:
     int     numKeys(const int row);
     void    setKeysFromFile(const char *filename);
     void    setKey(const int row, const int qcode, const ushort unicode,
-                    const int width, QImage *pix);
+                   const int width, QImage *pix);
     void    setPressed(const int row, const int col, const bool pressed);
     QString lang;
     QString label;
 
 private:
 
-    typedef struct Key {
-	    int qcode; // are qt key codes just unicode values?
-	    ushort unicode;
-	    int width;  // not pixels but relative key width. normal key is 2
+    struct Key {
+        int qcode; // are qt key codes just unicode values?
+        ushort unicode;
+        int width;  // not pixels but relative key width. normal key is 2
 
         // only needed for keys like ctrl that can have multiple keys pressed at once
         bool *pressed;
-	    QImage *pix;
+        QImage *pix;
     };
 
     QList<Key> keys[6];

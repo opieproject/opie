@@ -177,15 +177,12 @@ void Keyboard::paintEvent(QPaintEvent* e)
 
 void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 {
-
-
     if (row != -1 && col != -1) { //just redraw one key
 
         int x = 0;
-        for (int i = 0; i < col; i++) {
-
+        for (int i = 0; i < col; i++)
             x += keys->width(row, i) * defaultKeyWidth;
-        }
+
         int y = (row - 1) * keyHeight + (usePicks ? picks->height() : 0);
 
         int keyWidth = keys->width(row, col);
@@ -233,12 +230,10 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
                 else
                     c = keys->diaeresis(c);
             }
-
             p.drawText(x, y,
                defaultKeyWidth * keyWidth + 3, keyHeight,
                AlignCenter, (QChar)c);
-        }
-        else
+        } else
             // center the image in the middle of the key
             p.drawImage( x + (defaultKeyWidth * keyWidth - pix->width())/2 + 1,
                           y + (keyHeight - pix->height())/2 + 1,
@@ -248,92 +243,76 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
         // gets painted over, because it's one pixel shorter than all other keys
         p.setPen(keycolor_lines);
         p.drawLine(width() - 1, 0, width() - 1, height());
-
     } else {
+        p.fillRect(0, 0, width(), height(), keycolor);
 
+        for (row = 1; row <= keys->rows(); row++) {
 
-    p.fillRect(0, 0, width(), height(), keycolor);
-
-    for (row = 1; row <= keys->rows(); row++) {
-
-        int x = 0;
-        int y = (row - 1) * keyHeight + (usePicks ? picks->height() : 0);
-
-        p.setPen(keycolor_lines);
-        p.drawLine(x, y, x + width(), y);
-
-        for (int col = 0; col < keys->numKeys(row); col++) {
-
-            QImage *pix = keys->pix(row, col);
-            int keyWidth = keys->width(row, col);
-
-
-            int keyWidthPix = defaultKeyWidth * keyWidth;
-
-            if (keys->pressed(row, col))
-                p.fillRect(x+1, y+1, keyWidthPix - 1,
-                           keyHeight - 1, keycolor_pressed);
-
-            ushort c = keys->uni(row, col);
-
-            p.setPen(textcolor);
-            if (!pix) {
-                if ((shift || lock) && keys->shift(c))
-
-                    if (circumflex && keys->circumflex(keys->shift(c)))
-                        c = keys->circumflex(keys->shift(c));
-                    else if (diaeresis && keys->diaeresis(keys->shift(c)))
-                        c = keys->diaeresis(keys->shift(c));
-                    else if (baccent && keys->baccent(keys->shift(c)))
-                        c = keys->baccent(keys->shift(c));
-                    else if (accent && keys->accent(keys->shift(c)))
-                        c = keys->accent(keys->shift(c));
-                    else if (meta && keys->meta(keys->shift(c)))
-                        c = keys->meta(keys->shift(c));
-                    else
-                        c = keys->shift(c);
-
-                else if (meta && keys->meta(c))
-                    c = keys->meta(c);
-                else if (circumflex && keys->circumflex(c))
-                    c = keys->circumflex(c);
-                else if (baccent && keys->baccent(c))
-                    c = keys->baccent(c);
-                else if (accent && keys->accent(c))
-                    c = keys->accent(c);
-                else if (diaeresis && (keys->diaeresis(c) || c == 0x2c6)) {
-
-                    if (c == 0x2c6)
-                        c = 0xa8;
-                    else
-                        c = keys->diaeresis(c);
-                }
-
-                p.drawText(x, y,
-                   keyWidthPix + 3, keyHeight,
-                   AlignCenter, (QChar)c);
-            }
-            else {
-                // center the image in the middle of the key
-                pix->setColor(1, textcolor.rgb());
-                p.drawImage( x + (keyWidthPix - pix->width())/2 + 1,
-                              y + (keyHeight - pix->height())/2 + 1,
-                              QImage(*pix) );
-            }
+            int x = 0;
+            int y = (row - 1) * keyHeight + (usePicks ? picks->height() : 0);
 
             p.setPen(keycolor_lines);
-            p.drawLine(x, y, x, y + keyHeight);
+            p.drawLine(x, y, x + width(), y);
 
-            x += keyWidthPix;
+            for (int colIdx = 0; colIdx < keys->numKeys(row); colIdx++) {
+                QImage *pix = keys->pix(row, colIdx);
+                int keyWidth = keys->width(row, colIdx);
+                int keyWidthPix = defaultKeyWidth * keyWidth;
+
+                if (keys->pressed(row, colIdx))
+                    p.fillRect(x+1, y+1, keyWidthPix - 1,
+                               keyHeight - 1, keycolor_pressed);
+
+                ushort c = keys->uni(row, colIdx);
+
+                p.setPen(textcolor);
+                if (!pix) {
+                    if ((shift || lock) && keys->shift(c)) {
+                        if (circumflex && keys->circumflex(keys->shift(c)))
+                            c = keys->circumflex(keys->shift(c));
+                        else if (diaeresis && keys->diaeresis(keys->shift(c)))
+                            c = keys->diaeresis(keys->shift(c));
+                        else if (baccent && keys->baccent(keys->shift(c)))
+                            c = keys->baccent(keys->shift(c));
+                        else if (accent && keys->accent(keys->shift(c)))
+                            c = keys->accent(keys->shift(c));
+                        else if (meta && keys->meta(keys->shift(c)))
+                            c = keys->meta(keys->shift(c));
+                        else
+                            c = keys->shift(c);
+                    } else if (meta && keys->meta(c))
+                        c = keys->meta(c);
+                    else if (circumflex && keys->circumflex(c))
+                        c = keys->circumflex(c);
+                    else if (baccent && keys->baccent(c))
+                        c = keys->baccent(c);
+                    else if (accent && keys->accent(c))
+                        c = keys->accent(c);
+                    else if (diaeresis && (keys->diaeresis(c) || c == 0x2c6)) {
+                        if (c == 0x2c6)
+                            c = 0xa8;
+                        else
+                            c = keys->diaeresis(c);
+                    }
+                    p.drawText(x, y,
+                               keyWidthPix + 3, keyHeight,
+                               AlignCenter, (QChar)c);
+                } else {
+                    // center the image in the middle of the key
+                    pix->setColor(1, textcolor.rgb());
+                    p.drawImage( x + (keyWidthPix - pix->width())/2 + 1,
+                                 y + (keyHeight - pix->height())/2 + 1,
+                                 QImage(*pix) );
+                }
+                p.setPen(keycolor_lines);
+                p.drawLine(x, y, x, y + keyHeight);
+                x += keyWidthPix;
+            }
         }
-
-
+        p.setPen(keycolor_lines);
+        p.drawLine(0, height() - 1, width(), height() - 1);
+        p.drawLine(width() - 1, 0, width() - 1, height());
     }
-    p.setPen(keycolor_lines);
-    p.drawLine(0, height() - 1, width(), height() - 1);
-    p.drawLine(width() - 1, 0, width() - 1, height());
-    }
-
 }
 
 

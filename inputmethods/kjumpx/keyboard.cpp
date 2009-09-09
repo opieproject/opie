@@ -50,7 +50,7 @@ static const int cursorw   =  16;
 static const int myParenID = -10;
 
 
-typedef struct mapElement
+struct mapElement
 {
     int    qcode;
     ushort unicode;
@@ -64,12 +64,12 @@ static const mapElement mod1Map[] = {
     { Qt::Key_Control, 0 },
 };
 
-static const uchar *const letterMap[] = {
-    (const uchar *const)"zvchwk",
-    (const uchar *const)"fitaly",
-    (const uchar *const)"  ne  ",
-    (const uchar *const)"gdorsb",
-    (const uchar *const)"qjumpx",
+static const uchar *letterMap[] = {
+    (const uchar *)"zvchwk",
+    (const uchar *)"fitaly",
+    (const uchar *)"  ne  ",
+    (const uchar *)"gdorsb",
+    (const uchar *)"qjumpx",
 };
 
 static const ushort kletterMap[][6] = {
@@ -80,12 +80,12 @@ static const ushort kletterMap[][6] = {
 	{ 0x110e, 0x1107, 0x1106, 0x1111, 0x116e, 0x1172 },
 };
 
-static const uchar *const letterMapShift[] = {
-    (const uchar *const)"ZVCHWK",
-    (const uchar *const)"FITALY",
-    (const uchar *const)"  NE  ",
-    (const uchar *const)"GDORSB",
-    (const uchar *const)"QJUMPX",
+static const uchar *letterMapShift[] = {
+    (const uchar *)"ZVCHWK",
+    (const uchar *)"FITALY",
+    (const uchar *)"  NE  ",
+    (const uchar *)"GDORSB",
+    (const uchar *)"QJUMPX",
 };
 
 static const ushort kletterMapShift[][6] = {
@@ -96,33 +96,33 @@ static const ushort kletterMapShift[][6] = {
 	{ 0x110e, 0x1108, 0x1106, 0x1111, 0x116e, 0x1172 },
 };
 
-static const uchar *const num1Map = (const uchar *const)"12345";
+static const uchar *num1Map = (const uchar *)"12345";
 
-static const uchar *const specialMap[] = {
-    (const uchar *const)"-+",
-    (const uchar *const)"*!",
-    (const uchar *const)",'",
-    (const uchar *const)".%",
-    (const uchar *const)"/$",
+static const uchar *specialMap[] = {
+    (const uchar *)"-+",
+    (const uchar *)"*!",
+    (const uchar *)",'",
+    (const uchar *)".%",
+    (const uchar *)"/$",
 };
 
-static const uchar *const specialMapShift[] = {
-    (const uchar *const)"_=",
-    (const uchar *const)"#?",
-    (const uchar *const)";\"",
-    (const uchar *const)":|",
-    (const uchar *const)"\\&",
+static const uchar *specialMapShift[] = {
+    (const uchar *)"_=",
+    (const uchar *)"#?",
+    (const uchar *)";\"",
+    (const uchar *)":|",
+    (const uchar *)"\\&",
 };
 
-static const uchar *const specialMapParen[] = {
-    (const uchar *const)"()",
-    (const uchar *const)"[]",
-    (const uchar *const)"{}",
-    (const uchar *const)"<>",
-    (const uchar *const)"@~",
+static const uchar *specialMapParen[] = {
+    (const uchar *)"()",
+    (const uchar *)"[]",
+    (const uchar *)"{}",
+    (const uchar *)"<>",
+    (const uchar *)"@~",
 };
 
-static const uchar *const num2Map = (const uchar *const)"67890";
+static const uchar *num2Map = (const uchar *)"67890";
 
 static const mapElement mod2Map[] = {
     { Qt::Key_Backspace,  8 },

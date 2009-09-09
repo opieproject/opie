@@ -31,7 +31,7 @@
 
 static const int nw = 8;
 
-typedef struct BlockMap {
+struct BlockMap {
     ushort start;
     ushort stop;
     const char *name;
