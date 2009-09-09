@@ -361,7 +361,7 @@ void CHM::locate(unsigned int n) {
       FillHomeContent();
       bufpos = n - m_homestart;
       start2endSection();
-      qDebug("Home:%u:<%u, %u, %u>", m_ui.start, m_currentstart, n, m_currentend);
+      qDebug("Home:%llu:<%u, %u, %u>", m_ui.start, m_currentstart, n, m_currentend);
     }
   else if (n >= m_currentstart && n < m_currentend)
     {
@@ -373,7 +373,7 @@ void CHM::locate(unsigned int n) {
       FillHomeContent();
       bufpos = 0;
       start2endSection();
-      qDebug("Home:%u:<%u, %u, %u>", m_ui.start, m_currentstart, n, m_currentend);
+      qDebug("Home:%llu:<%u, %u, %u>", m_ui.start, m_currentstart, n, m_currentend);
     }
   else
     {
@@ -381,7 +381,7 @@ void CHM::locate(unsigned int n) {
       FillBuffer();
       start2endSection();
       bufpos=n-m_currentstart;
-      qDebug("Not Home:%u:<%u, %u, %u>", m_ui.start, m_currentstart, n, m_currentend);
+      qDebug("Not Home:%llu:<%u, %u, %u>", m_ui.start, m_currentstart, n, m_currentend);
     }
 }
 
