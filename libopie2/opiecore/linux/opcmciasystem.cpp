@@ -365,7 +365,7 @@ QString OPcmciaSocket::identity() const
 }
 
 
-const OPcmciaSocket::OPcmciaSocketCardStatus OPcmciaSocket::status() const
+OPcmciaSocket::OPcmciaSocketCardStatus OPcmciaSocket::status() const
 {
     // DS_GET_STATUS is no longer supported
     // FIXME remove this function

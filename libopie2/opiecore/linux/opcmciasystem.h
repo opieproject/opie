@@ -154,7 +154,7 @@ class OPcmciaSocket : public QObject
     /**
       * @returns the socket status
       */
-    const OPcmciaSocketCardStatus status() const;
+    OPcmciaSocketCardStatus status() const;
     /**
      * @returns true, if the card is unsupported by the cardmgr
      */
