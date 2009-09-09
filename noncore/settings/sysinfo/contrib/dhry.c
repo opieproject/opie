@@ -529,8 +529,13 @@ double          Microseconds,
 
 /**********************************************************************************************/
 
+int Proc_3 (Rec_Pointer*);
+int Proc_6 (Enumeration, Enumeration*);
+int Proc_7 (One_Fifty, One_Fifty, One_Fifty*);
+Boolean Func_3 (Enumeration);
 
-Proc_1 (Ptr_Val_Par)
+
+int Proc_1 (Ptr_Val_Par)
 /******************/
 
 REG Rec_Pointer Ptr_Val_Par;
@@ -561,10 +566,12 @@ REG Rec_Pointer Ptr_Val_Par;
   }
   else /* not executed */
     structassign (*Ptr_Val_Par, *Ptr_Val_Par->Ptr_Comp);
+
+  return 0;
 } /* Proc_1 */
 
 
-Proc_2 (Int_Par_Ref)
+int Proc_2 (Int_Par_Ref)
 /******************/
     /* executed once */
     /* *Int_Par_Ref == 1, becomes 4 */
@@ -584,10 +591,12 @@ One_Fifty   *Int_Par_Ref;
       Enum_Loc = Ident_1;
     } /* if */
   while (Enum_Loc != Ident_1); /* true */
+
+  return 0;
 } /* Proc_2 */
 
 
-Proc_3 (Ptr_Ref_Par)
+int Proc_3 (Ptr_Ref_Par)
 /******************/
     /* executed once */
     /* Ptr_Ref_Par becomes Ptr_Glob */
@@ -598,11 +607,11 @@ Rec_Pointer *Ptr_Ref_Par;
   if (Ptr_Glob != Null)
     /* then, executed */
     *Ptr_Ref_Par = Ptr_Glob->Ptr_Comp;
-  Proc_7 (10, Int_Glob, &Ptr_Glob->variant.var_1.Int_Comp);
+  return Proc_7 (10, Int_Glob, &Ptr_Glob->variant.var_1.Int_Comp);
 } /* Proc_3 */
 
 
-Proc_4 () /* without parameters */
+int Proc_4 () /* without parameters */
 /*******/
     /* executed once */
 {
@@ -611,15 +620,17 @@ Proc_4 () /* without parameters */
   Bool_Loc = Ch_1_Glob == 'A';
   Bool_Glob = Bool_Loc | Bool_Glob;
   Ch_2_Glob = 'B';
+  return 0;
 } /* Proc_4 */
 
 
-Proc_5 () /* without parameters */
+int Proc_5 () /* without parameters */
 /*******/
     /* executed once */
 {
   Ch_1_Glob = 'A';
   Bool_Glob = false;
+  return 0;
 } /* Proc_5 */
 
 
@@ -636,7 +647,7 @@ register int    l;
 #endif
 
 
-Proc_6 (Enum_Val_Par, Enum_Ref_Par)
+int Proc_6 (Enum_Val_Par, Enum_Ref_Par)
 /*********************************/
     /* executed once */
     /* Enum_Val_Par == Ident_3, Enum_Ref_Par becomes Ident_2 */
@@ -667,10 +678,11 @@ Enumeration *Enum_Ref_Par;
       *Enum_Ref_Par = Ident_3;
       break;
   } /* switch */
+  return 0;
 } /* Proc_6 */
 
 
-Proc_7 (Int_1_Par_Val, Int_2_Par_Val, Int_Par_Ref)
+int Proc_7 (Int_1_Par_Val, Int_2_Par_Val, Int_Par_Ref)
 /**********************************************/
     /* executed three times                                      */
     /* first call:      Int_1_Par_Val == 2, Int_2_Par_Val == 3,  */
@@ -687,10 +699,11 @@ One_Fifty      *Int_Par_Ref;
 
   Int_Loc = Int_1_Par_Val + 2;
   *Int_Par_Ref = Int_2_Par_Val + Int_Loc;
+  return 0;
 } /* Proc_7 */
 
 
-Proc_8 (Arr_1_Par_Ref, Arr_2_Par_Ref, Int_1_Par_Val, Int_2_Par_Val)
+int Proc_8 (Arr_1_Par_Ref, Arr_2_Par_Ref, Int_1_Par_Val, Int_2_Par_Val)
 /*********************************************************************/
     /* executed once      */
     /* Int_Par_Val_1 == 3 */
@@ -712,6 +725,7 @@ int             Int_2_Par_Val;
   Arr_2_Par_Ref [Int_Loc] [Int_Loc-1] += 1;
   Arr_2_Par_Ref [Int_Loc+20] [Int_Loc] = Arr_1_Par_Ref [Int_Loc];
   Int_Glob = 5;
+  return 0;
 } /* Proc_8 */
 
 
