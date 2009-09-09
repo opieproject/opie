@@ -72,8 +72,8 @@ void QIMPenProfile::setStyle( Style s )
 	pstyle = s;
 	Config config( userConfig() );
 	config.setGroup( "Settings" );
-	QString s = pstyle == ToggleCases ? "ToggleCases" : "BothCases";
-	config.writeEntry( "Style", s );
+	QString styleString = pstyle == ToggleCases ? "ToggleCases" : "BothCases";
+	config.writeEntry( "Style", styleString );
     }
 }
 
