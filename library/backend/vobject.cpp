@@ -381,16 +381,15 @@ DLLEXPORT(VObject*) addGroup(VObject *o, const char *g)
 	    prop(VCGrouping=b)
 		prop(VCGrouping=a)
      */
-    char *dot = strrchr(g,'.');
-    if (dot) {
+    if ( strrchr(g,'.') ) {
 	VObject *p, *t;
-	char *gs, *n = dot+1;
-	gs = dupStr(g,0);	/* so we can write to it. */
+	char *gs = dupStr(g,0);	/* so we can write to it. */
+	char *dot = strrchr(gs,'.');
+	char *n = dot+1;
 	/* used to be
 	 * t = p = addProp_(o,lookupProp_(n));
 	 */
 	t = p = addProp_(o,lookupProp(n));
-	dot = strrchr(gs,'.');
 	if (!dot)
 	    return 0;
 	*dot = 0;

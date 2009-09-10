@@ -167,7 +167,7 @@ bool LibMadPlugin::isFileSupported( const QString& path ) {
     // Other media extensions
     //  "wav","mid","mod","s3m","ogg","avi","mov","sid"
 
-    char *ext = strrchr( path.latin1(), '.' );
+    const char *ext = strrchr( path.latin1(), '.' );
 
     // Test file extension
     if ( ext ) {
