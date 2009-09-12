@@ -32,6 +32,7 @@
 /* #include <qasciidict.h> */
 
 #include <opie2/otodoaccessbackend.h>
+#include <opie2/opimchangelog_sql.h>
 
 namespace Opie {
 namespace DB   {
@@ -69,6 +70,8 @@ public:
 
     UIDArray sorted( bool, int, int, const QArray<int>& )const;
 
+    OPimChangeLog *changeLog() const;
+    
 private:
     void update()const;
     inline bool date( QDate& date, const QString& )const;
@@ -80,6 +83,7 @@ private:
 
     // QAsciiDict<int> m_dict;
     Opie::DB::OSQLDriver* m_driver;
+    OPimChangeLog_SQL *m_changeLog;
     QArray<UID> m_uids;
     bool m_dirty : 1;
 };

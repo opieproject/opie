@@ -33,6 +33,7 @@
 #include <opie2/osqlresult.h>
 
 #include <opie2/odatebookaccessbackend.h>
+#include <opie2/opimchangelog_sql.h>
 
 namespace Opie {
 namespace DB {
@@ -72,6 +73,8 @@ public:
     OPimEvent::ValueList directNonRepeats()const;
     OPimEvent::ValueList directRawRepeats()const;
 
+    OPimChangeLog *changeLog() const;
+    
 private:
     bool loadFile();
     QString m_fileName;
@@ -81,6 +84,7 @@ private:
     QMap<QString, int> m_reverseFieldMap;
 
     Opie::DB::OSQLDriver* m_driver;
+    OPimChangeLog_SQL *m_changeLog;
 
     class Private;
     Private *d;

@@ -372,11 +372,15 @@ OPimContactAccessBackend_SQL::OPimContactAccessBackend_SQL ( const QString& /* a
     m_driver = man.standard();
     m_driver->setUrl( m_fileName );
 
+    m_changeLog = new OPimChangeLog_SQL( m_driver, "changelog", "peers" );
+    
     odebug << "C'tor OPimContactAccessBackend_SQL ends: " << t.elapsed() << " ms" << oendl;
 }
 
 OPimContactAccessBackend_SQL::~OPimContactAccessBackend_SQL ()
 {
+    if( m_changeLog )
+        delete m_changeLog;
     if( m_driver )
         delete m_driver;
 }
@@ -393,6 +397,8 @@ bool OPimContactAccessBackend_SQL::load ()
     OSQLResult res = m_driver->query( &creat );
 
     update();
+
+    m_changeLog->init();
 
     return true;
 
@@ -415,6 +421,11 @@ void OPimContactAccessBackend_SQL::clear ()
     OSQLResult res = m_driver->query( &cle );
 
     reload();
+}
+
+OPimChangeLog *OPimContactAccessBackend_SQL::changeLog() const
+{
+    return m_changeLog;
 }
 
 bool OPimContactAccessBackend_SQL::wasChangedExternally()
@@ -442,9 +453,13 @@ bool OPimContactAccessBackend_SQL::add ( const OPimContact &newcontact )
     if ( res.state() == OSQLResult::Failure )
         return false;
 
+    // Add changelog entry
+    int uid = newcontact.uid();
+    m_changeLog->addAddEntry( uid );
+
     int c = m_uids.count();
     m_uids.resize( c+1 );
-    m_uids[c] = newcontact.uid();
+    m_uids[c] = uid;
 
     return true;
 }
@@ -458,6 +473,9 @@ bool OPimContactAccessBackend_SQL::remove ( int uid )
     if ( res.state() == OSQLResult::Failure )
         return false;
 
+    // Add changelog entry
+    m_changeLog->addDeleteEntry( uid );
+
     m_changed = true;
 
     return true;
@@ -465,10 +483,23 @@ bool OPimContactAccessBackend_SQL::remove ( int uid )
 
 bool OPimContactAccessBackend_SQL::replace ( const OPimContact &contact )
 {
+    // Disable the changelog (since we don't want the delete and add entries)
+    m_changeLog->setEnabled( false );
+
+    // Delete the old record
     if ( !remove( contact.uid() ) )
         return false;
 
-    return add( contact );
+    // Add the new version back in
+    bool result = add( contact );
+
+    m_changeLog->setEnabled( true );
+    if( result ) {
+        // Add changelog entry
+        m_changeLog->addUpdateEntry( contact.uid() );
+    }
+
+    return result;
 }
 
 

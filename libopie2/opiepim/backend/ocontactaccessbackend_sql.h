@@ -35,6 +35,7 @@
 
 #include <opie2/ocontactaccessbackend.h>
 #include <opie2/ocontactaccess.h>
+#include <opie2/opimchangelog_sql.h>
 
 #include <qlist.h>
 #include <qdict.h>
@@ -94,6 +95,8 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	bool remove ( int uid );
 	bool reload();
 
+    OPimChangeLog *changeLog() const;
+    
  private:
 	UIDArray extractUids( Opie::DB::OSQLResult& res ) const;
 	QMap<int, QString>  requestNonCustom( int uid ) const;
@@ -108,6 +111,7 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	UIDArray m_uids;
 
 	Opie::DB::OSQLDriver* m_driver;
+    OPimChangeLog_SQL *m_changeLog;
 };
 
 }

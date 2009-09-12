@@ -429,9 +429,12 @@ OPimTodoAccessBackendSQL::OPimTodoAccessBackendSQL( const QString& file )
     m_driver = man.standard();
     m_driver->setUrl(fi);
     // fillDict();
+    m_changeLog = new OPimChangeLog_SQL( m_driver, "changelog", "peers" );
 }
 
 OPimTodoAccessBackendSQL::~OPimTodoAccessBackendSQL(){
+    if( m_changeLog )
+        delete m_changeLog;
     if( m_driver )
         delete m_driver;
 }
@@ -443,6 +446,8 @@ bool OPimTodoAccessBackendSQL::load(){
     CreateQuery creat;
     OSQLResult res = m_driver->query(&creat );
 
+    m_changeLog->init();
+
     m_dirty = true;
     return true;
 }
@@ -453,6 +458,12 @@ bool OPimTodoAccessBackendSQL::reload(){
 bool OPimTodoAccessBackendSQL::save(){
     return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
 }
+
+OPimChangeLog *OPimTodoAccessBackendSQL::changeLog() const
+{
+    return m_changeLog;
+}
+
 QArray<int> OPimTodoAccessBackendSQL::allRecords()const {
     if (m_dirty )
         update();
@@ -516,9 +527,13 @@ bool OPimTodoAccessBackendSQL::add( const OPimTodo& t) {
     if ( res.state() == OSQLResult::Failure )
         return false;
 
+    // Add changelog entry
+    int uid = t.uid();
+    m_changeLog->addAddEntry( uid );
+
     int c = m_uids.count();
     m_uids.resize( c+1 );
-    m_uids[c] = t.uid();
+    m_uids[c] = uid;
 
     return true;
 }
@@ -529,6 +544,9 @@ bool OPimTodoAccessBackendSQL::remove( int uid ) {
     if ( res.state() == OSQLResult::Failure )
         return false;
 
+    // Add changelog entry
+    m_changeLog->addDeleteEntry( uid );
+
     m_dirty = true;
     return true;
 }
@@ -538,10 +556,25 @@ bool OPimTodoAccessBackendSQL::remove( int uid ) {
  * now we remove
  */
 bool OPimTodoAccessBackendSQL::replace( const OPimTodo& t) {
-    remove( t.uid() );
-    bool b= add(t);
+    // Disable the changelog (since we don't want the delete and add entries)
+    m_changeLog->setEnabled( false );
+
+    // Delete the old record
+    if ( !remove( t.uid() ) )
+        return false;
+    
+    // Add the new version back in
+    bool result = add( t );
+
+    m_changeLog->setEnabled( true );
+    if( result ) {
+        // Add changelog entry
+        m_changeLog->addUpdateEntry( t.uid() );
+    }
+
     m_dirty = false; // we changed some stuff but the UID stayed the same
-    return b;
+
+    return result;
 }
 QArray<int> OPimTodoAccessBackendSQL::overDue()const {
     OverDueQuery qu;

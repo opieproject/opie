@@ -104,12 +104,16 @@ ODateBookAccessBackend_SQL::ODateBookAccessBackend_SQL( const QString& ,
     m_driver = man.standard();
     m_driver->setUrl( m_fileName );
 
+    m_changeLog = new OPimChangeLog_SQL( m_driver, "changelog", "peers" );
+    
     initFields();
 
     load();
 }
 
 ODateBookAccessBackend_SQL::~ODateBookAccessBackend_SQL() {
+    if( m_changeLog )
+        delete m_changeLog;
     if( m_driver )
         delete m_driver;
 }
@@ -174,6 +178,8 @@ bool ODateBookAccessBackend_SQL::load()
 
     update();
 
+    m_changeLog->init();
+
     return true;
 }
 
@@ -200,6 +206,11 @@ bool ODateBookAccessBackend_SQL::reload()
 bool ODateBookAccessBackend_SQL::save()
 {
     return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
+}
+
+OPimChangeLog *ODateBookAccessBackend_SQL::changeLog() const
+{
+    return m_changeLog;
 }
 
 QArray<int> ODateBookAccessBackend_SQL::allRecords()const
@@ -294,6 +305,9 @@ bool ODateBookAccessBackend_SQL::add( const OPimEvent& ev )
         return false;
     }
 
+    // Add changelog entry
+    m_changeLog->addAddEntry( ev.uid() );
+
     // Update list of uid's
     update();
 
@@ -314,6 +328,9 @@ bool ODateBookAccessBackend_SQL::remove( int uid )
         return false;
     }
 
+    // Add changelog entry
+    m_changeLog->addDeleteEntry( uid );
+
     // Update list of uid's
     update();
 
@@ -322,8 +339,23 @@ bool ODateBookAccessBackend_SQL::remove( int uid )
 
 bool ODateBookAccessBackend_SQL::replace( const OPimEvent& ev )
 {
-    remove( ev.uid() );
-    return add( ev );
+    // Disable the changelog (since we don't want the delete and add entries)
+    m_changeLog->setEnabled( false );
+
+    // Delete the old record
+    if ( !remove( ev.uid() ) )
+        return false;
+
+    // Add the new version back in
+    bool result = add( ev );
+
+    m_changeLog->setEnabled( true );
+    if( result ) {
+        // Add changelog entry
+        m_changeLog->addUpdateEntry( ev.uid() );
+    }
+
+    return result;
 }
 
 
