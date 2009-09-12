@@ -63,12 +63,14 @@ public:
 private:
     void purgeOldData();
     bool entryExists( int uid, bool addedonly );
+    bool peersSynced();
     
     OPimSyncPeer m_peer;
     Opie::DB::OSQLDriver* m_driver;
     QString m_logTable;
     QString m_peerTable;
     bool m_enabled;
+    bool m_peersSynced;
 };
 
 }

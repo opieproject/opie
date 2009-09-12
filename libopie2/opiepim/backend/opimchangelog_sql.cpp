@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "opimchangelog_sql.h" // FIXME?
+#include "opimchangelog_sql.h"
 
 #include <opie2/osqldriver.h>
 #include <opie2/osqlresult.h>
@@ -39,12 +39,13 @@ using namespace Opie;
 using namespace Opie::DB;
 
 OPimChangeLog_SQL::OPimChangeLog_SQL( Opie::DB::OSQLDriver* driver, const QString &logTable, const QString &peerTable )
-    : m_driver( driver ), m_logTable( logTable ), m_peerTable( peerTable ), m_enabled( true )
+    : m_driver( driver ), m_logTable( logTable ), m_peerTable( peerTable ), m_enabled( true ), m_peersSynced( false )
 {
 }
 
 void OPimChangeLog_SQL::init()
 {
+    // Create tables and indexes
     QString qu;
     qu = "CREATE TABLE IF NOT EXISTS " + m_logTable;
     qu += " ( logid INTEGER PRIMARY KEY ASC ";
@@ -67,6 +68,10 @@ void OPimChangeLog_SQL::init()
     qu += " );";
     OSQLRawQuery qry3( qu );
     m_driver->query( &qry3 );
+
+    // No point logging anything if no peer has synced yet
+    // (since first sync is always a "slow sync")
+    m_peersSynced = peersSynced();
 }
 
 void OPimChangeLog_SQL::setEnabled( bool enabled )
@@ -76,7 +81,7 @@ void OPimChangeLog_SQL::setEnabled( bool enabled )
 
 void OPimChangeLog_SQL::addAddEntry( int uid )
 {
-    if( m_enabled ) {
+    if( m_enabled && m_peersSynced ) {
         QString qu;
         qu = "INSERT INTO " + m_logTable + "( uid, chgtype )";
         qu += " VALUES ( " + QString::number( uid ) + ", \"A\" )";
@@ -87,7 +92,7 @@ void OPimChangeLog_SQL::addAddEntry( int uid )
 
 void OPimChangeLog_SQL::addUpdateEntry( int uid )
 {
-    if( m_enabled ) {
+    if( m_enabled && m_peersSynced ) {
         if( !entryExists( uid, false ) ) {
             // OK, there's no existing entry, so add one
             QString qu;
@@ -101,7 +106,7 @@ void OPimChangeLog_SQL::addUpdateEntry( int uid )
 
 void OPimChangeLog_SQL::addDeleteEntry( int uid )
 {
-    if( m_enabled ) {
+    if( m_enabled && m_peersSynced ) {
         QString qu;
         if( entryExists( uid, true ) ) {
             // The record was added since the last sync. Since nobody else
@@ -199,6 +204,8 @@ void OPimChangeLog_SQL::syncDone()
     qu += ", " + QString::number(t) + " )";
     OSQLRawQuery qry2( qu );
     m_driver->query( &qry2 );
+
+    m_peersSynced = true;
     
     purgeOldData();
 }
@@ -236,6 +243,19 @@ bool OPimChangeLog_SQL::entryExists( int uid, bool addedonly )
     }
     else
         odebug << "entryExists: query failed!" << oendl;
+
+    return false;
+}
+
+bool OPimChangeLog_SQL::peersSynced()
+{
+    OSQLRawQuery qry( "SELECT COUNT(*) FROM " + m_peerTable );
+    OSQLResult result = m_driver->query( &qry );
+    if( result.state() == OSQLResult::Success ) {
+        OSQLResultItem item = result.first();
+        if( item.tableInt()[0].toInt() > 0 )
+            return true;
+    }
 
     return false;
 }
