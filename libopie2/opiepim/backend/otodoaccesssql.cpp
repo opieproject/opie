@@ -650,7 +650,7 @@ UIDArray OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
     switch( sortOrder ) {
         /* completed */
     case OPimTodoAccess::Completed:
-        query += "completed";
+        query += "completed, priority";
         break;
     case OPimTodoAccess::Priority:
         query += "priority";
