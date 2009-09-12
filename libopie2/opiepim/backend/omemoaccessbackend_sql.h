@@ -35,6 +35,7 @@
 
 #include <opie2/omemoaccessbackend.h>
 #include <opie2/omemoaccess.h>
+#include <opie2/opimchangelog_sql.h>
 
 #include <qlist.h>
 #include <qdict.h>
@@ -90,6 +91,8 @@ class OPimMemoAccessBackend_SQL : public OPimMemoAccessBackend {
     bool remove ( int uid );
     bool reload();
 
+    OPimChangeLog *changeLog() const;
+
  private:
     UIDArray extractUids( Opie::DB::OSQLResult& res ) const;
     OPimMemo readMemo( const Opie::DB::OSQLResultItem& resultItem ) const;
@@ -102,6 +105,7 @@ class OPimMemoAccessBackend_SQL : public OPimMemoAccessBackend {
     UIDArray m_uids;
 
     Opie::DB::OSQLDriver* m_driver;
+    OPimChangeLog_SQL *m_changeLog;
 };
 
 }

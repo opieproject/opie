@@ -277,11 +277,15 @@ OPimMemoAccessBackend_SQL::OPimMemoAccessBackend_SQL ( const QString& /* appname
     m_driver = man.standard();
     m_driver->setUrl( m_fileName );
 
+    m_changeLog = new OPimChangeLog_SQL( m_driver, "changelog", "peers" );
+
     odebug << "C'tor OPimMemoAccessBackend_SQL ends: " << t.elapsed() << " ms" << oendl;
 }
 
 OPimMemoAccessBackend_SQL::~OPimMemoAccessBackend_SQL ()
 {
+    if( m_changeLog )
+        delete m_changeLog;
     if( m_driver )
         delete m_driver;
 }
@@ -299,6 +303,8 @@ bool OPimMemoAccessBackend_SQL::load ()
 
     update();
 
+    m_changeLog->init();
+    
     return true;
 
 }
@@ -320,6 +326,11 @@ void OPimMemoAccessBackend_SQL::clear ()
     OSQLResult res = m_driver->query( &cle );
 
     reload();
+}
+
+OPimChangeLog *OPimMemoAccessBackend_SQL::changeLog() const
+{
+    return m_changeLog;
 }
 
 bool OPimMemoAccessBackend_SQL::wasChangedExternally()
@@ -347,9 +358,13 @@ bool OPimMemoAccessBackend_SQL::add ( const OPimMemo &newmemo )
     if ( res.state() == OSQLResult::Failure )
         return false;
 
+    // Add changelog entry
+    int uid = newmemo.uid();
+    m_changeLog->addAddEntry( uid );
+
     int c = m_uids.count();
     m_uids.resize( c+1 );
-    m_uids[c] = newmemo.uid();
+    m_uids[c] = uid;
 
     return true;
 }
@@ -363,6 +378,9 @@ bool OPimMemoAccessBackend_SQL::remove ( int uid )
     if ( res.state() == OSQLResult::Failure )
         return false;
 
+    // Add changelog entry
+    m_changeLog->addDeleteEntry( uid );
+
     m_changed = true;
 
     return true;
@@ -370,10 +388,23 @@ bool OPimMemoAccessBackend_SQL::remove ( int uid )
 
 bool OPimMemoAccessBackend_SQL::replace ( const OPimMemo &memo )
 {
+    // Disable the changelog (since we don't want the delete and add entries)
+    m_changeLog->setEnabled( false );
+
+    // Delete the old record
     if ( !remove( memo.uid() ) )
         return false;
 
-    return add( memo );
+    // Add the new version back in
+    bool result = add( memo );
+
+    m_changeLog->setEnabled( true );
+    if( result ) {
+        // Add changelog entry
+        m_changeLog->addUpdateEntry( memo.uid() );
+    }
+
+    return result;
 }
 
 

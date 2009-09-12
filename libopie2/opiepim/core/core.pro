@@ -27,7 +27,8 @@ HEADERS += \
         core/otodoaccess.h        \
         core/osortweekdaybuttons.h \
         core/opimmemo.h           \
-        core/omemoaccess.h
+        core/omemoaccess.h        \
+        core/opimchangelog.h
 
 SOURCES += \
         core/ocontactaccess.cpp     \

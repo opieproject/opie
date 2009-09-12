@@ -35,6 +35,7 @@
 #include <opie2/opimtemplatebase.h>
 #include <opie2/opimrecord.h>
 #include <opie2/opimbackendoccurrence.h>
+#include <opie2/opimchangelog.h>
 
 namespace Opie {
 class OPimAccessBackendPrivate;
@@ -121,6 +122,9 @@ public:
      * set the read ahead count
      */
     void setReadAhead( uint count );
+
+    OPimChangeLog *changeLog() const;
+
 protected:
     //@{
     int access()const;
@@ -239,6 +243,11 @@ uint OPimAccessBackend<T>::readAhead()const {
 template <class T>
 int OPimAccessBackend<T>::access()const {
     return m_acc;
+}
+
+template <class T>
+OPimChangeLog *OPimAccessBackend<T>::changeLog() const {
+    return NULL;
 }
 
 }

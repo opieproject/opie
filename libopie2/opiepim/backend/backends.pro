@@ -12,6 +12,7 @@ SOURCES += \
         backend/omemoaccessbackend.cpp          \
         backend/omemoaccessbackend_text.cpp     \
         backend/omemoaccessbackend_xml.cpp      \
+        backend/opimchangelog_sql.cpp           \
         backend/opimio.cpp
         
 HEADERS += \
@@ -30,6 +31,7 @@ HEADERS += \
         backend/omemoaccessbackend.h           \
         backend/omemoaccessbackend_text.h      \
         backend/omemoaccessbackend_xml.h       \
+        backend/opimchangelog_sql.h            \
         backend/opimio.h
 
 contains( ENABLE_SQL_PIM_BACKEND, y ) {
