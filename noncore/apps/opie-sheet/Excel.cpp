@@ -1083,6 +1083,7 @@ void ExcelBook::HandleFormula(ExcelSheet* sheet, ExcelBREC* record)
                 int sz;
                 sz=Integer2Byte(data[20],data[21]);// size of the formula
                 char* formuladata = new char[sz];
+                memset(formuladata, 0, sizeof(char) * sz);
                 for(int w1=0;w1<sz;w1++)
                 {
                     formuladata[w1]=data[22+w1];
