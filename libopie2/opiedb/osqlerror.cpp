@@ -5,8 +5,11 @@ using namespace Opie::DB;
 OSQLError::OSQLError( const QString& driverText,
                       const QString& driverDatabaseText,
                       int type, int subType )
-    : m_drvText( driverText ), m_drvDBText( driverDatabaseText ),
-      m_type( type ), m_number( subType )
+    : m_drvText( driverText )
+    , m_drvDBText( driverDatabaseText )
+    , m_type( type )
+    , m_number( subType )
+    , d( 0 )
 {
 }
 OSQLError::~OSQLError() {
