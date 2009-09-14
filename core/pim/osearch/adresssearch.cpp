@@ -47,7 +47,7 @@ void AdressSearch::load()
 
 int AdressSearch::search()
 {
-    OPimRecordList<OPimContact> results = _contacts->matchRegexp(_search);
+    OPimRecordList<OPimContact> results = _contacts->matchRegexp(m_search);
     for (uint i = 0; i < results.count(); i++) {
         (void)new ContactItem( this, new OPimContact( results[i] ));
     }

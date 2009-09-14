@@ -27,7 +27,7 @@ public:
     SearchGroup(QListView* parent, QString name);
 
     ~SearchGroup();
-    int _resultCount;
+    int m_resultCount;
 
     virtual void expand();
     virtual void doSearch();
@@ -38,12 +38,12 @@ protected:
     virtual void load() = 0;
     virtual int search() = 0;
     virtual void insertItem( void* ) = 0;
-    QRegExp _search;
-    QRegExp _lastSearch;
-    QString _name;
+    QRegExp m_search;
+    QRegExp m_lastSearch;
+    QString m_name;
 private:
     int realSearch();
-    bool loaded :1;
+    bool m_loaded;
 };
 
 #endif

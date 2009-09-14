@@ -57,15 +57,15 @@ void MemoSearch::load()
 
 int MemoSearch::search()
 {
-    OPimRecordList<OPimMemo> results = _memos->matchRegexp(_search);
+    OPimRecordList<OPimMemo> results = _memos->matchRegexp(m_search);
     for (uint i = 0; i < results.count(); i++)
         insertItem( new OPimMemo( results[i] ));
-    return _resultCount;
+    return m_resultCount;
 }
 
 void MemoSearch::insertItem( void *rec )
 {
     OPimMemo *memo = (OPimMemo*)rec;
     (void)new MemoItem( this, memo );
-    _resultCount++;
+    m_resultCount++;
 }
