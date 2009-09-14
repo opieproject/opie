@@ -564,6 +564,7 @@ static void dayNight(QImage *pImage)
     time_t tCurrent;
     struct tm *pTm;
 
+    memset( wtab, 0, sizeof( wtab ) );
     // get the position of the sun bassed on our current time...
     tCurrent = time( NULL );
     pTm = gmtime( &tCurrent );
