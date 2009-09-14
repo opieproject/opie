@@ -40,7 +40,7 @@
 class ODateBookMonthTablePrivate
 {
 public:
-    ODateBookMonthTablePrivate() {};
+    ODateBookMonthTablePrivate() : onMonday(false) {};
     ~ODateBookMonthTablePrivate() { mMonthEvents.clear(); };
 
     QValueList<EffectiveEvent> mMonthEvents;
