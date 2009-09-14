@@ -57,7 +57,7 @@ static int WAVsoundDuration(const QString& filename)
         Q_INT32 avgBytesPerSec;
         Q_INT16 blockAlign;
         Q_INT16 wBitsPerSample;
-    } chunkdata;
+    } chunkdata = { 0, 0, 0, 0, 0 , 0 };
 
     int total = 0;
 
