@@ -98,6 +98,9 @@ public:
      * Return identification of used records
      */
     int rtti() const;
+
+    OPimChangeLog *changeLog() const;
+
 signals:
     /**
      * if the OPimTodoAccess was changed

@@ -34,6 +34,7 @@
 #include <opie2/opimcache.h>
 #include <opie2/opimoccurrence.h>
 #include <opie2/opimbackendoccurrence.h>
+#include <opie2/opimchangelog.h>
 
 /* QT */
 #include <qarray.h>
@@ -156,6 +157,7 @@ struct OPimBase {
     virtual OPimOccurrence::List occurrences( const QDateTime& dt )const = 0;
     //@}
 
+    virtual OPimChangeLog *changeLog() const = 0;
 
 protected:
     OPimOccurrence::List convertOccurrenceFromBackend( const OPimBackendOccurrence::List& )const;

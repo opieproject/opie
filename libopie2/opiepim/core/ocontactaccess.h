@@ -136,6 +136,8 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
 	 */
 	int rtti() const;
 
+    OPimChangeLog *changeLog() const;
+
  signals:
 	/* Signal is emitted if the database was changed. Therefore
 	 * we may need to reload to stay consistent.

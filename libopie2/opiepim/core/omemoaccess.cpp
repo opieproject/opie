@@ -119,6 +119,10 @@ bool OPimMemoAccess::save ()
     return true;
 }
 
+OPimChangeLog *OPimMemoAccess::changeLog() const
+{
+    return m_backEnd->changeLog();
+}
 
 #if 0
 OPimRecordList<OPimMemo> OPimMemoAccess::sorted( bool ascending, int sortOrder, int sortFilter, int cat ) const

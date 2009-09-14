@@ -119,6 +119,12 @@ bool OPimContactAccess::save ()
 }
 
 
+OPimChangeLog *OPimContactAccess::changeLog() const
+{
+    return m_backEnd->changeLog();
+}
+
+
 #if 0
 OPimRecordList<OPimContact> OPimContactAccess::sorted( bool ascending, int sortOrder, int sortFilter, int cat ) const
 {

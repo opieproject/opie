@@ -100,6 +100,8 @@ class OPimMemoAccess: public QObject, public OPimAccessTemplate<OPimMemo>
          */
         int rtti() const;
 
+        OPimChangeLog *changeLog() const;
+
  signals:
         /* Signal is emitted if the database was changed. Therefore
          * we may need to reload to stay consistent.
@@ -108,7 +110,6 @@ class OPimMemoAccess: public QObject, public OPimAccessTemplate<OPimMemo>
          * @see reload()
          */
         void signalChanged ( const OPimMemoAccess *which );
-
 
  private:
         OPimMemoAccessBackend *m_backEnd;

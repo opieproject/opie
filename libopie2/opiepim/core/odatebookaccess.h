@@ -89,6 +89,7 @@ public:
      */
     int rtti() const;
 
+    OPimChangeLog *changeLog() const;
 
 private:
     ODateBookAccessBackend* m_backEnd;

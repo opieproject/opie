@@ -51,6 +51,10 @@ ODateBookAccess::ODateBookAccess( ODateBookAccessBackend* back, enum Access  )
 ODateBookAccess::~ODateBookAccess() {
 }
 
+OPimChangeLog *ODateBookAccess::changeLog() const
+{
+    return m_backEnd->changeLog();
+}
 
 /**
  * @return all repeating events

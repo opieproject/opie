@@ -52,6 +52,11 @@ OPimTodoAccess::OPimTodoAccess( OPimTodoAccessBackend* end, enum Access )
 OPimTodoAccess::~OPimTodoAccess() {
 }
 
+OPimChangeLog *OPimTodoAccess::changeLog() const
+{
+    return m_todoBackEnd->changeLog();
+}
+
 void OPimTodoAccess::mergeWith( const QValueList<OPimTodo>& list ) {
     QValueList<OPimTodo>::ConstIterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
