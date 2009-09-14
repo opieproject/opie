@@ -40,6 +40,7 @@
 
 
 struct RiffChunk {
+    RiffChunk() : size(0) { memset(id, 0, sizeof(id)); memset(data, 0, sizeof(data)); }
     char id[4];
     Q_UINT32 size;
     char data[4];
@@ -47,6 +48,8 @@ struct RiffChunk {
 
 
 struct ChunkData {
+    ChunkData() : formatTag(0), channels(0), samplesPerSec(0)
+                , avgBytesPerSec(0), blockAlign(0), wBitsPerSample(0) {}
     Q_INT16 formatTag;
     Q_INT16 channels;
     Q_INT32 samplesPerSec;
@@ -56,7 +59,8 @@ struct ChunkData {
 };
 
 
-const int sound_buffer_size = 512; // 4096; // you got to be kidding right?
+static const int sound_buffer_size = 512; // 4096; // you got to be kidding right?
+static const Q_INT16 WAVE_FORMAT_PCM = 1;
 
 
 class WavPluginData {
@@ -71,28 +75,28 @@ public:
     int samples_due;
     int samples;
 
-    WavPluginData() {
-  max = out = sound_buffer_size;
-  wavedata_remaining = 0;
-  samples_due = 0;
-  samples = -1;
+    WavPluginData() : input(0), wavedata_remaining(0), chunkdata(), chunk()
+                    , out(sound_buffer_size), max(sound_buffer_size)
+                    , samples_due(0), samples(-1)
+    {
+        memset(data, 0, sizeof(data));
     }
 
     // expands out samples to the frequency of 44kHz //not any more
     bool add( short *output, long count, long& done, bool stereo )
     {
-  done = 0;
+        done = 0;
 
-  if ( input == 0 ) {
-      odebug << "no input" << oendl;
-      return FALSE;
-  }
+        if ( input == 0 ) {
+            odebug << "no input" << oendl;
+            return false;
+        }
 
         while ( count ) {
             int l,r;
-            if ( getSample(l, r) == FALSE ) {
+            if ( getSample(l, r) == false ) {
                 odebug << "didn't get sample" << oendl;
-                return FALSE;
+                return false;
             }
               samples_due += chunkdata.samplesPerSec;
               printf("samples due %d\r", samples_due);
@@ -106,99 +110,94 @@ public:
                 done++;
             }
         }
-        return TRUE;
+        return true;
     }
 
     bool initialise() {
-  if ( input == 0 )
-      return FALSE;
+        if ( input == 0 )
+            return false;
 
-  wavedata_remaining = -1;
+        wavedata_remaining = -1;
 
-  while ( wavedata_remaining == -1 ) {
-      // Keep reading chunks...
-      const int n = sizeof(chunk) - sizeof(chunk.data);
-      int t = input->readBlock( (char*)&chunk, n );
-      if ( t != n ) {
-    if ( t == -1 )
-        return FALSE;
-    return TRUE;
-      }
-      if ( qstrncmp(chunk.id,"data",4) == 0 ) {
-    samples = wavedata_remaining = chunk.size;
-      } else if ( qstrncmp(chunk.id,"RIFF",4) == 0 ) {
-    char d[4];
-    if ( input->readBlock(d,4) != 4 ) {
-        return FALSE;
-    }
-    if ( qstrncmp(d,"WAVE",4) != 0 ) {
-        // skip
-        if ( chunk.size > 1000000000 || !input->at(input->at()+chunk.size-4) ) {
-      return FALSE;
-        }
-    }
-      } else if ( qstrncmp(chunk.id,"fmt ",4) == 0 ) {
-    if ( input->readBlock((char*)&chunkdata,sizeof(chunkdata)) != sizeof(chunkdata) ) {
-        return FALSE;
-    }
-#define WAVE_FORMAT_PCM 1
-    if ( chunkdata.formatTag != WAVE_FORMAT_PCM ) {
-        odebug << "WAV file: UNSUPPORTED FORMAT " << chunkdata.formatTag << "" << oendl;
-        return FALSE;
-    }
-      } else {
-    // ignored chunk
-    if ( chunk.size > 1000000000 || !input->at(input->at()+chunk.size) ) {
-        return FALSE;
-    }
-      }
-  } // while
-  odebug << "bits " << chunkdata.wBitsPerSample << "" << oendl;
-  return TRUE;
+        while ( wavedata_remaining == -1 ) {
+            // Keep reading chunks...
+            const int n = sizeof(chunk) - sizeof(chunk.data);
+            int t = input->readBlock( (char*)&chunk, n );
+            if ( t != n ) {
+                if ( t == -1 )
+                    return false;
+
+                return true;
+            }
+            if ( qstrncmp(chunk.id,"data",4) == 0 )
+                samples = wavedata_remaining = chunk.size;
+            else if ( qstrncmp(chunk.id,"RIFF",4) == 0 ) {
+                char d[4];
+                if ( input->readBlock(d,4) != 4 )
+                    return false;
+
+                if ( qstrncmp(d,"WAVE",4) != 0 ) {
+                    // skip
+                    if ( chunk.size > 1000000000 || !input->at(input->at()+chunk.size-4) )
+                        return false;
+                }
+            } else if ( qstrncmp(chunk.id,"fmt ",4) == 0 ) {
+                if ( input->readBlock((char*)&chunkdata,sizeof(chunkdata)) != sizeof(chunkdata) )
+                    return false;
+
+                if ( chunkdata.formatTag != WAVE_FORMAT_PCM ) {
+                    odebug << "WAV file: UNSUPPORTED FORMAT " << chunkdata.formatTag << "" << oendl;
+                    return false;
+                }
+            } else {
+                // ignored chunk
+                if ( chunk.size > 1000000000 || !input->at(input->at()+chunk.size) )
+                    return false;
+            }
+        } // while
+        odebug << "bits " << chunkdata.wBitsPerSample << "" << oendl;
+        return true;
     }
 
 
     // gets a sample from the file
     bool getSample(int& l, int& r)
     {
-  l = r = 0;
+        l = r = 0;
 
-  if ( input == 0 )
-      return FALSE;
+        if ( input == 0 )
+            return false;
 
-  if ( (wavedata_remaining < 0) || !max )
-      return FALSE;
+        if ( (wavedata_remaining < 0) || !max )
+            return false;
 
-  if ( out >= max ) {
-      max = input->readBlock( (char*)data, (uint)QMIN(sound_buffer_size,wavedata_remaining) );
-
-      wavedata_remaining -= max;
-
-      out = 0;
-      if ( max <= 0 ) {
-    max = 0;
-    return TRUE;
-      }
-  }
-  if ( chunkdata.wBitsPerSample == 8 ) {
-      l = (data[out++] - 128) * 128;
-  } else {
-      l = ((short*)data)[out/2];
-      out += 2;
-  }
-  if ( chunkdata.channels == 1 ) {
-      r = l;
-  } else {
-      if ( chunkdata.wBitsPerSample == 8 ) {
-    r = (data[out++] - 128) * 128;
-      } else {
-    r = ((short*)data)[out/2];
-    out += 2;
-      }
-  }
-  return TRUE;
+        if ( out >= max ) {
+            max = input->readBlock( (char*)data, (uint)QMIN(sound_buffer_size,wavedata_remaining) );
+            wavedata_remaining -= max;
+            out = 0;
+            if ( max <= 0 ) {
+                max = 0;
+                return true;
+            }
+        }
+        if ( chunkdata.wBitsPerSample == 8 )
+            l = (data[out++] - 128) * 128;
+        else {
+            l = ((short*)data)[out/2];
+            out += 2;
+        }
+        if ( chunkdata.channels == 1 )
+            r = l;
+        else {
+            if ( chunkdata.wBitsPerSample == 8 )
+                r = (data[out++] - 128) * 128;
+            else {
+                r = ((short*)data)[out/2];
+                out += 2;
+            }
+        }
+        return true;
     } // getSample
-
 };
 
 
@@ -222,14 +221,14 @@ bool WavPlugin::isFileSupported( const QString& path ) {
     // Test file extension
     if ( ext ) {
   if ( strncasecmp(ext, ".raw", 4) == 0 )
-      return TRUE;
+      return true;
   if ( strncasecmp(ext, ".wav", 4) == 0 )
-      return TRUE;
+      return true;
   if ( strncasecmp(ext, ".wave", 4) == 0 )
-      return TRUE;
+      return true;
     }
 
-    return FALSE;
+    return false;
 }
 
 
@@ -241,17 +240,17 @@ bool WavPlugin::open( const QString& path ) {
     d->samples_due = 0;
 
     d->input = new QFile( path );
-    if ( d->input->open(IO_ReadOnly) == FALSE ) {
+    if ( d->input->open(IO_ReadOnly) == false ) {
   odebug << "couldn't open file" << oendl;
   delete d->input;
   d->input = 0;
-  return FALSE;
+  return false;
     }
 
     d->initialise();
     qApp->processEvents();
 
-    return TRUE;
+    return true;
 }
 
 
@@ -261,7 +260,7 @@ bool WavPlugin::close() {
     d->input->close();
     delete d->input;
     d->input = 0;
-    return TRUE;
+    return true;
 }
 
 
@@ -298,7 +297,7 @@ int WavPlugin::audioSamples( int ) {
 
 bool WavPlugin::audioSetSample( long, int ) {
 //    odebug << "WavPlugin::audioSetSample" << oendl;
-    return FALSE;
+    return false;
 }
 
 
@@ -310,25 +309,25 @@ long WavPlugin::audioGetSample( int ) {
 /*
 bool WavPlugin::audioReadSamples( short *, int, long, int ) {
     debugMsg( "WavPlugin::audioReadSamples" );
-    return FALSE;
+    return false;
 }
 
 
 bool WavPlugin::audioReReadSamples( short *, int, long, int ) {
     debugMsg( "WavPlugin::audioReReadSamples" );
-    return FALSE;
+    return false;
 }
 
 
 bool WavPlugin::audioReadMonoSamples( short *output, long samples, long& samplesMade, int ) {
     debugMsg( "WavPlugin::audioReadMonoSamples" );
-    return !d->add( output, samples, samplesMade, FALSE );
+    return !d->add( output, samples, samplesMade, false );
 }
 
 
 bool WavPlugin::audioReadStereoSamples( short *output, long samples, long& samplesMade, int ) {
     debugMsg( "WavPlugin::audioReadStereoSamples" );
-    return !d->add( output, samples, samplesMade, TRUE );
+    return !d->add( output, samples, samplesMade, true );
 }
 */
 

@@ -24,6 +24,8 @@
 #include <qfileinfo.h>
 
 ModPlugin::ModPlugin()
+    : m_songTime( 0 )
+    , m_maxPosition( 0 )
 {
 }
 

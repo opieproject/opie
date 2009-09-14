@@ -141,15 +141,17 @@ public:
 };
 
 
-LibMadPlugin::LibMadPlugin() {
-    d = new LibMadPluginData;
+LibMadPlugin::LibMadPlugin()
+    : d( new LibMadPluginData )
+    , info( tr( "No Song Open" ) )
+    , bufferSize( 0 )
+{
     d->input.fd = 0;
 #if defined(HAVE_MMAP)
     d->input.fdm = 0;
 #endif
     d->input.data = 0;
     d->flush = TRUE;
-    info = tr( "No Song Open" );
 }
 
 
