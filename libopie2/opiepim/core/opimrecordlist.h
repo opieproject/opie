@@ -322,7 +322,7 @@ uint OPimRecordListIterator<T>::count() const
 template <class T>
 OPimRecordList<T>::OPimRecordList( const QArray<int>& ids,
                              const Base* acc )
-        : m_ids( ids ), m_acc( acc )
+        : m_ids( ids ), m_acc( acc ), d( 0 )
 {}
 
 

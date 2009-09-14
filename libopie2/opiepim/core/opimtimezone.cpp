@@ -130,7 +130,8 @@ static time_t to_Time_t( const QDateTime& utc, const QString& str )
 namespace Opie
 {
 OPimTimeZone::OPimTimeZone( const ZoneName& zone )
-        : m_name( zone )
+    : m_name( zone )
+    , d( 0 )
 {}
 
 
