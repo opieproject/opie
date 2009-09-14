@@ -1038,7 +1038,7 @@ QMakeProject::doProjectCheckReqs(const QStringList &deps, QMap<QString, QStringL
 	if(invert_test)
 	    chk = chk.right(chk.length() - 1);
 
-	bool test;
+	bool test = false;
 	int lparen = chk.find('(');
 	if(lparen != -1) { /* if there is an lparen in the chk, it IS a function */
 	    int rparen = chk.findRev(')');
