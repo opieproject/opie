@@ -18,7 +18,9 @@
 #include "datebookpluginconfig.h"
 
 
-DatebookPlugin::DatebookPlugin() {
+DatebookPlugin::DatebookPlugin()
+    : m_widget(0)
+{
 }
 
 DatebookPlugin::~DatebookPlugin() {

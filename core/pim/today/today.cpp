@@ -54,7 +54,9 @@ using Opie::Core::OConfig;
 
 
 struct TodayPlugin {
-TodayPlugin() : iface( 0 ), guiPart( 0 ), guiBox( 0 ) {}
+    TodayPlugin() : iface( 0 ), guiPart( 0 ), guiBox( 0 ), name()
+                  , excludeRefresh( false ) {}
+
     QInterfacePtr<TodayPluginInterface> iface;
     TodayPluginObject *guiPart;
     OPluginItem oplugin;
