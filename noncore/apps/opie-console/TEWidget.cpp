@@ -1145,7 +1145,7 @@ void TEWidget::calcGeometry()
 
   int showhscrollbar = 1;
   int hwidth = 0;
-  int dcolumns;
+  int dcolumns = 0;
 
   if(vcolumns == 0) showhscrollbar = 0;
   if(showhscrollbar == 1) hwidth = QApplication::style().scrollBarExtent().width();
