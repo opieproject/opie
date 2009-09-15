@@ -123,7 +123,7 @@ public:
      */
     void setReadAhead( uint count );
 
-    OPimChangeLog *changeLog() const;
+    virtual OPimChangeLog *changeLog() const;
 
 protected:
     //@{
