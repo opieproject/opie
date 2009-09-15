@@ -62,7 +62,7 @@ public:
 
 	// check for overflow cases; if so, wrap back to beginning of
 	// set ( -1 or 1 )
-	if ( sign == -1 && id > 0 || sign == 1 && id < 0 )
+	if ( ( sign == -1 && id > 0 ) || ( sign == 1 && id < 0 ) )
 	    id = sign;
     }
     return id;
