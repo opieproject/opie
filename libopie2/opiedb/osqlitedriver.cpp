@@ -53,6 +53,7 @@ OSQLiteDriver::OSQLiteDriver( QLibrary *lib )
     : OSQLDriver( lib )
 {
     m_sqlite = 0l;
+    sqreg.regex_raw = NULL;
 }
 
 
