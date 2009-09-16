@@ -90,9 +90,11 @@ namespace {
      */
     class LoadQuery : public OSQLQuery {
     public:
-        LoadQuery();
+        LoadQuery( OPimChangeLog_SQL *changeLog );
         ~LoadQuery();
         QString query()const;
+    private:
+        OPimChangeLog_SQL *m_changeLog;
     };
 
     /**
@@ -161,12 +163,22 @@ namespace {
     }
 
 
-    LoadQuery::LoadQuery() : OSQLQuery() {}
+    LoadQuery::LoadQuery( OPimChangeLog_SQL *changeLog )
+        : OSQLQuery(), m_changeLog( changeLog ) {}
     LoadQuery::~LoadQuery() {}
     QString LoadQuery::query()const {
         QString qu;
-        qu += "select uid from notes";
-
+        bool slowSync = m_changeLog->slowSync();
+        if( slowSync ) {
+            qu = "select uid from notes";
+        }
+        else {
+            int logId = m_changeLog->peerLastSyncLogId();
+            qu = "select notes.uid from notes, changelog";
+            qu += " where changelog.logid > " + QString::number( logId );
+            qu += " and notes.uid = changelog.uid";
+        }
+        
         odebug << " ******* query = " << qu << oendl;
 
         return qu;
@@ -602,7 +614,7 @@ void OPimMemoAccessBackend_SQL::update()
     // Now load the database set and extract the uid's
     // which will be held locally
 
-    LoadQuery lo;
+    LoadQuery lo( m_changeLog );
     OSQLResult res = m_driver->query(&lo);
     if ( res.state() != OSQLResult::Success )
         return;
