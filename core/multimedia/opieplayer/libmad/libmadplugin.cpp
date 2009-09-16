@@ -207,6 +207,8 @@ int LibMadPlugin::udp_open(char *address, int port) {
 
     stAddr.sin_family = AF_INET;
     stAddr.sin_port = htons(port);
+    memset(&stAddr.sin_zero, 0, sizeof(stAddr.sin_zero));
+    memset(&stLclAddr.sin_zero, 0, sizeof(stLclAddr.sin_zero));
 
     if ((host = gethostbyname(address)) == NULL) {
         return (0);

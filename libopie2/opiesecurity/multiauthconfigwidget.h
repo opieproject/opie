@@ -57,7 +57,8 @@ class MultiauthConfigWidget : public QWidget {
     public:
 
         /// standard widget constructor
-        MultiauthConfigWidget( QWidget *parent,  const char *name ) : QWidget( parent,  name ) {}
+        MultiauthConfigWidget( QWidget *parent,  const char *name )
+            : QWidget( parent,  name ), d( 0 ) {}
         virtual ~MultiauthConfigWidget() {}
 
         /// Method to reimplement, supposed to save the plugin configuration

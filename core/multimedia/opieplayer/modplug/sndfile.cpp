@@ -52,27 +52,37 @@ CSoundFile::CSoundFile()
 //----------------------
 {
 	m_nType = MOD_TYPE_NONE;
+	m_nDefaultGlobalVolume = m_nDefaultSpeed = m_nDefaultTempo = 0;
 	m_dwSongFlags = 0;
-	m_nChannels = 0;
-	m_nMixChannels = 0;
-	m_nSamples = 0;
-	m_nInstruments = 0;
-	m_nPatternNames = 0;
-	m_lpszPatternNames = NULL;
-	m_lpszSongComments = NULL;
+	m_nChannels = m_nMixChannels = m_nBufferCount = m_nMixStat = 0;
+	m_nSamples = m_nInstruments = 0;
+	m_nTickCount = m_nTotalCount = m_nPatternDelay = m_nFrameDelay = 0;
+	m_nMusicSpeed = m_nMusicTempo = 0;
+	m_nNextRow = m_nRow = 0;
+	m_nPattern = m_nCurrentPattern = m_nNextPattern = m_nRestartPos = 0;
+	m_nMasterVolume = m_nGlobalVolume = 128;
+	m_nSongPreAmp = 0;
 	m_nFreqFactor = m_nTempoFactor = 128;
-	m_nMasterVolume = 128;
+	m_nOldGlbVolSlide = 0;
 	m_nMinPeriod = 0x20;
 	m_nMaxPeriod = 0x7FFF;
-	m_nRepeatCount = 0;
+	m_nRepeatCount = m_nInitialRepeatCount = 0;
+	m_nGlobalFadeMaxSamples = m_nGlobalFadeSamples = 0;
+	m_nMaxOrderPosition = 0;
+	m_nPatternNames = 0;
+	m_lpszPatternNames = 0;
+	m_lpszSongComments = 0;
 	memset(Chn, 0, sizeof(Chn));
 	memset(ChnMix, 0, sizeof(ChnMix));
 	memset(Ins, 0, sizeof(Ins));
 	memset(ChnSettings, 0, sizeof(ChnSettings));
 	memset(Headers, 0, sizeof(Headers));
 	memset(Order, 0xFF, sizeof(Order));
+	memset(&m_MidiCfg, 0, sizeof(m_MidiCfg));
 	memset(Patterns, 0, sizeof(Patterns));
+	memset(PatternSize, 0, sizeof(PatternSize));
 	memset(m_szNames, 0, sizeof(m_szNames));
+	memset(CompressionTable, 0, sizeof(CompressionTable));
 	memset(m_MixPlugins, 0, sizeof(m_MixPlugins));
 }
 
@@ -115,8 +125,8 @@ BOOL CSoundFile::Create(LPCBYTE lpStream, DWORD dwMemLength)
 	m_nSongPreAmp = 0x30;
 	m_nPatternNames = 0;
 	m_nMaxOrderPosition = 0;
-	m_lpszPatternNames = NULL;
-	m_lpszSongComments = NULL;
+	m_lpszPatternNames = 0;
+	m_lpszSongComments = 0;
 	memset(Ins, 0, sizeof(Ins));
 	memset(ChnMix, 0, sizeof(ChnMix));
 	memset(Chn, 0, sizeof(Chn));
@@ -167,7 +177,7 @@ BOOL CSoundFile::Create(LPCBYTE lpStream, DWORD dwMemLength)
 		if (bMMCmp)
 		{
 			GlobalFreePtr(lpStream);
-			lpStream = NULL;
+			lpStream = 0;
 		}
 #endif
 	}
@@ -278,18 +288,18 @@ BOOL CSoundFile::Destroy()
 	for (i=0; i<MAX_PATTERNS; i++) if (Patterns[i])
 	{
 		FreePattern(Patterns[i]);
-		Patterns[i] = NULL;
+		Patterns[i] = 0;
 	}
 	m_nPatternNames = 0;
 	if (m_lpszPatternNames)
 	{
 		delete m_lpszPatternNames;
-		m_lpszPatternNames = NULL;
+		m_lpszPatternNames = 0;
 	}
 	if (m_lpszSongComments)
 	{
 		delete m_lpszSongComments;
-		m_lpszSongComments = NULL;
+		m_lpszSongComments = 0;
 	}
 	for (i=1; i<MAX_SAMPLES; i++)
 	{
@@ -297,7 +307,7 @@ BOOL CSoundFile::Destroy()
 		if (pins->pSample)
 		{
 			FreeSample(pins->pSample);
-			pins->pSample = NULL;
+			pins->pSample = 0;
 		}
 	}
 	for (i=0; i<MAX_INSTRUMENTS; i++)
@@ -305,7 +315,7 @@ BOOL CSoundFile::Destroy()
 		if (Headers[i])
 		{
 			delete Headers[i];
-			Headers[i] = NULL;
+			Headers[i] = 0;
 		}
 	}
 	for (i=0; i<MAX_MIXPLUGINS; i++)
@@ -314,13 +324,13 @@ BOOL CSoundFile::Destroy()
 		{
 			m_MixPlugins[i].nPluginDataSize = 0;
 			delete [] (signed char*)m_MixPlugins[i].pPluginData;
-			m_MixPlugins[i].pPluginData = NULL;
+			m_MixPlugins[i].pPluginData = 0;
 		}
-		m_MixPlugins[i].pMixState = NULL;
+		m_MixPlugins[i].pMixState = 0;
 		if (m_MixPlugins[i].pMixPlugin)
 		{
 			m_MixPlugins[i].pMixPlugin->Release();
-			m_MixPlugins[i].pMixPlugin = NULL;
+			m_MixPlugins[i].pMixPlugin = 0;
 		}
 	}
 	m_nType = MOD_TYPE_NONE;
@@ -578,8 +588,8 @@ void CSoundFile::SetCurrentPos(UINT nPos)
 	for (i=0; i<MAX_CHANNELS; i++)
 	{
 		Chn[i].nNote = Chn[i].nNewNote = Chn[i].nNewIns = 0;
-		Chn[i].pInstrument = NULL;
-		Chn[i].pHeader = NULL;
+		Chn[i].pInstrument = 0;
+		Chn[i].pHeader = 0;
 		Chn[i].nPortamentoDest = 0;
 		Chn[i].nCommand = 0;
 		Chn[i].nPatternLoopCount = 0;
@@ -597,9 +607,9 @@ void CSoundFile::SetCurrentPos(UINT nPos)
 			Chn[i].nLoopStart = 0;
 			Chn[i].nLoopEnd = 0;
 			Chn[i].nROfs = Chn[i].nLOfs = 0;
-			Chn[i].pSample = NULL;
-			Chn[i].pInstrument = NULL;
-			Chn[i].pHeader = NULL;
+			Chn[i].pSample = 0;
+			Chn[i].pInstrument = 0;
+			Chn[i].pHeader = 0;
 			Chn[i].nCutOff = 0x7F;
 			Chn[i].nResonance = 0;
 			Chn[i].nLeftVol = Chn[i].nRightVol = 0;
@@ -880,7 +890,7 @@ UINT CSoundFile::WriteSample(FILE *f, MODINSTRUMENT *pins, UINT nFlags, UINT nMa
 	UINT nLen = pins->nLength;
 
 	if ((nMaxLen) && (nLen > nMaxLen)) nLen = nMaxLen;
-	if ((!pSample) || (f == NULL) || (!nLen)) return 0;
+	if ((!pSample) || (f == 0) || (!nLen)) return 0;
 	switch(nFlags)
 	{
 #ifndef NO_PACKING
@@ -1105,7 +1115,7 @@ UINT CSoundFile::ReadSample(MODINSTRUMENT *pIns, UINT nFlags, LPCSTR lpMemFile, 
 		mem *= 2;
 		pIns->uFlags |= CHN_STEREO;
 	}
-	if ((pIns->pSample = AllocateSample(mem)) == NULL)
+	if ((pIns->pSample = AllocateSample(mem)) == 0)
 	{
 		pIns->nLength = 0;
 		return 0;
@@ -1528,7 +1538,7 @@ UINT CSoundFile::ReadSample(MODINSTRUMENT *pIns, UINT nFlags, LPCSTR lpMemFile, 
 		{
 			pIns->nLength = 0;
 			FreeSample(pIns->pSample);
-			pIns->pSample = NULL;
+			pIns->pSample = 0;
 		}
 		return 0;
 	}
@@ -1766,7 +1776,7 @@ BOOL CSoundFile::SetPatternName(UINT nPat, LPCSTR lpszName)
 		{
 			memcpy(p, m_lpszPatternNames, m_nPatternNames * MAX_PATTERNNAME);
 			delete m_lpszPatternNames;
-			m_lpszPatternNames = NULL;
+			m_lpszPatternNames = 0;
 		}
 		m_lpszPatternNames = p;
 		m_nPatternNames = nPat + 1;
@@ -1869,7 +1879,7 @@ BOOL CSoundFile::DestroySample(UINT nSample)
 	if (!Ins[nSample].pSample) return TRUE;
 	MODINSTRUMENT *pins = &Ins[nSample];
 	signed char *pSample = pins->pSample;
-	pins->pSample = NULL;
+	pins->pSample = 0;
 	pins->nLength = 0;
 	pins->uFlags &= ~(CHN_16BIT);
 	for (UINT i=0; i<MAX_CHANNELS; i++)
@@ -1877,7 +1887,7 @@ BOOL CSoundFile::DestroySample(UINT nSample)
 		if (Chn[i].pSample == pSample)
 		{
 			Chn[i].nPos = Chn[i].nLength = 0;
-			Chn[i].pSample = Chn[i].pCurrentSample = NULL;
+			Chn[i].pSample = Chn[i].pCurrentSample = 0;
 		}
 	}
 	FreeSample(pSample);

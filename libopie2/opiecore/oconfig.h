@@ -130,14 +130,17 @@ class OConfigGroupSaver
      * Create the object giving a OConfig object and a @a group to become
      * the current group.
      */
-    OConfigGroupSaver( OConfig* config, QString group ) :_config(config), _oldgroup(config->group() )
-        { _config->setGroup( group ); }
+    OConfigGroupSaver( OConfig* config, QString group )
+        :_config(config), _oldgroup(config->group() ), d( 0 )
+    { _config->setGroup( group ); }
 
-    OConfigGroupSaver( OConfig* config, const char *group ) :_config(config), _oldgroup(config->group())
-        { _config->setGroup( group ); }
+    OConfigGroupSaver( OConfig* config, const char *group )
+        :_config(config), _oldgroup(config->group()), d( 0 )
+    { _config->setGroup( group ); }
 
-    OConfigGroupSaver( OConfig* config, const QCString &group ) : _config(config), _oldgroup(config->group())
-        { _config->setGroup( group ); }
+    OConfigGroupSaver( OConfig* config, const QCString &group )
+        : _config(config), _oldgroup(config->group()), d( 0 )
+    { _config->setGroup( group ); }
     /**
      * Destructor.
      * Restores the last current group.

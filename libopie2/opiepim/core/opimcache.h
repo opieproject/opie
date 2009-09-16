@@ -88,7 +88,9 @@ private:
 // Implementation
 template <class T>
 OPimCacheItem<T>::OPimCacheItem( const T& t )
-    : m_t(t) {
+    : m_t(t)
+    , d(0)
+{
 }
 template <class T>
 OPimCacheItem<T>::~OPimCacheItem() {
@@ -105,7 +107,8 @@ void OPimCacheItem<T>::setRecord( const T& t ) {
 // Cache
 template <class T>
 OPimCache<T>::OPimCache()
-    : m_cache(100, 53 )
+    : m_cache( 100, 53 )
+    , d( 0 )
 {
     m_cache.setAutoDelete( TRUE );
 }
