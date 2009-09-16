@@ -49,7 +49,9 @@ class OPimChangeLog_SQL : public OPimChangeLog
 public:
     OPimChangeLog_SQL( Opie::DB::OSQLDriver* driver, const QString &logTable, const QString &peerTable );
     void setEnabled( bool enabled );
-
+    uint peerLastSyncLogId();
+    bool slowSync();
+    
     virtual void init();
     virtual void addAddEntry( int uid );
     virtual void addUpdateEntry( int uid );
@@ -57,7 +59,7 @@ public:
     virtual void purge();
     virtual QList<OPimSyncPeer> peerList();
     virtual void removePeer( const QString &peerId );
-    virtual bool startSync( const OPimSyncPeer &peer );
+    virtual bool startSync( const OPimSyncPeer &peer, bool slowSync );
     virtual void syncDone();
 
 private:
@@ -69,6 +71,8 @@ private:
     Opie::DB::OSQLDriver* m_driver;
     QString m_logTable;
     QString m_peerTable;
+    uint m_peerLastSyncLogId;
+    bool m_slowSync;
     bool m_enabled;
     bool m_peersSynced;
 };

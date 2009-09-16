@@ -105,9 +105,10 @@ public:
      * used when syncDone() is called.
      * @param peer peer info structure for the peer we are synchronising with.
      *   (lastSyncDate is not expected to be populated.)
+     * @param slowsync true to force a slow-sync, false otherwise
      * @returns true if we are able to filter for the specified peer, false if slow sync will be required
      */
-    virtual bool startSync( const OPimSyncPeer &peer ) = 0;
+    virtual bool startSync( const OPimSyncPeer &peer, bool slowSync ) = 0;
 
     /**
      * Indicate that synchronisation with the peer specified in startSync() was successful.

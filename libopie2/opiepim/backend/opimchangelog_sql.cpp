@@ -39,12 +39,18 @@ using namespace Opie;
 using namespace Opie::DB;
 
 OPimChangeLog_SQL::OPimChangeLog_SQL( Opie::DB::OSQLDriver* driver, const QString &logTable, const QString &peerTable )
-    : m_driver( driver ), m_logTable( logTable ), m_peerTable( peerTable ), m_enabled( true ), m_peersSynced( false )
+    : m_driver( driver ), m_logTable( logTable ), m_peerTable( peerTable ), m_peerLastSyncLogId( 0 )
+    , m_slowSync( true ), m_enabled( true ), m_peersSynced( false )
 {
 }
 
 void OPimChangeLog_SQL::init()
 {
+    if ( !m_driver->open() ) {
+        owarn << "OPimChangeLog_SQL::init: driver open failed" << oendl;
+        return;
+    }
+
     // Create tables and indexes
     QString qu;
     qu = "CREATE TABLE IF NOT EXISTS " + m_logTable;
@@ -77,6 +83,16 @@ void OPimChangeLog_SQL::init()
 void OPimChangeLog_SQL::setEnabled( bool enabled )
 {
     m_enabled = enabled;
+}
+
+uint OPimChangeLog_SQL::peerLastSyncLogId()
+{
+    return m_peerLastSyncLogId;
+}
+
+bool OPimChangeLog_SQL::slowSync()
+{
+    return m_slowSync;
 }
 
 void OPimChangeLog_SQL::addAddEntry( int uid )
@@ -169,24 +185,32 @@ void OPimChangeLog_SQL::removePeer( const QString &peerId )
     purgeOldData();
 }
 
-bool OPimChangeLog_SQL::startSync( const OPimSyncPeer &peer )
+bool OPimChangeLog_SQL::startSync( const OPimSyncPeer &peer, bool slowSync )
 {
     m_peer = peer;
+    m_peerLastSyncLogId = 0;
+    m_slowSync = true;
 
-    OSQLRawQuery qry( "SELECT * FROM " + m_peerTable + " WHERE peerid = \"" + m_peer.peerId() + "\"" );
-    OSQLResult result = m_driver->query( &qry );
+    if( !slowSync ) {
+        QString qu = "SELECT * FROM " + m_peerTable;
+        qu += " WHERE peerid = \"" + m_peer.peerId() + "\"";
+        OSQLRawQuery qry( qu );
+        OSQLResult result = m_driver->query( &qry );
 
-    QList<OPimSyncPeer> list;
-    list.setAutoDelete( true );
-
-    if( result.state() == OSQLResult::Success ) {
-        if( !result.results().isEmpty() )
-            return true;
+        if( result.state() == OSQLResult::Success ) {
+            if( result.results().count() > 0 ) {
+                bool ok = true;
+                m_peerLastSyncLogId = result.first().data("lastsynclogid", &ok).toInt();
+                m_slowSync = false;
+            }
+            else
+                odebug << "startSync: no record for specified peer " << m_peer.peerId() << oendl;
+        }
+        else
+            odebug << "startSync: Query failed" << oendl;
     }
-    else
-        odebug << "startSync: Query failed" << oendl;
-
-    return false;
+    
+    return !m_slowSync;
 }
 
 void OPimChangeLog_SQL::syncDone()
