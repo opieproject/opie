@@ -49,10 +49,10 @@ MemoSearch::~MemoSearch()
     delete _memos;
 }
 
-void MemoSearch::load()
+bool MemoSearch::load()
 {
     _memos = new OPimMemoAccess();
-    _memos->load();
+    return _memos->load();
 }
 
 int MemoSearch::search()

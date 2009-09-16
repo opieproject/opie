@@ -46,10 +46,10 @@ TodoSearch::~TodoSearch()
 }
 
 
-void TodoSearch::load()
+bool TodoSearch::load()
 {
     _todos = new OPimTodoAccess();
-    _todos->load();
+    return _todos->load();
 }
 
 int TodoSearch::search()

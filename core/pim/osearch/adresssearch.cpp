@@ -39,10 +39,10 @@ AdressSearch::~AdressSearch()
     delete _contacts;
 }
 
-void AdressSearch::load()
+bool AdressSearch::load()
 {
     _contacts = new OPimContactAccess("osearch");
-    _contacts->load();
+    return _contacts->load();
 }
 
 int AdressSearch::search()

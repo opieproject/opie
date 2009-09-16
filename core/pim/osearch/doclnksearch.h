@@ -30,7 +30,7 @@ public:
     virtual QPopupMenu* popupMenu();
 
 protected:
-    virtual void load();
+    virtual bool load();
     virtual bool searchFile(AppLnk*);
     virtual void insertItem( void* );
 private:

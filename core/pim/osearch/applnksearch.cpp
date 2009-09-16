@@ -32,9 +32,10 @@ AppLnkSearch::~AppLnkSearch()
 }
 
 
-void AppLnkSearch::load()
+bool AppLnkSearch::load()
 {
     _apps = new AppLnkSet(QPEApplication::qpeDir());
+    return true;
 }
 
 int AppLnkSearch::search()

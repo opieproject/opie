@@ -52,10 +52,10 @@ DatebookSearch::~DatebookSearch()
 }
 
 
-void DatebookSearch::load()
+bool DatebookSearch::load()
 {
      _dates = new ODateBookAccess();
-     _dates->load();
+     return _dates->load();
 }
 
 int DatebookSearch::search()

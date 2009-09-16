@@ -47,9 +47,10 @@ DocLnkSearch::~DocLnkSearch()
     cfg.writeEntry( "search_content", actionSearchInFiles->isOn() );
 }
 
-void DocLnkSearch::load()
+bool DocLnkSearch::load()
 {
     _apps = new DocLnkSet(QPEApplication::documentDir());
+    return true;
 }
 
 bool DocLnkSearch::searchFile( AppLnk *app )
