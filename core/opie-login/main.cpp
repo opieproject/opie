@@ -187,7 +187,7 @@ int main ( int argc, char **argv )
             if ( autolog && !userExited ) {
                 QWSServer::setDesktopBackground( QImage() );
                 ODevice::inst()->setDisplayStatus( true );
-                LoginApplication *app = new LoginApplication ( argc, argv, ppid );
+                new LoginApplication ( argc, argv, ppid );
                 LoginApplication::setLoginAs( autolog );
 
                 if ( LoginApplication::changeIdentity ( ))

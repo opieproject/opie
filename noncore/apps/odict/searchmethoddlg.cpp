@@ -38,10 +38,10 @@ SearchMethodDlg::SearchMethodDlg(QWidget *parent, const char *name, bool modal, 
 	QVBox *vbox = new QVBox( this );
 
 	QHBox *hbox1 = new QHBox( vbox );
-	QLabel *nameLabel = new QLabel( tr( "Name:" ) , hbox1 );
+	new QLabel( tr( "Name:" ) , hbox1 );
 	nameLE = new QLineEdit( hbox1 );
 
-	QLabel *dictLabel = new QLabel( tr( "Dictionary file" ), vbox );
+	new QLabel( tr( "Dictionary file" ), vbox );
 	QHBox *hbox2 = new QHBox( vbox );
 	dictFileLE = new QLineEdit( hbox2 );
 	QPushButton *browseButton = new QPushButton( tr( "Browse" ) , hbox2 );

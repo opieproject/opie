@@ -110,7 +110,7 @@ PlayListWidget::PlayListWidget(QWidget* parent, const char* name, WFlags fl )
                           d->selectedFiles, SLOT(removeSelected() ) );
     (void)new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down",
                           d->selectedFiles, SLOT(moveSelectedDown() ) );
-    QVBox *stretch2 = new QVBox( vbox1 );
+    new QVBox( vbox1 );
 
     connect( tbDeletePlaylist, ( SIGNAL( released() ) ),
              SLOT( deletePlaylist() ) );

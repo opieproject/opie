@@ -13,30 +13,29 @@ Keyview::Keyview( QWidget* parent,  const char* name, WFlags fl )
     setSpacing(3);
     setMargin(4);
 
-    QLabel *l;
 
-    l = new QLabel(QString("unicode:"), this);
+    new QLabel(QString("unicode:"), this);
     unicode = new QLineEdit(this);
     unicode->setReadOnly(1);
 
-    l = new QLabel(QString("keycode:"), this);
+    new QLabel(QString("keycode:"), this);
     keycode = new QLineEdit(this);
     keycode->setReadOnly(1);
 
-    l = new QLabel(QString("modifiers:"), this);
+    new QLabel(QString("modifiers:"), this);
     modifiers = new QLineEdit(this);
     modifiers->setReadOnly(1);
 
-    l = new QLabel(QString("isPress:"), this);
+    new QLabel(QString("isPress:"), this);
     isPress = new QLineEdit(this);
     isPress->setReadOnly(1);
 
-    l = new QLabel(QString("autoRepeat:"), this);
+    new QLabel(QString("autoRepeat:"), this);
     autoRepeat = new QLineEdit(this);
     autoRepeat->setReadOnly(1);
 
     // spacer
-    l = new QLabel(QString(""), this);
+    QLabel *l = new QLabel(QString(""), this);
     l->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
 

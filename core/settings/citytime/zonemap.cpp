@@ -489,13 +489,12 @@ QWidget* ZoneMap::selectionWidget( QWidget *parent) {
         ZoneField *pZone = itZone.current();
         if ( continentList.contains( pZone->country() ) == 0 ) {
             QString name;
-            QListViewItem *item;
             if ( !(pZone->country().length() > 24) ) {
                 name = pZone->country().left(pZone->country().length()-1 );
             } else {
                 name = pZone->country().left( 24 );
             }
-            item = new QListViewItem( continentView, name, pZone->country() );
+            new QListViewItem( continentView, name, pZone->country() );
             continentList.append( pZone->country() );
         }
     }
@@ -515,8 +514,7 @@ void ZoneMap::slotGetCities( QListViewItem * contItem) {
     for ( itZone.toFirst(); itZone.current(); ++itZone ) {
         ZoneField *pZone = itZone.current();
         if ( pZone->country() == contItem->text( 1 ) ) {
-            QListViewItem *item;
-            item = new QListViewItem( cityView, pZone->city() );
+            new QListViewItem( cityView, pZone->city() );
             connect ( cityView, SIGNAL( clicked(QListViewItem*) ), this, SLOT( slotCitySelected(QListViewItem*) ) );
         }
     }

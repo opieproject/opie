@@ -124,7 +124,7 @@ PlayListWidgetGui::PlayListWidgetGui(QWidget* parent, const char* name )
 
     vbox1 = new QVBox( hbox2 );
     QPEApplication::setStylusOperation( d->selectedFiles->viewport(), QPEApplication::RightOnHold );
-    QVBox *stretch1 = new QVBox( vbox1 ); // add stretch
+    new QVBox( vbox1 ); // add stretch
 
     Playout->addMultiCellWidget( vbox3, 0, 0, 0, 1 );
 

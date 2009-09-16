@@ -23,35 +23,35 @@ CommandEditDialog::CommandEditDialog(QWidget *parent, const char* name, WFlags f
   m_SuggestedCommandList->setSorting(-1,FALSE);
   m_SuggestedCommandList->clearSelection();
   m_SuggestedCommandList->setSorting(0,TRUE);
-  QListViewItem *item;
-  item = new QListViewItem( m_SuggestedCommandList,"export ");
-  item = new QListViewItem( m_SuggestedCommandList,"ifconfig ");
-  item = new QListViewItem( m_SuggestedCommandList,"ipkg ");
-  item = new QListViewItem( m_SuggestedCommandList,"gzip ");
-  item = new QListViewItem( m_SuggestedCommandList,"gunzip ");
-  item = new QListViewItem( m_SuggestedCommandList,"chgrp ");
-  item = new QListViewItem( m_SuggestedCommandList,"chown ");
-  item = new QListViewItem( m_SuggestedCommandList,"date ");
-  item = new QListViewItem( m_SuggestedCommandList,"dd ");
-  item = new QListViewItem( m_SuggestedCommandList,"dmesg ");
-  item = new QListViewItem( m_SuggestedCommandList,"fuser ");
-  item = new QListViewItem( m_SuggestedCommandList,"hostname ");
-  item = new QListViewItem( m_SuggestedCommandList,"kill ");
-  item = new QListViewItem( m_SuggestedCommandList,"killall ");
-  item = new QListViewItem( m_SuggestedCommandList,"ln ");
-  item = new QListViewItem( m_SuggestedCommandList,"ln -s ");
-  item = new QListViewItem( m_SuggestedCommandList,"lsmod");
-  item = new QListViewItem( m_SuggestedCommandList,"depmod -a");
-  item = new QListViewItem( m_SuggestedCommandList,"modprobe ");
-  item = new QListViewItem( m_SuggestedCommandList,"mount ");
-  item = new QListViewItem( m_SuggestedCommandList,"more ");
-  item = new QListViewItem( m_SuggestedCommandList,"sort ");
-  item = new QListViewItem( m_SuggestedCommandList,"touch ");
-  item = new QListViewItem( m_SuggestedCommandList,"umount ");
-  item = new QListViewItem( m_SuggestedCommandList,"mknod ");
-  item = new QListViewItem( m_SuggestedCommandList,"netstat ");
-  item = new QListViewItem( m_SuggestedCommandList,"route ");
-  item = new QListViewItem( m_SuggestedCommandList,"cardctl eject ");
+  new QListViewItem( m_SuggestedCommandList,"export ");
+  new QListViewItem( m_SuggestedCommandList,"ifconfig ");
+  new QListViewItem( m_SuggestedCommandList,"ipkg ");
+  new QListViewItem( m_SuggestedCommandList,"gzip ");
+  new QListViewItem( m_SuggestedCommandList,"gunzip ");
+  new QListViewItem( m_SuggestedCommandList,"chgrp ");
+  new QListViewItem( m_SuggestedCommandList,"chown ");
+  new QListViewItem( m_SuggestedCommandList,"date ");
+  new QListViewItem( m_SuggestedCommandList,"dd ");
+  new QListViewItem( m_SuggestedCommandList,"dmesg ");
+  new QListViewItem( m_SuggestedCommandList,"fuser ");
+  new QListViewItem( m_SuggestedCommandList,"hostname ");
+  new QListViewItem( m_SuggestedCommandList,"kill ");
+  new QListViewItem( m_SuggestedCommandList,"killall ");
+  new QListViewItem( m_SuggestedCommandList,"ln ");
+  new QListViewItem( m_SuggestedCommandList,"ln -s ");
+  new QListViewItem( m_SuggestedCommandList,"lsmod");
+  new QListViewItem( m_SuggestedCommandList,"depmod -a");
+  new QListViewItem( m_SuggestedCommandList,"modprobe ");
+  new QListViewItem( m_SuggestedCommandList,"mount ");
+  new QListViewItem( m_SuggestedCommandList,"more ");
+  new QListViewItem( m_SuggestedCommandList,"sort ");
+  new QListViewItem( m_SuggestedCommandList,"touch ");
+  new QListViewItem( m_SuggestedCommandList,"umount ");
+  new QListViewItem( m_SuggestedCommandList,"mknod ");
+  new QListViewItem( m_SuggestedCommandList,"netstat ");
+  new QListViewItem( m_SuggestedCommandList,"route ");
+  QListViewItem *item = new QListViewItem( m_SuggestedCommandList,"cardctl eject ");
+
   m_SuggestedCommandList->setSelected(m_SuggestedCommandList->firstChild(),TRUE);
   m_SuggestedCommandList->sort();
 
@@ -93,66 +93,63 @@ CommandEditDialog::CommandEditDialog(QWidget *parent, const char* name, WFlags f
   ToolButton5->setAutoRaise(TRUE);
   ToolButton5->setFocusPolicy(QWidget::NoFocus);
 
-connect(ToolButton5,SIGNAL(clicked()),m_PlayListSelection,SLOT(moveSelectedDown()));
-
-
-
+  connect(ToolButton5,SIGNAL(clicked()),m_PlayListSelection,SLOT(moveSelectedDown()));
 
   QListViewItem *current = m_SuggestedCommandList->selectedItem();
-    if ( current )
-        item->moveItem( current );
-    m_SuggestedCommandList->setSelected( item, TRUE );
-    m_SuggestedCommandList->ensureItemVisible( m_SuggestedCommandList->selectedItem() );
+  if ( current )
+    item->moveItem( current );
+
+  m_SuggestedCommandList->setSelected( item, TRUE );
+  m_SuggestedCommandList->ensureItemVisible( m_SuggestedCommandList->selectedItem() );
   Config cfg( "Konsole" );
   cfg.setGroup("Commands");
   if (cfg.readEntry("Commands Set","FALSE") == "TRUE") {
-   for (int i = 0; i < 100; i++) {
-     QString tmp;
-     tmp = cfg.readEntry( QString::number(i),"");
-     if (!tmp.isEmpty())
-         m_PlayListSelection->addStringToSelection(tmp);
-   }
+    for (int i = 0; i < 100; i++) {
+      QString tmp;
+      tmp = cfg.readEntry( QString::number(i),"");
+      if (!tmp.isEmpty())
+        m_PlayListSelection->addStringToSelection(tmp);
+    }
   } else {
-
-m_PlayListSelection->addStringToSelection("ls ");
-m_PlayListSelection->addStringToSelection("cardctl eject");
-m_PlayListSelection->addStringToSelection("cat ");
-m_PlayListSelection->addStringToSelection("cd ");
-m_PlayListSelection->addStringToSelection("chmod ");
-m_PlayListSelection->addStringToSelection("cp ");
-m_PlayListSelection->addStringToSelection("dc ");
-m_PlayListSelection->addStringToSelection("df ");
-m_PlayListSelection->addStringToSelection("dmesg");
-m_PlayListSelection->addStringToSelection("echo ");
-m_PlayListSelection->addStringToSelection("env");
-m_PlayListSelection->addStringToSelection("find ");
-m_PlayListSelection->addStringToSelection("free");
-m_PlayListSelection->addStringToSelection("grep ");
-m_PlayListSelection->addStringToSelection("ifconfig ");
-m_PlayListSelection->addStringToSelection("ipkg ");
-m_PlayListSelection->addStringToSelection("mkdir ");
-m_PlayListSelection->addStringToSelection("mv ");
-m_PlayListSelection->addStringToSelection("nc localhost 7776");
-m_PlayListSelection->addStringToSelection("nc localhost 7777");
-m_PlayListSelection->addStringToSelection("nslookup ");
-m_PlayListSelection->addStringToSelection("ping ");
-m_PlayListSelection->addStringToSelection("ps aux");
-m_PlayListSelection->addStringToSelection("pwd ");
-m_PlayListSelection->addStringToSelection("rm ");
-m_PlayListSelection->addStringToSelection("rmdir ");
-m_PlayListSelection->addStringToSelection("route ");
-m_PlayListSelection->addStringToSelection("set ");
-m_PlayListSelection->addStringToSelection("traceroute");
-
+    m_PlayListSelection->addStringToSelection("ls ");
+    m_PlayListSelection->addStringToSelection("cardctl eject");
+    m_PlayListSelection->addStringToSelection("cat ");
+    m_PlayListSelection->addStringToSelection("cd ");
+    m_PlayListSelection->addStringToSelection("chmod ");
+    m_PlayListSelection->addStringToSelection("cp ");
+    m_PlayListSelection->addStringToSelection("dc ");
+    m_PlayListSelection->addStringToSelection("df ");
+    m_PlayListSelection->addStringToSelection("dmesg");
+    m_PlayListSelection->addStringToSelection("echo ");
+    m_PlayListSelection->addStringToSelection("env");
+    m_PlayListSelection->addStringToSelection("find ");
+    m_PlayListSelection->addStringToSelection("free");
+    m_PlayListSelection->addStringToSelection("grep ");
+    m_PlayListSelection->addStringToSelection("ifconfig ");
+    m_PlayListSelection->addStringToSelection("ipkg ");
+    m_PlayListSelection->addStringToSelection("mkdir ");
+    m_PlayListSelection->addStringToSelection("mv ");
+    m_PlayListSelection->addStringToSelection("nc localhost 7776");
+    m_PlayListSelection->addStringToSelection("nc localhost 7777");
+    m_PlayListSelection->addStringToSelection("nslookup ");
+    m_PlayListSelection->addStringToSelection("ping ");
+    m_PlayListSelection->addStringToSelection("ps aux");
+    m_PlayListSelection->addStringToSelection("pwd ");
+    m_PlayListSelection->addStringToSelection("rm ");
+    m_PlayListSelection->addStringToSelection("rmdir ");
+    m_PlayListSelection->addStringToSelection("route ");
+    m_PlayListSelection->addStringToSelection("set ");
+    m_PlayListSelection->addStringToSelection("traceroute");
+  }
 }
-}
+
 CommandEditDialog::~CommandEditDialog()
 {
 }
 
 void CommandEditDialog::accept()
 {
-int i = 0;
+  int i = 0;
   Config *cfg = new Config("Konsole");
   cfg->setGroup("Commands");
   cfg->clearGroup();

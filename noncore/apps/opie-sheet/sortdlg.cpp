@@ -63,8 +63,8 @@ SortDialog::SortDialog(QWidget *parent)
 
     groupDirection=new QVButtonGroup(tr("&Direction"), widgetOptions);
     groupDirection->setGeometry(10, 40, 215, 70);
-    QRadioButton *radio=new QRadioButton(tr("&Top to bottom (rows)"), groupDirection);
-    radio=new QRadioButton(tr("&Left to right (columns)"), groupDirection);
+    new QRadioButton(tr("&Top to bottom (rows)"), groupDirection);
+    new QRadioButton(tr("&Left to right (columns)"), groupDirection);
     groupDirection->setButton(0);
     connect(groupDirection, SIGNAL(clicked(int)), this, SLOT(directionChanged(int)));
 
@@ -92,8 +92,8 @@ QVButtonGroup *SortDialog::createOrderButtons(int y)
 {
     QVButtonGroup *group=new QVButtonGroup(widgetSort);
     group->setGeometry(125, y, 100, 60);
-    QRadioButton *radio=new QRadioButton(tr("&Ascending"), group);
-    radio=new QRadioButton(tr("&Descending"), group);
+    new QRadioButton(tr("&Ascending"), group);
+    new QRadioButton(tr("&Descending"), group);
     group->setButton(0);
     return group;
 }

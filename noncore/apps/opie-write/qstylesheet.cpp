@@ -1204,9 +1204,9 @@ void QStyleSheet::init()
      style->setDisplayMode(QStyleSheetItem::DisplayBlock);
      style = new QStyleSheetItem( this, QString::fromLatin1("div") );
      style->setDisplayMode(QStyleSheetItem::DisplayBlock) ;
-     style = new QStyleSheetItem( this, QString::fromLatin1("span") );
+     new QStyleSheetItem( this, QString::fromLatin1("span") );
      style = new QStyleSheetItem( this, QString::fromLatin1("dl") );
-    style-> setMargin(QStyleSheetItem::MarginVertical, 8);
+     style-> setMargin(QStyleSheetItem::MarginVertical, 8);
      style->setDisplayMode(QStyleSheetItem::DisplayBlock);
      style = new QStyleSheetItem( this, QString::fromLatin1("dt") );
      style->setDisplayMode(QStyleSheetItem::DisplayBlock);
@@ -1228,7 +1228,7 @@ void QStyleSheet::init()
      style->setWhiteSpaceMode( QStyleSheetItem::WhiteSpacePre );
 
      // tables
-     style = new QStyleSheetItem( this, QString::fromLatin1("table") );
+     new QStyleSheetItem( this, QString::fromLatin1("table") );
      style = new QStyleSheetItem( this, QString::fromLatin1("tr") );
      style->setContexts(QString::fromLatin1("table"));
      style = new QStyleSheetItem( this, QString::fromLatin1("td") );
@@ -1238,7 +1238,7 @@ void QStyleSheet::init()
      style->setAlignment( Qt::AlignCenter );
      style->setContexts(QString::fromLatin1("tr"));
 
-     style = new QStyleSheetItem( this, QString::fromLatin1("html") );
+     new QStyleSheetItem( this, QString::fromLatin1("html") );
 }
 
 
