@@ -266,6 +266,7 @@ QTextStream::QTextStream()
     setEncoding( Locale ); //###
     reset();
     d->sourceType = QTextStreamPrivate::NotSet;
+    Q_UNUSED(unused2);
 }
 
 /*!
@@ -279,6 +280,7 @@ QTextStream::QTextStream( QIODevice *iod )
     dev = iod;
     reset();
     d->sourceType = QTextStreamPrivate::IODevice;
+    Q_UNUSED(unused2);
 }
 
 // TODO: use special-case handling of this case in QTextStream, and
@@ -539,6 +541,7 @@ QTextStream::QTextStream( QString* str, int filemode )
     setEncoding(RawUnicode);
     reset();
     d->sourceType = QTextStreamPrivate::String;
+    Q_UNUSED(unused2);
 }
 
 /*! \obsolete
@@ -556,6 +559,7 @@ QTextStream::QTextStream( QString& str, int filemode )
     setEncoding(RawUnicode);
     reset();
     d->sourceType = QTextStreamPrivate::String;
+    Q_UNUSED(unused2);
 }
 
 /*!
@@ -594,6 +598,7 @@ QTextStream::QTextStream( QByteArray a, int mode )
     setEncoding( Latin1 ); //### Locale???
     reset();
     d->sourceType = QTextStreamPrivate::ByteArray;
+    Q_UNUSED(unused2);
 }
 
 /*!
@@ -616,6 +621,7 @@ QTextStream::QTextStream( FILE *fh, int mode )
     owndev = TRUE;
     reset();
     d->sourceType = QTextStreamPrivate::File;
+    Q_UNUSED(unused2);
 }
 
 /*!
