@@ -121,24 +121,25 @@ void rlikeFunc( sqlite3_context* context, int count, sqlite3_value** values ){
  * and options
  */
 bool OSQLiteDriver::open() {
-    odebug << "OSQLiteDriver::open: about to open" << oendl;
-
-    int error = sqlite3_open( m_url.utf8(),
+    if ( !m_sqlite ) {
+        odebug << "OSQLiteDriver::open: about to open" << oendl;
+        int error = sqlite3_open( m_url.utf8(),
                            &m_sqlite );
 
-    /* failed to open */
-    if ( error != SQLITE_OK ) {
-        // FIXME set the last error
-        owarn << "OSQLiteDriver::open: " << error << "" << oendl;
-        sqlite3_close( m_sqlite );
-        return false;
-    }
-    if ( sqlite3_create_function( m_sqlite, "rlike", 2, SQLITE_UTF8, &sqreg, rlikeFunc, NULL, NULL ) != SQLITE_OK ){
-	    odebug << "Unable to create user defined function!" << oendl;
-	    return false;
-    }
+        /* failed to open */
+        if ( error != SQLITE_OK ) {
+            // FIXME set the last error
+            owarn << "OSQLiteDriver::open: " << error << "" << oendl;
+            sqlite3_close( m_sqlite );
+            return false;
+        }
+        if ( sqlite3_create_function( m_sqlite, "rlike", 2, SQLITE_UTF8, &sqreg, rlikeFunc, NULL, NULL ) != SQLITE_OK ){
+            odebug << "Unable to create user defined function!" << oendl;
+            return false;
+        }
 
-    sqreg.regex_raw = NULL;
+        sqreg.regex_raw = NULL;
+    }
 
     return true;
 }
@@ -167,6 +168,7 @@ bool OSQLiteDriver::close() {
 OSQLResult OSQLiteDriver::query( OSQLQuery* qu) {
 	if ( !m_sqlite ) {
 		// FIXME set error code
+		owarn << "OSQLiteDriver::query: driver not opened yet" << oendl;
 		OSQLResult result( OSQLResult::Failure );
 		return result;
 	}
