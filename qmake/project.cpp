@@ -183,11 +183,21 @@ static QStringList split_value_list(const QString &vals, bool do_semicolon=FALSE
 }
 
 QMakeProject::QMakeProject()
+    : test_status(TestNone)
+    , scope_block(0)
+    , scope_flag(0)
+    , pfile()
+    , cfile()
+    , prop(0)
 {
-    prop = NULL;
 }
 
 QMakeProject::QMakeProject(QMakeProperty *p)
+    : test_status(TestNone)
+    , scope_block(0)
+    , scope_flag(0)
+    , pfile()
+    , cfile()
 {
     prop = p;
 }
