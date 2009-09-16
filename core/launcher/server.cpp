@@ -499,6 +499,36 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         delete syncDialog;
         syncDialog = 0;
     }
+    else if (msg == "setSyncPeerInfo(QString,QString)") {
+        QString peerId, peerName;
+        stream >> peerId >> peerName;
+        transferServer->syncAccessManager()->setPeerInfo( peerId, peerName );
+#ifndef QT_NO_COP
+        QCopEnvelope e( "QPE/Desktop", "syncPeerInfoSet()" );
+#endif
+    }
+    else if (msg == "startAppSync(QString,bool)") {
+        QString app;
+        int slowSync;
+        stream >> app;
+        stream >> slowSync;
+        odebug << "startAppSync(\"" << app << "\", " << slowSync << ")" << oendl; 
+        bool status = transferServer->syncAccessManager()->startSync( app, slowSync );
+#ifndef QT_NO_COP
+        QCopEnvelope e( "QPE/Desktop", "appSyncStarted(bool)" );
+        e << status;
+        odebug << "fast sync is " << status << oendl;
+#endif
+    }
+    else if (msg == "finishAppSync(QString)") {
+        QString app;
+        stream >> app;
+        transferServer->syncAccessManager()->syncDone( app );
+#ifndef QT_NO_COP
+        QCopEnvelope e( "QPE/Desktop", "appSyncDone(QString)" );
+        e << app;
+#endif
+    }
     else if (msg == "restoreDone(QString)") {
         docList->restoreDone();
     }

@@ -33,7 +33,8 @@ HEADERS		+= server.h \
 		  screensaver.h \
 		  $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.h \
                   mediadlg.h \
-		  virtualfs.h
+		  virtualfs.h \
+          syncaccessmanager.h
 
 SOURCES		+= server.cpp \
 		  qrr.cpp \
@@ -66,7 +67,8 @@ SOURCES		+= server.cpp \
 		  screensaver.cpp \
 		  $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.cc \
                   mediadlg.cpp \
-		  virtualfs.cpp
+		  virtualfs.cpp \
+          syncaccessmanager.cpp
 
 
 INCLUDEPATH += $(OPIEDIR)/core/apps/calibrate

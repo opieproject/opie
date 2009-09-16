@@ -19,6 +19,7 @@
 **********************************************************************/
 
 #include "virtualfs.h"
+#include "syncaccessmanager.h"
 
 #include <qserversocket.h>
 #include <qsocket.h>
@@ -41,12 +42,14 @@ public:
 
     void newConnection( int socket );
     void authorizeConnections();
+    SyncAccessManager *syncAccessManager();
 
 protected slots:
     void closed(ServerPI *);
 
 private:
     QList<ServerPI> connections;
+    SyncAccessManager m_syncAccessManager;
 };
 
 class SyncAuthentication : QObject
@@ -147,7 +150,7 @@ class ServerPI : public QSocket
     enum Transfer { SendFile = 0, RetrieveFile = 1, SendByteArray = 2, RetrieveByteArray = 3, SendVirtual = 4, RetrieveVirtual = 5 };
 
 public:
-    ServerPI( int socket, QObject *parent = 0, const char* name = 0 );
+    ServerPI( int socket, SyncAccessManager *syncAccessManager, QObject *parent = 0, const char* name = 0 );
     virtual ~ServerPI();
 
     bool verifyAuthorised();

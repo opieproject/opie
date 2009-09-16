@@ -84,9 +84,14 @@ TransferServer::~TransferServer()
 
 void TransferServer::newConnection( int socket )
 {
-    ServerPI *ptr = new ServerPI( socket, this );
+    ServerPI *ptr = new ServerPI( socket, &m_syncAccessManager, this );
     connect( ptr, SIGNAL(connectionClosed(ServerPI*)), this, SLOT( closed(ServerPI*)) );
     connections.append( ptr );
+}
+
+SyncAccessManager *TransferServer::syncAccessManager()
+{
+    return &m_syncAccessManager;
 }
 
 QString SyncAuthentication::serverId()
@@ -307,7 +312,7 @@ bool SyncAuthentication::checkPassword( const QString& password )
 }
 
 
-ServerPI::ServerPI( int socket, QObject *parent, const char* name )
+ServerPI::ServerPI( int socket, SyncAccessManager *syncAccessManager, QObject *parent, const char* name )
     : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ),
       waitvreader( 0 ), waitvwriter( 0 ), waitsocket( 0 ), storFileSize(-1)
 {
@@ -319,7 +324,7 @@ ServerPI::ServerPI( int socket, QObject *parent, const char* name )
     peeraddress = peerAddress();
 
     QString home = getenv( "HOME" );
-    vfs.init( home );
+    vfs.init( home, syncAccessManager );
 
 #ifndef INSECURE
     if ( !SyncAuthentication::isAuthorized(peeraddress) ) {

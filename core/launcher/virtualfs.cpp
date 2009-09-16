@@ -76,21 +76,21 @@ VirtualFS::VirtualFS()
     m_files.setAutoDelete( true );
 }
 
-void VirtualFS::init( const QString &basedir )
+void VirtualFS::init( const QString &basedir, SyncAccessManager *syncAccessManager )
 {
     m_files.clear();
     m_files.append( new VirtualFile( basedir + "/Applications/datebook/datebook.xml",
-                                     new VirtualDateBookReader(),
-                                     new VirtualDateBookWriter() ) );
+                                     new VirtualDateBookReader( syncAccessManager ),
+                                     new VirtualDateBookWriter( syncAccessManager ) ) );
     m_files.append( new VirtualFile( basedir + "/Applications/addressbook/addressbook.xml",
-                                     new VirtualContactReader(),
-                                     new VirtualContactWriter() ) );
+                                     new VirtualContactReader( syncAccessManager ),
+                                     new VirtualContactWriter( syncAccessManager ) ) );
     m_files.append( new VirtualFile( basedir + "/Applications/todolist/todolist.xml",
-                                     new VirtualTodoListReader(),
-                                     new VirtualTodoListWriter() ) );
+                                     new VirtualTodoListReader( syncAccessManager ),
+                                     new VirtualTodoListWriter( syncAccessManager ) ) );
     m_files.append( new VirtualFile( basedir + "/Applications/notes/notes.xml",
-                                     new VirtualNotesReader(),
-                                     new VirtualNotesWriter() ) );
+                                     new VirtualNotesReader( syncAccessManager ),
+                                     new VirtualNotesWriter( syncAccessManager ) ) );
 }
 
 void VirtualFS::fileListing( const QString &path, QTextStream &stream )
@@ -225,10 +225,29 @@ VirtualWriter *VirtualFS::writeFile( const QString &file )
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+VirtualPimReader::VirtualPimReader( SyncAccessManager *manager )
+    : m_manager( manager )
+{
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+VirtualPimWriter::VirtualPimWriter( SyncAccessManager *manager )
+    : m_manager( manager )
+{
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+VirtualDateBookReader::VirtualDateBookReader( SyncAccessManager *manager )
+    : VirtualPimReader( manager )
+{
+}
+
 void VirtualDateBookReader::read( QTextStream &stream )
 {
-    ODateBookAccess *sourceDB = new ODateBookAccess();
-    sourceDB->load();
+    ODateBookAccess *sourceDB = m_manager->dateBookAccess();
+    sourceDB->reload();
     ODateBookAccessBackend_XML dest( QString::null );
 
     // Copy items from source to destination
@@ -241,8 +260,6 @@ void VirtualDateBookReader::read( QTextStream &stream )
         delete rec;
     }
 
-    delete sourceDB;
-
     // Write out the stream
     OTextStreamWriter wr( &stream );
     dest.write( wr );
@@ -250,9 +267,14 @@ void VirtualDateBookReader::read( QTextStream &stream )
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+VirtualDateBookWriter::VirtualDateBookWriter( SyncAccessManager *manager )
+    : VirtualPimWriter( manager )
+{
+}
+
 void VirtualDateBookWriter::write( OPimXmlReader &reader )
 {
-    ODateBookAccess *destDB = new ODateBookAccess();
+    ODateBookAccess *destDB = m_manager->dateBookAccess();
     destDB->clear();
     ODateBookAccessBackend_XML source( QString::null );
 
@@ -270,14 +292,18 @@ void VirtualDateBookWriter::write( OPimXmlReader &reader )
 
     // Write the changes
     destDB->save();
-    delete destDB;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+VirtualContactReader::VirtualContactReader( SyncAccessManager *manager )
+    : VirtualPimReader( manager )
+{
+}
+
 void VirtualContactReader::read( QTextStream &stream )
 {
-    OPimContactAccess *sourceDB = new OPimContactAccess();
+    OPimContactAccess *sourceDB = m_manager->contactAccess();
     sourceDB->load();
     OPimContactAccessBackend_XML dest( QString::null );
 
@@ -291,8 +317,6 @@ void VirtualContactReader::read( QTextStream &stream )
         delete rec;
     }
 
-    delete sourceDB;
-
     // Write out the stream
     OTextStreamWriter wr( &stream );
     dest.write( wr );
@@ -300,9 +324,14 @@ void VirtualContactReader::read( QTextStream &stream )
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+VirtualContactWriter::VirtualContactWriter( SyncAccessManager *manager )
+    : VirtualPimWriter( manager )
+{
+}
+
 void VirtualContactWriter::write( OPimXmlReader &reader )
 {
-    OPimContactAccess *destDB = new OPimContactAccess();
+    OPimContactAccess *destDB = m_manager->contactAccess();
     destDB->clear();
     OPimContactAccessBackend_XML source( QString::null );
 
@@ -320,14 +349,18 @@ void VirtualContactWriter::write( OPimXmlReader &reader )
 
     // Write the changes
     destDB->save();
-    delete destDB;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+VirtualTodoListReader::VirtualTodoListReader( SyncAccessManager *manager )
+    : VirtualPimReader( manager )
+{
+}
+
 void VirtualTodoListReader::read( QTextStream &stream )
 {
-    OPimTodoAccess *sourceDB = new OPimTodoAccess();
+    OPimTodoAccess *sourceDB = m_manager->todoAccess();
     sourceDB->load();
     OPimTodoAccessXML dest( QString::null );
 
@@ -341,8 +374,6 @@ void VirtualTodoListReader::read( QTextStream &stream )
         delete rec;
     }
 
-    delete sourceDB;
-
     // Write out the stream
     OTextStreamWriter wr( &stream );
     dest.write( wr );
@@ -350,9 +381,14 @@ void VirtualTodoListReader::read( QTextStream &stream )
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+VirtualTodoListWriter::VirtualTodoListWriter( SyncAccessManager *manager )
+    : VirtualPimWriter( manager )
+{
+}
+
 void VirtualTodoListWriter::write( OPimXmlReader &reader )
 {
-    OPimTodoAccess *destDB = new OPimTodoAccess();
+    OPimTodoAccess *destDB = m_manager->todoAccess();
     destDB->load(); // need to call this or internal opened flag won't be set
     destDB->clear();
     OPimTodoAccessXML source( QString::null );
@@ -371,14 +407,18 @@ void VirtualTodoListWriter::write( OPimXmlReader &reader )
 
     // Write the changes
     destDB->save();
-    delete destDB;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+VirtualNotesReader::VirtualNotesReader( SyncAccessManager *manager )
+    : VirtualPimReader( manager )
+{
+}
+
 void VirtualNotesReader::read( QTextStream &stream )
 {
-    OPimMemoAccess *sourceDB = new OPimMemoAccess();
+    OPimMemoAccess *sourceDB = m_manager->memoAccess();
     sourceDB->load();
     OPimMemoAccessBackend_XML dest;
 
@@ -392,8 +432,6 @@ void VirtualNotesReader::read( QTextStream &stream )
         delete rec;
     }
 
-    delete sourceDB;
-
     // Write out the stream
     OTextStreamWriter wr( &stream );
     dest.write( wr );
@@ -401,9 +439,14 @@ void VirtualNotesReader::read( QTextStream &stream )
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+VirtualNotesWriter::VirtualNotesWriter( SyncAccessManager *manager )
+    : VirtualPimWriter( manager )
+{
+}
+
 void VirtualNotesWriter::write( OPimXmlReader &reader )
 {
-    OPimMemoAccess *destDB = new OPimMemoAccess();
+    OPimMemoAccess *destDB = m_manager->memoAccess();
     destDB->load(); // need to call this or internal opened flag won't be set
     destDB->clear();
     OPimMemoAccessBackend_XML source;
@@ -422,5 +465,4 @@ void VirtualNotesWriter::write( OPimXmlReader &reader )
 
     // Write the changes
     destDB->save();
-    delete destDB;
 }

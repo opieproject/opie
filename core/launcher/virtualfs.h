@@ -37,6 +37,8 @@
 
 #include <opie2/opimio.h>
 
+#include "syncaccessmanager.h"
+
 using namespace Opie;
 
 class VirtualReader
@@ -74,7 +76,7 @@ class VirtualFS
 public:
     VirtualFS();
 
-    void init( const QString &basedir );
+    void init( const QString &basedir, SyncAccessManager *syncAccessManager );
     void fileListing( const QString &path, QTextStream &stream );
     bool canRead( const QString &file );
     bool canWrite( const QString &file );
@@ -83,57 +85,82 @@ public:
     bool deleteFile( const QString &file );
     VirtualReader *readFile( const QString &file );
     VirtualWriter *writeFile( const QString &file );
+
 private:
     QString fileListingEntry( const QString &name, bool dir, const QDateTime &lastModified );
-
+    
     QList<VirtualFile> m_files;
 };
 
-class VirtualDateBookReader: public VirtualReader
+class VirtualPimReader: public VirtualReader
 {
 public:
+    VirtualPimReader( SyncAccessManager *manager );
+protected:
+    SyncAccessManager *m_manager;
+};
+
+class VirtualPimWriter: public VirtualWriter
+{
+public:
+    VirtualPimWriter( SyncAccessManager *manager );
+protected:
+    SyncAccessManager *m_manager;
+};
+
+class VirtualDateBookReader: public VirtualPimReader
+{
+public:
+    VirtualDateBookReader( SyncAccessManager *manager );
     void read( QTextStream &stream );
 };
 
-class VirtualDateBookWriter: public VirtualWriter
+class VirtualDateBookWriter: public VirtualPimWriter
 {
 public:
+    VirtualDateBookWriter( SyncAccessManager *manager );
     void write( OPimXmlReader &reader );
 };
 
-class VirtualContactReader: public VirtualReader
+class VirtualContactReader: public VirtualPimReader
 {
 public:
+    VirtualContactReader( SyncAccessManager *manager );
     void read( QTextStream &stream );
 };
 
-class VirtualContactWriter: public VirtualWriter
+class VirtualContactWriter: public VirtualPimWriter
 {
 public:
+    VirtualContactWriter( SyncAccessManager *manager );
     void write( OPimXmlReader &reader );
 };
 
-class VirtualTodoListReader: public VirtualReader
+class VirtualTodoListReader: public VirtualPimReader
 {
 public:
+    VirtualTodoListReader( SyncAccessManager *manager );
     void read( QTextStream &stream );
 };
 
-class VirtualTodoListWriter: public VirtualWriter
+class VirtualTodoListWriter: public VirtualPimWriter
 {
 public:
+    VirtualTodoListWriter( SyncAccessManager *manager );
     void write( OPimXmlReader &reader );
 };
 
-class VirtualNotesReader: public VirtualReader
+class VirtualNotesReader: public VirtualPimReader
 {
 public:
+    VirtualNotesReader( SyncAccessManager *manager );
     void read( QTextStream &stream );
 };
 
-class VirtualNotesWriter: public VirtualWriter
+class VirtualNotesWriter: public VirtualPimWriter
 {
 public:
+    VirtualNotesWriter( SyncAccessManager *manager );
     void write( OPimXmlReader &reader );
 };
 
