@@ -56,7 +56,6 @@
 using namespace Opie::Core;
 
 const int JOURNALACTION = Qtopia::Notes + 1;
-const int JOURNALROW = JOURNALACTION + 1;
 
 
 namespace Opie {
@@ -410,9 +409,8 @@ void OPimContactAccessBackend_XML::initDict( QAsciiDict<int> &dict ) const
     dict.insert( "Anniversary", new int(Qtopia::Anniversary) );
     dict.insert( "Nickname", new int(Qtopia::Nickname) );
     dict.insert( "Notes", new int(Qtopia::Notes) );
-    // technically these are for the journal
+    // technically action is for the journal only
     dict.insert( "action", new int(JOURNALACTION) );
-    dict.insert( "actionrow", new int(JOURNALROW) );
 }
 
 /* This function loads the xml-database and the journalfile */
@@ -420,7 +418,6 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
 {
     bool foundAction = false;
     journal_action action = ACTION_ADD;
-    int journalKey = 0;
     QMap<int, QString> contactMap;
     QMap<QString, QString> customMap;
     QMap<QString, QString>::Iterator customIt;
@@ -485,9 +482,6 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
                     action = journal_action(it.data().toInt());
                     foundAction = true;
                     owarn << "ODefBack(journal)::ACTION found: " << action << oendl;
-                    break;
-                case JOURNALROW:
-                    journalKey = it.data().toInt();
                     break;
                 default: // no conversion needed add them to the map
                     contactMap.insert( *find, it.data() );
