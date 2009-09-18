@@ -326,7 +326,8 @@ void VirtualContactReader::read( QTextStream &stream )
 
     // Write out the stream
     OTextStreamWriter wr( &stream );
-    dest.write( wr );
+    if ( !dest.write( wr ) )
+	odebug << "Stream write out failed" << oendl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
