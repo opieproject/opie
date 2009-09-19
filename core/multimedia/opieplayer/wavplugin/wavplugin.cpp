@@ -216,7 +216,7 @@ WavPlugin::~WavPlugin() {
 bool WavPlugin::isFileSupported( const QString& path ) {
 //    odebug << "WavPlugin::isFileSupported" << oendl;
 
-    char *ext = strrchr( path.latin1(), '.' );
+    const char *ext = strrchr( path.latin1(), '.' );
 
     // Test file extension
     if ( ext ) {
