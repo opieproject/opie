@@ -13,7 +13,8 @@ SOURCES += \
         backend/omemoaccessbackend_text.cpp     \
         backend/omemoaccessbackend_xml.cpp      \
         backend/opimchangelog_sql.cpp           \
-        backend/opimio.cpp
+        backend/opimio.cpp                      \
+        backend/opimsql.cpp
         
 HEADERS += \
         backend/obackendfactory.h              \
@@ -32,7 +33,8 @@ HEADERS += \
         backend/omemoaccessbackend_text.h      \
         backend/omemoaccessbackend_xml.h       \
         backend/opimchangelog_sql.h            \
-        backend/opimio.h
+        backend/opimio.h                       \
+        backend/opimsql.h
 
 contains( ENABLE_SQL_PIM_BACKEND, y ) {
 	message ( Enabling the SQL Backend for libopiepim2 )

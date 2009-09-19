@@ -97,6 +97,7 @@ void OPimTodoAccessXML::initDict( QAsciiDict<int> &dict ) const
     dict.insert("start",           new int(OPimTodo::FRStart)          );
     dict.insert("rhasenddate",     new int(OPimTodo::FRHasEndDate)     );
     dict.insert("enddt",           new int(OPimTodo::FREndDate)        );
+    dict.insert("change_action",   new int(FIELDID_ACTION)             );
 }
 
 bool OPimTodoAccessXML::load() {
@@ -111,16 +112,6 @@ bool OPimTodoAccessXML::load() {
     OPimTodoXmlHandler handler( dict, *this );
     OPimXmlMmapParser parser( handler );
     return parser.parse( m_file );
-}
-
-inline void OPimTodoAccessXML::finalizeRecord( OPimTodo& ev )
-{
-    if (m_events.contains( ev.uid() ) || ev.uid() == 0) {
-        ev.setUid( 1 );
-        m_changed = true;
-    }
-
-    m_events.insert(ev.uid(), ev );
 }
 
 bool OPimTodoAccessXML::reload() {
@@ -421,7 +412,7 @@ QArray<int> OPimTodoAccessXML::matchRegexp(  const QRegExp &r ) const
 
 ////////////////////////////////////////////////////////////////////////////
 
-OPimTodoXmlHandler::OPimTodoXmlHandler( QAsciiDict<int> &dict, OPimTodoAccessXML &backend )
+OPimTodoXmlHandler::OPimTodoXmlHandler( QAsciiDict<int> &dict, OPimTodoAccessBackend &backend )
     : OPimXmlHandler( "Task", dict ), m_backend( backend )
 {
 }
@@ -433,7 +424,7 @@ void OPimTodoXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QStr
     for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
         todo.setCustomField(it.key(), it.data() );
 
-    m_backend.finalizeRecord( todo );
+    m_backend.applyAction( todo.action(), todo );
 }
 
 }

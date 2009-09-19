@@ -33,6 +33,7 @@
 #include <opie2/osqlresult.h>
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
+#include <opie2/opimsql.h>
 
 #include <opie2/otodoaccess.h>
 #include <opie2/otodoaccesssql.h>
@@ -72,17 +73,6 @@ namespace {
     };
 
     /**
-     * LoadQuery
-     * this one queries for all uids
-     */
-    class LoadQuery : public OSQLQuery {
-    public:
-        LoadQuery();
-        ~LoadQuery();
-        QString query()const;
-    };
-
-    /**
      * inserts/adds a OPimTodo to the table
      */
     class InsertQuery : public OSQLQuery {
@@ -118,22 +108,6 @@ namespace {
     };
 
     /**
-     * a find query
-     */
-    class FindQuery : public OSQLQuery {
-    public:
-        FindQuery(int uid);
-        FindQuery(const QArray<int>& );
-        ~FindQuery();
-        QString query()const;
-    private:
-        QString single()const;
-        QString multi()const;
-        QArray<int> m_uids;
-        int m_uid;
-    };
-
-    /**
      * overdue query
      */
     class OverDueQuery : public OSQLQuery {
@@ -154,7 +128,6 @@ namespace {
         QDate m_end;
         bool m_inc :1;
     };
-
 
     /**
      * a find query for custom elements
@@ -187,16 +160,6 @@ namespace {
         return qu;
     }
 
-    LoadQuery::LoadQuery() : OSQLQuery() {}
-    LoadQuery::~LoadQuery() {}
-    QString LoadQuery::query()const {
-        QString qu;
-    // We do not need "distinct" here. The primary key is always unique..
-        //qu += "select distinct uid from todolist";
-        qu += "select uid from todolist";
-
-        return qu;
-    }
 
     InsertQuery::InsertQuery( const OPimTodo& todo )
         : OSQLQuery(), m_todo( todo ) {
@@ -321,38 +284,6 @@ namespace {
         return qu;
     }
 
-    FindQuery::FindQuery(int uid)
-        : OSQLQuery(), m_uid(uid )
-    {
-    }
-
-    FindQuery::FindQuery(const QArray<int>& ints)
-        : OSQLQuery(), m_uids(ints)
-    {
-    }
-
-    FindQuery::~FindQuery()
-    {
-    }
-
-    QString FindQuery::query()const{
-        if (m_uids.count() == 0 )
-            return single();
-        else
-            return multi();
-    }
-    QString FindQuery::single()const{
-        QString qu = "select * from todolist where uid = " + QString::number(m_uid);
-        return qu;
-    }
-    QString FindQuery::multi()const {
-        QString qu = "select * from todolist where ";
-        for (uint i = 0; i < m_uids.count(); i++ ) {
-            qu += " UID = " + QString::number( m_uids[i] ) + " OR";
-        }
-        qu.remove( qu.length()-2, 2 );
-        return qu;
-    }
 
     OverDueQuery::OverDueQuery(): OSQLQuery() {}
     OverDueQuery::~OverDueQuery() {}
@@ -475,7 +406,7 @@ QArray<int> OPimTodoAccessBackendSQL::allRecords()const {
 //     return ints;
 // }
 OPimTodo OPimTodoAccessBackendSQL::find(int uid ) const{
-    FindQuery query( uid );
+    OPimSQLFindQuery query( "todolist", m_changeLog, uid );
     return parseResultAndCache( uid, m_driver->query(&query) );
 }
 
@@ -506,7 +437,7 @@ OPimTodo OPimTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
     }
 
     search.resize( size );
-    FindQuery query( search );
+    OPimSQLFindQuery query( "todolist", m_changeLog, search );
     OSQLResult res = m_driver->query( &query  );
     if ( res.state() != OSQLResult::Success )
         return OPimTodo();
@@ -758,6 +689,14 @@ OPimTodo OPimTodoAccessBackendSQL::parse( OSQLResultItem& item )const {
     recur.fromMap( recMap );
     to.setRecurrence( recur );
 
+    if( !m_changeLog->slowSync() ) {
+        QString chgtype = item.data("chgtype");
+        if( chgtype == "D" )
+            to.setAction( OPimRecord::ACTION_REMOVE );
+        else if( chgtype == "U" )
+            to.setAction( OPimRecord::ACTION_REPLACE );
+    }
+    
     // Finally load the custom-entries for this UID and put it into the created object
     to.setExtraMap( requestCustom( to.uid() ) );
 
@@ -766,7 +705,7 @@ OPimTodo OPimTodoAccessBackendSQL::parse( OSQLResultItem& item )const {
 
 // FIXME: Where is the difference to "find" ? (eilers)
 OPimTodo OPimTodoAccessBackendSQL::todo( int uid )const {
-    FindQuery find( uid );
+    OPimSQLFindQuery find( "todolist", m_changeLog, uid );
     return parseResultAndCache( uid, m_driver->query(&find) );
 }
 
@@ -777,7 +716,7 @@ OPimTodo OPimTodoAccessBackendSQL::todo( int uid )const {
  */
 void OPimTodoAccessBackendSQL::update()const {
     ((OPimTodoAccessBackendSQL*)this)->m_dirty = false;
-    LoadQuery lo;
+    OPimSQLLoadQuery lo( "todolist", m_changeLog );
     OSQLResult res = m_driver->query(&lo);
     if ( res.state() != OSQLResult::Success )
         return;

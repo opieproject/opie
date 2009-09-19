@@ -49,6 +49,7 @@ namespace Opie
 struct OPimMemo::OPimMemoData : public QShared
 {
     QString text;
+    ChangeAction action;
 };
 
 /*!
@@ -59,6 +60,7 @@ OPimMemo::OPimMemo()
     , d( 0 )
     , data( new OPimMemoData() )
 {
+    data->action = ACTION_ADD;
 }
 
 OPimMemo::OPimMemo( const OPimMemo &memo )
@@ -91,6 +93,7 @@ OPimMemo::OPimMemo( const QString &text,
     setCategories( category );
 
     data->text = text;
+    data->action = ACTION_ADD;
 }
 
 
@@ -229,6 +232,9 @@ QMap<int, QString> OPimMemo::toMap() const
 
     map.insert( Text, data->text );
 
+    if( data->action != ACTION_ADD )
+        map.insert( FIELDID_ACTION, actionToStr( data->action ) );
+    
     return map;
 }
 
@@ -241,6 +247,8 @@ void OPimMemo::fromMap( const QMap<int, QString>& map )
     setCategories( idsFromString( map[ Category ] ) );
 
     setText( map[ Text ] );
+
+    setAction( strToAction( map[ FIELDID_ACTION ] ) );
 }
 
 
@@ -269,6 +277,7 @@ void OPimMemo::changeOrModify()
 void OPimMemo::copy( OPimMemoData* src, OPimMemoData* dest )
 {
     dest->text = src->text;
+    dest->action = src->action;
 }
 
 
@@ -286,6 +295,16 @@ QString OPimMemo::recordField( int  id) const
     return res;
 }
 
+OPimRecord::ChangeAction OPimMemo::action() const
+{
+    return data->action;
+}
+
+void OPimMemo::setAction( OPimRecord::ChangeAction action )
+{
+    changeOrModify();
+    data->action = action;
+}
 
 int OPimMemo::rtti() const
 {

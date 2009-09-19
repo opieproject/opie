@@ -36,6 +36,7 @@
 #include <opie2/opimrecord.h>
 #include <opie2/opimbackendoccurrence.h>
 #include <opie2/opimchangelog.h>
+#include <opie2/odebug.h>
 
 namespace Opie {
 class OPimAccessBackendPrivate;
@@ -124,6 +125,7 @@ public:
     void setReadAhead( uint count );
 
     virtual OPimChangeLog *changeLog() const;
+    bool applyAction( int action, const T &rec );
 
 protected:
     //@{
@@ -248,6 +250,34 @@ int OPimAccessBackend<T>::access()const {
 template <class T>
 OPimChangeLog *OPimAccessBackend<T>::changeLog() const {
     return NULL;
+}
+
+template <class T>
+bool OPimAccessBackend<T>::applyAction( int action, const T &rec )
+{
+    bool retval = true;
+
+    switch ( action ) {
+        case OPimRecord::ACTION_ADD:
+            retval = add( rec );
+            break;
+        case OPimRecord::ACTION_REMOVE:
+            retval = remove( rec.uid() );
+            if ( !retval )
+                owarn << "ODefBack(journal)::Unable to remove uid: " << rec.uid() << oendl;
+            break;
+        case OPimRecord::ACTION_REPLACE:
+            retval = replace( rec );
+            if ( !retval )
+                owarn << "ODefBack(journal)::Unable to replace uid: " << rec.uid() << oendl;
+            break;
+        default:
+            owarn << "Unknown action: ignored !" << oendl;
+            retval = false;
+            break;
+    }
+
+    return retval;
 }
 
 }

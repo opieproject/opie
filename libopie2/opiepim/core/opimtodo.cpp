@@ -82,6 +82,7 @@ struct OPimTodo::OPimTodoData : public QShared
     QDate start;
     QDate completed;
     OPimNotifyManager *notifiers;
+    ChangeAction action;
 };
 
 
@@ -126,6 +127,7 @@ OPimTodo::OPimTodo( bool completed, int priority,
     data->sum = summary;
     data->prog = progress;
     data->desc = Qtopia::simplifyMultiLineSpace( description );
+    data->action = ACTION_ADD;
 }
 
 
@@ -152,6 +154,7 @@ OPimTodo::OPimTodo( bool completed, int priority,
     data->sum = summary;
     data->prog = progress;
     data->desc = Qtopia::simplifyMultiLineSpace( description );
+    data->action = ACTION_ADD;
 }
 
 
@@ -712,6 +715,10 @@ QMap<int, QString> OPimTodo::toMap() const
         }
     }
 
+    ChangeAction action = this->action();
+    if( action != ACTION_ADD )
+        map.insert( FIELDID_ACTION, actionToStr( action ) );
+
     // FIXME CrossReference, Maintainer
 
     return map;
@@ -796,6 +803,8 @@ void OPimTodo::fromMap( const QMap<int, QString>& map )
         }
     }
 
+    setAction( strToAction( map[ FIELDID_ACTION ] ) );
+
     // FIXME Maintainer
 }
 
@@ -847,6 +856,8 @@ void OPimTodo::copy( OPimTodoData* src, OPimTodoData* dest )
 
     if ( src->notifiers )
         dest->notifiers = new OPimNotifyManager( *src->notifiers );
+
+    dest->action = src->action;
 }
 
 
@@ -930,6 +941,16 @@ QString OPimTodo::recordField( int  id) const
     return res;
 }
 
+OPimRecord::ChangeAction OPimTodo::action() const
+{
+    return data->action;
+}
+
+void OPimTodo::setAction( ChangeAction action )
+{
+    changeOrModify();
+    data->action = action;
+}
 
 int OPimTodo::rtti() const
 {

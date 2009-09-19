@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) Stefan Eilers (Eilers.Stefan@epost.de)
-              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+              =.             Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -26,64 +26,61 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef OPIE_MEMO_ACCESS_BACKEND_XML__H
-#define OPIE_MEMO_ACCESS_BACKEND_XML__H
 
-#include <qmap.h>
-#include <qasciidict.h>
+#ifndef OPIMSQL_H
+#define OPIMSQL_H
 
-#include <opie2/omemoaccessbackend.h>
-#include <opie2/opimio.h>
+#include <opie2/opimchangelog_sql.h>
+#include <opie2/osqlquery.h>
+#include <opie2/opimglobal.h>
 
 namespace Opie {
 
-class OPimMemoXmlHandler : public OPimXmlHandler
-{
-public:
-    OPimMemoXmlHandler( QAsciiDict<int> &dict, OPimMemoAccessBackend &backend );
-    void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
-protected:
-    OPimMemoAccessBackend &m_backend;
-};
-
 
 /**
- * This is the XML implementation for memo XML storage
- * Note: this is only intended to be used for synchronisation!
- * @see OPimMemoAccessBackend
- * @see OPimAccessBackend
+ * OPimSQLLoadQuery
+ * this one queries for all uids
  */
-class OPimMemoAccessBackend_XML : public OPimMemoAccessBackend {
+class OPimSQLLoadQuery : public DB::OSQLQuery {
 public:
-    OPimMemoAccessBackend_XML();
-    ~OPimMemoAccessBackend_XML();
-
-    bool load();
-    bool reload();
-    bool save();
-    bool wasChangedExternally();
-
-    bool write( OAbstractWriter &wr );
-    bool read( OPimXmlReader &rd );
-
-    QArray<int> allRecords()const;
-    QArray<int> matchRegexp(const QRegExp &r) const;
-    QArray<int> queryByExample( const OPimMemo&, int, const QDateTime& d = QDateTime() )const;
-    OPimMemo find( int uid )const;
-    void clear();
-    bool add( const OPimMemo& ev );
-    bool remove( int uid );
-    bool replace( const OPimMemo& ev );
-
+    OPimSQLLoadQuery( const QString &dataTable, OPimChangeLog_SQL *changeLog );
+    ~OPimSQLLoadQuery();
+    QString query()const;
 private:
+    QString m_dataTable;
+    OPimChangeLog_SQL *m_changeLog;
+};
 
-    void initDict( QAsciiDict<int> &dict ) const;
-    QMap<int, OPimMemo> m_items;
+    
+/**
+ * removes one from the table
+ */
+class OPimSQLRemoveQuery : public DB::OSQLQuery {
+public:
+    OPimSQLRemoveQuery( const QString &dataTable, int uid );
+    ~OPimSQLRemoveQuery();
+    QString query() const;
+private:
+    QString m_dataTable;
+    int m_uid;
+};
 
-    struct Data;
-    Data* data;
-    class Private;
-    Private *d;
+/**
+ * a find query for elements
+ */
+class OPimSQLFindQuery : public DB::OSQLQuery {
+public:
+    OPimSQLFindQuery( const QString &dataTable, OPimChangeLog_SQL *changeLog, int uid);
+    OPimSQLFindQuery( const QString &dataTable, OPimChangeLog_SQL *changeLog, const UIDArray& );
+    ~OPimSQLFindQuery();
+    QString query() const;
+private:
+    QString single() const;
+    QString multi() const;
+    QString m_dataTable;
+    UIDArray m_uids;
+    int m_uid;
+    OPimChangeLog_SQL *m_changeLog;
 };
 
 }

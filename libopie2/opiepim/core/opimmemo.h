@@ -145,6 +145,8 @@ class OPimMemo : public OPimRecord
     static OPimMemo* safeCast( const OPimRecord* );
     //@}
 
+    ChangeAction action() const;
+    void setAction( ChangeAction action );
 
   private:
     class OPimMemoPrivate;

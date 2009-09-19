@@ -55,8 +55,6 @@
 
 using namespace Opie::Core;
 
-const int JOURNALACTION = Qtopia::Notes + 1;
-
 
 namespace Opie {
 OPimContactAccessBackend_XML::OPimContactAccessBackend_XML ( const QString& appname, const QString& filename ):
@@ -293,7 +291,7 @@ UIDArray OPimContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
 
 bool OPimContactAccessBackend_XML::add ( const OPimContact &newcontact )
 {
-    updateJournal (newcontact, ACTION_ADD);
+    updateJournal (newcontact, OPimRecord::ACTION_ADD);
     addContact_p( newcontact );
 
     m_changed = true;
@@ -310,7 +308,7 @@ bool OPimContactAccessBackend_XML::replace ( const OPimContact &contact )
     if ( found ) {
         OPimContact* newCont = new OPimContact( contact );
 
-        updateJournal ( *newCont, ACTION_REPLACE);
+        updateJournal ( *newCont, OPimRecord::ACTION_REPLACE);
         m_contactList.removeRef ( found );
         m_contactList.append ( newCont );
         m_uidToContact.remove( QString().setNum( contact.uid() ) );
@@ -329,7 +327,7 @@ bool OPimContactAccessBackend_XML::remove ( int uid )
     OPimContact* found = m_uidToContact.find ( QString().setNum( uid ) );
 
     if ( found ) {
-        updateJournal ( *found, ACTION_REMOVE);
+        updateJournal ( *found, OPimRecord::ACTION_REMOVE);
         m_contactList.removeRef ( found );
         m_uidToContact.remove( QString().setNum( uid ) );
 
@@ -409,15 +407,14 @@ void OPimContactAccessBackend_XML::initDict( QAsciiDict<int> &dict ) const
     dict.insert( "Anniversary", new int(Qtopia::Anniversary) );
     dict.insert( "Nickname", new int(Qtopia::Nickname) );
     dict.insert( "Notes", new int(Qtopia::Notes) );
-    // technically action is for the journal only
-    dict.insert( "action", new int(JOURNALACTION) );
+    // change_action is for the journal & synchronisation only
+    dict.insert( "change_action", new int(FIELDID_ACTION) );
 }
 
 /* This function loads the xml-database and the journalfile */
 bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
 {
-    bool foundAction = false;
-    journal_action action = ACTION_ADD;
+    OPimRecord::ChangeAction action = OPimRecord::ACTION_ADD;
     QMap<int, QString> contactMap;
     QMap<QString, QString> customMap;
     QMap<QString, QString>::Iterator customIt;
@@ -431,6 +428,8 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
         XMLElement *element = root->firstChild();
         element = element ? element->firstChild() : 0;
 
+        m_journalEnabled = false;
+        
         /* Search Tag "Contacts" which is the parent of all Contacts */
         while( element && !isJournal ) {
             if( element->tagName() != QString::fromLatin1("Contacts") ) {
@@ -451,7 +450,7 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
              * attributes contained
              */
             QString dummy;
-            foundAction = false;
+            action = OPimRecord::ACTION_ADD;
 
             XMLElement::AttributeMap aMap = element->attributes();
             XMLElement::AttributeMap::Iterator it;
@@ -478,9 +477,8 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
                       contact.setCategories( Qtopia::Record::idsFromString( it.data( )));
                       break;
                     */
-                case JOURNALACTION:
-                    action = journal_action(it.data().toInt());
-                    foundAction = true;
+                case FIELDID_ACTION:
+                    action = OPimRecord::ChangeAction(it.data().toInt());
                     owarn << "ODefBack(journal)::ACTION found: " << action << oendl;
                     break;
                 default: // no conversion needed add them to the map
@@ -495,33 +493,14 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
                 contact.setCustomField( customIt.key(),  customIt.data() );
             }
 
-            if (foundAction) {
-                foundAction = false;
-                switch ( action ) {
-                case ACTION_ADD:
-                    addContact_p (contact);
-                    break;
-                case ACTION_REMOVE:
-                    if ( !remove (contact.uid()) )
-                        owarn << "ODefBack(journal)::Unable to remove uid: " << contact.uid() << oendl;
-                    break;
-                case ACTION_REPLACE:
-                    if ( !replace ( contact ) )
-                        owarn << "ODefBack(journal)::Unable to replace uid: " << contact.uid() << oendl;
-                    break;
-                default:
-                    owarn << "Unknown action: ignored !" << oendl;
-                    break;
-                }
-            }
-            else {
-                /* Add contact to list */
-                addContact_p (contact);
-            }
+            applyAction( action, contact );
 
             /* Move to next element */
             element = element->nextChild();
         }
+
+        m_journalEnabled = true;
+        
         return true;
     }
     else {
@@ -532,9 +511,9 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
 
 
 void OPimContactAccessBackend_XML::updateJournal( const OPimContact& cnt,
-                           journal_action action )
+                           OPimRecord::ChangeAction action )
 {
-    if( m_journalName.isEmpty() )
+    if( !m_journalEnabled || m_journalName.isEmpty() )
         return;
 
     QFile f( m_journalName );
@@ -571,7 +550,7 @@ void OPimContactAccessBackend_XML::removeJournal()
 
 ////////////////////////////////////////////////////////////////////////////
 
-OPimContactXmlHandler::OPimContactXmlHandler( QAsciiDict<int> &dict, OPimContactAccessBackend_XML &backend )
+OPimContactXmlHandler::OPimContactXmlHandler( QAsciiDict<int> &dict, OPimContactAccessBackend &backend )
     : OPimXmlHandler( "Contact", dict ), m_backend( backend )
 {
 }
@@ -582,7 +561,8 @@ void OPimContactXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, Q
     for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
         contact.setCustomField(it.key(), it.data() );
 
-    m_backend.addContact_p( contact );
+    m_backend.applyAction( contact.action(), contact );
 }
+
 
 }

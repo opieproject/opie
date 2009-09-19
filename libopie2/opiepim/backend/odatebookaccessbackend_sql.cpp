@@ -35,6 +35,7 @@
 #include <opie2/osqldriver.h>
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
+#include <opie2/opimsql.h>
 
 #include <opie2/opimrecurrence.h>
 #include <opie2/odatebookaccessbackend_sql.h>
@@ -185,10 +186,9 @@ bool ODateBookAccessBackend_SQL::load()
 
 void ODateBookAccessBackend_SQL::update()
 {
+    OPimSQLLoadQuery query( "datebook", m_changeLog );
+    OSQLResult res = m_driver->query( &query );
 
-    QString qu = "select uid from datebook";
-    OSQLRawQuery raw( qu );
-    OSQLResult res = m_driver->query( &raw );
     if ( res.state() != OSQLResult::Success ){
         // m_uids.clear();
         return;
@@ -238,13 +238,8 @@ void ODateBookAccessBackend_SQL::clear()
 OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
     odebug << "ODateBookAccessBackend_SQL::find( " << uid << " )" << oendl;
 
-    QString qu = "select *";
-    qu += "from datebook where uid = " + QString::number(uid);
-
-    odebug << "Query: " << qu << "" << oendl;
-
-    OSQLRawQuery raw( qu );
-    OSQLResult res = m_driver->query( &raw );
+    OPimSQLFindQuery query( "datebook", m_changeLog, uid );
+    OSQLResult res = m_driver->query( &query );
 
     OSQLResultItem resItem = res.first();
 
@@ -257,6 +252,9 @@ OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
     for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
         dateEventMap.insert( m_reverseFieldMap[*it], resItem.data( *it ) );
     }
+
+    if( !m_changeLog->slowSync() )
+        dateEventMap.insert( FIELDID_ACTION, resItem.data( "chgtype" ) );
 
     // Last step: Put map into date event, add custom map and return it
     OPimEvent retDate( dateEventMap );

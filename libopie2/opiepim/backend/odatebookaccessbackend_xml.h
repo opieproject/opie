@@ -37,15 +37,13 @@
 
 namespace Opie {
 
-class ODateBookAccessBackend_XML;
-
 class OPimDateBookXmlHandler : public OPimXmlHandler
 {
 public:
-    OPimDateBookXmlHandler( QAsciiDict<int> &dict, ODateBookAccessBackend_XML &backend );
+    OPimDateBookXmlHandler( QAsciiDict<int> &dict, ODateBookAccessBackend &backend );
     void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 protected:
-    ODateBookAccessBackend_XML &m_backend;
+    ODateBookAccessBackend &m_backend;
 };
 
 
@@ -84,14 +82,12 @@ public:
     OPimEvent::ValueList directNonRepeats()const;
     OPimEvent::ValueList directRawRepeats()const;
 
-    friend void OPimDateBookXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 private:
     bool m_changed :1 ;
     bool m_noTimeZone : 1;
 
     bool loadFile();
     void initDict( QAsciiDict<int> &dict ) const;
-    inline void finalizeRecord( OPimEvent& ev );
     QString m_name;
     QMap<int, OPimEvent> m_raw;
     QMap<int, OPimEvent> m_rep;

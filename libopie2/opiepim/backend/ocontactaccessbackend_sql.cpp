@@ -40,6 +40,7 @@
 #include <opie2/osqlresult.h>
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
+#include <opie2/opimsql.h>
 #include <opie2/odebug.h>
 
 #include <qpe/global.h>
@@ -86,17 +87,6 @@ namespace {
 
 
     /**
-     * LoadQuery
-     * this one queries for all uids
-     */
-    class LoadQuery : public OSQLQuery {
-    public:
-        LoadQuery();
-        ~LoadQuery();
-        QString query()const;
-    };
-
-    /**
      * inserts/adds a OPimContact to the table
      */
     class InsertQuery : public OSQLQuery {
@@ -118,22 +108,6 @@ namespace {
         ~RemoveQuery();
         QString query()const;
     private:
-        int m_uid;
-    };
-
-    /**
-     * a find query for noncustom elements
-     */
-    class FindQuery : public OSQLQuery {
-    public:
-        FindQuery(int uid);
-        FindQuery(const UIDArray& );
-        ~FindQuery();
-        QString query()const;
-    private:
-        QString single()const;
-        QString multi()const;
-        UIDArray m_uids;
         int m_uid;
     };
 
@@ -185,16 +159,6 @@ namespace {
         QString qu = "drop table addressbook;";
         qu += "drop table custom_data;";
 //      qu += "drop table dates;";
-        return qu;
-    }
-
-
-    LoadQuery::LoadQuery() : OSQLQuery() {}
-    LoadQuery::~LoadQuery() {}
-    QString LoadQuery::query()const {
-        QString qu;
-        qu += "select uid from addressbook";
-
         return qu;
     }
 
@@ -290,42 +254,6 @@ namespace {
         return qu;
     }
 
-
-    FindQuery::FindQuery(int uid)
-        : OSQLQuery(), m_uid( uid ) {
-    }
-    FindQuery::FindQuery(const UIDArray& ints)
-        : OSQLQuery(), m_uids( ints ){
-    }
-    FindQuery::~FindQuery() {
-    }
-    QString FindQuery::query()const{
-           if ( m_uids.count() == 0 )
-                   return single();
-           else
-                   return multi();
-    }
-
-
-
-    QString FindQuery::multi()const {
-	    QString qu = "select * from addressbook where";
-	    for (uint i = 0; i < m_uids.count(); i++ ) {
-		    qu += " uid = " + QString::number( m_uids[i] ) + " OR";
-	    }
-	    qu.remove( qu.length()-2, 2 ); // Hmmmm..
-
-	    odebug << "find query: " << qu << "" << oendl;
-	    return qu;
-    }
-
-    QString FindQuery::single()const{
-	    QString qu = "select *";
-	    qu += " from addressbook where uid = " + QString::number(m_uid);
-
-	    // owarn << "find query: " << qu << "" << oendl;
-	    return qu;
-    }
 
 
     FindCustomQuery::FindCustomQuery(int uid)
@@ -941,7 +869,7 @@ void OPimContactAccessBackend_SQL::update()
     // Now load the database set and extract the uid's
     // which will be held locally
 
-    LoadQuery lo;
+    OPimSQLLoadQuery lo( "addressbook", m_changeLog );
     OSQLResult res = m_driver->query(&lo);
     if ( res.state() != OSQLResult::Success )
         return;
@@ -983,7 +911,7 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
     int t3needed = 0;
     QTime t2;
     t2.start();
-    FindQuery query( uid );
+    OPimSQLFindQuery query( "addressbook", m_changeLog, uid );
     OSQLResult res_noncustom = m_driver->query( &query );
     t2needed = t2.elapsed();
 
@@ -1022,7 +950,7 @@ OPimContact OPimContactAccessBackend_SQL::requestContactsAndCache( int uid, cons
 	int t3needed = 0;
 	QTime t2;
 	t2.start();
-	FindQuery query( cachelist );
+	OPimSQLFindQuery query( "addressbook", m_changeLog, cachelist );
 	OSQLResult res_noncustom = m_driver->query( &query );
 	t2needed = t2.elapsed();
 
@@ -1089,6 +1017,9 @@ QMap<int, QString> OPimContactAccessBackend_SQL::fillNonCustomMap( const OSQLRes
 
     nonCustomMap.insert( Qtopia::AddressUid, resultItem.data( "uid" ) );
 
+    if( !m_changeLog->slowSync() )
+        nonCustomMap.insert( FIELDID_ACTION, resultItem.data( "chgtype" ) );
+    
     return nonCustomMap;
 }
 

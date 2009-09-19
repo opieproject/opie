@@ -40,6 +40,26 @@ namespace Opie
 {
 Qtopia::UidGen OPimRecord::m_uidGen( Qtopia::UidGen::Qtopia );
 
+QString OPimRecord::actionToStr( ChangeAction action )
+{
+    if( action == ACTION_REMOVE )
+        return QString("D");
+    else if( action == ACTION_REPLACE )
+        return QString("U");
+    else
+        return QString::null;
+}
+
+OPimRecord::ChangeAction OPimRecord::strToAction( const QString &str )
+{
+    if( str == "D" )
+        return ACTION_REMOVE;
+    else if( str == "U" )
+        return ACTION_REPLACE;
+    else
+        return ACTION_ADD;
+}
+
 
 OPimRecord::OPimRecord( int uid )
         : Qtopia::Record()

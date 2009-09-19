@@ -39,6 +39,7 @@
 #include <opie2/osqlresult.h>
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
+#include <opie2/opimsql.h>
 #include <opie2/odebug.h>
 
 #include <qpe/global.h>
@@ -85,19 +86,6 @@ namespace {
 
 
     /**
-     * LoadQuery
-     * this one queries for all uids
-     */
-    class LoadQuery : public OSQLQuery {
-    public:
-        LoadQuery( OPimChangeLog_SQL *changeLog );
-        ~LoadQuery();
-        QString query()const;
-    private:
-        OPimChangeLog_SQL *m_changeLog;
-    };
-
-    /**
      * inserts/adds a OPimMemo to the table
      */
     class InsertQuery : public OSQLQuery {
@@ -108,36 +96,6 @@ namespace {
     private:
         OPimMemo m_memo;
     };
-
-
-    /**
-     * removes one from the table
-     */
-    class RemoveQuery : public OSQLQuery {
-    public:
-        RemoveQuery(int uid );
-        ~RemoveQuery();
-        QString query()const;
-    private:
-        int m_uid;
-    };
-
-    /**
-     * a find query for elements
-     */
-    class FindQuery : public OSQLQuery {
-    public:
-        FindQuery(int uid);
-        FindQuery(const UIDArray& );
-        ~FindQuery();
-        QString query()const;
-    private:
-        QString single()const;
-        QString multi()const;
-        UIDArray m_uids;
-        int m_uid;
-    };
-
 
 
     // We use a single "notes" table to store all data
@@ -163,27 +121,6 @@ namespace {
     }
 
 
-    LoadQuery::LoadQuery( OPimChangeLog_SQL *changeLog )
-        : OSQLQuery(), m_changeLog( changeLog ) {}
-    LoadQuery::~LoadQuery() {}
-    QString LoadQuery::query()const {
-        QString qu;
-        bool slowSync = m_changeLog->slowSync();
-        if( slowSync ) {
-            qu = "select uid from notes";
-        }
-        else {
-            int logId = m_changeLog->peerLastSyncLogId();
-            qu = "select notes.uid from notes, changelog";
-            qu += " where changelog.logid > " + QString::number( logId );
-            qu += " and notes.uid = changelog.uid";
-        }
-        
-        odebug << " ******* query = " << qu << oendl;
-
-        return qu;
-    }
-
 
     InsertQuery::InsertQuery( const OPimMemo& memo )
         : OSQLQuery(), m_memo( memo ) {
@@ -208,57 +145,6 @@ namespace {
         
         // qu  += "commit;";
         odebug << "add " << qu << "" << oendl;
-        return qu;
-    }
-
-
-    RemoveQuery::RemoveQuery(int uid )
-        : OSQLQuery(), m_uid( uid ) {}
-
-    RemoveQuery::~RemoveQuery() {}
-
-    QString RemoveQuery::query()const {
-        QString qu = "DELETE from notes where uid = "
-            + QString::number(m_uid) + ";";
-
-        odebug << qu << oendl;
-        return qu;
-    }
-
-
-    FindQuery::FindQuery(int uid)
-        : OSQLQuery(), m_uid( uid ) {
-    }
-    FindQuery::FindQuery(const UIDArray& ints)
-        : OSQLQuery(), m_uids( ints ){
-    }
-    FindQuery::~FindQuery() {
-    }
-    QString FindQuery::query()const{
-           if ( m_uids.count() == 0 )
-                   return single();
-           else
-                   return multi();
-    }
-
-
-
-    QString FindQuery::multi()const {
-        QString qu = "select * from notes where";
-        for (uint i = 0; i < m_uids.count(); i++ ) {
-            qu += " uid = " + QString::number( m_uids[i] ) + " OR";
-        }
-        qu.remove( qu.length()-2, 2 ); // Hmmmm..
-
-        odebug << "find query: " << qu << "" << oendl;
-        return qu;
-    }
-
-    QString FindQuery::single()const{
-        QString qu = "select *";
-        qu += " from notes where uid = " + QString::number(m_uid);
-
-        // owarn << "find query: " << qu << "" << oendl;
         return qu;
     }
 
@@ -384,7 +270,7 @@ bool OPimMemoAccessBackend_SQL::add ( const OPimMemo &newmemo )
 
 bool OPimMemoAccessBackend_SQL::remove ( int uid )
 {
-    RemoveQuery rem( uid );
+    OPimSQLRemoveQuery rem( "notes", uid );
     OSQLResult res = m_driver->query(&rem );
 
     if ( res.state() == OSQLResult::Failure )
@@ -426,7 +312,7 @@ OPimMemo OPimMemoAccessBackend_SQL::find ( int uid ) const
     QTime t;
     t.start();
 
-    FindQuery query( uid );
+    OPimSQLFindQuery query( "notes", m_changeLog, uid );
     OSQLResult result = m_driver->query( &query );
 
     OSQLResultItem resItem = result.first();
@@ -614,7 +500,7 @@ void OPimMemoAccessBackend_SQL::update()
     // Now load the database set and extract the uid's
     // which will be held locally
 
-    LoadQuery lo( m_changeLog );
+    OPimSQLLoadQuery lo( "notes", m_changeLog );
     OSQLResult res = m_driver->query(&lo);
     if ( res.state() != OSQLResult::Success )
         return;
@@ -667,7 +553,7 @@ OPimMemo OPimMemoAccessBackend_SQL::requestMemosAndCache( int uid, const UIDArra
     int t3needed = 0;
     QTime t2;
     t2.start();
-    FindQuery query( cachelist );
+    OPimSQLFindQuery query( "notes", m_changeLog, cachelist );
     OSQLResult result = m_driver->query( &query );
     t2needed = t2.elapsed();
 
@@ -700,6 +586,14 @@ OPimMemo OPimMemoAccessBackend_SQL::readMemo( const OSQLResultItem& resultItem )
     memo.setText( resultItem.data( "text" ) );
     QString categories = resultItem.data( "categories" );
     memo.setCategories( OPimMemo::idsFromString( categories ) );
+
+    if( !m_changeLog->slowSync() ) {
+        QString chgtype = resultItem.data( "chgtype" );
+        if( chgtype == "D" )
+            memo.setAction( OPimRecord::ACTION_REMOVE );
+        else if( chgtype == "U" )
+            memo.setAction( OPimRecord::ACTION_REPLACE );
+    }
 
     return memo;
 }

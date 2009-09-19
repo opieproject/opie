@@ -202,6 +202,8 @@ class OPimEvent : public OPimRecord
     static OPimEvent* safeCast( const OPimRecord* );
     //@}
 
+    ChangeAction action() const;
+    
   /*    bool operator==( const OPimEvent& );
         bool operator!=( const OPimEvent& );
         bool operator<( const OPimEvent& );

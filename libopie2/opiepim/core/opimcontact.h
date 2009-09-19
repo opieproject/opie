@@ -237,6 +237,8 @@ class QPC_EXPORT OPimContact : public OPimRecord
     static OPimContact* safeCast( const OPimRecord* );
     //@}
 
+    OPimRecord::ChangeAction action() const;
+
   private:
     // The XML Backend needs some access to the private functions
     friend class OPimContactAccessBackend_XML;

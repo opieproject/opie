@@ -96,6 +96,7 @@ void OPimMemoAccessBackend_XML::initDict( QAsciiDict<int> &dict ) const
     dict.insert( "categories", new int(OPimMemo::Category) );
     dict.insert( "text", new int(OPimMemo::Text) );
     dict.insert( "uid", new int(OPimMemo::Uid) );
+    dict.insert( "change_action", new int(FIELDID_ACTION) );
 }
 
 bool OPimMemoAccessBackend_XML::load()
@@ -204,15 +205,6 @@ bool OPimMemoAccessBackend_XML::wasChangedExternally()
     return false;
 }
 
-void OPimMemoAccessBackend_XML::finalizeRecord( OPimMemo& memo )
-{
-    if ( m_items.contains( memo.uid() ) ) {
-        memo.setUid( 1 );
-    }
-
-    m_items.insert( memo.uid(), memo );
-}
-
 bool OPimMemoAccessBackend_XML::read( OPimXmlReader &rd )
 {
     QAsciiDict<int> dict(OPimMemo::Text+1);
@@ -227,7 +219,7 @@ bool OPimMemoAccessBackend_XML::read( OPimXmlReader &rd )
 
 ////////////////////////////////////////////////////////////////////////////
 
-OPimMemoXmlHandler::OPimMemoXmlHandler( QAsciiDict<int> &dict, OPimMemoAccessBackend_XML &backend )
+OPimMemoXmlHandler::OPimMemoXmlHandler( QAsciiDict<int> &dict, OPimMemoAccessBackend &backend )
     : OPimXmlHandler( "memo", dict ), m_backend( backend )
 {
 }
@@ -238,8 +230,8 @@ void OPimMemoXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QStr
     memo.fromMap( map );
     for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
         memo.setCustomField(it.key(), it.data() );
-
-    m_backend.finalizeRecord( memo );
+    
+    m_backend.applyAction( memo.action(), memo );
 }
 
 

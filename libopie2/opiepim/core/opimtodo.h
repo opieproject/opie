@@ -316,6 +316,8 @@ class OPimTodo : public OPimRecord
     static OPimTodo* safeCast( const OPimRecord* );
     //@}
 
+    OPimRecord::ChangeAction action() const;
+    void setAction( ChangeAction action );
 
   private:
     class OPimTodoPrivate;

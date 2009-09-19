@@ -118,6 +118,7 @@ void ODateBookAccessBackend_XML::initDict( QAsciiDict<int> &dict ) const {
     dict.insert( "recchildren", new int(OPimEvent::FRecChildren) );
     dict.insert( "exceptions", new int(OPimEvent::FRExceptions) );
     dict.insert( "timezone", new int(OPimEvent::FTimeZone) );
+    dict.insert( "change_action", new int(FIELDID_ACTION) );
 }
 
 bool ODateBookAccessBackend_XML::load() {
@@ -302,18 +303,6 @@ bool ODateBookAccessBackend_XML::loadFile()
     return ret;
 }
 
-void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev )
-{
-    if ( m_raw.contains( ev.uid() ) || m_rep.contains( ev.uid() ) ) {
-        ev.setUid( 1 );
-    }
-
-    if ( ev.hasRecurrence() )
-        m_rep.insert( ev.uid(), ev );
-    else
-        m_raw.insert( ev.uid(), ev );
-}
-
 bool ODateBookAccessBackend_XML::read( OPimXmlReader &rd )
 {
     QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
@@ -347,7 +336,7 @@ QArray<int> ODateBookAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
 
 ////////////////////////////////////////////////////////////////////////////
 
-OPimDateBookXmlHandler::OPimDateBookXmlHandler( QAsciiDict<int> &dict, ODateBookAccessBackend_XML &backend )
+OPimDateBookXmlHandler::OPimDateBookXmlHandler( QAsciiDict<int> &dict, ODateBookAccessBackend &backend )
     : OPimXmlHandler( "event", dict ), m_backend( backend )
 {
 }
@@ -359,7 +348,7 @@ void OPimDateBookXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, 
     for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
         ev.setCustomField(it.key(), it.data() );
 
-    m_backend.finalizeRecord( ev );
+    m_backend.applyAction( ev.action(), ev );
 }
 
 

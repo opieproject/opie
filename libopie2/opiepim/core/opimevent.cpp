@@ -95,6 +95,7 @@ struct OPimEvent::Data : public QShared
         manager = 0;
         isAllDay = false;
         parent = 0;
+        action = ACTION_ADD;
     }
     ~Data()
     {
@@ -114,6 +115,7 @@ bool isAllDay : 1;
     QString timezone;
     QArray<int>* child;
     int parent;
+    ChangeAction action;
 };
 
 
@@ -557,6 +559,8 @@ void OPimEvent::changeOrModify()
             d2->child->detach();
         }
 
+        d2->action = data->action;
+
         data = d2;
     }
 }
@@ -625,6 +629,10 @@ QMap<int, QString> OPimEvent::toMap() const
         retMap.insert( OPimEvent::FRCreated, recFields[ OPimRecurrence::Created ] );
         retMap.insert( OPimEvent::FRExceptions, recFields[ OPimRecurrence::Exceptions ] );
     }
+
+    ChangeAction action = this->action();
+    if( action != ACTION_ADD )
+        retMap.insert( FIELDID_ACTION, actionToStr( action ) );
 
     return retMap;
 }
@@ -704,6 +712,7 @@ void OPimEvent::fromMap( const QMap<int, QString>& map )
         setRecurrence( recur );
     }
 
+    data->action = strToAction( map[ FIELDID_ACTION ] );
 }
 
 
@@ -771,6 +780,11 @@ void OPimEvent::removeChild( int uid )
         }
     }
     ( *data->child ) = newAr;
+}
+
+OPimRecord::ChangeAction OPimEvent::action() const
+{
+    return data->action;
 }
 
 }

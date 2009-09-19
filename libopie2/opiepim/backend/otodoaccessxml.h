@@ -38,16 +38,14 @@
 
 namespace Opie {
 
-class OPimTodoAccessXML;
-
 
 class OPimTodoXmlHandler : public OPimXmlHandler
 {
 public:
-    OPimTodoXmlHandler( QAsciiDict<int> &dict, OPimTodoAccessXML &backend );
+    OPimTodoXmlHandler( QAsciiDict<int> &dict, OPimTodoAccessBackend &backend );
     void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 protected:
-    OPimTodoAccessXML &m_backend;
+    OPimTodoAccessBackend &m_backend;
 };
 
 
@@ -82,13 +80,11 @@ public:
                                 bool includeNoDates )const;
     QArray<int> overDue()const;
 
-    friend void OPimTodoXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 //@{
     UIDArray sorted( const UIDArray&, bool, int, int, const QArray<int>& )const;
 //@}
 private:
     void initDict( QAsciiDict<int> &dict ) const;
-    inline void finalizeRecord( OPimTodo& todo );
     QString toString( const OPimTodo&, const QIntDict<QString> & )const;
     QString toString( const QArray<int>& ints ) const;
     QMap<int, OPimTodo> m_events;

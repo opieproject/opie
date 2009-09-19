@@ -43,15 +43,13 @@
 
 namespace Opie {
 
-class OPimContactAccessBackend_XML;
-
 class OPimContactXmlHandler : public OPimXmlHandler
 {
 public:
-    OPimContactXmlHandler( QAsciiDict<int> &dict, OPimContactAccessBackend_XML &backend );
+    OPimContactXmlHandler( QAsciiDict<int> &dict, OPimContactAccessBackend &backend );
     void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 protected:
-    OPimContactAccessBackend_XML &m_backend;
+    OPimContactAccessBackend &m_backend;
 };
 
 
@@ -90,11 +88,7 @@ public:
     bool read( OPimXmlReader &rd );
     bool write( OAbstractWriter &wr );
 
-    friend void OPimContactXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
-
 private:
-
-    enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
 
     void addContact_p( const OPimContact &newcontact );
     void initDict( QAsciiDict<int> &dict ) const;
@@ -102,12 +96,12 @@ private:
     /* This function loads the xml-database or the journalfile */
     bool loadXml( Opie::Core::XMLElement *root, bool isJournal );
 
-
-    void updateJournal( const OPimContact& cnt, journal_action action );
+    void updateJournal( const OPimContact& cnt, OPimRecord::ChangeAction action );
     void removeJournal();
 
 protected:
     bool m_changed;
+    bool m_journalEnabled;
     QString m_journalName;
     QString m_fileName;
     QString m_appName;

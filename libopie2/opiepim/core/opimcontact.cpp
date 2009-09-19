@@ -983,7 +983,7 @@ void OPimContact::save( QString &buf ) const
         int key = it.key();
         if ( !value.isEmpty() )
         {
-            if ( key == Qtopia::AddressCategory || key == Qtopia::AddressUid )
+            if ( key == Qtopia::AddressCategory || key == Qtopia::AddressUid || key == FIELDID_ACTION )
                 continue;
 
             key -= Qtopia::AddressCategory + 1;
@@ -995,6 +995,11 @@ void OPimContact::save( QString &buf ) const
     if ( categories().count() > 0 )
         buf += "Categories=\"" + idsToString( categories() ) + "\" ";
     buf += "Uid=\"" + QString::number( uid() ) + "\" ";
+
+    ChangeAction action = this->action();
+    if( action != ACTION_ADD )
+        buf += "change_action=\"" + actionToStr( action ) + "\" ";
+    
     // You need to close this yourself
 }
 
@@ -1302,4 +1307,11 @@ void OPimContact::setUid( int i )
     OPimRecord::setUid( i );
     replace( Qtopia::AddressUid , QString::number( i ) );
 }
+
+OPimRecord::ChangeAction OPimContact::action() const
+{
+    return strToAction( find( FIELDID_ACTION ) );
+}
+
+
 }

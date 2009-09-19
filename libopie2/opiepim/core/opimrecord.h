@@ -49,6 +49,13 @@
 
 namespace Opie
 {
+
+
+/**
+    * Field code for journal / changelog action field
+    */
+const int FIELDID_ACTION = 100000;
+
 /**
  * This is the base class for
  * all PIM Records
@@ -57,6 +64,8 @@ namespace Opie
 class OPimRecord : public Qtopia::Record
 {
   public:
+    enum ChangeAction { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
+    
     /**
      * c'tor
      * uid of 0 isEmpty
@@ -181,12 +190,16 @@ class OPimRecord : public Qtopia::Record
     virtual bool loadFromStream( QDataStream& );
     virtual bool saveToStream( QDataStream& stream ) const;
 
+    virtual ChangeAction action() const = 0;
+    
   protected:
     // need to be const cause it is called from const methods
     mutable int m_lastHit;
     void setLastHitField( int lastHit ) const;
     Qtopia::UidGen &uidGen();
     //    QString crossToString()const;
+    static QString actionToStr( ChangeAction action );
+    static ChangeAction strToAction( const QString &str );
 
   private:
     class OPimRecordPrivate;
