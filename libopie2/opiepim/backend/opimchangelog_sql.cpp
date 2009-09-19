@@ -124,18 +124,21 @@ void OPimChangeLog_SQL::addDeleteEntry( int uid )
 {
     if( m_enabled && m_peersSynced ) {
         QString qu;
-        if( entryExists( uid, true ) ) {
-            // The record was added since the last sync. Since nobody else
-            // "knows" about this record we just delete all entries for it
-            // (although there should only be one ADD record in this case!)
-            // Just to be safe, we only delete entries since the last sync
-            qu = "DELETE FROM " + m_logTable;
-            qu += " WHERE uid = \"" + QString::number( uid ) + "\"";
-            qu += " AND logid > (SELECT COALESCE(MAX(lastsynclogid),0) ";
-            qu += "    FROM " + m_peerTable + ")";
-        }
-        else {
-            qu = "INSERT INTO " + m_logTable + " ( uid, chgtype )";
+
+        // Find out if there is an ADD entry for this record since
+        // the last sync
+        bool newRecord = entryExists( uid, true );
+
+        // Any entries for this record since the last sync are no longer useful
+        qu = "DELETE FROM " + m_logTable;
+        qu += " WHERE uid = \"" + QString::number( uid ) + "\"";
+        qu += " AND logid > (SELECT COALESCE(MAX(lastsynclogid),0) ";
+        qu += "    FROM " + m_peerTable + ")";
+        
+        if( !newRecord ) {
+            // This record was added prior to the last sync, thus we need
+            // to record the fact that it was deleted for the next sync
+            qu += "; INSERT INTO " + m_logTable + " ( uid, chgtype )";
             qu += " VALUES ( " + QString::number( uid ) + ", \"D\" )";
         }
         OSQLRawQuery qry( qu );
