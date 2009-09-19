@@ -778,7 +778,7 @@ void OPimTodoAccessBackendSQL::removeAllCompleted(){
     qu += query + " );";
 
     // Put remove of custom entries in this query to speed up..
-    qu += "DELETE FORM custom_data WHERE (";
+    qu += "DELETE FROM custom_data WHERE (";
     query = "";
 
     for ( uint i = 0; i < completed_uids.size(); i++ ){
