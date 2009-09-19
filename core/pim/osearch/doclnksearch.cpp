@@ -47,9 +47,10 @@ DocLnkSearch::~DocLnkSearch()
     cfg.writeEntry( "search_content", actionSearchInFiles->isOn() );
 }
 
-void DocLnkSearch::load()
+bool DocLnkSearch::load()
 {
     _apps = new DocLnkSet(QPEApplication::documentDir());
+    return true;
 }
 
 bool DocLnkSearch::searchFile( AppLnk *app )
@@ -68,7 +69,7 @@ bool DocLnkSearch::searchFile( AppLnk *app )
         if ( f.open(IO_ReadOnly) ) {
             QTextStream t( &f );
             while ( !t.eof() ) {
-                if (_search.match( t.readLine()) != -1) {
+                if (m_search.match( t.readLine()) != -1) {
                     found = true;
                     break;
                 }
@@ -82,7 +83,7 @@ bool DocLnkSearch::searchFile( AppLnk *app )
 void DocLnkSearch::insertItem( void *rec )
 {
     (void)new DocLnkItem( this, (DocLnk*)rec );
-    _resultCount++;
+    m_resultCount++;
 }
 
 

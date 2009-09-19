@@ -194,11 +194,10 @@ ConfigDlg::ConfigDlg () : QDialog ()
     color_grid->setMargin(3);
     color_grid->setSpacing(3);
 
-    QLabel *label;
     QStringList color;
     config.setGroup("colors");
 
-    label = new QLabel(tr("Key Color"), color_grid);
+    new QLabel(tr("Key Color"), color_grid);
     keycolor_button = new QPushButton(color_grid);
     connect(keycolor_button, SIGNAL(clicked()), SLOT(keyColorClicked()));
     keycolor_button->setFlat(TRUE);
@@ -215,14 +214,14 @@ ConfigDlg::ConfigDlg () : QDialog ()
     keycolor_button->setPalette(QPalette(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt())));
 
 
-    label = new QLabel(tr("Key Pressed Color"), color_grid);
+    new QLabel(tr("Key Pressed Color"), color_grid);
     keycolor_pressed_button = new QPushButton(color_grid);
     connect(keycolor_pressed_button, SIGNAL(clicked()), SLOT(keyColorPressedClicked()));
     keycolor_pressed_button->setFlat(TRUE);
     color = config.readListEntry("keycolor_pressed", QChar(','));
     keycolor_pressed_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
-    label = new QLabel(tr("Line Color"), color_grid);
+    new QLabel(tr("Line Color"), color_grid);
     keycolor_lines_button = new QPushButton(color_grid);
     connect(keycolor_lines_button, SIGNAL(clicked()), SLOT(keyColorLinesClicked()));
     keycolor_lines_button->setFlat(TRUE);
@@ -230,14 +229,14 @@ ConfigDlg::ConfigDlg () : QDialog ()
     keycolor_lines_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
 
-    label = new QLabel(tr("Text Color"), color_grid);
+    new QLabel(tr("Text Color"), color_grid);
     textcolor_button = new QPushButton(color_grid);
     connect(textcolor_button, SIGNAL(clicked()), SLOT(textColorClicked()));
     textcolor_button->setFlat(TRUE);
     color = config.readListEntry("textcolor", QChar(','));
     textcolor_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
-    label = new QLabel("", color_grid); // a spacer so the above buttons dont expand
+    QLabel *label = new QLabel("", color_grid); // a spacer so the above buttons don't expand
     label->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     /* FIXME: hacked spacer height */
     QSpacerItem *spacer = new QSpacerItem(0, 300, QSizePolicy::Expanding, QSizePolicy::Maximum);

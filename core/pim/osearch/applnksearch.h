@@ -30,7 +30,7 @@ public:
     virtual void setSearch(QRegExp);
 
 protected:
-    virtual void load();
+    virtual bool load();
     virtual int search();
     virtual void insertItem( void* );
     virtual bool searchFile(AppLnk*) { return false; };

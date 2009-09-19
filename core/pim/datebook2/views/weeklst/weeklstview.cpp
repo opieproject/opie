@@ -260,6 +260,8 @@ void WeekLstView::addEvent( const QDateTime &start, const QDateTime &end )
 
 WeekLstViewParentWidget::WeekLstViewParentWidget( QWidget* parent, const char* name, WFlags fl )
     : QWidget(parent, name, fl)
+    , m_scroll(0)
+    , m_header(0)
 {
 }
 

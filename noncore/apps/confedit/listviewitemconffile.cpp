@@ -70,7 +70,7 @@ void ListViewItemConfFile::parseFile()
       //odebug << "got group"+s << oendl;
       group = s.mid(1,s.length()-2);
       if (!groupItem)
-        groupItem = new ListViewItemConfigEntry(this, tr("no group") );
+        new ListViewItemConfigEntry(this, tr("no group") );
 
       groupItem = new ListViewItemConfigEntry(this, group );
       insertItem( groupItem );

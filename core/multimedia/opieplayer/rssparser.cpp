@@ -17,9 +17,13 @@
 #include <qlist.h>
 
 RssParser::RssParser()
+    : tag(NoneTag)
+    , Item(0)
+    , channel(0)
+    , image(0)
+    , isItem(false)
+    , htmlString()
 {
-    channel = 0;
-    isItem = false;
 }
 
 RssParser::~RssParser()

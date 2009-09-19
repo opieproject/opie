@@ -247,7 +247,9 @@ VirtualDateBookReader::VirtualDateBookReader( SyncAccessManager *manager )
 void VirtualDateBookReader::read( QTextStream &stream )
 {
     ODateBookAccess *sourceDB = m_manager->dateBookAccess();
-    sourceDB->reload();
+    if (!sourceDB->load())
+        return;
+
     ODateBookAccessBackend_XML dest( QString::null );
 
     // Copy items from source to destination
@@ -256,7 +258,10 @@ void VirtualDateBookReader::read( QTextStream &stream )
     for ( uint i = 0; i < uidList.count(); ++i ) {
         odebug << "Adding uid: " << uidList[i] << "" << oendl;
         OPimRecord* rec = sourceDB->record( uidList[i] );
-        dest.add( *OPimEvent::safeCast( rec ) );
+        OPimEvent* event = OPimEvent::safeCast( rec );
+        if ( event )
+            dest.add( *OPimEvent::safeCast( rec ) );
+
         delete rec;
     }
 
@@ -304,7 +309,9 @@ VirtualContactReader::VirtualContactReader( SyncAccessManager *manager )
 void VirtualContactReader::read( QTextStream &stream )
 {
     OPimContactAccess *sourceDB = m_manager->contactAccess();
-    sourceDB->load();
+    if (!sourceDB->load())
+        return;
+
     OPimContactAccessBackend_XML dest( QString::null );
 
     // Copy items from source to destination
@@ -319,7 +326,8 @@ void VirtualContactReader::read( QTextStream &stream )
 
     // Write out the stream
     OTextStreamWriter wr( &stream );
-    dest.write( wr );
+    if ( !dest.write( wr ) )
+	odebug << "Stream write out failed" << oendl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////

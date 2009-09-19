@@ -2207,15 +2207,14 @@ QImage OImageEffect::sample(QImage &src, int w, int h)
     // sample each row
     if(src.depth() > 8){ // DirectClass source image
         unsigned int *srcData, *destData;
-        unsigned int *pixels;
-        pixels = (unsigned int *)malloc(src.width()*sizeof(unsigned int));
+        unsigned int *pixels = (unsigned int *)(malloc(src.width()*sizeof(unsigned int)));
         if(!pixels){
             owarn << "Unable to allocate pixels buffer" << oendl;
-            free(pixels);
             free(x_offset);
             free(y_offset);
             return(src);
         }
+        memset(pixels, 0, sizeof(unsigned int) * src.width());
         j = (-1);
         for(y=0; y < h; ++y){
             destData = (unsigned int *)dest.scanLine(y);
@@ -2223,7 +2222,7 @@ QImage OImageEffect::sample(QImage &src, int w, int h)
                 // read a scan line
                 j = (int)(y_offset[y]);
                 srcData = (unsigned int *)src.scanLine(j);
-                (void)memcpy(pixels, srcData, src.width()*sizeof(unsigned int));
+                memcpy(pixels, srcData, src.width()*sizeof(unsigned int));
             }
             // sample each column
             for(x=0; x < w; ++x){
@@ -2235,18 +2234,18 @@ QImage OImageEffect::sample(QImage &src, int w, int h)
     }
     else{ // PsudeoClass source image
         unsigned char *srcData, *destData;
-        unsigned char *pixels;
-        pixels = (unsigned char *)malloc(src.width()*sizeof(unsigned char));
+        unsigned char *pixels = (unsigned char *)(malloc(src.width()*sizeof(unsigned char)));
         if(!pixels){
             owarn << "Unable to allocate pixels buffer" << oendl;
-            free(pixels);
             free(x_offset);
             free(y_offset);
             return(src);
         }
+        memset(pixels, 0, sizeof(unsigned char) * src.width());
+
         // copy colortable
         dest.setNumColors(src.numColors());
-        (void)memcpy(dest.colorTable(), src.colorTable(),
+        memcpy(dest.colorTable(), src.colorTable(),
                      src.numColors()*sizeof(unsigned int));
 
         // sample image
@@ -2257,7 +2256,7 @@ QImage OImageEffect::sample(QImage &src, int w, int h)
                 // read a scan line
                 j = (int)(y_offset[y]);
                 srcData = (unsigned char *)src.scanLine(j);
-                (void)memcpy(pixels, srcData, src.width()*sizeof(unsigned char));
+                memcpy(pixels, srcData, src.width()*sizeof(unsigned char));
             }
             // sample each column
             for(x=0; x < w; ++x){

@@ -127,6 +127,7 @@ tcp_connect(char *server)
 	struct sockaddr_in servaddr;
 	int l_true = 1;
 
+
 	if ((nslookup = gethostbyname(server)) != NULL)
 	{
 		memcpy(&servaddr.sin_addr, nslookup->h_addr, sizeof(servaddr.sin_addr));
@@ -145,6 +146,7 @@ tcp_connect(char *server)
 
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_port = htons(tcp_port_rdp);
+        memset(&servaddr.sin_zero, 0, sizeof(servaddr.sin_zero));
 
 	if (connect(sock, (struct sockaddr *) &servaddr, sizeof(struct sockaddr)) < 0)
 	{

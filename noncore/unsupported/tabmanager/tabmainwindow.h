@@ -22,10 +22,10 @@ public:
     emptyToolBar->setHorizontalStretchable(true);
 
     // Insert all of the buttons.
-    QToolButton *newFolder = new QToolButton(Resource::loadPixmap("fileopen"), "New Folder", 0, tabManager, SLOT(newFolder()), newToolBar);
-    QToolButton *newFile = new QToolButton(Resource::loadPixmap("new"), "New Application", 0, tabManager, SLOT(newApplication()), newToolBar);
-    QToolButton *editItem = new QToolButton(Resource::loadPixmap("edit"), "Edit", 0, tabManager, SLOT(editCurrentItem()), newToolBar);
-    QToolButton *deleteItem = new QToolButton(Resource::loadPixmap("trash"), "Delete", 0, tabManager, SLOT(removeItem()), newToolBar);
+    new QToolButton(Resource::loadPixmap("fileopen"), "New Folder", 0, tabManager, SLOT(newFolder()), newToolBar);
+    new QToolButton(Resource::loadPixmap("new"), "New Application", 0, tabManager, SLOT(newApplication()), newToolBar);
+    new QToolButton(Resource::loadPixmap("edit"), "Edit", 0, tabManager, SLOT(editCurrentItem()), newToolBar);
+    new QToolButton(Resource::loadPixmap("trash"), "Delete", 0, tabManager, SLOT(removeItem()), newToolBar);
 
   };
 

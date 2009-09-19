@@ -124,6 +124,7 @@ QGArray::QGArray()
 */
 
 QGArray::QGArray( int, int )
+    : shd(0)
 {
 }
 

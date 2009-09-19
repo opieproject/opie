@@ -47,9 +47,16 @@ UidGen Task::sUidGen( UidGen::Qtopia );
 /*!
   Creates a new, empty task.
 */
-Task::Task() : Record(), mDue( FALSE ),
-mDueDate( QDate::currentDate() ),
-mCompleted( FALSE ), mPriority( 3 ), mDesc()
+Task::Task()
+    : Record()
+    , mDue( FALSE )
+    , mDueDate( QDate::currentDate() )
+    , mCompleted( false )
+    , mPriority( 3 )
+    , mDesc()
+    , d( 0 )
+    , recordId( 0 )
+    , recordInfo( 0 )
 {
 }
 

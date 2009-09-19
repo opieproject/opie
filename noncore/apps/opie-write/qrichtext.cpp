@@ -929,6 +929,9 @@ void QTextCursor::gotoLineEnd()
 	idx = para->length() - 1;
     } else {
 	c = para->lineStartOfLine( ++line, &indexOfLineStart );
+        if ( !c )
+            return;
+
 	indexOfLineStart--;
 	idx = indexOfLineStart;
     }

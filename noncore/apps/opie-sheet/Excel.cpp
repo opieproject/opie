@@ -1013,14 +1013,16 @@ void ExcelBook::HandleFormat(ExcelBREC* rec)
     int format;
     data   = GetDataOfBREC(rec);
     format = Integer2Byte(data[2],data[3]);
+#if 0
     xfrec  = GetFormatting(format);
-    /*int idx;
+    int idx;
     idx=XFRecords.count()-1;
     XFRecords[idx]->code=xfrec->code;
     XFRecords[idx]->type=xfrec->type;
     XFRecords[idx]->format="manos";
     //XFRecords[XFRecords.count()-1]=xfrec;
-    printf("6\r\n");*/
+    printf("6\r\n");
+#endif
 };
 
 void ExcelBook::HandleXF(ExcelBREC* rec)
@@ -1083,6 +1085,7 @@ void ExcelBook::HandleFormula(ExcelSheet* sheet, ExcelBREC* record)
                 int sz;
                 sz=Integer2Byte(data[20],data[21]);// size of the formula
                 char* formuladata = new char[sz];
+                memset(formuladata, 0, sizeof(char) * sz);
                 for(int w1=0;w1<sz;w1++)
                 {
                     formuladata[w1]=data[22+w1];

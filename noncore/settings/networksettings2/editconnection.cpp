@@ -171,10 +171,9 @@ NetworkSetup * EditNetworkSetup::getTmpCollection( void ) {
         // NN here contains the netnode of the
         // current item -> this node needs to
         // be stored in the collection
-        if( NNI == 0 ||
-            it->text(0) != NNI->nodeClass()->name() ) {
+        if( NN && ( !NNI || it->text( 0 ) != NNI->nodeClass()->name() ) ) {
           // new item not in previous collection
-          ANetNodeInstance * NNI = NN->createInstance();
+          NNI = NN->createInstance();
           NNI->initialize();
           // this node type not in collection
           TmpCollection.append( NNI );
@@ -255,8 +254,10 @@ void EditNetworkSetup::setNetworkSetup( NetworkSetup * NC ) {
             return;
           }
 
+	  // XXX - this assignment gets overwritten by the first statement in the
+	  // while loop
           // it now contains selected radio
-          NN = (*Mapping)[it];
+//          NN = (*Mapping)[it];
         } else {
           // automatic selection
           if( NNI == 0 ||  it->text(0) != NNI->nodeClass()->name() ) {
@@ -636,8 +637,10 @@ bool EditNetworkSetup::haveCompleteConfig( QListViewItem * it ) {
           return 0; // no not complete -> a radio should have been chkd
         }
 
+	// XXX - this assignment gets overwritten by the first statement in the
+	// while loop
         // it now contains selected radio
-        NN = (*Mapping)[it];
+//        NN = (*Mapping)[it];
       } else {
         // automatic selection
         it = it->firstChild();

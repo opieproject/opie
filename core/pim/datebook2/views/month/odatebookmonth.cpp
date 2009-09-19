@@ -46,7 +46,7 @@ static const QColor s_colorHolidayLight= QColor(150, 255, 150);
 class ODateBookMonthTablePrivate
 {
 public:
-    ODateBookMonthTablePrivate() {};
+    ODateBookMonthTablePrivate() : onMonday( false ) {};
     ~ODateBookMonthTablePrivate() { mMonthEvents.clear(); };
 
     OPimOccurrence::List mMonthEvents;
@@ -459,8 +459,10 @@ public:
 
 ODayItemMonth::ODayItemMonth( QTable *table, EditType et, const QString &t )
         : QTableItem( table, et, t )
+	, dy( 0 )
+	, typ( Calendar::Day::ThisMonth )
+	, d( new ODayItemMonthPrivate() )
 {
-    d = new ODayItemMonthPrivate();
 }
 
 ODayItemMonth::~ODayItemMonth()

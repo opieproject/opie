@@ -209,13 +209,16 @@ void MainWindow::setCurrent(QListViewItem *item)
         QButton *button;
         for (uint i = 0; i < acts.count(); i++) {
             button = buttonMap[i];
-            if (!button) {
+            if (!button && acts[i]) {
                 owarn << " no button for " << *acts[i] << oendl;
                 button = new QPushButton( buttonBox );
                 buttonMap.insert( i,  button );
                 signalMapper->setMapping(button, i );
                 connect(button, SIGNAL(clicked() ), signalMapper, SLOT(map() ) );
-            }
+            } else if (!acts[i]) {
+		owarn << "No action for index " << i << oendl;
+		continue;
+	    }
             button->setText( *acts[i] );
             button->show();
         }
@@ -252,7 +255,7 @@ void MainWindow::showPopup()
 void MainWindow::setSearch( const QString &key )
 {
     searchTimer->stop();
-    _searchString = key;
+    m_searchString = key;
     searchTimer->start( 300 );
 }
 
@@ -262,10 +265,10 @@ void MainWindow::searchStringChanged()
     OWait("setting search string");
 #endif
     searchTimer->stop();
-    QString ss = _searchString;
-    //ss = Global::stringQuote( _searchString );
+    QString ss = m_searchString;
+    //ss = Global::stringQuote( m_searchString );
 //    if (actionWholeWordsOnly->isOn())
-//        ss = "\\s"+_searchString+"\\s";
+//        ss = "\\s"+m_searchString+"\\s";
 //    Opie:Core::odebug << " set searchString >" << ss << "<" << oendl;
     QRegExp re( ss );
     re.setCaseSensitive( actionCaseSensitiv->isOn() );

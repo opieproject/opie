@@ -74,7 +74,7 @@ private:
     QToolButton* ClearSearchText;
     QLabel* LabelEnterText;
 
-    QString _searchString;
+    QString m_searchString;
     QList<SearchGroup> searches;
     QAction *SearchAllAction;
     QAction *actionCaseSensitiv;

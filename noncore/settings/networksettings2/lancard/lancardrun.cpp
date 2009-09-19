@@ -127,11 +127,10 @@ InterfaceInfo * LanCardRun::getInterface( void ) {
 }
 
 bool LanCardRun::handlesInterface( const QString & S ) {
-    InterfaceInfo * II;
-    II = NSResources->system().interface( S );
-    if( ( II = NSResources->system().interface( S ) ) ) {
+    InterfaceInfo* II = NSResources->system().interface( S );
+    if( II )
       return handlesInterface( *II );
-    }
+
     return Pat.match( S ) >= 0;
 }
 

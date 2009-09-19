@@ -29,12 +29,12 @@ ConsoleConfigWidget::ConsoleConfigWidget( const QString& name, QWidget* parent,
     m_lay->addWidget(m_env);
 
     QHBox *hbox = new QHBox(this);
-    label = new QLabel(tr("Name :"), hbox);
+    new QLabel(tr("Name :"), hbox);
     m_name = new QLineEdit(hbox);
     m_lay->addWidget(hbox);
 
     hbox = new QHBox(this);
-    label = new QLabel(tr("Value :"), hbox);
+    new QLabel(tr("Value :"), hbox);
     m_value = new QLineEdit(hbox);
     m_lay->addWidget(hbox);
 

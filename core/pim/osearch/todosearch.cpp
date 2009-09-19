@@ -46,18 +46,18 @@ TodoSearch::~TodoSearch()
 }
 
 
-void TodoSearch::load()
+bool TodoSearch::load()
 {
     _todos = new OPimTodoAccess();
-    _todos->load();
+    return _todos->load();
 }
 
 int TodoSearch::search()
 {
-    OPimRecordList<OPimTodo> results = _todos->matchRegexp(_search);
+    OPimRecordList<OPimTodo> results = _todos->matchRegexp(m_search);
     for (uint i = 0; i < results.count(); i++)
         insertItem( new OPimTodo( results[i] ));
-    return _resultCount;
+    return m_resultCount;
 }
 
 void TodoSearch::insertItem( void *rec )
@@ -66,7 +66,7 @@ void TodoSearch::insertItem( void *rec )
     if (!actionShowCompleted->isOn() &&
         todo->isCompleted() ) return;
     (void)new TodoItem( this, todo );
-    _resultCount++;
+    m_resultCount++;
 }
 
 QPopupMenu* TodoSearch::popupMenu()

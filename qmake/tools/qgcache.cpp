@@ -81,7 +81,19 @@ class QCList : private QPtrList<QCacheItem>
 friend class QGCacheIterator;
 friend class QCListIt;
 public:
-    QCList()	{}
+    QCList()
+#if defined(QT_DEBUG)
+        : inserts(0)
+	, insertCosts(0)
+	, insertMisses(0)
+        , finds(0)
+        , hits(0)
+        , hitCosts(0)
+        , dumps(0)
+        , dumpCosts(0)
+#endif
+	{}
+
    ~QCList();
 
     void	insert( QCacheItem * );		// insert according to priority
@@ -250,16 +262,16 @@ inline QCDict::~QCDict()
 
 QGCache::QGCache( int maxCost, uint size, KeyType kt, bool caseSensitive,
 		  bool copyKeys )
+    : keytype(kt)
+    , lruList(new QCList)
+    , dict(new QCDict( size, kt, caseSensitive, FALSE ))
+    , mCost(maxCost)
+    , tCost(0)
+    , copyk(((keytype == AsciiKey) && copyKeys))
 {
-    keytype = kt;
-    lruList = new QCList;
     Q_CHECK_PTR( lruList );
     lruList->setAutoDelete( TRUE );
-    copyk   = ((keytype == AsciiKey) && copyKeys);
-    dict    = new QCDict( size, kt, caseSensitive, FALSE );
     Q_CHECK_PTR( dict );
-    mCost   = maxCost;
-    tCost   = 0;
 #if defined(QT_DEBUG)
     lruList->inserts	  = 0;
     lruList->insertCosts  = 0;
@@ -278,6 +290,12 @@ QGCache::QGCache( int maxCost, uint size, KeyType kt, bool caseSensitive,
 
 QGCache::QGCache( const QGCache & )
     : QPtrCollection()
+    , keytype(StringKey)
+    , lruList(0)
+    , dict(0)
+    , mCost(0)
+    , tCost(0)
+    , copyk(false)
 {
 #if defined(QT_CHECK_NULL)
     qFatal( "QGCache::QGCache(QGCache &): Cannot copy a cache" );

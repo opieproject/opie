@@ -236,15 +236,15 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
              this, SLOT(slotKeyPressed(FKey,ushort,ushort,bool)));
 
     QGroupBox *dimentions = new QGroupBox(2, Qt::Horizontal, tr("Dimensions"), this);
-    QLabel *l = new QLabel(tr("Rows"), dimentions);
+    new QLabel(tr("Rows"), dimentions);
     m_rowBox = new QSpinBox(1, 15, 1, dimentions);
     connect (m_rowBox, SIGNAL(valueChanged(int)), this, SLOT(slotChangeRows(int)));
-    l = new QLabel(tr("Columns"), dimentions);
+    new QLabel(tr("Columns"), dimentions);
     m_colBox = new QSpinBox(1, 15, 1, dimentions);
     connect (m_colBox, SIGNAL(valueChanged(int)), this, SLOT(slotChangeCols(int)));
 
     QGroupBox *editKey = new QGroupBox(2, Qt::Horizontal, tr("Edit Key"), this);
-    l = new QLabel(tr("Label"), editKey);
+    new QLabel(tr("Label"), editKey);
     m_labels = new QComboBox(true, editKey);
     m_labels->setInsertionPolicy(QComboBox::AtCurrent);
     m_labels->insertItem("");
@@ -257,14 +257,14 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
     connect (m_labels, SIGNAL(activated(int)), this, SLOT(slotChangeIcon(int)));
     connect (m_labels, SIGNAL(textChanged(const QString&)), this, SLOT(slotChangeLabelText(const QString&)));
 
-    l = new QLabel(tr("Q Keycode", "Qt Key Code for the OnScreen Keyboard"), editKey);
+    new QLabel(tr("Q Keycode", "Qt Key Code for the OnScreen Keyboard"), editKey);
     m_qvalues = new QComboBox(true, editKey);
     m_qvalues->setInsertionPolicy(QComboBox::AtTop);
     m_qvalues->setDuplicatesEnabled(false);
     m_qvalues->insertItem("");
     connect (m_qvalues, SIGNAL(textChanged(const QString&)), this, SLOT(slotChangeQCode(const QString&)));
 
-    l = new QLabel(tr("Unicode Value", "The Unicode value of the key"), editKey);
+    new QLabel(tr("Unicode Value", "The Unicode value of the key"), editKey);
     m_uniValues = new QComboBox(true, editKey);
     m_uniValues->setInsertionPolicy(QComboBox::AtTop);
     m_uniValues->setDuplicatesEnabled(false);

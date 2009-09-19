@@ -217,9 +217,9 @@ bool OPimResolver::add( const QString& service,  const OPimRecord& rec) {
             return false;
     }else{
         OPimBase* base = backend( service );
-        if (!base ) return false;
+        if (!base || base->load())
+	    return false;
 
-        base->load();
         base->add( rec );
         base->save();
         delete base;

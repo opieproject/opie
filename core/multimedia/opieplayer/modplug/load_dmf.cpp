@@ -100,6 +100,7 @@ BOOL CSoundFile::ReadDMF(const BYTE *lpStream, DWORD dwMemLength)
 	if ((pfh->id != 0x464d4444) || (!pfh->version) || (pfh->version & 0xF0)) return FALSE;
 	dwMemPos = 66;
 	memcpy(m_szNames[0], pfh->songname, 30);
+	memset(smplflags, 0, sizeof(smplflags));
 	m_szNames[0][30] = 0;
 	m_nType = MOD_TYPE_DMF;
 	m_nChannels = 0;

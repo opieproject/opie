@@ -63,9 +63,9 @@ FindDialog::FindDialog(QWidget *parent)
 
     groupType=new QVButtonGroup(tr("&Type"), widgetFind);
     groupType->setGeometry(10, 150, 215, 90);
-    QRadioButton *radio=new QRadioButton(tr("&Find"), groupType);
-    radio=new QRadioButton(tr("&Replace"), groupType);
-    radio=new QRadioButton(tr("Replace &all"), groupType);
+    new QRadioButton(tr("&Find"), groupType);
+    new QRadioButton(tr("&Replace"), groupType);
+    new QRadioButton(tr("Replace &all"), groupType);
     groupType->setButton(0);
     connect(groupType, SIGNAL(clicked(int)), this, SLOT(typeChanged(int)));
 

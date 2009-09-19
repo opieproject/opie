@@ -183,11 +183,21 @@ static QStringList split_value_list(const QString &vals, bool do_semicolon=FALSE
 }
 
 QMakeProject::QMakeProject()
+    : test_status(TestNone)
+    , scope_block(0)
+    , scope_flag(0)
+    , pfile()
+    , cfile()
+    , prop(0)
 {
-    prop = NULL;
 }
 
 QMakeProject::QMakeProject(QMakeProperty *p)
+    : test_status(TestNone)
+    , scope_block(0)
+    , scope_flag(0)
+    , pfile()
+    , cfile()
 {
     prop = p;
 }
@@ -1038,7 +1048,7 @@ QMakeProject::doProjectCheckReqs(const QStringList &deps, QMap<QString, QStringL
 	if(invert_test)
 	    chk = chk.right(chk.length() - 1);
 
-	bool test;
+	bool test = false;
 	int lparen = chk.find('(');
 	if(lparen != -1) { /* if there is an lparen in the chk, it IS a function */
 	    int rparen = chk.findRev(')');

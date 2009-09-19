@@ -22,10 +22,11 @@ static Opie::Ui::OWait *wait = 0;
 #endif
 
 SearchGroup::SearchGroup(QListView* parent, QString name)
-: OListViewItem(parent, name)
+    : OListViewItem(parent, name)
+    , m_resultCount(0)
+    , m_name(name)
+    , m_loaded(false)
 {
-    _name = name;
-    loaded = false;
 }
 
 
@@ -37,42 +38,42 @@ SearchGroup::~SearchGroup()
 void SearchGroup::expand()
 {
     //expanded = true;
-    if (_lastSearch != _search)
+    if (m_lastSearch != m_search)
         clearList();
 
-    if (_search.isEmpty())
+    if (m_search.isEmpty())
         return;
 
     OListViewItem *dummy = new OListViewItem( this, "searching...");
     setOpen( true );
     repaint();
     int res_count = realSearch();
-    setText(0, _name + " - " + _search.pattern() + " (" + QString::number( res_count ) + ")");
+    setText(0, m_name + " - " + m_search.pattern() + " (" + QString::number( res_count ) + ")");
     delete dummy;
     repaint();
 }
 
 void SearchGroup::doSearch()
 {
-    if (_lastSearch == _search)
+    if (m_lastSearch == m_search)
         return;
     
     clearList();
     
-    if (_search.isEmpty())
+    if (m_search.isEmpty())
         return;
     
-    _resultCount = realSearch();
+    m_resultCount = realSearch();
 //    repaint();
 }
 
 void SearchGroup::setSearch(QRegExp re)
 {
-    if (re == _search)
+    if (re == m_search)
         return;
     
-    setText(0, _name+" - "+re.pattern() );
-    _search = re;
+    setText(0, m_name+" - "+re.pattern() );
+    m_search = re;
     
     if ( isOpen() )
         expand();
@@ -82,8 +83,8 @@ void SearchGroup::setSearch(QRegExp re)
 
 int SearchGroup::realSearch()
 {
-    if (_lastSearch == _search)
-        return _resultCount;
+    if (m_lastSearch == m_search)
+        return m_resultCount;
     
 #ifndef NEW_OWAIT
     if (!wait)
@@ -95,17 +96,17 @@ int SearchGroup::realSearch()
     Opie:Core::odebug << "********** NEW_OWAIT *************" << oendl;
     OWait( "searching" );
 #endif
-    if (!loaded)
+    if (!m_loaded)
         load();
     
-    _resultCount = 0;
-    _resultCount = search();
-    _lastSearch = _search;
-    setText(0, _name + " - " + _search.pattern() + " (" + QString::number( _resultCount ) + ")");
+    m_resultCount = 0;
+    m_resultCount = search();
+    m_lastSearch = m_search;
+    setText(0, m_name + " - " + m_search.pattern() + " (" + QString::number( m_resultCount ) + ")");
 
 #ifndef NEW_OWAIT
     wait->hide();
 #endif
-    return _resultCount;
+    return m_resultCount;
 }
 

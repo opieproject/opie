@@ -251,9 +251,9 @@ private:
  */
 template <class T>
 OPimAccessTemplate<T>::OPimAccessTemplate( BackEnd* end )
-    : OTemplateBase<T>(), m_backEnd( end )
+    : OTemplateBase<T>(), m_backEnd( end ), d( 0 )
 {
-    if (end )
+    if ( end )
         end->setFrontend( this );
 }
 template <class T>

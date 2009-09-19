@@ -24,7 +24,9 @@ using Opie::Security::MultiauthPluginObject;
 using Opie::Security::MultiauthConfigWidget;
 /// keeps information about MultiauthPluginObject plugins
 struct MultiauthPlugin {
-    MultiauthPlugin() : library( 0 ), iface( 0 ), pluginObject( 0 ) {}
+    MultiauthPlugin()
+	: library( 0 ), iface( 0 ), pluginObject( 0 ), name(), active( false )
+	, pos( 0 ) {}
     /// plugin file
     QLibrary *library;
     /// the plugin object interface
@@ -288,7 +290,13 @@ static void test_and_start() {
         pluginListLayout->setAlignment( Qt::AlignTop );
         QVGroupBox *warningBox = new QVGroupBox(tr("Important notice"), m_pluginListWidget, "noPlugins warning box");
         pluginListLayout->addWidget(warningBox);
-        QLabel * warningText = new QLabel( "<p>" + tr("To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one <em>opie-securityplugin-*</em> package! Once you have done that, you will be able to configure your PDA protection here.") + "</p>", warningBox );
+        new QLabel( "<p>" + tr("To be able to protect your PDA with one or "
+                               "more authentication plugins (for example, a "
+                               "simple PIN authentication), you must install "
+                               "at least one <em>opie-securityplugin-*</em> "
+                               "package! Once you have done that, you will be "
+                               "able to configure your PDA protection here.")
+                    + "</p>", warningBox );
 
         m_mainTW->addTab(m_pluginListWidget, "security/Security", tr( "Locking") );
     }

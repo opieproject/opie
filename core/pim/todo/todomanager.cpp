@@ -38,8 +38,12 @@ using namespace Todo;
 
 TodoManager::TodoManager( QObject *obj )
     : QObject( obj )
+    , m_db( 0 )
+    , m_ca( 0 )
+    , m_shCat( false )
+    , m_sortOrder( 0 )
+    , m_asc( false )
 {
-    m_db = 0l;
     m_cat.load( categoryFileName() );
 }
 

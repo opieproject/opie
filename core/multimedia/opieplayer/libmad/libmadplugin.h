@@ -109,7 +109,7 @@ private:
 
     LibMadPluginData *d;
     QString info;
-int bufferSize;
+    int bufferSize;
 };
 
 

@@ -173,7 +173,7 @@ void Wellenreiter::handleNotification( OPacket* p )
 
     while ( (o = it.current()) != 0 )
     {
-        QString name = it.current()->name();
+        QString name = o->name();
         if ( configwindow->parsePackets->isProtocolChecked( name ) )
         {
             QString action = configwindow->parsePackets->protocolAction( name );
@@ -392,7 +392,7 @@ bool Wellenreiter::checkDumpPacket( OPacket* p )
 
     while ( (o = it.current()) != 0 )
     {
-        QString name = it.current()->name();
+        QString name = o->name();
         if ( configwindow->capturePackets->isProtocolChecked( name ) )
         {
             QString action = configwindow->capturePackets->protocolAction( name );

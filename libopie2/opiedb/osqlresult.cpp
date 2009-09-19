@@ -84,7 +84,10 @@ QDateTime OSQLResultItem::dataToDateTime( int column, bool *ok ) {
 OSQLResult::OSQLResult( enum State state,
                         const OSQLResultItem::ValueList& list,
                         const OSQLError::ValueList& error )
-    : m_state( state ), m_list( list ), m_error( error )
+    : m_state( state )
+    , m_list( list )
+    , m_error( error )
+    , d( 0 )
 {
 
 }

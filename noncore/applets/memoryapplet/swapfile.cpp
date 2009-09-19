@@ -58,7 +58,7 @@ Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
     : QWidget( parent, name, f )
 {
     if ( !QFile::exists( "/proc/swaps" ) ) {
-        QLabel *text = new QLabel( tr( "Swap disabled in kernel" ), this );
+        new QLabel( tr( "Swap disabled in kernel" ), this );
         return;
     }
     // are we running as root?

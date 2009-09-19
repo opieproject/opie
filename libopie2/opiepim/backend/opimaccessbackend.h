@@ -145,10 +145,11 @@ private:
 
 template <class T>
 OPimAccessBackend<T>::OPimAccessBackend(int acc)
-    : m_acc( acc )
+    : d( 0 )
+    , m_front( 0 )
+    , m_read( 20 )
+    , m_acc( acc )
 {
-    m_front = 0l;
-    m_read = 20;
 }
 template <class T>
 OPimAccessBackend<T>::~OPimAccessBackend() {

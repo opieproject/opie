@@ -112,7 +112,7 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* par
     button = new QToolButton( icon_forward, tr("Forward"), "", browser, SLOT(forward()), toolbar );
     connect( browser, SIGNAL( forwardAvailable(bool) ), button, SLOT( setEnabled(bool) ) );
     button->setEnabled( FALSE );
-    button = new QToolButton( icon_home, tr("Home"), "", browser, SLOT(home()), toolbar );
+    new QToolButton( icon_home, tr("Home"), "", browser, SLOT(home()), toolbar );
 
     toolbar->addSeparator();
 

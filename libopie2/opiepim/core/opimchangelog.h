@@ -55,6 +55,7 @@ class OPimSyncPeer;
 class OPimChangeLog
 {
 public:
+    virtual ~OPimChangeLog() {}
     /**
      * Initialise the changelog
      */
@@ -140,8 +141,5 @@ private:
     QString m_peerName;
     QDateTime m_lastSyncDate;
 };
-
-
 }
-
 #endif

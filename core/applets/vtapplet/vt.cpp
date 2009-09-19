@@ -33,7 +33,9 @@ using namespace Opie::Core;
 #include <linux/vt.h>
 
 VTApplet::VTApplet()
-         :QObject( 0, "VTApplet" ), m_ourVT( 0 )
+    : QObject( 0, "VTApplet" )
+    , m_subMenu( 0 )
+    , m_ourVT( 0 )
 {
 }
 

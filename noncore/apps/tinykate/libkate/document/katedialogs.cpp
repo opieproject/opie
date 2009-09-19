@@ -142,7 +142,7 @@ HighlightDialogPage::HighlightDialogPage(HlManager *hlManager, ItemStyleList *st
   QGridLayout *grid = new QGridLayout(page1, 1, 1);
 
   QVGroupBox *dvbox1 = new QVGroupBox( i18n("Default Item Styles"), page1 );
-  /*QLabel *label = */new QLabel( i18n("Item:"), dvbox1 );
+  new QLabel( i18n("Item:"), dvbox1 );
   QComboBox *styleCombo = new QComboBox( false, dvbox1 );
   defaultStyleChanger = new StyleChanger( dvbox1 );
   for( int i = 0; i < hlManager->defaultStyles(); i++ ) {
@@ -164,7 +164,7 @@ HighlightDialogPage::HighlightDialogPage(HlManager *hlManager, ItemStyleList *st
   QGroupBox *gbox2 = new QGroupBox( 2, Qt::Horizontal, i18n("Item Style"), page2 );
   gbox2->layout()->setMargin(5);
 
-  QLabel *label = new QLabel( i18n("Highlight:"), gbox1 );
+  new QLabel( i18n("Highlight:"), gbox1 );
   hlCombo = new QComboBox( false, gbox1 );
   hlCombo->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Minimum ) );
 //  connect(new QPushButton(i18n("New"),modHl),SIGNAL(clicked()),this,SLOT(hlNew()));
@@ -176,12 +176,12 @@ HighlightDialogPage::HighlightDialogPage(HlManager *hlManager, ItemStyleList *st
   }
   hlCombo->setCurrentItem(hlNumber);
 
-  label = new QLabel( i18n("File Extensions:"), gbox1 );
+  new QLabel( i18n("File Extensions:"), gbox1 );
   wildcards  = new QLineEdit( gbox1 );
-  label = new QLabel( i18n("Mime Types:"), gbox1 );
+  new QLabel( i18n("Mime Types:"), gbox1 );
   mimetypes = new QLineEdit( gbox1 );
 
-  label = new QLabel( i18n("Item:"), gbox2 );
+  new QLabel( i18n("Item:"), gbox2 );
   itemCombo = new QComboBox( false, gbox2 );
   connect( itemCombo, SIGNAL(activated(int)), this, SLOT(itemChanged(int)) );
 
@@ -349,7 +349,7 @@ void HlEditDialog::initItemOptions(QVBox *co)
         (void) new QLabel(i18n("Context switch:"),tmp);
         ItemContext = new QComboBox(tmp);
         co->setSpacing(15);
-        QPushButton *delItem=new QPushButton(i18n("Delete this item"),co);
+        new QPushButton(i18n("Delete this item"),co);
 
 	/* init translation lists */
 	insertTranslationList("CharDetect","CharDetect",1);
@@ -364,6 +364,7 @@ void HlEditDialog::initItemOptions(QVBox *co)
 	insertTranslationList("dataType","dataType",0);
         ItemType->clear();
         for (int i=0; i<transTableCnt; i++) ItemType->insertItem(id2info[i].trans_i18n);
+
         connect(ItemType,SIGNAL(activated(int)),this,SLOT(ItemTypeChanged(int)));
         connect(ItemParameter,SIGNAL(textChanged(const QString&)),this,SLOT(ItemParameterChanged(const QString&)));
         connect(ItemAttribute,SIGNAL(activated(int)),this,SLOT(ItemAttributeChanged(int)));

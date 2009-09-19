@@ -34,11 +34,11 @@ using namespace Todo;
 
 struct SmallTodo::SmallTodoPrivate : public QShared {
 
-    SmallTodoPrivate() : QShared(), uid(-1) {};
+    SmallTodoPrivate() : QShared(), name(), uid(-1), complete(false) {};
     QString name;
     QStringList categories; // as real Names
     int uid;
-    bool complete:1;
+    bool complete;
     QDate date;
 
 

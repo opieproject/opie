@@ -60,9 +60,15 @@ void CenteringDialog::resizeEvent( QResizeEvent *e )
 // =====================================================================
 
 QueuedRequestRunner::QueuedRequestRunner( QFile *f, QWidget *parent )
-    : readyToDelete( FALSE ), waitingForMessages( FALSE ), file( 0 )
+    : readyToDelete( false )
+    , waitingForMessages( false )
+    , file( f )
+    , progressDialog( 0 )
+    , progressLabel( 0 )
+    , progressBar( 0 )
+    , steps( 0 )
+    , action()
 {
-    file = f;
     waitMsgs.setAutoDelete( TRUE );
     if ( parent ) {
 	progressDialog = new CenteringDialog( parent, 0, TRUE );

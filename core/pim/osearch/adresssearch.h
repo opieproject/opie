@@ -26,7 +26,7 @@ public:
     ~AdressSearch();
 
 protected:
-    virtual void load();
+    virtual bool load();
     virtual int search();
     virtual void insertItem( void* );
 

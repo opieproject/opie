@@ -1040,10 +1040,10 @@ void MainWindow::slotInsertCells()
 
     QVButtonGroup *group=new QVButtonGroup(tr("&Type"), &dialogInsert);
     group->setGeometry(10, 10, 160, 110);
-    QRadioButton *radio=new QRadioButton(tr("Shift cells &down"), group);
-    radio=new QRadioButton(tr("Shift cells &right"), group);
-    radio=new QRadioButton(tr("Entire ro&w"), group);
-    radio=new QRadioButton(tr("Entire &column"), group);
+    new QRadioButton(tr("Shift cells &down"), group);
+    new QRadioButton(tr("Shift cells &right"), group);
+    new QRadioButton(tr("Entire ro&w"), group);
+    new QRadioButton(tr("Entire &column"), group);
     group->setButton(0);
 
     if (dialogInsert.exec()==QDialog::Accepted)

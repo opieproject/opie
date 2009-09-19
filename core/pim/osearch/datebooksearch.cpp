@@ -52,18 +52,18 @@ DatebookSearch::~DatebookSearch()
 }
 
 
-void DatebookSearch::load()
+bool DatebookSearch::load()
 {
      _dates = new ODateBookAccess();
-     _dates->load();
+     return _dates->load();
 }
 
 int DatebookSearch::search()
 {
-    OPimRecordList<OPimEvent> results = _dates->matchRegexp(_search);
+    OPimRecordList<OPimEvent> results = _dates->matchRegexp(m_search);
     for (uint i = 0; i < results.count(); i++)
         insertItem( new OPimEvent( results[i] ) );
-    return _resultCount;
+    return m_resultCount;
 }
 
 void DatebookSearch::insertItem( void *rec )
@@ -78,7 +78,7 @@ void DatebookSearch::insertItem( void *rec )
           ev->lastHitField() == Qtopia::EndDateTime )
         ) return;
     new EventItem( this, ev );
-    _resultCount++;
+    m_resultCount++;
 }
 
 QPopupMenu* DatebookSearch::popupMenu()

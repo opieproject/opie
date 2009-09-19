@@ -3191,7 +3191,14 @@ struct QRegExpPrivate
 #endif
     QMemArray<int> captured; // what QRegExpEngine::search() returned last
 
-    QRegExpPrivate() { captured.fill( -1, 2 ); }
+    QRegExpPrivate()
+	: pattern()
+	, rxpattern()
+#ifndef QT_NO_REGEXP_WILDCARD
+	, wc(false)
+#endif
+	, min(false)
+	, t() { captured.fill( -1, 2 ); }
 };
 
 #ifndef QT_NO_REGEXP_OPTIM
