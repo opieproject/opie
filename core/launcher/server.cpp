@@ -507,17 +507,18 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         QCopEnvelope e( "QPE/Desktop", "syncPeerInfoSet()" );
 #endif
     }
-    else if (msg == "startAppSync(QString,bool)") {
+    else if (msg == "startAppSync(QString,bool,bool)") {
         QString app;
-        int slowSync;
+        int slowSyncRead, slowSyncWrite;
         stream >> app;
-        stream >> slowSync;
-        odebug << "startAppSync(\"" << app << "\", " << slowSync << ")" << oendl; 
-        bool status = transferServer->syncAccessManager()->startSync( app, slowSync );
+        stream >> slowSyncRead;
+        stream >> slowSyncWrite;
+        odebug << "startAppSync(\"" << app << "\", " << slowSyncRead << ", " << slowSyncWrite << ")" << oendl; 
+        bool status = transferServer->syncAccessManager()->startSync( app, slowSyncRead, slowSyncWrite );
 #ifndef QT_NO_COP
         QCopEnvelope e( "QPE/Desktop", "appSyncStarted(bool)" );
         e << status;
-        odebug << "slow sync is " << status << oendl;
+        odebug << "slow sync read is " << status << oendl;
 #endif
     }
     else if (msg == "finishAppSync(QString)") {

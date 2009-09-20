@@ -38,20 +38,23 @@
 #include <opie2/opimchangelog.h>
 #include <opie2/opimaccessfactory.h>
 
+#include <qmap.h>
+
 class SyncAccessManager {
 public:
     SyncAccessManager();
     virtual ~SyncAccessManager();
     
     void setPeerInfo( const QString &peerId, const QString &peerName );
-    bool startSync( const QString &app, bool slowSync );
+    bool startSync( const QString &app, bool slowSyncRead, bool slowSyncWrite );
     void syncDone( const QString &app );
+    bool isSlowSyncWrite( const QString &app );
 
     OPimContactAccess *contactAccess();
     ODateBookAccess *dateBookAccess();
     OPimTodoAccess *todoAccess();
     OPimMemoAccess *memoAccess();
-    
+
 private:
     OPimBase *appAccess( const QString &app );
     
@@ -61,6 +64,7 @@ private:
     ODateBookAccess *m_dateBookAccess;
     OPimTodoAccess *m_todoAccess;
     OPimMemoAccess *m_memoAccess;
+    QMap<QString,bool> m_slowSyncWrite;
 };
 
 #endif

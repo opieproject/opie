@@ -280,20 +280,16 @@ VirtualDateBookWriter::VirtualDateBookWriter( SyncAccessManager *manager )
 void VirtualDateBookWriter::write( OPimXmlReader &reader )
 {
     ODateBookAccess *destDB = m_manager->dateBookAccess();
-    destDB->clear();
+
+    if( m_manager->isSlowSyncWrite( "datebook" ) )
+        destDB->clear();
+    else
+        destDB->load();
+
     ODateBookAccessBackend_XML source( QString::null );
 
     // FIXME return code
-    source.read( reader );
-
-    // Copy items from source to destination
-    QArray<int> uidList = source.allRecords();
-    odebug << "Try to move data for datebook.. (" << uidList.count() << " items) " << oendl;
-    for ( uint i = 0; i < uidList.count(); ++i ) {
-        odebug << "Adding uid: " << uidList[i] << "" << oendl;
-        OPimEvent ev = source.find( uidList[i] );
-        destDB->add( ev );
-    }
+    source.readInto( reader, destDB );
 
     // Write the changes
     destDB->save();
@@ -340,20 +336,16 @@ VirtualContactWriter::VirtualContactWriter( SyncAccessManager *manager )
 void VirtualContactWriter::write( OPimXmlReader &reader )
 {
     OPimContactAccess *destDB = m_manager->contactAccess();
-    destDB->clear();
+
+    if( m_manager->isSlowSyncWrite( "addressbook" ) )
+        destDB->clear();
+    else
+        destDB->load();
+    
     OPimContactAccessBackend_XML source( QString::null );
 
     // FIXME return code
-    source.read( reader );
-
-    // Copy items from source to destination
-    QArray<int> uidList = source.allRecords();
-    odebug << "Try to move data for contacts.. (" << uidList.count() << " items) " << oendl;
-    for ( uint i = 0; i < uidList.count(); ++i ) {
-        odebug << "Adding uid: " << uidList[i] << "" << oendl;
-        OPimContact contact = source.find( uidList[i] );
-        destDB->add( contact );
-    }
+    source.readInto( reader, destDB );
 
     // Write the changes
     destDB->save();
@@ -398,20 +390,14 @@ void VirtualTodoListWriter::write( OPimXmlReader &reader )
 {
     OPimTodoAccess *destDB = m_manager->todoAccess();
     destDB->load(); // need to call this or internal opened flag won't be set
-    destDB->clear();
+
+    if( m_manager->isSlowSyncWrite( "todolist" ) )
+        destDB->clear();
+
     OPimTodoAccessXML source( QString::null );
 
     // FIXME return code
-    source.read( reader );
-
-    // Copy items from source to destination
-    QArray<int> uidList = source.allRecords();
-    odebug << "Try to move data for todolist.. (" << uidList.count() << " items) " << oendl;
-    for ( uint i = 0; i < uidList.count(); ++i ) {
-        odebug << "Adding uid: " << uidList[i] << "" << oendl;
-        OPimTodo todo = source.find( uidList[i] );
-        destDB->add( todo );
-    }
+    source.readInto( reader, destDB );
 
     // Write the changes
     destDB->save();
@@ -456,20 +442,14 @@ void VirtualNotesWriter::write( OPimXmlReader &reader )
 {
     OPimMemoAccess *destDB = m_manager->memoAccess();
     destDB->load(); // need to call this or internal opened flag won't be set
-    destDB->clear();
+
+    if( m_manager->isSlowSyncWrite( "notes" ) )
+        destDB->clear();
+
     OPimMemoAccessBackend_XML source;
 
     // FIXME return code
-    source.read( reader );
-
-    // Copy items from source to destination
-    QArray<int> uidList = source.allRecords();
-    odebug << "Try to move data for notes.. (" << uidList.count() << " items) " << oendl;
-    for ( uint i = 0; i < uidList.count(); ++i ) {
-        odebug << "Adding uid: " << uidList[i] << "" << oendl;
-        OPimMemo todo = source.find( uidList[i] );
-        destDB->add( todo );
-    }
+    source.readInto( reader, destDB );
 
     // Write the changes
     destDB->save();

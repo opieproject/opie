@@ -54,7 +54,7 @@ void SyncAccessManager::setPeerInfo( const QString &peerId, const QString &peerN
     m_peerName = peerName;
 }
 
-bool SyncAccessManager::startSync( const QString &app, bool slowSync )
+bool SyncAccessManager::startSync( const QString &app, bool slowSyncRead, bool slowSyncWrite )
 {
     // Note: function returns true if slow-sync is required (or error)
     OPimBase *access = appAccess( app );
@@ -66,9 +66,10 @@ bool SyncAccessManager::startSync( const QString &app, bool slowSync )
         else {
             OPimChangeLog *changelog = access->changeLog();
             if( changelog ) {
+                m_slowSyncWrite[ app ] = slowSyncWrite;
                 changelog->init();
                 OPimSyncPeer peer( m_peerId, m_peerName );
-                return changelog->startSync( peer, slowSync );
+                return changelog->startSync( peer, slowSyncRead );
             }
             else
                 return true;
@@ -91,6 +92,14 @@ void SyncAccessManager::syncDone( const QString &app )
     }
     else
         owarn << "syncDone: unrecognised application name \"" << app << "\"" << oendl;
+}
+
+bool SyncAccessManager::isSlowSyncWrite( const QString &app )
+{
+    if( m_slowSyncWrite.contains( app ) )
+        return m_slowSyncWrite[ app ];
+    else
+        return true;
 }
 
 OPimContactAccess *SyncAccessManager::contactAccess()
