@@ -227,7 +227,7 @@ void OPimChangeLog_SQL::syncDone()
     time_t t = time( NULL );
     qu += " VALUES ( \"" + m_peer.peerId() + "\"";
     qu += ", \"" + m_peer.peerName() + "\"";
-    qu += ", (SELECT COALESCE(MAX(logid) FROM " + m_logTable + "), 0)";
+    qu += ", (SELECT COALESCE(MAX(logid), 0) FROM " + m_logTable + ")";
     qu += ", " + QString::number(t) + " )";
     OSQLRawQuery qry2( qu );
     m_driver->query( &qry2 );
