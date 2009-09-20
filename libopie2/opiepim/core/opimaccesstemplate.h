@@ -225,6 +225,9 @@ public:
     void setSaneCacheSize( int );
 
     QArray<UID> records()const;
+
+    bool applyAction( int action, const T &rec );
+    
 protected:
     /**
      * invalidate the cache
@@ -635,6 +638,13 @@ UIDArray OPimAccessTemplate<T>::sortedSimple( bool ascending,
                                               const QArray<int>& cats ) const{
     return m_backEnd->sorted( ascending, sortOrder, sortFilter, cats );
 }
+
+template <class T>
+bool OPimAccessTemplate<T>::applyAction( int action, const T &rec )
+{
+    return m_backEnd->applyAction( action, rec );
+}
+
 }
 
 #endif

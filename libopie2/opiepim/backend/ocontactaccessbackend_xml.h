@@ -43,15 +43,6 @@
 
 namespace Opie {
 
-class OPimContactXmlHandler : public OPimXmlHandler
-{
-public:
-    OPimContactXmlHandler( QAsciiDict<int> &dict, OPimContactAccessBackend &backend );
-    void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
-protected:
-    OPimContactAccessBackend &m_backend;
-};
-
 
 /* the default xml implementation */
 /**
@@ -85,7 +76,7 @@ public:
     bool remove ( int uid );
     bool reload();
 
-    bool read( OPimXmlReader &rd );
+    bool readInto( OPimXmlReader &rd, OPimContactAccess *target );
     bool write( OAbstractWriter &wr );
 
 private:

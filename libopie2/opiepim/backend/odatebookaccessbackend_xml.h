@@ -33,6 +33,7 @@
 #include <qasciidict.h>
 
 #include <opie2/odatebookaccessbackend.h>
+#include <opie2/odatebookaccess.h>
 #include <opie2/opimio.h>
 
 namespace Opie {
@@ -40,10 +41,10 @@ namespace Opie {
 class OPimDateBookXmlHandler : public OPimXmlHandler
 {
 public:
-    OPimDateBookXmlHandler( QAsciiDict<int> &dict, ODateBookAccessBackend &backend );
+    OPimDateBookXmlHandler( QAsciiDict<int> &dict, ODateBookAccessBackend *backend );
     void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 protected:
-    ODateBookAccessBackend &m_backend;
+    ODateBookAccessBackend *m_backend;
 };
 
 
@@ -64,7 +65,7 @@ public:
     bool save();
 
     bool write( OAbstractWriter &wr );
-    bool read( OPimXmlReader &rd );
+    bool readInto( OPimXmlReader &rd, ODateBookAccess *target );
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;

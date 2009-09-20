@@ -109,7 +109,7 @@ bool OPimTodoAccessXML::load() {
     initDict(dict);
 
     // parse
-    OPimTodoXmlHandler handler( dict, *this );
+    OPimTodoXmlHandler handler( dict, this );
     OPimXmlMmapParser parser( handler );
     return parser.parse( m_file );
 }
@@ -119,12 +119,12 @@ bool OPimTodoAccessXML::reload() {
     return load();
 }
 
-bool OPimTodoAccessXML::read( OPimXmlReader &rd )
+bool OPimTodoAccessXML::readInto( OPimXmlReader &rd, OPimTodoAccess *target )
 {
     QAsciiDict<int> dict(26);
     initDict( dict );
 
-    OPimTodoXmlHandler handler( dict, *this );
+    OPimWriteBackXmlHandler<OPimTodo> handler( "Task", dict, target );
     OPimXmlStreamParser parser( handler );
     rd.read( parser );
     return true;
@@ -412,7 +412,7 @@ QArray<int> OPimTodoAccessXML::matchRegexp(  const QRegExp &r ) const
 
 ////////////////////////////////////////////////////////////////////////////
 
-OPimTodoXmlHandler::OPimTodoXmlHandler( QAsciiDict<int> &dict, OPimTodoAccessBackend &backend )
+OPimTodoXmlHandler::OPimTodoXmlHandler( QAsciiDict<int> &dict, OPimTodoAccessBackend *backend )
     : OPimXmlHandler( "Task", dict ), m_backend( backend )
 {
 }
@@ -424,7 +424,7 @@ void OPimTodoXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QStr
     for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
         todo.setCustomField(it.key(), it.data() );
 
-    m_backend.applyAction( todo.action(), todo );
+    m_backend->applyAction( todo.action(), todo );
 }
 
 }

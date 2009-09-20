@@ -350,12 +350,12 @@ void OPimContactAccessBackend_XML::addContact_p( const OPimContact &newcontact )
     m_uidToContact.insert( QString().setNum( newcontact.uid() ), contRef );
 }
 
-bool OPimContactAccessBackend_XML::read( OPimXmlReader &rd )
+bool OPimContactAccessBackend_XML::readInto( OPimXmlReader &rd, OPimContactAccess *target )
 {
     QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
     initDict( dict );
 
-    OPimContactXmlHandler handler( dict, *this );
+    OPimWriteBackXmlHandler<OPimContact> handler( "Contact", dict, target );
     OPimXmlStreamParser parser( handler );
     rd.read( parser );
     return true;
@@ -546,22 +546,6 @@ void OPimContactAccessBackend_XML::removeJournal()
     QFile f ( m_journalName );
     if ( f.exists() )
         f.remove();
-}
-
-////////////////////////////////////////////////////////////////////////////
-
-OPimContactXmlHandler::OPimContactXmlHandler( QAsciiDict<int> &dict, OPimContactAccessBackend &backend )
-    : OPimXmlHandler( "Contact", dict ), m_backend( backend )
-{
-}
-
-void OPimContactXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap )
-{
-    OPimContact contact( map );
-    for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
-        contact.setCustomField(it.key(), it.data() );
-
-    m_backend.applyAction( contact.action(), contact );
 }
 
 

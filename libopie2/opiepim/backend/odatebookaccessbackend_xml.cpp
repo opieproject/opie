@@ -295,7 +295,7 @@ bool ODateBookAccessBackend_XML::loadFile()
     initDict(dict);
 
     // parse
-    OPimDateBookXmlHandler handler( dict, *this );
+    OPimDateBookXmlHandler handler( dict, this );
     OPimXmlMmapParser parser( handler );
     bool ret = parser.parse( m_name );
 
@@ -303,12 +303,12 @@ bool ODateBookAccessBackend_XML::loadFile()
     return ret;
 }
 
-bool ODateBookAccessBackend_XML::read( OPimXmlReader &rd )
+bool ODateBookAccessBackend_XML::readInto( OPimXmlReader &rd, ODateBookAccess *target )
 {
     QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
     initDict( dict );
 
-    OPimDateBookXmlHandler handler( dict, *this );
+    OPimWriteBackXmlHandler<OPimEvent> handler( "event", dict, target );
     OPimXmlStreamParser parser( handler );
     rd.read( parser );
     return true;
@@ -336,7 +336,7 @@ QArray<int> ODateBookAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
 
 ////////////////////////////////////////////////////////////////////////////
 
-OPimDateBookXmlHandler::OPimDateBookXmlHandler( QAsciiDict<int> &dict, ODateBookAccessBackend &backend )
+OPimDateBookXmlHandler::OPimDateBookXmlHandler( QAsciiDict<int> &dict, ODateBookAccessBackend *backend )
     : OPimXmlHandler( "event", dict ), m_backend( backend )
 {
 }
@@ -348,7 +348,7 @@ void OPimDateBookXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, 
     for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
         ev.setCustomField(it.key(), it.data() );
 
-    m_backend.applyAction( ev.action(), ev );
+    m_backend->applyAction( ev.action(), ev );
 }
 
 

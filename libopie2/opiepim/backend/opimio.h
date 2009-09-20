@@ -30,6 +30,8 @@
 #ifndef OPIMIO_H
 #define OPIMIO_H
 
+#include <opie2/opimaccesstemplate.h>
+
 #include <qcstring.h>
 #include <qasciidict.h>
 #include <qmap.h>
@@ -85,6 +87,24 @@ public:
 private:
     QCString m_itemMarker;
     QAsciiDict<int> &m_dict;
+};
+
+template <class T>
+class OPimWriteBackXmlHandler : public OPimXmlHandler
+{
+public:
+    OPimWriteBackXmlHandler( const char *marker, QAsciiDict<int> &dict, OPimAccessTemplate<T> *target )
+        : OPimXmlHandler( marker, dict ), m_target( target ) {}
+
+    virtual void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap ) {
+        T record( map );
+        for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
+            record.setCustomField(it.key(), it.data() );
+
+        m_target->applyAction( record.action(), record );
+    }
+private:
+    OPimAccessTemplate<T> *m_target;
 };
 
 

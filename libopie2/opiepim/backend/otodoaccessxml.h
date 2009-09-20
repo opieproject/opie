@@ -34,6 +34,7 @@
 #include <qintdict.h>
 
 #include <opie2/otodoaccessbackend.h>
+#include <opie2/otodoaccess.h>
 #include <opie2/opimio.h>
 
 namespace Opie {
@@ -42,10 +43,10 @@ namespace Opie {
 class OPimTodoXmlHandler : public OPimXmlHandler
 {
 public:
-    OPimTodoXmlHandler( QAsciiDict<int> &dict, OPimTodoAccessBackend &backend );
+    OPimTodoXmlHandler( QAsciiDict<int> &dict, OPimTodoAccessBackend *backend );
     void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 protected:
-    OPimTodoAccessBackend &m_backend;
+    OPimTodoAccessBackend *m_backend;
 };
 
 
@@ -62,7 +63,7 @@ public:
     bool reload();
     bool save();
 
-    bool read( OPimXmlReader &rd );
+    bool readInto( OPimXmlReader &rd, OPimTodoAccess *target );
     bool write( OAbstractWriter &wr );
 
     QArray<int> allRecords()const;

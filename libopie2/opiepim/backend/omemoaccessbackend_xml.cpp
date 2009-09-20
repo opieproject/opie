@@ -205,33 +205,15 @@ bool OPimMemoAccessBackend_XML::wasChangedExternally()
     return false;
 }
 
-bool OPimMemoAccessBackend_XML::read( OPimXmlReader &rd )
+bool OPimMemoAccessBackend_XML::readInto( OPimXmlReader &rd, OPimMemoAccess *target )
 {
     QAsciiDict<int> dict(OPimMemo::Text+1);
     initDict( dict );
 
-    OPimMemoXmlHandler handler( dict, *this );
+    OPimWriteBackXmlHandler<OPimMemo> handler( "memo", dict, target );
     OPimXmlStreamParser parser( handler );
     rd.read( parser );
     return true;
-}
-
-
-////////////////////////////////////////////////////////////////////////////
-
-OPimMemoXmlHandler::OPimMemoXmlHandler( QAsciiDict<int> &dict, OPimMemoAccessBackend &backend )
-    : OPimXmlHandler( "memo", dict ), m_backend( backend )
-{
-}
-
-void OPimMemoXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap )
-{
-    OPimMemo memo;
-    memo.fromMap( map );
-    for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
-        memo.setCustomField(it.key(), it.data() );
-    
-    m_backend.applyAction( memo.action(), memo );
 }
 
 

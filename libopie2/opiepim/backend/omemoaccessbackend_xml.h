@@ -33,18 +33,10 @@
 #include <qasciidict.h>
 
 #include <opie2/omemoaccessbackend.h>
+#include <opie2/omemoaccess.h>
 #include <opie2/opimio.h>
 
 namespace Opie {
-
-class OPimMemoXmlHandler : public OPimXmlHandler
-{
-public:
-    OPimMemoXmlHandler( QAsciiDict<int> &dict, OPimMemoAccessBackend &backend );
-    void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
-protected:
-    OPimMemoAccessBackend &m_backend;
-};
 
 
 /**
@@ -64,7 +56,7 @@ public:
     bool wasChangedExternally();
 
     bool write( OAbstractWriter &wr );
-    bool read( OPimXmlReader &rd );
+    bool readInto( OPimXmlReader &rd, OPimMemoAccess *target );
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;
