@@ -157,6 +157,14 @@ OPimTodo::OPimTodo( bool completed, int priority,
     data->action = ACTION_ADD;
 }
 
+OPimTodo::OPimTodo( const QMap<int, QString> &map )
+    : OPimRecord( 0 )
+{
+    data = new OPimTodoData;
+    data->action = ACTION_ADD;
+    fromMap( map );
+}
+
 
 bool OPimTodo::match( const QRegExp &regExp ) const
 {

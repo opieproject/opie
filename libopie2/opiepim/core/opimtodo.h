@@ -116,6 +116,8 @@ class OPimTodo : public OPimRecord
            bool hasDate = false, QDate date = QDate::currentDate(),
            int uid = 0 /* empty */ );
 
+    OPimTodo( const QMap<int, QString> &map );
+           
     /** Copy c'tor
      *
      */

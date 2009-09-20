@@ -63,6 +63,16 @@ OPimMemo::OPimMemo()
     data->action = ACTION_ADD;
 }
 
+OPimMemo::OPimMemo( const QMap<int, QString> &map )
+    : OPimRecord()
+    , d( 0 )
+    , data( new OPimMemoData() )
+{
+    data->action = ACTION_ADD;
+    fromMap( map );
+}
+
+
 OPimMemo::OPimMemo( const OPimMemo &memo )
     : OPimRecord( memo )
     , d( 0 )

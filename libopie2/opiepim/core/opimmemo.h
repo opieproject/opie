@@ -62,6 +62,8 @@ class OPimMemo : public OPimRecord
   public:
     OPimMemo();
       
+    OPimMemo( const QMap<int, QString> &map );
+
     /* Constructs a new memo
        @param text The text of the memo
        @param category The categories it belongs to, if any
