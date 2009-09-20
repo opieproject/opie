@@ -1,8 +1,9 @@
 *.moc
 Makefile*
 moc_*
-loginbase.*
-syncbase.*
-securitybase.*
+loginbase.cpp
+loginbase.h
+syncbase.cpp
+syncbase.h
 .moc
 .obj
