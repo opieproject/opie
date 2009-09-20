@@ -60,7 +60,7 @@ class ToolButton : public QToolButton {
 };
 
     MultiauthGeneralConfig::MultiauthGeneralConfig(MultiauthConfig * parentConfig, QWidget * parent, const char * name = "general Opie-multiauthentication config widget")
-: QWidget(parent, name), m_onStart(0), m_onResume(0), m_noProtectConfig(0), m_explanScreens(0), m_nbSuccessMin(0), m_tryButton(0)
+: QWidget(parent, name), m_onStart(0), m_onResume(0), m_protectConfig(0), m_explanScreens(0), m_nbSuccessMin(0), m_tryButton(0)
 {
     // keep track of the MultiauthConfig parent in one of our attributes
     m_parentConfig = parentConfig;
@@ -100,9 +100,9 @@ class ToolButton : public QToolButton {
     QGroupBox *devBox = new QGroupBox(0, Qt::Vertical, tr("Options"), this, "dev box");
     vb->addWidget(devBox);
     QGridLayout *devBoxLayout = new QGridLayout( devBox->layout() );
-    m_noProtectConfig = new QCheckBox( tr("Don't protect this settings screen"), devBox, "don't protect config");
+    m_protectConfig = new QCheckBox( tr("Protect this settings screen"), devBox, "protect config");
     m_explanScreens = new QCheckBox( tr("Show explanatory screens"), devBox, "Show explan. screens");
-    devBoxLayout->addWidget(m_noProtectConfig, 0, 0);
+    devBoxLayout->addWidget(m_protectConfig, 0, 0);
     devBoxLayout->addWidget(m_explanScreens, 1, 0);
 
     m_tryButton = new QPushButton( tr("Test the authentication now"), this, "try button");
@@ -381,7 +381,7 @@ void MultiauthConfig::readConfig()
         m_generalConfig->m_onStart->setChecked( pcfg->readBoolEntry( "onStart", false ) );
         m_generalConfig->m_onResume->setChecked( pcfg->readBoolEntry( "onResume", false ) );
         m_generalConfig->m_nbSuccessMin->setValue( pcfg->readNumEntry( "nbSuccessMin", 1 ) );
-        m_generalConfig->m_noProtectConfig->setChecked( pcfg->readBoolEntry( "noProtectConfig", true) );
+        m_generalConfig->m_protectConfig->setChecked( ! pcfg->readBoolEntry( "noProtectConfig", true) );
         m_generalConfig->m_explanScreens->setChecked( pcfg->readBoolEntry( "explanScreens", true ) );
         m_generalConfig->m_skipEnabled->setChecked( pcfg->readBoolEntry( "suspendTime", false ) );
         m_generalConfig->m_skipTime->setValue( pcfg->readNumEntry( "suspendTimeMins", 2 ) );
@@ -496,7 +496,7 @@ void MultiauthConfig::writeConfig()
         if ( m_generalConfig->m_nbSuccessMin->value() > (int)include.count() )
             m_generalConfig->m_nbSuccessMin->setValue( include.count() );
         pcfg.writeEntry( "nbSuccessMin", m_generalConfig->m_nbSuccessMin->value() );
-        pcfg.writeEntry( "noProtectConfig",  m_generalConfig->m_noProtectConfig->isChecked() );
+        pcfg.writeEntry( "noProtectConfig", ! m_generalConfig->m_protectConfig->isChecked() );
         pcfg.writeEntry( "explanScreens",  m_generalConfig->m_explanScreens->isChecked() );
         pcfg.writeEntry( "suspendTime", m_generalConfig->m_skipEnabled->isChecked() );
         pcfg.writeEntry( "suspendTimeMins", m_generalConfig->m_skipTime->value() );

@@ -69,7 +69,7 @@ public:
     MultiauthGeneralConfig(MultiauthConfig * parentConfig, QWidget * parent, const char * name);
     ~MultiauthGeneralConfig();
 protected:
-    QCheckBox *m_onStart, *m_onResume, *m_noProtectConfig, *m_explanScreens, *m_skipEnabled;
+    QCheckBox *m_onStart, *m_onResume, *m_protectConfig, *m_explanScreens, *m_skipEnabled;
     QSpinBox *m_nbSuccessMin, *m_skipTime;
     QGroupBox *m_nbBox;
 private:
