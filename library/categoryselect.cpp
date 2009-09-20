@@ -496,7 +496,7 @@ void CategorySelect::init(int width)
     QObject::connect( cmdCat, SIGNAL(clicked()), this, SLOT(slotDialog()) );
     cmdCat->setTextLabel( "...", FALSE );
     cmdCat->setUsesTextLabel( true );
-    cmdCat->setMaximumSize( cmdCat->sizeHint() );
+    cmdCat->setMaximumSize( cmdCat->sizeHint().width(), cmbCat->sizeHint().height() - 1 );
     cmdCat->setFocusPolicy( TabFocus );
 }
 
