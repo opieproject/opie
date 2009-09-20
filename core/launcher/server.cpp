@@ -517,7 +517,7 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 #ifndef QT_NO_COP
         QCopEnvelope e( "QPE/Desktop", "appSyncStarted(bool)" );
         e << status;
-        odebug << "fast sync is " << status << oendl;
+        odebug << "slow sync is " << status << oendl;
 #endif
     }
     else if (msg == "finishAppSync(QString)") {

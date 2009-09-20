@@ -56,11 +56,12 @@ void SyncAccessManager::setPeerInfo( const QString &peerId, const QString &peerN
 
 bool SyncAccessManager::startSync( const QString &app, bool slowSync )
 {
+    // Note: function returns true if slow-sync is required (or error)
     OPimBase *access = appAccess( app );
     if( access ) {
         if ( m_peerId.isEmpty() ) {
             owarn << "startSync: no peer ID has been set, can't start sync" << oendl;
-            return false;
+            return true;
         }
         else {
             OPimChangeLog *changelog = access->changeLog();
@@ -70,12 +71,12 @@ bool SyncAccessManager::startSync( const QString &app, bool slowSync )
                 return changelog->startSync( peer, slowSync );
             }
             else
-                return false;
+                return true;
         }
     }
     else {
         owarn << "startSync: unrecognised application name \"" << app << "\"" << oendl;
-        return false;
+        return true;
     }
 }
 

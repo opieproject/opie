@@ -213,7 +213,7 @@ bool OPimChangeLog_SQL::startSync( const OPimSyncPeer &peer, bool slowSync )
             odebug << "startSync: Query failed" << oendl;
     }
     
-    return !m_slowSync;
+    return m_slowSync;
 }
 
 void OPimChangeLog_SQL::syncDone()
