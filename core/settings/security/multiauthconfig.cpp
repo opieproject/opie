@@ -65,7 +65,7 @@ class ToolButton : public QToolButton {
     // keep track of the MultiauthConfig parent in one of our attributes
     m_parentConfig = parentConfig;
     QVBoxLayout *vb = new QVBoxLayout(this);
-    vb->setSpacing(11);
+    vb->setSpacing(8);
     vb->setMargin(11);
     vb->setAlignment( Qt::AlignTop );
 

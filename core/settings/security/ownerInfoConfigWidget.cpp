@@ -51,11 +51,12 @@ using Opie::Security::MultiauthConfigWidget;
 OwnerInfoConfigWidget::OwnerInfoConfigWidget(QWidget* parent = 0, const char* name = "Owner info config widget") : MultiauthConfigWidget(parent, name)
 {
     QVBoxLayout *baseLayout = new QVBoxLayout( this);
-    baseLayout->setSpacing(8);
-    baseLayout->setMargin(11);
+    baseLayout->setSpacing(4);
+    baseLayout->setMargin(8);
     baseLayout->setAlignment( Qt::AlignTop );
 
     QGroupBox *gbWhen = new QGroupBox(1, Qt::Horizontal, tr("When to show"), this);
+    gbWhen->layout()->setMargin(8);
     cbWhen = new QComboBox( FALSE, gbWhen, "whenToShow" );
     QWhatsThis::add( cbWhen, tr( "Specifies when the owner information should be shown." ) );
     // Don't forget to update the ownerInfoWhenToShow enum in multiauthcommon.h if you change these
@@ -66,6 +67,7 @@ OwnerInfoConfigWidget::OwnerInfoConfigWidget(QWidget* parent = 0, const char* na
     baseLayout->addWidget(gbWhen);
 
     QGroupBox *gbOptions = new QGroupBox(2, Qt::Horizontal, tr("Details"), this);
+    gbOptions->layout()->setSpacing(4);
     ckShowHomePhone   = new QCheckBox(tr("Home phone"), gbOptions);
     ckShowHomeMobile  = new QCheckBox(tr("Home mobile"), gbOptions);
     ckShowWorkPhone   = new QCheckBox(tr("Work phone"), gbOptions);
@@ -77,6 +79,7 @@ OwnerInfoConfigWidget::OwnerInfoConfigWidget(QWidget* parent = 0, const char* na
     baseLayout->addWidget(gbOptions);
 
     QGroupBox *gbMessage = new QGroupBox(0, Qt::Vertical, tr("Additional Message"), this);
+    gbMessage->layout()->setMargin(8);
     baseLayout->addWidget(gbMessage);
 
     // Set the multilineedit box text to getNoticeText()

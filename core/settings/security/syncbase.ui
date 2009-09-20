@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>303</width>
+            <width>302</width>
             <height>233</height>
         </rect>
     </property>
@@ -59,10 +59,13 @@
                 <name>title</name>
                 <string>Sync</string>
             </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
             <vbox>
                 <property stdset="1">
                     <name>margin</name>
-                    <number>6</number>
+                    <number>11</number>
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
