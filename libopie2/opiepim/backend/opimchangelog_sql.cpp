@@ -239,9 +239,12 @@ void OPimChangeLog_SQL::syncDone()
 
 void OPimChangeLog_SQL::purgeOldData()
 {
+    // We must leave at least one entry in the table, so that SELECT MAX(logid)
+    // will still work; hence we only delete entries with logid less than the
+    // lowest peer lastsynclogid
     QString qu;
     qu = "DELETE FROM " + m_logTable;
-    qu += " WHERE logid <= (SELECT MIN(lastsynclogid) FROM " + m_peerTable + ")";
+    qu += " WHERE logid < (SELECT MIN(lastsynclogid) FROM " + m_peerTable + ")";
     OSQLRawQuery qry( qu );
     m_driver->query( &qry );
 }
