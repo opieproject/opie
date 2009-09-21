@@ -64,9 +64,9 @@ bool SyncAccessManager::startSync( const QString &app, bool slowSyncRead, bool s
             return true;
         }
         else {
+            m_slowSyncWrite[ app ] = slowSyncWrite;
             OPimChangeLog *changelog = access->changeLog();
             if( changelog ) {
-                m_slowSyncWrite[ app ] = slowSyncWrite;
                 changelog->init();
                 OPimSyncPeer peer( m_peerId, m_peerName );
                 return changelog->startSync( peer, slowSyncRead );
