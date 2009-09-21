@@ -102,6 +102,20 @@ bool SyncAccessManager::isSlowSyncWrite( const QString &app )
         return true;
 }
 
+bool SyncAccessManager::hasChangeLog( const QString &app )
+{
+    OPimBase *access = appAccess( app );
+    if( access ) {
+        OPimChangeLog *changelog = access->changeLog();
+        if( changelog )
+            return true;
+    }
+    else
+        owarn << "hasChangeLog: unrecognised application name \"" << app << "\"" << oendl;
+
+    return false;
+}
+
 OPimContactAccess *SyncAccessManager::contactAccess()
 {
     if( !m_contactAccess )

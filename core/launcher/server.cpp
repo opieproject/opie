@@ -516,7 +516,9 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         odebug << "startAppSync(\"" << app << "\", " << slowSyncRead << ", " << slowSyncWrite << ")" << oendl; 
         bool status = transferServer->syncAccessManager()->startSync( app, slowSyncRead, slowSyncWrite );
 #ifndef QT_NO_COP
-        QCopEnvelope e( "QPE/Desktop", "appSyncStarted(bool)" );
+        bool hasChangeLog = transferServer->syncAccessManager()->hasChangeLog( app );
+        QCopEnvelope e( "QPE/Desktop", "appSyncStarted(bool,bool)" );
+        e << hasChangeLog;
         e << status;
         odebug << "slow sync read is " << status << oendl;
 #endif

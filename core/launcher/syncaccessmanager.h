@@ -49,6 +49,7 @@ public:
     bool startSync( const QString &app, bool slowSyncRead, bool slowSyncWrite );
     void syncDone( const QString &app );
     bool isSlowSyncWrite( const QString &app );
+    bool hasChangeLog( const QString &app );
 
     OPimContactAccess *contactAccess();
     ODateBookAccess *dateBookAccess();
