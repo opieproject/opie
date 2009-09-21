@@ -498,6 +498,7 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
     else if ( msg == "stopSync()") {
         delete syncDialog;
         syncDialog = 0;
+        transferServer->syncAccessManager()->reset();
     }
     else if (msg == "setSyncPeerInfo(QString,QString)") {
         QString peerId, peerName;
@@ -837,8 +838,11 @@ void Server::terminateServers()
 void Server::syncConnectionClosed( const QHostAddress & )
 {
     odebug << "Lost sync connection" << oendl;
-    delete syncDialog;
-    syncDialog = 0;
+    if( syncDialog ) {
+        delete syncDialog;
+        syncDialog = 0;
+        transferServer->syncAccessManager()->reset();
+    }
 }
 
 void Server::pokeTimeMonitors()

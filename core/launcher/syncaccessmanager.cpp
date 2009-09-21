@@ -38,14 +38,32 @@ SyncAccessManager::SyncAccessManager()
 
 SyncAccessManager::~SyncAccessManager()
 {
-    if( m_contactAccess )
+    reset();
+}
+
+void SyncAccessManager::reset()
+{
+    if( m_contactAccess ) {
         delete m_contactAccess;
-    if( m_dateBookAccess )
+        m_contactAccess = NULL;
+    }
+    if( m_dateBookAccess ) {
         delete m_dateBookAccess;
-    if( m_todoAccess )
+        m_dateBookAccess = NULL;
+    }
+    if( m_todoAccess ) {
         delete m_todoAccess;
-    if( m_memoAccess )
+        m_todoAccess = NULL;
+    }
+    if( m_memoAccess ) {
         delete m_memoAccess;
+        m_memoAccess = NULL;
+    }
+
+    m_slowSyncWrite.clear();
+
+    m_peerId = QString::null;
+    m_peerName = QString::null;
 }
 
 void SyncAccessManager::setPeerInfo( const QString &peerId, const QString &peerName )
@@ -88,7 +106,8 @@ void SyncAccessManager::syncDone( const QString &app )
         OPimChangeLog *changelog = access->changeLog();
         if( changelog )
             changelog->syncDone();
-        // FIXME should probably clean up access object here since we're done with it
+        // Dispose of access object since we are done with it
+        freeAppAccess( app );
     }
     else
         owarn << "syncDone: unrecognised application name \"" << app << "\"" << oendl;
@@ -161,4 +180,33 @@ OPimBase *SyncAccessManager::appAccess( const QString &app )
     }
     else
         return NULL;
+}
+
+void SyncAccessManager::freeAppAccess( const QString &app )
+{
+    QString appid = app.lower();
+    if( appid == "addressbook" ) {
+        if( m_contactAccess ) {
+            delete m_contactAccess;
+            m_contactAccess = NULL;
+        }
+    }
+    else if( appid == "datebook" ) {
+        if( m_dateBookAccess ) {
+            delete m_dateBookAccess;
+            m_dateBookAccess = NULL;
+        }
+    }
+    else if( appid == "todolist" ) {
+        if( m_todoAccess ) {
+            delete m_todoAccess;
+            m_todoAccess = NULL;
+        }
+    }
+    else if( appid == "notes" ) {
+        if( m_memoAccess ) {
+            delete m_memoAccess;
+            m_memoAccess = NULL;
+        }
+    }
 }

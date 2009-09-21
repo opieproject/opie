@@ -50,6 +50,7 @@ public:
     void syncDone( const QString &app );
     bool isSlowSyncWrite( const QString &app );
     bool hasChangeLog( const QString &app );
+    void reset();
 
     OPimContactAccess *contactAccess();
     ODateBookAccess *dateBookAccess();
@@ -58,6 +59,7 @@ public:
 
 private:
     OPimBase *appAccess( const QString &app );
+    void freeAppAccess( const QString &app );
     
     QString m_peerId;
     QString m_peerName;
