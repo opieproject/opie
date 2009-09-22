@@ -45,14 +45,14 @@ class VirtualReader
 {
 public:
     virtual ~VirtualReader() {};
-    virtual void read( QTextStream &stream ) = 0;
+    virtual bool read( QTextStream &stream ) = 0;
 };
 
 class VirtualWriter
 {
 public:
     virtual ~VirtualWriter() {};
-    virtual void write( OPimXmlReader &reader ) = 0;
+    virtual bool write( OPimXmlReader &reader ) = 0;
 };
 
 class VirtualFile
@@ -112,56 +112,56 @@ class VirtualDateBookReader: public VirtualPimReader
 {
 public:
     VirtualDateBookReader( SyncAccessManager *manager );
-    void read( QTextStream &stream );
+    bool read( QTextStream &stream );
 };
 
 class VirtualDateBookWriter: public VirtualPimWriter
 {
 public:
     VirtualDateBookWriter( SyncAccessManager *manager );
-    void write( OPimXmlReader &reader );
+    bool write( OPimXmlReader &reader );
 };
 
 class VirtualContactReader: public VirtualPimReader
 {
 public:
     VirtualContactReader( SyncAccessManager *manager );
-    void read( QTextStream &stream );
+    bool read( QTextStream &stream );
 };
 
 class VirtualContactWriter: public VirtualPimWriter
 {
 public:
     VirtualContactWriter( SyncAccessManager *manager );
-    void write( OPimXmlReader &reader );
+    bool write( OPimXmlReader &reader );
 };
 
 class VirtualTodoListReader: public VirtualPimReader
 {
 public:
     VirtualTodoListReader( SyncAccessManager *manager );
-    void read( QTextStream &stream );
+    bool read( QTextStream &stream );
 };
 
 class VirtualTodoListWriter: public VirtualPimWriter
 {
 public:
     VirtualTodoListWriter( SyncAccessManager *manager );
-    void write( OPimXmlReader &reader );
+    bool write( OPimXmlReader &reader );
 };
 
 class VirtualNotesReader: public VirtualPimReader
 {
 public:
     VirtualNotesReader( SyncAccessManager *manager );
-    void read( QTextStream &stream );
+    bool read( QTextStream &stream );
 };
 
 class VirtualNotesWriter: public VirtualPimWriter
 {
 public:
     VirtualNotesWriter( SyncAccessManager *manager );
-    void write( OPimXmlReader &reader );
+    bool write( OPimXmlReader &reader );
 };
 
 #endif

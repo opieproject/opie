@@ -1313,8 +1313,10 @@ void ServerDTP::connected()
         {
             bytes_written = 0;
             QTextStream os( this );
-            vreader->read( os );
-            emit completed();
+            if( vreader->read( os ) )
+                emit completed();
+            else
+                emit failed();
         }
         break;
     case RetrieveFile:
@@ -1347,8 +1349,10 @@ void ServerDTP::connected()
     case RetrieveVirtual:
         {
             OPimXmlSocketReader reader( this );
-            vwriter->write( reader );
-            emit completed();
+            if( vwriter->write( reader ) )
+                emit completed();
+            else
+                emit failed();
         }
         break;
     case Idle:

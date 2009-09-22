@@ -244,11 +244,11 @@ VirtualDateBookReader::VirtualDateBookReader( SyncAccessManager *manager )
 {
 }
 
-void VirtualDateBookReader::read( QTextStream &stream )
+bool VirtualDateBookReader::read( QTextStream &stream )
 {
     ODateBookAccess *sourceDB = m_manager->dateBookAccess();
-    if (!sourceDB->load())
-        return;
+    if( !sourceDB->load() )
+        return false;
 
     ODateBookAccessBackend_XML dest( QString::null );
 
@@ -267,7 +267,11 @@ void VirtualDateBookReader::read( QTextStream &stream )
 
     // Write out the stream
     OTextStreamWriter wr( &stream );
-    dest.write( wr );
+    if ( !dest.write( wr ) ) {
+        odebug << "Stream write out failed" << oendl;
+        return false;
+    }
+    return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -277,22 +281,25 @@ VirtualDateBookWriter::VirtualDateBookWriter( SyncAccessManager *manager )
 {
 }
 
-void VirtualDateBookWriter::write( OPimXmlReader &reader )
+bool VirtualDateBookWriter::write( OPimXmlReader &reader )
 {
     ODateBookAccess *destDB = m_manager->dateBookAccess();
 
-    if( m_manager->isSlowSyncWrite( "datebook" ) )
+    if( m_manager->isSlowSyncWrite( "datebook" ) ) {
         destDB->clear();
-    else
-        destDB->load();
+    }
+    else {
+        if( !destDB->load() )
+            return false;
+    }
 
     ODateBookAccessBackend_XML source( QString::null );
 
-    // FIXME return code
-    source.readInto( reader, destDB );
+    if( !source.readInto( reader, destDB ) )
+        return false;
 
     // Write the changes
-    destDB->save();
+    return destDB->save();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -302,11 +309,11 @@ VirtualContactReader::VirtualContactReader( SyncAccessManager *manager )
 {
 }
 
-void VirtualContactReader::read( QTextStream &stream )
+bool VirtualContactReader::read( QTextStream &stream )
 {
     OPimContactAccess *sourceDB = m_manager->contactAccess();
-    if (!sourceDB->load())
-        return;
+    if( !sourceDB->load() )
+        return false;
 
     OPimContactAccessBackend_XML dest( QString::null );
 
@@ -322,8 +329,11 @@ void VirtualContactReader::read( QTextStream &stream )
 
     // Write out the stream
     OTextStreamWriter wr( &stream );
-    if ( !dest.write( wr ) )
-	odebug << "Stream write out failed" << oendl;
+    if ( !dest.write( wr ) ) {
+        odebug << "Stream write out failed" << oendl;
+        return false;
+    }
+    return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -333,22 +343,25 @@ VirtualContactWriter::VirtualContactWriter( SyncAccessManager *manager )
 {
 }
 
-void VirtualContactWriter::write( OPimXmlReader &reader )
+bool VirtualContactWriter::write( OPimXmlReader &reader )
 {
     OPimContactAccess *destDB = m_manager->contactAccess();
 
-    if( m_manager->isSlowSyncWrite( "addressbook" ) )
+    if( m_manager->isSlowSyncWrite( "addressbook" ) ) {
         destDB->clear();
-    else
-        destDB->load();
+    }
+    else {
+        if( !destDB->load() )
+            return false;
+    }
     
     OPimContactAccessBackend_XML source( QString::null );
 
-    // FIXME return code
-    source.readInto( reader, destDB );
+    if( !source.readInto( reader, destDB ) )
+        return false;
 
     // Write the changes
-    destDB->save();
+    return destDB->save();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -358,10 +371,12 @@ VirtualTodoListReader::VirtualTodoListReader( SyncAccessManager *manager )
 {
 }
 
-void VirtualTodoListReader::read( QTextStream &stream )
+bool VirtualTodoListReader::read( QTextStream &stream )
 {
     OPimTodoAccess *sourceDB = m_manager->todoAccess();
-    sourceDB->load();
+    if( !sourceDB->load() )
+        return false;
+    
     OPimTodoAccessXML dest( QString::null );
 
     // Copy items from source to destination
@@ -376,7 +391,11 @@ void VirtualTodoListReader::read( QTextStream &stream )
 
     // Write out the stream
     OTextStreamWriter wr( &stream );
-    dest.write( wr );
+    if ( !dest.write( wr ) ) {
+        odebug << "Stream write out failed" << oendl;
+        return false;
+    }
+    return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -386,21 +405,22 @@ VirtualTodoListWriter::VirtualTodoListWriter( SyncAccessManager *manager )
 {
 }
 
-void VirtualTodoListWriter::write( OPimXmlReader &reader )
+bool VirtualTodoListWriter::write( OPimXmlReader &reader )
 {
     OPimTodoAccess *destDB = m_manager->todoAccess();
-    destDB->load(); // need to call this or internal opened flag won't be set
-
+    if( !destDB->load() ) // need to call this or internal opened flag won't be set
+        return false;
+        
     if( m_manager->isSlowSyncWrite( "todolist" ) )
         destDB->clear();
 
     OPimTodoAccessXML source( QString::null );
 
-    // FIXME return code
-    source.readInto( reader, destDB );
+    if( !source.readInto( reader, destDB ) )
+        return false;
 
     // Write the changes
-    destDB->save();
+    return destDB->save();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -410,10 +430,12 @@ VirtualNotesReader::VirtualNotesReader( SyncAccessManager *manager )
 {
 }
 
-void VirtualNotesReader::read( QTextStream &stream )
+bool VirtualNotesReader::read( QTextStream &stream )
 {
     OPimMemoAccess *sourceDB = m_manager->memoAccess();
-    sourceDB->load();
+    if( !sourceDB->load())
+        return false;
+        
     OPimMemoAccessBackend_XML dest;
 
     // Copy items from source to destination
@@ -428,7 +450,11 @@ void VirtualNotesReader::read( QTextStream &stream )
 
     // Write out the stream
     OTextStreamWriter wr( &stream );
-    dest.write( wr );
+    if ( !dest.write( wr ) ) {
+        odebug << "Stream write out failed" << oendl;
+        return false;
+    }
+    return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -438,19 +464,20 @@ VirtualNotesWriter::VirtualNotesWriter( SyncAccessManager *manager )
 {
 }
 
-void VirtualNotesWriter::write( OPimXmlReader &reader )
+bool VirtualNotesWriter::write( OPimXmlReader &reader )
 {
     OPimMemoAccess *destDB = m_manager->memoAccess();
-    destDB->load(); // need to call this or internal opened flag won't be set
-
+    if( !destDB->load() ) // need to call this or internal opened flag won't be set
+        return false;
+        
     if( m_manager->isSlowSyncWrite( "notes" ) )
         destDB->clear();
 
     OPimMemoAccessBackend_XML source;
 
-    // FIXME return code
-    source.readInto( reader, destDB );
+    if( !source.readInto( reader, destDB ) )
+        return false;
 
     // Write the changes
-    destDB->save();
+    return destDB->save();
 }
