@@ -246,9 +246,6 @@ class QPC_EXPORT OPimContact : public OPimRecord
     void insert( int key, const QString &value );
     void replace( int key, const QString &value );
     QString find( int key ) const;
-    static QStringList fields();
-
-    void save( QString &buf ) const;
 
     QString displayAddress( const QString &street,
                             const QString &city,

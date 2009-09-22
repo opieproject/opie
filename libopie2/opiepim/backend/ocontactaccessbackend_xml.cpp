@@ -36,9 +36,12 @@
 #include <opie2/xmltree.h>
 #include <opie2/ocontactaccessbackend.h>
 #include <opie2/ocontactaccess.h>
+#include <opie2/opimrecord.h>
 #include <opie2/odebug.h>
 
 #include <qpe/global.h>
+#include <qpe/stringutil.h>
+#include <qpe/timestring.h>
 
 /* QT */
 #include <qasciidict.h>
@@ -121,8 +124,52 @@ bool OPimContactAccessBackend_XML::save()
     return true;
 }
 
+/*!
+  \internal
+  Appends the contact information to \a buf.
+*/
+void OPimContactAccessBackend_XML::saveEntry( const OPimContact *contact, const QIntDict<QString> &revdict, QString &buf )
+{
+    QMap<int, QString> map = contact->toMap();
+    // I'm expecting "<Contact " in front of this...
+    for ( QMap<int, QString>::ConstIterator it = map.begin();
+            it != map.end(); ++it )
+    {
+        const QString &value = it.data();
+        int key = it.key();
+        if ( !value.isEmpty() )
+        {
+            if ( key == Qtopia::AddressCategory || key == Qtopia::AddressUid || key == FIELDID_ACTION )
+                continue;
+
+            QString *name = revdict[ key ];
+            if( name )
+                buf += *name + "=\"" + Qtopia::escapeString( value ) + "\" ";
+        }
+    }
+    buf += contact->customToXml();
+    if ( contact->categories().count() > 0 )
+        buf += "Categories=\"" + contact->idsToString( contact->categories() ) + "\" ";
+    buf += "Uid=\"" + QString::number( contact->uid() ) + "\" ";
+
+    OPimRecord::ChangeAction action = contact->action();
+    if( action != OPimRecord::ACTION_ADD )
+        buf += "change_action=\"" + OPimRecord::actionToStr( action ) + "\" ";
+
+    // You need to close this yourself
+}
+
 bool OPimContactAccessBackend_XML::write( OAbstractWriter &wr )
 {
+    QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
+    initDict( dict );
+    QIntDict<QString> revdict( dict.size() );
+    revdict.setAutoDelete( true );
+    // Now we need to reverse the dictionary (!)
+    for( QAsciiDictIterator<int> it( dict ); it.current(); ++it ) {
+        revdict.insert( (*it), new QString( it.currentKey() ) );
+    }
+
     // Write Header
     QString out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE Addressbook ><AddressBook>\n"
         " <Groups>\n"
@@ -136,7 +183,7 @@ bool OPimContactAccessBackend_XML::write( OAbstractWriter &wr )
     QListIterator<OPimContact> it( m_contactList );
     for ( ; it.current(); ++it ) {
         out = "<Contact ";
-        (*it)->save( out );
+        saveEntry( (*it), revdict, out );
         out += "/>\n";
         cstr = out.utf8();
         if ( !wr.writeString( cstr ) )
@@ -407,6 +454,7 @@ void OPimContactAccessBackend_XML::initDict( QAsciiDict<int> &dict ) const
     dict.insert( "Anniversary", new int(Qtopia::Anniversary) );
     dict.insert( "Nickname", new int(Qtopia::Nickname) );
     dict.insert( "Notes", new int(Qtopia::Notes) );
+    dict.insert( "Groups", new int(Qtopia::Groups) );
     // change_action is for the journal & synchronisation only
     dict.insert( "change_action", new int(FIELDID_ACTION) );
 }
@@ -524,6 +572,15 @@ void OPimContactAccessBackend_XML::updateJournal( const OPimContact& cnt,
     QString buf;
     QCString str;
 
+    QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
+    initDict( dict );
+    QIntDict<QString> revdict( dict.size() );
+    revdict.setAutoDelete( true );
+    // Now we need to reverse the dictionary (!)
+    for( QAsciiDictIterator<int> it( dict ); it.current(); ++it ) {
+        revdict.insert( (*it), new QString( it.currentKey() ) );
+    }
+    
     // if the file was created, we have to set the Tag "<CONTACTS>" to
     // get a XML-File which is readable by our parser.
     // This is just a cheat, but better than rewrite the parser.
@@ -534,7 +591,7 @@ void OPimContactAccessBackend_XML::updateJournal( const OPimContact& cnt,
     }
 
     buf = "<Contact ";
-    cnt.save( buf );
+    saveEntry( &cnt, revdict, buf );
     buf += " action=\"" + QString::number( (int)action ) + "\" ";
     buf += "/>\n";
     QCString cstr = buf.utf8();

@@ -40,6 +40,7 @@
 
 #include <qlist.h>
 #include <qdict.h>
+#include <qintdict.h>
 
 namespace Opie {
 
@@ -90,6 +91,8 @@ private:
     void updateJournal( const OPimContact& cnt, OPimRecord::ChangeAction action );
     void removeJournal();
 
+    void saveEntry( const OPimContact *contact, const QIntDict<QString> &revdict, QString &buf );
+    
 protected:
     bool m_changed;
     bool m_journalEnabled;

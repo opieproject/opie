@@ -968,106 +968,6 @@ void OPimContact::setFileAs()
     replace( Qtopia::FileAs, fileas );
 }
 
-/*!
-  \internal
-  Appends the contact information to \a buf.
-*/
-void OPimContact::save( QString &buf ) const
-{
-    static const QStringList SLFIELDS = fields();
-    // I'm expecting "<Contact " in front of this...
-    for ( QMap<int, QString>::ConstIterator it = mMap.begin();
-            it != mMap.end(); ++it )
-    {
-        const QString &value = it.data();
-        int key = it.key();
-        if ( !value.isEmpty() )
-        {
-            if ( key == Qtopia::AddressCategory || key == Qtopia::AddressUid || key == FIELDID_ACTION )
-                continue;
-
-            key -= Qtopia::AddressCategory + 1;
-            buf += SLFIELDS[ key ];
-            buf += "=\"" + Qtopia::escapeString( value ) + "\" ";
-        }
-    }
-    buf += customToXml();
-    if ( categories().count() > 0 )
-        buf += "Categories=\"" + idsToString( categories() ) + "\" ";
-    buf += "Uid=\"" + QString::number( uid() ) + "\" ";
-
-    ChangeAction action = this->action();
-    if( action != ACTION_ADD )
-        buf += "change_action=\"" + actionToStr( action ) + "\" ";
-    
-    // You need to close this yourself
-}
-
-
-/*!
-  \internal
-  Returns the list of fields belonging to a contact
-  Never change order of this list ! It has to be regarding
-  enum AddressBookFields !!
-*/
-QStringList OPimContact::fields()
-{
-    QStringList list;
-
-    list.append( "Title" );  // Not Used!
-    list.append( "FirstName" );
-    list.append( "MiddleName" );
-    list.append( "LastName" );
-    list.append( "Suffix" );
-    list.append( "FileAs" );
-
-    list.append( "JobTitle" );
-    list.append( "Department" );
-    list.append( "Company" );
-    list.append( "BusinessPhone" );
-    list.append( "BusinessFax" );
-    list.append( "BusinessMobile" );
-
-    list.append( "DefaultEmail" );
-    list.append( "Emails" );
-
-    list.append( "HomePhone" );
-    list.append( "HomeFax" );
-    list.append( "HomeMobile" );
-
-    list.append( "BusinessStreet" );
-    list.append( "BusinessCity" );
-    list.append( "BusinessState" );
-    list.append( "BusinessZip" );
-    list.append( "BusinessCountry" );
-    list.append( "BusinessPager" );
-    list.append( "BusinessWebPage" );
-
-    list.append( "Office" );
-    list.append( "Profession" );
-    list.append( "Assistant" );
-    list.append( "Manager" );
-
-    list.append( "HomeStreet" );
-    list.append( "HomeCity" );
-    list.append( "HomeState" );
-    list.append( "HomeZip" );
-    list.append( "HomeCountry" );
-    list.append( "HomeWebPage" );
-
-    list.append( "Spouse" );
-    list.append( "Gender" );
-    list.append( "Birthday" );
-    list.append( "Anniversary" );
-    list.append( "Nickname" );
-    list.append( "Children" );
-
-    list.append( "Notes" );
-    list.append( "Groups" );
-
-    return list;
-}
-
 
 /*!
   Sets the list of email address for contact to those contained in \a str.
@@ -1126,8 +1026,8 @@ QString OPimContact::type() const
 
 class QString OPimContact::recordField( int pos ) const
 {
-    QStringList SLFIELDS = fields(); // ?? why this ? (se)
-    return SLFIELDS[ pos ];
+    Q_UNUSED(pos);
+    return QString::null;
 }
 
 // In future releases, we should store birthday and anniversary
