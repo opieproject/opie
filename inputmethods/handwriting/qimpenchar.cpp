@@ -52,14 +52,16 @@ const QIMPenSpecialKeys qimpen_specialKeys[] = {
   */
 
 QIMPenChar::QIMPenChar()
+    : ch( 0 )
+    , d()
+    , flags( 0 )
 {
-	flags = 0;
-	strokes.setAutoDelete( TRUE );
+	strokes.setAutoDelete( true );
 }
 
 QIMPenChar::QIMPenChar( const QIMPenChar &chr )
 {
-	strokes.setAutoDelete( TRUE );
+	strokes.setAutoDelete( true );
 	ch = chr.ch;
 	flags = chr.flags;
 	d = chr.d;
@@ -271,12 +273,15 @@ bool QIMPenCharMatch::operator<=( const QIMPenCharMatch &m )
   */
 
 QIMPenCharSet::QIMPenCharSet()
+    : csTitle( "abc" )
+    , desc( "Unnamed" )
+    , sysFilename()
+    , userFilename()
+    , csType( Unknown )
+    , maxStrokes( 0 )
+    , phidden( false )
 {
-	chars.setAutoDelete( TRUE );
-	desc = "Unnamed";
-	csTitle = "abc";
-	csType = Unknown;
-	maxStrokes = 0;
+	chars.setAutoDelete( true );
 }
 
 /*!
@@ -284,7 +289,7 @@ QIMPenCharSet::QIMPenCharSet()
   */
 QIMPenCharSet::QIMPenCharSet( const QString &fn )
 {
-	chars.setAutoDelete( TRUE );
+	chars.setAutoDelete( true );
 	desc = "Unnamed";
 	csTitle = "abc";
 	csType = Unknown;
@@ -315,7 +320,7 @@ bool QIMPenCharSet::load( const QString &fn, Domain d )
 {
 	setFilename( fn, d );
 
-	bool ok = FALSE;
+	bool ok = false;
 	QFile file( fn );
 	if ( file.open( IO_ReadOnly ) ) {
 		QDataStream ds( &file );
@@ -346,7 +351,7 @@ bool QIMPenCharSet::load( const QString &fn, Domain d )
 				addChar( pc );
 		}
 		if ( file.status() == IO_Ok )
-			ok = TRUE;
+			ok = true;
 	}
 	setHidden ( false );
 	return ok;
@@ -358,12 +363,12 @@ bool QIMPenCharSet::load( const QString &fn, Domain d )
 bool QIMPenCharSet::save( Domain d )
 {
 	if ( filename( d ).isEmpty() )
-		return FALSE;
+		return false;
 
 	if ( hidden() )
-		return TRUE;
+		return true;
 
-	bool ok = FALSE;
+	bool ok = false;
 
 	QString fn = filename( d );
 	QString tmpFn = fn + ".new";
@@ -401,7 +406,7 @@ bool QIMPenCharSet::save( Domain d )
 		file.writeBlock( buf );
 		file.close();
 		if ( file.status() == IO_Ok )
-			ok = TRUE;
+			ok = true;
 	}
 
 	if ( ok ) {
@@ -410,7 +415,7 @@ bool QIMPenCharSet::save( Domain d )
 			<< ", errno: " <<  errno << oendl;
 			// remove the tmp file, otherwise, it will just lay around...
 			QFile::remove( tmpFn.latin1() );
-			ok = FALSE;
+			ok = false;
 		}
 	}
 
