@@ -76,7 +76,5 @@ private:
     bool m_enabled;
     bool m_peersSynced;
 };
-
 }
-
 #endif
