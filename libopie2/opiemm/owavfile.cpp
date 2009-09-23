@@ -45,18 +45,28 @@ using namespace Opie::Core;
 #include <unistd.h>
 
 OWavFile::OWavFile( const QString &fileName )
+    : m_numsamples( 0 )
+    , m_samplesperblock( 0 )
+    , track( fileName )
 {
+    memset( &m_fileparams, 0, sizeof( m_fileparams ) );
+    memset( &hdr, 0, sizeof( hdr));
+    memset( &factblk, 0, sizeof( factblk) );
+    memset( &datahdr, 0, sizeof( datahdr) );
     owarn << "new wave file (no params): " << fileName << oendl;
-    track.setName(fileName);
 }
 
 OWavFile::OWavFile( const QString &fileName, OWavFileParameters fileparams,
-        unsigned short samplesPerBlock )
+                    unsigned short samplesPerBlock )
+    : m_fileparams( fileparams )
+    , m_numsamples( 0 )
+    , m_samplesperblock( samplesPerBlock )
+    , track( fileName )
 {
+    memset(&hdr, 0, sizeof(hdr));
+    memset(&factblk, 0, sizeof(factblk));
+    memset(&datahdr, 0, sizeof(datahdr));
     owarn << "new wave file: " << fileName << oendl;
-    m_fileparams = fileparams;
-    m_samplesperblock = samplesPerBlock;
-    track.setName(fileName);
 }
 
 OWavFile::~OWavFile() {
@@ -185,7 +195,7 @@ bool OWavFile::adjustHeaders(unsigned long total) {
 
 int OWavFile::parseWavHeader(int fd) {
     ssize_t bytes = read(fd, &hdr, sizeof(hdr));
-    if(bytes < sizeof(hdr)) {
+    if(bytes < 0 || size_t(bytes) < sizeof(hdr)) {
         return -1;
     }
 
@@ -208,7 +218,7 @@ int OWavFile::parseWavHeader(int fd) {
     if (hdr.fmtTag == WAVE_FORMAT_DVI_ADPCM) {
         m_fileparams.resolution = 16;
         bytes = read(fd, &imaext, sizeof(imaext));
-        if(bytes < sizeof(imaext)) {
+        if(bytes < 0 || size_t(bytes) < sizeof(imaext)) {
             return -1;
         }
     }
@@ -216,7 +226,7 @@ int OWavFile::parseWavHeader(int fd) {
     lseek(fd, 20 + hdr.fmtLen, SEEK_SET);
     while(true) {
         bytes = read(fd, &datahdr, sizeof(datahdr));
-        if(bytes < sizeof(datahdr))
+        if(bytes < 0 || size_t(bytes) < sizeof(datahdr))
             return -1;
         if(!strncmp(datahdr.dataID, "data", 4))
             break;

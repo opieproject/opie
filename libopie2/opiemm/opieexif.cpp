@@ -776,25 +776,38 @@ int ExifData::Exif2tm(struct ::tm * timeptr, char * ExifTime)
 // Contructor for initialising
 //--------------------------------------------------------------------------
 ExifData::ExifData()
+    : CameraMake()
+    , CameraModel()
+    , DateTime()
+    , Orientation(0)
+    , Height(0)
+    , Width(0)
+    , ExifImageLength(0)
+    , ExifImageWidth(0)
+    , IsColor(0)
+    , Process(0)
+    , FlashUsed(-1)
+    , FocalLength(0.0)
+    , ExposureTime(0.0)
+    , ApertureFNumber(0.0)
+    , Distance(0.0)
+    , Whitebalance(-1)
+    , MeteringMode(-1)
+    , CCDWidth(0.0)
+    , ExposureBias(0.0)
+    , ExposureProgram(0)
+    , ISOequivalent(0)
+    , CompressionLevel(0)
+    , UserComment()
+    , Comment()
+    , Thumbnail()
+    , LastExifRefd(0)
+    , ExifSettingsLength(0)
+    , FocalplaneXRes(0.0)
+    , FocalplaneUnits(0.0)
+    , MotorolaOrder(0)
+    , SectionsRead(0)
 {
-    ExifData::Whitebalance = -1;
-    ExifData::MeteringMode = -1;
-    ExifData::FlashUsed = -1;
-    Orientation = 0;
-    Height = 0;
-    Width = 0;
-    IsColor = 0;
-    Process = 0;
-    FocalLength = 0;
-    ExposureTime = 0;
-    ApertureFNumber = 0;
-    Distance = 0;
-    CCDWidth = 0;
-    ExposureBias = 0;
-    ExposureProgram = 0;
-    ISOequivalent = 0;
-    CompressionLevel = 0;
-    MotorolaOrder = 0;
 }
 
 ExifData::~ExifData()

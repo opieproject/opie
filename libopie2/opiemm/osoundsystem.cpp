@@ -150,7 +150,9 @@ void OSoundCard::init()
  *======================================================================================*/
 
 OAudioInterface::OAudioInterface( QObject* parent, const char* name )
-                 :QObject( parent, name ), _sfd(0)
+    : QObject( parent, name )
+    , _sfd(0)
+    , d(0)
 {
     odebug << "OAudioInterface::OAudioInterface()" << oendl;
     init();

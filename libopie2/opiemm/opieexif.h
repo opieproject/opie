@@ -36,6 +36,7 @@ public:
     //--------------------------------------------------------------------------
     // This structure is used to store jpeg file sections in memory.
     struct Section_t {
+        Section_t() : Data(0), Type(-1), Size(0) {}
         uchar *  Data;
         int      Type;
         unsigned Size;

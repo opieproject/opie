@@ -40,12 +40,13 @@
 #include <alsa/asoundlib.h>
 
 OSoundDevice::OSoundDevice( QString deviceName )
+    : devForm( SND_PCM_FORMAT_S16_LE )
+    , devCh( 0 )
+    , devRate( 0 )
+    , m_handle( 0 )
+    , m_deviceName( deviceName )
+    , m_frames( 0 )
 {
-    devForm = SND_PCM_FORMAT_S16_LE;
-    devCh = -1;
-    devRate = -1;
-    m_deviceName = deviceName;
-    m_handle = NULL;
     snd_pcm_hw_params_malloc(&m_hwparams);
 }
 
