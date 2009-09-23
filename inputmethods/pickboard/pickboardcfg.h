@@ -79,7 +79,9 @@ private:
 class PickboardConfig : public QObject {
     Q_OBJECT
 public:
-    PickboardConfig(PickboardPicks* p) : parent(p), nrows(2), pressx(-1) { }
+    PickboardConfig(PickboardPicks* p)
+        : parent(p), nrows(2), pressrow(-1), pressx(-1) { }
+
     virtual ~PickboardConfig();
     virtual void pickPoint(const QPoint& p, bool press);
     virtual void draw(QPainter*)=0;

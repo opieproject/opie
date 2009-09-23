@@ -247,8 +247,9 @@ static const char *Space_xpm[] = {
 "aaaaaaaaa"
 };
 
-PickboardPicks::PickboardPicks(QWidget* parent, const char* name, WFlags f ) :
-    QFrame(parent,name,f)
+PickboardPicks::PickboardPicks(QWidget* parent, const char* name, WFlags f )
+    : QFrame(parent,name,f)
+    , mode( 0 )
 {
     configs.setAutoDelete( TRUE );
 }
