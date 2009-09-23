@@ -47,6 +47,7 @@ namespace Opie
 class OAbstractWriter
 {
 public:
+    virtual ~OAbstractWriter() {}
     virtual bool writeString( const char *str ) = 0;
     virtual bool writeString( const QCString &str ) = 0;
 };
@@ -80,6 +81,7 @@ class OPimXmlHandler
 {
 public:
     OPimXmlHandler( const char *marker, QAsciiDict<int> &dict );
+    virtual ~OPimXmlHandler() {}
     const char *itemMarker();
     QAsciiDict<int> &dict();
 
@@ -144,6 +146,7 @@ private:
 class OPimXmlReader
 {
 public:
+    virtual ~OPimXmlReader() {}
     virtual void read( OPimXmlStreamParser &parser ) = 0;
 };
 
@@ -152,6 +155,7 @@ class OPimXmlFileReader: public OPimXmlReader
 {
 public:
     OPimXmlFileReader( const QString &file );
+    virtual ~OPimXmlFileReader() {}
     void read( OPimXmlStreamParser &parser );
 protected:
     QString m_file;
@@ -162,6 +166,7 @@ class OPimXmlSocketReader: public OPimXmlReader
 {
 public:
     OPimXmlSocketReader( QSocket *socket );
+    virtual ~OPimXmlSocketReader() {}
     void read( OPimXmlStreamParser &parser );
     void readData();
 protected:
