@@ -554,8 +554,9 @@ void MainWindow::receiveFile( const QString& filename )
     OPimTodoAccessVCal* cal = new OPimTodoAccessVCal(filename );
 
     OPimTodoAccess acc( cal );
-    acc.load();
-    OPimTodoAccess::List list = acc.allRecords();
+    OPimTodoAccess::List list;
+    if ( acc.load() )
+	list = acc.allRecords();
 
     if (list.count()) {
 
@@ -883,9 +884,10 @@ void MainWindow::beam( int uid )
     OPimTodo todo = event( uid );
     OPimTodoAccessVCal* cal = new OPimTodoAccessVCal(QString::fromLatin1(beamfile) );
     OPimTodoAccess acc( cal );
-    acc.load();
-    acc.add( todo );
-    acc.save();
+    if ( acc.load() ) {
+        acc.add( todo );
+        acc.save();
+    }
     Ir* ir = new Ir(this );
     connect(ir, SIGNAL(done(Ir*) ),
             this, SLOT(beamDone(Ir*) ) );

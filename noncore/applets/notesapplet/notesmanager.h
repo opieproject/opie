@@ -45,7 +45,7 @@ namespace Notes {
         Q_OBJECT
     public:
         bool isLoaded() const;
-        void load();
+        bool load();
         NotesManager(QObject* obj = 0);
         ~NotesManager();
 

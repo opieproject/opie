@@ -22,6 +22,7 @@
 #include <qfile.h>
 #include <qcstring.h>
 #include <qtextstream.h>
+#include <opie2/odebug.h>
 
 using namespace Qtopia;
 
@@ -581,15 +582,16 @@ void Categories::setGlobal( const QString &appname,
 			    bool global )
 {
     // if in global and should be in app; then move it
-    if ( mGlobalCats.contains( catname ) && !global ) {
-	mGlobalCats.remove( catname );
-	addCategory( appname, catname );
-	return ;
+    if ( !global ) {
+        if ( mGlobalCats.contains( catname ) ) {
+	    mGlobalCats.remove( catname );
+	    if ( !addCategory( appname, catname ) )
+                odebug << "Unable to add " << appname << " to " << catname << oendl;
+        }
+        // if in app and should be in global, then move it
+        return;
     }
 
-    // if in app and should be in global, then move it
-    if ( !global )
-	return;
     if ( removeCategory( appname, catname, FALSE ) )
 	addGlobalCategory( catname );
 }

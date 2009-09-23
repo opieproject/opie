@@ -50,7 +50,7 @@ namespace Todo {
         Q_OBJECT
     public:
         bool isLoaded() const;
-        void load();
+        bool load();
         TodoManager(QObject* obj = 0);
         ~TodoManager();
 

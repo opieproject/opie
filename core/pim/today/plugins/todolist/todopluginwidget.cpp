@@ -23,28 +23,15 @@ using namespace Opie::Ui;
 using namespace Opie;
 
 TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
-    : QWidget( parent, name ) {
+    : QWidget( parent, name )
+    , todoLabel( new OClickableLabel( this ) )
+    , layoutTodo( new QVBoxLayout( this ) )
+    , todo( new OPimTodoAccess() )
+{
+    if ( !todo->load() )
+        odebug << "Failed to load todo access" << oendl;
 
-    todo = 0l;
-    layoutTodo = 0l;
-    todoLabel = 0l;
-
-    if ( todo ) {
-        delete todo;
-    }
-    todo = new OPimTodoAccess();
-    todo->load();
-
-    if ( layoutTodo ) {
-        delete layoutTodo;
-    }
-    layoutTodo = new QVBoxLayout( this );
     layoutTodo->setAutoAdd( true );
-
-    if ( todoLabel )  {
-        delete todoLabel;
-    }
-    todoLabel = new OClickableLabel( this );
 
     connect( todoLabel, SIGNAL( clicked() ), this, SLOT( startTodolist() ) );
 

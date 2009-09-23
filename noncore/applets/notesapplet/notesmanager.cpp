@@ -110,10 +110,10 @@ bool NotesManager::isLoaded()const
     return ( m_db == 0 );
 }
 
-void NotesManager::load()
+bool NotesManager::load()
 {
-    if ( !m_db ) {
+    if ( !m_db )
         m_db = new OPimMemoAccess();
-        m_db->load();
-    }
+
+    return m_db->load();
 }
