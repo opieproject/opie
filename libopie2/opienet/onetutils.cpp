@@ -51,24 +51,28 @@ const OMacAddress& OMacAddress::unknown = OMacAddress( __unknown );
 //TODO: Incorporate Ethernet Manufacturer database here! (inline or so)
 
 OMacAddress::OMacAddress()
+	    :d( 0 )
 {
     memcpy( _bytes, __unknown, 6 );
 }
 
 
 OMacAddress::OMacAddress( unsigned char* p )
+	    :d( 0 )
 {
     memcpy( _bytes, p, 6 );
 }
 
 
 OMacAddress::OMacAddress( const unsigned char* p )
+	    :d( 0 )
 {
     memcpy( _bytes, p, 6 );
 }
 
 
 OMacAddress::OMacAddress( struct ifreq& ifr )
+	    :d( 0 )
 {
     memcpy( _bytes, ifr.ifr_hwaddr.sa_data, 6 );
 }
@@ -136,12 +140,14 @@ bool operator==( const OMacAddress &m1, const OMacAddress &m2 )
 
 OHostAddress::OHostAddress()
              :QHostAddress()
+	     ,d( 0 )
 {
 }
 
 
 OHostAddress::OHostAddress( Q_UINT32 ip4Addr )
              :QHostAddress( ip4Addr )
+	     ,d( 0 )
 {
 }
 
@@ -155,7 +161,7 @@ OHostAddress::~OHostAddress()
  *======================================================================================*/
 
 OPrivateIOCTL::OPrivateIOCTL( QObject* parent, const char* name, int cmd, int getargs, int setargs )
-              :QObject( parent, name ), _ioctl( cmd ), _getargs( getargs ), _setargs( setargs )
+              :QObject( parent, name ), _ioctl( cmd ), _getargs( getargs ), _setargs( setargs ), d( 0 )
 {
 }
 

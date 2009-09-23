@@ -285,11 +285,13 @@ namespace {
 
 namespace Opie {
 
-ODateBookAccessBackend_VCal::ODateBookAccessBackend_VCal( const QString& ,
-                                                        const QString& fileName )
-    : ODateBookAccessBackend() {
-    m_file = fileName;
-    m_changed = false;
+ODateBookAccessBackend_VCal::ODateBookAccessBackend_VCal( const QString&,
+                                                          const QString& fileName )
+    : ODateBookAccessBackend()
+    , m_changed( false )
+    , m_noTimeZone( false )
+    , m_file( fileName )
+{
 }
 
 ODateBookAccessBackend_VCal::~ODateBookAccessBackend_VCal() {

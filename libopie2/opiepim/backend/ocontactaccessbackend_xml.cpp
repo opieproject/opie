@@ -60,32 +60,27 @@ using namespace Opie::Core;
 
 
 namespace Opie {
-OPimContactAccessBackend_XML::OPimContactAccessBackend_XML ( const QString& appname, const QString& filename ):
-    m_changed( false )
+OPimContactAccessBackend_XML::OPimContactAccessBackend_XML ( const QString& appname, const QString& filename )
+    : m_changed( false )
+    , m_journalEnabled( false )
+    , m_journalName()
+    , m_fileName( filename )
+    , m_appName( appname )
 {
     // Just m_contactlist should call delete if an entry
     // is removed.
     m_contactList.setAutoDelete( true );
     m_uidToContact.setAutoDelete( false );
 
-    m_appName = appname;
-
-    if( appname.isEmpty() ) {
-        // No journal
-        m_journalName = QString::null;
-    }
-    else {
+    if( !m_appName.isEmpty() ) {
         // Set journal file name
         m_journalName = getenv("HOME");
         m_journalName +="/.abjournal" + appname;
-
     }
 
     // Expecting to access the default filename if nothing else is set
-    if ( filename.isEmpty() )
+    if ( m_fileName.isEmpty() )
         m_fileName = Global::applicationFileName( "addressbook","addressbook.xml" );
-    else
-        m_fileName = filename;
 }
 
 bool OPimContactAccessBackend_XML::save()

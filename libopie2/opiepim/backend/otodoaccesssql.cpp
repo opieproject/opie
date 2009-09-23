@@ -333,7 +333,7 @@ namespace {
         : OSQLQuery(), m_uid( uid ) {
     }
     FindCustomQuery::FindCustomQuery(const QArray<int>& ints)
-        : OSQLQuery(), m_uids( ints ){
+        : OSQLQuery(), m_uids( ints ), m_uid( 0 ) {
     }
     FindCustomQuery::~FindCustomQuery() {
     }

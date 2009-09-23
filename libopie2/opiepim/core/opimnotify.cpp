@@ -46,8 +46,8 @@ struct OPimNotify::Data : public QShared
 };
 
 OPimNotify::OPimNotify( const QDateTime& start, int duration, int parent )
+    : data( new Data ), d( 0 )
 {
-    data = new Data;
     data->start = start;
     data->dur = duration;
     data->parent = parent;
@@ -55,7 +55,7 @@ OPimNotify::OPimNotify( const QDateTime& start, int duration, int parent )
 
 
 OPimNotify::OPimNotify( const OPimNotify& noti )
-        : data( noti.data )
+        : data( noti.data ), d( 0 )
 {
     data->ref();
 }
@@ -66,7 +66,7 @@ OPimNotify::~OPimNotify()
     if ( data->deref() )
     {
         delete data;
-        data = 0l;
+        data = 0;
     }
 }
 
@@ -190,16 +190,15 @@ struct OPimAlarm::Data : public QShared
 
 
 OPimAlarm::OPimAlarm( int sound, const QDateTime& start, int duration, int parent, QDateTime occur )
-        : OPimNotify( start, duration, parent )
+        : OPimNotify( start, duration, parent ), data( new Data ), d( 0 )
 {
-    data = new Data;
     data->sound = sound;
     data->occur = occur;
 }
 
 
 OPimAlarm::OPimAlarm( const OPimAlarm& al )
-        : OPimNotify( al ), data( al.data )
+        : OPimNotify( al ), data( al.data ), d( 0 )
 {
     data->ref();
 }
@@ -318,15 +317,14 @@ struct OPimReminder::Data : public QShared
 
 
 OPimReminder::OPimReminder( int uid, const QDateTime& start, int dur, int parent )
-        : OPimNotify( start, dur, parent )
+        : OPimNotify( start, dur, parent ), data( new Data ), d( 0 )
 {
-    data = new Data;
     data->record = uid;
 }
 
 
 OPimReminder::OPimReminder( const OPimReminder& rem )
-        : OPimNotify( rem ), data( rem.data )
+        : OPimNotify( rem ), data( rem.data ), d( 0 )
 {
     data->ref();
 }

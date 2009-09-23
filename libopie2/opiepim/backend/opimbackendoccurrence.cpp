@@ -31,7 +31,14 @@
 
 namespace Opie {
 
-OPimBackendOccurrence::OPimBackendOccurrence() {}
+OPimBackendOccurrence::OPimBackendOccurrence()
+    : m_uid( 0 )
+    , m_haveTime( false )
+    , m_summary()
+    , m_note()
+    , m_location()
+    , d( 0 )
+{}
 /**
  * \brief The occurence is only on the specefic Day
  *
@@ -47,8 +54,8 @@ OPimBackendOccurrence::OPimBackendOccurrence() {}
 OPimBackendOccurrence::OPimBackendOccurrence( const QDate& date,
                                               const UID& uid,
                                               const QString& sum )
-    : m_start( date ), m_end( date ), m_uid( uid ),
-      m_haveTime(false ), m_summary( sum )
+    : m_start( date ), m_end( date ), m_uid( uid )
+    , m_haveTime( false ), m_summary( sum ), d( 0 )
 {}
 
 /**
@@ -68,7 +75,7 @@ OPimBackendOccurrence::OPimBackendOccurrence( const QDate& date,
 OPimBackendOccurrence::OPimBackendOccurrence( const QDate& date,
                                               const QDate& end,
                                               const UID& uid)
-    : m_start( date ), m_end( end ), m_uid( uid ), m_haveTime( false )
+    : m_start( date ), m_end( end ), m_uid( uid ), m_haveTime( false ), d( 0 )
 {}
 
 
@@ -85,7 +92,7 @@ OPimBackendOccurrence::OPimBackendOccurrence( const QDate& date,
 OPimBackendOccurrence::OPimBackendOccurrence( const QDateTime& date,
                                               const QDateTime& end,
                                               const UID& uid )
-    : m_start( date ), m_end( end ), m_uid( uid ), m_haveTime( true )
+    : m_start( date ), m_end( end ), m_uid( uid ), m_haveTime( true ), d( 0 )
 {}
 
 /**

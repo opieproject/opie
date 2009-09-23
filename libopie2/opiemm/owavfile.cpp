@@ -51,6 +51,7 @@ OWavFile::OWavFile( const QString &fileName )
 {
     memset( &m_fileparams, 0, sizeof( m_fileparams ) );
     memset( &hdr, 0, sizeof( hdr));
+    memset(&imaext, 0, sizeof(imaext));
     memset( &factblk, 0, sizeof( factblk) );
     memset( &datahdr, 0, sizeof( datahdr) );
     owarn << "new wave file (no params): " << fileName << oendl;
@@ -64,6 +65,7 @@ OWavFile::OWavFile( const QString &fileName, OWavFileParameters fileparams,
     , track( fileName )
 {
     memset(&hdr, 0, sizeof(hdr));
+    memset(&imaext, 0, sizeof(imaext));
     memset(&factblk, 0, sizeof(factblk));
     memset(&datahdr, 0, sizeof(datahdr));
     owarn << "new wave file: " << fileName << oendl;

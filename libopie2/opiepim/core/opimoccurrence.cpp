@@ -40,7 +40,7 @@ namespace Opie {
 
 OPimOccurrence::OPimOccurrence( OPimOccurrence::Data* _data,
                                 enum OPimOccurrence::Position pos )
-    : m_pos( pos ), data( _data )
+    : m_isAllDay( false ), m_pos( pos ), data( _data ), d( 0 )
 {
     data->ref();
 }
@@ -49,7 +49,7 @@ OPimOccurrence::OPimOccurrence( OPimOccurrence::Data* _data,
  * \brief Copy constructor
  */
 OPimOccurrence::OPimOccurrence( const OPimOccurrence& oc )
-    : data( oc.data )
+    : data( oc.data ), d( 0 )
 {
     /*
      * Increment the reference count
@@ -67,11 +67,11 @@ OPimOccurrence::OPimOccurrence( const OPimOccurrence& oc )
 }
 
 OPimOccurrence::OPimOccurrence()
-    : m_isAllDay( false ), m_pos( StartEnd )
-{
-    /* simple convient c'tor */
-    data = new OPimOccurrence::Data();
-}
+    : m_isAllDay( false )
+    , m_pos( StartEnd )
+    , data( new OPimOccurrence::Data() )
+    , d( 0 )
+{}
 
 OPimOccurrence::~OPimOccurrence() {
     deref();

@@ -67,9 +67,9 @@ struct OPimRecurrence::Data : public QShared {
 };
 
 
-OPimRecurrence::OPimRecurrence() {
-    data = new Data;
-}
+OPimRecurrence::OPimRecurrence()
+    : data( new Data ), d( 0 )
+{}
 
 OPimRecurrence::OPimRecurrence( const QMap<int, QString>& map )
 {

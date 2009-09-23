@@ -40,7 +40,7 @@ namespace Opie
 {
 
 OPimNotifyManager::OPimNotifyManager( const Reminders& rem, const Alarms& al )
-        : m_rem( rem ), m_al( al )
+        : m_rem( rem ), m_al( al ), d( 0 )
 {}
 
 

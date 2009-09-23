@@ -31,11 +31,13 @@
 
 namespace Opie {
 OPimMaintainer::OPimMaintainer( int mode, int uid )
-    :  m_mode(mode), m_uid(uid )
+    : m_mode(mode), m_uid(uid ), d( 0 )
 {}
 OPimMaintainer::~OPimMaintainer() {
 }
-OPimMaintainer::OPimMaintainer( const OPimMaintainer& main ) {
+OPimMaintainer::OPimMaintainer( const OPimMaintainer& main )
+    : d( 0)
+{
     *this = main;
 }
 OPimMaintainer &OPimMaintainer::operator=( const OPimMaintainer& main ) {

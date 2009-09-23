@@ -55,7 +55,7 @@ namespace Net  {
  *======================================================================================*/
 
 OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* data, QObject* parent )
-        :QObject( parent, "Generic" ), _hdr( header ), _data( 0 )
+        :QObject( parent, "Generic" ), _hdr( header ), _data( 0 ), d( 0 )
 {
 
     _data = new unsigned char[ header.len ];
@@ -199,7 +199,7 @@ QTextStream& operator<<( QTextStream& s, const OPacket& p )
  *======================================================================================*/
 
 OEthernetPacket::OEthernetPacket( const unsigned char* end, const struct ether_header* data, QObject* parent )
-                :QObject( parent, "Ethernet" ), _ether( data )
+                :QObject( parent, "Ethernet" ), _ether( data ), d( 0 )
 {
 
     odebug << "Source = " << sourceAddress().toString() << oendl;
@@ -249,7 +249,7 @@ int OEthernetPacket::type() const
 
 
 OIPPacket::OIPPacket( const unsigned char* end, const struct iphdr* data, QObject* parent )
-          :QObject( parent, "IP" ), _iphdr( data )
+          :QObject( parent, "IP" ), _iphdr( data ), d( 0 )
 {
     odebug << "OIPPacket::OIPPacket(): decoding IP header..." << oendl;
 
@@ -389,8 +389,7 @@ OMacAddress OARPPacket::targetMacAddress() const
 
 
 OUDPPacket::OUDPPacket( const unsigned char* end, const struct udphdr* data, QObject* parent )
-           :QObject( parent, "UDP" ), _udphdr( data )
-
+           :QObject( parent, "UDP" ), _udphdr( data ), d( 0 )
 {
     odebug << "OUDPPacket::OUDPPacket(): decoding UDP header..." << oendl;
     odebug << "fromPort = " << fromPort() << oendl;
@@ -549,8 +548,7 @@ OMacAddress ODHCPPacket::clientMacAddress() const
 
 
 OTCPPacket::OTCPPacket( const unsigned char* /*end*/, const struct tcphdr* data, QObject* parent )
-           :QObject( parent, "TCP" ), _tcphdr( data )
-
+           :QObject( parent, "TCP" ), _tcphdr( data ), d( 0 )
 {
     odebug << "OTCPPacket::OTCPPacket(): decoding TCP header..." << oendl;
 }
@@ -628,8 +626,7 @@ unsigned int OPrismHeaderPacket::signalStrength() const
 
 
 OWaveLanPacket::OWaveLanPacket( const unsigned char* end, const struct ieee_802_11_header* data, QObject* parent )
-                :QObject( parent, "802.11" ), _wlanhdr( data )
-
+                :QObject( parent, "802.11" ), _wlanhdr( data ), d( 0 )
 {
     odebug << "OWaveLanPacket::OWaveLanPacket(): decoding IEEE 802.11 header..." << oendl;
     odebug << "type = " << type() << oendl;
@@ -836,7 +833,7 @@ bool OWaveLanManagementPacket::canPrivacy() const
  *======================================================================================*/
 
 OWaveLanManagementSSID::OWaveLanManagementSSID( const unsigned char* /*end*/, const struct ssid_t* data, QObject* parent )
-                :QObject( parent, "802.11 SSID" ), _data( data )
+                :QObject( parent, "802.11 SSID" ), _data( data ), d( 0 )
 {
     odebug << "OWaveLanManagementSSID()" << oendl;
 }
@@ -872,7 +869,7 @@ QString OWaveLanManagementSSID::ID( bool decloak ) const
  *======================================================================================*/
 
 OWaveLanManagementRates::OWaveLanManagementRates( const unsigned char* /*end*/, const struct rates_t* data, QObject* parent )
-                :QObject( parent, "802.11 Rates" ), _data( data )
+                :QObject( parent, "802.11 Rates" ), _data( data ), d( 0 )
 {
     odebug << "OWaveLanManagementRates()" << oendl;
 }
@@ -887,7 +884,7 @@ OWaveLanManagementRates::~OWaveLanManagementRates()
  *======================================================================================*/
 
 OWaveLanManagementCF::OWaveLanManagementCF( const unsigned char* /*end*/, const struct cf_t* data, QObject* parent )
-                :QObject( parent, "802.11 CF" ), _data( data )
+                :QObject( parent, "802.11 CF" ), _data( data ), d( 0 )
 {
     odebug << "OWaveLanManagementCF()" << oendl;
 }
@@ -902,7 +899,7 @@ OWaveLanManagementCF::~OWaveLanManagementCF()
  *======================================================================================*/
 
 OWaveLanManagementFH::OWaveLanManagementFH( const unsigned char* /*end*/, const struct fh_t* data, QObject* parent )
-                :QObject( parent, "802.11 FH" ), _data( data )
+                :QObject( parent, "802.11 FH" ), _data( data ), d( 0 )
 {
     odebug << "OWaveLanManagementFH()" << oendl;
 }
@@ -917,7 +914,7 @@ OWaveLanManagementFH::~OWaveLanManagementFH()
  *======================================================================================*/
 
 OWaveLanManagementDS::OWaveLanManagementDS( const unsigned char* /*end*/, const struct ds_t* data, QObject* parent )
-                :QObject( parent, "802.11 DS" ), _data( data )
+                :QObject( parent, "802.11 DS" ), _data( data ), d( 0 )
 {
     odebug << "OWaveLanManagementDS()" << oendl;
 }
@@ -938,7 +935,7 @@ int OWaveLanManagementDS::channel() const
  *======================================================================================*/
 
 OWaveLanManagementTim::OWaveLanManagementTim( const unsigned char* /*end*/, const struct tim_t* data, QObject* parent )
-                :QObject( parent, "802.11 Tim" ), _data( data )
+                :QObject( parent, "802.11 Tim" ), _data( data ), d( 0 )
 {
     odebug << "OWaveLanManagementTim()" << oendl;
 }
@@ -953,7 +950,7 @@ OWaveLanManagementTim::~OWaveLanManagementTim()
  *======================================================================================*/
 
 OWaveLanManagementIBSS::OWaveLanManagementIBSS( const unsigned char* /*end*/, const struct ibss_t* data, QObject* parent )
-                :QObject( parent, "802.11 IBSS" ), _data( data )
+                :QObject( parent, "802.11 IBSS" ), _data( data ), d( 0 )
 {
     odebug << "OWaveLanManagementIBSS()" << oendl;
 }
@@ -967,8 +964,10 @@ OWaveLanManagementIBSS::~OWaveLanManagementIBSS()
  * OWaveLanManagementChallenge
  *======================================================================================*/
 
-OWaveLanManagementChallenge::OWaveLanManagementChallenge( const unsigned char* /*end*/, const struct challenge_t* data, QObject* parent )
-                :QObject( parent, "802.11 Challenge" ), _data( data )
+OWaveLanManagementChallenge::OWaveLanManagementChallenge( const unsigned char* /*end*/,
+							  const struct challenge_t* data,
+							  QObject* parent )
+                :QObject( parent, "802.11 Challenge" ), _data( data ), d( 0 )
 {
     odebug << "OWaveLanManagementChallenge()" << oendl;
 }
@@ -1006,7 +1005,7 @@ OWaveLanDataPacket::~OWaveLanDataPacket()
  *======================================================================================*/
 
 OLLCPacket::OLLCPacket( const unsigned char* end, const struct ieee_802_11_802_2_header* data, QObject* parent )
-           :QObject( parent, "802.11 LLC" ), _header( data )
+           :QObject( parent, "802.11 LLC" ), _header( data ), d( 0 )
 {
     odebug << "OLLCPacket::OLLCPacket(): decoding frame..." << oendl;
 
@@ -1068,7 +1067,8 @@ QString OWaveLanControlPacket::controlType() const
  *======================================================================================*/
 
 OPacketCapturer::OPacketCapturer( QObject* parent, const char* name )
-                :QObject( parent, name ), _name( QString::null ), _open( false ), _pch( 0 ), _pcd( 0 ), _sn( 0 ), _autodelete( true )
+                :QObject( parent, name ), _name( QString::null ), _open( false )
+		,_pch( 0 ), _pcd( 0 ), _sn( 0 ), _autodelete( true ), d( 0 )
 {
 }
 

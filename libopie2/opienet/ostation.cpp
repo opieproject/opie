@@ -41,15 +41,17 @@ namespace Net {
  *======================================================================================*/
 
 OStation::OStation()
+    : type("<unknown>")
+    , macAddress(OMacAddress::unknown)
+    , ipAddress()
+    , ssid("<unknown>")
+    , apAddress(OMacAddress::unknown)
+    , channel(0)
+    , level(0)
+    , encrypted(false)
+    , d(0)
 {
     odebug << "OStation::OStation()" << oendl;
-
-    type = "<unknown>";
-    macAddress = OMacAddress::unknown;
-    ssid = "<unknown>";
-    channel = 0;
-    apAddress = OMacAddress::unknown;
-
 }
 
 

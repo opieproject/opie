@@ -378,7 +378,7 @@ ONetworkInterfaceDriverInfo ONetworkInterface::driverInfo() const
 
 OChannelHopper::OChannelHopper( OWirelessNetworkInterface* iface )
                :QObject( 0, "Mickey's funky hopper" ),
-               _iface( iface ), _interval( 0 ), _tid( 0 )
+               _iface( iface ), _interval( 0 ), _tid( 0 ), d( 0 )
 {
     int _maxChannel = iface->channels();
     // generate fancy hopping sequence honoring the device capabilities
@@ -1245,7 +1245,7 @@ bool OWirelessNetworkInterface::wioctl( int call ) const
  *======================================================================================*/
 
 OMonitoringInterface::OMonitoringInterface( ONetworkInterface* iface, bool prismHeader )
-                      :_if( static_cast<OWirelessNetworkInterface*>( iface ) ), _prismHeader( prismHeader )
+                      :_if( static_cast<OWirelessNetworkInterface*>( iface ) ), _prismHeader( prismHeader ), d( 0 )
 {
 }
 

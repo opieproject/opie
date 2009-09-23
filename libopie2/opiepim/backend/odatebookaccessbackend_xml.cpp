@@ -87,9 +87,13 @@ namespace {
 namespace Opie {
 ODateBookAccessBackend_XML::ODateBookAccessBackend_XML( const QString& ,
                                                         const QString& fileName )
-    : ODateBookAccessBackend() {
-    m_name = fileName.isEmpty() ? Global::applicationFileName( "datebook", "datebook.xml" ) : fileName;
-    m_changed = false;
+    : ODateBookAccessBackend()
+    , m_changed( false )
+    , m_noTimeZone( false )
+    , m_name( fileName )
+{
+    if ( m_name.isEmpty() )
+	m_name = Global::applicationFileName( "datebook", "datebook.xml" );
 }
 
 ODateBookAccessBackend_XML::~ODateBookAccessBackend_XML() {

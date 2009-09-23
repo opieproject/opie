@@ -90,7 +90,7 @@ OPimSQLFindQuery::OPimSQLFindQuery( const QString &dataTable, OPimChangeLog_SQL 
 }
 
 OPimSQLFindQuery::OPimSQLFindQuery( const QString &dataTable, OPimChangeLog_SQL *changeLog, const UIDArray& ints )
-    : OSQLQuery(), m_dataTable( dataTable ), m_uids( ints ), m_changeLog( changeLog )
+    : OSQLQuery(), m_dataTable( dataTable ), m_uids( ints ), m_uid( 0 ), m_changeLog( changeLog )
 {
 }
 
