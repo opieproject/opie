@@ -54,7 +54,7 @@ class OTaskbarAppletWrapperPrivate;
 template<class T> class OTaskbarAppletWrapper : public TaskbarAppletInterface
 {
   public:
-    OTaskbarAppletWrapper():_applet( 0 )
+    OTaskbarAppletWrapper() : _applet( 0 ), d( 0 )
     {
     }
 

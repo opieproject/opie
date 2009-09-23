@@ -73,7 +73,7 @@ public:
      * @param label QString text label for OTabWidget selection control.
      */
     OTabInfo( int id, QWidget *control, const QString &icon, const QString &label )
-            : i( id ), c( control ), p( icon ), l( label ) {}
+            : i( id ), c( control ), p( icon ), l( label ), d( 0 ) {}
 
     /**
      * @fn id()const
