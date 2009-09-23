@@ -126,41 +126,27 @@ class OPimRecordList
     typedef OTemplateBase<T> Base;
     typedef OPimRecordListIterator<T> Iterator;
 
-    /**
-     * c'tor
-     */
-    OPimRecordList (){}
+    /// c'tor
+    OPimRecordList() : m_acc( 0 ), d( 0 ) {}
     OPimRecordList( const QArray<int>& ids,
 		    const Base* );
     ~OPimRecordList();
 
-    /**
-     * the first iterator
-     */
+    /// the first iterator
     Iterator begin();
 
-    /**
-     * the end
-     */
+    /// the end
     Iterator end();
 
-    /**
-     * the number of items in the list
-     */
+    /// the number of items in the list
     uint count() const;
 
     T operator[] ( uint i );
     int uidAt( uint i );
 
-    /**
-     * Remove the contact with given uid
-     */
+    /// Remove the contact with given uid
     bool remove( int uid );
 
-    /*
-      ConstIterator begin()const;
-      ConstIterator end()const;
-    */
   protected:
     UIDArray uids()const;
 
@@ -174,13 +160,14 @@ class OPimRecordList
 /* ok now implement it  */
 template <class T>
 OPimRecordListIterator<T>::OPimRecordListIterator()
-{
-    m_current = 0;
-    m_temp = 0l;
-    m_end = true;
-    m_record = T();
+    : m_current( 0 )
+    , m_temp( 0 )
+    , m_end( true )
+    , m_record()
     /* forward */
-    m_direction = TRUE;
+    , m_direction( true )
+    , d( 0 )
+{
 }
 
 
@@ -200,6 +187,7 @@ OPimRecordListIterator<T>::OPimRecordListIterator( const OPimRecordListIterator<
     m_end = it.m_end;
     m_record = it.m_record;
     m_direction = it.m_direction;
+    d = 0;
 }
 
 
@@ -286,9 +274,13 @@ bool OPimRecordListIterator<T>::operator!=( const OPimRecordListIterator<T>& it 
 
 template <class T>
 OPimRecordListIterator<T>::OPimRecordListIterator( const QArray<int> uids,
-        const Base* t )
-        : m_uids( uids ), m_current( 0 ), m_temp( t ), m_end( false ),
-        m_direction( true )
+                                                   const Base* t )
+    : m_uids( uids )
+    , m_current( 0 )
+    , m_temp( t )
+    , m_end( false )
+    , m_direction( true )
+    , d( 0 )
 {
     /* if the list is empty we're already at the end of the list */
     if ( uids.count() == 0 )

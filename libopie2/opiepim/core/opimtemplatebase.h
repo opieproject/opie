@@ -190,7 +190,7 @@ public:
 
 
     //@{
-    OTemplateBase() {};
+    OTemplateBase() : d( 0 ) {}
     virtual ~OTemplateBase() {}
     //@}
 
@@ -198,17 +198,13 @@ public:
     //@{
     virtual T find( int uid )const = 0;
 
-    /**
-     * read ahead find
-     */
+    /// read ahead find
     virtual T find( int uid, const QArray<int>& items,
                     uint current, CacheDirection dir = Forward )const = 0;
     //@}
 
     //@{
-   /**
-    * Put element into Cache
-    */
+    /// Put element into Cache
     virtual void cache( const T& )const = 0;
     virtual void setSaneCacheSize( int ) = 0;
 
