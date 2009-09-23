@@ -56,6 +56,7 @@ namespace Bluez {
 OBluetooth* OBluetooth::_instance = 0;
 
 OBluetooth::OBluetooth()
+    : d( 0 )
 {
     synchronize();
 }
