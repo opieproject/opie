@@ -2,9 +2,10 @@
 #include <qlabel.h>
 #include "activateprofile.h"
 
-ActivateProfile::ActivateProfile( const char * Interface ) :
-        ActivateProfileGUI( 0, 0, TRUE ), NSD() {
-
+ActivateProfile::ActivateProfile( const char * Interface )
+    : ActivateProfileGUI( 0, Interface, true, 0 )
+    , NSD()
+{
     Possible = NSD.collectPossible( Interface );
 
     DeviceName_LBL->setText( Interface );
