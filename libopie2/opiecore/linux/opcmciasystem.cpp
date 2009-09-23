@@ -329,7 +329,9 @@ OPcmciaSystem::CardIterator OPcmciaSystem::iterator() const
  *======================================================================================*/
 
 OPcmciaSocket::OPcmciaSocket( int socket, QObject* parent, const char* name )
-                 :QObject( parent, name ), _socket( socket )
+    : QObject( parent, name )
+    , _socket( socket )
+    , d( 0 )
 {
     qDebug( "OPcmciaSocket::OPcmciaSocket()" );
     init();

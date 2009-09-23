@@ -52,12 +52,14 @@ using Opie::Core::Internal::OQCopMessageData;
 
 OQCopMessage::OQCopMessage()
         : d ( 0 )
+        , m_data( 0 )
 {
     init ( QCString(), QCString(), QByteArray());
 }
 
 OQCopMessage::OQCopMessage ( const OQCopMessage &copy )
         : d ( 0 )
+        , m_data( 0 )
 {
     init ( copy. channel(), copy. message(), copy. data());
 }
@@ -75,6 +77,7 @@ OQCopMessage &OQCopMessage::operator = ( const OQCopMessage &assign )
 
 OQCopMessage::OQCopMessage ( const QCString &ch, const QCString &m, const QByteArray &arg )
         : d ( 0 )
+        , m_data( 0 )
 {
     init ( ch, m, arg );
 }
@@ -149,6 +152,10 @@ void OQCopMessage::setData ( const QByteArray &data )
 */
 
 ODeviceButton::ODeviceButton()
+    : m_Keycode( 0 )
+    , m_UserText()
+    , m_Pixmap()
+    , d( 0 )
 {}
 
 ODeviceButton::~ODeviceButton()

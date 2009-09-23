@@ -120,6 +120,7 @@ OInputDevice::OInputDevice( QObject* parent, const char* name ) : QObject( paren
 {
     qDebug( "OInputDevice::OInputDevice( '%s' )", name );
 
+    memset(&_id, 0, sizeof(_id));
     _fd = ::open( name, O_RDONLY );
     if ( _fd == -1 )
     {

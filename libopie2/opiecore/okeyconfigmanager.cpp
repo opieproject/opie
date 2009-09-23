@@ -45,7 +45,9 @@ namespace Internal {
  * @see OKeyPair OKeyPair::emptyKey()
  */
 OKeyPair::OKeyPair( int key, int mod )
-    : m_key( key ), m_mod( mod )
+    : m_key( key )
+    , m_mod( mod )
+    , d( 0 )
 {}
 
 /**
@@ -221,9 +223,15 @@ OKeyConfigItem::OKeyConfigItem( const QString& text, const QCString& config_key,
                                 const QPixmap& pix, int id, const OKeyPair& def,
                                 QObject *caller,
                                 const char* slot )
-    : m_text( text ), m_config( config_key ), m_pix( pix ),
-      m_id( id ), m_def( def ),
-      m_obj( caller ), m_str( slot ) {}
+    : m_text( text )
+    , m_config( config_key )
+    , m_pix( pix )
+    , m_id( id )
+    , m_def( def )
+    , m_obj( caller )
+    , m_str( slot )
+    , d( 0 )
+{}
 
 /**
  * A special Constructor for converting from an Opie::Core::ODeviceButton
@@ -236,8 +244,13 @@ OKeyConfigItem::OKeyConfigItem( const QString& text, const QCString& config_key,
  * @see Opie::Core::ODevice::buttons()
  */
 OKeyConfigItem::OKeyConfigItem( const Opie::Core::ODeviceButton& b )
-    : m_text( b.userText() ), m_pix( b.pixmap() ), m_id( -1 ),
-      m_key( OKeyPair( b.keycode(), 0 ) ), m_def( OKeyPair( b.keycode(), 0 ) )
+    : m_text( b.userText() )
+    , m_pix( b.pixmap() )
+    , m_id( -1 )
+    , m_key( OKeyPair( b.keycode(), 0 ) )
+    , m_def( OKeyPair( b.keycode(), 0 ) )
+    , m_obj( 0 )
+    , d( 0 )
 {}
 
 
@@ -479,8 +492,14 @@ OKeyConfigManager::OKeyConfigManager( Opie::Core::OConfig* conf,
                                       const OKeyPair::List& black,
                                       bool grabkeyboard, QObject* par,
                                       const char* name)
-    : QObject( par, name ), m_conf( conf ), m_group( group ),
-      m_blackKeys( black ), m_grab( grabkeyboard ), m_map( 0 ){
+    : QObject( par, name )
+    , m_conf( conf )
+    , m_group( group )
+    , m_blackKeys( black )
+    , m_grab( grabkeyboard )
+    , m_map( 0 )
+    , d( 0 )
+{
     if ( m_grab )
         QPEApplication::grabKeyboard();
     m_event_mask = OKeyConfigManager::MaskReleased;

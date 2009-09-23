@@ -108,7 +108,12 @@ bool operator<=( const OPluginItem& l, const OPluginItem& r ) {
  * other things are used with the default ctors
  */
 OPluginItem::OPluginItem()
-    : m_pos( -1 ) {
+    : m_name()
+    , m_path()
+    , m_enabled( false )
+    , m_pos( -1 )
+    , d( 0 )
+{
 }
 
 /**
@@ -126,12 +131,14 @@ OPluginItem::OPluginItem()
  *
  */
 OPluginItem::OPluginItem( const QString& name, const QString& path, bool b, int pos )
-    : m_name( name ), m_path( path ), m_enabled( b ), m_pos( pos )
+    : m_name( name )
+    , m_path( path )
+    , m_enabled( b )
+    , m_pos( pos )
+    , d( 0 )
 {}
 
-/**
- * \brief simple d'tor
- */
+/// \brief simple d'tor
 OPluginItem::~OPluginItem() {
 }
 

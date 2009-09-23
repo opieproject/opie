@@ -118,10 +118,13 @@ OFileNotificationEvent::~OFileNotificationEvent()
 //==============================================================================
 // OFileNotification
 //==============================================================================
-OFileNotification::OFileNotification( QObject* parent, const char* name ) :
-    QObject( parent, name ),
-    _active( false ),
-    _multi( true )
+OFileNotification::OFileNotification( QObject* parent, const char* name )
+    : QObject( parent, name )
+    , _path()
+    , _type( Nothing )
+    , _active( false )
+    , _multi( true )
+    , _wd( -1 )
 {
     qDebug( "OFileNotification::OFileNotification()" );
 }

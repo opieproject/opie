@@ -297,26 +297,26 @@ odbgstream odFatal(bool cond, int area)
 }
 
 odbgstream::odbgstream(unsigned int _area, unsigned int _level, bool _print)
-           :area(_area), level(_level),  print(_print)
+           :area(_area), level(_level),  print(_print), d(0)
 {
 }
 
 
 odbgstream::odbgstream(const char * initialString, unsigned int _area, unsigned int _level, bool _print)
-          :output(QString::fromLatin1(initialString)), area(_area), level(_level),  print(_print)
+          :output(QString::fromLatin1(initialString)), area(_area), level(_level),  print(_print), d(0)
 {
 }
 
 
 odbgstream::odbgstream(odbgstream &str)
-           :output(str.output), area(str.area), level(str.level), print(str.print)
+           :output(str.output), area(str.area), level(str.level), print(str.print), d(0)
 {
     str.output.truncate(0);
 }
 
 
 odbgstream::odbgstream(const odbgstream &str)
-           :output(str.output), area(str.area), level(str.level), print(str.print)
+           :output(str.output), area(str.area), level(str.level), print(str.print), d(0)
 {
 }
 
