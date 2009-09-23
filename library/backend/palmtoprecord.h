@@ -50,8 +50,9 @@ class RecordPrivate;
 class QPC_EXPORT Record
 {
 public:
-    Record() : mUid(0), mCats() { }
-    Record( const Record &c ) : mUid( c.mUid ), mCats ( c.mCats ), customMap(c.customMap) { }
+    Record() : mUid(0), mCats(), d( 0 ) { }
+    Record( const Record &c )
+        : mUid( c.mUid ), mCats ( c.mCats ), customMap(c.customMap), d( 0 ) { }
     /**
      * @todo make non inline in regard to KDE BC guide
      */

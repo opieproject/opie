@@ -26,12 +26,14 @@
 class PowerStatus
 {
 public:
-    PowerStatus() {
-        ac = Offline;
-        bs = NotPresent;
-        bbs = NotPresent;
-        percentRemain = -1;
-        secsRemain = -1;
+    PowerStatus() 
+        : ac( Offline )
+        , bs( NotPresent )
+        , bbs( NotPresent )
+        , percentRemain( -1 )
+        , secsRemain( -1 )
+        , percentAccurate( false )
+    {
     }
 
     enum ACStatus { Offline, Online, Backup };
