@@ -183,8 +183,8 @@ NetworkSetup * EditNetworkSetup::getTmpCollection( void ) {
           NNI = 0;
         } else {
           // already in list -> copy pointer
-          TmpCollection.append( NNI );
-          NNI = SelectedNodes->next();
+          if (NNI) TmpCollection.append( NNI );
+          NNI = SelectedNodes ? SelectedNodes->next() : 0;
         }
 
         // go deeper to next level
