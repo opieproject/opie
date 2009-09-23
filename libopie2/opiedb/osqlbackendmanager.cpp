@@ -59,7 +59,8 @@ namespace {
 using namespace Opie::DB;
 
 OSQLBackEndManager::OSQLBackEndManager( const QStringList& path )
-    :m_path( path )
+    : d( 0 )
+    , m_path( path )
 {
 }
 OSQLBackEndManager::~OSQLBackEndManager() {

@@ -7,8 +7,12 @@
 namespace Opie {
 namespace DB {
 
-OSQLManager::OSQLManager() {
+OSQLManager::OSQLManager()
+    : m_path()
+    , d( 0 )
+{
 }
+
 OSQLBackEnd::ValueList OSQLManager::queryBackEnd() {
     m_list.clear();
     QString opie = QString::fromLatin1( getenv("OPIEDIR") );

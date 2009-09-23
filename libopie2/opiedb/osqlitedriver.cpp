@@ -51,9 +51,11 @@ namespace {
 
 OSQLiteDriver::OSQLiteDriver( QLibrary *lib )
     : OSQLDriver( lib )
+    , m_url()
+    , m_sqlite( 0 )
 {
-    m_sqlite = 0l;
-    sqreg.regex_raw = NULL;
+    sqreg.regex_raw = 0;
+    memset(&(sqreg.regex_c), 0, sizeof(sqreg.regex_c));
 }
 
 

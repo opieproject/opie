@@ -9,12 +9,19 @@ OSQLBackEnd::OSQLBackEnd( const QString& name,
                           const QString& vendor,
                           const QString& license,
                           const QCString& lib )
-    : m_name( name), m_vendor( vendor),  m_license( license ), m_lib( lib )
+    : m_name( name )
+    , m_vendor( vendor )
+    , m_license( license )
+    , m_lib( lib )
+    , m_default( false )
+    , m_pref( -1 )
+    , d( 0 )
 {
-    m_default = false;
-    m_pref = -1;
 }
-OSQLBackEnd::OSQLBackEnd( const OSQLBackEnd& back ) {
+
+OSQLBackEnd::OSQLBackEnd( const OSQLBackEnd& back )
+    : d( 0 )
+{
     (*this) = back;
 }
 OSQLBackEnd::~OSQLBackEnd() {

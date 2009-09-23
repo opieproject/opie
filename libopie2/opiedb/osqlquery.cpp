@@ -3,13 +3,20 @@
 
 using namespace Opie::DB;
 
-OSQLQuery::OSQLQuery() {
+OSQLQuery::OSQLQuery()
+    : d( 0 )
+{
 }
-OSQLQuery::~OSQLQuery() {
+
+OSQLQuery::~OSQLQuery()
+{
 }
 
 OSQLRawQuery::OSQLRawQuery(const QString& query)
-    : OSQLQuery(), m_query( query ) {
+    : OSQLQuery()
+    , d( 0 )
+    , m_query( query )
+{
 
 }
 OSQLRawQuery::~OSQLRawQuery() {

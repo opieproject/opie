@@ -5,11 +5,18 @@
 using namespace Opie::DB;
 
 OSQLDriver::OSQLDriver( QLibrary* lib )
-: QObject(), m_lib(lib) {
+    : QObject()
+    , m_lib(lib)
+    , d(0)
+{
 }
-OSQLDriver::~OSQLDriver() {
+
+OSQLDriver::~OSQLDriver()
+{
     delete m_lib;
 }
-bool OSQLDriver::sync() {
+
+bool OSQLDriver::sync()
+{
     return true;
 }
