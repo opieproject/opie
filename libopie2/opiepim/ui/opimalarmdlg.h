@@ -39,7 +39,5 @@ private:
 
     class Private;
     Private *d;
-
 };
-
 #endif
