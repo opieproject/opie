@@ -152,7 +152,7 @@ QString VirtualFS::fileListingEntry( const QString &name, bool dir, const QDateT
     s += g.leftJustify( 8, ' ', TRUE ) + " ";
 
     // file size in bytes
-    s += QString::number( 1024 ).rightJustify( 9, ' ', TRUE ) + " ";
+    s += QString::number( 0 ).rightJustify( 9, ' ', TRUE ) + " ";
 
     // last modified date
     QDate date = lastModified.date();

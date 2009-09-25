@@ -818,9 +818,11 @@ void ServerPI::process( const QString& message )
         else {
             // virtual
             // We're not going to produce the file just to get the size,
-            // so just send back something other than 0
+            // FTP RFC 3659 says it's not acceptable to return any old number
+            // here, it must be the exact size or an error (and cURL definitely
+            // takes it literally!)
             if ( vfs.canRead( filePath ) )
-                send( "213 1024" );
+                send( "550 Virtual file size unavailable" );
             else
                 send( "500 Invalid file" ); // No tr
         }
