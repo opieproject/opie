@@ -24,22 +24,19 @@ void StringManager::add( const QString& str ) {
 }
 
 bool StringManager::load() {
-    Config qpe( "datebook-"+m_base );
-    if( qpe.isValid() ) {
-        qpe.setGroup(m_base );
-        QStringList list =  qpe.readListEntry( "Names",  0x1f );
-        for (QStringList::Iterator it = list.begin(); it != list.end(); ++it )
-            add( (*it) );
-        return true;
-    }
-    else
-        return false;
+    Config config( "DateBook" );
+    config.setGroup( m_base );
+    bool existing = config.hasKey( "Names" );
+    QStringList list =  config.readListEntry( "Names",  0x1f );
+    for (QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+        add( (*it) );
+    return existing;
 }
 
 bool StringManager::save() {
-    Config qpe( "datebook-"+m_base );
-    qpe.setGroup(m_base);
-    qpe.writeEntry( "Names", names(), 0x1f );
+    Config config( "DateBook" );
+    config.setGroup( m_base );
+    config.writeEntry( "Names", names(), 0x1f );
 
     return false;
 }
