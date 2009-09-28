@@ -527,21 +527,10 @@ void MainWindow::slotConfigure() {
     frmSettings.setSnooze( m_snoozeTime, m_snoozeUnits );
     frmSettings.setPluginList( manager()->holiday()->pluginManager(), manager()->holiday()->pluginLoader() );
     frmSettings.setViews( &m_views );
+    frmSettings.comboLocation->insertItem( m_defaultLocation );
+    frmSettings.comboLocation->setCurrentItem( frmSettings.comboLocation->count()-1 );
     frmSettings.setManagers( descriptionManager(), locationManager() );
     frmSettings.comboDefaultView->setCurrentItem(m_defaultViewIdx-1);
-
-    bool found=false;
-    for (int i=0; i<(frmSettings.comboLocation->count()); i++) {
-        if ( frmSettings.comboLocation->text(i) == m_defaultLocation ) {
-            frmSettings.comboLocation->setCurrentItem(i);
-            found=true;
-            break;
-        }
-    }
-    if(!found) {
-        frmSettings.comboLocation->insertItem(m_defaultLocation);
-        frmSettings.comboLocation->setCurrentItem(frmSettings.comboLocation->count()-1);
-    }
     frmSettings.comboCategory->setCategories(m_defaultCategories,"Calendar", tr("Calendar"));
 
     if ( QPEApplication::execDialog( &frmSettings ) ) {

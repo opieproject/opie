@@ -94,6 +94,8 @@ protected slots:
 
 protected:
     void init();
+    void loadLocations();
+    
     bool ampm;
     int oldtime;
     Opie::Core::OPluginManager *m_manager;

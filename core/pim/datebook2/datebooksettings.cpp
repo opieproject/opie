@@ -178,6 +178,31 @@ void DateBookSettings::setManagers( const DescriptionManager &descMan, const Loc
 {
     m_descMan = descMan;
     m_locMan = locMan;
+    loadLocations();
+}
+
+void DateBookSettings::loadLocations()
+{
+    QString currText = comboLocation->currentText();
+    
+    comboLocation->clear();
+    comboLocation->insertItem("");
+    comboLocation->insertStringList( m_locMan.names() );
+
+    if( !currText.isEmpty() ) {
+        bool found = false;
+        for( int i=0; i < comboLocation->count(); i++ ) {
+            if( comboLocation->text(i) == currText ) {
+                comboLocation->setCurrentItem(i);
+                found = true;
+                break;
+            }
+        }
+        if( !found ) {
+            comboLocation->insertItem( currText );
+            comboLocation->setCurrentItem( comboLocation->count()-1 );
+        }
+    }
 }
 
 DescriptionManager DateBookSettings::descriptionManager() const
@@ -306,6 +331,7 @@ void DateBookSettings::slotConfigureLocs() {
     dlg.setCaption( tr("Configure Locations") );
     if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
         m_locMan = dlg.manager();
+        loadLocations();
     }
 }
 
