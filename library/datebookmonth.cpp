@@ -41,18 +41,18 @@ DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
     begin = new QToolButton( this );
     begin->setFocusPolicy(NoFocus);
     begin->setPixmap( Resource::loadPixmap( "start" ) );
-    begin->setAutoRaise( TRUE );
+    begin->setAutoRaise( true );
     begin->setFixedSize( begin->sizeHint() );
     QWhatsThis::add( begin, tr("Show January in the selected year") );
 
     back = new QToolButton( this );
     back->setFocusPolicy(NoFocus);
     back->setPixmap( Resource::loadPixmap( "back" ) );
-    back->setAutoRaise( TRUE );
+    back->setAutoRaise( true );
     back->setFixedSize( back->sizeHint() );
     QWhatsThis::add( back, tr("Show the previous month") );
 
-    month = new QComboBox( FALSE, this );
+    month = new QComboBox( false, this );
     for ( int i = 0; i < 12; ++i )
         month->insertItem( Calendar::nameOfMonth( i + 1 ) );
 
@@ -61,14 +61,14 @@ DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
     next = new QToolButton( this );
     next->setFocusPolicy(NoFocus);
     next->setPixmap( Resource::loadPixmap( "forward" ) );
-    next->setAutoRaise( TRUE );
+    next->setAutoRaise( true );
     next->setFixedSize( next->sizeHint() );
     QWhatsThis::add( next, tr("Show the next month") );
 
     end = new QToolButton( this );
     end->setFocusPolicy(NoFocus);
     end->setPixmap( Resource::loadPixmap( "finish" ) );
-    end->setAutoRaise( TRUE );
+    end->setAutoRaise( true );
     end->setFixedSize( end->sizeHint() );
     QWhatsThis::add( end, tr("Show December in the selected year") );
 
@@ -84,8 +84,8 @@ DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
              this, SLOT( monthBack() ) );
     connect( next, SIGNAL( clicked() ),
              this, SLOT( monthForward() ) );
-    back->setAutoRepeat( TRUE );
-    next->setAutoRepeat( TRUE );
+    back->setAutoRepeat( true );
+    next->setAutoRepeat( true );
 }
 
 
@@ -149,8 +149,8 @@ void DateBookMonthHeader::setDate( int y, int m )
 class DateBookMonthTablePrivate
 {
 public:
-    DateBookMonthTablePrivate() {};
-    ~DateBookMonthTablePrivate() { mMonthEvents.clear(); };
+    DateBookMonthTablePrivate() : onMonday( false ) {}
+    ~DateBookMonthTablePrivate() { mMonthEvents.clear(); }
 
     QValueList<EffectiveEvent> mMonthEvents;
     bool onMonday;
@@ -175,18 +175,18 @@ DateBookMonthTable::DateBookMonthTable( QWidget *parent, const char *name,
     cfg.setGroup( "Time" );
     d->onMonday = cfg.readBoolEntry( "MONDAY" );
 
-    horizontalHeader()->setResizeEnabled( FALSE );
+    horizontalHeader()->setResizeEnabled( false );
     // we have to do this here... or suffer the consequences later...
     for ( int i = 0; i < 7; i++ ){
         horizontalHeader()->resizeSection( i, 30 );
-        setColumnStretchable( i, TRUE );
+        setColumnStretchable( i, true );
     }
     setupLabels();
 
     verticalHeader()->hide();
     setLeftMargin( 0 );
     for ( int i = 0; i < 6; ++i )
-            setRowStretchable( i, TRUE );
+            setRowStretchable( i, true );
 
     setSelectionMode( NoSelection );
 
@@ -367,7 +367,7 @@ void DateBookMonthTable::setupLabels()
 {
     for ( int i = 0; i < 7; ++i ) {
 //         horizontalHeader()->resizeSection( i, 30 );
-//         setColumnStretchable( i, TRUE );
+//         setColumnStretchable( i, true );
         if ( d->onMonday )
             horizontalHeader()->setLabel( i, Calendar::nameOfDay( i + 1 ) );
         else {
@@ -510,9 +510,10 @@ public:
 
 DayItemMonth::DayItemMonth( QTable *table, EditType et, const QString &t )
         : QTableItem( table, et, t )
-{
-    d = new DayItemMonthPrivate();
-}
+	, dy( 0 )
+        , typ( Calendar::Day::ThisMonth )
+	, d( new DayItemMonthPrivate() )
+{}
 
 DayItemMonth::~DayItemMonth()
 {
@@ -547,10 +548,10 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
     QValueStack<int> repeatLine;
     QValueStack<int> travelLine;
 
-    bool normalAllDay = FALSE;
-    bool repeatAllDay = FALSE;
-    bool travelAllDay = FALSE;
-        bool holidayAllDay = FALSE;
+    bool normalAllDay = false;
+    bool repeatAllDay = false;
+    bool travelAllDay = false;
+    bool holidayAllDay = false;
 
     QValueListIterator<EffectiveEvent> itDays = d->mDayEvents.begin();
 
@@ -563,12 +564,12 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
 
         if (ev.isAllDay()) {
             if (!ev.hasRepeat()) {
-                        normalAllDay = TRUE;
+                        normalAllDay = true;
                         if (!ev.isValidUid()) {
-                                holidayAllDay = TRUE;
+                                holidayAllDay = true;
                         }
             } else {
-                        repeatAllDay = TRUE;
+                        repeatAllDay = true;
                 }
         } else {
             int sLine, eLine;
@@ -715,7 +716,7 @@ void DateButton::pickDate()
     static DateBookMonth *picker = 0;
     if ( !m1 ) {
         m1 = new QPopupMenu( this );
-        picker = new DateBookMonth( m1, 0, TRUE );
+        picker = new DateBookMonth( m1, 0, true );
         m1->insertItem( picker );
         connect( picker, SIGNAL( dateClicked(int,int,int) ),
                  this, SLOT( setDate(int,int,int) ) );
@@ -766,7 +767,7 @@ void DateButton::setDateFormat( DateFormat f )
 
 bool DateButton::customWhatsThis() const
 {
-    return TRUE;
+    return true;
 }
 
 
@@ -778,6 +779,6 @@ bool DateButton::customWhatsThis() const
 DateBookMonthPopup::DateBookMonthPopup ( QWidget *w )
         : QPopupMenu ( w )
 {
-        m_dbm = new DateBookMonth( this, 0, TRUE );
+        m_dbm = new DateBookMonth( this, 0, true );
         insertItem( m_dbm );
 }

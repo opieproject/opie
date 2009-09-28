@@ -39,6 +39,7 @@ int ODialog::mSpacingSize = 2;
 
 ODialog::ODialog(QWidget *parent, const char *name, bool modal, WFlags f)
         :QDialog(parent, name, modal, f)
+	,d(0)
 {
     // d = new ODialogPrivate();
 }

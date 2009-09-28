@@ -1,8 +1,14 @@
 #include "profile.h"
 
-Profile::Profile() {
-
-}
+Profile::Profile()
+    : m_name()
+    , m_ioLayer()
+    , m_term()
+    , m_autoConnect( false )
+    , m_back( 0 )
+    , m_fore( 0 )
+    , m_terminal( 0 )
+{}
 
 Profile::Profile( const QString& name,
                   const QCString& iolayerName,
@@ -10,10 +16,9 @@ Profile::Profile( const QString& name,
                   int background,
                   int foreground,
                   int terminal )
-    : m_name( name ), m_ioLayer( iolayerName ), m_term( termName), m_autoConnect(0),
+    : m_name( name ), m_ioLayer( iolayerName ), m_term( termName ), m_autoConnect( false ),
       m_back( background ), m_fore( foreground ), m_terminal( terminal )
-{
-}
+{}
 
 Profile::Profile( const Profile& prof )
 {

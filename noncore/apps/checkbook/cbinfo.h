@@ -43,46 +43,45 @@ class CBInfo
 		CBInfo();
 		CBInfo( const QString &, const QString & );
 
-		const QString &name()				const { return n; }
-		const QString &filename()			const { return fn; }
-		const QString &password()			const { return pw; }
-		const QString &type()				const { return t; }
-		const QString &bank()				const { return bn; }
-		const QString &account()			const { return a; }
-		const QString &pin()				const { return p; }
-		const QString &notes()				const { return nt; }
-		float           startingBalance()	const { return sb; }
-		float           balance();
+		const QString &name()		const { return n; }
+		const QString &filename()	const { return fn; }
+		const QString &password()	const { return pw; }
+		const QString &type()		const { return t; }
+		const QString &bank()		const { return bn; }
+		const QString &account()	const { return a; }
+		const QString &pin()		const { return p; }
+		const QString &notes()		const { return nt; }
+		float startingBalance()         const { return sb; }
+		float balance();
 
-		void setName( const QString &name )			{ n = name; }
+		void setName( const QString &name )		{ n = name; }
 		void setFilename( const QString &filename )	{ fn = filename; }
 		void setPassword( const QString &password )	{ pw = password; }
-		void setType( const QString &type )			{ t = type; }
-		void setBank( const QString &bank )			{ bn = bank; }
-		void setAccount( const QString &account )		{ a = account; }
-		void setPin( const QString &pin )				{ p = pin; }
-		void setNotes( const QString &notes )			{ nt = notes; }
-		void setStartingBalance( float startbal )		{ sb = startbal; }
+		void setType( const QString &type )		{ t = type; }
+		void setBank( const QString &bank )		{ bn = bank; }
+		void setAccount( const QString &account )	{ a = account; }
+		void setPin( const QString &pin )		{ p = pin; }
+		void setNotes( const QString &notes )		{ nt = notes; }
+		void setStartingBalance( float startbal )	{ sb = startbal; }
 
-        // write
 		void     write();
 
-        // transactions
-		TranInfoList *transactions()		const { return tl; }
+                // transactions
+		TranInfoList *transactions() const              { return tl; }
 		TranInfo *findTransaction( const QString & );
 		void addTransaction( TranInfo * );
 		void removeTransaction( TranInfo * );
 
         // lastTab
-        void setLastTab(const QString &sLastTab) { _sLastTab=sLastTab; }
-        QString &getLastTab() { return(_sLastTab); }
+        void setLastTab(const QString &sLastTab)        { _sLastTab=sLastTab; }
+        QString &getLastTab()                           { return _sLastTab; }
 
         // getNextNumber
-        int getNextNumber() { return( ++_last ); }
+        int getNextNumber() { return ++_last; }
 
         // sortOrder
-        void setSortOrder(const QString &sSortOrder) { _sSortOrder=sSortOrder; }
-        QString &getSortOrder() { return(_sSortOrder); }
+        void setSortOrder(const QString &sSortOrder)    { _sSortOrder=sSortOrder; }
+        QString &getSortOrder()                         { return(_sSortOrder); }
 
 	private:
 		QString n;
@@ -95,10 +94,10 @@ class CBInfo
 		QString nt;
 		float   sb;
 		float   b;
-        QString _sLastTab;
-        int _first;
-        int _last;
-        QString _sSortOrder;
+                QString _sLastTab;
+                int _first;
+                int _last;
+                QString _sSortOrder;
 
 		TranInfoList *tl;
 

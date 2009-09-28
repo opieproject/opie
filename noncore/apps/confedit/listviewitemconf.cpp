@@ -10,19 +10,19 @@
 #include "listviewitemconf.h"
 
 ListViewItemConf::ListViewItemConf(ListViewItemConf *parent)
-	: QListViewItem(parent), _changed(false)
-{
-}
+	: QListViewItem(parent)
+	, _type(0)
+	, _changed(false)
+{}
 
 ListViewItemConf::ListViewItemConf(QListView *parent)
-	: QListViewItem(parent), _changed(false)
-{
-	_type = File;
-}
+	: QListViewItem(parent)
+	, _type( File )
+	, _changed(false)
+{}
 
 ListViewItemConf::~ListViewItemConf()
-{
-}
+{}
 
 int ListViewItemConf::getType()
 {

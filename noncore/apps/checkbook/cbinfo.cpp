@@ -35,22 +35,22 @@
 
 // --- CBInfo -----------------------------------------------------------------
 CBInfo::CBInfo()
-{
-	n = "";
-	fn = "";
-	pw = QString::null;
-	t = "";
-	bn = "";
-	a = "";
-	p = "";
-	nt = "";
-	sb = 0.0;
-    _sLastTab="";
-    _first=-1;
-    _last=-1;
-
-	tl = new TranInfoList();
-}
+    : n()
+    , fn()
+    , pw()
+    , t()
+    , bn()
+    , a()
+    , p()
+    , nt()
+    , sb( 0.0 )
+    , b( 0.0 )
+    , _sLastTab()
+    , _first( -1 )
+    , _last( -1 )
+    , _sSortOrder()
+    , tl( new TranInfoList() )
+{}
 
 
 // --- CBInfo -----------------------------------------------------------------

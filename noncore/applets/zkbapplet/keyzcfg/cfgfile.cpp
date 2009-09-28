@@ -83,8 +83,10 @@ void CfgFile::setAutorepeatPeriod(int n) {
 }
 
 // CfgParser implementation
-CfgParser::CfgParser() {
-}
+CfgParser::CfgParser()
+    : ardelay( 0 )
+    , arperiod( 0 )
+{}
 
 bool CfgParser::load(QString file, CfgFile& cfg) {
     QFile f(file);

@@ -37,6 +37,7 @@ void GraphData::addItem( const QString &name, int value )
 
 Graph::Graph(QWidget *parent, const char *name, WFlags f )
     : QFrame( parent, name, f )
+    , data( 0 )
 {
 }
 
@@ -124,8 +125,9 @@ void BarGraph::drawSegment( QPainter *p, const QRect &r, const QColor &c )
 
 GraphLegend::GraphLegend( QWidget *parent, const char *name, WFlags f )
     : QFrame( parent, name, f )
+    , data( 0 )
+    , horz( false )
 {
-    horz = FALSE;
 }
 
 void GraphLegend::setOrientation(Orientation o)

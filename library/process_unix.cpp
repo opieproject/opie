@@ -109,11 +109,11 @@ public:
 #endif
 	if ( process != 0 ) {
 	    if ( process->d->notifierStdin )
-		process->d->notifierStdin->setEnabled( FALSE );
+		process->d->notifierStdin->setEnabled( false );
 	    if ( process->d->notifierStdout )
-		process->d->notifierStdout->setEnabled( FALSE );
+		process->d->notifierStdout->setEnabled( false );
 	    if ( process->d->notifierStderr )
-		process->d->notifierStderr->setEnabled( FALSE );
+		process->d->notifierStderr->setEnabled( false );
 	    process->d->proc = 0;
 	}
 	if( socketStdin != 0 )
@@ -161,9 +161,12 @@ public:
 
 
 ProcessManager::ProcessManager()
+    : procList( new QPtrList<Proc> )
 {
-    procList = new QPtrList<Proc>;
-    procList->setAutoDelete( TRUE );
+    procList->setAutoDelete( true );
+    memset( &oldactChld, 0, sizeof( oldactChld ) );
+    memset( &oldactPipe, 0, sizeof( oldactPipe ) );
+    memset( sigchldFd, 0, sizeof( sigchldFd ) );
 }
 
 ProcessManager::~ProcessManager()
@@ -217,8 +220,8 @@ ProcessPrivate::ProcessPrivate()
     notifierStdout = 0;
     notifierStderr = 0;
 
-    exitValuesCalculated = FALSE;
-    socketReadCalled = FALSE;
+    exitValuesCalculated = false;
+    socketReadCalled = false;
 
     proc = 0;
 }
@@ -288,7 +291,7 @@ void Process::init()
 {
     d = new ProcessPrivate();
     exitStat = 0;
-    exitNormal = FALSE;
+    exitNormal = false;
 }
 
 /*!
@@ -316,13 +319,13 @@ bool Process::exec( const QByteArray& in, QByteArray& out, QStringList *env )
 
     // open sockets for piping
     if ( ::socketpair( AF_UNIX, SOCK_STREAM, 0, sStdin ) ) {
-	return FALSE;
+	return false;
     }
     if ( ::socketpair( AF_UNIX, SOCK_STREAM, 0, sStderr ) ) {
-	return FALSE;
+	return false;
     }
     if ( ::socketpair( AF_UNIX, SOCK_STREAM, 0, sStdout ) ) {
-	return FALSE;
+	return false;
     }
 
     // the following pipe is only used to determine if the process could be
@@ -479,7 +482,7 @@ bool Process::exec( const QByteArray& in, QByteArray& out, QStringList *env )
     ::close( sStdin[1] );
     ::close( sStdout[0] );
     ::close( sStderr[0] );
-    return TRUE;
+    return true;
 
 error:
 #if defined(QT_QPROCESS_DEBUG)
@@ -495,7 +498,7 @@ error:
     ::close( fd[1] );
     delete[] arglistQ;
     delete[] arglist;
-    return FALSE;
+    return false;
 }
 
 

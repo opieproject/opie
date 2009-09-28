@@ -44,20 +44,25 @@
 namespace Opie {
 
 struct OPimRecurrence::Data : public QShared {
-    Data() : QShared() {
-        type = OPimRecurrence::NoRepeat;
-        freq = -1;
-        days = 0;
-        pos = 0;
-        create = QDateTime::currentDateTime();
-        hasEnd = FALSE;
-        end = QDate::currentDate();
+    Data()
+        : QShared()
+	, days( 0 )
+        , type( OPimRecurrence::NoRepeat )
+        , freq( -1 )
+        , pos( 0 )
+        , hasEnd( false )
+        , end( QDate::currentDate() )
+        , create( QDateTime::currentDateTime() )
+        , rep( 0 )
+        , app()
+        , start( QDate::currentDate() )
+    {
     }
     char days; // Q_UINT8 for 8 seven days;)
     OPimRecurrence::RepeatType type;
     int freq;
     int pos;
-    bool hasEnd : 1;
+    bool hasEnd;
     QDate end;
     QDateTime create;
     int rep;
@@ -79,7 +84,7 @@ OPimRecurrence::OPimRecurrence( const QMap<int, QString>& map )
 
 
 OPimRecurrence::OPimRecurrence( const OPimRecurrence& rec)
-    : data( rec.data )
+    : data( rec.data ), d( 0 )
 {
     data->ref();
 }

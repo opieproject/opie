@@ -248,6 +248,7 @@ QDataStream& operator>>( QDataStream& s, OListView& lv )
 
 OListViewItem::OListViewItem(QListView *parent)
   : QListViewItem(parent)
+  , d(0)
 {
     init();
 }
@@ -255,6 +256,7 @@ OListViewItem::OListViewItem(QListView *parent)
 
 OListViewItem::OListViewItem(QListViewItem *parent)
   : QListViewItem(parent)
+  , d(0)
 {
     init();
 }
@@ -262,6 +264,7 @@ OListViewItem::OListViewItem(QListViewItem *parent)
 
 OListViewItem::OListViewItem(QListView *parent, QListViewItem *after)
   : QListViewItem(parent, after)
+  , d(0)
 {
     init();
 }
@@ -269,6 +272,7 @@ OListViewItem::OListViewItem(QListView *parent, QListViewItem *after)
 
 OListViewItem::OListViewItem(QListViewItem *parent, QListViewItem *after)
   : QListViewItem(parent, after)
+  , d(0)
 {
     init();
 }
@@ -278,6 +282,7 @@ OListViewItem::OListViewItem(QListView *parent,
     QString label1, QString label2, QString label3, QString label4,
     QString label5, QString label6, QString label7, QString label8)
   : QListViewItem(parent, label1, label2, label3, label4, label5, label6, label7, label8)
+  , d(0)
 {
     init();
 }
@@ -287,6 +292,7 @@ OListViewItem::OListViewItem(QListViewItem *parent,
     QString label1, QString label2, QString label3, QString label4,
     QString label5, QString label6, QString label7, QString label8)
   : QListViewItem(parent, label1, label2, label3, label4, label5, label6, label7, label8)
+  , d(0)
 {
     init();
 }
@@ -296,6 +302,7 @@ OListViewItem::OListViewItem(QListView *parent, QListViewItem *after,
     QString label1, QString label2, QString label3, QString label4,
     QString label5, QString label6, QString label7, QString label8)
   : QListViewItem(parent, after, label1, label2, label3, label4, label5, label6, label7, label8)
+  , d(0)
 {
     init();
 }
@@ -305,6 +312,7 @@ OListViewItem::OListViewItem(QListViewItem *parent, QListViewItem *after,
     QString label1, QString label2, QString label3, QString label4,
     QString label5, QString label6, QString label7, QString label8)
   : QListViewItem(parent, after, label1, label2, label3, label4, label5, label6, label7, label8)
+  , d(0)
 {
     init();
 }
@@ -318,6 +326,7 @@ OListViewItem::~OListViewItem()
 void OListViewItem::init()
 {
     m_known = false;
+    m_odd = false;
 }
 
 
@@ -523,6 +532,7 @@ OCheckListItem::~OCheckListItem()
 void OCheckListItem::init()
 {
     m_known = false;
+    m_odd = false;
 }
 
 
@@ -606,6 +616,7 @@ void OCheckListItem::paintCell(QPainter *p, const QColorGroup &cg, int column, i
 
 ONamedListView::ONamedListView( QWidget *parent, const char *name )
                :OListView( parent, name )
+               ,d(0)
 {
 }
 

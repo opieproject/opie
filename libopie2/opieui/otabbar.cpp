@@ -39,6 +39,7 @@ using namespace Opie::Ui;
 
 OTabBar::OTabBar( QWidget *parent , const char *name  )
         :QTabBar( parent, name )
+	,d( 0 )
 {}
 
 void OTabBar::paintLabel( QPainter* p, const QRect& br, QTab* t, bool has_focus ) const

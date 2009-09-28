@@ -165,11 +165,17 @@ private:
 
 
 KeytabReader::KeytabReader(QString p, QIODevice &d)
-{
-  path = p;
-  buf = &d;
-  cc = 0;
-}
+    : sym(0)
+    , res()
+    , len(0)
+    , slinno(0)
+    , scolno(0)
+    , cc(0)
+    , linno(0)
+    , colno(0)
+    , buf(&d)
+    , path(p)
+{}
 
 void KeytabReader::getCc()
 {

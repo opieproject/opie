@@ -53,13 +53,24 @@ namespace Opie
 
 struct OPimTodo::OPimTodoData : public QShared
 {
-    OPimTodoData() : QShared()
-    {
-        recur = 0;
-        state = 0;
-        maintainer = 0;
-        notifiers = 0;
-    };
+    OPimTodoData()
+	: QShared()
+	, date( QDate::currentDate() )
+	, isCompleted( false )
+	, hasDate( false )
+	, priority( 0 )
+	, desc()
+	, sum()
+	, prog( 0 )
+	, state( 0 )
+	, recur( 0 )
+	, maintainer( 0 )
+	, start( QDate::currentDate() )
+	, completed( QDate::currentDate() )
+	, notifiers( 0 )
+	, action( ACTION_ADD )
+    {}
+
     ~OPimTodoData()
     {
         delete recur;
@@ -69,8 +80,8 @@ struct OPimTodo::OPimTodoData : public QShared
     }
 
     QDate date;
-    bool isCompleted: 1;
-    bool hasDate: 1;
+    bool isCompleted;
+    bool hasDate;
     int priority;
     QString desc;
     QString sum;

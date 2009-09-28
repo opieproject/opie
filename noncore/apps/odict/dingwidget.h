@@ -19,31 +19,30 @@ struct BroswerContent
 class DingWidget
 {
     public:
-		DingWidget();
+        DingWidget();
 
-		BroswerContent setText( QString );
-		QStringList lines;
-		void setCaseSensitive( bool );
-		void loadDict( QString );
-		QString loadedDict() const;
-		void setQueryWord( QString );
-		void setDict( QString );
-		void loadValues();
+        BroswerContent setText( QString );
+        void setCaseSensitive( bool );
+        void loadDict( QString );
+        QString loadedDict() const;
+        void setQueryWord( QString );
+        void setDict( QString );
+        void loadValues();
 
-		QString lang1_name,
-				lang2_name;
+        QStringList lines;
+        QString lang1_name, lang2_name;
 
-		bool isCaseSensitive;
+        bool isCaseSensitive;
 
-	private:
-		BroswerContent parseInfo();
+    private:
+        BroswerContent parseInfo();
 
-		BroswerContent s_strings;
+        BroswerContent s_strings;
 
-		QString dictName;
+        QString dictName;
 
-		QString search_word;
-		QString queryword;
-		QString methodname;
-		QString trenner;
+        QString search_word;
+        QString queryword;
+        QString methodname;
+        QString trenner;
 };

@@ -94,7 +94,7 @@ QString Node::subData(const QString& tag) const
 */
 
 XmlHandler::XmlHandler()
-    : node( 0 ), tree( 0 )
+    : node( 0 ), tree( 0 ), d( 0 )
 {
 }
 

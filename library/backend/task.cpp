@@ -143,32 +143,39 @@ Task::Task()
   Creates a new task.  The properties of the task are set from \a m.
 */
 
-Task::Task( const QMap<int, QString> &m ) : Record(), mDue( FALSE ),
-mDueDate( QDate::currentDate() ), mCompleted( FALSE ), mPriority( 3 ), mDesc()
+Task::Task( const QMap<int, QString> &m )
+    : Record()
+    , mDue( FALSE )
+    , mDueDate( QDate::currentDate() )
+    , mCompleted( FALSE )
+    , mPriority( 3 )
+    , mDesc()
+    , recordId( 0 )
+    , recordInfo( 0 )
 {
     //qDebug("Task::Task fromMap");
     //dump( m );
-    for ( QMap<int,QString>::ConstIterator it = m.begin(); it != m.end();++it )
+    for ( QMap<int,QString>::ConstIterator it = m.begin(); it != m.end();++it ) {
 	switch ( (TaskFields) it.key() ) {
-	case HasDate: if ( *it == "1" ) mDue = TRUE; break;
-	case Completed: setCompleted( *it == "1" ); break;
-	case TaskCategory: setCategories( idsFromString( *it ) ); break;
-	case TaskDescription: setDescription( *it ); break;
-	case Priority: setPriority( (*it).toInt() ); break;
-	case Date: mDueDate = TimeConversion::fromString( (*it) ); break;
-	case TaskUid: setUid( (*it).toInt() ); break;
-	case TaskRid:
-	case TaskRinfo:
-			break;
+	    case HasDate: if ( *it == "1" ) mDue = TRUE; break;
+	    case Completed: setCompleted( *it == "1" ); break;
+	    case TaskCategory: setCategories( idsFromString( *it ) ); break;
+	    case TaskDescription: setDescription( *it ); break;
+	    case Priority: setPriority( (*it).toInt() ); break;
+	    case Date: mDueDate = TimeConversion::fromString( (*it) ); break;
+	    case TaskUid: setUid( (*it).toInt() ); break;
+	    case TaskRid:
+	    case TaskRinfo:
+            break;
 	}
+    }
 }
 
 /*!
   Destroys a task.
 */
 Task::~Task()
-{
-}
+{}
 
 /*!
   \internal
@@ -181,11 +188,14 @@ QMap<int, QString> Task::toMap() const
     m.insert( Completed, isCompleted() ? "1" : "0" );
     if ( categories().count() )
 	m.insert( TaskCategory, idsToString( categories() ) );
+
     if ( !description().isEmpty() )
 	m.insert( TaskDescription, description() );
+
     m.insert( Priority, QString::number( priority() ) );
     if ( hasDueDate() )
 	m.insert( Date, TimeConversion::toString( dueDate() ) );
+
     m.insert( TaskUid, QString::number(uid()) );
 
     //qDebug("Task::toMap");

@@ -43,7 +43,7 @@ static void setPeriod( OPimOccurrence& oc, bool period, const QDate& d,
 }
 
 // namespace Opie {
-OPimBase::OPimBase() {}
+OPimBase::OPimBase() : d( 0 ) {}
 OPimBase::~OPimBase() {}
 
 /**

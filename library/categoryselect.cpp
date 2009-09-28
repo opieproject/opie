@@ -91,13 +91,15 @@ class CategorySelectPrivate
 {
 public:
     CategorySelectPrivate( const QArray<int> &cats)
-	: mRec( cats ),
-	  usingAll( false )
-    {
-    }
+	: mRec( cats )
+	, usingAll( false )
+	, mVisibleName()
+    {}
     CategorySelectPrivate()
-    {
-    }
+	: usingAll( false )
+	, mVisibleName()
+    {}
+
     QArray<int> mRec;
     bool usingAll;
     QString mVisibleName;

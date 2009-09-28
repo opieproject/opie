@@ -53,7 +53,7 @@ class TrieList : public QValueList<TriePtr> {
 public:
     TrieList()
     {
-	sorted=TRUE;
+	sorted=true;
     }
 
     QTrie* findAdd(QChar c);
@@ -63,7 +63,7 @@ public:
     {
 	if ( !sorted ) {
 	    qHeapSort(*this);
-	    sorted = TRUE;
+	    sorted = true;
 	}
     }
 };
@@ -94,10 +94,11 @@ private:
 };
 
 QTrie::QTrie()
-{
-    key = 0;
-    isword = FALSE;
-}
+    : isword( false )
+    , maxdepth( 0 )
+    , decendants( 0 )
+    , key( 0 )
+{}
 
 QTrie::~QTrie()
 {
@@ -108,7 +109,7 @@ QTrie::~QTrie()
 void QTrie::insertWord(const QString& s, uint index)
 {
     if ( index == s.length() ) {
-	isword = TRUE;
+	isword = true;
     } else {
 	QTrie* t = children.findAdd(s[index]);
 	t->insertWord(s,index+1);
@@ -117,9 +118,9 @@ void QTrie::insertWord(const QString& s, uint index)
 
 bool QTrie::equal(QTrie* o)
 {
-    if ( o == this ) return TRUE;
+    if ( o == this ) return true;
     if ( isword != o->isword )
-	return FALSE;
+	return false;
     return children.equal(o->children);
 }
 
@@ -193,14 +194,14 @@ int TriePtr::operator <=(const TriePtr& o) const
 bool TrieList::equal(TrieList& l)
 {
     if ( count() != l.count() )
-	return FALSE;
+	return false;
     sort(); l.sort();
     ConstIterator it2 = begin();
     ConstIterator it = l.begin();
     for( ; it != l.end(); ++it, ++it2 )
 	if ( (*it).letter != (*it2).letter || ! (*it).p->equal((*it2).p) )
-	    return FALSE;
-    return TRUE;
+	    return false;
+    return true;
 }
 QTrie* TrieList::findAdd(QChar c)
 {
@@ -212,7 +213,7 @@ QTrie* TrieList::findAdd(QChar c)
     p.p = new QTrie;
     p.letter = c;
     prepend(p);
-    sorted=FALSE;
+    sorted=false;
     sort();
     return p.p;
 }
@@ -235,6 +236,7 @@ public:
 	    node = (QDawg::Node*)(nn);
 	    nodes = n / sizeof(QDawg::Node);
 	} else {
+	    nodes = 0;
 	    node = 0;
 	}
     }
@@ -252,6 +254,9 @@ public:
 	    // #### endianness problem ignored.
 	    node = (QDawg::Node*)((char*)mem);
 	    nodes = n / sizeof(QDawg::Node);
+	} else {
+	    nodes = 0;
+	    node = 0;
 	}
     }
 
@@ -332,12 +337,12 @@ public:
 	    QDawg::Node& n = node[nid+i];
 	    if ( s[index] == QChar((ushort)n.let) ) {
 		if ( n.isword && index == (int)s.length()-1 )
-		    return TRUE;
+		    return true;
 		if ( n.offset )
 		    return contains(s,n.offset+nid+i,index+1);
 	    }
 	} while (!node[nid+i++].islast);
-	return FALSE;
+	return false;
     }
 
     void appendAllWords(QStringList& list, int nid=0, QString s="") const
@@ -474,7 +479,7 @@ bool QDawg::createFromWords(QIODevice* dev)
 	d = new QDawgPrivate(trie);
     else
 	d = 0;
-    return TRUE;
+    return true;
 }
 
 /*!
@@ -518,7 +523,7 @@ bool QDawg::readFile(const QString& filename)
     d = 0;
     int f = ::open( QFile::encodeName(filename), O_RDONLY );
     if ( f < 0 )
-	return FALSE;
+	return false;
     struct stat st;
     if ( fstat( f, &st ) == 0 ) {
 	char * tmp = (char*)mmap( 0, st.st_size, // any address, whole file
@@ -543,10 +548,10 @@ bool QDawg::read(QIODevice* dev)
     delete d;
     d = new QDawgPrivate(dev);
     if ( d->ok() )
-	return TRUE;
+	return true;
     delete d;
     d = 0;
-    return FALSE;
+    return false;
 }
 
 /*!
@@ -554,7 +559,7 @@ bool QDawg::read(QIODevice* dev)
 */
 bool QDawg::write(QIODevice* dev) const
 {
-    return d ? d->write(dev) : TRUE;
+    return d ? d->write(dev) : true;
 }
 
 /*!
@@ -574,12 +579,12 @@ const QDawg::Node* QDawg::root() const
 }
 
 /*!
-  Returns TRUE if the DAWG contains the word \a s; otherwise returns
-  FALSE.
+  Returns true if the DAWG contains the word \a s; otherwise returns
+  false.
 */
 bool QDawg::contains(const QString& s) const
 {
-    return d ? d->contains(s) : FALSE;
+    return d ? d->contains(s) : false;
 }
 
 /*!
@@ -605,14 +610,14 @@ void QDawg::dump() const
 /*!
   \fn bool QDawg::Node::isWord() const
 
-  Returns TRUE if this Node is the end of a word; otherwise returns
-  FALSE.
+  Returns true if this Node is the end of a word; otherwise returns
+  false.
 */
 /*!
   \fn bool QDawg::Node::isLast() const
 
-  Returns TRUE if this Node is the last in the child list; otherwise
-  returns FALSE.
+  Returns true if this Node is the last in the child list; otherwise
+  returns false.
 */
 /*!
   \fn const Node* QDawg::Node::next() const

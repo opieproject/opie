@@ -3,14 +3,19 @@
 #include "dialer.h"
 
 IOModem::IOModem( const Profile &profile )
-	: IOSerial( profile ) {
-	m_profile = profile;
-}
+	: IOSerial( profile )
+        , m_initString(), m_resetString(), m_dialPref1(), m_dialSuf1()
+        , m_dialPref2(), m_dialSuf2(), m_dialPref3(), m_dialSuf3(), m_connect()
+        , m_hangup(), m_cancel()
+        , m_dialTime( 0 ), m_delayRedial( 0 ), m_numberTries( 0 )
+        , m_dtrDropTime( 0 ), m_bpsDetect( 0 ), m_dcdLines( 0 )
+        , m_multiLineUntag( 0 )
+        , m_profile( profile )
+{}
 
 
-IOModem::~IOModem() {
-}
-
+IOModem::~IOModem()
+{}
 
 void IOModem::close() {
 	// Hangup, discarding result
@@ -27,24 +32,21 @@ void IOModem::close() {
 
 bool IOModem::open() {
     bool ret = IOSerial::open();
-	if(!ret) return false;
+    if(!ret) return false;
 
-//	int fd = rawIO();
-        internDetach();
-	Dialer d(m_profile, m_fd);
+//    int fd = rawIO();
+    internDetach();
+    Dialer d(m_profile, m_fd);
 
-	int result = d.exec();
-        internAttach();
-//	closeRawIO(fd);
-	if(result == QDialog::Accepted)
-	{
-		return true;
-	}
-	else
-	{
-		close();
-		return false;
-	}
+    int result = d.exec();
+    internAttach();
+//    closeRawIO(fd);
+    if(result == QDialog::Accepted)
+        return true;
+    else {
+        close();
+        return false;
+    }
 }
 
 void IOModem::reload( const Profile &config ) {

@@ -40,13 +40,16 @@ using namespace Opie::Ui;
 
 OXYSelector::OXYSelector( QWidget *parent, const char *name )
 	: QWidget( parent, name )
+	, px( 0 )
+	, py( 0 )
+	, xPos( 0 )
+	, yPos( 0 )
+	, minX( 0 )
+	, maxX( 100 )
+	, minY( 0 )
+	, maxY( 100 )
+	, d( 0 )
 {
-	xPos = 0;
-	yPos = 0;
-	minX = 0;
-	minY = 0;
-	maxX = 100;
-	maxY = 100;
 	store.setOptimization( QPixmap::BestOptim );
 	store.resize( STORE_W2, STORE_W2 );
 }
@@ -215,14 +218,18 @@ void OXYSelector::drawCursor( QPainter *p, int xp, int yp )
 
 
 OSelector::OSelector( QWidget *parent, const char *name )
-	: QWidget( parent, name ), QRangeControl()
+    : QWidget( parent, name )
+    , QRangeControl()
+    , d( 0 )
 {
 	_orientation = Horizontal;
 	_indent = TRUE;
 }
 
 OSelector::OSelector( Orientation o, QWidget *parent, const char *name )
-	: QWidget( parent, name ), QRangeControl()
+    : QWidget( parent, name )
+    , QRangeControl()
+    , d( 0 )
 {
 	_orientation = o;
 	_indent = TRUE;
@@ -505,12 +512,14 @@ static QColor *standardPalette = 0;
 
 OColor::OColor()
 : QColor()
+, d( 0 )
 {
   r = 0; g = 0; b = 0; h = 0; s = 0; v = 0;
 };
 
 OColor::OColor( const OColor &col)
 : QColor( col )
+, d( 0 )
 {
   h = col.h; s = col.s; v = col.v;
   r = col.r; g = col.g; b = col.b;
@@ -596,6 +605,7 @@ static void createStandardPalette()
 
 OHSSelector::OHSSelector( QWidget *parent, const char *name )
 	: OXYSelector( parent, name )
+	, d( 0 )
 {
 	setRange( 0, 0, 359, 255 );
 }

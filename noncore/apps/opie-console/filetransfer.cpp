@@ -12,15 +12,23 @@
 
 
 FileTransfer::FileTransfer( Type t, IOLayer* lay )
-    : FileTransferLayer( lay ), m_type( t ), m_pid ( 0 ) {
-    signal(SIGPIPE,  SIG_IGN );
+    : FileTransferLayer( lay )
+    , m_type( t )
+    , m_pid ( 0 )
+    , m_fd( -1 )
+    , m_prog( 0 )
+    , m_file()
+    , m_not( 0 )
+    , m_proc( 0 )
+{
+    memset( m_info, 0, sizeof( m_info ) );
+    memset( m_comm, 0, sizeof( m_comm ) );
+    memset( m_term, 0, sizeof( m_term ) );
+    signal( SIGPIPE,  SIG_IGN );
+}
 
-    m_pid = 0;
-    m_not = 0l;
-    m_proc = 0l;
-}
-FileTransfer::~FileTransfer() {
-}
+FileTransfer::~FileTransfer()
+{}
 
 /**
  * now we will send the file.
@@ -213,8 +221,8 @@ void FileTransfer::slotProgress( const QStringList& list ) {
     }
 
 
-    double pro = (double)sent/total;
-    int prog = pro * 100;
+    double pro = double(sent)/double(total);
+    int prog = int(pro) * 100;
 
     // speed
     progi = QStringList::split(':', list[3].simplifyWhiteSpace() );

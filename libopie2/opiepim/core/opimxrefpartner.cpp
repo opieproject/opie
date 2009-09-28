@@ -32,10 +32,16 @@ namespace Opie {
 
 OPimXRefPartner::OPimXRefPartner( const QString& appName,
                                   int uid, int field )
-    : m_app(appName), m_uid(uid), m_field( field ) {
+    : m_app( appName )
+    , m_uid( uid )
+    , m_field( field )
+    , d( 0 )
+{
 }
 
-OPimXRefPartner::OPimXRefPartner( const OPimXRefPartner& ref ) {
+OPimXRefPartner::OPimXRefPartner( const OPimXRefPartner& ref )
+    : d( 0 )
+{
     *this = ref;
 }
 

@@ -30,10 +30,13 @@
 
 namespace Opie {
 
-OPimXRefManager::OPimXRefManager() {
-}
+OPimXRefManager::OPimXRefManager()
+    : d( 0 )
+{}
 
-OPimXRefManager::OPimXRefManager( const OPimXRefManager& ref) {
+OPimXRefManager::OPimXRefManager( const OPimXRefManager& ref) 
+    : d( 0 )
+{
     m_list = ref.m_list;
 }
 
@@ -46,8 +49,6 @@ OPimXRefManager &OPimXRefManager::operator=( const OPimXRefManager& ref) {
 }
 
 bool OPimXRefManager::operator==( const OPimXRefManager& /*ref*/) {
-    //   if ( m_list == ref.m_list ) return true;
-
     return false;
 }
 

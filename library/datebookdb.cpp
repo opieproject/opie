@@ -981,6 +981,7 @@ void DateBookDB::init()
         save();
     }
     d->clean = true;
+    recordIdMax = 0;
 }
 
 bool DateBookDB::save()

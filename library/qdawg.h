@@ -49,7 +49,7 @@ public:
 	uint isword:1;
 	uint islast:1;
 	int offset:nodebits;
-	Node() { }
+	Node() : let(0), isword(0), islast(0), offset(0) { }
     public:
 	QChar letter() const { return QChar((ushort)let); }
 	bool isWord() const { return isword; }

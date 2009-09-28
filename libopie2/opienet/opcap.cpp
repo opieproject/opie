@@ -1070,6 +1070,7 @@ OPacketCapturer::OPacketCapturer( QObject* parent, const char* name )
                 :QObject( parent, name ), _name( QString::null ), _open( false )
 		,_pch( 0 ), _pcd( 0 ), _sn( 0 ), _autodelete( true ), d( 0 )
 {
+    memset(_errbuf, 0, sizeof(_errbuf));
 }
 
 

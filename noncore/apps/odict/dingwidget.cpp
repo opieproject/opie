@@ -20,11 +20,17 @@
 #include <qpe/config.h>
 #include <qtextstream.h>
 
-DingWidget::DingWidget( )
+DingWidget::DingWidget()
+    : lines()
+    , lang1_name()
+    , lang2_name()
+    , isCaseSensitive( false )
+    , dictName()
+    , search_word()
+    , queryword()
+    , methodname()
+    , trenner()
 {
-	methodname = QString::null;
-	trenner = QString::null;
-	lines = 0L;
 }
 
 void DingWidget::loadDict( QString name )

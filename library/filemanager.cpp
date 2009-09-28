@@ -31,30 +31,20 @@
 #include <errno.h>
 #include <sys/stat.h>
 
-/*!
-  \class FileManager
-  \brief The FileManager class assists with AppLnk input/output.
-*/
+/// \class FileManager
+/// \brief The FileManager class assists with AppLnk input/output.
 
-/*!
-  Constructs a FileManager.
-*/
+/// Constructs a FileManager.
 FileManager::FileManager()
-{
-}
+    : d( 0 )
+{}
 
-/*!
-  Destroys a FileManager.
-*/
+/// Destroys a FileManager.
 FileManager::~FileManager()
-{
-}
+{}
 
-/*!
-  Saves \a data as the document specified by \a f.
-
-  Returns whether the operation succeeded.
-*/
+/// Saves \a data as the document specified by \a f.
+/// Returns whether the operation succeeded.
 bool FileManager::saveFile( const DocLnk &f, const QByteArray &data )
 {
     QString fileName = f.file() + ".new";

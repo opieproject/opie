@@ -11,17 +11,26 @@
 #include "filereceive.h"
 
 FileReceive::FileReceive( Type t, IOLayer* lay, const QString& dir )
-    : ReceiveLayer(lay, dir ), m_type( t )
+    : ReceiveLayer(lay, dir )
+    , m_pid( pid_t() )
+    , m_fd( -1 )
+    , m_prog( 0 )
+    , m_type( t )
+    , m_not( 0 )
+    , m_proc( 0 )
 {
-    m_fd = -1;
-    m_not = 0l;
-    m_proc = 0l;
+    memset( m_info, 0, sizeof( m_info ) );
+    memset( m_comm, 0, sizeof( m_comm ) );
+    memset( m_term, 0, sizeof( m_term ) );
 }
-FileReceive::~FileReceive() {
-}
+
+FileReceive::~FileReceive()
+{}
+
 void FileReceive::receive() {
     receive( currentDir() );
 }
+
 void FileReceive::receive( const QString& dir ) {
     m_prog = -1;
     m_fd = layer()->rawIO();

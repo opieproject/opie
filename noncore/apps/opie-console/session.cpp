@@ -5,19 +5,15 @@
 #include "session.h"
 
 
-Session::Session() {
-    m_widget = 0l;
-    m_layer = 0l;
-    m_emu = 0l;
-    m_transfer = 0l;
-}
+Session::Session()
+    : m_name(), m_widget( 0 ), m_layer( 0 ), m_emu( 0 ), m_connected( false )
+    , m_prof(), m_transfer( 0 )
+{}
+
 Session::Session( const QString& na, QWidgetStack* widget, IOLayer* lay)
-    : m_name( na ), m_widget( widget ), m_layer( lay )
-{
-//    m_widLay = 0l;
-//    m_emLay  = 0l;
-    m_emu = 0l;
-}
+    : m_name( na ), m_widget( widget ), m_layer( lay ), m_emu( 0 )
+    , m_connected( false ), m_prof(), m_transfer( 0 )
+{}
 
 Session::~Session() {
     delete m_layer;

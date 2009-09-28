@@ -32,16 +32,19 @@ namespace Opie {
 
 OPimXRef::OPimXRef( const OPimXRefPartner& one, const OPimXRefPartner& two )
     : m_partners(2)
+    , d( 0 )
 {
     m_partners[0] = one;
     m_partners[1] = two;
 }
-OPimXRef::OPimXRef():m_partners(2)
+OPimXRef::OPimXRef()
+    : m_partners(2)
+    , d( 0 )
+{}
+
+OPimXRef::OPimXRef( const OPimXRef& ref)
+    : d( 0 )
 {
-
-}
-
-OPimXRef::OPimXRef( const OPimXRef& ref) {
     *this = ref;
 }
 
@@ -56,11 +59,13 @@ OPimXRef &OPimXRef::operator=( const OPimXRef& ref) {
 }
 
 bool OPimXRef::operator==( const OPimXRef& oper ) {
-    if ( m_partners == oper.m_partners ) return true;
+    if ( m_partners == oper.m_partners )
+	return true;
 
     return false;
 }
-OPimXRefPartner OPimXRef::partner( enum Partners par) const{
+
+OPimXRefPartner OPimXRef::partner( enum Partners par) const {
     return m_partners[par];
 }
 
@@ -68,16 +73,22 @@ void OPimXRef::setPartner( enum Partners par,  const OPimXRefPartner& part) {
     m_partners[par] = part;
 }
 
-bool OPimXRef::containsString( const QString& string ) const{
+bool OPimXRef::containsString( const QString& string ) const {
     if ( m_partners[One].service() == string ||
-         m_partners[Two].service() == string ) return true;
+         m_partners[Two].service() == string )
+    {
+	return true;
+    }
 
     return false;
 }
 
-bool OPimXRef::containsUid( int uid ) const{
+bool OPimXRef::containsUid( int uid ) const {
     if ( m_partners[One].uid() == uid ||
-         m_partners[Two].uid() == uid ) return true;
+         m_partners[Two].uid() == uid )
+    {
+	return true;
+    }
 
     return false;
 }

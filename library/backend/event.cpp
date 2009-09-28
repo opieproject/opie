@@ -347,6 +347,10 @@ Event::Event()
   \internal
 */
 Event::Event( const QMap<int, QString> &map )
+    : startTimeDirty( false )
+    , endTimeDirty( false )
+    , mRid( 0 )
+    , mRinfo( 0 )
 {
     setDescription( map[DatebookDescription] );
     setLocation( map[Location] );

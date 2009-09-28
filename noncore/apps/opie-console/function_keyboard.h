@@ -17,7 +17,7 @@
 
 struct FKey {
 
-    FKey(): qcode(0), unicode(0) {};
+    FKey(): label(), pix(0), pixFile(), qcode(0), unicode(0) {}
     FKey(const QString &l, const QString &f, ushort q, ushort u)
         : label(l)
         , pix(0)

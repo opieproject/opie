@@ -62,7 +62,7 @@ _;:,   .>  :=|.         This file is free software; you can
 // --- Checkbook --------------------------------------------------------------
 using namespace Opie::Ui;
 Checkbook::Checkbook( QWidget *parent, CBInfo *i, Cfg *cfg )
-    : QDialog( parent, 0, TRUE, WStyle_ContextHelp )
+    : QDialog( parent, 0, true, WStyle_ContextHelp )
 {
     info = i;
     _pCfg=cfg;
@@ -241,7 +241,7 @@ QWidget *Checkbook::initTransactions()
     tranTable->setColumnAlignment( column, Qt::AlignRight );
     column=tranTable->addColumn( tr("Balance") );
     tranTable->setColumnAlignment( column, Qt::AlignRight );
-    tranTable->setAllColumnsShowFocus( TRUE );
+    tranTable->setAllColumnsShowFocus( true );
     tranTable->setSorting( -1 );
     layout->addMultiCellWidget( tranTable, 1, 1, 0, 2 );
     QPEApplication::setStylusOperation( tranTable->viewport(), QPEApplication::RightOnHold );
@@ -429,7 +429,7 @@ void Checkbook::slotPasswordClicked()
         Password *pw = new Password( this, tr( "Enter password" ), tr( "Please enter your password:" ) );
         if ( pw->exec() != QDialog::Accepted  )
         {
-            passwordCB->setChecked( FALSE );
+            passwordCB->setChecked( false );
             delete pw;
             return;
         }
@@ -439,7 +439,7 @@ void Checkbook::slotPasswordClicked()
         pw = new Password( this, tr( "Confirm password" ), tr( "Please confirm your password:" ) );
         if ( pw->exec() != QDialog::Accepted || pw->password != info->password() )
         {
-            passwordCB->setChecked( FALSE );
+            passwordCB->setChecked( false );
             info->setPassword( QString::null );
         }
 
@@ -457,7 +457,7 @@ void Checkbook::slotPasswordClicked()
         }
         else
         {
-            passwordCB->setChecked( TRUE );
+            passwordCB->setChecked( true );
         }
 
         delete pw;
@@ -635,16 +635,16 @@ void Checkbook::slotDrawGraph()
     {
         case 0 : drawBalanceChart();
             break;
-        case 1 : drawCategoryChart( TRUE );
+        case 1 : drawCategoryChart( true );
             break;
-        case 2 : drawCategoryChart( FALSE );
+        case 2 : drawCategoryChart( false );
             break;
     };
 
     if ( graphInfo )
         graphWidget->setGraphInfo( graphInfo );
 
-    graphWidget->drawGraph( TRUE );
+    graphWidget->drawGraph( true );
 }
 
 void Checkbook::drawBalanceChart()
@@ -723,11 +723,11 @@ CBListItem::CBListItem( TranInfo *pTran, QListView *parent, QString label1, QStr
                      QString label3, QString label4, QString label5, QString label6, QString label7,
                      QString label8 )
     : QListViewItem( parent, label1, label2, label3, label4, label5, label6, label7, label8 )
-{
-    _pTran=pTran;
-    m_known = FALSE;
-    owner = parent;
-}
+    , _pTran( pTran )
+    , owner( parent )
+    , m_known( false )
+    , m_odd( false )
+{}
 
 void CBListItem::paintCell( QPainter *p, const QColorGroup &cg, int column, int width, int align )
 {

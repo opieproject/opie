@@ -38,17 +38,22 @@ namespace Opie {
  * we will do it for the future
  */
 struct OPimState::Data : public QShared {
-    Data() : QShared(),state(Undefined) {
-    }
+    Data() : QShared(), state( Undefined )
+    {}
     int state;
 };
 
-OPimState::OPimState( int state ) {
-    data = new Data;
+OPimState::OPimState( int state )
+    : data( new Data )
+    , d( 0 )
+{
     data->state = state;
 }
-OPimState::OPimState( const OPimState& st) :
-    data( st.data ) {
+
+OPimState::OPimState( const OPimState& st)
+    : data( st.data )
+    , d( 0 )
+{
     /* ref up */
     data->ref();
 }

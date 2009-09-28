@@ -72,14 +72,19 @@ public:
 class ConfigData
 {
 public:
-    ConfigData() {}
+    ConfigData()
+        : mtime( 0 )
+	, size( 0 )
+    { used.tv_sec = used.tv_usec = 0; }
     ConfigData( const ConfigGroupMap& cf, const ConfigPrivate& pri,
                 struct stat sbuf )
-        : cfg( cf ), priv( pri ), mtime( sbuf.st_mtime ),
-          size( sbuf.st_size )
-        {
-            gettimeofday(&used, 0 );
-        }
+        : cfg( cf )
+	, priv( pri )
+        , mtime( sbuf.st_mtime )
+	, size( sbuf.st_size )
+    {
+        gettimeofday(&used, 0 );
+    }
 
     ConfigGroupMap cfg;
     ConfigPrivate priv; // Owned by this object
