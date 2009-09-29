@@ -499,6 +499,7 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         delete syncDialog;
         syncDialog = 0;
         transferServer->syncAccessManager()->reset();
+        notifyPostSync();
     }
     else if (msg == "setSyncPeerInfo(QString,QString)") {
         QString peerId, peerName;
@@ -621,6 +622,32 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
             if (!appName.isEmpty()) {
                 cfg.writeEntry("Apps", appName);
                 cfg.writeEntry("Delay", delay);
+            }
+        }
+    }
+#endif
+}
+
+void Server::notifyPostSync()
+{
+#ifndef QT_NO_COP
+    QFile f( QPEApplication::qpeDir() + "etc/post_sync" );
+    if( f.open( IO_ReadOnly ) ) {
+        QTextStream ts(&f);
+        while( !ts.atEnd() ) {
+            QString s = ts.readLine();
+            if(!s.startsWith("#")) {
+                QStringList sl = QStringList::split( ' ', s );
+                // Lines should be:
+                // uniqueid appname channel message
+                // (where appname is the sync appname, for future filtering)
+                // e.g.
+                // datebook_alarm datebook QPE/Application/datebook registerAllAlarms()
+                if( sl.count() > 3 ) {
+                    QCString channel( sl[2] );
+                    QCString message( sl[3] );
+                    QCopEnvelope e( channel, message );
+                }
             }
         }
     }
