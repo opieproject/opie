@@ -617,6 +617,9 @@ void MainWindow::slotAppMessage( const QCString& msg, const QByteArray& data ) {
             m_initialDate = day;  // still starting
         needShow = true;
     }
+    else if (msg == "registerAllAlarms()") {
+        manager()->setupAllAlarms();
+    }
 
     if (needShow )
         QPEApplication::setKeepRunning();
