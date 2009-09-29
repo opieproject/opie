@@ -30,6 +30,9 @@ TextToolDialog::TextToolDialog(QWidget* parent, const char* name)
     QVBoxLayout* mainLayout = new QVBoxLayout(this, 4, 4);
 
     mainLayout->addWidget(m_pLineEdit);
+
+    connect( m_pLineEdit, SIGNAL( returnPressed() ),
+         this, SLOT( accept() ) );
 }
 
 TextToolDialog::~TextToolDialog()
