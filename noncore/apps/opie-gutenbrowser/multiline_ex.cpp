@@ -29,16 +29,9 @@ public:
 
 MultiLine_Ex::MultiLine_Ex( QWidget *parent ,  const char *name  )
     :QMultiLineEdit( parent,name )
-{
-
-#ifndef Q_WS_QWS
-//    clearTableFlags( Tbl_autoHScrollBar | Tbl_autoVScrollBar);  //for pre release testing
-#else
-// clearTableFlags( Tbl_autoVScrollBar );  //for pre release testing
-#endif
-//     clearTableFlags( Tbl_autoHScrollBar | Tbl_autoVScrollBar); // for release
-//    init();
-}
+    ,row(0)
+    ,pageSize(0)
+{}
 
 void MultiLine_Ex::pageDown( bool mark )
 {
@@ -71,12 +64,6 @@ void MultiLine_Ex::cursorDown( bool mark )
   QMultiLineEdit::cursorDown(  mark );
 }
 
-
-//void MultiLine_Ex::setPaper( const QBrush& pap)
-//{
-
-//}
-
 int MultiLine_Ex::lastRow()
 {
   return lastRowVisible();
@@ -90,21 +77,18 @@ int MultiLine_Ex::topRow()
 int MultiLine_Ex::editSize( )
 {
   return viewHeight() / cellHeight();
-//scroll( 0, int yPixels );
 }
 
 void MultiLine_Ex::ScrollUp( int lines )
 {
-    for( int i = 0; i < lines; i++) {
-    this->setTopCell( topCell() + 1 );
-    }
+    for( int i = 0; i < lines; i++)
+        this->setTopCell( topCell() + 1 );
 }
 
 void MultiLine_Ex::ScrollDown( int lines )
 {
-  for( int i = 0; i < lines; i++) {
-  this->setTopCell( topCell() -1 );
-  }
+  for( int i = 0; i < lines; i++)
+      this->setTopCell( topCell() -1 );
 }
 
 int MultiLine_Ex::lineHeight( int row)

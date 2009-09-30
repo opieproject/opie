@@ -31,35 +31,7 @@ class/* Q_EXPORT*/ MultiLine_Ex : public QMultiLineEdit
     Q_OBJECT
 public:
     MultiLine_Ex( QWidget *parent=0, const char *name=0 );//:
-//  QMultiLineEdit(QWidget *parent=0, QString& name=0 );
- //  ~MultiLine_Ex();
-
-//    const char *textLine( int line ) const;
-//    QString text() const;
-//int row;
-//    int numLines() const;
-//
-//    bool  isReadOnly() const;
-//    bool  isOverwriteMode() const;
-//
-//    void  setFont( const QFont &font );
-//    void insertLine( const char *s, int line = -1 );
-//    void insertAt( const char *s, int line, int col );
-//    void removeLine( int line );
-//
-//    void  cursorPosition( int *line, int *col ) const;
-//    void  setCursorPosition( int line, int col, bool mark = FALSE );
-//    void  getCursorPosition( int *line, int *col );
-//    bool  atBeginning() const;
-//    bool  atEnd() const;
-//
-//    bool  autoUpdate()    const;
-//    void  setAutoUpdate( bool );
-//
-//    void  setFixedVisibleLines( int lines );
 public:
-int row;
-//setPaper( QBrush& pap);
     bool hasSelectedText();
     void pageUp( bool mark=FALSE );
     void pageDown( bool mark=FALSE );
@@ -70,7 +42,6 @@ int row;
     int lastRow();
     int topRow();
     int editSize( );
-    int pageSize ;
     int maxLineWidth() const;
     void ScrollUp( int lines);
     void ScrollDown( int lines);
@@ -78,25 +49,9 @@ int row;
     int Top();
     int lineHeight( int row );
     int PageSize();
-public slots:
-//    void       clear();
-//    void       setText( const char * );
-//    void       append( const char * );
-//    void       deselect();
-//    void       selectAll();
-//    void       setReadOnly( bool );
-//    void       setOverwriteMode( bool );
-//    void       paste();
-//    void       copyText();
-//    void       cut();
-signals:
-//    void  textChanged();
-//    void  returnPressed();
 
-protected:
-protected:
-private slots:
-private:
+    int row;
+    int pageSize;
 
 private:    // Disabled copy constructor and operator=
 #if defined(Q_DISABLE_COPY)
