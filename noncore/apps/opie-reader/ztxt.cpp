@@ -4,7 +4,16 @@
 #include "my_list.h"
 #include "Bkmks.h"
 
-ztxt::ztxt() : bInit(false), expandedtextbuffer(NULL), compressedtextbuffer(NULL) { /*printf("constructing:%x\n",fin);*/ }
+ztxt::ztxt()
+  : bInit(false)
+  , buffersize(0)
+  , buffercontent(0)
+  , expandedtextbuffer(0)
+  , compressedtextbuffer(0)
+  , bufferpos(0)
+  , bufferrec(0)
+  , currentpos(0)
+{}
 
 
 int ztxt::OpenFile(const char *src)

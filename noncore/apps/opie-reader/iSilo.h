@@ -77,9 +77,32 @@ class iSilo : public Cpdb
   u_int32_t getreccode();
   bool process_record();
 public:
-  iSilo() : pos(0), master(NULL), lz(NULL), text(NULL), cur_rec(0), buffer_size(4096), current_pos(0), bsize(0), BlockSize(4096)
+  iSilo()
+      : BlockSize(4096)
+      , pos(0)
+      , master(0)
+      , lz(0)
+      , text(0)
+      , cur_rec(0)
+      , buffer_size(4096)
+      , current_pos(0)
+      , bsize(0)
+      , filepos(0)
+      , filesize(0)
+      , textsize(0)
+      , attr_start(0)
+      , attr_end(0)
+      , attr_num(0)
+      , current_attr(0)
+      , attr_rec(0)
+      , pos_hi(0)
+      , last_pos(0)
+      , last_value(0)
   {
+      memset(buf, 0, sizeof(buf));
+      memset(buffer, 0, sizeof(buffer));
   }
+
   ~iSilo();
   int getch();
   void getch(tchar& ch, CStyle& sty, unsigned long& pos);

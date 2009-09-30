@@ -24,23 +24,7 @@ inline size_t hash2fn(unsigned long l)
 {
   return l & 7;
 }
-/*/
-template<class K>size_t hashfn(const K& l)
-{
-  size_t s = 0;
-  unsigned char* p = (unsigned char*)&l;
-  for (int i = 0; i < sizeof(K)-1; i++)
-    {
-      s = 3*s+(255-p[i]);
-    }
-}
 
-template<class K>size_t hash2fn(const K& l)
-{
-  unsigned char* p = (unsigned char*)&l;
-  return 255-p[sizeof(K)-1];
-}
-*/
 template<class K, class D>
 class hashtable
 {
@@ -55,7 +39,7 @@ class hashtable
     K key;
     D data;
     bool inuse;
-    keydata() : inuse(false) {}
+    keydata() : key(), data(), inuse(false) {}
     keydata(K k, D d) : key(k), data(d), inuse(true) {}
   };
   keydata* table;
@@ -160,7 +144,7 @@ class hashtable
 	    }
 	}
     public:
-      iterator() : tab(NULL) {}
+      iterator() : ptr(0), tab(0) {}
       iterator operator++()
 	{
 	  while (++ptr < tab->hshsz)

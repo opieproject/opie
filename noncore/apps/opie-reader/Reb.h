@@ -17,17 +17,6 @@
 
 #include "mytypes.h"
 
-/*
-struct Reb_Segment
-{
-  UInt32 len, page, flags;
-  Reb_Segment(UInt32 _len = 0, UInt32 _page = 0, UInt32 _flags = 0)
-    :
-    len(_len), page(_page), flags(_flags)
-  {}
-};
-*/
-
 class CReb;
 
 class RBPage
@@ -37,19 +26,37 @@ class RBPage
   UInt32 nochunks, currentchunk, chunkpos, chunklen, chunkoffset;
   UInt32 m_pagelen, m_blocksize;
   bool m_Compressed;
-  void readchunk();
   UInt32* chunklist;
   UInt8* chunk;
   FILE* fin;
   UInt32 m_pageno;
+
+  void readchunk();
   void initpage(UInt32 pos, size_t _cp, bool _isCompressed, UInt32 _len);
   size_t (*m_decompress)(UInt8*, size_t, UInt8*, size_t);
  public:
-  RBPage() : pageoffset(0), nochunks(0), currentchunk(0), chunkpos(0), chunkoffset(0), m_pagelen(0), m_Compressed(false), chunklist(NULL), chunk(NULL) {}
+  RBPage()
+      : filepos(0)
+      , pageoffset(0)
+      , nochunks(0)
+      , currentchunk(0)
+      , chunkpos(0)
+      , chunklen(0)
+      , chunkoffset(0)
+      , m_pagelen(0)
+      , m_blocksize(0)
+      , m_Compressed(false)
+      , chunklist(0)
+      , chunk(0)
+      , fin(0)
+      , m_pageno(0)
+      , m_decompress(0)
+    {}
+
   ~RBPage()
     {
-      if (chunk != NULL) delete [] chunk;
-      if (chunklist != NULL) delete [] chunklist;
+      if (chunk) delete [] chunk;
+      if (chunklist) delete [] chunklist;
     }
   int getch(CReb*);
   unsigned short int getuint(CReb*);

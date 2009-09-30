@@ -7,29 +7,12 @@
 #include "CExpander.h"
 #include "pdb.h"
 
+#define COUNT_BITS 3
+
 typedef UInt32 DWORD;
 typedef UInt16 WORD;
 
-#define DISP_BITS 11
-#define COUNT_BITS 3
-/*
-// all numbers in these structs are big-endian, MAC format
-struct tDocHeader {
-	char sName[32];
-	DWORD dwUnknown1;
-	DWORD dwTime1;
-	DWORD dwTime2;
-	DWORD dwTime3;
-	DWORD dwLastSync;
-	DWORD ofsSort;
-	DWORD ofsCatagories;
-	DWORD dwCreator;
-	DWORD dwType;
-	DWORD dwUnknown2;
-	DWORD dwUnknown3;
-	WORD  wNumRecs;
-};
-*/
+//#define DISP_BITS 11
 struct tDocRecord0 {
 	WORD wVersion;	// 1=plain text, 2=compressed
 	WORD wSpare;
@@ -60,8 +43,9 @@ inline DWORD SwapLong(DWORD r)
 }
 
 class Aportis : public Cpdb {
-    bool peanutfile, html;
-    void dePeanut(int&);
+  void dePeanut(int&);
+
+  bool peanutfile, html;
   DWORD dwLen;
   WORD nRecs2;
   DWORD dwTLen;
@@ -76,11 +60,11 @@ class Aportis : public Cpdb {
   char bCompressed;
 public:
   void sizes(unsigned long& _file, unsigned long& _text)
-    {
-      qDebug("Calling aportis sizes:(%u,%u,%u)", dwTLen, nRecs, BlockSize);
-      _file = dwLen;
-      _text = dwTLen;
-    }
+  {
+    qDebug("Calling aportis sizes:(%u,%u,%u)", dwTLen, nRecs, BlockSize);
+    _file = dwLen;
+    _text = dwTLen;
+  }
   bool hasrandomaccess() { return true; }
   virtual ~Aportis() {}
   Aportis();
@@ -99,5 +83,4 @@ private:
   bool refreshbuffer();
   unsigned int GetBS(unsigned int bn);
 };
-
 #endif

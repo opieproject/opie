@@ -19,13 +19,10 @@ static unsigned char h2i(unsigned char c)
 {
   unsigned char ret = 0;
   if ('0' <= c && c <= '9')
-    {
       ret = c - '0';
-    }
   else if ('a' <= c && c <= 'f')
-    {
       ret = c - 'a' + 10;
-    }
+
   return ret;
 }
 
@@ -309,10 +306,23 @@ bool striphtml::findanchor(const QString& _info)
   return ret;
 }
 
-striphtml::striphtml(const QString& _s) : entmap(NULL), isPre(false), currentid(0), lastch(0), currentfile(_s), indent(0), forcecentre(false), m_inblock(false), m_bchm(false), ignorespace(false), tablenesteddepth(0)
+striphtml::striphtml(const QString& _s)
+  : entmap(0)
+  , isPre(false)
+  , currentid(0)
+  , lastch(0)
+  , currentfile(_s)
+  , indent(0)
+  , forcecentre(false)
+  , m_inblock(false)
+  , m_bchm(false)
+  , ignorespace(false)
+  , tablenesteddepth(0)
 {
   href2filepos = new QMap<QString, unsigned long>;
   id2href = new QMap<unsigned long, QString>;
+  memset(m_listtype, 0, sizeof(m_listtype));
+  memset(m_ctr, 0, sizeof(m_ctr));
 }
 
 striphtml::~striphtml()

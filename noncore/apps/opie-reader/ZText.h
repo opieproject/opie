@@ -57,7 +57,7 @@ public:
 	  }
 #endif
       }
-  Text() : file(NULL) {};
+  Text() : file(0), fsize(0) {};
   virtual ~Text()
     {
       if (file != NULL)

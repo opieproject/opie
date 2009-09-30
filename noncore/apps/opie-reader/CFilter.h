@@ -36,7 +36,7 @@ class CFilter : public CFilter_IFace
 	{
 	    return parent->hyperlink(n,noff,w,nm);
 	}
-    CFilter() : parent(NULL) {}
+    CFilter() : parent(0) {}
     void setparent(CCharacterSource* p) { parent = p; }
     CCharacterSource* getparent() { return parent; }
     virtual ~CFilter() {};
@@ -67,7 +67,7 @@ class CFilterChain
     CFilter_IFace* first;
     CCharacterSource* front;
  public:
-    CFilterChain(CEncoding* _e) : encoder(_e), first(NULL), front(_e) {};
+    CFilterChain(CEncoding* _e) : expander(0), encoder(_e), first(0), front(_e) {};
     ~CFilterChain()
 	{
 	    CCharacterSource* p = front;
@@ -103,7 +103,7 @@ class CFilterChain
     */
     void addfilter(CFilter_IFace* p)
 	{
-	    if (first == NULL)
+	    if (!first)
 	    {
 		front = first = p;
 		p->setparent(encoder);
@@ -160,7 +160,7 @@ class dehyphen : public CFilter
     tchar m_nextChar;
     CStyle m_nextSty;
  public:
-    dehyphen() : m_bCharWaiting(false) {}
+    dehyphen() : m_bCharWaiting(false), m_nextChar(0) {}
     ~dehyphen() {}
     void getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	{

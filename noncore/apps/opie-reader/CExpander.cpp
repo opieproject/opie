@@ -5,9 +5,11 @@
 
 size_t CExpander::getHome() { return m_homepos; }
 
-CExpander::CExpander() : m_homepos(0), fname(NULL), m_scrWidth(240), m_currentstart(1), m_currentend(0) {};
+CExpander::CExpander() : m_homepos(0), m_continuous(false), fname(0)
+                       , bSuspended(false), suspos(0), sustime(0)
+                       , m_scrWidth(240), m_currentstart(1), m_currentend(0) {};
 
-CExpander::~CExpander() { if (fname != NULL) delete [] fname; };
+CExpander::~CExpander() { if (fname) delete [] fname; };
 
 int CExpander::openfile(const char *src)
 {
@@ -63,8 +65,8 @@ void CExpander::suspend(FILE*& fin)
   bSuspended = true;
   suspos = ftell(fin);
   fclose(fin);
-  fin = NULL;
-  sustime = time(NULL);
+  fin = 0;
+  sustime = time(0);
 }
 
 void CExpander::unsuspend(FILE*& fin)
@@ -72,22 +74,22 @@ void CExpander::unsuspend(FILE*& fin)
   if (bSuspended)
     {
       bSuspended = false;
-      int delay = time(NULL) - sustime;
+      int delay = time(0) - sustime;
       if (delay < 10)
 	{
 	  Global::statusMessage("Stalling");
 	  sleep(10-delay);
 	}
       fin = fopen(fname, "rb");
-      for (int i = 0; fin == NULL && i < 5; i++)
+      for (int i = 0; !fin && i < 5; i++)
 	{
 	  Global::statusMessage("Stalling");
 	  sleep(5);
 	  fin = fopen(fname, "rb");
 	}
-      if (fin == NULL)
+      if (!fin)
 	{
-	  QMessageBox::warning(NULL, PROGNAME, "Couldn't reopen file");
+	  QMessageBox::warning(0, PROGNAME, "Couldn't reopen file");
 	  exit(0);
 	}
       suspos = fseek(fin, suspos, SEEK_SET);

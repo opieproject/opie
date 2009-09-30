@@ -28,8 +28,7 @@ class FontControl
     unsigned char getBaseSize() { return m_basesize; }
     int gzoom();
     FontControl(QString n = "helvetica", int size = 10)
-	:
-      m_fontsizes(NULL), m_hasCourier(false), m_leading(0), m_extraspace(0), m_fixgraphics(true)
+	: m_fontsizes(0), m_hasCourier(false), m_leading(0), m_extraspace(0), m_basesize(0), m_fixgraphics(true)
     {
 	ChangeFont(n, size);
     }

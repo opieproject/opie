@@ -24,7 +24,7 @@ class FontControl;
 
 class CDrawBuffer : public CBuffer
 {
-   bool m_hastext;
+    bool m_hastext;
     CList<textsegment> segs;
     int len;
     FontControl* fc;
@@ -46,21 +46,14 @@ class CDrawBuffer : public CBuffer
     void setEof() { m_bEof = true; }
     bool eof() { return m_bEof; }
     CDrawBuffer& operator=(CDrawBuffer&);
-    CDrawBuffer(FontControl* _fs = NULL)
-	:
-	fc(_fs)
-	{
-	    empty();
-	}
+    CDrawBuffer(FontControl* _fs = 0)
+	: fc(_fs)
+        , m_hastext(false)
+        , m_showPartial(false)
+    { empty(); }
+
     ~CDrawBuffer();
-/*
-    CDrawBuffer()
-	:
-	size(0)
-	{
-	    empty();
-	}
-*/
+
     int charwidth(int numchars, CStyle& currentstyle);
     int charwidth(int numchars);
     int width(int availht, int numchars = -1, bool onscreen = false, int scwidth = 0, unsigned short _lborder = 0, unsigned short _rborder = 0);

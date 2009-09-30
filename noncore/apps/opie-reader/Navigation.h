@@ -13,7 +13,8 @@ protected:
     T history[NAVIGATION_HISTORY_SIZE];
     size_t historystart, historyend, historycurrent;
  public:
-    CNavigation_base() : historystart(0),historyend(0),historycurrent(0) {}
+    CNavigation_base() : historystart(0), historyend(0), historycurrent(0)
+    { for (size_t i = 0; i < NAVIGATION_HISTORY_SIZE; i++) history[i] = T(); }
     void saveposn(T posn);
     void writeposn(T posn);
     bool forward(T& loc);

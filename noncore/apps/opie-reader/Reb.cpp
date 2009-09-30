@@ -8,9 +8,22 @@
 #include "Model.h"
 
 CReb::CReb()
-:
-  fin(NULL), m_indexpages(NULL), m_pagedetails(NULL),tagoffset(0),
-  tags(NULL), paras(NULL), noparas(0), joins(NULL), nojoins(0)
+  : nopages(0)
+  , m_homepage(0)
+  , m_blocksize(0)
+  , file_length(0)
+  , text_length(0)
+  , toc(0)
+  , fin(0)
+  , m_indexpages(0)
+  , m_pagedetails(0)
+  , tagoffset(0)
+  , tags(0)
+  , paras(0)
+  , joins(0)
+  , nojoins(0)
+  , noparas(0)
+  , m_binary(false)
 {
 }
 

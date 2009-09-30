@@ -17,10 +17,11 @@ class Bkmk
     unsigned short m_annolen;
     unsigned int m_position;
     unsigned int m_position2;
-    unsigned char m_red,m_green,m_blue, m_level;
+    unsigned char m_red, m_green, m_blue, m_level;
     void init(const void*, unsigned short, const void*, unsigned short, unsigned int);
  public:
-    Bkmk() : m_name(0), m_namelen(0), m_anno(0), m_annolen(0), m_position(0) {};
+    Bkmk() : m_name(0), m_namelen(0), m_anno(0), m_annolen(0), m_position(0)
+           , m_position2(0), m_red(0), m_green(0), m_blue(0), m_level(0) {};
     Bkmk(const unsigned char* _nm, unsigned short _nmlen, const unsigned char* _anno, unsigned short _annolen, unsigned int _p);
     Bkmk(const tchar* _nm, const unsigned char* _anno, unsigned short _annolen, unsigned int _p);
     Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p);

@@ -85,7 +85,7 @@ class Cpdb : public CExpander
     void gotorecordnumber(int);
     DatabaseHdrType head;
     bool openpdbfile(const char* src);
-    Cpdb() : fin(NULL) {}
+    Cpdb() : file_length(0), fin(0) { memset(&head, 0, sizeof(head)); }
     ~Cpdb();
 #ifdef USEQPE
     void suspend();

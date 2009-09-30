@@ -4,7 +4,24 @@
 #include "my_list.h"
 #include "Bkmks.h"
 
-Aportis::Aportis() : peanutfile(false) { /*printf("constructing:%x\n",fin);*/ }
+Aportis::Aportis()
+    : peanutfile(false)
+    , html(false)
+    , dwLen(0)
+    , nRecs2(0)
+    , dwTLen(0)
+    , nRecs(0)
+    , BlockSize(0)
+    , dwRecLen(0)
+    , mobiimagerec(0)
+    , currentrec(0)
+    , currentpos(0)
+    , cbptr(0)
+    , outptr(0)
+    , bCompressed(0)
+{
+    memset(circbuf, 0, sizeof(circbuf));
+}
 
 void Aportis::dePeanut(int& ch)
 {

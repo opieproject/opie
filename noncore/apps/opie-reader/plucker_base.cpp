@@ -26,17 +26,29 @@
 
 const UInt8 CPlucker_base::continuation_bit = 1;
 
-CPlucker_base::CPlucker_base() :
+CPlucker_base::CPlucker_base()
+  : m_lastIsBreak(false)
 #ifdef LOCALPICTURES
-  m_viewer(NULL),
-  m_picture(NULL),
+  , m_viewer(0)
+  , m_picture(0)
 #endif
-  expandedtextbuffer(NULL),
-  compressedtextbuffer(NULL),
-  bufferrec(-1),
-  m_offset(0)
-  //,    urls(NULL)
-{ /*printf("constructing:%x\n",fin);*/ }
+  , textlength(0)
+  , m_lastBreak(0)
+  , m_offset(0)
+  , uid(0)
+  , m_nextPara(0)
+  , m_nextParaIndex(0)
+  , m_nParas(0)
+  , buffersize(0)
+  , compressedbuffersize(0)
+  , buffercontent(0)
+  , expandedtextbuffer(0)
+  , compressedtextbuffer(0)
+  , bufferpos(0)
+  , bufferrec(-1)
+  , m_bufferisreserved(false)
+  , currentpos(0)
+{}
 
 
 void CPlucker_base::Expand(UInt32 reclen, UInt8 type, UInt8* buffer, UInt32 buffersize)

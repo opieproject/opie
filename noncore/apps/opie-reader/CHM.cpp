@@ -39,16 +39,21 @@ static int _get_hhc (struct chmFile *h, struct chmUnitInfo *ui,
     return CHM_ENUMERATOR_CONTINUE;
 }
 
-CHM::CHM() {
-    chmFile = NULL;
-    chmPath = "";
-    chmHHCPath = "";
-    chmBuffer = "";
-    bufpos = 0;
+CHM::CHM()
+    : chmFile(0)
+    , chmHomeBuffer()
+    , chmBuffer()
+    , chmPath()
+    , chmHHCPath()
+    , bufpos(0)
+    , fsize(0)
+    , m_homestart(0)
+    , m_homeend(0)
+{
 }
 
 CHM::~CHM()  {
-    if (chmFile != NULL)
+    if (chmFile)
         chm_close(chmFile);
 }
 
@@ -57,8 +62,8 @@ void CHM::suspend() {
         bSuspended = true;
         //suspos = gztell(file);
         chm_close(chmFile);
-        chmFile = NULL;
-        sustime = time(NULL);
+        chmFile = 0;
+        sustime = time(0);
 #endif
 }
 
@@ -67,20 +72,20 @@ void CHM::unsuspend() {
         if (bSuspended)
         {
             bSuspended = false;
-            int delay = time(NULL) - sustime;
+            int delay = time(0) - sustime;
             if (delay < 10)
 	      {
 		Global::statusMessage("Stalling");
                 sleep(10-delay);
 	      }
             chmFile = chm_open(fname);
-            for (int i = 0; chmFile == NULL && i < 5; i++) {
+            for (int i = 0; !chmFile && i < 5; i++) {
 	      Global::statusMessage("Stalling");
                 sleep(5);
                 chmFile = chm_open(fname);
             }
-            if (chmFile == NULL) {
-                QMessageBox::warning(NULL, PROGNAME, "Couldn't reopen file");
+            if (!chmFile) {
+                QMessageBox::warning(0, PROGNAME, "Couldn't reopen file");
                 exit(0);
             }
         //suspos = gzseek(file, suspos, SEEK_SET);
@@ -267,7 +272,7 @@ bool CHM::getFile(const QString& _href, const QString& ) {
 }
 
 QImage *CHM::getPicture(const QString& href) {
-        QImage *img = NULL;
+        QImage *img = 0;
         QString PicRef = "/"+href;
         struct chmUnitInfo ui;
         const char *ext;
@@ -307,12 +312,12 @@ QImage *CHM::getPicture(const QString& href) {
 }
 
 int CHM::OpenFile(const char *src) {
-        if (chmFile != NULL) chm_close(chmFile);
+        if (chmFile) chm_close(chmFile);
         struct stat _stat;
         stat(src,&_stat);
         fsize = _stat.st_size;
         chmFile = chm_open(src);
-        if (chmFile != NULL) {
+        if (chmFile) {
             chm_enumerate(chmFile,
                         CHM_ENUMERATE_ALL,
                         _get_hhc,
@@ -324,7 +329,7 @@ int CHM::OpenFile(const char *src) {
         }
 	m_homepos = locate();
 	qDebug("Home:%u", m_homepos);
-        return (chmFile==NULL);
+        return !chmFile;
 }
 
 int CHM::getch() {
