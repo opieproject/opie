@@ -15,6 +15,7 @@
 class Config;
 class DateBookWeekView;
 class DateBookWeekHeader;
+class DatebookWeekItemPreview;
 
 namespace Opie {
 namespace Datebook {
@@ -56,7 +57,7 @@ namespace Datebook {
         QDate bdate;
         DateBookWeekHeader *m_header;
         DateBookWeekView *m_view;
-        QLabel *lblDesc;
+        DatebookWeekItemPreview *m_preview;
         QTimer *tHide;
         int startTime;
 

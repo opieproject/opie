@@ -45,6 +45,19 @@ using namespace Opie;
 
 //-----------------------------------------------------------------
 
+DatebookWeekItemPreview::DatebookWeekItemPreview( QWidget * parent, const char * name, WFlags f )
+    : QLabel( parent, name, f )
+{
+    setFrameStyle( QFrame::Plain | QFrame::Box );
+    setBackgroundColor( QColor( 255, 255, 120 ) );
+}
+
+void DatebookWeekItemPreview::mousePressEvent( QMouseEvent * )
+{
+    hide();
+}
+
+//-----------------------------------------------------------------
 
 DateBookWeekItem::DateBookWeekItem( const OPimOccurrence e, Opie::Datebook::WeekView *weekView )
     : ev( e )

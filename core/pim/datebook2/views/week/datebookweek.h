@@ -36,6 +36,7 @@
 
 #include <qlist.h>
 #include <qscrollview.h>
+#include <qlabel.h>
 #include <qstring.h>
 #include <qvaluelist.h>
 
@@ -43,11 +44,18 @@
 
 class DateBookWeekHeader;
 class QDate;
-class QLabel;
 class QResizeEvent;
 class QSpinBox;
 class QTimer;
 class QHeader;
+
+class DatebookWeekItemPreview: public QLabel
+{
+public:
+    DatebookWeekItemPreview( QWidget * parent, const char * name=0, WFlags f=0 );
+protected:
+    void mousePressEvent(QMouseEvent *);
+};
 
 class DateBookWeekItem
 {

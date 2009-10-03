@@ -93,10 +93,8 @@ void WeekView::initUI(QWidget *parent) {
     vb->addWidget( m_header );
     vb->addWidget( m_view );
 
-    lblDesc = new QLabel( m_widget, "event label" );
-    lblDesc->setFrameStyle( QFrame::Plain | QFrame::Box );
-    lblDesc->setBackgroundColor( yellow );
-    lblDesc->hide();
+    m_preview = new DatebookWeekItemPreview( m_widget, "event label" );
+    m_preview->hide();
 
     tHide = new QTimer( this );
 
@@ -106,7 +104,7 @@ void WeekView::initUI(QWidget *parent) {
     connect( m_view, SIGNAL(signalDateChanged(QDate&)), this, SLOT(slotViewDateChanged(QDate&) ) );
     connect( m_header, SIGNAL( dateChanged(QDate&) ), this, SLOT( dateChanged(QDate&) ) );
     connect( m_header, SIGNAL( dateChanged(QDate&) ), m_view, SLOT( slotDateChanged(QDate&) ) );
-    connect( tHide, SIGNAL( timeout() ), lblDesc, SLOT( hide() ) );
+    connect( tHide, SIGNAL( timeout() ), m_preview, SLOT( hide() ) );
     connect( qApp, SIGNAL(weekChanged(bool)), this, SLOT(slotWeekChanged(bool)) );
     connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(slotClockChanged(bool)));
 
@@ -273,11 +271,11 @@ void WeekView::slotShowEvent( const OPimOccurrence &ev )
 
     str += "<br><br>" + strNote;
 
-    lblDesc->setText( str );
-    lblDesc->resize( lblDesc->sizeHint() );
+    m_preview->setText( str );
+    m_preview->resize( m_preview->sizeHint() );
     // move the label so it is "centered" horizontally...
-    lblDesc->move( QMAX(0,(m_widget->width() - lblDesc->width()) / 2), 0 );
-    lblDesc->show();
+    m_preview->move( QMAX(0,(m_widget->width() - m_preview->width()) / 2), 0 );
+    m_preview->show();
 }
 
 void WeekView::slotHideEvent()
