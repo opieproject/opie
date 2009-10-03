@@ -37,12 +37,12 @@ bool NHcfg::load(const QString&aPath)
 {
     _path=aPath;
     stage = 0;
-    QFile *f=new QFile(_path);
-    if (!f) {
-        oerr << "Could not open file" << oendl;
+    QFile f(_path);
+    if( !f.exists() ) {
+        oerr << "National holiday file " << _path << " not found" << oendl;
         return false;
     }
-    QXmlInputSource is(*f);
+    QXmlInputSource is(f);
     QXmlSimpleReader reader;
     reader.setContentHandler(this);
     reader.setErrorHandler(this);
