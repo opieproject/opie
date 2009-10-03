@@ -39,6 +39,8 @@
 #include <qstring.h>
 #include <qvaluelist.h>
 
+#include "weekview.h"
+
 class DateBookWeekHeader;
 class QDate;
 class QLabel;
@@ -50,7 +52,7 @@ class QHeader;
 class DateBookWeekItem
 {
 public:
-    DateBookWeekItem( const Opie::OPimOccurrence e );
+    DateBookWeekItem( const Opie::OPimOccurrence e, Opie::Datebook::WeekView *weekView );
 
     void setGeometry( int x, int y, int w, int h );
     QRect geometry() const { return r; }
@@ -68,7 +70,8 @@ class DateBookWeekView : public QScrollView
 {
     Q_OBJECT
 public:
-    DateBookWeekView( bool ampm, bool weekOnMonday, QWidget *parent = 0,
+    DateBookWeekView( Opie::Datebook::WeekView *weekView,
+              bool ampm, bool weekOnMonday, QWidget *parent = 0,
               const char *name = 0 );
 
     bool whichClock() const;
@@ -102,6 +105,7 @@ private:
     void initNames();
 
 private:
+    Opie::Datebook::WeekView *m_weekView;
     bool ampm;
     bool bOnMonday;
     QHeader *header;

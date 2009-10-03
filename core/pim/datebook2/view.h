@@ -40,6 +40,8 @@
 #include <opie2/opimoccurrence.h>
 #include <opie2/odatebookaccess.h>
 
+#include "eventvisualiser.h"
+
 class Config;
 namespace Opie {
 namespace Datebook {
@@ -126,6 +128,11 @@ namespace Datebook {
          * the view needs an update!
          */
         virtual void reschedule() = 0;
+
+        /**
+         * Get the event visualiser
+         */
+        EventVisualiser *eventVisualiser();
     protected:
         void popup( const OPimOccurrence &ev, const QPoint &pt );
         QString toShortText(const OPimOccurrence& eff)const;

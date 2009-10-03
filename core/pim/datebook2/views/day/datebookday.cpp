@@ -388,26 +388,7 @@ void DateBookDayWidget::paintEvent( QPaintEvent *e )
 {
     QPainter p( this );
 
-    if (dayView->getSelectedWidget() == this) {
-        p.setBrush( QColor( 155, 240, 230 ) ); // selected item
-    } else {
-        if (dayView->date() == QDate::currentDate()) {
-            QTime curTime = QTime::currentTime();
-            if (ev.endTime() < curTime) {
-                p.setBrush( QColor( 180, 180, 180 ) ); // grey, inactive
-            } else {
-                //change color in dependence of the time till the event starts
-                int duration = curTime.secsTo(ev.startTime());
-                if (duration < 0) duration = 0;
-                int colChange = duration*160/86400; //86400: secs per day, 160: max color shift
-                p.setBrush( QColor( 200-colChange, 200-colChange, 255 ) ); //blue
-            }
-        } else {
-            p.setBrush( QColor( 220, 220, 220 ) ); //light grey, inactive (not current date)
-            //perhaps make a distinction between future/past dates
-        }
-    }
-
+    p.setBrush( dayView->eventVisualiser()->eventColour( ev ) );
     p.setPen( QColor(100, 100, 100) );
     p.drawRect(rect());
 

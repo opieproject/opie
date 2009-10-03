@@ -780,6 +780,10 @@ DescriptionManager MainWindow::descriptionManager() {
     return m_descMan;
 }
 
+EventVisualiser *MainWindow::eventVisualiser() {
+    return &m_eventVis;
+}
+
 void MainWindow::setLocationManager( const LocationManager& loc) {
     m_locMan = loc;
 }

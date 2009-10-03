@@ -61,6 +61,7 @@ public:
     unsigned int items()const{return item_count;}
     void popup( const Opie::OPimOccurrence &e, const QPoint &pos );
     const Opie::OPimOccurrence *selectedEvent();
+    Opie::Datebook::DayView *dayView();
 
 public slots:
     void removeAllEvents();
@@ -71,7 +72,7 @@ protected:
     DatebookEventDesc * lblDesc;
     unsigned int item_count;
     QList<DatebookAlldayDisp> subWidgets;
-    Opie::Datebook::DayView *dayView;
+    Opie::Datebook::DayView *m_dayView;
     const Opie::OPimOccurrence *m_selectedEv;
 };
 

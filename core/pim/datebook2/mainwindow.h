@@ -38,6 +38,7 @@
 #include "descriptionmanager.h"
 #include "locationmanager.h"
 #include "templatemanager.h"
+#include "eventvisualiser.h"
 #include "view.h"
 
 class QAction;
@@ -127,6 +128,7 @@ namespace Datebook {
         void setDescriptionManager( const DescriptionManager& );
         Show* eventShow();
         Editor* editor();
+        EventVisualiser *eventVisualiser();
 
     private: // friend functions for Show
         void hideShow(); // to hide the view
@@ -162,6 +164,7 @@ namespace Datebook {
         TemplateManager m_tempMan;
         DescriptionManager m_descMan;
         LocationManager m_locMan;
+        EventVisualiser m_eventVis;
         Show* m_show;
         Editor* m_edit;
         QDate m_initialDate;

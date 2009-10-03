@@ -46,17 +46,12 @@ using namespace Opie;
 //-----------------------------------------------------------------
 
 
-DateBookWeekItem::DateBookWeekItem( const OPimOccurrence e )
+DateBookWeekItem::DateBookWeekItem( const OPimOccurrence e, Opie::Datebook::WeekView *weekView )
     : ev( e )
 {
     // with the current implementation change the color for all day events
     OPimEvent event = e.toEvent();
-    if ( event.isAllDay() && !event.hasNotifiers() ) {
-        c = Qt::green;
-    }
-    else {
-        c = event.hasNotifiers() ? Qt::red : Qt::blue;
-    }
+    c = weekView->eventVisualiser()->eventColour( ev );
 }
 
 void DateBookWeekItem::setGeometry( int x, int y, int w, int h )
@@ -67,9 +62,10 @@ void DateBookWeekItem::setGeometry( int x, int y, int w, int h )
 
 //------------------=---------------------------------------------
 
-DateBookWeekView::DateBookWeekView( bool ap, bool startOnMonday,
+DateBookWeekView::DateBookWeekView( Opie::Datebook::WeekView *weekView,
+                    bool ap, bool startOnMonday,
                     QWidget *parent, const char *name )
-    : QScrollView( parent, name ), ampm( ap ), bOnMonday( startOnMonday ),
+    : QScrollView( parent, name ), m_weekView( weekView ), ampm( ap ), bOnMonday( startOnMonday ),
       showingEvent( false )
 {
     items.setAutoDelete( true );
@@ -133,7 +129,7 @@ void DateBookWeekView::showEvents( QValueList<OPimOccurrence> &ev )
     items.clear();
     QValueListIterator<OPimOccurrence> it;
     for ( it = ev.begin(); it != ev.end(); ++it ) {
-        DateBookWeekItem *i = new DateBookWeekItem( *it );
+        DateBookWeekItem *i = new DateBookWeekItem( *it, m_weekView );
 // FIXME when this is reinstated it needs to stop leaking DateBookWeekItems also
 //X        if(!((i->event().end().hour()==0) && (i->event().end().minute()==0) && (i->event().startDate()!=i->event().date()))) {  // Skip events ending at 00:00 starting at another day.
             positionItem( i );

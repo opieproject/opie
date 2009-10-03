@@ -54,7 +54,7 @@ DatebookdayAllday::DatebookdayAllday(DayView *view, QWidget* parent,  const char
     if ( !name )
         setName( "DatebookdayAllday" );
 
-    dayView = view;
+    m_dayView = view;
     m_selectedEv = NULL;
 
     setMinimumSize( QSize( 0, 0 ) );
@@ -114,8 +114,13 @@ const OPimOccurrence *DatebookdayAllday::selectedEvent()
 void DatebookdayAllday::popup( const Opie::OPimOccurrence &e, const QPoint &pos )
 {
     m_selectedEv = &e;
-    dayView->setSelectedWidget( NULL );
-    dayView->popup( pos );
+    m_dayView->setSelectedWidget( NULL );
+    m_dayView->popup( pos );
+}
+
+DayView *DatebookdayAllday::dayView()
+{
+    return m_dayView;
 }
 
 //---------------------------------------------------------------------------
@@ -140,9 +145,9 @@ DatebookAlldayDisp::DatebookAlldayDisp(DatebookdayAllday *allday, const OPimOccu
         setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Minimum));
     }
     else {
-        setBackgroundColor(yellow);
         setFrameStyle(QFrame::Raised|QFrame::Panel);
     }
+    setBackgroundColor( m_allday->dayView()->eventVisualiser()->eventColour( m_Ev ) );
 }
 
 DatebookAlldayDisp::~DatebookAlldayDisp()

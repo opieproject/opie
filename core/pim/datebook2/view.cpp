@@ -228,3 +228,8 @@ QList<OPimRecord> View::records( const QDate& on ) {
 QList<OPimRecord> View::records( const QDate& on, const QDate& to ) {
     return m_win->manager()->records( on, to );
 }
+
+EventVisualiser *View::eventVisualiser()
+{
+    return m_win->eventVisualiser();
+}

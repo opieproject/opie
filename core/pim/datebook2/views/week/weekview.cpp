@@ -88,7 +88,7 @@ void WeekView::initUI(QWidget *parent) {
 
     QVBoxLayout *vb = new QVBoxLayout( m_widget );
     m_header = new DateBookWeekHeader( weekStartOnMonday(), m_widget );
-    m_view = new DateBookWeekView( isAP(), weekStartOnMonday(), m_widget );
+    m_view = new DateBookWeekView( this, isAP(), weekStartOnMonday(), m_widget );
     m_view->setFocusPolicy(QWidget::StrongFocus);
     vb->addWidget( m_header );
     vb->addWidget( m_view );

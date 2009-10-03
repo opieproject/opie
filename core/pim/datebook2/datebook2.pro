@@ -21,6 +21,7 @@ HEADERS	= mainwindow.h \
           holiday.h \
           odatebookaccessbackend_holiday.h \
           namespace_hack.h \
+          eventvisualiser.h \
           views/day/dayview.h \
           views/day/datebookday.h \
           views/day/datebookdayheaderimpl.h \
@@ -52,6 +53,7 @@ SOURCES	= main.cpp \
           repeatentry.cpp \
           exceptions.cpp \
           onoteedit.cpp \
+          eventvisualiser.cpp \
           odatebookaccessbackend_holiday.cpp \
           views/day/dayview.cpp \
           views/day/datebookday.cpp \
