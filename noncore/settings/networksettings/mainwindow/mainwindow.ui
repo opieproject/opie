@@ -498,8 +498,14 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>The name here is that one your device identifying with on 
-console or infrared.</string>
+                            <string>This name is used to identify your device on the console or via infrared.</string>
+                        </property>
+                        <property stdset="1">
+                            <name>alignment</name>
+                            <set>WordBreak|AlignVCenter|AlignLeft</set>
+                        </property>
+                        <property>
+                            <name>wordwrap</name>
                         </property>
                     </widget>
                     <spacer>
