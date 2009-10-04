@@ -45,6 +45,7 @@
 #include <qmap.h>
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
+#include <qprogressbar.h>
 
 #include <sys/vfs.h>
 
@@ -130,16 +131,23 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
     groupBoxLayout->addWidget( m_output );
     layout->addMultiCellWidget( groupBox, 2, 2, 0, 1 );
 
+#ifdef USE_LIBOPKG
+    m_progressBar = new QProgressBar( this );
+    m_progressBar->setTotalSteps( 100 );
+    m_progressBar->hide();
+    layout->addMultiCellWidget( m_progressBar, 3, 3, 0, 1 );
+#endif
+
     m_btnStart = new QPushButton( Opie::Core::OResource::loadPixmap( "packagemanager/apply",
                                   Opie::Core::OResource::SmallIcon ), tr( "Start" ), this );
     m_btnStart->setMinimumHeight( AppLnk::smallIconSize() );
-    layout->addWidget( m_btnStart, 3, 0 );
+    layout->addWidget( m_btnStart, 4, 0 );
     connect( m_btnStart, SIGNAL(clicked()), this, SLOT(slotBtnStart()) );
 
     m_btnOptions = new QPushButton( Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
                                     tr( "Options" ), this );
     m_btnOptions->setMinimumHeight( AppLnk::smallIconSize() );
-    layout->addWidget( m_btnOptions, 3, 1 );
+    layout->addWidget( m_btnOptions, 4, 1 );
     connect( m_btnOptions, SIGNAL( clicked() ), this, SLOT(slotBtnOptions()) );
 
     // Display packages being acted upon in output widget
@@ -251,12 +259,28 @@ void InstallDlg::slotBtnStart()
         m_btnStart->setEnabled( false );
     }
 
+#ifdef USE_LIBOPKG
+    connect( m_packman, SIGNAL(signalProgress(const QString &, int)), this, SLOT(slotProgress(const QString &, int)) );
+
+    m_progressBar->show();
+#endif
+
     for ( m_currCommand = 0; m_currCommand < m_numCommands; m_currCommand++ )
     {
+#ifdef USE_LIBOPKG
+        m_progressBar->reset();
+#endif
         // Execute next command
         m_packman->executeCommand( m_command[ m_currCommand ], m_packages[ m_currCommand ], dest,
                                    this, SLOT(slotOutput(const QString &)), true );
     }
+
+    slotOutput( tr("Completed") );
+#ifdef USE_LIBOPKG
+    m_progressBar->hide();
+
+    disconnect( m_packman, SIGNAL(signalProgress(const QString &, int)), this, SLOT(slotProgress(const QString &, int)) );
+#endif
 
     // All commands executed, allow user to close dialog
     m_btnStart->setEnabled( true );
@@ -314,3 +338,15 @@ void InstallDlg::slotOutput( const QString &msg )
     // Update available space
     slotDisplayAvailSpace( QString::null );
 }
+
+void InstallDlg::slotProgress( const QString &msg, int percentage )
+{
+    static QString lastmsg = "";
+    if( lastmsg != msg ) {
+        slotOutput( msg );
+        lastmsg = msg; 
+    }
+
+    m_progressBar->setProgress( percentage );
+}
+

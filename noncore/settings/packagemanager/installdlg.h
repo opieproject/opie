@@ -39,6 +39,7 @@ class QComboBox;
 class QLabel;
 class QMultiLineEdit;
 class QPushButton;
+class QProgressBar;
 
 class OConfItem;
 class OPackageManager;
@@ -69,6 +70,7 @@ private:
     QMultiLineEdit  *m_output;      // Multi-line edit to display status
     QPushButton     *m_btnStart;    // Start/abort/close button
     QPushButton     *m_btnOptions;  // Installation options button
+    QProgressBar    *m_progressBar;
 
     // Commands and packages to execute
     int               m_numCommands; // Number of commands to be executed
@@ -85,6 +87,7 @@ private slots:
 
     // Execution slots
     void slotOutput( const QString &msg );
+    void slotProgress( const QString &msg, int percentage );
 
 signals:
     void closeInstallDlg();

@@ -38,6 +38,12 @@
 
 #include <qobject.h>
 
+#ifdef USE_LIBOPKG
+extern "C" {
+#include <opkg.h>
+};
+#endif
+
 // Ipkg execution options (m_ipkgExecOptions)
 #define FORCE_DEPENDS                           0x0001
 #define FORCE_REMOVE                            0x0002
@@ -86,9 +92,11 @@ public:
                          bool rawOutput = true );
     void abortCommand();
 
-    void ipkgMessage( char *msg );
+    void ipkgMessage( const char *msg );
     void ipkgStatus( char *status );
     void ipkgList( char *filelist );
+    void progressInit();
+    void progress( const QString &msg, int percentage );
 
 private:
     Config        *m_config;            // Pointer to application configuration file
@@ -96,6 +104,9 @@ private:
     int            m_ipkgExecOptions;   // Bit-mapped flags for Ipkg execution options
     int            m_ipkgExecVerbosity; // Ipkg execution verbosity level
     QString        m_rootPath;          // Directory path where the 'root' destination is located
+#ifdef USE_LIBOPKG
+    opkg_t        *m_opkg; 
+#endif
 
     void           loadConfiguration();
     OConfItemList *filterConfItems( OConfItem::Type typefilter = OConfItem::NotDefined );
@@ -108,6 +119,8 @@ signals:
     void signalIpkgMessage( const QString &msg );
     void signalIpkgStatus( const QString &status );
     void signalIpkgList( const QString &filelist );
+    void signalProgressInit();
+    void signalProgress( const QString &msg, int percentage );
 };
 
 #endif

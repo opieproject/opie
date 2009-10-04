@@ -29,7 +29,18 @@ DEFINES     += HAVE_MKDTEMP
 TARGET       = packagemanager
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lopiecore2 -lopieui2 -lipkg
+LIBS        += -lqpe -lopiecore2 -lopieui2
+
+CONFTEST = $$system( echo $CONFIG_LIBIPK_DEP )
+contains( CONFTEST, y ) {
+	LIBS += -lipkg
+}
+
+CONFTEST = $$system( echo $CONFIG_LIBOPK_DEP )
+contains( CONFTEST, y ) {
+	LIBS += -lopkg
+	DEFINES += USE_LIBOPKG
+}
 
 include( $(OPIEDIR)/include.pro )
 
@@ -39,3 +50,4 @@ include( $(OPIEDIR)/include.pro )
 !isEmpty( LIBIPK_LIB_DIR ) {
     LIBS = -L$$LIBIPK_LIB_DIR $$LIBS
 }
+

@@ -178,8 +178,10 @@ void MainWindow::initUI()
     QAction *actionDownload = new QAction( tr( "Download" ), iconDownload, QString::null, 0, this, 0 );
     actionDownload->setWhatsThis( tr( "Tap here to download the currently selected package(s)." ) );
     connect( actionDownload, SIGNAL(activated()), this, SLOT(slotDownload()) );
+#ifndef USE_LIBOPKG
     actionDownload->addTo( popup );
     actionDownload->addTo( &m_toolBar );
+#endif
 
     a = new QAction( tr( "Apply changes" ), Opie::Core::OResource::loadPixmap( "packagemanager/apply",
                      Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );

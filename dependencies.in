@@ -46,17 +46,21 @@
     string "LIBXINE include dir"
     depends LIBXINE_DEP
 
+  config LIBOPK_DEP
+    boolean "Have libopkg"
+    default "n"
+
   config LIBIPK_DEP
     boolean "Have libipkg >= 0.99.120"
     default "n"
 
   config LIBIPK_LIB_DIR
-    string "libipkg library dir"
-    depends LIBIPK_DEP
+    string "libipkg/libopkg library dir"
+    depends ( LIBIPK_DEP || LIBOPK_DEP )
 
   config LIBIPK_INC_DIR
-    string "libipkg include dir"
-    depends LIBIPK_DEP
+    string "libipkg/libopkg include dir"
+    depends ( LIBIPK_DEP || LIBOPK_DEP )
 
   config LIBSDL_DEP
     boolean "Have libsdl12 and sdlimage"

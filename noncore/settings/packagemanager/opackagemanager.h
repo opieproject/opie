@@ -89,6 +89,7 @@ signals:
     void initStatus( int numSteps );
     void statusText( const QString &status );
     void statusBar( int currStep );
+    void signalProgress( const QString &msg, int percentage );
 };
 
 #endif

@@ -43,6 +43,9 @@ OPackageManager::OPackageManager( Config *config, QObject *parent, const char *n
     , m_categories()
 {
     m_packages.setAutoDelete( true );
+#ifdef USE_LIBOPKG
+    connect( &m_ipkg, SIGNAL(signalProgress(const QString &, int)), this, SIGNAL(signalProgress(const QString &, int)) );
+#endif
 }
 
 void OPackageManager::loadAvailablePackages()
