@@ -240,7 +240,7 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
 {
     m_icon = icon;
 
-    bool has_wav_alarm = ODevice::inst()->hasWaveAudio();
+    bool has_wav_alarm = ODevice::inst()->hasWaveSpeaker();
     bool has_bass = true;
     bool has_treble = true;
 

@@ -537,9 +537,9 @@ OHingeStatus ODevice::readHingeSensor()const
 }
 
 /**
-* @return if the device has wave audio output
+* @return if the device has wave audio speaker (we're mostly interested for alarms)
 */
-bool ODevice::hasWaveAudio() const
+bool ODevice::hasWaveSpeaker() const
 {
     return true;
 }

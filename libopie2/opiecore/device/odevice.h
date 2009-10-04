@@ -348,7 +348,7 @@ public:
     virtual bool hasHingeSensor() const;
     virtual OHingeStatus readHingeSensor()const;
 
-    virtual bool hasWaveAudio() const;
+    virtual bool hasWaveSpeaker() const;
 
     const QStrList &allowedCpuFrequencies() const;
     bool setCurrentCpuFrequency(uint index);
