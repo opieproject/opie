@@ -227,6 +227,7 @@ TimeZoneSelector::TimeZoneSelector(QWidget* p, const char* n) :
 */
 TimeZoneSelector::~TimeZoneSelector()
 {
+    delete d;
 }
 
 void TimeZoneSelector::setLocalIncluded(bool b)
