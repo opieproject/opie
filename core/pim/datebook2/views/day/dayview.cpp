@@ -20,7 +20,7 @@ using namespace Opie;
 using namespace Opie::Datebook;
 
 DayView::DayView( MainWindow* window, QWidget* parent )
-    : View(window, parent), currDate( QDate::currentDate() ), startTime( 0 )
+    : View(window, parent), currDate( QDate::currentDate() ), startTime( 0 ), widgetList(0)
 {
     rowStyle = -1; // initialize with bogus values
     jumpToCurTime = false;
@@ -28,6 +28,11 @@ DayView::DayView( MainWindow* window, QWidget* parent )
     m_disabled = true; // prevents relayoutPage from being called too early
 
     initUI(parent);
+}
+
+DayView::~DayView()
+{
+    delete widgetList;
 }
 
 QPixmap DayView::pixmap() const  {

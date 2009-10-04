@@ -26,6 +26,7 @@ namespace Datebook {
         Q_OBJECT
     public:
         DayView( MainWindow* window,  QWidget* parent );
+        virtual ~DayView();
 
         virtual QPixmap pixmap() const;
         virtual QCString type() const;

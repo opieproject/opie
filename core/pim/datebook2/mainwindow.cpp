@@ -79,6 +79,7 @@ MainWindow::MainWindow()
     m_currView = 0;
     m_initialDate = QDate::currentDate();
     m_inSearch = false;
+    m_views.setAutoDelete(true);
 
     initConfig();
     initBars();
@@ -111,6 +112,7 @@ MainWindow::~MainWindow() {
 
     manager()->save();
     saveConfig();
+    delete m_edit;
     delete m_manager;
 }
 
@@ -753,8 +755,8 @@ void MainWindow::beamEvent( const OPimEvent &e )
     odebug << "trying to beam" << oendl;
     unlink( beamfile ); // delete if exists
     mkdir("/tmp/obex/", 0755);
-    ODateBookAccessBackend_VCal* cal = new ODateBookAccessBackend_VCal( "calendar", QString::fromLatin1(beamfile) );
-    ODateBookAccess acc( cal );
+    ODateBookAccessBackend_VCal cal( "calendar", QString::fromLatin1(beamfile) );
+    ODateBookAccess acc( &cal );
     acc.load();
     acc.add( e );
     acc.save();

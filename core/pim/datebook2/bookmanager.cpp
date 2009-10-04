@@ -42,6 +42,7 @@ BookManager::BookManager() {
 }
 
 BookManager::~BookManager() {
+    delete m_holiday;
     delete m_db;
 }
 

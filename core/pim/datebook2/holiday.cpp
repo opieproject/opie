@@ -73,6 +73,7 @@ void DateBookHoliday::deinit()
     for (it=_pluginlist.begin();it!=_pluginlist.end();++it) {
         HPlugin*_pl = *it;
         *it = 0;
+        delete _pl->_access;
         delete _pl;
     }
     _pluginlist.clear();
