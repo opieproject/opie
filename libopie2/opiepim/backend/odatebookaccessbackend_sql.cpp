@@ -236,7 +236,7 @@ void ODateBookAccessBackend_SQL::clear()
 
 
 OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
-    odebug << "ODateBookAccessBackend_SQL::find( " << uid << " )" << oendl;
+//    odebug << "ODateBookAccessBackend_SQL::find( " << uid << " )" << oendl;
 
     OPimSQLFindQuery query( "datebook", m_changeLog, uid );
     OSQLResult res = m_driver->query( &query );
@@ -260,7 +260,7 @@ OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
     OPimEvent retDate( dateEventMap );
     retDate.setExtraMap( requestCustom( uid ) );
 
-    odebug << "ODateBookAccessBackend_SQL::find( " << uid << " ) end" << oendl;
+//    odebug << "ODateBookAccessBackend_SQL::find( " << uid << " ) end" << oendl;
     return retDate;
 }
 
@@ -471,7 +471,7 @@ QMap<QString, QString> ODateBookAccessBackend_SQL::requestCustom( int uid ) cons
         customMap.insert( (*it).data( "type" ), (*it).data( "value" ) );
     }
 
-    odebug << "RequestCustom needed: " << t.elapsed() << " ms" << oendl;
+//    odebug << "RequestCustom needed: " << t.elapsed() << " ms" << oendl;
     return customMap;
 }
 
