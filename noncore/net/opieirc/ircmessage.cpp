@@ -78,7 +78,7 @@ IRCMessage::IRCMessage(QString line) {
         m_ctcp = FALSE;
     }
 
-
+/*
     odebug << "Parsed: " << line << oendl;
     odebug << "Prefix: " << m_prefix << oendl;
     odebug << "Command: " << m_command << oendl;
@@ -93,7 +93,7 @@ IRCMessage::IRCMessage(QString line) {
         odebug << "CTCP Destination: " << m_ctcpDestination << oendl;
         odebug << "CTCP param count is: " << m_parameters.count() << oendl;
     }
-
+*/
 }
 
 QString IRCMessage::param(int param) {
