@@ -41,6 +41,7 @@ IRCCTCPMessageParserStruct IRCMessageParser::ctcpParserProcTable[] = {
  * According to:
  * http://www.faqs.org/rfcs/rfc1459.html
  * http://www.faqs.org/rfcs/rfc2812.html
+ * (with some additions from testing on Freenode)
 */
 
 IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
@@ -86,6 +87,7 @@ IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
     { 422, "%1", "1", 0 },                                  // ERR_NOMOTD
     { 433, QT_TR_NOOP("Can't change nick to %1: %2"), "1,2", FUNC(parseNumericalNicknameInUse) }, // ERR_NICKNAMEINUSE
     { 442, QT_TR_NOOP("You're not on channel %1"), "1", 0}, // ERR_NOTONCHANNEL
+    { 470, QT_TR_NOOP("Redirecting from %1 to %2"), "1,2", 0},      // ERR_LINKCHANNEL
     { 477, "%1", "1", 0 },                                  // ERR_NOCHANMODES || ERR_NEEDREGGEDNICK
     { 482, QT_TR_NOOP("[%1] Operation not permitted, you don't have enough channel privileges"), "1", 0 }, //ERR_CHANOPRIVSNEEDED
     { 0, 0, 0, 0 }
@@ -527,6 +529,7 @@ void IRCMessageParser::parseLiteralMode(IRCMessage *message) {
                         temp = temp.right(1);
                     }
                     else {
+                        odebug << "Mode change: unknown type " << temp << oendl;
                         emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change has unknown type")));
                         return;
                     }
@@ -558,6 +561,7 @@ void IRCMessageParser::parseLiteralMode(IRCMessage *message) {
                         }
                     }
                     else {
+                        odebug << "Mode change: unknown flag " << temp << oendl;
                         emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change with unknown flag")));
                     }
                 }
