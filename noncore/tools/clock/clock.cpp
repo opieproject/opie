@@ -85,6 +85,12 @@ static void toggleScreenSaver( bool on )
     e << ( on ? QPEApplication::Enable : QPEApplication::DisableSuspend );
 }
 
+static void setUseAlarmVolume( bool useAlarmVol )
+{
+    QCopEnvelope e( "QPE/TaskBar", "setUseAlarmVolume(bool)" );
+    e << useAlarmVol;
+}
+
 static void playFile( QString file, bool opiePlayer2 )
 {
     if(opiePlayer2) {
@@ -627,6 +633,7 @@ void Clock::appMessage( const QCString &msg, const QByteArray &data )
             Config config( "qpe" );
             config.setGroup("Time");
             int player = config.readNumEntry("mp3Player", DEFAULT_ALARMTYPE);
+            setUseAlarmVolume( true );
             if(player == ALARMTYPE_DEFALARM) {
                 Sound::soundAlarm();
                 alarmCount = 0;
@@ -659,6 +666,7 @@ void Clock::appMessage( const QCString &msg, const QByteArray &data )
                 alarmt->stop();
                 if(alarmProc)
                     alarmProc->kill();
+                setUseAlarmVolume( false );
             }
         }
         else if ( t == magic_countdown ) {

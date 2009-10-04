@@ -858,6 +858,7 @@ void ServerApplication::rereadVolumes()
     m_screentap_sound = cfg. readBoolEntry ( "TouchSound" );
     m_keyclick_sound  = cfg. readBoolEntry ( "KeySound" );
     m_alarm_sound     = cfg. readBoolEntry ( "AlarmSound" );
+    m_alarm_percent   = cfg.readNumEntry ( "AlarmPercent", 65 );
 }
 
 void ServerApplication::checkMemory()
@@ -921,6 +922,20 @@ void ServerApplication::screenClick(bool press)
 void ServerApplication::soundAlarm() {
     if ( me ()->m_alarm_sound )
         ODevice::inst()->playAlarmSound();
+}
+
+void ServerApplication::setUseAlarmVolume( bool useAlarmVol )
+{
+#ifndef QT_NO_COP
+    int vol;
+    if( useAlarmVol )
+        vol = me()->m_alarm_percent;
+    else
+        vol = -1;
+    QCopEnvelope e( "QPE/System", "setVolume(int,int)" );
+    e << 0;
+    e << vol;
+#endif
 }
 
 ServerApplication *ServerApplication::me ( )

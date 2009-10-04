@@ -197,6 +197,9 @@ bool OPimMainWindow::doAlarm( const QDateTime&, int ) {
 }
 
 void OPimMainWindow::startAlarm(int count  ) {
+    QCopEnvelope e( "QPE/TaskBar", "setUseAlarmVolume(bool)" );
+    e << true;
+    
     m_alarmCount = count;
     m_playedCount = 0;
     Sound::soundAlarm();
@@ -205,15 +208,18 @@ void OPimMainWindow::startAlarm(int count  ) {
 
 void OPimMainWindow::killAlarm() {
     killTimer( m_timerId );
+    
+    QCopEnvelope e( "QPE/TaskBar", "setUseAlarmVolume(bool)" );
+    e << false;
 }
 
 void OPimMainWindow::timerEvent( QTimerEvent* e) {
     if ( m_playedCount <m_alarmCount ) {
         m_playedCount++;
         Sound::soundAlarm();
-    }else {
-        killTimer( e->timerId() );
     }
+    else
+        killAlarm();
 }
 
 QPopupMenu *OPimMainWindow::itemContextMenu() {

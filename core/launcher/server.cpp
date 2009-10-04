@@ -722,6 +722,11 @@ void Server::receiveTaskBar(const QCString &msg, const QByteArray &data)
     else if ( msg == "soundAlarm()" ) {
       ServerApplication::soundAlarm();
     }
+    else if ( msg == "setUseAlarmVolume(bool)" ) {
+        int useAlarmVol;
+        stream >> useAlarmVol;
+        ServerApplication::setUseAlarmVolume( useAlarmVol );
+    }
     else if ( msg == "setLed(int,bool)" ) {
         int led, status;
         stream >> led >> status;
