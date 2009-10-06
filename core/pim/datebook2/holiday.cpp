@@ -77,6 +77,7 @@ void DateBookHoliday::deinit()
         delete _pl;
     }
     _pluginlist.clear();
+    m_pluginLoader->clear();
 }
 
 #if 0

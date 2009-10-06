@@ -523,40 +523,49 @@ void MainWindow::slotDoFind( const QString& txt, const QDate &dt,
 }
 
 void MainWindow::slotConfigure() {
-    DateBookSettings frmSettings( m_ampm, this );
-    frmSettings.setStartTime( m_startTime );
-    frmSettings.setAlarmPreset( m_alarmPreset, m_alarmPresetTime, m_alarmPresetUnits );
-    frmSettings.setSnooze( m_snoozeTime, m_snoozeUnits );
-    frmSettings.setPluginList( manager()->holiday()->pluginManager(), manager()->holiday()->pluginLoader() );
-    frmSettings.setViews( &m_views );
-    frmSettings.comboLocation->insertItem( m_defaultLocation );
-    frmSettings.comboLocation->setCurrentItem( frmSettings.comboLocation->count()-1 );
-    frmSettings.setManagers( descriptionManager(), locationManager() );
-    frmSettings.comboDefaultView->setCurrentItem(m_defaultViewIdx-1);
-    frmSettings.comboCategory->setCategories(m_defaultCategories,"Calendar", tr("Calendar"));
+    DateBookSettings *frmSettings = new DateBookSettings( m_ampm, this );
+    frmSettings->setStartTime( m_startTime );
+    frmSettings->setAlarmPreset( m_alarmPreset, m_alarmPresetTime, m_alarmPresetUnits );
+    frmSettings->setSnooze( m_snoozeTime, m_snoozeUnits );
+    frmSettings->setPluginList( manager()->holiday()->pluginManager(), manager()->holiday()->pluginLoader() );
+    frmSettings->setViews( &m_views );
+    frmSettings->comboLocation->insertItem( m_defaultLocation );
+    frmSettings->comboLocation->setCurrentItem( frmSettings->comboLocation->count()-1 );
+    frmSettings->setManagers( descriptionManager(), locationManager() );
+    frmSettings->comboDefaultView->setCurrentItem(m_defaultViewIdx-1);
+    frmSettings->comboCategory->setCategories(m_defaultCategories,"Calendar", tr("Calendar"));
 
-    if ( QPEApplication::execDialog( &frmSettings ) ) {
-        frmSettings.savePlugins();
+    bool reload = false;
+    if ( QPEApplication::execDialog( frmSettings ) ) {
+        frmSettings->savePlugins();
         manager()->holiday()->pluginManager()->save();
-        manager()->holiday()->reloadPlugins();
 
-        frmSettings.saveViews();
+        frmSettings->saveViews();
 
-        m_alarmPreset = frmSettings.alarmPreset();
-        m_alarmPresetTime = frmSettings.presetTime();
-        m_alarmPresetUnits = frmSettings.presetUnits();
-        m_snoozeTime = frmSettings.snoozeTime();
-        m_snoozeUnits = frmSettings.snoozeUnits();
-        m_startTime = frmSettings.startTime();
-        m_defaultViewIdx = frmSettings.comboDefaultView->currentItem()+1;
-        m_defaultLocation = frmSettings.comboLocation->currentText();
-        m_defaultCategories = frmSettings.comboCategory->currentCategories();
+        m_alarmPreset = frmSettings->alarmPreset();
+        m_alarmPresetTime = frmSettings->presetTime();
+        m_alarmPresetUnits = frmSettings->presetUnits();
+        m_snoozeTime = frmSettings->snoozeTime();
+        m_snoozeUnits = frmSettings->snoozeUnits();
+        m_startTime = frmSettings->startTime();
+        m_defaultViewIdx = frmSettings->comboDefaultView->currentItem()+1;
+        m_defaultLocation = frmSettings->comboLocation->currentText();
+        m_defaultCategories = frmSettings->comboCategory->currentCategories();
 
-        setDescriptionManager( frmSettings.descriptionManager() );
-        setLocationManager( frmSettings.locationManager() );
+        setDescriptionManager( frmSettings->descriptionManager() );
+        setLocationManager( frmSettings->locationManager() );
 
         saveConfig();
+
+        reload = true;
     }
+
+    delete frmSettings;
+
+    if( reload ) {
+        manager()->holiday()->reloadPlugins(); // must be done after config widget is destroyed!
+        currentView()->reschedule();
+    }   
 }
 
 void MainWindow::slotClockChanged( bool ) {
