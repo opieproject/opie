@@ -1,10 +1,8 @@
 CONFIG  = qt quick-app
-HEADERS = ima_rw.h \
-        pixmaps.h \
+HEADERS = pixmaps.h \
         qtrec.h \
         waveform.h
-SOURCES = ima_rw.c \
-        main.cpp \
+SOURCES = main.cpp \
         qtrec.cpp \
         waveform.cpp
 INTERFACES  =

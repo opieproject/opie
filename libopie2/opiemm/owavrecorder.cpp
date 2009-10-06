@@ -90,10 +90,10 @@ void OWavRecorder::record( OWavRecorderCallback *callback )
 
         int samplesPerBlock = m_bufsize/2;
         int fd = m_wavfile->getfd();
-	if (fd == -1) {
-	    free(buffer);
-	    return;
-	}
+        if (fd == -1) {
+            free(buffer);
+            return;
+        }
 
         int adpcm_outsize = lsx_ima_bytes_per_block( m_fileparams.channels, samplesPerBlock );
         unsigned char adpcm_outbuf[ adpcm_outsize ];
@@ -123,7 +123,7 @@ void OWavRecorder::record( OWavRecorderCallback *callback )
 
 void OWavRecorder::finalize( int bytesWritten )
 {
-    m_device->closeDevice();
+    OWavHandler::finalize();
 
     if( m_wavfile->isOpen()) {
         m_wavfile->adjustHeaders( bytesWritten );

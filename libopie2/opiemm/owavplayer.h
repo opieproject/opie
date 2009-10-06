@@ -26,50 +26,50 @@
                              Boston, MA 02111-1307, USA.
 */
 
+
+#ifndef OWAVPLAYER_H
+#define OWAVPLAYER_H
+
+#include <qobject.h>
 #include "owavhandler.h"
 
 namespace Opie {
 namespace MM {
 
-OWavHandler::OWavHandler()
-    : m_device(0)
+class OWavPlayer;
+
+class OWavPlayerCallback
 {
-}
+    friend class OWavPlayer;
 
-OWavHandler::~OWavHandler()
+    virtual void playerCallback( const char *buffer, const int bytes, int &position, bool &stopflag, bool &paused ) = 0;
+};
+
+
+/**
+ * @brief A simple sound playing class
+ *
+ * This class provides an easy interface for playing audio.
+ */
+class OWavPlayer : public OWavHandler
 {
-    finalize();
-}
-    
-bool OWavHandler::setupSoundDevice( bool record ) {
-    snd_pcm_format_t sampleformat;
+  Q_OBJECT
 
-    if( m_fileparams.resolution == 16 )
-        sampleformat = SND_PCM_FORMAT_S16;
-    else
-        sampleformat = SND_PCM_FORMAT_U8;
+  public:
+    bool setup( const QString &filename );
+    void play( OWavPlayerCallback *callback );
+    OWavFile *wavFile();
 
-    owarn << "<<<<<<<<<<<<<<<<<<<open dsp " << m_fileparams.sampleRate << " " << m_fileparams.channels << " " << sampleformat << "" << oendl;
+  protected:
+    QString m_filename;
+    bool setupFile();
 
-    m_device = new OSoundDevice( "default" );
-    m_device->openDevice(record);
-
-    m_device->setDeviceFormat( sampleformat );
-    m_device->setDeviceChannels( m_fileparams.channels );
-    m_device->setDeviceRate( m_fileparams.sampleRate );
-    m_bufsize = m_device->init();
-
-    return (m_bufsize > 0);
-}
-
-void OWavHandler::finalize()
-{
-    if( m_device ) {
-        m_device->closeDevice();
-        delete m_device;
-        m_device = 0;
-    }
-}
+  private:
+    class Private;
+    Private *d;
+};
 
 }
 }
+
+#endif

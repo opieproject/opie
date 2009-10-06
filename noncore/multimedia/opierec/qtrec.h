@@ -11,6 +11,7 @@ copyright 2002 by L.J. Potter ljp@llornkcor.com
 #include <qwidget.h>
 
 #include <opie2/owavrecorder.h>
+#include <opie2/owavplayer.h>
 
 class QButtonGroup;
 class QCheckBox;
@@ -40,7 +41,7 @@ using namespace Opie::MM;
 
 enum playerMode { MODE_IDLE, MODE_PLAYING, MODE_PAUSED, MODE_STOPPING, MODE_RECORDING };
 
-class QtRec : public QWidget, public OWavRecorderCallback
+class QtRec : public QWidget, public OWavRecorderCallback, public OWavPlayerCallback
 {
    Q_OBJECT
 
@@ -89,6 +90,7 @@ private:
     void fileSize(unsigned long size, QString &str);
     QString getSelectedFile();
     void recorderCallback(const char *buffer, const int bytes, const int totalbytes, bool &stopflag);
+    void playerCallback(const char *buffer, const int bytes, int &position, bool &stopflag, bool &paused);
 
 private slots:
     void endPlaying();
@@ -131,8 +133,8 @@ private slots:
 
 protected:
 
-    OWavFile *wavFile; // FIXME remove all
     OWavRecorder m_recorder;
+    OWavPlayer m_player;
     QCheckBox *outMuteCheckBox, *inMuteCheckBox, *compressionCheckBox, *autoMuteCheckBox, *stereoCheckBox;
     QComboBox* sampleRateComboBox, * bitRateComboBox, *directoryComboBox, *sizeLimitCombo;
     QLabel *playLabel2;

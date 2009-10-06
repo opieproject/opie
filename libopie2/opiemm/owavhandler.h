@@ -49,6 +49,8 @@ class OWavHandler : public QObject
   Q_OBJECT
 
   public:
+    OWavHandler();
+    virtual ~OWavHandler();
     bool setupSoundDevice( bool record );
 
   protected:

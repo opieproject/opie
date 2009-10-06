@@ -270,3 +270,8 @@ int OWavFile::getChannels() {
 bool OWavFile::isOpen() {
     return track.isOpen();
 }
+
+OWavFileParameters OWavFile::fileParams()
+{
+    return m_fileparams;
+}

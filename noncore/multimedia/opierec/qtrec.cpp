@@ -7,9 +7,6 @@
 #include "pixmaps.h"
 #include "qtrec.h"
 #include "waveform.h"
-extern "C" {
-#include "ima_rw.h"
-}
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -40,83 +37,47 @@ using namespace Opie::Core;
 
 /* STD */
 #include <errno.h>
-#include <fcntl.h>
-#include <math.h>
-#include <mntent.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <sys/stat.h>
-#include <sys/time.h>
-#include <sys/types.h>
 #include <sys/vfs.h>
 #include <unistd.h>
-#include <sys/wait.h>
-#include <sys/signal.h>
 
-#include <alsa/asoundlib.h>
 static int deviceSampleRates[] = { 11025, 16000, 22050, 32000, 44100, 48000, -1 };
 static int deviceBitRates[] = { 8, 16, -1 };
 
-
+// FIXME remove this structure
 typedef struct {
     int sampleRate;
-    int resolution; //bitrate
-    int channels; //number of channels
-    int numberSamples; //total number of samples
     int SecondsToRecord; // number of seconds that should be recorded
     float numberOfRecordedSeconds; //total number of samples recorded
-    int format; //wavfile format PCM.. ADPCM
     QString fileName; //name of fiel to be played/recorded
 } fileParameters;
 
 fileParameters filePara;
 
-int bufsize;
 int mode;
 QLabel *timeLabel;
 QSlider *timeSlider;
 
 Waveform* waveform;
-OSoundDevice *soundDevice;
 
 void QtRec::playIt()
 {
-    if(bufsize > 0) {
-        char *buffer = (char *) malloc(bufsize);
 
-        int samplesPerBlock = bufsize/2;
-        int adpcm_insize = lsx_ima_bytes_per_block(filePara.channels, samplesPerBlock);
-        unsigned char adpcm_inbuf[ adpcm_insize ];
+    m_player.play( this );
 
-        if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
-            memset( adpcm_inbuf, 0, adpcm_insize);
-            lsx_ima_init_table();
-        }
+}
 
-        int fd = wavFile->getfd();
-        int bytesWritten = lseek( fd, 0, SEEK_CUR ); // so we can resume from the middle
-        while(bytesWritten < filePara.numberSamples) {
-            if ( mode == MODE_STOPPING )
-                break;
-            if ( mode != MODE_PAUSED ) {
-                int number;
-                if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
-                    number = ::read( fd, adpcm_inbuf, adpcm_insize);
-                    lsx_ima_block_expand_i(filePara.channels, adpcm_inbuf, (short *)buffer, samplesPerBlock);
-                }
-                else
-                    number = ::read( fd, buffer, bufsize);
-
-                soundDevice->devWrite(buffer);
-                waveform->newSamples( buffer, number );
-                bytesWritten += number;
-                timeSlider->setValue( bytesWritten);
-            }
-            qApp->processEvents();
-            bytesWritten = timeSlider->value();
-        }
-        free(buffer);
+void QtRec::playerCallback(const char *buffer, const int bytes, int &position, bool &stopflag, bool &paused)
+{
+    stopflag = ( mode == MODE_STOPPING );
+    paused = ( mode == MODE_PAUSED );
+    if( !paused ) {
+        waveform->newSamples( buffer, bytes );
+        timeSlider->setValue( position );
     }
+    
+    qApp->processEvents();
+    position = timeSlider->value();
 }
 
 QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
@@ -141,15 +102,13 @@ QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
     hwcfg.setGroup("Hardware");
 
     // FIXME this is broken
-    soundDevice = new OSoundDevice( "default" );
+    OSoundDevice *soundDevice = new OSoundDevice( "default" );
 
     getInVol();
     getOutVol();
 
     soundDevice->closeDevice();
-    soundDevice = 0;
-    wavFile = 0;
-//      if( soundDevice) delete soundDevice;
+    delete soundDevice;
     QTimer::singleShot(100,this, SLOT(initIconView()));
 
     if( autoMute)
@@ -158,7 +117,6 @@ QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
 }
 
 QtRec::~QtRec() {
-//   if( soundDevice) delete soundDevice;
 
 }
 
@@ -178,9 +136,6 @@ void QtRec::cleanUp() {
 
     if( autoMute)
         doMute(false);
-
-//      if( wavFile) delete wavFile;
-// if(soundDevice) delete soundDevice;
 }
 
 void QtRec::init() {
@@ -475,7 +430,6 @@ void QtRec::initConfig() {
     for(int ws=0;ws<sampleRateComboBox->count();ws++) {
         fred = sampleRateComboBox->text(ws).toInt(&ok, 10);
         if( index == fred) {
-            filePara.sampleRate  = fred;
             sampleRateComboBox->setCurrentItem(ws);
         }
     }
@@ -489,8 +443,6 @@ void QtRec::initConfig() {
         bitRateComboBox->setCurrentItem( 3);
     else
         bitRateComboBox->setCurrentItem( 0);
-
-    filePara.resolution = i;
 
     i = cfg.readNumEntry("sizeLimit", 5 );
     QString temp;
@@ -579,15 +531,15 @@ bool QtRec::rec() { //record
         if( filePara.SecondsToRecord == 0) {
             fileSize = diskSize;
         }
-        else if( filePara.format == WAVE_FORMAT_PCM) {
+        else if( fileparams.format == WAVE_FORMAT_PCM) {
 //                odebug << "WAVE_FORMAT_PCM" << oendl;
-            fileSize = (filePara.SecondsToRecord ) * filePara.channels
-                * filePara.sampleRate * ( filePara.resolution / 8) + 1000;
+            fileSize = (filePara.SecondsToRecord ) * fileparams.channels
+                * fileparams.sampleRate * ( fileparams.resolution / 8) + 1000;
         }
         else {
 //                odebug << "WAVE_FORMAT_DVI_ADPCM" << oendl;
-            fileSize = ((filePara.SecondsToRecord) * filePara.channels
-                        * filePara.sampleRate * ( filePara.resolution / 8) ) / 4 + 250;
+            fileSize = ((filePara.SecondsToRecord) * fileparams.channels
+                        * fileparams.sampleRate * ( fileparams.resolution / 8) ) / 4 + 250;
         }
 
         timeSlider->setRange(0, filePara.SecondsToRecord);
@@ -684,45 +636,32 @@ void QtRec::changedInVolume( ) {
 bool QtRec::setupAudio( bool record ) {
     bool ok;
     snd_pcm_format_t sampleformat;
+    int channels;
 
     if( !record ) {
-        if( filePara.resolution == 16 )
+        if( m_player.wavFile()->getResolution() == 16 )
             sampleformat = SND_PCM_FORMAT_S16;
         else
             sampleformat = SND_PCM_FORMAT_U8;
+
+        channels = m_player.wavFile()->getChannels();
+        filePara.sampleRate = m_player.wavFile()->getSampleRate();
     }
     else { // we want to record
-        filePara.resolution = bitRateComboBox->currentText().toInt( &ok,10);  //16
-
         if( !bitRateComboBox->isEnabled() || bitRateComboBox->currentText() == "16")
             sampleformat = SND_PCM_FORMAT_S16;
         else
             sampleformat = SND_PCM_FORMAT_U8;
 
-        if(stereoCheckBox->isChecked())
-            filePara.channels = 2;
+        if( stereoCheckBox->isChecked() )
+            channels = 2;
         else
-            filePara.channels = 1;
-
-        if(compressionCheckBox->isChecked())
-            filePara.format = WAVE_FORMAT_DVI_ADPCM;
-        else
-            filePara.format = WAVE_FORMAT_PCM;
+            channels = 1;
 
         filePara.sampleRate = sampleRateComboBox->currentText().toInt( &ok,10);//44100;
     }
 
-    owarn << "<<<<<<<<<<<<<<<<<<<open dsp " << filePara.sampleRate << " " << filePara.channels << " " << sampleformat << "" << oendl;
-    waveform->changeSettings( filePara.sampleRate, filePara.channels, sampleformat );
-
-    soundDevice = new OSoundDevice( "default" ); //open rec
-    soundDevice->openDevice(record);
-
-    //////////////////         <<<<<<<<<<<<>>>>>>>>>>>>
-    soundDevice->setDeviceFormat( sampleformat);
-    soundDevice->setDeviceChannels( filePara.channels);
-    soundDevice->setDeviceRate( filePara.sampleRate);
-    bufsize = soundDevice->init();
+    waveform->changeSettings( filePara.sampleRate, channels, sampleformat );
 
     if(autoMute)
         doMute(false);
@@ -755,7 +694,6 @@ void QtRec::setupFileName() {
 /// <<<<<<<<<<<<<<<<  PLAY >>>>>>>>>>>>>>>>>>>
 bool QtRec::doPlay() {
     if( mode != MODE_PAUSED ) {
-        total = 0;
         filePara.numberOfRecordedSeconds = 0;
     }
     else {
@@ -763,15 +701,10 @@ bool QtRec::doPlay() {
     }
 
     QString num;
-    odebug << "Play number of samples " << filePara.numberSamples << "" << oendl;
 
     QString timeString;
     timeString.sprintf("%f",  filePara.numberOfRecordedSeconds);
 //    timeLabel->setText( timeString+ tr(" seconds"));
-
-    odebug << "rate = " << filePara.sampleRate
-           << "  ch = " << filePara.channels
-           << " res = " << filePara.resolution << oendl;
 
     if(mode != MODE_PAUSED)
         startTimer( 1000);
@@ -932,16 +865,8 @@ void QtRec::endPlaying() {
     if(autoMute)
         doMute( true);
 
-    soundDevice->closeDevice( mode == MODE_STOPPING );
-    //  if(soundDevice) delete soundDevice;
-    odebug << "file and sound device closed" << oendl;
 //    timeLabel->setText("");
-    total = 0;
-    filePara.numberSamples = 0;
-//   wavFile->closeFile();
-//  if(wavFile) delete wavFile; //this crashes
 
-    odebug << "track closed" << oendl;
     killTimers();
 }
 
@@ -954,7 +879,6 @@ QString QtRec::getSelectedFile() {
 }
 
 bool QtRec::openPlayFile() {
-    qWarning("opening file");
     qApp->processEvents();
     QString fileName = getSelectedFile();
     if( fileName.isEmpty()) {
@@ -962,30 +886,18 @@ bool QtRec::openPlayFile() {
         endPlaying();
         return false;
     }
-    wavFile = new OWavFile(fileName);
-    int fd = wavFile->openFile();
-    if(fd == -1) {
-        //  if(!track.open(IO_ReadOnly)) {
+    odebug << "opening file " << fileName << oendl;
+
+    if( m_player.setup( fileName ) ) {
+        timeSlider->setPageStep(1);
+        timeSlider->setRange(0, m_player.wavFile()->getNumberSamples() );
+    }
+    else {
+        // FIXME this is no longer sufficient, we need to get the actual error from the player object
         QString errorMsg = (QString)strerror(errno);
         QMessageBox::message(tr("Note"), tr("Could not open audio file.\n")
                              + errorMsg + "\n" + fileName);
         return false;
-    } else {
-        filePara.numberSamples = wavFile->getNumberSamples();
-        filePara.format = wavFile->getFormat();
-        filePara.sampleRate = wavFile->getSampleRate();
-        filePara.resolution = wavFile->getResolution();
-        filePara.channels = wavFile->getChannels();
-        timeSlider->setPageStep(1);
-
-        odebug << "**** filePara.resolution = " << filePara.resolution << oendl;
-
-        odebug << "file " << fd << ", samples " << filePara.numberSamples << " " << filePara.sampleRate << "" << oendl;
-        int sec = (int) (( filePara.numberSamples / filePara.sampleRate) / filePara.channels) / ( filePara.channels*( filePara.resolution/8));
-
-//        owarn << "seconds " << sec << "" << oendl;
-
-        timeSlider->setRange(0, filePara.numberSamples );
     }
 
     return true;
@@ -1209,7 +1121,7 @@ void QtRec::timerEvent( QTimerEvent * ) {
 }
 
 void QtRec::changeTimeSlider(int index) {
-    if( ListView1->currentItem() == 0 || !wavFile->isOpen()) return;
+    if( ListView1->currentItem() == 0 || mode != MODE_PLAYING ) return;
     //debug << "Slider moved to " << index << "" << oendl;    mode = MODE_PAUSED;
 
     sliderPos=index;
@@ -1232,8 +1144,7 @@ void QtRec::timeSliderReleased() {
     sliderPos = timeSlider->value();
 
     odebug << "slider released " << sliderPos << "" << oendl;
-    int newPos =  lseek( wavFile->getfd(), sliderPos, SEEK_SET);
-    total =  newPos*4;
+    int newPos =  lseek( m_player.wavFile()->getfd(), sliderPos, SEEK_SET);
     filePara.numberOfRecordedSeconds = (float)sliderPos / (float)filePara.sampleRate * (float)2;
 
     if(mode == MODE_PAUSED)
@@ -1260,11 +1171,9 @@ void QtRec::rewindTimerTimeout() {
 
 void QtRec::rewindReleased() {
     rewindTimer->stop();
-    if( wavFile->isOpen()) {
+    if( m_player.wavFile()->isOpen() ) {
         sliderPos = timeSlider->value();
-        int newPos = lseek( wavFile->getfd(), sliderPos, SEEK_SET);
-        total =  newPos * 4;
-        odebug << "rewind released " << total << "" << oendl;
+        int newPos = lseek( m_player.wavFile()->getfd(), sliderPos, SEEK_SET);
         startTimer(1000);
         if(mode == MODE_PAUSED)
             mode = MODE_PLAYING;
@@ -1291,11 +1200,9 @@ void QtRec::forwardTimerTimeout() {
 
 void QtRec::FastforwardReleased() {
     forwardTimer->stop();
-    if( wavFile->isOpen()) {
+    if( m_player.wavFile()->isOpen()) {
         sliderPos = timeSlider->value();
-        int newPos = lseek( wavFile->getfd(), sliderPos, SEEK_SET);
-        total =  newPos * 4;
-        odebug << "fastforward released " << total << "" << oendl;
+        int newPos = lseek( m_player.wavFile()->getfd(), sliderPos, SEEK_SET);
         startTimer(1000);
         if(mode == MODE_PAUSED)
             mode = MODE_PLAYING;
@@ -1357,7 +1264,6 @@ void QtRec::fillDirectoryCombo() {
 
 void QtRec::errorStop() {
     mode = MODE_IDLE;
-    wavFile->closeFile();
     killTimers();
 }
 

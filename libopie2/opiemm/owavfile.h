@@ -88,6 +88,7 @@ public:
     int getNumberSamples();
     int getChannels();
     QString getFileName();
+    OWavFileParameters fileParams();
     int openFile();
     int createFile();
     void closeFile();
