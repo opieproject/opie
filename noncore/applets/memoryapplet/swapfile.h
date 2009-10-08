@@ -39,27 +39,25 @@ public:
 private slots:
     void swapon();
     void swapoff();
-    void cfsdchecked();
+    void locationSelected(int);
     void makeswapfile();
     void removeswapfile();
     void cardnotify( const QCString &msg, const QByteArray & );
-    void getStatusPcmcia();
-    void getStatusSd();
+    void getMounts();
     void status();
+    bool checkSwapFileActive( const QString &path );
 
 private:
-    bool cardInPcmcia0;
-        bool cardInPcmcia1;
-    bool cardInSd;
-
-    QRadioButton* ramRB;
-    QRadioButton* cfRB;
-    QRadioButton* sdRB;
+    QComboBox* swapLocation;
     QLineEdit* swapPath1;
     QLabel* swapStatus;
     QLabel* swapStatusIcon;
     QComboBox* swapSize;
     QProgressBar* mkswapProgress;
+    QPushButton* swapOn;
+    QPushButton* swapOff;
+    QPushButton* mkSwap;
+    QPushButton* rmSwap;
 
     bool isRoot;
 
