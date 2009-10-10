@@ -423,7 +423,7 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
 
 void OFileViewFileListView::slotFSpressed()
 {
-    m_fsPop->exec(QPoint( QCursor::pos().x(), QCursor::pos().y()));
+    m_fsPop->exec( m_fsButton->mapToGlobal( m_fsButton->frameGeometry().bottomRight() ));
     m_fsButton->setDown(false);
 }
 
