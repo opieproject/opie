@@ -76,8 +76,7 @@ QString OStorageInfo::sdPath()const
 
     for (QListIterator<FileSystem> i( fileSystems() ); i.current(); ++i)
     {
-        if ( (*i)->disk().left( 9 ) == "/dev/mmcd" ||
-             (*i)->disk().left( 14 ) == "/dev/mmc/part1" )
+        if ( (*i)->disk().startsWith( "/dev/mmc" ) )
         {
             r = (*i)->path();
             break;
@@ -88,17 +87,10 @@ QString OStorageInfo::sdPath()const
 
 QString OStorageInfo::mmcPath()const
 {
+    // Note that we simply consider MMC devices to be SD now since they are
+    // largely indistinguishable to userspace, thus this function always
+    // returns an empty string
     QString r = "";
-
-    for (QListIterator<FileSystem> i( fileSystems() ); i.current(); ++i)
-    {
-        if ( (*i)->disk().left( 14 ) == "/dev/mmc/part1"||
-             (*i)->disk().left(11) == "/dev/mmcblk" )
-        {
-            r = (*i)->path();
-            break;
-        }
-    }
     return r;
 }
 

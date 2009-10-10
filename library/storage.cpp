@@ -40,12 +40,30 @@
 #endif /* Q_OS_MACX */
 
 
-// Shouldn't be here ! (eilers)
-// #include <sys/vfs.h>
-// #include <mntent.h>
-
 #include <qdir.h>
 #include <qmap.h>
+
+static bool isUSB( const QString &devpath )
+{
+    bool matched = false;
+    if( devpath.startsWith( "/dev/" ) ) {
+        QDir diskdir("/dev/disk/by-id/");
+        diskdir.setFilter( QDir::System );
+        diskdir.setNameFilter( "usb-*" );
+        const QFileInfoList *list = diskdir.entryInfoList();
+        QFileInfoListIterator it( *list );
+        QFileInfo *fi;
+
+        for( ; (fi=it.current()); ++it ) {
+            QString absdevpath = QDir::cleanDirPath(diskdir.absFilePath(fi->readLink()));
+            if( absdevpath == devpath ) {
+                matched = true;
+                break;
+            }
+        }
+    }
+    return matched;
+}
 
 static bool isCF(const QString& m)
 {
@@ -54,41 +72,43 @@ static bool isCF(const QString& m)
         QString blockdev = m.mid(5);
 
         QDir pcmciadir("/sys/bus/pcmcia/devices");
-        pcmciadir.setFilter( QDir::Dirs );
+        if( pcmciadir.exists() ) {
+            pcmciadir.setFilter( QDir::Dirs );
 
-        QMap<QString,QString> pcmciadevs;
-        for ( unsigned int i=0; i<pcmciadir.count(); i++ ) {
-            QString devid = pcmciadir[i];
-            if(devid[0] == '.') continue;
-            QDir pcmciadevdir("/sys/bus/pcmcia/devices/" + devid);
-            // Now we need to split out the socket number
-            devid = QStringList::split('.', devid)[0];
-            pcmciadevs.insert( devid, pcmciadevdir.canonicalPath() );
-        }
+            QMap<QString,QString> pcmciadevs;
+            for ( unsigned int i=0; i<pcmciadir.count(); i++ ) {
+                QString devid = pcmciadir[i];
+                if(devid[0] == '.') continue;
+                QDir pcmciadevdir("/sys/bus/pcmcia/devices/" + devid);
+                // Now we need to split out the socket number
+                devid = QStringList::split('.', devid)[0];
+                pcmciadevs.insert( devid, pcmciadevdir.canonicalPath() );
+            }
 
-        if(!pcmciadevs.isEmpty()) {
-            QDir blockdir("/sys/block");
-            blockdir.setFilter( QDir::Dirs );
+            if(!pcmciadevs.isEmpty()) {
+                QDir blockdir("/sys/block");
+                blockdir.setFilter( QDir::Dirs );
 
-            for ( unsigned int i=0; i<blockdir.count(); i++ ) {
-                if(blockdir[i][0] == '.') continue;
-                QString fpath = "/sys/block/" + blockdir[i];
-                if ( QFile::exists( fpath + "/" + blockdev ) || fpath == blockdev ) {
-                    // Check if mount point is associated with a PCMCIA device
-                    bool matched = false;
-                    if(!pcmciadevs.isEmpty()) {
-                        QDir devdir(fpath + "/device");
-                        QString devlink = devdir.canonicalPath();
+                for ( unsigned int i=0; i<blockdir.count(); i++ ) {
+                    if(blockdir[i][0] == '.') continue;
+                    QString fpath = "/sys/block/" + blockdir[i];
+                    if ( QFile::exists( fpath + "/" + blockdev ) || fpath == blockdev ) {
+                        // Check if mount point is associated with a PCMCIA device
+                        bool matched = false;
+                        if(!pcmciadevs.isEmpty()) {
+                            QDir devdir(fpath + "/device");
+                            QString devlink = devdir.canonicalPath();
 
-                        QMap<QString,QString>::Iterator pit;
-                        for( pit = pcmciadevs.begin(); pit != pcmciadevs.end(); ++pit ) {
-                            if ( devlink.startsWith(pit.data()) ) {
-                                matched = true;
-                                break;
+                            QMap<QString,QString>::Iterator pit;
+                            for( pit = pcmciadevs.begin(); pit != pcmciadevs.end(); ++pit ) {
+                                if ( devlink.startsWith(pit.data()) ) {
+                                    matched = true;
+                                    break;
+                                }
                             }
                         }
+                        break;
                     }
-                    break;
                 }
             }
         }
@@ -171,11 +191,9 @@ void StorageInfo::update()
         while ( (me = getmntent( mntfp )) != 0 )
         {
             QString fs = me->mnt_fsname;
-            if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
-                    || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
-                    || fs.left( 14 ) == "/dev/mmc/part1"
-                    || fs.left(5)=="tmpfs" || fs.left(11)=="/dev/mmcblk"
-                    || fs.left(9)=="/dev/root" )
+            if ( fs.startsWith( "/dev/hd" ) || fs.startsWith( "/dev/sd" )
+                    || fs.startsWith( "/dev/mtd" ) || fs.startsWith( "/dev/mmc" )
+                    || fs == "/dev/root" )
             {
                 n++;
                 curdisks.append(fs);
@@ -215,37 +233,29 @@ void StorageInfo::update()
                 humanname = tr("CF Card");
                 removable = TRUE;
             }
-            else if ( disk == "/dev/hda1" )
+            else if ( disk.startsWith( "/dev/hd" ) )
             {
-                humanname = tr("Hard Disk");
+                humanname = tr("IDE Disk");
             }
-            else if ( disk.left(9) == "/dev/mmcd" )
+            else if ( disk.startsWith( "/dev/mmc" ) )
             {
-                humanname = tr("SD Card");
+                humanname = tr("SD/MMC Card");
                 removable = TRUE;
             }
-            else if ( disk.left( 14 ) == "/dev/mmc/part1" || disk.left(11) == "/dev/mmcblk" )
-            {
-                humanname = tr("MMC Card");
-                removable = TRUE;
+            else if ( disk.startsWith( "/dev/sd" ) ) {
+                if( isUSB( disk ) ) {
+                    humanname = tr("USB Disk") + " " + disk;
+                    removable = TRUE;
+                }
+                else
+                    humanname = tr("SCSI Disk") + " " + disk;
             }
-            else if ( disk.left(7) == "/dev/hd" )
-                humanname = tr("Hard Disk") + " " + disk;
-            else if ( disk.left(7) == "/dev/sd" ) {
-                humanname = tr("SCSI Hard Disk") + " " + disk;
-                removable = TRUE;
-            } else if ( disk.left(14) == "/dev/mtdblock6" ) //openzaurus ramfs
-                humanname = tr("Internal Memory");
-            else if ( disk == "/dev/mtdblock1" || humanname == "/dev/mtdblock/1" )
-                humanname = tr("Internal Storage");
-            else if ( disk.left(14) == "/dev/mtdblock/" )
+            else if ( disk.startsWith( "/dev/mtd" ) ) 
                 humanname = tr("Internal Storage") + " " + disk;
-            else if ( disk.left(13) == "/dev/mtdblock" )
+            else if ( disk == "/dev/root" )
                 humanname = tr("Internal Storage") + " " + disk;
-            else if ( disk.left(9) == "/dev/root" )
-                humanname = tr("Internal Storage") + " " + disk;
-            else if ( disk.left(5) == "tmpfs" ) //ipaqs /mnt/ramfs
-                humanname = tr("Internal Memory");
+            else
+                humanname = tr("Unknown") + " " + disk;
             FileSystem *fs = new FileSystem( disk, *fsit, humanname, removable, opts );
             mFileSystems.append( fs );
         }
@@ -321,22 +331,19 @@ bool StorageInfo::hasCf()
  */
 bool StorageInfo::hasSd()
 {
-    return deviceTab("/dev/mmcd");
+    return deviceTab("/dev/mmc");
 }
 
 /*!
  * @fn static bool StorageInfo::hasMmc()
  * @brief returns whether device has mmc mounted
- *
+ * Note that we simply consider MMC devices to be SD now since they are
+ * largely indistinguishable to userspace, thus this function always
+ * returns false
  */
 bool StorageInfo::hasMmc()
 {
-    bool hasMmc=false;
-    if( deviceTab("/dev/mmc/part"))
-        hasMmc=true;
-    else if( deviceTab("/dev/mmcblk"))
-        hasMmc=true;
-    return hasMmc;
+    return false;
 }
 
 /*! \fn const QList<FileSystem> &StorageInfo::fileSystems() const
