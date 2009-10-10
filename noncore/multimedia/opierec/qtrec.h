@@ -130,6 +130,7 @@ private slots:
     void initIconView();
 /*     void changedOutVolume(int); */
 /*    void changedInVolume(int); */
+    void receive( const QCString &msg, const QByteArray &data );
 
 protected:
 
@@ -159,7 +160,6 @@ protected:
     void keyPressEvent( QKeyEvent *e);
     void keyReleaseEvent( QKeyEvent *e);
     void hideEvent( QHideEvent * );
-    void receive( const QCString &, const QByteArray & );
     void showListMenu(QListViewItem * );
     void playIt();
 

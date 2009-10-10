@@ -348,6 +348,13 @@ void QtRec::init() {
 
     layout->addMultiCellWidget( waveform, 8, 8, 0, 8);
     waveform->setBackgroundColor ( black );
+
+    QCopChannel *chan = new QCopChannel( "QPE/Recorder", this );
+
+    connect( chan, SIGNAL(received(const QCString&,const QByteArray&)),
+            this, SLOT(receive(const QCString&,const QByteArray&)) );
+    connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
+             this, SLOT( receive(const QCString&,const QByteArray&) ) );
 }
 
 void QtRec::initIconView() {
@@ -1099,9 +1106,25 @@ long QtRec::checkDiskSpace(const QString &path) {
 //   char  f_fname[6]; /* Volumename */
 //   char  f_fpack[6]; /* Pack name */
 
-void QtRec::receive( const QCString &msg, const QByteArray & ) {
-    odebug << "Voicerecord received message "+msg << oendl;
+void QtRec::receive( const QCString &msg, const QByteArray &data )
+{
+    QDataStream stream( data, IO_ReadOnly );
 
+    if( msg == "toggleRecord()" )  {
+        if( mode == MODE_RECORDING )
+            stop();
+        else if( mode == MODE_IDLE ) {
+            if( isVisible() )
+                newSound();
+            else       // need to delay until window shown
+                QTimer::singleShot(100, this, SLOT(newSound()));
+        }
+        QPEApplication::setKeepRunning();
+    }
+    else if( msg == "stop()" )  {
+        if( mode != MODE_IDLE )
+            stop();
+    }
 }
 
 ///////////////////////////// timerEvent
