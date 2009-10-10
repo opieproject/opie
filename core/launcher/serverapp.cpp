@@ -621,6 +621,10 @@ void ServerApplication::doBeforeSuspend()
     suspendDateTime = QDateTime::currentDateTime();
 
 #ifdef QWS
+    // Notify user that the system is suspending
+    QCopEnvelope e( "QPE/TaskBar", "message(QString)" );
+    e << QString( tr("Suspending...") );
+
     if ( !m_login && !loginlock && Opie::Security::MultiauthPassword::needToAuthenticate ( false ) ) {
         if ( qt_screen ) {
             // Should use a big black window instead.
@@ -637,6 +641,12 @@ void ServerApplication::doBeforeSuspend()
 
 void ServerApplication::doResume()
 {
+#ifdef QWS
+    // Clear system suspend notification message
+    QCopEnvelope e( "QPE/TaskBar", "message(QString)" );
+    e << QString::null;
+#endif
+
     if( !loginlock && Opie::Security::MultiauthPassword::isAuthenticating() ) {
         // Authentication is already taking place but not by us (eg. because the
         // user used the lock applet before suspending), so we need to let it
