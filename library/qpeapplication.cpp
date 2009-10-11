@@ -1540,42 +1540,58 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
         emit dateFormatChanged( tmp );
     }
     else if ( msg == "setVolume(int,int)" ) {
-        int t, v;
-        stream >> t >> v;
-        setVolume( t, v );
+        if ( type() == GuiServer ) {
+            int t, v;
+            stream >> t >> v;
+            setVolume( t, v );
+        }
         emit volumeChanged( muted );
     }
     else if ( msg == "volumeChange(bool)" ) {
-        stream >> muted;
-        setVolume();
+        if ( type() == GuiServer ) {
+            stream >> muted;
+            setVolume();
+        }
         emit volumeChanged( muted );
     }
     else if ( msg == "setMic(int,int)" ) { // Added: 2002-02-08 by Jeremy Cowgar <jc@cowgar.com>
-        int t, v;
-        stream >> t >> v;
-        setMic( t, v );
+        if ( type() == GuiServer ) {
+            int t, v;
+            stream >> t >> v;
+            setMic( t, v );
+        }
         emit micChanged( micMuted );
     }
     else if ( msg == "micChange(bool)" ) { // Added: 2002-02-08 by Jeremy Cowgar <jc@cowgar.com>
-        stream >> micMuted;
-        setMic();
+        if ( type() == GuiServer ) {
+            stream >> micMuted;
+            setMic();
+        }
         emit micChanged( micMuted );
     }
     else if ( msg == "setBass(int,int)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
-        int t, v;
-        stream >> t >> v;
-        setBass( t, v );
+        if ( type() == GuiServer ) {
+            int t, v;
+            stream >> t >> v;
+            setBass( t, v );
+        }
     }
     else if ( msg == "bassChange(bool)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
-        setBass();
+        if ( type() == GuiServer ) {
+            setBass();
+        }
     }
     else if ( msg == "setTreble(int,int)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
-        int t, v;
-        stream >> t >> v;
-        setTreble( t, v );
+        if ( type() == GuiServer ) {
+            int t, v;
+            stream >> t >> v;
+            setTreble( t, v );
+        }
     }
     else if ( msg == "trebleChange(bool)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
-        setTreble();
+        if ( type() == GuiServer ) {
+            setTreble();
+        }
     }
     else if ( msg == "getMarkedText()" ) {
         if ( type() == GuiServer ) {
