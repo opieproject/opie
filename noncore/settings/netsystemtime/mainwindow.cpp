@@ -95,8 +95,6 @@ MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal, WFlags 
 
     // Connect everything together
     connect( timeTab, SIGNAL(getNTPTime()), this, SLOT(slotGetNTPTime()) );
-    connect( timeTab, SIGNAL(tzChanged(const QString&)), predictTab, SLOT(slotTZChanged(const QString&)) );
-    connect( timeTab, SIGNAL(getPredictedTime()), predictTab, SLOT(slotSetPredictedTime()) );
     connect( formatTab, SIGNAL(show12HourTime(int)), timeTab, SLOT(slotUse12HourTime(int)) );
     connect( formatTab, SIGNAL(dateFormatChanged(const DateFormat&)),
              timeTab, SLOT(slotDateFormatChanged(const DateFormat&)) );
@@ -104,7 +102,6 @@ MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal, WFlags 
     connect( settingsTab, SIGNAL(ntpDelayChanged(int)), this, SLOT(slotNTPDelayChanged(int)) );
     connect( settingsTab, SIGNAL(displayNTPTab(bool)), this, SLOT(slotDisplayNTPTab(bool)) );
     connect( settingsTab, SIGNAL(displayPredictTab(bool)), this, SLOT(slotDisplayPredictTab(bool)) );
-    connect( predictTab, SIGNAL(setTime(const QDateTime&)), this, SLOT(slotSetTime(const QDateTime&)) );
 
     // Do initial time server check
     slotNTPDelayChanged( config.readNumEntry( "ntpRefreshFreq", 1440 ) );
@@ -278,6 +275,9 @@ void MainWindow::slotDisplayPredictTab( bool display )
     if ( display && !predictTab )
     {
         predictTab = new PredictTabWidget( mainWidget );
+        connect( timeTab, SIGNAL(tzChanged(const QString&)), predictTab, SLOT(slotTZChanged(const QString&)) );
+        connect( timeTab, SIGNAL(getPredictedTime()), predictTab, SLOT(slotSetPredictedTime()) );
+        connect( predictTab, SIGNAL(setTime(const QDateTime&)), this, SLOT(slotSetTime(const QDateTime&)) );
     }
     // Display/hide tab
     display ? mainWidget->addTab( predictTab, "netsystemtime/predicttab", tr( "Predict" ) )
