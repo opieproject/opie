@@ -170,9 +170,9 @@ public:
         QByteArray data;
     };
     QGuardedPtr<QWidget> qpe_main_widget;
-        QGuardedPtr<QWidget> lastraised;
+    QGuardedPtr<QWidget> lastraised;
     QQueue<QCopRec> qcopq;
-        QString styleName;
+    QString styleName;
     QString decorationName;
 
     void enqueueQCop( const QCString &ch, const QCString &msg,
@@ -180,28 +180,29 @@ public:
     {
         qcopq.enqueue( new QCopRec( ch, msg, data ) );
     }
+
     void sendQCopQ()
     {
-            if (!qcopQok )
-                return;
+        if (!qcopQok )
+            return;
 
         QCopRec * r;
 
-           while((r=qcopq.dequeue())) {
-               // remove from queue before sending...
-               // event loop can come around again before getting
-               // back from sendLocally
+        while((r=qcopq.dequeue())) {
+            // remove from queue before sending...
+            // event loop can come around again before getting
+            // back from sendLocally
 #ifndef QT_NO_COP
-               QCopChannel::sendLocally( r->channel, r->message, r->data );
+            QCopChannel::sendLocally( r->channel, r->message, r->data );
 #endif
 
-           delete r;
-           }
+            delete r;
+        }
     }
 
-    static void show_mx(QWidget* mw, bool nomaximize, QString &strName) {
-        if ( mw->inherits("QMainWindow") || mw->isA("QMainWindow") )
-        {
+    static void show_mx(QWidget* mw, bool nomaximize, QString &strName)
+    {
+        if ( mw->inherits("QMainWindow") || mw->isA("QMainWindow") ) {
             ( (  QMainWindow* ) mw )->setUsesBigPixmaps( useBigPixmaps );
         }
         QPoint p;
@@ -214,7 +215,8 @@ public:
                 mw->move(p);
             }
             mw->raise();
-        } else {
+        }
+        else {
 
             if ( mw->layout() && mw->inherits("QDialog") ) {
                 if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
@@ -223,17 +225,21 @@ public:
 
                     if ( max && !nomaximize ) {
                         mw->showMaximized();
-                    } else {
+                    }
+                    else {
                         mw->show();
                     }
-                } else {
+                }
+                else {
                     QPEApplication::showDialog((QDialog*)mw,nomaximize);
                 }
-            } else {
+            }
+            else {
                 if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
                     mw->resize(s);
                     mw->move(p);
-                } else {    //no stored rectangle, make an estimation
+                }
+                else {    //no stored rectangle, make an estimation
                     int x = (qApp->desktop()->width()-mw->frameGeometry().width())/2;
                     int y = (qApp->desktop()->height()-mw->frameGeometry().height())/2;
                     mw->move( QMAX(x,0), QMAX(y,0) );
@@ -253,7 +259,7 @@ public:
     static bool read_widget_rect(const QString &app, bool &maximized, QPoint &p, QSize &s)
     {
         if (!saveWindowsPos)
-	    return FALSE;
+        return FALSE;
         maximized = TRUE;
         // 350 is the trigger in qwsdefaultdecoration for providing a resize button
         if ( qApp->desktop()->width() <= 350 )
@@ -278,73 +284,73 @@ public:
     }
 
 
-        static bool validate_widget_size(const QWidget *w, QPoint &p, QSize &s)
+    static bool validate_widget_size(const QWidget *w, QPoint &p, QSize &s)
     {
 #ifndef Q_WS_QWS
-    QRect qt_maxWindowRect = qApp->desktop()->geometry();
+        QRect qt_maxWindowRect = qApp->desktop()->geometry();
 #endif
-    int maxX = qt_maxWindowRect.width();
-    int maxY = qt_maxWindowRect.height();
-    int wWidth = s.width() + ( w->frameGeometry().width() - w->geometry().width() );
-    int wHeight = s.height() + ( w->frameGeometry().height() - w->geometry().height() );
+        int maxX = qt_maxWindowRect.width();
+        int maxY = qt_maxWindowRect.height();
+        int wWidth = s.width() + ( w->frameGeometry().width() - w->geometry().width() );
+        int wHeight = s.height() + ( w->frameGeometry().height() - w->geometry().height() );
 
-    // total window size is not allowed to be larger than desktop window size
-    if ( ( wWidth >= maxX ) && ( wHeight >= maxY ) )
-        return FALSE;
+        // total window size is not allowed to be larger than desktop window size
+        if ( ( wWidth >= maxX ) && ( wHeight >= maxY ) )
+            return FALSE;
 
-    if ( wWidth > maxX ) {
-        s.setWidth( maxX - (w->frameGeometry().width() - w->geometry().width() ) );
-        wWidth = maxX;
-    }
+        if ( wWidth > maxX ) {
+            s.setWidth( maxX - (w->frameGeometry().width() - w->geometry().width() ) );
+            wWidth = maxX;
+        }
 
-    if ( wHeight > maxY ) {
-        s.setHeight( maxY - (w->frameGeometry().height() - w->geometry().height() ) );
-        wHeight = maxY;
-    }
+        if ( wHeight > maxY ) {
+            s.setHeight( maxY - (w->frameGeometry().height() - w->geometry().height() ) );
+            wHeight = maxY;
+        }
 
-    // any smaller than this and the maximize/close/help buttons will be overlapping
-    if ( wWidth < 80 || wHeight < 60 )
-        return FALSE;
+        // any smaller than this and the maximize/close/help buttons will be overlapping
+        if ( wWidth < 80 || wHeight < 60 )
+            return FALSE;
 
-    if ( p.x() < 0 )
-        p.setX(0);
-    if ( p.y() < 0 )
-        p.setY(0);
+        if ( p.x() < 0 )
+            p.setX(0);
+        if ( p.y() < 0 )
+            p.setY(0);
 
-    if ( p.x() + wWidth > maxX )
-        p.setX( maxX - wWidth );
-    if ( p.y() + wHeight > maxY )
-        p.setY( maxY - wHeight );
+        if ( p.x() + wWidth > maxX )
+            p.setX( maxX - wWidth );
+        if ( p.y() + wHeight > maxY )
+            p.setY( maxY - wHeight );
 
-    return TRUE;
+        return TRUE;
     }
 
     static void store_widget_rect(QWidget *w, QString &app)
     {
-    if( !w )
-    return;
-    if (!saveWindowsPos)
-    return;
-    // 350 is the trigger in qwsdefaultdecoration for providing a resize button
-    if ( qApp->desktop()->width() <= 350 )
-        return;
-    // we use these to map the offset of geometry and pos.  ( we can only use normalGeometry to
-    // get the non-maximized version, so we have to do it the hard way )
-    int offsetX = w->x() - w->geometry().left();
-    int offsetY = w->y() - w->geometry().top();
+        if( !w )
+            return;
+        if (!saveWindowsPos)
+            return;
+        // 350 is the trigger in qwsdefaultdecoration for providing a resize button
+        if ( qApp->desktop()->width() <= 350 )
+            return;
+        // we use these to map the offset of geometry and pos.  ( we can only use normalGeometry to
+        // get the non-maximized version, so we have to do it the hard way )
+        int offsetX = w->x() - w->geometry().left();
+        int offsetY = w->y() - w->geometry().top();
 
-    QRect r;
-    if ( w->isMaximized() )
-        r = ( (HackWidget *) w)->normalGeometry();
-    else
-        r = w->geometry();
+        QRect r;
+        if ( w->isMaximized() )
+            r = ( (HackWidget *) w)->normalGeometry();
+        else
+            r = w->geometry();
 
-    // Stores the window placement as pos(), size()  (due to the offset mapping)
-    Config cfg( "qpe" );
-    cfg.setGroup("ApplicationPositions");
-    QString s;
-    s.sprintf("%d,%d,%d,%d,%d", r.left() + offsetX, r.top() + offsetY, r.width(), r.height(), w->isMaximized() );
-    cfg.writeEntry( app, s );
+        // Stores the window placement as pos(), size()  (due to the offset mapping)
+        Config cfg( "qpe" );
+        cfg.setGroup("ApplicationPositions");
+        QString s;
+        s.sprintf("%d,%d,%d,%d,%d", r.left() + offsetX, r.top() + offsetY, r.width(), r.height(), w->isMaximized() );
+        cfg.writeEntry( app, s );
     }
 
     static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appName*/, const QString& /*appsPath*/ )
@@ -376,9 +382,9 @@ public:
         setWidgetCaptionFromAppName( mw, appName, QPEApplication::qpeDir() + "apps" );
         nomaximize = nomax;
         qpe_main_widget = mw;
-                qcopQok = TRUE;
-#ifndef QT_NO_COP
+        qcopQok = TRUE;
 
+#ifndef QT_NO_COP
         sendQCopQ();
 #endif
 
@@ -454,14 +460,15 @@ public:
 class ResourceMimeFactory : public QMimeSourceFactory
 {
 public:
-        ResourceMimeFactory() : resImage( 0 )
+    ResourceMimeFactory() : resImage( 0 )
     {
         setFilePath( Global::helpPath() );
         setExtensionType( "html", "text/html;charset=UTF-8" );
     }
-        ~ResourceMimeFactory() {
-            delete resImage;
-        }
+
+    ~ResourceMimeFactory() {
+        delete resImage;
+    }
 
     const QMimeSource* data( const QString& abs_name ) const
     {
@@ -476,10 +483,10 @@ public:
                     name = name.left( dot );
                 QImage img = Resource::loadImage( name );
                 if ( !img.isNull() ) {
-                                    delete resImage;
-                                    resImage = new QImageDrag( img );
-                                    r = resImage;
-                                }
+                    delete resImage;
+                    resImage = new QImageDrag( img );
+                    r = resImage;
+                }
             }
             while ( !r && sl > 0 );
         }
@@ -506,27 +513,27 @@ static void setVolume( int t = 0, int percent = -1 )
 {
     switch ( t ) {
         case 0: {
-                Config cfg( "qpe" );
-                cfg.setGroup( "Volume" );
-                if ( percent < 0 )
-                    percent = cfg.readNumEntry( "VolumePercent", 50 );
+            Config cfg( "qpe" );
+            cfg.setGroup( "Volume" );
+            if ( percent < 0 )
+                percent = cfg.readNumEntry( "VolumePercent", 50 );
 #ifndef QT_NO_SOUND
-                int fd = 0;
+            int fd = 0;
 #ifdef QT_QWS_DEVFS
-                if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
+            if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
 #else
-                if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+            if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 #endif
-                    int vol = muted ? 0 : percent;
-                    // set both channels to same volume
-                    vol |= vol << 8;
-                    if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_VOLUME ), &vol ) == -1 )
-                        qWarning( "Failed to set both channels to %d", vol );
-                    ::close( fd );
-                }
-#endif
+                int vol = muted ? 0 : percent;
+                // set both channels to same volume
+                vol |= vol << 8;
+                if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_VOLUME ), &vol ) == -1 )
+                    qWarning( "Failed to set both channels to %d", vol );
+                ::close( fd );
             }
-            break;
+#endif
+        }
+        break;
     }
 }
 
@@ -534,26 +541,26 @@ static void setMic( int t = 0, int percent = -1 )
 {
     switch ( t ) {
         case 0: {
-                Config cfg( "qpe" );
-                cfg.setGroup( "Volume" );
-                if ( percent < 0 )
-                    percent = cfg.readNumEntry( "Mic", 50 );
+            Config cfg( "qpe" );
+            cfg.setGroup( "Volume" );
+            if ( percent < 0 )
+                percent = cfg.readNumEntry( "Mic", 50 );
 
 #ifndef QT_NO_SOUND
-                int fd = 0;
-                int mic = micMuted ? 0 : percent;
+            int fd = 0;
+            int mic = micMuted ? 0 : percent;
 #ifdef QT_QWS_DEVFS
-                if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
+            if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
 #else
-                if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+            if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 #endif
-                    if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_MIC ), &mic ) == -1 )
-                        qWarning( "Failed to set mic to %d", mic );
-                    ::close( fd );
-                }
-#endif
+                if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_MIC ), &mic ) == -1 )
+                    qWarning( "Failed to set mic to %d", mic );
+                ::close( fd );
             }
-            break;
+#endif
+        }
+        break;
     }
 }
 
@@ -562,26 +569,26 @@ static void setBass( int t = 0, int percent = -1 )
 {
     switch ( t ) {
         case 0: {
-                Config cfg( "qpe" );
-                cfg.setGroup( "Volume" );
-                if ( percent < 0 )
-                    percent = cfg.readNumEntry( "BassPercent", 50 );
+            Config cfg( "qpe" );
+            cfg.setGroup( "Volume" );
+            if ( percent < 0 )
+                percent = cfg.readNumEntry( "BassPercent", 50 );
 
 #ifndef QT_NO_SOUND
-                int fd = 0;
-                int bass = percent;
+            int fd = 0;
+            int bass = percent;
 #ifdef QT_QWS_DEVFS
-                                if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
+            if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
 #else
-                                if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+            if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 #endif
-                    if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_BASS ), &bass ) == -1 )
-                        qWarning( "Failed to set bass to %d", bass );
-                    ::close( fd );
-                }
-#endif
+                if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_BASS ), &bass ) == -1 )
+                    qWarning( "Failed to set bass to %d", bass );
+                ::close( fd );
             }
-            break;
+#endif
+        }
+        break;
     }
 }
 
@@ -590,26 +597,26 @@ static void setTreble( int t = 0, int percent = -1 )
 {
     switch ( t ) {
         case 0: {
-                Config cfg( "qpe" );
-                cfg.setGroup( "Volume" );
-                if ( percent < 0 )
-                    percent = cfg.readNumEntry( "TreblePercent", 50 );
+            Config cfg( "qpe" );
+            cfg.setGroup( "Volume" );
+            if ( percent < 0 )
+                percent = cfg.readNumEntry( "TreblePercent", 50 );
 
 #ifndef QT_NO_SOUND
-                int fd = 0;
-                int treble = percent;
+            int fd = 0;
+            int treble = percent;
 #ifdef QT_QWS_DEVFS
-                if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
+            if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
 #else
-                if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+            if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 #endif
-                    if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_TREBLE ), &treble ) == -1 )
-                        qWarning( "Failed to set treble to %d", treble );
-                    ::close( fd );
-                }
-#endif
+                if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_TREBLE ), &treble ) == -1 )
+                    qWarning( "Failed to set treble to %d", treble );
+                ::close( fd );
             }
-            break;
+#endif
+        }
+        break;
     }
 }
 
@@ -718,19 +725,19 @@ void QPEApplication::processQCopFile()
     QFile f(qcopfn);
     if ( f.open(IO_ReadWrite) ) {
 #ifndef Q_OS_WIN32
-    flock(f.handle(), LOCK_EX);
+        flock(f.handle(), LOCK_EX);
 #endif
-    QDataStream ds(&f);
-    QCString channel, message;
-    QByteArray data;
-    while(!ds.atEnd()) {
-        ds >> channel >> message >> data;
-        d->enqueueQCop(channel,message,data);
-    }
-    ::ftruncate(f.handle(), 0);
+        QDataStream ds(&f);
+        QCString channel, message;
+        QByteArray data;
+        while(!ds.atEnd()) {
+            ds >> channel >> message >> data;
+            d->enqueueQCop(channel,message,data);
+        }
+        ::ftruncate(f.handle(), 0);
 #ifndef Q_OS_WIN32
-    f.flush();
-    flock(f.handle(), LOCK_UN);
+        f.flush();
+        flock(f.handle(), LOCK_UN);
 #endif
     }
 #endif
@@ -790,24 +797,24 @@ static void qtopia_loadTranslations( const QStringList& qms )
 #endif
 
 /*
-	Turn off qDebug in release mode
+    Turn off qDebug in release mode
  */
 static void qtopiaMsgHandler(QtMsgType type, const char* msg)
 {
-		switch ( type ) {
-			case QtDebugMsg:
+    switch ( type ) {
+        case QtDebugMsg:
 #ifdef QT_DEBUG
-					fprintf( stderr, "Debug: %s\n", msg );
+            fprintf( stderr, "Debug: %s\n", msg );
 #endif
-					break;
-			case QtWarningMsg:
+            break;
+        case QtWarningMsg:
 #ifdef QT_DEBUG
-					fprintf( stderr, "Warning: %s\n", msg );
+            fprintf( stderr, "Warning: %s\n", msg );
 #endif
-					break;
-			case QtFatalMsg:
-					fprintf( stderr, "Fatal: %s\n", msg );
-					abort();
+            break;
+        case QtFatalMsg:
+            fprintf( stderr, "Fatal: %s\n", msg );
+            abort();
     }
 }
 
@@ -963,18 +970,19 @@ void QPEApplication::initApp( int argc, char **argv )
     d->keep_running = d->qcopq.isEmpty();
 
     for (int a=0; a<argc; a++) {
-    if ( qstrcmp(argv[a],"-preload")==0 ) {
-        argv[a] = argv[a+1];
-        a++;
-        d->preloaded = TRUE;
-        argc-=1;
-    } else if ( qstrcmp(argv[a],"-preload-show")==0 ) {
-        argv[a] = argv[a+1];
-        a++;
-        d->preloaded = TRUE;
-        d->forceshow = TRUE;
-        argc-=1;
-    }
+        if ( qstrcmp(argv[a],"-preload")==0 ) {
+            argv[a] = argv[a+1];
+            a++;
+            d->preloaded = TRUE;
+            argc-=1;
+        }
+        else if ( qstrcmp(argv[a],"-preload-show")==0 ) {
+            argv[a] = argv[a+1];
+            a++;
+            d->preloaded = TRUE;
+            d->forceshow = TRUE;
+            argc-=1;
+        }
     }
 
     /* overide stored arguments */
@@ -1134,8 +1142,9 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
                     HackDialog * d = ( HackDialog * ) active;
                     d->rejectIt();
                     return TRUE;
-                } else /*if ( strcmp( argv() [ 0 ], "embeddedkonsole" ) != 0 )*/ {
-                active->close();
+                }
+                else /*if ( strcmp( argv() [ 0 ], "embeddedkonsole" ) != 0 )*/ {
+                    active->close();
                 }
             }
 
@@ -1218,7 +1227,7 @@ QPEApplication::~QPEApplication()
 
 #ifdef OPIE_WITHROHFEEDBACK
     if( d->RoH )
-      delete d->RoH;
+        delete d->RoH;
 #endif
     delete d;
 }
@@ -1303,7 +1312,8 @@ void QPEApplication::setDefaultRotation( int r )
     }
     else {
 #ifndef QT_NO_COP
-        { QCopEnvelope e( "QPE/System", "setDefaultRotation(int)" );
+        {
+            QCopEnvelope e( "QPE/System", "setDefaultRotation(int)" );
             e << r;
         }
 #endif
@@ -1390,9 +1400,9 @@ void QPEApplication::applyStyle()
     setPalette( pal, TRUE );
 
 
-        // Set the ScrollBar on the 'right' side but only if the weak symbol is present
-        if (&qt_left_hand_scrollbars )
-            qt_left_hand_scrollbars = config.readBoolEntry( "LeftHand", false );
+    // Set the ScrollBar on the 'right' side but only if the weak symbol is present
+    if (&qt_left_hand_scrollbars )
+        qt_left_hand_scrollbars = config.readBoolEntry( "LeftHand", false );
 
     // Window Decoration
     QString dec = config.readEntry( "Decoration", "Flat" );
@@ -1439,23 +1449,23 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
         }
     }
     else if ( msg == "setCurrentMode(int,int,int)" ) { // Added: 2003-06-11 by Tim Ansell <mithro@mithis.net>
-            if ( type() == GuiServer ) {
-        int x, y, depth;
-        stream >> x;
-        stream >> y;
-        stream >> depth;
-        setCurrentMode( x, y, depth );
-            }
+        if ( type() == GuiServer ) {
+            int x, y, depth;
+            stream >> x;
+            stream >> y;
+            stream >> depth;
+            setCurrentMode( x, y, depth );
+        }
      }
     else if ( msg == "reset()" ) {
-            if ( type() != GuiServer )
-                reset();
+        if ( type() != GuiServer )
+            reset();
     }
     else if ( msg == "setCurrentRotation(int)" ) {
         int r;
         stream >> r;
         setCurrentRotation( r );
-     }
+    }
     else if ( msg == "shutdown()" ) {
         if ( type() == GuiServer )
             shutdown();
@@ -1557,33 +1567,33 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
         setBass( t, v );
     }
     else if ( msg == "bassChange(bool)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
-            setBass();
+        setBass();
     }
-        else if ( msg == "setTreble(int,int)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
+    else if ( msg == "setTreble(int,int)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
         int t, v;
         stream >> t >> v;
         setTreble( t, v );
     }
     else if ( msg == "trebleChange(bool)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
-            setTreble();
-    } else if ( msg == "getMarkedText()" ) {
-    if ( type() == GuiServer ) {
-        const ushort unicode = 'C'-'@';
-        const int scan = Key_C;
-        qwsServer->processKeyEvent( unicode, scan, ControlButton, TRUE, FALSE );
-        qwsServer->processKeyEvent( unicode, scan, ControlButton, FALSE, FALSE );
+        setTreble();
     }
-    } else if ( msg == "newChannel(QString)") {
-    QString myChannel = "QPE/Application/" + d->appName;
-    QString channel;
-    stream >> channel;
-    if (channel == myChannel) {
-        processQCopFile();
-        d->sendQCopQ();
+    else if ( msg == "getMarkedText()" ) {
+        if ( type() == GuiServer ) {
+            const ushort unicode = 'C'-'@';
+            const int scan = Key_C;
+            qwsServer->processKeyEvent( unicode, scan, ControlButton, TRUE, FALSE );
+            qwsServer->processKeyEvent( unicode, scan, ControlButton, FALSE, FALSE );
+        }
     }
+    else if ( msg == "newChannel(QString)") {
+        QString myChannel = "QPE/Application/" + d->appName;
+        QString channel;
+        stream >> channel;
+        if (channel == myChannel) {
+            processQCopFile();
+            d->sendQCopQ();
+        }
     }
-
-
 #endif
 }
 
@@ -1600,21 +1610,22 @@ bool QPEApplication::raiseAppropriateWindow()
 
     // 1. Raise the main widget
     QWidget *top = d->qpe_main_widget;
-    if ( !top ) top = mainWidget();
+    if ( !top )
+        top = mainWidget();
 
     if ( top && d->keep_running ) {
-    if ( top->isVisible() )
-        r = TRUE;
-    else if (d->preloaded) {
-        // We are preloaded and not visible.. pretend we just started..
+        if ( top->isVisible() )
+            r = TRUE;
+        else if (d->preloaded) {
+            // We are preloaded and not visible.. pretend we just started..
 #ifndef QT_NO_COP
-        QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
-        e << d->appName;
+            QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
+            e << d->appName;
 #endif
-    }
+        }
 
-    d->show_mx(top,d->nomaximize, d->appName);
-    top->raise();
+        d->show_mx(top,d->nomaximize, d->appName);
+        top->raise();
     }
 
     QWidget *topm = activeModalWidget();
@@ -1625,44 +1636,44 @@ bool QPEApplication::raiseAppropriateWindow()
     //     that repeated calls cycle through widgets.
     QWidgetList *list = topLevelWidgets();
     if ( list ) {
-    bool foundlast = FALSE;
-    QWidget* topsub = 0;
-    if ( d->lastraised ) {
-        for (QWidget* w = list->first(); w; w = list->next()) {
-        if ( !w->parentWidget() && w != topm && w->isVisible() && !w->isDesktop() ) {
-            if ( w == d->lastraised )
-            foundlast = TRUE;
-            if ( foundlast ) {
-            w->raise();
-            topsub = w;
+        bool foundlast = FALSE;
+        QWidget* topsub = 0;
+        if ( d->lastraised ) {
+            for (QWidget* w = list->first(); w; w = list->next()) {
+                if ( !w->parentWidget() && w != topm && w->isVisible() && !w->isDesktop() ) {
+                    if ( w == d->lastraised )
+                        foundlast = TRUE;
+                    if ( foundlast ) {
+                        w->raise();
+                        topsub = w;
+                    }
+                }
             }
         }
+        for (QWidget* w = list->first(); w; w = list->next()) {
+            if ( !w->parentWidget() && w != topm && w->isVisible() && !w->isDesktop() ) {
+                if ( w == d->lastraised )
+                    break;
+                w->raise();
+                topsub = w;
+            }
         }
-    }
-    for (QWidget* w = list->first(); w; w = list->next()) {
-        if ( !w->parentWidget() && w != topm && w->isVisible() && !w->isDesktop() ) {
-        if ( w == d->lastraised )
-            break;
-        w->raise();
-        topsub = w;
-        }
-    }
-    d->lastraised = topsub;
-    delete list;
+        d->lastraised = topsub;
+        delete list;
     }
 
     // 3. Raise the active modal widget.
     if ( topm ) {
-    topm->show();
-    topm->raise();
-    // If we haven't already handled the fastAppShowing message
-    if (!top && d->preloaded) {
+        topm->show();
+        topm->raise();
+        // If we haven't already handled the fastAppShowing message
+        if (!top && d->preloaded) {
 #ifndef QT_NO_COP
-        QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
-        e << d->appName;
+            QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
+            e << d->appName;
 #endif
-    }
-    r = FALSE;
+        }
+        r = FALSE;
     }
 
     return r;
@@ -1721,28 +1732,28 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
             mw = d->qpe_main_widget;
         if ( mw )
             Global::setDocument( mw, doc );
-
-    } else if ( msg == "QPEProcessQCop()" ) {
-            processQCopFile();
-            d->sendQCopQ();
-        }else
-        {
-            bool p = d->keep_running;
-            d->keep_running = FALSE;
-            emit appMessage( msg, data);
-            if ( d->keep_running ) {
-                d->notbusysent = FALSE;
-                raiseAppropriateWindow();
-                if ( !p ) {
-                    // Tell the system we're still chugging along...
+    }
+    else if ( msg == "QPEProcessQCop()" ) {
+        processQCopFile();
+        d->sendQCopQ();
+    }
+    else {
+        bool p = d->keep_running;
+        d->keep_running = FALSE;
+        emit appMessage( msg, data);
+        if ( d->keep_running ) {
+            d->notbusysent = FALSE;
+            raiseAppropriateWindow();
+            if ( !p ) {
+                // Tell the system we're still chugging along...
 #ifndef QT_NO_COP
-                    QCopEnvelope e("QPE/System", "appRaised(QString)");
-                    e << d->appName;
+                QCopEnvelope e("QPE/System", "appRaised(QString)");
+                e << d->appName;
 #endif
-                }
             }
-            if ( p )
-                d->keep_running = p;
+        }
+        if ( p )
+            d->keep_running = p;
     }
 #endif
 }
@@ -1756,8 +1767,8 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 */
 void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
 {
-//        setMainWidget(mw); this breaks FastLoading because lastWindowClose() would quit
-            d->show(mw, nomaximize );
+//    setMainWidget(mw); this breaks FastLoading because lastWindowClose() would quit
+    d->show(mw, nomaximize );
 }
 
 /*!
@@ -1911,7 +1922,8 @@ void QPEApplication::prepareForTermination( bool willrestart )
         lblWait->show();
         lblWait->showMaximized();
     }
-    { QCopEnvelope envelope( "QPE/System", "forceQuit()" );
+    {
+        QCopEnvelope envelope( "QPE/System", "forceQuit()" );
     }
     processEvents(); // ensure the message goes out.
 }
@@ -1989,8 +2001,8 @@ void QPEApplication::setStylusOperation( QWidget * w, StylusMode mode )
 */
 bool QPEApplication::eventFilter( QObject *o, QEvent *e )
 {
-        if ( !o->isWidgetType() )
-            return FALSE;
+    if ( !o->isWidgetType() )
+        return FALSE;
 
     if ( stylusDict && e->type() >= QEvent::MouseButtonPress && e->type() <= QEvent::MouseMove ) {
         QMouseEvent * me = ( QMouseEvent* ) e;
@@ -2006,7 +2018,7 @@ bool QPEApplication::eventFilter( QObject *o, QEvent *e )
                             d->rightpressed = FALSE;
 #ifdef OPIE_WITHROHFEEDBACK
                             if( ! d->RoH )
-                              d->RoH = new Opie::Internal::RoHFeedback;
+                                d->RoH = new Opie::Internal::RoHFeedback;
 
                             d->RoH->init( me->globalPos(), d->presswidget );
                             Pref = d->RoH->delay();
@@ -2036,7 +2048,7 @@ bool QPEApplication::eventFilter( QObject *o, QEvent *e )
                                 d->presstimer = 0;
                             }
                             if ( d->rightpressed && d->presswidget ) {
-                              printf( "Send ButtonRelease\n" );
+                                printf( "Send ButtonRelease\n" );
                                 // Right released
                                 postEvent( d->presswidget,
                                            new QMouseEvent( QEvent::MouseButtonRelease, me->pos(),
@@ -2096,8 +2108,7 @@ void QPEApplication::timerEvent( QTimerEvent *e )
 
 void QPEApplication::removeSenderFromStylusDict()
 {
-    stylusDict->remove
-    ( ( void* ) sender() );
+    stylusDict->remove( ( void* ) sender() );
     if ( d->presswidget == sender() )
         d->presswidget = 0;
 }
@@ -2139,11 +2150,11 @@ void QPEApplication::grabKeyboard()
 */
 int QPEApplication::exec()
 {
-        d->qcopQok = true;
+    d->qcopQok = true;
 #ifndef QT_NO_COP
     d->sendQCopQ();
-        if ( !d->keep_running )
-            processEvents(); // we may have received QCop messages in the meantime.
+    if ( !d->keep_running )
+        processEvents(); // we may have received QCop messages in the meantime.
 #endif
 
     if ( d->keep_running )
@@ -2151,7 +2162,6 @@ int QPEApplication::exec()
         return QApplication::exec();
 
 #ifndef QT_NO_COP
-
     {
         QCopEnvelope e( "QPE/System", "closing(QString)" );
         e << d->appName;
@@ -2171,14 +2181,13 @@ void QPEApplication::tryQuit()
     if ( activeModalWidget() )
         return ; // Inside modal loop or konsole. Too hard to save state.
 #ifndef QT_NO_COP
-
     {
         QCopEnvelope e( "QPE/System", "closing(QString)" );
         e << d->appName;
     }
 #endif
     if ( d->keep_running )
-    d->store_widget_rect(d->qpe_main_widget, d->appName);
+        d->store_widget_rect(d->qpe_main_widget, d->appName);
     processEvents();
 
     quit();
@@ -2194,20 +2203,19 @@ void QPEApplication::tryQuit()
 void QPEApplication::hideOrQuit()
 {
     if ( d->keep_running )
-    d->store_widget_rect(d->qpe_main_widget, d->appName);
+        d->store_widget_rect(d->qpe_main_widget, d->appName);
     processEvents();
 
     // If we are a preloaded application we don't actually quit, so emit
     // a System message indicating we're quasi-closing.
     if ( d->preloaded && d->qpe_main_widget )
-#ifndef QT_NO_COP
-
     {
+#ifndef QT_NO_COP
         QCopEnvelope e("QPE/System", "fastAppHiding(QString)" );
         e << d->appName;
         d->qpe_main_widget->hide();
-    }
 #endif
+    }
     else
         quit();
 }
@@ -2224,7 +2232,6 @@ void __cxa_pure_virtual()
 {
     fprintf( stderr, "Pure virtual called\n");
     abort();
-
 }
 
 #endif
