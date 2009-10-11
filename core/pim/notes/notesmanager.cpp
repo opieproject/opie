@@ -107,7 +107,7 @@ int NotesManager::catId( const QString& cats )
 
 bool NotesManager::isLoaded()const
 {
-    return ( m_db == 0 );
+    return ( m_db != 0 );
 }
 
 void NotesManager::load()
