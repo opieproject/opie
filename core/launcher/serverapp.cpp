@@ -504,6 +504,20 @@ void ServerApplication::systemMessage( const QCString& msg,
     else if ( msg == "systemResume()" ) {
         doResume();
     }
+    else if ( msg == "setVolume(int)" ) {
+        int vol;
+        stream >> vol;
+        adjustVolume( true, vol );
+    }
+    else if ( msg == "incVolume()" ) {
+        adjustVolume( false, 10 );
+    }
+    else if ( msg == "decVolume()" ) {
+        adjustVolume( false, -10 );
+    }
+    else if ( msg == "toggleMute()" ) {
+        toggleMute();
+    }
 }
 
 void ServerApplication::reloadPowerWarnSettings ( )
@@ -869,6 +883,8 @@ void ServerApplication::rereadVolumes()
     m_keyclick_sound  = cfg. readBoolEntry ( "KeySound" );
     m_alarm_sound     = cfg. readBoolEntry ( "AlarmSound" );
     m_alarm_percent   = cfg.readNumEntry ( "AlarmPercent", 65 );
+    m_volume_muted    = cfg.readBoolEntry ( "Mute", 0 );
+    m_volume_percent  = cfg.readNumEntry ( "VolumePercent", 50 );
 }
 
 void ServerApplication::checkMemory()
@@ -937,6 +953,8 @@ void ServerApplication::soundAlarm() {
 void ServerApplication::setUseAlarmVolume( bool useAlarmVol )
 {
 #ifndef QT_NO_COP
+    // We don't use adjustVolume here because we don't want the volume
+    // change to be saved to disk
     int vol;
     if( useAlarmVol )
         vol = me()->m_alarm_percent;
@@ -946,6 +964,44 @@ void ServerApplication::setUseAlarmVolume( bool useAlarmVol )
     e << 0;
     e << vol;
 #endif
+}
+
+void ServerApplication::toggleMute()
+{
+    m_volume_muted = !m_volume_muted;
+    
+    Config cfg( "qpe" );
+    cfg.setGroup( "Volume" );
+    cfg.writeEntry( "Mute", m_volume_muted );
+
+#ifndef QT_NO_COP
+    QCopEnvelope e( "QPE/System", "volumeChange(bool)" );
+    e << m_volume_muted;
+#endif
+}
+
+void ServerApplication::adjustVolume( bool absolute, int vol )
+{
+    int vol_value;
+
+    if( absolute )
+        vol_value = vol;
+    else
+        vol_value = m_volume_percent + vol;
+    
+    // clamp volume percent to be between 0 and 100
+    vol_value = ( vol_value < 0 ) ? 0 : (( vol_value > 100 ) ? 100 : vol_value );
+
+    if( vol_value != m_volume_percent ) {
+        Config cfg( "qpe" );
+        cfg.setGroup( "Volume" );
+        cfg.writeEntry( "VolumePercent", vol_value );
+
+#ifndef QT_NO_COP
+        QCopEnvelope e( "QPE/System", "volumeChange(bool)" );
+        e << m_volume_muted;
+#endif
+    }
 }
 
 ServerApplication *ServerApplication::me ( )

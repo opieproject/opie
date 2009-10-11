@@ -102,6 +102,8 @@ public:
     static void switchLCD ( bool on ); // only for togglePower in Desktop
     static void setUseAlarmVolume( bool useAlarmVol );
     static void soundAlarm(); // only because QCop soundAlarm() is defined in QPE/TaskBar
+    void adjustVolume( bool absolute, int vol );
+    void toggleMute();
 
     void restart();
     int exec();
@@ -164,7 +166,9 @@ private:
     bool m_keyclick_sound  : 1;
     bool m_screentap_sound : 1;
     bool m_alarm_sound     : 1;
-    int m_alarm_percent    : 65;
+    int m_alarm_percent;
+    int m_volume_percent;
+    bool m_volume_muted    : 1;
     
     static bool ms_is_starting;
     bool m_login;
