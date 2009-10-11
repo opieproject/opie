@@ -48,17 +48,19 @@ static bool isUSB( const QString &devpath )
     bool matched = false;
     if( devpath.startsWith( "/dev/" ) ) {
         QDir diskdir("/dev/disk/by-id/");
-        diskdir.setFilter( QDir::System );
-        diskdir.setNameFilter( "usb-*" );
-        const QFileInfoList *list = diskdir.entryInfoList();
-        QFileInfoListIterator it( *list );
-        QFileInfo *fi;
+        if( diskdir.exists() ) {
+            diskdir.setFilter( QDir::System );
+            diskdir.setNameFilter( "usb-*" );
+            const QFileInfoList *list = diskdir.entryInfoList();
+            QFileInfoListIterator it( *list );
+            QFileInfo *fi;
 
-        for( ; (fi=it.current()); ++it ) {
-            QString absdevpath = QDir::cleanDirPath(diskdir.absFilePath(fi->readLink()));
-            if( absdevpath == devpath ) {
-                matched = true;
-                break;
+            for( ; (fi=it.current()); ++it ) {
+                QString absdevpath = QDir::cleanDirPath(diskdir.absFilePath(fi->readLink()));
+                if( absdevpath == devpath ) {
+                    matched = true;
+                    break;
+                }
             }
         }
     }
