@@ -1,5 +1,0 @@
-menu "Holiday Plugins"
-  source core/pim/datebook/holiday/birthday/config.in
-  source core/pim/datebook/holiday/christian/config.in
-  source core/pim/datebook/holiday/national/config.in
-endmenu
