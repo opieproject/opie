@@ -1,4 +1,4 @@
-  config DATEBOOK2_CHRISTIAN_PLUGIN
-    boolean "opie-datebook2-christian-holidays"
+  config DATEBOOK_CHRISTIAN_PLUGIN
+    boolean "opie-datebook-christian-holidays"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM

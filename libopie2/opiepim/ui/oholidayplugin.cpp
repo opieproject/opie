@@ -1,4 +1,4 @@
-#include "oholidayplugin2.h"
+#include "oholidayplugin.h"
 
 #include <opie2/opimtemplatebase.h>
 #include <opie2/odebug.h>
@@ -6,7 +6,7 @@
 using namespace Opie;
 using namespace Opie::Datebook;
 
-QMap<QDate,QStringList> HolidayPlugin2::entries(const QDate& start, const QDate& end)
+QMap<QDate,QStringList> HolidayPlugin::entries(const QDate& start, const QDate& end)
 {
     // This is the default implementation - if you can do it more efficiently in
     // your plugin, then override it.

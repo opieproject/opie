@@ -38,8 +38,8 @@
 
 namespace Opie {
 namespace Datebook {
-    class HolidayPlugin2;
-    class HolidayPluginIf2;
+    class HolidayPlugin;
+    class HolidayPluginIf;
 }
 namespace Core {
     class OPluginLoader;
@@ -70,9 +70,9 @@ protected:
     void deinit();
 
     struct HPlugin {
-        Opie::Datebook::HolidayPlugin2*_plugin;
+        Opie::Datebook::HolidayPlugin*_plugin;
         //QLibrary*_lib;
-        //Opie::Datebook::HolidayPluginIf2*_if;
+        //Opie::Datebook::HolidayPluginIf*_if;
         Opie::ODateBookAccess *_access;
     };
     QValueList<HPlugin*>_pluginlist;

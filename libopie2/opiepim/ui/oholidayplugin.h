@@ -7,8 +7,6 @@
 #include <qmap.h>
 #include <qwidget.h>
 
-class EffectiveEvent;
-
 namespace Opie {
 namespace Datebook {
 
@@ -21,9 +19,7 @@ public:
     virtual ~HolidayPlugin(){};
     virtual QString description()=0;
     virtual QStringList entries(const QDate&)=0;
-    virtual QStringList entries(unsigned year, unsigned month, unsigned day)=0;
-    virtual QMap<QDate,QStringList> entries(const QDate&,const QDate&)=0;
-    virtual QValueList<EffectiveEvent> events(const QDate&,const QDate&)=0;
+    virtual QMap<QDate,QStringList> entries(const QDate&,const QDate&);
 
     virtual HolidayPluginConfigWidget*configWidget(QWidget *parent=0,  const char *name = 0, QWidget::WFlags fl = 0 ){return 0;}
 };

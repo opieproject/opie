@@ -1,5 +1,5 @@
-menu "Holiday Plugins2"
-  source core/pim/datebook2/plugins/birthday/config.in
-  source core/pim/datebook2/plugins/christian/config.in
-  source core/pim/datebook2/plugins/national/config.in
+menu "Holiday Plugins"
+  source core/pim/datebook/plugins/birthday/config.in
+  source core/pim/datebook/plugins/christian/config.in
+  source core/pim/datebook/plugins/national/config.in
 endmenu

@@ -34,7 +34,7 @@
 using namespace Opie;
 using namespace Opie::Datebook;
 
-ODateBookAccessBackend_Holiday::ODateBookAccessBackend_Holiday( HolidayPlugin2 *holidayplugin )
+ODateBookAccessBackend_Holiday::ODateBookAccessBackend_Holiday( HolidayPlugin *holidayplugin )
     : ODateBookAccessBackend(), plugin(holidayplugin) {
 }
 

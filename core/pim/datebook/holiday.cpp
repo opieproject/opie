@@ -31,8 +31,8 @@
 
 #include <opie2/odebug.h>
 #include <opie2/opluginloader.h>
-#include <opie2/oholidaypluginif2.h>
-#include <opie2/oholidayplugin2.h>
+#include <opie2/oholidaypluginif.h>
+#include <opie2/oholidayplugin.h>
 #include <opie2/opimoccurrence.h>
 
 #include <opie2/odatebookaccess.h>
@@ -46,7 +46,7 @@ using namespace Opie::Datebook;
 DateBookHoliday::DateBookHoliday()
 {
     _pluginlist.clear();
-    m_pluginLoader = new Opie::Core::OPluginLoader("holidays2",false);
+    m_pluginLoader = new Opie::Core::OPluginLoader("holidays",false);
     m_pluginLoader->setAutoDelete(true);
     m_pluginManager = new Opie::Core::OPluginManager(m_pluginLoader);
     m_pluginManager->load();
@@ -94,9 +94,9 @@ void DateBookHoliday::init()
     Opie::Core::OPluginItem::List  lst = m_pluginLoader->filtered(true);
 //    debugLst( lst );
     for( Opie::Core::OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ){
-        Opie::Datebook::HolidayPluginIf2*hif = m_pluginLoader->load<Opie::Datebook::HolidayPluginIf2>(*it,IID_HOLIDAY_PLUGIN);
+        Opie::Datebook::HolidayPluginIf*hif = m_pluginLoader->load<Opie::Datebook::HolidayPluginIf>(*it,IID_HOLIDAY_PLUGIN);
         if (hif) {
-            Opie::Datebook::HolidayPlugin2 *pl = hif->plugin();
+            Opie::Datebook::HolidayPlugin *pl = hif->plugin();
             if (pl) {
                 HPlugin*_pl=new HPlugin;
                 _pl->_plugin = pl;

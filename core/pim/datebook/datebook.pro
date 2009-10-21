@@ -84,6 +84,6 @@ INTERFACES = datebooksettingsbase.ui \
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS        += -lqpe -lopieui2 -lopiecore2 -lopiepim2
-TARGET		= datebook2
+TARGET		= datebook
 
 include( $(OPIEDIR)/include.pro )

@@ -32,7 +32,7 @@
 #include <qmap.h>
 
 #include <opie2/odatebookaccessbackend.h>
-#include <opie2/oholidayplugin2.h>
+#include <opie2/oholidayplugin.h>
 
 namespace Opie {
 /**
@@ -42,7 +42,7 @@ namespace Opie {
  */
 class ODateBookAccessBackend_Holiday : public ODateBookAccessBackend {
 public:
-    ODateBookAccessBackend_Holiday( Datebook::HolidayPlugin2 *holidayplugin );
+    ODateBookAccessBackend_Holiday( Datebook::HolidayPlugin *holidayplugin );
     ~ODateBookAccessBackend_Holiday();
 
     bool load();
@@ -69,7 +69,7 @@ public:
     OPimBackendOccurrence::List effectiveNonRepeatingEvents( const QDate& from, const QDate& to )const;
 
 private:
-    Datebook::HolidayPlugin2 *plugin;
+    Datebook::HolidayPlugin *plugin;
 };
 
 }

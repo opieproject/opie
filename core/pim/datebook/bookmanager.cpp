@@ -149,16 +149,16 @@ void BookManager::addAlarms( const OPimEvent &ev ) {
         if( alarmDateTime < QDateTime::currentDateTime() )
             continue;
 
-        AlarmServer::addAlarm( alarmDateTime, "QPE/Application/datebook2", "alarm(QDateTime,int)", ev.uid() );
+        AlarmServer::addAlarm( alarmDateTime, "QPE/Application/datebook", "alarm(QDateTime,int)", ev.uid() );
     }
 }
 
 void BookManager::snoozeAlarm( const QDateTime &dt, int uid ) {
-    AlarmServer::addAlarm( dt, "QPE/Application/datebook2", "alarm(QDateTime,int)", uid );
+    AlarmServer::addAlarm( dt, "QPE/Application/datebook", "alarm(QDateTime,int)", uid );
 }
 
 void BookManager::removeAlarms( const OPimEvent &ev ) {
-    AlarmServer::deleteAlarm( QDateTime(), "QPE/Application/datebook2", "alarm(QDateTime,int)", ev.uid() );
+    AlarmServer::deleteAlarm( QDateTime(), "QPE/Application/datebook", "alarm(QDateTime,int)", ev.uid() );
 }
 
 void BookManager::setupAlarms( const OPimEvent &ev ) {
@@ -168,7 +168,7 @@ void BookManager::setupAlarms( const OPimEvent &ev ) {
 
 void BookManager::setupAllAlarms() {
     // Unregister all alarms that belong to us
-    AlarmServer::deleteAlarm( QDateTime(), "QPE/Application/datebook2", "alarm(QDateTime,int)", -1 );
+    AlarmServer::deleteAlarm( QDateTime(), "QPE/Application/datebook", "alarm(QDateTime,int)", -1 );
     // Now, register all alarms in the future
     ODateBookAccess::List allrecs = allRecords();
     for ( ODateBookAccess::List::Iterator it = allrecs.begin(); it != allrecs.end(); ++it ) {

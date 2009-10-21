@@ -32,8 +32,8 @@
 
 #include <opie2/opluginloader.h>
 #include <opie2/odebug.h>
-#include <opie2/oholidaypluginif2.h>
-#include <opie2/oholidayplugin2.h>
+#include <opie2/oholidaypluginif.h>
+#include <opie2/oholidayplugin.h>
 #include <opie2/oholidayplugincfgwidget.h>
 
 #include <qpe/qpeapplication.h>
@@ -117,9 +117,9 @@ void DateBookSettings::setPluginList(Opie::Core::OPluginManager*aManager,Opie::C
     QCheckListItem *pitem = 0;
 
     for ( Opie::Core::OPluginItem::List::Iterator it = inLst.begin(); it != inLst.end(); ++it ) {
-        Opie::Datebook::HolidayPluginIf2*hif = m_loader->load<Opie::Datebook::HolidayPluginIf2>(*it,IID_HOLIDAY_PLUGIN);
+        Opie::Datebook::HolidayPluginIf *hif = m_loader->load<Opie::Datebook::HolidayPluginIf>(*it,IID_HOLIDAY_PLUGIN);
         if (!hif) continue;
-        Opie::Datebook::HolidayPlugin2*pl = hif->plugin();
+        Opie::Datebook::HolidayPlugin *pl = hif->plugin();
         if (!pl) continue;
 
         pitem = new QCheckListItem(m_PluginListView,pl->description(),QCheckListItem::CheckBox);

@@ -1,4 +1,4 @@
-  config DATEBOOK2_NATIONAL_HOLIDAY
-    boolean "opie-datebook2-national-holidays"
+  config DATEBOOK_NATIONAL_HOLIDAY
+    boolean "opie-datebook-national-holidays"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM
