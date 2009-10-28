@@ -193,7 +193,13 @@ bool KeyFilter::keyRegistered( int key )
 
 bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepeat)
 {
-    if ( loginlock
+    bool locked;
+    if( serverApp )
+        locked = serverApp->screenLocked();
+    else
+        locked = loginlock;
+    
+    if ( locked
         // Permitted keys
         && keycode != Key_F34 // power
         && keycode != Key_F30 // select
@@ -567,7 +573,7 @@ void ServerApplication::desktopMessage( const QCString & msg, const QByteArray &
 
 bool ServerApplication::screenLocked()
 {
-    return loginlock;
+    return loginlock || Opie::Security::MultiauthPassword::isAuthenticating();
 }
 
 bool ServerApplication::login(bool at_poweron)
