@@ -262,6 +262,9 @@ void iPAQ::initButtons()
 
 void iPAQ::initButtonCombos()
 {
+    if ( d->m_buttonCombos )
+        return;
+
     d->m_buttonCombos = new QValueList<ODeviceButtonCombo>;
     loadButtonCombos( ipaq_combos, sizeof( ipaq_combos ) / sizeof( ODeviceButtonComboStruct ) );
 }

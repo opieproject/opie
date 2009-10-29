@@ -392,6 +392,9 @@ void Zaurus::initButtons()
 
 void Zaurus::initButtonCombos()
 {
+    if ( d->m_buttonCombos )
+        return;
+
     d->m_buttonCombos = new QValueList<ODeviceButtonCombo>;
     loadButtonCombos( z_combos, sizeof( z_combos ) / sizeof( ODeviceButtonComboStruct ) );
 }
