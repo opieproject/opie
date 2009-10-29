@@ -106,6 +106,53 @@ class ODeviceButton
     Private *d;
 };
 
+/**
+ * This class represents a combination of physical buttons on a device.
+ * This is intended to be used for rarely used hard-coded actions such as
+ * launching screen calibration.
+ *
+ * @version 1.0
+ * @author Paul Eggleton
+ * @short A representation of special multi-button combinations
+ */
+class ODeviceButtonCombo
+{
+  public:
+    ODeviceButtonCombo();
+    virtual ~ODeviceButtonCombo();
+
+    QString keycodeDesc() const;
+    QString actionDesc() const;
+    OQCopMessage action() const;
+    bool hold() const;
+    bool keyCodeEvent( ushort keycode, bool down, bool locked );
+
+    void setKeycodes( ushort keycode1, ushort keycode2, ushort keycode3 );
+    void setAction( const OQCopMessage& qcopMessage );
+    void setActionDesc( const QString& desc );
+    void setKeycodeDesc( const QString& desc );
+    void setLockedOnly( bool lockedOnly );
+    void setHold( bool hold );
+  public:
+    bool checkActivate();
+    
+  private:
+    ushort m_keycode1;
+    ushort m_keycode2;
+    ushort m_keycode3;
+    bool m_down1;
+    bool m_down2;
+    bool m_down3;
+    OQCopMessage m_action;
+    QString m_actionDesc;
+    QString m_keycodeDesc;
+    bool m_lockedOnly;
+    bool m_hold;
+    class Private;
+    Private *d;
+};
+
+
 }
 }
 

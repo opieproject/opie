@@ -38,6 +38,7 @@
 #include <qnamespace.h>
 #include <qobject.h>
 #include <qstring.h>
+#include <qtimer.h>
 
 
 #include <qstrlist.h>
@@ -82,6 +83,7 @@ enum OModel {
 
     Model_Zaurus        = ( 3 << 20 ),
 
+    Model_Zaurus_All    = ( Model_Zaurus | 0xfffff ),
     Model_Zaurus_SL5000 = ( Model_Zaurus | 0x00001 ),
     Model_Zaurus_SL5500 = ( Model_Zaurus | 0x00002 ),
     Model_Zaurus_SLA300 = ( Model_Zaurus | 0x00004 ),
@@ -267,6 +269,19 @@ struct default_button {
     char *fheldaction;
 };
 
+struct ODeviceButtonComboStruct {
+    uint model;
+    Qt::Key keycode1;
+    Qt::Key keycode2;
+    Qt::Key keycode3;
+    bool hold;
+    const char *keycodedesc;
+    const char *actionchan;
+    const char *actionmsg;
+    const char *actiondesc;
+    bool lockedonly;
+};
+
 /**
  * A singleton which gives informations about device specefic option
  * like the Hardware used, LEDs, the Base Distribution and
@@ -289,7 +304,9 @@ protected:
     ODevice();
     virtual void init(const QString&);
     virtual void initButtons();
+    virtual void initButtonCombos();
     static void sendSuspendmsg();
+    void loadButtonCombos( const ODeviceButtonComboStruct combos[], uint length );
 
     ODeviceData *d;
 
@@ -387,11 +404,25 @@ public:
      */
     uint buttonHoldTime() const;
 
+    /**
+     * Returns the button combos set up for this device. At the moment these are intended
+     * to be hard-coded eg. for launching screen calibration.
+     *
+     */
+    const QValueList<ODeviceButtonCombo> &buttonCombos();
+
+    /**
+     * Try all registered button combos and launch action if one has been activated
+     * @returns true if the combo was activated, false otherwise
+     */
+    bool comboKeyEvent( ushort keycode, bool press, bool locked );
+    
 signals:
     void buttonMappingChanged();
 
 private slots:
     void systemMessage ( const QCString &, const QByteArray & );
+    void holdCheckCombo();
 
 protected:
     void addPreHandler(QWSServer::KeyboardFilter*aFilter);
@@ -422,9 +453,12 @@ class ODeviceData {
     QString m_qteDriver;
 
     QValueList <ODeviceButton> *m_buttons;
+    QValueList <ODeviceButtonCombo> *m_buttonCombos;
     uint                        m_holdtime;
     QStrList                   *m_cpu_frequencies;
     bool    m_initializedButtonQcop : 1;
+    ODeviceButtonCombo         *m_heldCombo;
+    QTimer                      *m_heldComboTimer;
 };
 
 extern bool isQWS();

@@ -102,6 +102,7 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
   protected:
     virtual void init(const QString&);
     virtual void initButtons();
+    void initButtonCombos();
     void initHingeSensor();
 
   protected slots:

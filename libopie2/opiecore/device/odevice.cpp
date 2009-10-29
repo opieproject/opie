@@ -193,6 +193,7 @@ ODevice::ODevice()
 
     d->m_holdtime = 1000; // 1000ms
     d->m_buttons = 0;
+    d->m_buttonCombos = 0;
     d->m_cpu_frequencies = new QStrList;
 
 
@@ -219,6 +220,10 @@ ODevice::ODevice()
             break;
         }
     }
+
+    d->m_heldCombo = 0;
+    d->m_heldComboTimer = new QTimer( this );
+    connect( d->m_heldComboTimer, SIGNAL(timeout()), this, SLOT(holdCheckCombo()) );
 }
 
 void ODevice::systemMessage( const QCString &msg, const QByteArray & )
@@ -254,6 +259,36 @@ void ODevice::initButtons()
     }
 
     reloadButtonMapping();
+}
+
+/**
+* This method initialises the special combo mapping
+*/
+void ODevice::initButtonCombos()
+{
+    if ( d->m_buttonCombos )
+        return;
+
+    d->m_buttonCombos = new QValueList<ODeviceButtonCombo>;
+}
+
+void ODevice::loadButtonCombos( const ODeviceButtonComboStruct combos[], uint length )
+{
+    for ( uint i = 0; i < length; i++ ) {
+        const ODeviceButtonComboStruct *cs = combos + i;
+        ODeviceButtonCombo c;
+
+        if (( cs->model & d->m_model ) == d->m_model ) {
+            c.setKeycodes( cs->keycode1, cs->keycode2, cs->keycode3 );
+            c.setHold( cs->hold );
+            c.setKeycodeDesc( QObject::tr ( "Button", cs->keycodedesc ));
+            c.setAction( OQCopMessage( makeChannel ( cs->actionchan ), cs->actionmsg ));
+            c.setActionDesc( QObject::tr ( "ComboAction", cs->actiondesc ));
+            c.setLockedOnly( cs->lockedonly );
+
+            d->m_buttonCombos->append( c );
+        }
+    }
 }
 
 ODevice::~ODevice()
@@ -591,6 +626,16 @@ const QValueList <ODeviceButton> &ODevice::buttons()
 }
 
 /**
+* @return a list of special button combos
+*/
+const QValueList <ODeviceButtonCombo> &ODevice::buttonCombos()
+{
+    initButtonCombos();
+
+    return *d->m_buttonCombos;
+}
+
+/**
 * @return The amount of time that would count as a hold
 */
 uint ODevice::buttonHoldTime() const
@@ -614,6 +659,32 @@ const ODeviceButton *ODevice::buttonForKeycode ( ushort code )
             return &(*it);
     }
     return 0;
+}
+
+bool ODevice::comboKeyEvent( ushort keycode, bool press, bool locked )
+{
+    initButtonCombos();
+
+    for( QValueListIterator<ODeviceButtonCombo> it = d->m_buttonCombos->begin(); it != d->m_buttonCombos->end(); ++it ) {
+        if( (*it).keyCodeEvent( keycode, press, locked ) ) {
+            if( (*it).hold() ) {
+                // This combo needs to be held down to activate
+                if( press ) {
+                    d->m_heldCombo = &(*it);
+                    d->m_heldComboTimer->start( d->m_holdtime, true );
+                }
+                else
+                    d->m_heldComboTimer->stop();
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+void ODevice::holdCheckCombo()
+{
+    d->m_heldCombo->checkActivate();
 }
 
 void ODevice::reloadButtonMapping()

@@ -199,6 +199,12 @@ bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepe
     else
         locked = loginlock;
     
+    // Do hardcoded button combos
+    if( !autoRepeat && ( locked || !keyRegistered( keycode ) ) ) {
+        if( ODevice::inst()->comboKeyEvent( keycode, press, locked ) )
+            return true;
+    }
+
     if ( locked
         // Permitted keys
         && keycode != Key_F34 // power

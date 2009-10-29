@@ -45,6 +45,7 @@ class OQCopMessageData
     QCString m_message;
     QByteArray m_data;
 };
+
 }
 
 using namespace Opie::Core;
@@ -261,6 +262,124 @@ void ODeviceButton::setFactoryPresetHeldAction(const OQCopMessage& action)
 void ODeviceButton::setHeldAction(const OQCopMessage& action)
 {
     m_HeldAction = action;
+}
+
+/////////////////////////////////////////////////////////////////
+
+ODeviceButtonCombo::ODeviceButtonCombo()
+    : m_keycode1( 0 )
+    , m_keycode2( 0 )
+    , m_keycode3( 0 )
+    , m_down1( false )
+    , m_down2( false )
+    , m_down3( false )
+    , m_lockedOnly( false )
+    , m_hold( false )
+    , d( 0 )
+{
+}
+
+ODeviceButtonCombo::~ODeviceButtonCombo()
+{
+}
+
+QString ODeviceButtonCombo::keycodeDesc() const
+{
+    return m_keycodeDesc;
+}
+
+QString ODeviceButtonCombo::actionDesc() const
+{
+    return m_actionDesc;
+}
+
+OQCopMessage ODeviceButtonCombo::action() const
+{
+    return m_action;
+}
+
+bool ODeviceButtonCombo::keyCodeEvent( ushort keycode, bool down, bool locked )
+{
+    bool res = false;
+    if( m_down1 && m_down2 && m_down3 )
+        res = true;
+
+    if( keycode == m_keycode1 )
+        m_down1 = down;
+    else if( keycode == m_keycode2 )
+        m_down2 = down;
+    else if( keycode == m_keycode3 )
+        m_down3 = down;
+    else
+        return false;
+
+    if( !locked && m_lockedOnly ) {
+        return false;
+    }
+    
+    if( m_down1 && m_down2 && m_down3 ) {
+        if( !m_hold )
+            m_action.send();
+        return true;
+    }
+    else
+        return res;
+}
+
+void ODeviceButtonCombo::setKeycodes( ushort keycode1, ushort keycode2, ushort keycode3 )
+{
+    m_keycode1 = keycode1;
+    m_keycode2 = keycode2;
+    m_keycode3 = keycode3;
+
+    if( m_keycode2 == Qt::Key_unknown ) {
+        m_down2 = true;
+        m_keycode2 = 0;
+    }
+    if( m_keycode3 == Qt::Key_unknown ) {
+        m_down3 = true;
+        m_keycode3 = 0;
+    }
+}
+
+void ODeviceButtonCombo::setAction( const OQCopMessage& qcopMessage )
+{
+    m_action = qcopMessage;
+}
+
+void ODeviceButtonCombo::setActionDesc( const QString& desc )
+{
+    m_actionDesc = desc;
+}
+
+void ODeviceButtonCombo::setKeycodeDesc( const QString& desc )
+{
+    m_keycodeDesc = desc;
+}
+
+void ODeviceButtonCombo::setLockedOnly( bool lockedOnly )
+{
+    m_lockedOnly = lockedOnly;
+}
+
+void ODeviceButtonCombo::setHold( bool hold )
+{
+    m_hold = hold;
+}
+
+bool ODeviceButtonCombo::hold() const
+{
+    return m_hold;
+}
+
+bool ODeviceButtonCombo::checkActivate()
+{
+    if( m_down1 && m_down2 && m_down3 ) {
+        m_action.send();
+        return true;
+    }
+    else
+        return false;
 }
 
 }

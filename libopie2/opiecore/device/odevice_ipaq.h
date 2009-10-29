@@ -45,6 +45,7 @@ class iPAQ : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
   protected:
     virtual void init(const QString&);
     virtual void initButtons();
+    virtual void initButtonCombos();
 
   public:
     virtual bool setDisplayStatus ( bool on );

@@ -150,6 +150,18 @@ struct i_button ipaq_buttons [] = {
 
 };
 
+struct ODeviceButtonComboStruct ipaq_combos[] = {
+    // Centre of joypad + Calendar -> recalibrate
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_Keyboardless_2_6, 
+    Qt::Key_Return, Qt::Key_F9, Qt::Key_unknown, false, QT_TRANSLATE_NOOP("Button", "Joypad + Calendar"),
+    "QPE/Application/calibrate", "raise()", QT_TRANSLATE_NOOP("ComboAction", "Recalibrate screen"), false },
+    // Hold down Record (only when device locked) -> recalibrate
+    { Model_iPAQ_H191x | Model_iPAQ_HX4700 | Model_iPAQ_H4xxx |
+      Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
+    Qt::Key_F24, Qt::Key_unknown, Qt::Key_unknown, true, QT_TRANSLATE_NOOP("Button", "Record Button"),
+    "QPE/Application/calibrate", "raise()", QT_TRANSLATE_NOOP("ComboAction", "Recalibrate screen"), true }
+};
+
 void iPAQ::init(const QString& model)
 {
     d->m_vendorstr = "HP";
@@ -246,6 +258,12 @@ void iPAQ::initButtons()
         }
     }
     reloadButtonMapping();
+}
+
+void iPAQ::initButtonCombos()
+{
+    d->m_buttonCombos = new QValueList<ODeviceButtonCombo>;
+    loadButtonCombos( ipaq_combos, sizeof( ipaq_combos ) / sizeof( ODeviceButtonComboStruct ) );
 }
 
 QValueList <OLed> iPAQ::ledList() const

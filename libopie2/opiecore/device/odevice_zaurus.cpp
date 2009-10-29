@@ -191,6 +191,14 @@ struct z_button z_buttons_6000 [] = {
     "sound", "raise()" },
 };
 
+struct ODeviceButtonComboStruct z_combos[] = {
+    // Centre of joypad (OK) + Calendar -> recalibrate
+    { Model_Zaurus_All,
+    Qt::Key_Return, Qt::Key_F9, Qt::Key_unknown, false, QT_TRANSLATE_NOOP("Button", "OK + Calendar"),
+    "QPE/Application/calibrate", "raise()", QT_TRANSLATE_NOOP("ComboAction", "Recalibrate screen"), false },
+};
+
+
 // FIXME This gets unnecessary complicated. We should think about splitting the Zaurus
 //       class up into individual classes. We would need three classes
 //
@@ -382,6 +390,11 @@ void Zaurus::initButtons()
     reloadButtonMapping();
 }
 
+void Zaurus::initButtonCombos()
+{
+    d->m_buttonCombos = new QValueList<ODeviceButtonCombo>;
+    loadButtonCombos( z_combos, sizeof( z_combos ) / sizeof( ODeviceButtonComboStruct ) );
+}
 
 
 typedef struct sharp_led_status {
