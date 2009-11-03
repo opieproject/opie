@@ -2,7 +2,7 @@
 Exec=backup
 Icon=backup/backupandrestore
 Type=Settings
-Name=Backup And Restore
+Name=Backup & Restore
 Comment=Backup and Restore Utility
 Name[da]=Sikkerheds-kopiering
 Comment[da]=Sikkerhedskopiering og gendannelse fra sikkerhedskopi

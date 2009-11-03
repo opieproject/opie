@@ -2,7 +2,7 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore</source>
+        <source>Backup &amp; Restore</source>
         <translation>備份與還原</translation>
     </message>
     <message>
@@ -27,7 +27,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Backup and Restore.. Failed !!</source>
+        <source>Backup &amp; Restore.. Failed !!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -82,7 +82,7 @@
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
-        <source>Backup And Restore</source>
+        <source>Backup &amp; Restore</source>
         <translation>備份與還原</translation>
     </message>
     <message>

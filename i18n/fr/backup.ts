@@ -3,7 +3,7 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore</source>
+        <source>Backup &amp; Restore</source>
         <translation>Sauvegarde/Restauration</translation>
     </message>
     <message>
@@ -29,7 +29,7 @@
         <translation>Détails</translation>
     </message>
     <message>
-        <source>Backup and Restore.. Failed !!</source>
+        <source>Backup &amp; Restore.. Failed !!</source>
         <translation>Sauvegarde/Restauration.. Echec !!</translation>
     </message>
     <message>
@@ -86,7 +86,7 @@
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
-        <source>Backup And Restore</source>
+        <source>Backup &amp; Restore</source>
         <translation>Sauvegarde/Restauration</translation>
     </message>
     <message>

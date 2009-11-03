@@ -23,16 +23,16 @@
         <translation>Podrobnosti</translation>
     </message>
     <message>
-        <source>Backup and Restore.. Failed !!</source>
-        <translation>Backup and Restore.. Se nezdařilo !!</translation>
+        <source>Backup &amp; Restore.. Failed !!</source>
+        <translation>Backup &amp; Restore.. Se nezdařilo !!</translation>
     </message>
     <message>
         <source>Backup Successful.</source>
         <translation>Zálohování proběhlo úspěšně.</translation>
     </message>
     <message>
-        <source>Backup and Restore</source>
-        <translation>Backup and Restore</translation>
+        <source>Backup &amp; Restore</source>
+        <translation>Backup &amp; Restore</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
@@ -82,8 +82,8 @@
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
-        <source>Backup And Restore</source>
-        <translation>Backup And Restore</translation>
+        <source>Backup &amp; Restore</source>
+        <translation>Backup &amp; Restore</translation>
     </message>
     <message>
         <source>Backup</source>

@@ -473,7 +473,7 @@ void BackupAndRestore::backupUserData()
             delete pErrDialog;
             break;
         }
-        setCaption(tr("Backup and Restore.. Failed !!"));
+        setCaption(tr("Backup & Restore.. Failed !!"));
         return;
     }
     else
@@ -486,7 +486,7 @@ void BackupAndRestore::backupUserData()
     config.setGroup( "LastLocation" );
     config.writeEntry( "LastStoreLocation", storeToLocation->currentText() );
 
-    setCaption(tr("Backup and Restore"));
+    setCaption(tr("Backup & Restore"));
 }
 
 /***
@@ -682,7 +682,7 @@ void BackupAndRestore::restore()
             QPEApplication::execDialog( pErrDialog );
             delete pErrDialog;
 
-            setCaption(tr("Backup and Restore.. Failed !!"));
+            setCaption(tr("Backup & Restore.. Failed !!"));
             return;
 
             break;
@@ -699,7 +699,7 @@ void BackupAndRestore::restore()
     config.setGroup( "LastLocation" );
     config.writeEntry( "LastRestoreLocation", restoreSource->currentText() );
 
-    setCaption(tr("Backup and Restore"));
+    setCaption(tr("Backup & Restore"));
 }
 
 /**

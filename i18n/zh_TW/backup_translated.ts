@@ -2,18 +2,18 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
+        <source>Backup &amp; Restore... working...</source>
         <translation type="備份與還原...執行中..."></translation>
     </message>
     <message>
-        <source>Backup and Restore</source>
+        <source>Backup &amp; Restore</source>
         <translation type="備份與還原"></translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
-        <source>Backup And Restore</source>
+        <source>Backup &amp; Restore</source>
         <translation type="備份與還原"></translation>
     </message>
     <message>

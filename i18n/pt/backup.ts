@@ -2,7 +2,7 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore</source>
+        <source>Backup &amp; Restore</source>
         <translation>Cópia de Segurança</translation>
     </message>
     <message>
@@ -28,7 +28,7 @@
         <translation>Detalhes</translation>
     </message>
     <message>
-        <source>Backup and Restore.. Failed !!</source>
+        <source>Backup &amp; Restore.. Failed !!</source>
         <translation>Falhou a Cópia de Segurança!</translation>
     </message>
     <message>
@@ -83,7 +83,7 @@
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
-        <source>Backup And Restore</source>
+        <source>Backup &amp; Restore</source>
         <translation>Cópia de Segurança</translation>
     </message>
     <message>
