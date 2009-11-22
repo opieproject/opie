@@ -5,7 +5,7 @@
 #include <qobject.h>
 
 Birthday::Birthday()
-    :Opie::Datebook::HolidayPlugin2()
+    :Opie::Datebook::HolidayPlugin()
 {
     m_contactdb = new Opie::OPimContactAccess("addressplugin");
     m_contactdb->load();

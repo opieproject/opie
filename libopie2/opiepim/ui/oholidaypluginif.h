@@ -52,7 +52,7 @@ protected:
 
 #define EXPORT_HOLIDAY_PLUGIN(  Plugin ) \
     Q_EXPORT_INTERFACE() { \
-    Q_CREATE_INSTANCE(  Opie::Datebook::HolidayPluginWrapper2<Plugin> ) \
+    Q_CREATE_INSTANCE(  Opie::Datebook::HolidayPluginWrapper<Plugin> ) \
     }
 }
 }

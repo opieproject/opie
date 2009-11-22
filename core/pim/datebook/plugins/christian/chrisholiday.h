@@ -3,17 +3,17 @@
 
 #include "hlist.h"
 
-#include <opie2/oholidayplugin2.h>
-#include <opie2/oholidaypluginif2.h>
+#include <opie2/oholidayplugin.h>
+#include <opie2/oholidaypluginif.h>
 
 #include <qmap.h>
 
-class ChrisHoliday:public Opie::Datebook::HolidayPlugin2
+class ChrisHoliday:public Opie::Datebook::HolidayPlugin
 {
 typedef QMap<QDate,QStringList> tDayMap;
 
 public:
-    ChrisHoliday():Opie::Datebook::HolidayPlugin2(){_lastyear=0;}
+    ChrisHoliday():Opie::Datebook::HolidayPlugin(){_lastyear=0;}
     virtual ~ChrisHoliday(){}
 
     virtual QString description();

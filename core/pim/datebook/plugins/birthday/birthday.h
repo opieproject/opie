@@ -1,13 +1,13 @@
 #ifndef __DUMMY_HOLIDAY_H
 #define __DUMMY_HOLIDAY_H
 
-#include <opie2/oholidayplugin2.h>
-#include <opie2/oholidaypluginif2.h>
+#include <opie2/oholidayplugin.h>
+#include <opie2/oholidaypluginif.h>
 #include <opie2/ocontactaccess.h>
 
 #include <qmap.h>
 
-class Birthday:public Opie::Datebook::HolidayPlugin2
+class Birthday:public Opie::Datebook::HolidayPlugin
 {
 typedef QMap<QDate,QStringList> tDayMap;
 

@@ -9,7 +9,7 @@
 #include <qpe/qpeapplication.h>
 
 NationalHoliday::NationalHoliday()
-    :Opie::Datebook::HolidayPlugin2()
+    :Opie::Datebook::HolidayPlugin()
 {
     _lastyear=0;
     init_done = false;

@@ -3,14 +3,14 @@
 
 #include "nationalcfg.h"
 
-#include <opie2/oholidayplugin2.h>
-#include <opie2/oholidaypluginif2.h>
+#include <opie2/oholidayplugin.h>
+#include <opie2/oholidaypluginif.h>
 #include <opie2/oholidayplugincfgwidget.h>
 
 #include <qmap.h>
 #include <qstringlist.h>
 
-class NationalHoliday:public Opie::Datebook::HolidayPlugin2
+class NationalHoliday:public Opie::Datebook::HolidayPlugin
 {
 
 public:
