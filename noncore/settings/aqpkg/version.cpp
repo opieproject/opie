@@ -116,21 +116,26 @@ int versionsatisfied3(const struct versionrevision *it,
   exit(1);
 }
 
-const char *parseversion(struct versionrevision *rversion, const char *string)
+const char *parseversion(struct versionrevision *rversion, const char *str)
 {
-  char *hyphen, *colon, *eepochcolon;
+  char *hyphen, *colon, *eepochcolon, *string;
   unsigned long epoch;
 
-  if ( !*string )
+  if ( !*str )
     return QObject::tr( "Version string is empty." );
 
+  string = strdup(str);
   colon= strchr(string,':');
   if (colon) {
     epoch= strtoul(string,&eepochcolon,10);
-    if ( colon != eepochcolon )
+    if ( colon != eepochcolon ) {
+        free(string);
         return QObject::tr( "Epoch in version is not number." );
-    if ( !*++colon )
+    }
+    if ( !*++colon ) {
+        free(string);
         return QObject::tr( "Nothing after colon in version number." );
+    }
     string= colon;
     rversion->epoch= epoch;
   } else {
@@ -162,6 +167,7 @@ const char *parseversion(struct versionrevision *rversion, const char *string)
 	  rversion->revision,
 	  rversion->familiar_revision);
 */
+  free(string);
   return 0;
 }
 
