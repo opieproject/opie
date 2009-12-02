@@ -25,7 +25,7 @@ SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \
 INCLUDEPATH     += $(OPIEDIR)/include
 INCLUDEPATH     += $(OPIEDIR)/noncore/net/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe -lbluetooth -lopietooth1 -lopiecore2 -lopieui2 -lopenobex 
+LIBS            += -lqpe -lbluetooth -lopietooth1 -lopiecore2 -lopieui2 -lopenobex -lobexftp
 INTERFACES      = bluetoothbase.ui  devicedialog.ui rfcommassigndialogbase.ui \
                   rfcommdialogitembase.ui obexftpdialogbase.ui \
                   servicesdialogbase.ui
