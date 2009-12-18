@@ -23,6 +23,7 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     m_isFullScreen = false;
     m_ignore_next_in = false;
     m_slideTimer = 0;
+    setFrameStyle( QFrame::NoFrame );
     QPEApplication::setStylusOperation(viewport(),QPEApplication::RightOnHold);
     initKeys();
     m_slideValue = 5;
