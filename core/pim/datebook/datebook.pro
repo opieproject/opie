@@ -1,5 +1,5 @@
 TEMPLATE	= app
-CONFIG		+= qt warn_on 
+CONFIG		+= qt warn_on quick-app 
 DESTDIR		= $(OPIEDIR)/bin
 HEADERS	= mainwindow.h \
           bookmanager.h \
