@@ -139,6 +139,7 @@ protected:
     void doResume();
     void doAfterResume();
     void doBeforeSuspend();
+    int readRtc();
 
 protected slots:
     void shutdown(ShutdownImpl::Type);

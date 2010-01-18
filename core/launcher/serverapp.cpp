@@ -54,12 +54,15 @@ using namespace Opie::Core;
 #endif
 #include <stdlib.h>
 
+#include <sysfs/libsysfs.h>
+
 // NOTE: when we talk about "login" here we are talking about the
 // authentication system (MultiAuth) and not opie-login
 
 static ServerApplication *serverApp = 0;
 static bool loginlock = false; // TRUE if the authentication system is currently shown
-static QDateTime suspendDateTime;
+static int suspendEpoch;
+static int resumeEpoch;
 
 QCopKeyRegister::QCopKeyRegister()
     : m_keyCode( 0 )
@@ -595,7 +598,7 @@ bool ServerApplication::login(bool at_poweron)
         bool skipEnabled = pcfg.readBoolEntry( "suspendTime", false );
         if( skipEnabled ) {
             int skipTime = pcfg.readNumEntry( "suspendTimeMins", 2 ) * 60;
-            int secsSuspended = suspendDateTime.secsTo( QDateTime::currentDateTime() );
+            int secsSuspended = resumeEpoch - suspendEpoch;
             if ( secsSuspended < skipTime )
                 return true;
         }
@@ -623,7 +626,7 @@ bool ServerApplication::login(bool at_poweron)
 #endif
 
 namespace {
-    void execAutoStart(const QDateTime& suspendTime ) {
+    void execAutoStart() {
         QString appName;
         int delay;
         QDateTime now = QDateTime::currentDateTime();
@@ -635,16 +638,36 @@ namespace {
 
         // If the time between suspend and resume was longer then the
         // value saved as delay, start the app
-        if ( suspendTime.secsTo( now ) >= ( delay * 60 ) && !appName.isEmpty() ) {
+        if ( (resumeEpoch - suspendEpoch) >= ( delay * 60 ) && !appName.isEmpty() ) {
             QCopEnvelope e( "QPE/System", "execute(QString)" );
             e << QString( appName );
         }
     }
 }
 
+int ServerApplication::readRtc()
+{
+    int ret = 0;
+    
+    struct sysfs_class *cls = sysfs_open_class( "rtc" );
+    if( cls ) {
+        struct sysfs_class_device *cdev = sysfs_get_class_device( cls, "rtc0" );
+        if( cdev ) {
+            struct sysfs_attribute *attr = sysfs_get_classdev_attr( cdev, "since_epoch" );
+            if( attr ) {
+                if( sysfs_read_attribute( attr ) == 0 )
+                    ret = atoi( attr->value );
+            }
+        }
+        sysfs_close_class( cls );
+    }
+
+    return ret;
+}
+
 void ServerApplication::doBeforeSuspend()
 {
-    suspendDateTime = QDateTime::currentDateTime();
+    suspendEpoch = readRtc();
 
 #ifdef QWS
     // Notify user that the system is suspending
@@ -673,6 +696,8 @@ void ServerApplication::doResume()
     e << QString::null;
 #endif
 
+    resumeEpoch = readRtc();
+
     if( !loginlock && Opie::Security::MultiauthPassword::isAuthenticating() ) {
         // Authentication is already taking place but not by us (eg. because the
         // user used the lock applet before suspending), so we need to let it
@@ -696,7 +721,7 @@ void ServerApplication::doResume()
 
 void ServerApplication::doAfterResume()
 {
-    execAutoStart( suspendDateTime );
+    execAutoStart();
 }
 
 void ServerApplication::togglePower()

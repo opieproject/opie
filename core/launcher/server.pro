@@ -80,7 +80,7 @@ DEPENDPATH	+= $(OPIEDIR)/rsync
 INCLUDEPATH += $(OPIEDIR)/noncore/settings/mediummount
 DEPENDPATH  += $(OPIEDIR)/noncore/settings/mediummount
 
-LIBS        += -lqpe -lopiecore2 -lopieui2 -lopiesecurity2 -lqrsync
+LIBS        += -lqpe -lopiecore2 -lopieui2 -lopiesecurity2 -lqrsync -lsysfs
 TARGET       = qpe
 
 ## not ready for use yet
