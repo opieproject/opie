@@ -43,8 +43,6 @@
 #include "dayview.h"
 
 class DateBookDayHeader;
-class DateBookDB;
-class DateBookDBHoliday;
 class DatebookdayAllday;
 class DateBookDayView;
 class QDateTime;
