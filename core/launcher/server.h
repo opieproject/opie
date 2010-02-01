@@ -89,7 +89,6 @@ private:
     void preloadApps();
     void prepareDirectAccess();
     void postDirectAccess();
-    void notifyPostSync();
     QString cardInfoString();
     QString installLocationsString();
 

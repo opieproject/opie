@@ -36,13 +36,15 @@
 #include "predicttabwidget.h"
 
 #include <qpe/config.h>
-#include <qpe/datebookdb.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpedialog.h>
+#include <qpe/timeconversion.h>
 
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
 #endif
+
+#include <opie2/osysevent.h>
 
 #include <qlayout.h>
 #include <qmessagebox.h>
@@ -128,6 +130,9 @@ void MainWindow::accept()
         disableScreenSaver << 0 << 0 << 0;
     }
 
+    // Pre time change system event
+    OSysEvent::sendSysEvent(SYSEVENT_PRE_SYS_TIME_CHANGE);
+
     // Update the systemtime
     timeTab->saveSettings( true );
 
@@ -137,9 +142,8 @@ void MainWindow::accept()
     // Save settings options
     settingsTab->saveSettings();
 
-    // Since time has changed quickly load in the DateBookDB to allow the alarm server to get a better
-    // grip on itself (example re-trigger alarms for when we travel back in time).
-    DateBookDB db;
+    // Post time change system event
+    OSysEvent::sendSysEvent(SYSEVENT_POST_SYS_TIME_CHANGE);
 
     // Turn back on the screensaver
     QCopEnvelope enableScreenSaver( "QPE/System", "setScreenSaverIntervals(int,int,int)" );

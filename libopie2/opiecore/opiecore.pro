@@ -15,6 +15,7 @@ HEADERS     = oapplication.h            \
               osharedpointer.h          \
               osmartpointer.h           \
               ostorageinfo.h            \
+              osysevent.h               \
               xmltree.h
 
 SOURCES     = oapplication.cpp          \
@@ -30,6 +31,7 @@ SOURCES     = oapplication.cpp          \
               oresource.cpp             \
               osmartpointer.cpp         \
               ostorageinfo.cpp          \
+              osysevent.cpp             \
               xmltree.cpp
 
 
