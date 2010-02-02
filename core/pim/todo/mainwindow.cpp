@@ -94,6 +94,9 @@ MainWindow::MainWindow( QWidget* parent,
     initEditor();
     initShow();
 
+    connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
+             this, SLOT( slotAppMessage(const QCString&,const QByteArray&) ) );
+
     raiseCurrentView();
     QTimer::singleShot( 0, this, SLOT(initStuff()) );
 }
@@ -1000,6 +1003,25 @@ void MainWindow::handleAlarms( const OPimTodo& oldTodo, const OPimTodo& newTodo)
     }
 }
 
+void MainWindow::handleAllAlarms()
+{
+    if( !m_todoMgr.isLoaded() )
+        m_todoMgr.load();
+    
+    // Delete all todo alarms
+    AlarmServer::deleteAlarm( QDateTime(), "QPE/Application/todolist", QCString(), -1 );
+
+    // Register all todo alarms
+    m_todoMgr.updateList();
+    OPimTodoAccess::List list = m_todoMgr.list();
+    OPimTodoAccess::List::Iterator it;
+    for ( it = list.begin(); it != list.end(); ++it ) {
+        const OPimTodo& todo = (*it);
+        if ( todo.hasNotifiers() )
+            addAlarms( todo.notifiers().alarms(), todo.uid() );
+    }
+}
+
 /* we might have not loaded the db */
 bool MainWindow::doAlarm( const QDateTime& dt, int uid )
 {
@@ -1060,3 +1082,9 @@ bool MainWindow::doAlarm( const QDateTime& dt, int uid )
     return needshow;
 }
 
+void MainWindow::slotAppMessage( const QCString& msg, const QByteArray& data )
+{
+    if( msg == "registerAllAlarms()" ) {
+        handleAllAlarms();
+    }
+}

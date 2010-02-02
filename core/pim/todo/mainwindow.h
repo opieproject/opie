@@ -106,6 +106,7 @@ namespace Todo {
     private:
         /* handle setting and removing alarms */
         void handleAlarms( const OPimTodo& oldTodo, const OPimTodo& newTodo );
+        void handleAllAlarms();
         void receiveFile( const QString& filename );
         void connectBase( ViewBase* );
         void initUI();
@@ -180,6 +181,7 @@ namespace Todo {
 
         void setDocument( const QString& );
 
+        void slotAppMessage( const QCString& msg, const QByteArray& data );
 
         void beamDone( Ir* );
         void slotShowDetails();

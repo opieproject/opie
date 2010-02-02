@@ -166,7 +166,7 @@ void TodoManager::remove( const QArray<int>& ids)
 
 bool TodoManager::isLoaded()const
 {
-    return ( m_db == 0 );
+    return ( m_db != 0 );
 }
 
 bool TodoManager::load()
