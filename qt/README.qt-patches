@@ -1,6 +1,5 @@
-The Qt patches are patches generally useful for all platforms.
-For specefic Device patches like Keyboard and Mousedrivers see
+The Qt patches here are patches generally useful for all platforms.
+For device-specific patches such as keyboard and mouse drivers, see:
 
-http://openembedded.bkbits.net:8080/packages/src/qte/qte-2.3.10?nav=index.html|src/.|src/qte
-
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/qte/qte-2.3.10
 
