@@ -197,6 +197,8 @@ void iPAQ::init(const QString& model)
         d->m_model = Model_iPAQ_H4xxx;
     else if ( d->m_modelstr == "RX3000" )
         d->m_model = Model_iPAQ_RX3xxx;
+    else if ( d->m_modelstr == "RX1950" )
+        d->m_model = Model_iPAQ_RX1950;
 
     else
         d->m_model = Model_Unknown;
@@ -213,6 +215,7 @@ void iPAQ::init(const QString& model)
         case Model_iPAQ_HX4700:
         case Model_iPAQ_H4xxx:
         case Model_iPAQ_RX3xxx:
+        case Model_iPAQ_RX1950:
             d->m_rotation = Rot0;
             break;
         case Model_iPAQ_H36xx:
@@ -472,6 +475,7 @@ int iPAQ::displayBrightnessResolution() const
         case Model_iPAQ_H191x:
             return 255;
         case Model_iPAQ_H1940:
+        case Model_iPAQ_RX1950:
             return 44;
         case Model_iPAQ_RX3xxx:
             return 900;

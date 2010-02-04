@@ -180,6 +180,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
                     break;
                 case Model_iPAQ_H191x:
                 case Model_iPAQ_H1940:
+                case Model_iPAQ_RX1950:
                     modelPixmap += "ipaqh1900";
                     break;
                 /* JORNADA */
