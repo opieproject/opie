@@ -3,38 +3,51 @@
 	
 	New Features
 	------------
-	* DateBook2: rewritten datebook. Supports SQLite database backend, improved alarm functionality (with snooze), etc.
-	* Todo: add snooze capability for alarms
+	* DateBook: rewritten datebook. Supports SQLite database backend, improved alarm functionality (with snooze), etc.
+	* TodoList: add snooze capability for alarms
 	* OpieRec: rewrote major parts of this application. Now uses ALSA, writes .wav files correctly with compression enabled, and is much more stable.
-	* VMemo: also rewritten, now sharing the same recording code as OpieRec.
+	* VMemo: also rewritten, now shares the same recording logic as OpieRec.
 	* Kbddcontrol: new settings application and applet for configuring external keyboards using kbdd.
 	* TextEdit: add undo/redo
 	* Opie-Notes: add category handling and SQLite backend support
-	* Lots of additional minor features added (see list below)
+	* NotesApplet: change to use same backend as Opie-Notes and improve UI behaviour
+	* Extended synchronisation protocol to support SQLite backends and transmission of only the changes since the last synchronisation
+	* Add support for iPAQ rx1950 (Vasily Khoruzhick)
+	* Lots of additional minor features added - see list below
 
 	Fixed Bugs
 	----------
-	* #1171 - Datebook2: add ability to delay alarm popups
-	* #1845 - Datebook2: save and restore selected timezone
-	* #0605 - Datebook2: allow changing timezone of existing event
-	* #0767 - Datebook2: allow editing drop-down lists for location/event
-	* #1688 - Datebook2: allow alarm time in days or hours as well as minutes
-	* #0995 - Datebook2: select correct default repeat end date
+	* #1171 - Datebook: add ability to delay alarm popups
+	* #1845 - Datebook: save and restore selected timezone
+	* #0605 - Datebook: allow changing timezone of existing event
+	* #0767 - Datebook: allow editing drop-down lists for location/event
+	* #1688 - Datebook: allow alarm time in days or hours as well as minutes
+	* #0995 - Datebook: select correct default repeat end date
+	* n.a.  - Datebook: fix jumping a week ahead when tapping on Sunday in week view when week start is set to Monday
+	* #1899 - Datebook: finish rewrite with SQL backend support
+	* #1910 - Datebook: clear out old alarms when changing system time
+	* #1926 - Correctly use alarm volume setting when playing alarm sounds
+	* n.a.  - Fix erratic volume control behaviour (pops/clicks, volume jumping) when adjusting volume
+	* #1721 - Add QCop messages for controlling volume
 	* n.a.  - Contacts: allow editing Department field
-	* n.a.  - Todo: allow pressing enter in quick bar
-	* n.a.  - Todo: allow using all 5 priority values in quick bar
+	* n.a.  - TodoList: allow pressing enter in quick bar
+	* n.a.  - TodoList: allow using all 5 priority values in quick bar
 	* #1888 - Opie-Notes: convert over to Opie PIM libraries and support storing notes in SQLite
 	* #1577 - All PIM apps: greatly improve compatibility when receiving/importing vCard/vCalendar files
 	* #1927 - OpieRec: change to use ALSA
+	* n.a.  - OpieRec: allow recording control via QCop
 	* #1452 - Date/Time Settings: enable access to network settings prior to setting time from network
 	* n.a.  - Date/Time Settings: hide AM/PM box when 24-hour time format set
 	* #1598 - Clock: allow configuring default snooze time
 	* n.a.  - Today: tidy up display of birthdays/anniversaries
 	* n.a.  - Launcher: fix using different default sync protocol than what Security settings application showed until first set
+	* #0774 - Launcher: show "Suspending..." in taskbar when device is suspending
 	* n.a.  - ScreenShotApplet: send actual device model and resolution with upload
 	* n.a.  - ScreenShotApplet: display correct URL for retrieving uploaded screenshots
 	* n.a.  - TextEdit: don't create a documents entry for new file until saving
 	* n.a.  - TextEdit: improve Delete function behaviour (and safety)
+	* #1912 - PackageManager: add support for opkg (selectable at build time)
+	* n.a.  - Opie-Eye: fix erroneous 1-pixel scrolling when "fit to screen" is enabled
 	* n.a.  - Opie-rdesktop: fix crash on connect
 	* n.a.  - Opie-rdesktop: fix not loading settings for the first configuration entry
 	* #0817 - Security: add option to skip authentication if suspended for less than a specified time
@@ -47,20 +60,29 @@
 	* n.a.  - SysInfo: improve distribution detection
 	* n.a.  - SysInfo: show better device icons for Zaurus clamshell devices
 	* n.a.  - AutoRotateApplet: fix showing as disabled when actually enabled (until first set)
-	* n.a.  - VolumeApplet: enable tapping on muting LEDs
+	* n.a.  - VolumeApplet: enable tapping on muting LED buttons
 	* n.a.  - BatteryApplet: retrieve battery status from sysfs (with fallback to old APM method)
 	* #1560 - Opie-Console: fix unexpected changes when editing default profile
 	* #1436 - Opie-Console: close tab on Ctrl+D / exit (or application if last tab)
+	* #1920 - MemoryApplet: allow selecting any storage location for swapfile
+	* n.a.  - MemoryApplet: check to see if swap exists / is active before operations
 	* n.a.  - OpieIRC: fix "Received unhandled numeric command: 328" warning (implement RPL_CHANNEL_URL)
+	* n.a.  - OpieIRC: fix "Received unhandled numeric command: 470" warning (implement ERR_LINKCHANNEL)
 	* n.a.  - OpieIRC: don't output handled server messages (eg. "Names for #xxxx")
+	* #1831 - Support centre of joypad + Calendar button combination to recalibrate screen
+	* #1831 - Support hold-down of Record button to recalibrate screen (only when device is locked)
 	* n.a.  - Allow typing file name and pressing enter in standard file dialog
+	* #1909 - Fix detection of SCSI hard disks as removable
 	* #1923 - Remove usage of deprecated PCMCIA ioctls
 
 	Internal
 	--------
 	* libopiepim2 code improvements - serialization, timezone fixes, refactoring etc.
+	* libopiemm2 now has simple audio playback & recording classes
 	* qcop command line client now supports QDate parameters
+	* More potential crash fixes and code quality improvements
 	* Various code style fixes and tidy-ups
+	* Original Datebook application code replaced by Datebook2 (renamed to Datebook)
 	
 
 2008-09-30	Opie 1.2.4
