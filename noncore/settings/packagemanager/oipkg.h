@@ -31,6 +31,8 @@
 #ifndef OIPKG_H
 #define OIPKG_H
 
+#include <cstdio>
+
 #include "oconfitem.h"
 #include "opackage.h"
 
@@ -39,9 +41,21 @@
 #include <qobject.h>
 
 #ifdef USE_LIBOPKG
+// Some hacks are required due to poor naming in opkg headers
+#ifdef DEBUG
+    #define DEBUG_FIX
+    #undef DEBUG
+#endif
+
 extern "C" {
 #include <opkg.h>
 };
+
+#ifdef DEBUG_FIX
+    #define DEBUG
+    #undef DEBUG_FIX
+#endif
+
 #endif
 
 // Ipkg execution options (m_ipkgExecOptions)
@@ -104,9 +118,6 @@ private:
     int            m_ipkgExecOptions;   // Bit-mapped flags for Ipkg execution options
     int            m_ipkgExecVerbosity; // Ipkg execution verbosity level
     QString        m_rootPath;          // Directory path where the 'root' destination is located
-#ifdef USE_LIBOPKG
-    opkg_t        *m_opkg; 
-#endif
 
     void           loadConfiguration();
     OConfItemList *filterConfItems( OConfItem::Type typefilter = OConfItem::NotDefined );

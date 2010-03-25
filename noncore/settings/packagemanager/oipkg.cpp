@@ -46,6 +46,7 @@ const QString IPKG_CONF_DIR    = "/etc/opkg";           // Directory of secondar
 const QString IPKG_PKG_PATH    = "/usr/lib/opkg/lists"; // Directory containing server package lists
 const QString IPKG_STATUS_PATH = "usr/lib/opkg/status"; // Destination status file location
 const QString IPKG_INFO_PATH   = "usr/lib/opkg/info";   // Package file lists location
+#define OPKG_NO_ERROR 0
 
 #else
 
@@ -68,15 +69,15 @@ OIpkg *oipkg;
 
 
 #ifdef USE_LIBOPKG
-void fsignalOpkgProgress (opkg_t *opkg, const opkg_progress_data_t *progress, void *user_data)
+void fsignalOpkgProgress (const opkg_progress_data_t *progress, void *user_data)
 {
     QString msg;
 
     QString pkginfo;
-    if( progress->package ) {
-        pkginfo = progress->package->name;
+    if( progress->pkg ) {
+        pkginfo = progress->pkg->name;
         pkginfo += " ";
-        pkginfo += progress->package->version;
+        pkginfo += progress->pkg->version;
     }
     switch( progress->action ) {
         case OPKG_INSTALL:
@@ -104,9 +105,16 @@ void fsignalOpkgProgress (opkg_t *opkg, const opkg_progress_data_t *progress, vo
     oipkg->progress( (const char *)msg, progress->percentage );
 }
 
-void fsignalOpkgPackage (opkg_t *opkg, opkg_package_t *package, void *user_data)
+void fsignalOpkgPackage (pkg_t *package, void *user_data)
 {
 
+}
+
+void fsignalOpkgMessage (int, const char *fmt, va_list ap)
+{
+    QString msg;
+    msg.sprintf(fmt, ap);
+    oipkg->ipkgMessage( msg );
 }
 #endif
 
@@ -136,36 +144,6 @@ int fIpkgStatus( char */*name*/, int /*status*/, char *desc, void */*userdata*/ 
     return 0;
 }
 
-#ifdef USE_LIBOPKG
-QString opkg_error_message( int err )
-{
-    switch(err) {
-        case OPKG_NO_ERROR:
-            return "Success";
-        case OPKG_UNKNOWN_ERROR:
-            return "Unknown error";
-        case OPKG_DOWNLOAD_FAILED:
-            return "Download failed";
-        case OPKG_DEPENDENCIES_FAILED:
-            return "Unable to complete operation due to dependencies";
-        case OPKG_PACKAGE_ALREADY_INSTALLED:
-            return "Specified package is already installed";
-        case OPKG_PACKAGE_NOT_AVAILABLE:
-            return "Specified package is not available";
-        case OPKG_PACKAGE_NOT_FOUND:
-            return "Specified package could not be found";
-        case OPKG_PACKAGE_NOT_INSTALLED:
-            return "Specified package is not installed";
-        case OPKG_GPG_ERROR:
-            return "GPG verification failed";
-        case OPKG_MD5_ERROR:
-            return "MD5 verification failed";
-        default:
-            return "Unrecognised error code";
-    }
-}
-#endif
-
 #ifndef USE_LIBOPKG
 int fIpkgFiles( char */*name*/, char *desc, char */*version*/, pkg_state_status_t /*status*/,
                 void */*userdata*/ )
@@ -187,7 +165,9 @@ OIpkg::OIpkg( Config *config, QObject *parent, const char *name )
 
     // Initialize libipkg
 #ifdef USE_LIBOPKG
-    m_opkg = opkg_new();
+    opkg_new();
+    opkg_conf_init();
+    conf->opkg_vmessage = fsignalOpkgMessage;
 #else
     ipkg_init( &fsignalIpkgMessage, &fIpkgResponse, &m_ipkgArgs );
 
@@ -205,7 +185,8 @@ OIpkg::~OIpkg()
 
     // Free up libipkg resources
 #ifdef USE_LIBOPKG
-    opkg_free( m_opkg );
+    opkg_conf_deinit();
+    opkg_free();
 #else
     ipkg_deinit( &m_ipkgArgs );
 #endif
@@ -338,7 +319,7 @@ void OIpkg::setConfigItems( OConfItemList *configList )
 
     // Reinitialize libipkg to pick up new configuration
 #ifdef USE_LIBOPKG
-    opkg_re_read_config_files( m_opkg );
+    opkg_re_read_config_files();
 #else
     ipkg_deinit( &m_ipkgArgs );
     ipkg_init( &fsignalIpkgMessage, &fIpkgResponse, &m_ipkgArgs );
@@ -542,19 +523,20 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
     // Set ipkg run-time options/arguments
 #ifdef USE_LIBOPKG
     optvalue = ( m_ipkgExecOptions & FORCE_DEPENDS ) ? 1 : 0;
-    opkg_set_option( m_opkg, "force_depends", &optvalue );
+    opkg_set_option( "force_depends", &optvalue );
 
     optvalue = ( m_ipkgExecOptions & FORCE_REINSTALL ) ? 1 : 0;
-    opkg_set_option( m_opkg, "force_reinstall", &optvalue );
+    opkg_set_option( "force_reinstall", &optvalue );
 
     optvalue = ( m_ipkgExecOptions & FORCE_OVERWRITE ) ? 1 : 0;
-    opkg_set_option( m_opkg, "force_overwrite", &optvalue );
+    opkg_set_option( "force_overwrite", &optvalue );
 
     optvalue = ( m_ipkgExecOptions & FORCE_RECURSIVE ) ? 1 : 0;
-    opkg_set_option( m_opkg, "force_removal_of_dependent_packages", &optvalue );
+    opkg_set_option( "force_removal_of_dependent_packages", &optvalue );
 
+    
     optvalue = m_ipkgExecVerbosity;
-    opkg_set_option( m_opkg, "verbosity", &optvalue );
+    opkg_set_option( "verbosity", &optvalue );
 #else
     m_ipkgArgs.force_depends = ( m_ipkgExecOptions & FORCE_DEPENDS );
     m_ipkgArgs.force_reinstall = ( m_ipkgExecOptions & FORCE_REINSTALL );
@@ -590,7 +572,7 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
         case OPackage::Update : {
                 connect( this, SIGNAL(signalIpkgMessage(const QString &)), receiver, slotOutput );
 #ifdef USE_LIBOPKG
-                ret = opkg_update_package_lists( m_opkg, &fsignalOpkgProgress, NULL );
+                ret = opkg_update_package_lists( &fsignalOpkgProgress, NULL );
 #else
                 ipkg_lists_update( &m_ipkgArgs );
 #endif
@@ -598,7 +580,7 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
 
 #ifdef USE_LIBOPKG
                 if( ret != OPKG_NO_ERROR ) {
-                    emit signalIpkgMessage( tr("Update failed: ") + opkg_error_message( ret ) );
+                    emit signalIpkgMessage( tr("Update failed") );
                     return false;
                 }
 #endif
@@ -607,9 +589,9 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
         case OPackage::Upgrade : {
                 connect( this, SIGNAL(signalIpkgMessage(const QString &)), receiver, slotOutput );
 #ifdef USE_LIBOPKG
-                ret = opkg_upgrade_all( m_opkg, &fsignalOpkgProgress, NULL );
+                ret = opkg_upgrade_all( &fsignalOpkgProgress, NULL );
                 if( ret != OPKG_NO_ERROR ) {
-                    emit signalIpkgMessage( tr("Upgrade failed: ") + opkg_error_message( ret ) );
+                    emit signalIpkgMessage( tr("Upgrade failed") );
                     disconnect( this, SIGNAL(signalIpkgMessage(const QString &)), 0, 0 );
                     return false;
                 }
@@ -635,9 +617,9 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
                 for ( QStringList::ConstIterator it = parameters.begin(); it != parameters.end(); ++it )
                 {
 #ifdef USE_LIBOPKG
-                    ret = opkg_install_package( m_opkg, (*it), &fsignalOpkgProgress, NULL );
+                    ret = opkg_install_package( (*it), &fsignalOpkgProgress, NULL );
                     if( ret != OPKG_NO_ERROR ) {
-                        emit signalIpkgMessage( tr("Install failed: ") + opkg_error_message( ret ) );
+                        emit signalIpkgMessage( tr("Install failed") );
                         disconnect( this, SIGNAL(signalIpkgMessage(const QString &)), 0, 0 );
                         return false;
                     }
@@ -660,14 +642,9 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
                 {
                     unlinkPackage( (*it), destList );
 #ifdef USE_LIBOPKG
-                    ret = opkg_remove_package( m_opkg, (*it), &fsignalOpkgProgress, NULL );
+                    ret = opkg_remove_package( (*it), &fsignalOpkgProgress, NULL );
                     if( ret != OPKG_NO_ERROR ) {
-                        if ( ret == OPKG_DEPENDENCIES_FAILED || ret == OPKG_UNKNOWN_ERROR ) {
-                            emit signalIpkgMessage( tr("Remove failed: other package(s) depend on the specified package") );
-                        }
-                        else {
-                            emit signalIpkgMessage( tr("Remove failed: ") + opkg_error_message( ret ) );
-                        }
+                        emit signalIpkgMessage( tr("Remove failed") );
                         delete destList;
                         disconnect( this, SIGNAL(signalIpkgMessage(const QString &)), 0, 0 );
                         return false;
@@ -695,22 +672,47 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
         case OPackage::Info : {
                 connect( this, SIGNAL(signalIpkgStatus(const QString &)), receiver, slotOutput );
 #ifdef USE_LIBOPKG
-                opkg_package_t *pkginfo = opkg_find_package( m_opkg, (*parameters.begin()), NULL, NULL, NULL );
+                pkg_t *pkginfo = opkg_find_package( (*parameters.begin()), NULL, NULL, NULL );
                 if(pkginfo) {
                     QString msg = tr("Package:  %1\n").arg( pkginfo->name );
                     msg += tr("Version:  %1\n").arg( pkginfo->version );
                     msg += tr("Architecture:  %1\n").arg( pkginfo->architecture );
-                    if( pkginfo->repository )
-                        msg += tr("Repository:  %1\n").arg( pkginfo->repository );
+                    if( pkginfo->source )
+                        msg += tr("Source:  %1\n").arg( pkginfo->source );
                     if( pkginfo->description )
                         msg += tr("Description:  %1\n\n").arg( pkginfo->description );
                     if( pkginfo->tags )
                         msg += tr("Tags:  %1\n").arg( pkginfo->tags );
-                    if( pkginfo->url )
-                        msg += tr("URL:  %1\n").arg( pkginfo->url );
                     if( pkginfo->size > 0 )
                         msg += tr("Size:  %1\n").arg( pkginfo->size );
-                    msg += tr("Status:  %1").arg( pkginfo->installed ? tr("installed") : "" );
+                    QString status;
+                    switch( pkginfo->state_status ) {
+                        case SS_NOT_INSTALLED:
+                            status = tr( "Not installed" );
+                            break;
+                        case SS_UNPACKED:
+                            status = tr( "Unpacked" );
+                            break;
+                        case SS_HALF_CONFIGURED:
+                            status = tr( "Partially configured" );
+                            break;
+                        case SS_INSTALLED:
+                            status = tr( "Installed" );
+                            break;
+                        case SS_HALF_INSTALLED:
+                            status = tr( "Partially installed" );
+                            break;
+//                        case SS_CONFIG_FILES:
+                        case SS_POST_INST_FAILED:
+                            status = tr( "Postinst failed" );
+                            break;
+                        case SS_REMOVAL_FAILED:
+                            status = tr( "Removal failed" );
+                            break;
+                        default:
+                            status = tr( "Unknown" );
+                    }
+                    msg += tr("Status:  %1").arg( status );
                     emit signalIpkgStatus( msg );
                 }
 #else
