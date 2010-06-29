@@ -204,8 +204,9 @@ void BatteryStatus::paintEvent( QPaintEvent * ev ) {
     QPainter p( this );
 
     QString text = statusText();
-    p.eraseRect( p.boundingRect( 10, 50, width() - 20, 40 , AlignVCenter, text ) );
-    p.drawText( 10, 50, width() - 20, 40 , AlignVCenter, text );
+    QRect textr = p.boundingRect( 10, 51, width() - 20, height() - 55, AlignTop, text );
+    p.eraseRect( textr );
+    p.drawText( 10, 51, width() - 20, textr.height() + 5, AlignTop, text );
 
     QColor c;
     QColor darkc;
@@ -230,7 +231,7 @@ void BatteryStatus::paintEvent( QPaintEvent * ev ) {
     int rightEnd2 = width() - 35;
     int percent2 = (percent * rightEnd1) / 100;
     p.setPen( black );
-    qDrawShadePanel( &p,   9, 10, rightEnd1 , 39, colorGroup(), TRUE, 1, NULL);
+    qDrawShadePanel( &p,   9, 10, rightEnd1 + 4, 39, colorGroup(), TRUE, 1, NULL);
     qDrawShadePanel( &p, rightEnd2, 17,  12, 24, colorGroup(), TRUE, 1, NULL);
     drawSegment( &p, QRect( 10, 10, percent2, 40 ), lightc, darkc, lightc.light(115), 6 );
     drawSegment( &p, QRect( 11 + percent2, 10,  rightEnd1 - percent2, 40 ), white.light(80), black, white.light(90), 6 );
@@ -239,14 +240,16 @@ void BatteryStatus::paintEvent( QPaintEvent * ev ) {
 
     if ( ODevice::inst ( )-> series ( ) == Model_iPAQ && bat2 ) {
 
-        p.drawText( 15, 30, tr("Ipaq  %1").arg( ipaqChem ) );
+        p.drawText( 15, 34, tr("Ipaq  %1").arg( ipaqChem ) );
 
+        int top = textr.bottom() + 15;
         QString jacketMsg;
         if (bat2) {
             p.setPen(black);
             QString text = statusTextIpaq();
-            p.eraseRect( p.boundingRect( 10, 130, width() - 20, 40 , AlignVCenter, text ) );
-            p.drawText( 10, 130,  width() - 20, 40 , AlignVCenter, text );
+            textr = p.boundingRect( 10, top + 41, width() - 20, 40 , AlignTop, text );
+            p.eraseRect( textr );
+            p.drawText( 10, top + 41,  width() - 20, textr.height() + 5, AlignTop, text );
             jacketMsg = tr("Jacket  ").arg( jackChem );
         } else {
             jackPercent = 0;
@@ -255,13 +258,13 @@ void BatteryStatus::paintEvent( QPaintEvent * ev ) {
 
         int jackPerc =  ( jackPercent * ( width() - 47 ) ) / 100;
 
-        qDrawShadePanel( &p,   9, 90, rightEnd1, 39, colorGroup(), TRUE, 1, NULL);
-        qDrawShadePanel( &p, rightEnd2, 97,  12, 24, colorGroup(), TRUE, 1, NULL);
-        drawSegment( &p, QRect( 10, 90, jackPerc, 40 ), lightc, darkc, lightc.light(115), 6 );
-        drawSegment( &p, QRect( 11 + jackPerc, 90, rightEnd1 - jackPerc, 40 ), white.light(80), black, white.light(90), 6 );
-        drawSegment( &p, QRect( rightEnd2, 97, 10, 25 ), white.light(80), black, white.light(90), 2 );
+        qDrawShadePanel( &p,   9, top, rightEnd1 + 4, 39, colorGroup(), TRUE, 1, NULL);
+        qDrawShadePanel( &p, rightEnd2, top + 7,  12, 24, colorGroup(), TRUE, 1, NULL);
+        drawSegment( &p, QRect( 10, top, jackPerc, 40 ), lightc, darkc, lightc.light(115), 6 );
+        drawSegment( &p, QRect( 11 + jackPerc, top, rightEnd1 - jackPerc, 40 ), white.light(80), black, white.light(90), 6 );
+        drawSegment( &p, QRect( rightEnd2, top + 7, 10, 25 ), white.light(80), black, white.light(90), 2 );
         p.setPen( black );
-        p.drawText(15, 100, width() - 20, 20 , AlignVCenter,  jacketMsg);
+        p.drawText(15, top + 8, width() - 20, 20, AlignVCenter,  jacketMsg);
     }
     QFrame::paintEvent(ev);
 }
