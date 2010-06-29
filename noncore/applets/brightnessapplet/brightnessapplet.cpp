@@ -121,15 +121,15 @@ BrightnessAppletControl::BrightnessAppletControl( OTaskbarApplet* parent, const 
     QPixmap onPm( (const char **)light_on_xpm );
     QLabel *l = new QLabel( this );
     l->setPixmap( onPm );
-    gl->addWidget( l, 0, 1 );
+    gl->addWidget( l, 0, 1, Qt::AlignTop );
 
     QPixmap offPm( (const char **)light_off_xpm );
     l = new QLabel( this );
     l->setPixmap( offPm );
-    gl->addWidget( l, 2, 1 );
+    gl->addWidget( l, 2, 1, Qt::AlignBottom );
 
-    setFixedHeight( 100 );
-    setFixedWidth( gl->sizeHint().width() );
+    slider->setFixedHeight( QMAX(qApp->desktop()->height() / 3, 100) );
+    setFixedSize( gl->sizeHint() );
     setFocusPolicy(QWidget::NoFocus);
 }
 
