@@ -66,29 +66,37 @@ void BatteryMeter::mousePressEvent( QMouseEvent* e ) {
         c.setGroup( "Battery" );
         c.writeEntry( "Style", style ? 1 : 0 );
         repaint( true );
+        m_ignoreRelease = true;
     }
     QWidget::mousePressEvent( e );
 }
 
-void BatteryMeter::mouseReleaseEvent( QMouseEvent* /*e*/ ) {
-    if ( batteryView && batteryView->isVisible() ) {
-        batteryView->hide();
-    } else {
-        if ( !batteryView ) {
-            batteryView = new BatteryStatus( ps, this, WStyle_StaysOnTop | WType_Popup );
-            batteryView->setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
+void BatteryMeter::mouseReleaseEvent( QMouseEvent *e ) {
+    if ( e->button() == LeftButton ) {
+        if( m_ignoreRelease ) {
+            m_ignoreRelease = false;
         }
+        else {
+            if ( batteryView && batteryView->isVisible() ) {
+                batteryView->hide();
+            } else {
+                if ( !batteryView ) {
+                    batteryView = new BatteryStatus( ps, this, WStyle_StaysOnTop | WType_Popup );
+                    batteryView->setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
+                }
 
-        batteryView->UpdateBatteryStatus();
-        QRect r(batteryView->pos(),batteryView->sizeHint());
-        QPoint curPos = this->mapToGlobal ( rect().topLeft() );
+                batteryView->UpdateBatteryStatus();
+                QRect r(batteryView->pos(),batteryView->sizeHint());
+                QPoint curPos = this->mapToGlobal ( rect().topLeft() );
 
-        int lp = qApp->desktop()->width() - batteryView->sizeHint().width();
-        r.moveTopLeft( QPoint(lp, curPos.y()-batteryView->sizeHint().height()-1) );
-        batteryView->setGeometry(r);
+                int lp = qApp->desktop()->width() - batteryView->sizeHint().width();
+                r.moveTopLeft( QPoint(lp, curPos.y()-batteryView->sizeHint().height()-1) );
+                batteryView->setGeometry(r);
 
-        batteryView->raise();
-        batteryView->show();
+                batteryView->raise();
+                batteryView->show();
+            }
+        }
     }
 }
 

@@ -54,6 +54,7 @@ class BatteryMeter : public QWidget
     int percent;
     bool charging;
     bool style;
+    bool m_ignoreRelease;
 };
 
 #endif
