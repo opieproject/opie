@@ -21,6 +21,7 @@
 #include "memory.h"
 #include "swapfile.h"
 
+#include <qapplication.h>
 #include <qpainter.h>
 #include <qpushbutton.h>
 #include <qdrawutil.h>
@@ -72,8 +73,8 @@ int MemoryStatus::percent()
 QSize MemoryStatus::sizeHint() const
 {
     QSize s = tab->size();
-    s.setWidth(200);
-    s.setHeight((mi->swaptotal > 0) ? 220 : 200);
+    s.setWidth(qApp->desktop()->width() / 240 * 200);
+    s.setHeight(qApp->desktop()->height() / 320 * 240);
     return s;
 }
 
