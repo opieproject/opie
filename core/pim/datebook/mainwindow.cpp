@@ -73,8 +73,9 @@
 using namespace Opie;
 using namespace Datebook;
 
-MainWindow::MainWindow()
-    : OPimMainWindow( "Datebook", 0, 0, 0, 0, 0, WType_TopLevel | WStyle_ContextHelp ), m_descMan( "Descriptions" ),  m_locMan( "Locations" ) /* no tr */
+MainWindow::MainWindow( QWidget *parent, const char *name,
+                      WFlags /*f*/ )
+    : OPimMainWindow( "Datebook", 0, 0, 0, parent, name, WType_TopLevel | WStyle_ContextHelp ), m_descMan( "Descriptions" ),  m_locMan( "Locations" ) /* no tr */
 {
     m_currView = 0;
     m_initialDate = QDate::currentDate();

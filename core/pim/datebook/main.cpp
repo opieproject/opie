@@ -1,15 +1,6 @@
 #include "mainwindow.h"
 
-#include <qpe/qpeapplication.h>
+#include <opie2/oapplicationfactory.h>
 
-using namespace Opie;
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<Opie::Datebook::MainWindow> )
 
-int main( int argc, char* argv[] ) {
-    QPEApplication app( argc, argv );
-
-    Datebook::MainWindow mw;
-
-    app.showMainWidget( &mw );
-
-    return app.exec();
-}

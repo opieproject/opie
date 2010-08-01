@@ -56,9 +56,10 @@ namespace Datebook {
         friend class View; // to avoid QObject
         friend class Editor;
     public:
-        MainWindow();
+        MainWindow(QWidget *parent, const char *name, WFlags /*f*/);
         ~MainWindow();
-
+        static QString appName() { return QString::fromLatin1("datebook"); }
+        
     signals:
         void signalFindNotFound();
         void signalFindWrapAround();
