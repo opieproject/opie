@@ -189,7 +189,7 @@ void DateBookWeekView::slotDateChanged( QDate &date )
 void DateBookWeekView::slotChangeClock( bool c )
 {
     ampm = c;
-    viewport()->update();
+    resizeEvent(NULL); // force resize to relayout columns
 }
 
 static inline int db_round30min( int m )
@@ -214,7 +214,6 @@ void DateBookWeekView::alterDay( int day )
 
 void DateBookWeekView::positionItem( DateBookWeekItem *i )
 {
-    const int Width = 8;
     const OPimOccurrence ev = i->event();
 
     // 30 minute intervals
@@ -246,11 +245,12 @@ void DateBookWeekView::positionItem( DateBookWeekItem *i )
     }
     int x = header->sectionPos( dow ) - 1;
     int xlim = header->sectionPos( dow ) + header->sectionSize( dow );
+    int itemwidth = header->sectionSize( dow ) / 4;
     DateBookWeekItem *isect = 0;
     do {
-        i->setGeometry( x, y, Width, h );
+        i->setGeometry( x, y, itemwidth, h );
         isect = intersects( i );
-        x += Width - 1;
+        x += itemwidth - 1;
     } while ( isect && x < xlim );
 }
 
@@ -356,10 +356,15 @@ void DateBookWeekView::drawContents( QPainter *p, int cx, int cy, int cw, int ch
 
 void DateBookWeekView::resizeEvent( QResizeEvent *e )
 {
-    const int hourWidth = 20;
     QScrollView::resizeEvent( e );
 
-
+    int hourWidth;
+    QFontMetrics fm( font() );
+    if ( ampm )
+        hourWidth = fm.width("12p") * 1.25;
+    else
+        hourWidth = fm.width("20") * 1.25;
+    
     //HEAD
     /*
     int avail = visibleWidth();
