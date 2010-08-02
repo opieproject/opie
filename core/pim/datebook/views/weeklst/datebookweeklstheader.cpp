@@ -6,6 +6,7 @@
 
 #include <qtoolbutton.h>
 #include <qlayout.h>
+#include <qmainwindow.h>
 
 #include <view.h>
 
@@ -29,6 +30,15 @@ DateBookWeekLstHeader::DateBookWeekLstHeader(bool onM, QWidget* parent, const ch
     //setSizePolicy(QSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding));
     setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed));
 
+    QWidget *tl = topLevelWidget();
+    if (tl->inherits("QMainWindow")) {
+        QMainWindow *mw = (QMainWindow*)tl;
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), backmonth, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), backweek, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), forwardweek, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), forwardmonth, SLOT(setUsesBigPixmap(bool)));
+    }
+    
     connect(backmonth, SIGNAL(clicked()), this, SLOT(prevMonth()));
     connect(backweek, SIGNAL(clicked()), this, SLOT(prevWeek()));
     connect(forwardweek, SIGNAL(clicked()), this, SLOT(nextWeek()));

@@ -38,6 +38,7 @@
 #include <qpe/datebookmonth.h>
 
 #include <qtoolbutton.h>
+#include <qmainwindow.h>
 
 using namespace Opie::Datebook;
 
@@ -55,6 +56,15 @@ DateBookWeekHeader::DateBookWeekHeader( bool startOnMonday, QWidget* parent, con
     backweek->setPixmap( Opie::Core::OResource::loadPixmap( "back", Opie::Core::OResource::SmallIcon ) );
     forwardweek->setPixmap( Opie::Core::OResource::loadPixmap( "forward", Opie::Core::OResource::SmallIcon ) );
     forwardmonth->setPixmap( Opie::Core::OResource::loadPixmap( "fastforward", Opie::Core::OResource::SmallIcon ) );
+
+    QWidget *tl = topLevelWidget();
+    if (tl->inherits("QMainWindow")) {
+        QMainWindow *mw = (QMainWindow*)tl;
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), backmonth, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), backweek, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), forwardweek, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), forwardmonth, SLOT(setUsesBigPixmap(bool)));
+    }
 }
 
 /*

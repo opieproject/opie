@@ -36,6 +36,7 @@
 
 #include <qbuttongroup.h>
 #include <qtoolbutton.h>
+#include <qmainwindow.h>
 
 
 /*
@@ -54,10 +55,19 @@ DateBookDayHeader::DateBookDayHeader( bool useMonday,
 
     setupNames();
 
-    forward->setPixmap(  Opie::Core::OResource::loadPixmap( "forward" ) );
-    back->setPixmap(  Opie::Core::OResource::loadPixmap( "back" ) );
-    forwardweek->setPixmap(  Opie::Core::OResource::loadPixmap( "fastforward" ) );
-    backweek->setPixmap(  Opie::Core::OResource::loadPixmap( "fastback" ) );
+    forward->setPixmap(  Opie::Core::OResource::loadPixmap( "forward", Opie::Core::OResource::SmallIcon ) );
+    back->setPixmap(  Opie::Core::OResource::loadPixmap( "back", Opie::Core::OResource::SmallIcon ) );
+    forwardweek->setPixmap(  Opie::Core::OResource::loadPixmap( "fastforward", Opie::Core::OResource::SmallIcon ) );
+    backweek->setPixmap(  Opie::Core::OResource::loadPixmap( "fastback", Opie::Core::OResource::SmallIcon ) );
+
+    QWidget *tl = topLevelWidget();
+    if (tl->inherits("QMainWindow")) {
+        QMainWindow *mw = (QMainWindow*)tl;
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), forward, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), back, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), forwardweek, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), backweek, SLOT(setUsesBigPixmap(bool)));
+    }
 
     setBackgroundMode( PaletteButton );
     grpDays->setBackgroundMode( PaletteButton );

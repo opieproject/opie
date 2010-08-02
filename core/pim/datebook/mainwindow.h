@@ -50,7 +50,7 @@ namespace Datebook {
     class BookManager;
     class Show;
     class Editor;
-    class MainWindow : public OPimMainWindow {
+    class MainWindow : public Opie::OPimMainWindow {
         Q_OBJECT
         friend class Show; // to avoid QObject
         friend class View; // to avoid QObject
