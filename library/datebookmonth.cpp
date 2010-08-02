@@ -28,6 +28,8 @@
 #include <qcombobox.h>
 #include <qvaluestack.h>
 #include <qwhatsthis.h>
+#include <qmainwindow.h>
+#include <qlayout.h>
 
 static const QColor s_colorNormalLight = QColor(255, 150, 150);
 static const QColor s_colorRepeatLight = QColor(150, 150, 255);
@@ -38,39 +40,47 @@ DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
 {
     setBackgroundMode( PaletteButton );
 
+    QHBoxLayout *layout = new QHBoxLayout( this );
+    layout->setSpacing( 0 );
+    layout->setMargin( 0 );
+    
     begin = new QToolButton( this );
     begin->setFocusPolicy(NoFocus);
     begin->setPixmap( Resource::loadPixmap( "start" ) );
     begin->setAutoRaise( true );
-    begin->setFixedSize( begin->sizeHint() );
     QWhatsThis::add( begin, tr("Show January in the selected year") );
+    layout->addWidget(begin);
 
     back = new QToolButton( this );
     back->setFocusPolicy(NoFocus);
     back->setPixmap( Resource::loadPixmap( "back" ) );
     back->setAutoRaise( true );
-    back->setFixedSize( back->sizeHint() );
     QWhatsThis::add( back, tr("Show the previous month") );
+    layout->addWidget(back);
 
     month = new QComboBox( false, this );
+    month->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding, month->sizePolicy().hasHeightForWidth() ) );
     for ( int i = 0; i < 12; ++i )
         month->insertItem( Calendar::nameOfMonth( i + 1 ) );
+    layout->addWidget(month);
 
     year = new QSpinBox( 1752, 8000, 1, this );
+    year->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding, year->sizePolicy().hasHeightForWidth() ) );
+    layout->addWidget(year);
 
     next = new QToolButton( this );
     next->setFocusPolicy(NoFocus);
     next->setPixmap( Resource::loadPixmap( "forward" ) );
     next->setAutoRaise( true );
-    next->setFixedSize( next->sizeHint() );
     QWhatsThis::add( next, tr("Show the next month") );
+    layout->addWidget(next);
 
     end = new QToolButton( this );
     end->setFocusPolicy(NoFocus);
     end->setPixmap( Resource::loadPixmap( "finish" ) );
     end->setAutoRaise( true );
-    end->setFixedSize( end->sizeHint() );
     QWhatsThis::add( end, tr("Show December in the selected year") );
+    layout->addWidget(end);
 
     connect( month, SIGNAL( activated(int) ),
              this, SLOT( updateDate() ) );
@@ -86,6 +96,17 @@ DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
              this, SLOT( monthForward() ) );
     back->setAutoRepeat( true );
     next->setAutoRepeat( true );
+
+    setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed));
+    
+    QWidget *tl = topLevelWidget();
+    if (tl->inherits("QMainWindow")) {
+        QMainWindow *mw = (QMainWindow*)tl;
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), begin, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), back, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), next, SLOT(setUsesBigPixmap(bool)));
+        connect( mw, SIGNAL(pixmapSizeChanged(bool)), end, SLOT(setUsesBigPixmap(bool)));
+    }    
 }
 
 
