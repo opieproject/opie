@@ -79,13 +79,6 @@
                 <cstring>backweek</cstring>
             </property>
             <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>7</hsizetype>
-                    <vsizetype>0</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
                 <name>text</name>
                 <string></string>
             </property>
@@ -145,7 +138,7 @@
                 <name>sizePolicy</name>
                 <sizepolicy>
                     <hsizetype>7</hsizetype>
-                    <vsizetype>0</vsizetype>
+                    <vsizetype>1</vsizetype>
                 </sizepolicy>
             </property>
             <property stdset="1">
@@ -185,7 +178,7 @@
                 <name>sizePolicy</name>
                 <sizepolicy>
                     <hsizetype>3</hsizetype>
-                    <vsizetype>0</vsizetype>
+                    <vsizetype>1</vsizetype>
                 </sizepolicy>
             </property>
             <property stdset="1">
