@@ -231,6 +231,12 @@ void DateEntry::init()
     comboDescription->setInsertionPolicy(QComboBox::AtCurrent);
     comboLocation->setInsertionPolicy(QComboBox::AtCurrent);
 
+    int btnwidth = buttonStart->sizeHint().width() * 1.45;
+    buttonStart->setMaximumSize(btnwidth, 32767);
+    comboStart->setMaximumSize(btnwidth, 32767);
+    buttonEnd->setMaximumSize(btnwidth, 32767);
+    comboEnd->setMaximumSize(btnwidth, 32767);
+    
     initCombos();
     QPopupMenu *m1 = new QPopupMenu( this );
     startPicker = new DateBookMonth( m1, 0, TRUE );
