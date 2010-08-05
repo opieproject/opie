@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 /*
- * XML Backend for the OPIE-Notes Database.
+ * Text Backend for the OPIE-Notes Database.
  */
 
 
@@ -37,8 +37,8 @@
 #include <opie2/omemoaccessbackend.h>
 #include <opie2/omemoaccess.h>
 #include <opie2/odebug.h>
+#include <opie2/oglobal.h>
 
-#include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
@@ -167,12 +167,9 @@ bool OPimMemoAccessBackend_Text::saveMemo( const OPimMemo &memo, bool mustExist 
 
 bool OPimMemoAccessBackend_Text::checkCreateDirectory() const
 {
-    QDir fileList( m_path );
-    if( !fileList.exists() ) {
-        if( !fileList.mkdir( fileList.absPath() ) ) {
-            oerr << "checkCreateDirectory: failed to create directory " << fileList.absPath() << oendl;
-            return false;
-        }
+    if( ! OGlobal::createDirPath( m_path ) ) {
+        oerr << "checkCreateDirectory: failed to create directory " << m_path << oendl;
+        return false;
     }
     return true;
 }

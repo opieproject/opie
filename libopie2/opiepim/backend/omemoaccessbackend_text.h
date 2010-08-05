@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 /*
- * XML Backend for the OPIE-Notes Database.
+ * Text Backend for the OPIE-Notes Database.
  */
 
 #ifndef _OPimMemoAccessBackend_Text_
