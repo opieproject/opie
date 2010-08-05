@@ -29,6 +29,8 @@
 
 #include <opie2/oglobal.h>
 
+#include <opie2/odebug.h>
+
 #include <qtextstream.h>
 #include <qdir.h>
 #include <qpe/mimetype.h>
@@ -431,3 +433,51 @@ bool OGlobal::truncateFile( QFile &f, off_t size )
 
     return r==0;
 }
+
+bool OGlobal::createDirPath( const QString &dirPath )
+{
+    QDir fullDir(dirPath);
+    if (fullDir.exists())
+        return true;
+
+    // at this point the directory doesn't exist
+    // go through the directory tree and start creating the direcotories
+    // that don't exist; if we can't create the directories, return false
+
+    QString dirAbsPath = fullDir.absPath();
+    QString dirSeps = "/";
+    int dirIndex = dirAbsPath.find(dirSeps);
+    QString checkedPath;
+
+    // didn't find any seps; weird, use the cur dir instead
+    if (dirIndex == -1) {
+        //odebug << "No seperators found in path " << dirAbsPath << "" << oendl;
+        checkedPath = QDir::currentDirPath();
+    }
+
+    while (checkedPath != dirAbsPath) {
+        // no more seperators found, use the local path
+        if (dirIndex == -1) {
+            checkedPath = dirAbsPath;
+        }
+        else {
+            // the next directory to check
+            checkedPath = dirAbsPath.left(dirIndex) + "/";
+            // advance the iterator; the next dir seperator
+            dirIndex = dirAbsPath.find(dirSeps, dirIndex+1);
+        }
+
+        QDir checkDir(checkedPath);
+        if (!checkDir.exists()) {
+            //odebug << "mkdir making dir " << checkedPath << "" << oendl;
+
+            if (!checkDir.mkdir(checkedPath)) {
+                odebug << "Unable to make directory " << checkedPath << "" << oendl;
+                return false;
+            }
+        }
+
+    }
+    return true;
+}
+

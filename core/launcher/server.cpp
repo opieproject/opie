@@ -43,6 +43,7 @@
 #include <opie2/odevice.h>
 #include <opie2/oprocess.h>
 #include <opie2/osysevent.h>
+#include <opie2/oglobal.h>
 
 #include <qtopia/applnk.h>
 #include <qtopia/private/categories.h>
@@ -363,7 +364,7 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         QString dir;
         stream >> dir;
         if ( !dir.isEmpty() )
-            mkdir( dir );
+            OGlobal::createDirPath( dir );
     }
     else if ( msg == "rdiffGenSig(QString,QString)" ) {
         QString baseFile, sigFile;
@@ -399,7 +400,7 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         }
     }
     else if ( msg == "rdiffCleanup()" ) {
-        mkdir( "/tmp/rdiff" );
+        OGlobal::createDirPath( "/tmp/rdiff" );
         QDir dir;
         dir.setPath( "/tmp/rdiff" );
         QStringList entries = dir.entryList();
@@ -723,52 +724,6 @@ void Server::cancelSync()
 #endif
     delete syncDialog;
     syncDialog = 0;
-}
-
-bool Server::mkdir(const QString &localPath)
-{
-    QDir fullDir(localPath);
-    if (fullDir.exists())
-        return true;
-
-    // at this point the directory doesn't exist
-    // go through the directory tree and start creating the direcotories
-    // that don't exist; if we can't create the directories, return false
-
-    QString dirSeps = "/";
-    int dirIndex = localPath.find(dirSeps);
-    QString checkedPath;
-
-    // didn't find any seps; weird, use the cur dir instead
-    if (dirIndex == -1) {
-        //odebug << "No seperators found in path " << localPath << "" << oendl;
-        checkedPath = QDir::currentDirPath();
-    }
-
-    while (checkedPath != localPath) {
-        // no more seperators found, use the local path
-        if (dirIndex == -1) {
-            checkedPath = localPath;
-        }
-        else {
-            // the next directory to check
-            checkedPath = localPath.left(dirIndex) + "/";
-            // advance the iterator; the next dir seperator
-            dirIndex = localPath.find(dirSeps, dirIndex+1);
-        }
-
-        QDir checkDir(checkedPath);
-        if (!checkDir.exists()) {
-            //odebug << "mkdir making dir " << checkedPath << "" << oendl;
-
-            if (!checkDir.mkdir(checkedPath)) {
-                odebug << "Unable to make directory " << checkedPath << "" << oendl;
-                return FALSE;
-            }
-        }
-
-    }
-    return TRUE;
 }
 
 void Server::styleChange( QStyle &s )

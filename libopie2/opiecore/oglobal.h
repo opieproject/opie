@@ -101,6 +101,7 @@ public:
     static QString tempFileName( const QString& );
     static bool renameFile( const QString& from, const QString& to );
     static bool truncateFile( QFile &f, off_t size );
+    static bool createDirPath( const QString& );
     //@}
 
 
