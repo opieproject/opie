@@ -97,7 +97,7 @@ UIDArray OPimMemoAccessBackend::sorted( const UIDArray& events, bool asc,
                                         int sortOrder, int sortFilter,
                                         const QArray<int>& categories ) const
 {
-    odebug << "Using Unaccelerated TodoList sorted Implementation" << oendl;
+    odebug << "Using Unaccelerated Memo sorted Implementation" << oendl;
     Internal::OPimMemoSortVector vector(events.count(), asc,sortOrder );
     int item = 0;
 
@@ -106,8 +106,8 @@ UIDArray OPimMemoAccessBackend::sorted( const UIDArray& events, bool asc,
     int cat;
 
     for ( uint i = 0; i < events.count(); ++i ) {
-        OPimMemo todo = find( events[i], events, i, Frontend::Forward );
-        if ( todo.isEmpty() )
+        OPimMemo memo = find( events[i], events, i, Frontend::Forward );
+        if ( memo.isEmpty() )
             continue;
 
         /* show category */
@@ -116,10 +116,10 @@ UIDArray OPimMemoAccessBackend::sorted( const UIDArray& events, bool asc,
         for ( uint cat_nu = 0; cat_nu < categories.count(); ++cat_nu ) {
             cat = categories[cat_nu];
             if ( bCat && cat == -1 ) {
-                if(!todo.categories().isEmpty() )
+                if(!memo.categories().isEmpty() )
                     continue;
             } else if ( bCat && cat != 0)
-                if (!todo.categories().contains( cat ) )
+                if (!memo.categories().contains( cat ) )
                     continue;
             catPassed = true;
             break;
@@ -132,7 +132,7 @@ UIDArray OPimMemoAccessBackend::sorted( const UIDArray& events, bool asc,
         if ( !catPassed )
             continue;
 
-        vector.insert(item++, todo );
+        vector.insert(item++, memo );
     }
 
     vector.resize( item );

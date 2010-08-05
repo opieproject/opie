@@ -104,7 +104,7 @@ class OPimMemo : public OPimRecord
 
     /**
      * @reimplemented
-     * Return this todoevent in a RichText formatted QString
+     * Return this memo in a RichText formatted QString
      */
     QString toRichText() const;
 
