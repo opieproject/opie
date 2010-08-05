@@ -61,14 +61,14 @@ OPimMemoAccess::List NotesManager::find( QString regex )
     return m_db->matchRegexp( regex );
 }
 
-void NotesManager::add( const OPimMemo& ev )
+bool NotesManager::add( const OPimMemo& ev )
 {
-    m_db->add( ev );
+    return m_db->add( ev );
 }
 
-void NotesManager::update( int, const OPimMemo& ev )
+bool NotesManager::update( int, const OPimMemo& ev )
 {
-    m_db->replace( ev );
+    return m_db->replace( ev );
 }
 
 bool NotesManager::remove( int uid )
@@ -76,12 +76,7 @@ bool NotesManager::remove( int uid )
     return m_db->remove( uid );
 }
 
-void NotesManager::save()
-{
-    m_db->save();
-}
-
-bool NotesManager::saveAll()
+bool NotesManager::save()
 {
     return m_db->save();
 }

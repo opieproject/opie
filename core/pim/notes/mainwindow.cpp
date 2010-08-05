@@ -211,28 +211,46 @@ void mainWindowWidget::editMemo( OPimMemo &memo, bool create )
 {
     editWindowWidget *editWindow = new editWindowWidget(0, "editWindow", true);
 
-    editWindow->readMemo(memo);
     if( create )
         editWindow->setCaption( tr( "Add note" ) );
     else
         editWindow->setCaption( tr( "Edit note" ) );
 
-    if(QPEApplication::execDialog(editWindow) == QDialog::Accepted)
-    {
-        editWindow->writeMemo( memo );
-        
-        if( create ) {
-            m_manager.add( memo );
-            // the new selection will be always at the end and count is already
-            // 1 bigger than m_selected
-            m_selected = notesList->count();
+    while( true ) {
+        editWindow->readMemo(memo);
+        if(QPEApplication::execDialog(editWindow) == QDialog::Accepted)
+        {
+            editWindow->writeMemo( memo );
+
+            if( create ) {
+                if( !m_manager.add( memo ) ) {
+                    // FIXME this is really rather poor error reporting
+                    QMessageBox::critical( this, "Notes", tr("Failed to save note") );
+                    continue;
+                }
+                // the new selection will be always at the end and count is already
+                // 1 bigger than m_selected
+                m_selected = notesList->count();
+            }
+            else {
+                if( !m_manager.update( memo.uid(), memo ) ) {
+                    // FIXME this is really rather poor error reporting
+                    QMessageBox::critical( this, "Notes", tr("Failed to save note") );
+                    continue;
+                }
+            }
+        }
+
+        if( ! m_manager.save() ) {
+            // FIXME this is really rather poor error reporting
+            QMessageBox::critical( this, "Notes", tr("Failed to save note") );
         }
         else {
-            m_manager.update( memo.uid(), memo );
+            odebug << "save OK!!!!!!!!!!!!!!!!!" << oendl;
+            break;
         }
     }
-
-    m_manager.save();
+        
 
     refreshList();
 }

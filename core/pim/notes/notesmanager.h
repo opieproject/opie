@@ -56,19 +56,17 @@ namespace Notes {
         OPimMemoAccess::List sorted( bool asc, int so, int f,  int cat );
         OPimMemoAccess::List find( QString regex );
 
-        bool saveAll();
-
     signals:
         void update();
         void updateCategories();
 
     public slots:
-        void add( const OPimMemo& );
-        void update( int uid, const OPimMemo& );
+        bool add( const OPimMemo& );
+        bool update( int uid, const OPimMemo& );
         bool remove( int uid );
 
         void reload();
-        void save();
+        bool save();
 
     private:
         OPimMemoAccess* m_db;
