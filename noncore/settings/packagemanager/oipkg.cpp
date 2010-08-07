@@ -521,20 +521,18 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
     // Set ipkg run-time options/arguments
 #ifdef USE_LIBOPKG
     optvalue = ( m_ipkgExecOptions & FORCE_DEPENDS ) ? 1 : 0;
-    opkg_set_option( "force_depends", &optvalue );
+    conf->force_depends = optvalue;
 
     optvalue = ( m_ipkgExecOptions & FORCE_REINSTALL ) ? 1 : 0;
-    opkg_set_option( "force_reinstall", &optvalue );
+    conf->force_reinstall = optvalue;
 
     optvalue = ( m_ipkgExecOptions & FORCE_OVERWRITE ) ? 1 : 0;
-    opkg_set_option( "force_overwrite", &optvalue );
-
-    optvalue = ( m_ipkgExecOptions & FORCE_RECURSIVE ) ? 1 : 0;
-    opkg_set_option( "force_removal_of_dependent_packages", &optvalue );
-
+    conf->force_overwrite = optvalue;
     
-    optvalue = m_ipkgExecVerbosity;
-    opkg_set_option( "verbosity", &optvalue );
+    optvalue = ( m_ipkgExecOptions & FORCE_RECURSIVE ) ? 1 : 0;
+    conf->force_removal_of_dependent_packages = optvalue;
+    
+    conf->verbosity = m_ipkgExecVerbosity;
 #else
     m_ipkgArgs.force_depends = ( m_ipkgExecOptions & FORCE_DEPENDS );
     m_ipkgArgs.force_reinstall = ( m_ipkgExecOptions & FORCE_REINSTALL );
