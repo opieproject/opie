@@ -718,11 +718,23 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
             };
             break;
         case OPackage::Files : {
-#ifndef USE_LIBOPKG
                 connect( this, SIGNAL(signalIpkgList(const QString &)), receiver, slotOutput );
+#ifdef USE_LIBOPKG
+                pkg_t *pkg = opkg_find_package( (*parameters.begin()), NULL, NULL, NULL );
+                if(pkg) {
+                    str_list_t *files = pkg_get_installed_files(pkg);
+
+                    for (str_list_elt_t *iter=str_list_first(files); iter; iter=str_list_next(files, iter)) {
+                        QString str = (char *)iter->data;
+                        emit signalIpkgList(str);
+                    }
+
+                    pkg_free_installed_files(pkg);
+                }
+#else
                 ipkg_package_files( &m_ipkgArgs, (*parameters.begin()), &fIpkgFiles, 0l );
-                disconnect( this, SIGNAL(signalIpkgList(const QString &)), 0, 0 );
 #endif
+                disconnect( this, SIGNAL(signalIpkgList(const QString &)), 0, 0 );
             };
             break;
         default : break;
