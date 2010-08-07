@@ -166,7 +166,6 @@ OIpkg::OIpkg( Config *config, QObject *parent, const char *name )
     // Initialize libipkg
 #ifdef USE_LIBOPKG
     opkg_new();
-    opkg_conf_init();
     conf->opkg_vmessage = fsignalOpkgMessage;
 #else
     ipkg_init( &fsignalIpkgMessage, &fIpkgResponse, &m_ipkgArgs );
@@ -185,7 +184,6 @@ OIpkg::~OIpkg()
 
     // Free up libipkg resources
 #ifdef USE_LIBOPKG
-    opkg_conf_deinit();
     opkg_free();
 #else
     ipkg_deinit( &m_ipkgArgs );
