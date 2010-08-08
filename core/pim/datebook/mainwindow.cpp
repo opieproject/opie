@@ -223,13 +223,15 @@ void MainWindow::edit( const OPimOccurrence *occurrence ) {
     OPimEvent event = occurrence->toEvent();
     while ( editor()->edit( event ) ) {
         int result = 0;
+        bool oldRecur = event.hasRecurrence();
+        // Now pick up the edited event
         event = editor()->event();
-        OPimRecurrence rec = event.recurrence();
-        if( rec.type() != OPimRecurrence::NoRepeat ) {
+        if( oldRecur && event.hasRecurrence() ) {
             result = QMessageBox::warning( this, tr("Calendar"), tr( "This is a recurring event.\n\nDo you want to apply changes to\nall occurrences or just this one?"), tr("All"), tr("This one"), tr("Cancel") );
             if(result == 1) {
                 // Now create a copy of the event just for this day
                 event.assignUid();
+                OPimRecurrence rec = event.recurrence();
                 rec.setType( OPimRecurrence::NoRepeat );
                 event.setRecurrence(rec);
                 event.setStartDateTime( QDateTime(occurrence->date(), event.startDateTime().time()) );
