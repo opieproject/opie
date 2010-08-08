@@ -526,8 +526,7 @@ void DateEntry::getEvent( Opie::OPimEvent &ev )
         st = OPimAlarm::Silent;
     DateEntryEditor::setEventAlarm( ev, checkAlarm->isChecked(), spinAlarm->value(), cbAlarmUnits->currentItem(), st );
 
-    if ( rp.type() != OPimRecurrence::NoRepeat )
-        ev.setRecurrence( rp );
+    ev.setRecurrence( rp );
     ev.setNote( noteStr );
 }
 
