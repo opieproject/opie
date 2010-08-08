@@ -247,6 +247,7 @@ void MainWindow::edit( const OPimOccurrence *occurrence ) {
                 // Write changes
                 manager()->add(event);
                 manager()->update( dupEvent );
+                currentView()->reschedule();
             }
             else if(result == 2)
                 continue;
