@@ -185,7 +185,7 @@ bool BookManager::nextOccurrence( const OPimEvent &ev, const QDateTime &start, Q
         do {
             if( ! ev.recurrence().nextOcurrence( startDate, recurDate ) )
                 return false;
-            if( recurDate == startDate ) {
+            if( recurDate == start.date() ) {
                 if( start.time() >= ev.startDateTime().time() ) {
                     startDate = startDate.addDays(1);
                     continue;
