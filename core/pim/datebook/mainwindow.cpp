@@ -658,7 +658,7 @@ void MainWindow::slotItemDuplicate() {
         return;
 
     OPimEvent event = occurrence->toEvent();
-    if ( editor()->edit( event ) ) {
+    if ( editor()->edit( event, true ) ) {
         OPimEvent dupEvent( editor()->event() );
         dupEvent.assignUid();
         manager()->add( dupEvent );

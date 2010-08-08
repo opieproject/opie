@@ -99,7 +99,7 @@ public:
 
     virtual bool newEvent( const QDate& );
     virtual bool newEvent( const QDateTime& start, const QDateTime& end, const QString &desc );
-    virtual bool edit( const OPimEvent&, bool showRec = TRUE );
+    virtual bool edit( const OPimEvent&, bool duplicate = FALSE );
 
     virtual OPimEvent event() const;
 

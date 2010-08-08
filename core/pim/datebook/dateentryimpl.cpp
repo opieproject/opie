@@ -736,9 +736,14 @@ bool DateEntryEditor::newEvent( const QDateTime& start, const QDateTime& end, co
         return false;
 }
 
-bool DateEntryEditor::edit( const OPimEvent& event, bool showRec) {
+bool DateEntryEditor::edit( const OPimEvent& event, bool duplicate) {
     OPimEvent ev(event);
-    if( showDialog( DateEntryBase::tr("Edit Event"), ev ) ) {
+    QString title;
+    if( duplicate )
+        title = DateEntryBase::tr("Duplicate Event");
+    else
+        title = DateEntryBase::tr("Edit Event");
+    if( showDialog( title, ev ) ) {
         m_event = ev;
         m_event.setUid( event.uid() );
         return true;
