@@ -191,6 +191,10 @@ bool ODateBookAccessBackend_XML::write( OAbstractWriter &wr )
     return true;
 }
 
+bool ODateBookAccessBackend_XML::dataSourceExists() const {
+    return QFile::exists( m_name );
+}
+
 QArray<int> ODateBookAccessBackend_XML::allRecords()const {
     QArray<int> ints( m_raw.count()+ m_rep.count() );
     uint i = 0;

@@ -46,6 +46,7 @@
 /* QT */
 #include <qarray.h>
 #include <qstringlist.h>
+#include <qfile.h>
 
 /* STD */
 #include <stdio.h>
@@ -204,6 +205,11 @@ bool ODateBookAccessBackend_SQL::reload()
 bool ODateBookAccessBackend_SQL::save()
 {
     return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
+}
+
+bool ODateBookAccessBackend_SQL::dataSourceExists() const
+{
+    return QFile::exists( m_fileName );
 }
 
 OPimChangeLog *ODateBookAccessBackend_SQL::changeLog() const

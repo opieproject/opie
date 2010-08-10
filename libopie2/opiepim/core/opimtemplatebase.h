@@ -158,6 +158,7 @@ struct OPimBase {
     //@}
 
     virtual OPimChangeLog *changeLog() const = 0;
+    virtual bool dataSourceExists() const = 0;
 
 protected:
     OPimOccurrence::List convertOccurrenceFromBackend( const OPimBackendOccurrence::List& )const;

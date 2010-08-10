@@ -227,6 +227,7 @@ public:
     QArray<UID> records()const;
 
     bool applyAction( int action, const T &rec );
+    bool dataSourceExists() const;
     
 protected:
     /**
@@ -643,6 +644,12 @@ template <class T>
 bool OPimAccessTemplate<T>::applyAction( int action, const T &rec )
 {
     return m_backEnd->applyAction( action, rec );
+}
+
+template <class T>
+bool OPimAccessTemplate<T>::dataSourceExists() const
+{
+    return m_backEnd->dataSourceExists();
 }
 
 }

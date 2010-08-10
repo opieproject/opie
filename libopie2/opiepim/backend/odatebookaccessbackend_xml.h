@@ -63,6 +63,7 @@ public:
     bool load();
     bool reload();
     bool save();
+    bool dataSourceExists() const;
 
     bool write( OAbstractWriter &wr );
     bool readInto( OPimXmlReader &rd, ODateBookAccess *target );

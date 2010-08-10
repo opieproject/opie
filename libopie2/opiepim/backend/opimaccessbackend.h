@@ -126,6 +126,9 @@ public:
 
     virtual OPimChangeLog *changeLog() const;
     bool applyAction( int action, const T &rec );
+    virtual bool dataSourceExists() const {
+        return false;
+    };
 
 protected:
     //@{

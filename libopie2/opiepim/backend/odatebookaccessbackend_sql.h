@@ -57,6 +57,7 @@ public:
     bool load();
     bool reload();
     bool save();
+    bool dataSourceExists() const;
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;
