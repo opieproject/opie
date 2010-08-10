@@ -56,6 +56,7 @@
 #include <opie2/opimalarmdlg.h>
 #include <opie2/odatebookaccess.h>
 #include <opie2/odatebookaccessbackend_vcal.h>
+#include <opie2/opimautoconvert.h>
 
 #include "editor.h"
 #include "show.h"
@@ -93,6 +94,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name,
     setCaption( tr("Calendar") );
     setIcon( Opie::Core::OResource::loadPixmap( "datebook_icon" ) );
 
+    OPimAutoConverter::promptConvertData( Pim::OPimGlobal::DATEBOOK, this, caption() );
+    
     QTimer::singleShot(0, this, SLOT(populate() ) );
 
     QCopChannel* chan = new QCopChannel( "QPE/System", this );
