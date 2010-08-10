@@ -108,8 +108,6 @@ ODateBookAccessBackend_SQL::ODateBookAccessBackend_SQL( const QString& ,
     m_changeLog = new OPimChangeLog_SQL( m_driver, "changelog", "peers" );
     
     initFields();
-
-    load();
 }
 
 ODateBookAccessBackend_SQL::~ODateBookAccessBackend_SQL() {
