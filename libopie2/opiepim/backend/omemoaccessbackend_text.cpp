@@ -95,6 +95,11 @@ bool OPimMemoAccessBackend_Text::wasChangedExternally()
     return false; // FIXME what to do here???
 }
 
+bool OPimMemoAccessBackend_Text::dataSourceExists() const {
+    QDir memodir( m_path );
+    return memodir.exists();
+}
+
 UIDArray OPimMemoAccessBackend_Text::allRecords() const
 {
     QDir memodir( m_path );

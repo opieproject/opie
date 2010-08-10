@@ -62,6 +62,7 @@ public:
     bool load();
     bool reload();
     bool save();
+    bool dataSourceExists() const;
 
     bool readInto( OPimXmlReader &rd, OPimTodoAccess *target );
     bool write( OAbstractWriter &wr );

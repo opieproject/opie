@@ -252,6 +252,10 @@ bool OPimContactAccessBackend_XML::wasChangedExternally()
     return (lastmod != m_readtime);
 }
 
+bool OPimContactAccessBackend_XML::dataSourceExists() const {
+    return QFile::exists( m_fileName );
+}
+
 UIDArray OPimContactAccessBackend_XML::allRecords() const
 {
     UIDArray uid_list( m_contactList.count() );

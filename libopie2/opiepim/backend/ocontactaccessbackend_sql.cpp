@@ -50,6 +50,7 @@
 #include <qarray.h>
 #include <qdatetime.h>
 #include <qstringlist.h>
+#include <qfile.h>
 
 
 using namespace Opie;
@@ -359,6 +360,10 @@ OPimChangeLog *OPimContactAccessBackend_SQL::changeLog() const
 bool OPimContactAccessBackend_SQL::wasChangedExternally()
 {
     return false;
+}
+
+bool OPimContactAccessBackend_SQL::dataSourceExists() const {
+    return QFile::exists( m_fileName );
 }
 
 UIDArray OPimContactAccessBackend_SQL::allRecords() const

@@ -48,6 +48,7 @@
 #include <qdatetime.h>
 #include <qmap.h>
 #include <qstring.h>
+#include <qfile.h>
 
 
 using namespace Opie::DB;
@@ -353,12 +354,11 @@ namespace Opie {
 OPimTodoAccessBackendSQL::OPimTodoAccessBackendSQL( const QString& file )
     : OPimTodoAccessBackend(),/* m_dict(15),*/ m_driver(NULL), m_dirty(true)
 {
-    QString fi = file;
-    if ( fi.isEmpty() )
-        fi = Global::applicationFileName( "todolist", "todolist.db" );
+    m_fileName = file.isEmpty() ? Global::applicationFileName( "todolist", "todolist.db" ) : file;
+
     OSQLManager man;
     m_driver = man.standard();
-    m_driver->setUrl(fi);
+    m_driver->setUrl(m_fileName);
     // fillDict();
     m_changeLog = new OPimChangeLog_SQL( m_driver, "changelog", "peers" );
 }
@@ -393,6 +393,10 @@ bool OPimTodoAccessBackendSQL::save(){
 OPimChangeLog *OPimTodoAccessBackendSQL::changeLog() const
 {
     return m_changeLog;
+}
+
+bool OPimTodoAccessBackendSQL::dataSourceExists() const {
+    return QFile::exists( m_fileName );
 }
 
 QArray<int> OPimTodoAccessBackendSQL::allRecords()const {

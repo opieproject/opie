@@ -191,6 +191,10 @@ bool OPimTodoAccessXML::save() {
     return true;
 }
 
+bool OPimTodoAccessXML::dataSourceExists() const {
+    return QFile::exists( m_file );
+}
+
 QArray<int> OPimTodoAccessXML::allRecords()const {
     QArray<int> ids( m_events.count() );
     QMap<int, OPimTodo>::ConstIterator it;

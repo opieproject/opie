@@ -52,6 +52,8 @@ public:
     bool load();
     bool reload();
     bool save();
+    bool dataSourceExists() const;
+
     QArray<UID> allRecords()const;
 
 /*     QArray<UID> queryByExample( const UIDArray& uidlist, const OPimTodo& t, int settings, const QDateTime& d = QDateTime() ); */
@@ -83,6 +85,7 @@ private:
 
     // QAsciiDict<int> m_dict;
     Opie::DB::OSQLDriver* m_driver;
+    QString m_fileName;
     OPimChangeLog_SQL *m_changeLog;
     QArray<UID> m_uids;
     bool m_dirty : 1;

@@ -61,6 +61,7 @@ public:
     void clear ();
 
     bool wasChangedExternally();
+    bool dataSourceExists() const;
 
     UIDArray allRecords() const;
 

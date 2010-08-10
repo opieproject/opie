@@ -70,6 +70,7 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	void clear ();
 
 	bool wasChangedExternally();
+    bool dataSourceExists() const;
 
 	UIDArray allRecords() const;
 

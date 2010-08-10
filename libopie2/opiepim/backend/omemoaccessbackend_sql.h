@@ -69,6 +69,7 @@ class OPimMemoAccessBackend_SQL : public OPimMemoAccessBackend {
     void clear ();
 
     bool wasChangedExternally();
+    bool dataSourceExists() const;
 
     UIDArray allRecords() const;
 
