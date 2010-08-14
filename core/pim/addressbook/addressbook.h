@@ -134,6 +134,7 @@ private:
     AbConfig m_config;
 
     int active_view;
+    bool m_forceClose;
 };
 
 #endif

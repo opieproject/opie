@@ -28,6 +28,7 @@
 #include <opie2/opimcontact.h>
 #include <opie2/ocontactaccessbackend_vcard.h>
 #include <opie2/oresource.h>
+#include <opie2/opimautoconvert.h>
 
 #include <qpe/ir.h>
 #include <qpe/qpemessagebox.h>
@@ -38,6 +39,7 @@
 #include <qlayout.h>
 #include <qmessagebox.h>
 #include <qtoolbutton.h>
+#include <qtimer.h>
 
 #include <stdlib.h>
 #include <sys/stat.h>
@@ -66,6 +68,13 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
     m_config.load();
 
+    m_forceClose = false;
+    if( ! Opie::OPimAutoConverter::promptConvertData( Opie::Pim::OPimGlobal::CONTACTLIST, this, caption() ) ) {
+        m_forceClose = true;
+        QTimer::singleShot(0, qApp, SLOT(quit() ) );
+        return;
+    }
+    
     // Create Views
     m_listContainer = new QWidget( this );
     QVBoxLayout *vb = new QVBoxLayout( m_listContainer );
@@ -297,12 +306,14 @@ void AddressbookWindow::resizeEvent( QResizeEvent *e )
 
 AddressbookWindow::~AddressbookWindow()
 {
-    ToolBarDock dock;
-    int dummy;
-    bool bDummy;
-    getLocation ( listTools, dock, dummy, bDummy, dummy );
-    m_config.setToolBarDock( dock );
-    m_config.save();
+    if( ! m_forceClose ) {
+        ToolBarDock dock;
+        int dummy;
+        bool bDummy;
+        getLocation ( listTools, dock, dummy, bDummy, dummy );
+        m_config.setToolBarDock( dock );
+        m_config.save();
+    }
 }
 
 int AddressbookWindow::create()
@@ -785,6 +796,11 @@ void AddressbookWindow::flush()
 
 void AddressbookWindow::closeEvent( QCloseEvent *e )
 {
+    if ( m_forceClose ) {
+        e->accept();
+        return;
+    }
+    
     if ( active_view == AbView::CardView )
     {
         if ( !m_actionPersonal->isOn() ) {
