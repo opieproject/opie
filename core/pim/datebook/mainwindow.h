@@ -181,6 +181,7 @@ namespace Datebook {
         QArray<int> m_defaultCategories;
         QString m_defaultLocation;
         bool m_inSearch;
+        bool m_forceClose;
     };
 }
 }

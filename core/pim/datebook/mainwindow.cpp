@@ -94,7 +94,12 @@ MainWindow::MainWindow( QWidget *parent, const char *name,
     setCaption( tr("Calendar") );
     setIcon( Opie::Core::OResource::loadPixmap( "datebook_icon" ) );
 
-    OPimAutoConverter::promptConvertData( Pim::OPimGlobal::DATEBOOK, this, caption() );
+    m_forceClose = false;
+    if( ! OPimAutoConverter::promptConvertData( Pim::OPimGlobal::DATEBOOK, this, caption() ) ) {
+        m_forceClose = true;
+        QTimer::singleShot(0, qApp, SLOT(quit() ) );
+        return;
+    }
     
     QTimer::singleShot(0, this, SLOT(populate() ) );
 
@@ -110,12 +115,14 @@ MainWindow::MainWindow( QWidget *parent, const char *name,
 }
 
 MainWindow::~MainWindow() {
-    m_tempMan.save();
-    m_locMan.save();
-    m_descMan.save();
+    if( !m_forceClose ) {
+        m_tempMan.save();
+        m_locMan.save();
+        m_descMan.save();
 
-    manager()->save();
-    saveConfig();
+        manager()->save();
+        saveConfig();
+    }
     delete m_edit;
     delete m_manager;
 }
