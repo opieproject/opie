@@ -42,7 +42,7 @@ class OPimAutoConverter {
 protected:
     static OPimBase *createAccess( Pim::OPimGlobal::PimType type, Pim::OPimGlobal::DatabaseStyle dbtype );
 public:
-    static void promptConvertData( Pim::OPimGlobal::PimType type, QWidget *parent, const QString &appTitle );
+    static bool promptConvertData( Pim::OPimGlobal::PimType type, QWidget *parent, const QString &appTitle );
 };
     
 }

@@ -78,8 +78,10 @@ OPimBase *OPimAutoConverter::createAccess( OPimGlobal::PimType type, OPimGlobal:
 }
 
 
-void OPimAutoConverter::promptConvertData( OPimGlobal::PimType type, QWidget *parent, const QString &appTitle )
+bool OPimAutoConverter::promptConvertData( OPimGlobal::PimType type, QWidget *parent, const QString &appTitle )
 {
+    bool result = true;
+    
     Config config("pimaccess");
     QString group_name;
     switch ( type ) {
@@ -108,7 +110,6 @@ void OPimAutoConverter::promptConvertData( OPimGlobal::PimType type, QWidget *pa
             int result = QMessageBox::information( parent, appTitle,
                                         "<p>" + QObject::tr( "Opie is now able to store your PIM data in a new database format, offering improved performance and functionality. Would you like to convert over to the new format now?"), QObject::tr("Yes"), QObject::tr("No") );
             if(result == 0) {
-                // FIXME check results of these functions
                 if( sourceDB->load() && destDB->load()) {
                     // Now transmit every pim-item from the source database to the destination -database
                     QArray<int> uidList = sourceDB->records();
@@ -151,13 +152,17 @@ void OPimAutoConverter::promptConvertData( OPimGlobal::PimType type, QWidget *pa
                         config.writeEntry( "convertprompted", true );
                         // FIXME Send out message to all apps that db has changed?
                     }
-                    else // FIXME make application quit here
+                    else {
                         QMessageBox::critical(parent, appTitle,
                                             "<p>" + QObject::tr("Data conversion failed. Please ensure you have enough disk space and try again."));
+                        result = false;
+                    }                        
                 }
-                else // FIXME make application quit here
+                else {
                     QMessageBox::critical(parent, appTitle,
                                         "<p>" + QObject::tr("Data conversion failed - unable to load source or destination data format."));
+                    result = false;
+                }
             }
             else {
                 // User has said no, let them access their data in XML format still
@@ -191,4 +196,6 @@ void OPimAutoConverter::promptConvertData( OPimGlobal::PimType type, QWidget *pa
                 owarn << "Unknown database selected (" << type << ")" << oendl;
         }
     }
+    
+    return result;
 }
