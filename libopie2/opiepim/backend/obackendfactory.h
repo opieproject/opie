@@ -215,7 +215,7 @@ database << oendl;
 
 			 Config config( "pimaccess" );
 			 config.setGroup ( group_name );
-			 QString db_String = config.readEntry( "usebackend", "xml" );
+			 QString db_String = config.readEntry( "usebackend", "sql" );
 
 			 QAsciiDict<int> dictDbTypes( OPimGlobal::_END_DatabaseStyle );
 			 dictDbTypes.setAutoDelete( TRUE );
