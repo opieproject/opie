@@ -67,6 +67,7 @@
 #include <opie2/omemoaccess.h>
 #include <opie2/omemoaccessbackend_text.h>
 #include <opie2/oresource.h>
+#include <opie2/opimautoconvert.h>
 
 #include <qpe/ir.h>
 
@@ -124,6 +125,13 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
     setCaption( tr("Notes"));
     notesList = new QListBox(this, "notesList");
     setCentralWidget(notesList);
+
+//    m_forceClose = false;
+    if( ! OPimAutoConverter::promptConvertData( Pim::OPimGlobal::NOTES, this, caption() ) ) {
+//        m_forceClose = true;
+        QTimer::singleShot(0, qApp, SLOT(quit() ) );
+        return;
+    }
 
     m_manager.load();
     
