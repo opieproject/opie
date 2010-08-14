@@ -37,6 +37,7 @@
 #include <opie2/oapplicationfactory.h>
 #include <opie2/opimalarmdlg.h>
 #include <opie2/oresource.h>
+#include <opie2/opimautoconvert.h>
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
@@ -93,6 +94,13 @@ MainWindow::MainWindow( QWidget* parent,
     initActions();
     initEditor();
     initShow();
+
+    m_forceClose = false;
+    if( ! OPimAutoConverter::promptConvertData( Pim::OPimGlobal::TODOLIST, this, caption() ) ) {
+        m_forceClose = true;
+        QTimer::singleShot(0, qApp, SLOT(quit() ) );
+        return;
+    }
 
     connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
              this, SLOT( slotAppMessage(const QCString&,const QByteArray&) ) );
@@ -290,6 +298,11 @@ void MainWindow::slotReload()
 
 void MainWindow::closeEvent( QCloseEvent* e )
 {
+    if ( m_forceClose ) {
+        e->accept();
+        return;
+    }
+    
     if ( m_stack->visibleWidget() == currentShow()->widget() ) {
         m_showing = false;
         raiseCurrentView();

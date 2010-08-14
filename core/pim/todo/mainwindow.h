@@ -149,7 +149,7 @@ namespace Todo {
         uint m_counter;
         TemplateManager* m_tempManager;
         QValueList<QPixmap> m_pic_priority;
-
+        bool m_forceClose;
 
     private slots:
         void initStuff();
