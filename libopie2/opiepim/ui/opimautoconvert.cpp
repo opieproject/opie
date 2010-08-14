@@ -103,7 +103,12 @@ bool OPimAutoConverter::promptConvertData( OPimGlobal::PimType type, QWidget *pa
     config.setGroup ( group_name );
     bool prompted = config.readBoolEntry( "convertprompted" );
     if( !prompted ) {
-        OPimBase *sourceDB = createAccess( type, OPimGlobal::XML );
+        OPimGlobal::DatabaseStyle srcDBType;
+        if( type == OPimGlobal::NOTES )
+            srcDBType = OPimGlobal::TEXT;
+        else
+            srcDBType = OPimGlobal::XML;
+        OPimBase *sourceDB = createAccess( type, srcDBType );
         OPimBase *destDB = createAccess( type, OPimGlobal::SQL );
 
         if( sourceDB->dataSourceExists() && !destDB->dataSourceExists() ) {
