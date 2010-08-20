@@ -118,6 +118,7 @@ class OPimRecurrence {
 
     /* almost internal */
     QString toString()const;
+    bool equals( const OPimRecurrence &rec ) const;
 
   private:
     bool p_nextOccurrence( const QDate& from, QDate& next );

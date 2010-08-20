@@ -714,4 +714,33 @@ void OPimRecurrence::fromMap( const QMap<int, QString>& map )
     }
 }
 
+// This possibly ought to be operator== but it's not necessarily
+// a full comparison
+bool OPimRecurrence::equals( const OPimRecurrence &rec ) const
+{
+    if( data->days != rec.data->days )
+        return false;
+    if( data->type != rec.data->type )
+        return false;
+    if( data->freq != rec.data->freq )
+        return false;
+    if( data->pos != rec.data->pos )
+        return false;
+    if( data->hasEnd != rec.data->hasEnd )
+        return false;
+    if( data->hasEnd ) {    
+        if( data->end != rec.data->end )
+            return false;
+    }
+    // don't compare create
+    if( data->rep != rec.data->rep )
+        return false;
+    // don't compare app
+    if( data->list != rec.data->list )
+        return false;
+    // don't compare start
+    
+    return true;
+}
+
 }

@@ -111,7 +111,7 @@ struct OPimEvent::Data : public QShared
     QDateTime created;
     QDateTime start;
     QDateTime end;
-bool isAllDay : 1;
+    bool isAllDay : 1;
     QString timezone;
     QArray<int>* child;
     int parent;
@@ -785,6 +785,46 @@ void OPimEvent::removeChild( int uid )
 OPimRecord::ChangeAction OPimEvent::action() const
 {
     return data->action;
+}
+
+OPimEvent::CompareResult OPimEvent::compareTo( const OPimEvent &ev ) const
+{
+    bool minorDiff = false;
+
+    if( data == ev.data )  
+        return Equal;    // it's an unmodified copy of the same object
+    
+    if( data->description != ev.data->description )
+        return Different;
+    if( data->location != ev.data->location )
+        return Different;
+    if( data->manager != ev.data->manager )
+        return Different;
+    if( data->recur != ev.data->recur ) {
+        if( ! data->recur->equals( *ev.data->recur ) )
+            minorDiff = true;
+    }
+    if( data->note != ev.data->note )
+        return Different;
+    if( data->start != ev.data->start )
+        return Different;
+    if( data->end != ev.data->end )
+        return Different;
+    if( data->created != ev.data->created )
+        minorDiff = true;
+    if( data->isAllDay != ev.data->isAllDay )
+        return Different;
+    if( data->timezone != ev.data->timezone )
+        minorDiff = true;
+    if( data->child != ev.data->child )
+        minorDiff = true;
+    if( data->parent != ev.data->parent )
+        minorDiff = true;
+
+    if( minorDiff )
+        return Similar;
+    else
+        return Equal;
 }
 
 }

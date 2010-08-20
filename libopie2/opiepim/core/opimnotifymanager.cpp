@@ -257,4 +257,15 @@ void OPimNotifyManager::remindersFromString( const QString& str )
     }
 
 }
+
+bool OPimNotifyManager::operator==( const OPimNotifyManager &mgr ) const
+{
+    if( m_al != mgr.m_al )
+        return false;
+    else if (m_rem != mgr.m_rem)
+        return false;
+    else
+        return true;
+}
+
 }

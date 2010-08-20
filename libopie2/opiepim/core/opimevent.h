@@ -71,6 +71,12 @@ class OPimRecurrence;
 class OPimEvent : public OPimRecord
 {
   public:
+    enum CompareResult {
+        Equal,
+        Similar,
+        Different
+    };
+      
     typedef QValueList<OPimEvent> ValueList;
     /**
      * RecordFields contain possible attributes
@@ -203,6 +209,8 @@ class OPimEvent : public OPimRecord
     //@}
 
     ChangeAction action() const;
+    /** Determine if another event is equal, similar or different to this one */
+    CompareResult compareTo( const OPimEvent &ev ) const;
     
   /*    bool operator==( const OPimEvent& );
         bool operator!=( const OPimEvent& );

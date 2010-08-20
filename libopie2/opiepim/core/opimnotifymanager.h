@@ -111,6 +111,8 @@ class OPimNotifyManager
      */
     void remindersFromString( const QString& str );
 
+    bool operator==( const OPimNotifyManager &mgr ) const;
+
   private:
     Reminders m_rem;
     Alarms m_al;
