@@ -59,7 +59,7 @@ class OPimNotify
     virtual ~OPimNotify();
 
     OPimNotify &operator=( const OPimNotify& );
-    bool operator==( const OPimNotify& );
+    bool operator==( const OPimNotify& ) const;
 
     virtual QString type() const = 0;
 
@@ -113,7 +113,7 @@ class OPimAlarm : public OPimNotify
     ~OPimAlarm();
 
     OPimAlarm &operator=( const OPimAlarm& );
-    bool operator==( const OPimAlarm& );
+    bool operator==( const OPimAlarm& ) const;
     QString type() const;
 
     int sound() const;
@@ -165,7 +165,7 @@ class OPimReminder : public OPimNotify
 
     QString type() const;
 
-    bool operator==( const OPimReminder& );
+    bool operator==( const OPimReminder& ) const;
 
     /**
      * the uid of the alarm

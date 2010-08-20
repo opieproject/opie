@@ -81,7 +81,7 @@ OPimNotify &OPimNotify::operator=( const OPimNotify& noti )
 }
 
 
-bool OPimNotify::operator==( const OPimNotify& noti )
+bool OPimNotify::operator==( const OPimNotify& noti ) const
 {
     if ( data == noti.data ) return true;
     if ( data->dur != noti.data->dur ) return false;
@@ -227,7 +227,7 @@ OPimAlarm &OPimAlarm::operator=( const OPimAlarm& al )
 }
 
 
-bool OPimAlarm::operator==( const OPimAlarm& al )
+bool OPimAlarm::operator==( const OPimAlarm& al ) const
 {
     if ( data->sound != al.data->sound ) return false;
     else if ( data->sound == Custom && data->file != al.data->file )
@@ -352,7 +352,7 @@ OPimReminder& OPimReminder::operator=( const OPimReminder& rem )
 }
 
 
-bool OPimReminder::operator==( const OPimReminder& rem )
+bool OPimReminder::operator==( const OPimReminder& rem ) const
 {
     if ( data->record != rem.data->record ) return false;
 
