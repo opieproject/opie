@@ -60,6 +60,7 @@ void FortunePluginWidget::getFortune() {
 //	fortune->setReadOnly( TRUE );
 //	fortune->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum ) );
 
+    fortune->setUpdateTime(25); // a bit faster than the default
 	fortune->setText( QString("Obtaining fortune...") );
 	layoutFortune->addWidget( fortune );
 
@@ -75,12 +76,11 @@ void FortunePluginWidget::getFortune() {
 		delete fortuneProcess;
 		fortuneProcess = 0;
 	}
-
 }
 
 void FortunePluginWidget::slotStdOut( OProcess* /*proc*/, char* buf, int len )
 {
 	QCString s( buf, len );
-	s.replace( QRegExp("\n"), "" );
+	s.replace( QRegExp("\n"), " " );
 	fortune->setText( s );
 }
