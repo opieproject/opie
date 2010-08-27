@@ -76,28 +76,28 @@ void Converter::loadPimAccess()
     Config config( "pimaccess" );
 
     config.setGroup( "datebook" );
-    dbtype = config.readEntry( "usebackend", "xml" );
+    dbtype = config.readEntry( "usebackend", "sql" );
     if( dbtype == "sql" )
         m_datebookFormatSelector->setCurrentItem( 1 );
     else
         m_datebookFormatSelector->setCurrentItem( 0 );
 
     config.setGroup( "contact" );
-    dbtype = config.readEntry( "usebackend", "xml" );
+    dbtype = config.readEntry( "usebackend", "sql" );
     if( dbtype == "sql" )
         m_contactsFormatSelector->setCurrentItem( 1 );
     else
         m_contactsFormatSelector->setCurrentItem( 0 );
 
     config.setGroup( "todo" );
-    dbtype = config.readEntry( "usebackend", "xml" );
+    dbtype = config.readEntry( "usebackend", "sql" );
     if( dbtype == "sql" )
         m_todoFormatSelector->setCurrentItem( 1 );
     else
         m_todoFormatSelector->setCurrentItem( 0 );
 
     config.setGroup( "notes" );
-    dbtype = config.readEntry( "usebackend", "text" );
+    dbtype = config.readEntry( "usebackend", "sql" );
     if( dbtype == "sql" )
         m_notesFormatSelector->setCurrentItem( 1 );
     else
