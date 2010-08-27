@@ -118,6 +118,7 @@ signals:
  *
  */
     void mousePressed();
+    
 protected:
 /*!
  * @fn timerEvent( QTimerEvent * e)
@@ -140,11 +141,15 @@ protected:
  *
  */
     void mouseReleaseEvent( QMouseEvent *e);
+
+    void resizeEvent( QResizeEvent *e );
 private:
     QColor backgroundcolor, foregroundcolor;
     QString scrollText;
     QPixmap scrollTextPixmap;
     int pos, updateTimerTime, scrollLength;
+    int m_scrollTextWidth;
+    int m_scrollBreakWidth;
 };
 
 }

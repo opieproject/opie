@@ -46,7 +46,7 @@ OTicker::OTicker( QWidget* parent )
     Config cfg( "qpe" );
     cfg.setGroup( "Appearance" );
     backgroundcolor = QColor( cfg.readEntry( "Background", "#E5E1D5" ) );
-    foregroundcolor = Qt::black;
+    foregroundcolor = QColor( cfg.readEntry( "Text", "#FFFFFF" ) );
     updateTimerTime = 50;
     scrollLength = 1;
 }
@@ -74,9 +74,7 @@ void OTicker::setFrame( int frameStyle )
 
 void OTicker::setText( const QString& text )
 {
-    pos = 0; // reset it everytime the text is changed
     scrollText = text;
-    odebug << scrollText << oendl;
 
     int pixelLen = 0;
     bool bigger = false;
@@ -94,9 +92,13 @@ void OTicker::setText( const QString& text )
         pixelLen = pixelTextLen;
     }
     QPixmap pm( pixelLen, contHeight );
-    //    pm.fill( QColor( 167, 212, 167 ));
-
     pm.fill( backgroundcolor );
+
+    if(bigger)
+        pos = contWidth; // reset it everytime the text is changed
+    else
+        pos = 0;
+        
     QPainter pmp( &pm );
     pmp.setPen( foregroundcolor );
     pmp.drawText( 0, 0, pixelTextLen, contHeight, AlignVCenter, scrollText );
@@ -104,8 +106,11 @@ void OTicker::setText( const QString& text )
     scrollTextPixmap = pm;
 
     killTimers();
+
+    m_scrollBreakWidth = (contWidth / 2); // some break space
+    m_scrollTextWidth = scrollTextPixmap.width() + m_scrollBreakWidth; 
     //    odebug << "Scrollupdate " << updateTimerTime << "" << oendl;
-    if ( bigger /*pixelTextLen > contWidth*/ )
+    if ( bigger )
         startTimer( updateTimerTime );
     update();
 }
@@ -113,16 +118,24 @@ void OTicker::setText( const QString& text )
 
 void OTicker::timerEvent( QTimerEvent * )
 {
-    pos = ( pos <= 0 ) ? scrollTextPixmap.width() : pos - scrollLength; //1;
+    pos = ( pos <= -m_scrollTextWidth ) ? 0 : pos - scrollLength; //1;
     repaint( FALSE );
 }
 
 void OTicker::drawContents( QPainter *p )
 {
-    int pixelLen = scrollTextPixmap.width();
-    p->drawPixmap( pos, contentsRect().y(), scrollTextPixmap );
-    if ( pixelLen > contentsRect().width() )  // Scrolling
-        p->drawPixmap( pos - pixelLen, contentsRect().y(), scrollTextPixmap );
+    QRect contRect = contentsRect();
+    p->drawPixmap( pos, contRect.y(), scrollTextPixmap );
+    int actualWidth = m_scrollTextWidth - m_scrollBreakWidth;
+    if ( pos < -(actualWidth - contRect.width()) ) {  // Scrolling
+        // Scrolling, draw a break (blank) after text
+        QPainter paint( this );
+        paint.eraseRect( pos + actualWidth, contRect.y(), m_scrollBreakWidth, contRect.height() );
+    }
+    if ( pos < -(m_scrollTextWidth - contRect.width()) ) {
+        // Scrolling, draw another copy after break width
+        p->drawPixmap( pos + m_scrollTextWidth, contRect.y(), scrollTextPixmap );
+    }
 }
 
 void OTicker::mouseReleaseEvent( QMouseEvent * )
@@ -141,3 +154,8 @@ void OTicker::setScrollLength( int len )
     scrollLength = len;
 }
 
+void OTicker::resizeEvent( QResizeEvent *e )
+{
+    setText( scrollText );
+    QLabel::resizeEvent( e );
+}
