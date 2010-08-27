@@ -47,8 +47,8 @@ g  = lower price
 v  = volume
 */
 
-const char yahoo_us_stocks_server[]="finance.yahoo.com";
-const char yahoo_eu_stocks_server[]="finance.yahoo.com";
+const char yahoo_us_stocks_server[]="download.finance.yahoo.com";
+const char yahoo_eu_stocks_server[]="download.finance.yahoo.com";
 //const char yahoo_eu_stocks_server[]="fr.finance.yahoo.com";
 
 const char yahoo_url_beg[]="/d/quotes.csv?s=";
