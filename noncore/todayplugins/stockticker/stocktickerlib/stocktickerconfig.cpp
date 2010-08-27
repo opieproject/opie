@@ -133,9 +133,9 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     scrollSpeed = new QSpinBox( this, "Scrollspin" );
     QWhatsThis::add( timerDelaySpin , tr( "Speed of scrolling action, in milliseconds" ) );
     scrollSpeed->setMaxValue( 1000);
-    scrollSpeed->setSteps(50,50);
+    scrollSpeed->setSteps(25,25);
     cfg.setGroup("Timer");
-    scrollSpeed->setValue( cfg.readNumEntry("ScrollSpeed",50));
+    scrollSpeed->setValue( cfg.readNumEntry("ScrollSpeed",25));
     layout->addMultiCellWidget( scrollSpeed , 7, 7, 0, 0);
 
     QLabel *label3;

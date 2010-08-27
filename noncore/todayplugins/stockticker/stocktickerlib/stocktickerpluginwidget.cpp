@@ -242,7 +242,7 @@ void getStocks(char *blah) {
       symbollist.replace(QRegExp(" "),"+");//seperated by +
 
       cfg.setGroup("Timer");
-      stocktickerTicker->setUpdateTime( cfg.readNumEntry("ScrollSpeed",50));
+      stocktickerTicker->setUpdateTime( cfg.readNumEntry("ScrollSpeed",25));
       stocktickerTicker->setScrollLength( cfg.readNumEntry("ScrollLength",10));
 
       if (!symbollist.isEmpty()) {
