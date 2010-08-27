@@ -50,37 +50,21 @@ void getStocks(char *blah) {
   QString tempString;
       libstocks_return_code error;
 
-//        Config cfg( "stockticker");
-//        cfg.setGroup( "Fields" );
-//        bool dotimeCheck, dodateCheck, dosymbolCheck, donameCheck;
-//        bool docurrentPriceCheck, dolastPriceCheck, doopenPriceCheck;
-//        bool dominPriceCheck, domaxPriceCheck, dovariationCheck, dovolumeCheck;
+        Config cfg( "stockticker");
+        cfg.setGroup( "Fields" );
 
-      dotimeCheck=dodateCheck=dosymbolCheck=donameCheck= docurrentPriceCheck=dolastPriceCheck=doopenPriceCheck=dominPriceCheck=domaxPriceCheck=dovariationCheck=dovolumeCheck=false;
 
-      dotimeCheck=1;
-      dodateCheck=1;
-      dosymbolCheck=1;
-      donameCheck=1;
-      docurrentPriceCheck=1;
-      dolastPriceCheck=1;
-      doopenPriceCheck=1;
-      dominPriceCheck=1;
-      domaxPriceCheck=1;
-      dovariationCheck=1;
-      dovolumeCheck=1;
-
-//        dotimeCheck=cfg.readBoolEntry("timeCheck",1);
-//        dodateCheck=cfg.readBoolEntry("dateCheck",1);
-//        dosymbolCheck=cfg.readBoolEntry("symbolCheck",1);
-//        donameCheck=cfg.readBoolEntry("nameCheck",1);
-//        docurrentPriceCheck=cfg.readBoolEntry("currentPriceCheck",1);
-//        dolastPriceCheck=cfg.readBoolEntry("lastPriceCheck",1);
-//        doopenPriceCheck=cfg.readBoolEntry("openPriceCheck",1);
-//        dominPriceCheck=cfg.readBoolEntry("minPriceCheck",1);
-//        domaxPriceCheck=cfg.readBoolEntry("maxPriceCheck",1);
-//        dovariationCheck=cfg.readBoolEntry("variationCheck",1);
-//        dovolumeCheck=cfg.readBoolEntry("volumeCheck",1);
+        dotimeCheck=cfg.readBoolEntry("timeCheck",1);
+        dodateCheck=cfg.readBoolEntry("dateCheck",1);
+        dosymbolCheck=cfg.readBoolEntry("symbolCheck",1);
+        donameCheck=cfg.readBoolEntry("nameCheck",1);
+        docurrentPriceCheck=cfg.readBoolEntry("currentPriceCheck",1);
+        dolastPriceCheck=cfg.readBoolEntry("lastPriceCheck",1);
+        doopenPriceCheck=cfg.readBoolEntry("openPriceCheck",1);
+        dominPriceCheck=cfg.readBoolEntry("minPriceCheck",1);
+        domaxPriceCheck=cfg.readBoolEntry("maxPriceCheck",1);
+        dovariationCheck=cfg.readBoolEntry("variationCheck",1);
+        dovolumeCheck=cfg.readBoolEntry("volumeCheck",1);
 
   //    DefProxy();
       // {
