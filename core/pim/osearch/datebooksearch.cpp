@@ -61,8 +61,12 @@ bool DatebookSearch::load()
 int DatebookSearch::search()
 {
     OPimRecordList<OPimEvent> results = _dates->matchRegexp(m_search);
-    for (uint i = 0; i < results.count(); i++)
-        insertItem( new OPimEvent( results[i] ) );
+    for (uint i = 0; i < results.count(); i++) {
+        OPimEvent *event = new OPimEvent( results[i] );
+        if( event->lastHitField() == -1 )
+            event->match( m_search );
+        insertItem( event );
+    }
     return m_resultCount;
 }
 

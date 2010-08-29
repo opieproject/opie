@@ -49,7 +49,10 @@ int AdressSearch::search()
 {
     OPimRecordList<OPimContact> results = _contacts->matchRegexp(m_search);
     for (uint i = 0; i < results.count(); i++) {
-        (void)new ContactItem( this, new OPimContact( results[i] ));
+        OPimContact *contact = new OPimContact( results[i] );
+        if( contact->lastHitField() == -1 )
+            contact->match( m_search );
+        (void)new ContactItem( this, contact );
     }
     return results.count();
 }

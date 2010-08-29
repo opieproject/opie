@@ -55,8 +55,12 @@ bool TodoSearch::load()
 int TodoSearch::search()
 {
     OPimRecordList<OPimTodo> results = _todos->matchRegexp(m_search);
-    for (uint i = 0; i < results.count(); i++)
-        insertItem( new OPimTodo( results[i] ));
+    for (uint i = 0; i < results.count(); i++) {
+        OPimTodo *todo = new OPimTodo( results[i] );
+        if( todo->lastHitField() == -1 )
+            todo->match( m_search );
+        insertItem( todo );
+    }
     return m_resultCount;
 }
 
