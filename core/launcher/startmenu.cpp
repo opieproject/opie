@@ -36,6 +36,7 @@
 
 /* OPIE */
 #include <opie2/oresource.h>
+#include <opie2/odebug.h>
 using namespace Opie::Core;
 #include <qtopia/qpeapplication.h>
 #include <qtopia/config.h>
@@ -73,6 +74,25 @@ StartMenu::StartMenu(QWidget *parent) : QLabel( parent )
     launchMenu = 0;
     currentItem = 0;
     refreshMenu();
+
+    qApp->installEventFilter( this );
+}
+
+
+bool StartMenu::eventFilter( QObject *obj, QEvent *e )
+{
+    if ( e->type() == QEvent::MouseButtonRelease )  {
+        QMouseEvent *me = static_cast<QMouseEvent *>(e);
+        if( launchMenu && launchMenu->isVisible() ) {
+            QPoint pt = mapFromGlobal( me->globalPos() );
+            if( frameGeometry().contains(pt) ) {
+                // Eat this event, because sometimes it will
+                // close the menu unexpectedly
+                return true;
+            }
+        }
+    }
+    return QLabel::eventFilter(obj,e);
 }
 
 

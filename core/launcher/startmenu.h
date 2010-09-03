@@ -78,6 +78,7 @@ protected slots:
 
 protected:
     virtual void mousePressEvent( QMouseEvent * );
+    bool eventFilter( QObject *obj, QEvent *e );
 
 private:
     void loadApplets();
