@@ -98,7 +98,6 @@ private slots:
     void findClose();
 
     void search();
-    void accept();
 
     void newFile();
     void openFile( const DocLnk & );

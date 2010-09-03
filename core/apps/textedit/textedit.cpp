@@ -434,16 +434,6 @@ void TextEdit::cleanUp()
     cfg.writeEntry ( "FilePermissions", filePerms );
 }
 
-void TextEdit::accept()
-{
-    if( edited ) {
-        if(save())
-            qApp->quit();
-    }
-    else
-        qApp->quit();
-}
-
 void TextEdit::zoomIn()
 {
     setFontSize(editor->font().pointSize()+1,false);
@@ -586,7 +576,7 @@ void TextEdit::search()
 
 void TextEdit::newFile() {
     clear();
-    setWState (WState_Reserved1 );
+//    setWState (WState_Reserved1 );
     editor->setFocus();
     updateCaption();
     resetEditStatus();
@@ -693,7 +683,7 @@ void TextEdit::openFile( const DocLnk &f )
 void TextEdit::showEditTools() {
     menu->show();
     editBar->show();
-    setWState (WState_Reserved1 );
+//    setWState (WState_Reserved1 );
 }
 
 void TextEdit::resetEditStatus() {
