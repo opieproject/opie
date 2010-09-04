@@ -54,9 +54,15 @@ class QpeEditor : public QMultiLineEdit
 
 public:
     QpeEditor( QWidget *parent, const char * name = 0 )
-            : QMultiLineEdit( parent, name ) {
+            : QMultiLineEdit( parent, name )
+    {
         clearTableFlags();
         setTableFlags( Tbl_vScrollBar | Tbl_autoHScrollBar );
+        markIt = false;
+        line1 = 0;
+        line2 = 0;
+        col1 = 0;
+        col2 = 0;
     }
 
     void find( const QString &txt, bool caseSensitive,
