@@ -745,7 +745,7 @@ bool TextEdit::save()
 
                 if(setmode) {
                     if (fstat(docFd, &buf)) {
-                        close(docFd);
+                        ::close(docFd);
                         setmode = false;
                     }
                     else
@@ -762,7 +762,7 @@ bool TextEdit::save()
                 // Restore file permissions
                 if(setmode) {
                     fchmod(docFd, mode);
-                    close(docFd);
+                    ::close(docFd);
                 }
             } else {
                 odebug << "regular save file" << oendl;
