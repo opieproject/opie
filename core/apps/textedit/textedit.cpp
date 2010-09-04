@@ -744,12 +744,13 @@ bool TextEdit::save()
                     setmode = false;
 
                 if(setmode) {
-		    if (fstat(docFd, &buf)) {
+                    if (fstat(docFd, &buf)) {
                         close(docFd);
                         setmode = false;
-                    } else
+                    }
+                    else
                         mode = buf.st_mode;
-		}
+                }
 
                 doc->setName(name);
                 FileManager fm;
