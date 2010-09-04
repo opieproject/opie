@@ -59,32 +59,7 @@ void OAbstractMobileDevice::setAPMTimeOut( int time ) {
 
 
 bool OAbstractMobileDevice::suspend() {
-    if ( !isQWS( ) ) // only qwsserver is allowed to suspend
-        return false;
-
-    bool res = false;
-    QCopChannel::send( "QPE/System", "aboutToSuspend()" );
-
-    struct timeval tvs, tvn;
-    ::gettimeofday ( &tvs, 0 );
-
-    ::sync(); // flush fs caches
-    res = ( ::system ( "apm --suspend" ) == 0 );
-
-    // This is needed because some apm implementations are asynchronous and we
-    // can not be sure when exactly the device is really suspended
-    // This can be deleted as soon as a stable familiar with a synchronous apm implementation exists.
-
-    if ( res ) {
-        do { // wait at most 1.5 sec: either suspend didn't work or the device resumed
-            ::usleep ( 200 * 1000 );
-            ::gettimeofday ( &tvn, 0 );
-        } while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < m_timeOut );
-    }
-
-    QCopChannel::send( "QPE/System", "returnFromSuspend()" );
-
-    return res;
+    return apmSuspend( m_timeOut );
 }
 
 //#include <linux/fb.h> better not rely on kernel headers in userspace ...

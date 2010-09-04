@@ -210,9 +210,9 @@ struct ODeviceButtonComboStruct z_combos[] = {
 void Zaurus::init(const QString& cpu_info)
 {
     qDebug( "Zaurus::init()" );
-    // Set the time to wait until the system is really suspended
-    // the delta between apm --suspend and sleeping
-    setAPMTimeOut( 15000 );
+
+    // No need to wait after apm --suspend
+    setAPMTimeOut( 0 );
 
     // generic distribution code already scanned /etc/issue at that point -
     // embedix releases contain "Embedix <version> | Linux for Embedded Devices"
@@ -855,32 +855,3 @@ bool Zaurus::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress,
     return false;
 }
 
-bool Zaurus::suspend() {
-    if ( !isQWS( ) ) // only qwsserver is allowed to suspend
-        return false;
-
-    bool res = false;
-    QCopChannel::send( "QPE/System", "aboutToSuspend()" );
-
-    struct timeval tvs, tvn;
-    ::gettimeofday ( &tvs, 0 );
-
-    ::sync(); // flush fs caches
-    res = ( ::system ( "apm --suspend" ) == 0 );
-
-    // This is needed because some apm implementations are asynchronous and we
-    // can not be sure when exactly the device is really suspended
-    // This can be deleted as soon as a stable familiar with a synchronous apm implementation exists.
-    // on non embedix eg. 2.6 kernel line apm is synchronous so we don't need it here.
-
-    if ( res && m_embedix) {
-        do { // wait at most 1.5 sec: either suspend didn't work or the device resumed
-            ::usleep ( 200 * 1000 );
-            ::gettimeofday ( &tvn, 0 );
-        } while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < m_timeOut );
-    }
-
-    QCopChannel::send( "QPE/System", "returnFromSuspend()" );
-
-    return res;
-}

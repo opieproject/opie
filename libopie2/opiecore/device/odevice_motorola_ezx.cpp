@@ -86,9 +86,9 @@ struct ezx_button ezx_buttons [] = {
 void Motorola_EZX::init(const QString& cpu_info)
 {
     qDebug( "Motorola_EZX::init()" );
-    // Set the time to wait until the system is really suspended
-    // the delta between apm --suspend and sleeping
-    setAPMTimeOut( 15000 );
+
+    // No need to wait after apm --suspend
+    setAPMTimeOut( 0 );
 
     d->m_vendorstr = "OpenEZX Team";
     d->m_systemstr = "OpenEZX";
@@ -199,22 +199,4 @@ void Motorola_EZX::systemMessage( const QCString &msg, const QByteArray & )
     if ( msg == "deviceButtonMappingChanged()" ) {
         reloadButtonMapping();
     }
-}
-
-bool Motorola_EZX::suspend() {
-    if ( !isQWS( ) ) // only qwsserver is allowed to suspend
-        return false;
-
-    bool res = false;
-    QCopChannel::send( "QPE/System", "aboutToSuspend()" );
-
-    struct timeval tvs;
-    ::gettimeofday ( &tvs, 0 );
-
-    ::sync(); // flush fs caches
-    res = ( ::system ( "apm --suspend" ) == 0 );
-
-    QCopChannel::send( "QPE/System", "returnFromSuspend()" );
-
-    return res;
 }

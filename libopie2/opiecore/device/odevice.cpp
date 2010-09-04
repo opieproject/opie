@@ -56,6 +56,7 @@
 #include <opie2/okeyfilter.h>
 #include <opie2/oresource.h>
 #include <opie2/odebug.h>
+#include <opie2/oprocess.h>
 
 /* STD */
 #include <fcntl.h>
@@ -825,6 +826,57 @@ void ODevice::remPreHandler(QWSServer::KeyboardFilter*aFilter)
     Opie::Core::OKeyFilter::inst()->remPreHandler(aFilter);
 }
 
+/**
+ * \brief Perform standard APM suspend
+ *
+ * Suspends the device by calling apm --suspend (asynchronously, while
+ * continuing to process events, allowing suspend notification scripts to
+ * work).
+ *
+ * @param timeout max time to wait after calling apm --suspend (for older
+ *  async apm implementations) or 0 to disable waiting
+ * @return true on success, false on failure
+ */
+bool ODevice::apmSuspend( int timeout )
+{
+    if ( !isQWS( ) ) // only qwsserver is allowed to suspend
+        return false;
+
+    bool res = false;
+    sendSuspendmsg();
+
+    struct timeval tvs, tvn;
+    ::gettimeofday ( &tvs, 0 );
+
+    ::sync(); // flush fs caches
+
+    OProcess *process = new OProcess();
+    *process << "/usr/bin/apm" << "--suspend";
+    if (process->start()) {
+        while( process->isRunning() ) {
+           qApp->processEvents();
+        }
+        if( process->normalExit() )
+            res = (process->exitStatus() == 0);
+    }
+    else
+        owarn << "apm suspend execution failed" << oendl;
+
+    if ( res && timeout > 0 ) {
+        // This is needed because some apm implementations are asynchronous and we
+        // can not be sure when exactly the device is really suspended
+        // This can be deleted as soon as a stable familiar with a synchronous apm implementation exists.
+
+        do { // wait for timeout, after which either suspend didn't work or the device resumed
+            ::usleep ( 200 * 1000 );
+            ::gettimeofday ( &tvn, 0 );
+        } while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < timeout );
+    }    
+
+    QCopChannel::send( "QPE/System", "returnFromSuspend()" );
+
+    return res;
+}
 
 
 }

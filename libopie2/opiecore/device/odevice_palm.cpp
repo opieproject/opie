@@ -352,12 +352,7 @@ bool Palm::suspend()
         case Model_Palm_T750:
         case Model_Palm_T755P:
             {
-                QCopChannel::send( "QPE/System", "aboutToSuspend()" );
-
-                ::sync(); // flush fs caches
-                res = ( ::system ( "apm --suspend" ) == 0 );
-
-                QCopChannel::send( "QPE/System", "returnFromSuspend()" );
+                res = apmSuspend( 0 );
             }
             break;
         default:

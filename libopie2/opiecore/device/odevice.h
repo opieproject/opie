@@ -308,6 +308,7 @@ protected:
     virtual void initButtonCombos();
     static void sendSuspendmsg();
     void loadButtonCombos( const ODeviceButtonComboStruct combos[], uint length );
+    bool apmSuspend( int timeout );
 
     ODeviceData *d;
 

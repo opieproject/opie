@@ -77,8 +77,6 @@ class Motorola_EZX : public OAbstractMobileDevice
     virtual OLedState ledState( OLed led ) const;
     virtual bool setLedState( OLed led, OLedState st );
 
-    virtual bool suspend();
-
   protected:
     QString m_backlightdev;
     OLedState m_leds[1];
