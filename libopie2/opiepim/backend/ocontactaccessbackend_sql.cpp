@@ -420,11 +420,12 @@ bool OPimContactAccessBackend_SQL::replace ( const OPimContact &contact )
     m_changeLog->setEnabled( false );
 
     // Delete the old record
-    if ( !remove( contact.uid() ) )
-        return false;
+    bool result = remove( contact.uid() );
 
-    // Add the new version back in
-    bool result = add( contact );
+    if( result ) {
+        // Add the new version back in
+        result = add( contact );
+    }
 
     m_changeLog->setEnabled( true );
     if( result ) {

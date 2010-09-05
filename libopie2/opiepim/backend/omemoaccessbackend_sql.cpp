@@ -295,12 +295,13 @@ bool OPimMemoAccessBackend_SQL::replace ( const OPimMemo &memo )
     m_changeLog->setEnabled( false );
 
     // Delete the old record
-    if ( !remove( memo.uid() ) )
-        return false;
+    bool result = remove( memo.uid() );
 
-    // Add the new version back in
-    bool result = add( memo );
-
+    if( result ) {
+        // Add the new version back in
+        result = add( memo );
+    }
+        
     m_changeLog->setEnabled( true );
     if( result ) {
         // Add changelog entry

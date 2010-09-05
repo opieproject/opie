@@ -495,19 +495,20 @@ bool OPimTodoAccessBackendSQL::replace( const OPimTodo& t) {
     m_changeLog->setEnabled( false );
 
     // Delete the old record
-    if ( !remove( t.uid() ) )
-        return false;
-    
-    // Add the new version back in
-    bool result = add( t );
+    bool result = remove( t.uid() );
+
+    if( result ) {
+        // Add the new version back in
+        result = add( t );
+    }
 
     m_changeLog->setEnabled( true );
     if( result ) {
         // Add changelog entry
         m_changeLog->addUpdateEntry( t.uid() );
+        
+        m_dirty = false; // we changed some stuff but the UID stayed the same
     }
-
-    m_dirty = false; // we changed some stuff but the UID stayed the same
 
     return result;
 }

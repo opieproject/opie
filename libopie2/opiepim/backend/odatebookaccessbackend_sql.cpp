@@ -345,11 +345,12 @@ bool ODateBookAccessBackend_SQL::replace( const OPimEvent& ev )
     m_changeLog->setEnabled( false );
 
     // Delete the old record
-    if ( !remove( ev.uid() ) )
-        return false;
+    bool result = remove( ev.uid() );
 
-    // Add the new version back in
-    bool result = add( ev );
+    if( result ) {
+        // Add the new version back in
+        result = add( ev );
+    }
 
     m_changeLog->setEnabled( true );
     if( result ) {
