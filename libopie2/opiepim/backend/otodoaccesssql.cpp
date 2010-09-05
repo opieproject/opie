@@ -387,7 +387,7 @@ bool OPimTodoAccessBackendSQL::reload(){
 }
 
 bool OPimTodoAccessBackendSQL::save(){
-    return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
+    return m_driver->sync();
 }
 
 OPimChangeLog *OPimTodoAccessBackendSQL::changeLog() const

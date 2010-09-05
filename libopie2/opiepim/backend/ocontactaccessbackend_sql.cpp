@@ -340,7 +340,7 @@ bool OPimContactAccessBackend_SQL::reload()
 
 bool OPimContactAccessBackend_SQL::save()
 {
-    return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
+    return m_driver->sync();
 }
 
 
