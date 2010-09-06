@@ -103,7 +103,7 @@ void Motorola_EZX::init(const QString& cpu_info)
     else
         model = cpu_info;
 
-    if ( model == "Motorola Ezx Platform" ) {
+    if ( model.left(12).lower() == "motorola ezx" ) {
         d->m_model = Model_Motorola_EZX;
         d->m_modelstr = "Motorola_EZX";
     } else assert( 0 );
