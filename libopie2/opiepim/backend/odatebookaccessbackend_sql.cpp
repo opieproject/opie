@@ -419,6 +419,7 @@ QArray<int> ODateBookAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
     QString qu = "SELECT uid FROM datebook WHERE (";
 
     // Do it make sense to search other fields, too ?
+    qu += " rlike(\""+ r.pattern() + "\", Description ) OR";
     qu += " rlike(\""+ r.pattern() + "\", Location ) OR";
     qu += " rlike(\""+ r.pattern() + "\", Note )";
 
