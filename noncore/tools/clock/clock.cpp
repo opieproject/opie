@@ -139,6 +139,10 @@ AlarmDlg::AlarmDlg(QWidget *parent, const char *name,
     pixmap->setPixmap( Opie::Core::OResource::loadPixmap("clock/alarmbell") );
     alarmDlgLabel->setText(txt);
 
+    // Force the window to overlap the taskbar
+    // FIXME: It doesn't quite overlap completely, possibly due to the way it is being shown (execDialog)
+    setFixedHeight( qApp->desktop()->height() );
+
     connect(cmdSnooze, SIGNAL(clicked()), this, SLOT(checkSnooze()));
     connect(cmdOk, SIGNAL(clicked()), this, SLOT(accept()));
 }
