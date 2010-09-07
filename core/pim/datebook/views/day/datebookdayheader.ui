@@ -36,11 +36,9 @@
             <height>26</height>
         </rect>
     </property>
-    <property>
-        <name>layoutMargin</name>
-    </property>
-    <property>
-        <name>layoutSpacing</name>
+    <property stdset="1">
+        <name>caption</name>
+        <string>DateBookDayHeaderBase</string>
     </property>
     <hbox>
         <property stdset="1">
@@ -164,6 +162,13 @@
                 <cstring>grpDays</cstring>
             </property>
             <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>3</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
                 <name>frameShape</name>
                 <enum>NoFrame</enum>
             </property>
@@ -199,6 +204,13 @@
                     <property stdset="1">
                         <name>name</name>
                         <cstring>cmdDay1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>3</vsizetype>
+                        </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>text</name>
