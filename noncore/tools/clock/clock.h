@@ -37,7 +37,7 @@ class AlarmDlg: public AlarmDlgBase
     Q_OBJECT
 
 public:
-    AlarmDlg(QWidget *parent = 0, const char *name = 0, bool modal = TRUE,
+    AlarmDlg(QWidget *parent = 0, const char *name = 0,
     const QString &txt = "Alarm");
 
     void    setText(const QString &txt);

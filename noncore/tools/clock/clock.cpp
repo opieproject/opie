@@ -126,9 +126,9 @@ public:
 };
 
 
-AlarmDlg::AlarmDlg(QWidget *parent, const char *name, bool modal,
+AlarmDlg::AlarmDlg(QWidget *parent, const char *name,
     const QString &txt) :
-    AlarmDlgBase(parent, name, modal)
+    AlarmDlgBase(parent, name, TRUE, WType_Modal | WStyle_StaysOnTop )
 {
     // Increase font size to make it a little more readable
     QFont f(font());
