@@ -12,6 +12,7 @@
 #include <qpixmap.h>
 #include <qlayout.h>
 #include <qtextview.h>
+#include <qapplication.h>
 
 #include <stdlib.h>
 
@@ -54,6 +55,8 @@ OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, co
 
     if( ! largeDesc )
         startTimer( 60000 );
+
+    setFixedHeight( qApp->desktop()->height() );
 }
 
 OPimAlarmDlg::~OPimAlarmDlg()
