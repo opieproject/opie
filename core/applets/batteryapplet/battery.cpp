@@ -35,7 +35,7 @@
 
 using namespace Opie::Ui;
 BatteryMeter::BatteryMeter( QWidget *parent )
-: QWidget( parent ), charging(false) {
+: QWidget( parent ), charging(false), m_ignoreRelease(false) {
     ps = new PowerStatus;
     startTimer( 10000 );
 
