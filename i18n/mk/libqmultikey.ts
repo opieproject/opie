@@ -19,11 +19,11 @@
     </message>
     <message>
         <source>Add</source>
-        <translation>Додади</translation>
+        <translation type="obsolete">Додади</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Одстрани</translation>
+        <translation type="obsolete">Одстрани</translation>
     </message>
     <message>
         <source>Pickboard</source>
@@ -59,6 +59,14 @@
     </message>
     <message>
         <source>Move Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add keymap...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove keymap</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

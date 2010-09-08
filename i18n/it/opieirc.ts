@@ -387,6 +387,18 @@ Real name: %4</source>
         <source>Channel %1 doesn&apos;t exists</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Redirecting from %1 to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Topic for channel </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> is &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IRCQueryTab</name>

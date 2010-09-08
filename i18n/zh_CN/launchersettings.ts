@@ -6,10 +6,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -196,15 +192,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -220,15 +208,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Adds a new Tab to the Launcher.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Opens a new dialog to customize the select Tab.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deletes a Tab from the Launcher.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

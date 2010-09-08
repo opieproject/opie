@@ -15,11 +15,19 @@
     </message>
     <message>
         <source>Disable discovery</source>
-        <translation>Désactiver la recherche</translation>
+        <translation type="obsolete">Désactiver la recherche</translation>
     </message>
     <message>
         <source>Enable discovery</source>
-        <translation>Activer la recherche</translation>
+        <translation type="obsolete">Activer la recherche</translation>
+    </message>
+    <message>
+        <source>Disable receive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable receive</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

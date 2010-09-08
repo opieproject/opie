@@ -14,11 +14,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disable discovery</source>
+        <source>Disable receive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable discovery</source>
+        <source>Enable receive</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -210,6 +210,10 @@ ntpdate</translation>
         <source>Display time prediction information</source>
         <translation>Прикажи информации за претпоставки</translation>
     </message>
+    <message>
+        <source>Show time settings on every restart</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TimeTabWidget</name>
@@ -244,6 +248,21 @@ ntpdate</translation>
     <message>
         <source>Set predicted time</source>
         <translation>Постави претпоставено време</translation>
+    </message>
+    <message>
+        <source>Network settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time zone file missing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no time zone file for the
+selected time zone (%1).
+You will need to install it before the
+system time zone can be set correctly.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

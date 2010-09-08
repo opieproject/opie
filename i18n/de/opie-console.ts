@@ -541,6 +541,22 @@ Der Unicode Wert der Taste</translation>
         <source>Log</source>
         <translation></translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Keine</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scrollbar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ModemConfigWidget</name>

@@ -179,6 +179,30 @@ Click here to select an available scheme.</source>
         <source>Click here to display scrollbars on the left side instead of the right.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Big Icon size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Big Icon Size determines the size of the application icons in Launcher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small Icon size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small Icon Size determines the size of many of the icons seen in applications (in menus, tab bars, tool bars, etc.), as well as the size of taskbar.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>use Big Pixmaps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enlarge toolbar pixmaps, you probably want to enable this option for devices with screen resolution greater than 240x320</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>

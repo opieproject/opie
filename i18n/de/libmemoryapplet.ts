@@ -92,15 +92,15 @@ Speicher wird wie folgt eingeteilt:
     </message>
     <message>
         <source>RAM</source>
-        <translation>RAM</translation>
+        <translation type="obsolete">RAM</translation>
     </message>
     <message>
         <source>CF Card</source>
-        <translation>CF Card</translation>
+        <translation type="obsolete">CF Card</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation>SD Card</translation>
+        <translation type="obsolete">SD Card</translation>
     </message>
     <message>
         <source> On </source>
@@ -152,7 +152,7 @@ Speicher wird wie folgt eingeteilt:
     </message>
     <message>
         <source>Swapfile activated.</source>
-        <translation>Auslagerungsdate aktiviert.</translation>
+        <translation type="obsolete">Auslagerungsdate aktiviert.</translation>
     </message>
     <message>
         <source></source>
@@ -164,6 +164,22 @@ Speicher wird wie folgt eingeteilt:
     </message>
     <message>
         <source>Swap disabled in kernel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(None)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swapfile already active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swapfile not active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swap file currently active!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

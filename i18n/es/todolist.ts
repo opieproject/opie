@@ -3,11 +3,11 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>&lt;h1&gt;Alarma en %1&lt;/h1&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;h1&gt;Alarma en %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>All</source>
@@ -16,6 +16,10 @@
     <message>
         <source>Unfiled</source>
         <translation type="unfinished">En blanco</translation>
+    </message>
+    <message>
+        <source>Todo Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -303,7 +307,19 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation>%1 dia(s)</translation>
+        <translation type="obsolete">%1 dia(s)</translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -331,6 +347,10 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
     <message>
         <source>Type</source>
         <translation>Tipo</translation>
+    </message>
+    <message>
+        <source>Alarm time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

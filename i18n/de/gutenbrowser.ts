@@ -316,11 +316,11 @@ http://www.trolltech.com
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>   </source>
+        <source>Last name first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Last name first.</source>
+        <source>   </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

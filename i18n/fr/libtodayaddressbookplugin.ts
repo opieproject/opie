@@ -82,26 +82,54 @@ jours</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Prochain anniversaire de naissance
+        <translation type="obsolete">Prochain anniversaire de naissance
 prévu dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire de naissance prévu
+        <translation type="obsolete">Pas d&apos;anniversaire de naissance prévu
 dans les &lt;b&gt;%1&lt;/b&gt; prochains jours !</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Prochain anniversaire dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
+        <translation type="obsolete">Prochain anniversaire dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire dans les &lt;b&gt;%1&lt;/b&gt;
+        <translation type="obsolete">Pas d&apos;anniversaire dans les &lt;b&gt;%1&lt;/b&gt;
 prochains jours !</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>
         <translation>La base de données ne permet pas ce type de recherche ! Mettez à jour libOpie !&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>Birthdays in next %1 days:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tomorrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No birthdays in next %1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anniversaries in next %1 days:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No anniversaries in next %1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

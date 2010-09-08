@@ -3,62 +3,62 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation>Kalender</translation>
+        <translation type="obsolete">Kalender</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Ny</translation>
+        <translation type="obsolete">Ny</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Idag</translation>
+        <translation type="obsolete">Idag</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Dag</translation>
+        <translation type="obsolete">Dag</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Uge</translation>
+        <translation type="obsolete">Uge</translation>
     </message>
     <message>
         <source>WeekLst</source>
-        <translation>Uge liste</translation>
+        <translation type="obsolete">Uge liste</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Måned</translation>
+        <translation type="obsolete">Måned</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Find</translation>
+        <translation type="obsolete">Find</translation>
     </message>
     <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
-        <translation>Begivenhedens varighed er
+        <translation type="obsolete">Begivenhedens varighed er
 potientielt længere end
 intervallet mellem gentagelserne.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Kan ikke redigere data, synkronisering er igang</translation>
+        <translation type="obsolete">Kan ikke redigere data, synkronisering er igang</translation>
     </message>
     <message>
         <source>Edit Event</source>
-        <translation>Rediger begivenhed</translation>
+        <translation type="obsolete">Rediger begivenhed</translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation> minutter)</translation>
+        <translation type="obsolete"> minutter)</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Ikke mere lagerplads</translation>
+        <translation type="obsolete">Ikke mere lagerplads</translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -66,7 +66,7 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation>Kalender kunne ikke gemme
+        <translation type="obsolete">Kalender kunne ikke gemme
 dine ændringer.
 Frigør noget lagerplads og prøv igen.
 
@@ -74,31 +74,27 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation>(Ukendt)</translation>
+        <translation type="obsolete">(Ukendt)</translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation>Fejl!</translation>
+        <translation type="obsolete">Fejl!</translation>
     </message>
     <message>
         <source>Fix it</source>
-        <translation>Ret</translation>
+        <translation type="obsolete">Ret</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation>Fortsæt</translation>
+        <translation type="obsolete">Fortsæt</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation>Kopier begivenhed</translation>
+        <translation type="obsolete">Kopier begivenhed</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation>Rediger...</translation>
-    </message>
-    <message>
-        <source>error box</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Rediger...</translation>
     </message>
 </context>
 <context>
@@ -151,6 +147,10 @@ Afslut alligevel?</translation>
         <source>Sunday</source>
         <translation>Søndag</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -167,23 +167,23 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Start</translation>
+        <translation type="obsolete">Start</translation>
     </message>
     <message>
         <source>End</source>
-        <translation>Slut</translation>
+        <translation type="obsolete">Slut</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Rediger</translation>
+        <translation type="obsolete">Rediger</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Slet</translation>
+        <translation type="obsolete">Slet</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Send</translation>
+        <translation type="obsolete">Send</translation>
     </message>
     <message>
         <source>Time</source>
@@ -195,11 +195,11 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Kopier</translation>
+        <translation type="obsolete">Kopier</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation>Send denne begivenhed</translation>
+        <translation type="obsolete">Send denne begivenhed</translation>
     </message>
 </context>
 <context>
@@ -228,6 +228,14 @@ Afslut alligevel?</translation>
         <source>Calendar</source>
         <translation>Kalender</translation>
     </message>
+    <message>
+        <source>Configure Descriptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure Locations</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -249,15 +257,15 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Alarm Settings</source>
-        <translation>Alarm indstillinger</translation>
+        <translation type="obsolete">Alarm indstillinger</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation>Alarm forvalg</translation>
+        <translation type="obsolete">Alarm forvalg</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation> minutter</translation>
+        <translation type="obsolete"> minutter</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -265,19 +273,19 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation>Række stil:</translation>
+        <translation type="obsolete">Række stil:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Standard</translation>
+        <translation type="obsolete">Standard</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation>Medium</translation>
+        <translation type="obsolete">Medium</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Stor</translation>
+        <translation type="obsolete">Stor</translation>
     </message>
     <message>
         <source>Views</source>
@@ -289,39 +297,39 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Dag</translation>
+        <translation type="obsolete">Dag</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Uge</translation>
+        <translation type="obsolete">Uge</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation>Ugeliste</translation>
+        <translation type="obsolete">Ugeliste</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Måned</translation>
+        <translation type="obsolete">Måned</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation>Gå til dags dato</translation>
+        <translation type="obsolete">Gå til dags dato</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation>Klokketslet for</translation>
+        <translation type="obsolete">Klokketslet for</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Ingen</translation>
+        <translation type="obsolete">Ingen</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Start</translation>
+        <translation type="obsolete">Start</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation>Start-slut</translation>
+        <translation type="obsolete">Start-slut</translation>
     </message>
     <message>
         <source>Defaults</source>
@@ -351,12 +359,40 @@ Afslut alligevel?</translation>
         <source>Pluginlist</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snooze:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">dage</translation>
+    </message>
+    <message>
+        <source>Descriptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locations...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation>Denne begivenhed varer hele dagen.</translation>
+        <translation type="obsolete">Denne begivenhed varer hele dagen.</translation>
     </message>
 </context>
 <context>
@@ -385,19 +421,19 @@ Afslut alligevel?</translation>
     <name>DateBookWeekLstEvent</name>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Rediger</translation>
+        <translation type="obsolete">Rediger</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Kopier</translation>
+        <translation type="obsolete">Kopier</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Slet</translation>
+        <translation type="obsolete">Slet</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Send</translation>
+        <translation type="obsolete">Send</translation>
     </message>
 </context>
 <context>
@@ -480,19 +516,19 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Meeting</source>
-        <translation>Møde</translation>
+        <translation type="obsolete">Møde</translation>
     </message>
     <message>
         <source>Lunch</source>
-        <translation>Frokost</translation>
+        <translation type="obsolete">Frokost</translation>
     </message>
     <message>
         <source>Dinner</source>
-        <translation>Middag</translation>
+        <translation type="obsolete">Middag</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Rejse</translation>
+        <translation type="obsolete">Rejse</translation>
     </message>
     <message>
         <source>Description </source>
@@ -500,11 +536,11 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Kontor</translation>
+        <translation type="obsolete">Kontor</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Hjemme</translation>
+        <translation type="obsolete">Hjemme</translation>
     </message>
     <message>
         <source>Start - End </source>
@@ -555,10 +591,6 @@ Afslut alligevel?</translation>
         <translation>Bemærkning...</translation>
     </message>
     <message>
-        <source>minutes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>hours</source>
         <translation type="unfinished"></translation>
     </message>
@@ -566,12 +598,158 @@ Afslut alligevel?</translation>
         <source>days</source>
         <translation type="unfinished">dage</translation>
     </message>
+    <message>
+        <source>mins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate Event</source>
+        <translation type="unfinished">Kopier begivenhed</translation>
+    </message>
+    <message>
+        <source>Edit Event</source>
+        <translation type="unfinished">Rediger begivenhed</translation>
+    </message>
 </context>
 <context>
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation>Info</translation>
+        <translation type="obsolete">Info</translation>
+    </message>
+</context>
+<context>
+    <name>DayView</name>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Dag</translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished">Gå til dags dato</translation>
+    </message>
+    <message>
+        <source>Row style:</source>
+        <translation type="unfinished">Række stil:</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standard</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation type="unfinished">Medium</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation type="unfinished">Stor</translation>
+    </message>
+</context>
+<context>
+    <name>Exceptions</name>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Kalender</translation>
+    </message>
+</context>
+<context>
+    <name>ExceptionsBase</name>
+    <message>
+        <source>Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Kalender</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;A new event has arrived. Would you like to add it to your calendar?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 new events have arrived. Would you like to add them to your calendar?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a recurring event.
+
+Do you want to apply changes to
+all occurrences or just this one?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished">Idag</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Find</translation>
+    </message>
+    <message>
+        <source>Beam this occurrence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transmit the specific occurrence of the selected recurring item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meeting</source>
+        <translation type="unfinished">Møde</translation>
+    </message>
+    <message>
+        <source>Lunch</source>
+        <translation type="unfinished">Frokost</translation>
+    </message>
+    <message>
+        <source>Dinner</source>
+        <translation type="unfinished">Middag</translation>
+    </message>
+    <message>
+        <source>Travel</source>
+        <translation type="unfinished">Rejse</translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Kontor</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Hjemme</translation>
+    </message>
+    <message>
+        <source>This is a recurring event.
+
+Do you want to delete all
+occurrences or just this one?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calendar Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -643,6 +821,57 @@ Afslut alligevel?</translation>
         <source>Sunday</source>
         <translation>Søndag</translation>
     </message>
+    <message>
+        <source>Error!</source>
+        <translation type="unfinished">Fejl!</translation>
+    </message>
+    <message>
+        <source>Fix it</source>
+        <translation type="unfinished">Ret</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished">Fortsæt</translation>
+    </message>
+    <message>
+        <source>Event duration is potentially longer
+than interval between repeats.</source>
+        <translation type="unfinished">Begivenhedens varighed er
+potientielt længere end
+intervallet mellem gentagelserne.</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Dag</translation>
+    </message>
+    <message>
+        <source>View a single day&apos;s events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished">Uge</translation>
+    </message>
+    <message>
+        <source>View a single week&apos;s events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished">Ugeliste</translation>
+    </message>
+    <message>
+        <source>View a week&apos;s events in a list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished">Måned</translation>
+    </message>
+    <message>
+        <source>Block style calendar view</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QWidget</name>
@@ -661,6 +890,10 @@ Afslut alligevel?</translation>
     <message>
         <source>th</source>
         <translation>.</translation>
+    </message>
+    <message>
+        <source>New Events</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -837,6 +1070,90 @@ og </translation>
     <message>
         <source>years</source>
         <translation>år</translation>
+    </message>
+    <message>
+        <source>Exceptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StringManagerDialog</name>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TemplateDialog</name>
+    <message>
+        <source>Template Names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re&amp;move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WeekLstView</name>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished">Ugeliste</translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished">Klokketslet for</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Ingen</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Start</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished">Start-slut</translation>
+    </message>
+</context>
+<context>
+    <name>WeekView</name>
+    <message>
+        <source>This is an all day event.</source>
+        <translation type="unfinished">Denne begivenhed varer hele dagen.</translation>
     </message>
 </context>
 </TS>

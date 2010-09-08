@@ -60,11 +60,11 @@
     </message>
     <message>
         <source>Start with new file</source>
-        <translation>Inizia con un nuovo file</translation>
+        <translation type="obsolete">Inizia con un nuovo file</translation>
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation>Chiedi conferma in Uscita</translation>
+        <translation type="obsolete">Chiedi conferma in Uscita</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -124,7 +124,7 @@
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation>Apri Barra di Ricerca</translation>
+        <translation type="obsolete">Apri Barra di Ricerca</translation>
     </message>
     <message>
         <source>Auto Save 5 min.</source>
@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>Text Edit è copyright&lt;BR&gt;2000 Trolltech AS, e&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;ed è sotto licenza GPL</translation>
+        <translation type="obsolete">Text Edit è copyright&lt;BR&gt;2000 Trolltech AS, e&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;ed è sotto licenza GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
@@ -198,11 +198,36 @@ Procedere e salvare?</translation>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation>Vuoi veramente&lt;BR&gt;&lt;B&gt;cancellare&lt;/B&gt; il file corrente
+        <translation type="obsolete">Vuoi veramente&lt;BR&gt;&lt;B&gt;cancellare&lt;/B&gt; il file corrente
 dal disco?&lt;BR&gt;L&apos;operazione è &lt;B&gt;irreversibile!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The selected file already exists. Overwrite it?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from disk?&lt;BR&gt;This is &lt;B&gt;irreversible!&lt;/B&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

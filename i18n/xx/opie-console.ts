@@ -534,6 +534,22 @@
         <source>Log</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scrollbar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ModemConfigWidget</name>

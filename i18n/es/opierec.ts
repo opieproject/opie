@@ -3,11 +3,11 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation>Atrás</translation>
+        <translation type="obsolete">Atrás</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Adelante</translation>
+        <translation type="obsolete">Adelante</translation>
     </message>
 </context>
 <context>
@@ -104,7 +104,7 @@ no ha sido reconocida</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Reproducir</translation>
+        <translation type="obsolete">Reproducir</translation>
     </message>
     <message>
         <source>Send with Ir</source>
@@ -139,15 +139,19 @@ no ha sido reconocida</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Del</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Stereo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please select file to play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

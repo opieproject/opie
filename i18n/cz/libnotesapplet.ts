@@ -15,19 +15,19 @@
     </message>
     <message>
         <source>Delete?</source>
-        <translation>Smazat?</translation>
+        <translation type="obsolete">Smazat?</translation>
     </message>
     <message>
         <source>Do you really want to&lt;BR&gt;&lt;B&gt; delete&lt;/B&gt; this note ?</source>
-        <translation>Opravdu chcete&lt;BR&gt;&lt;B&gt; smazat&lt;/B&gt; tuto poznámku?</translation>
+        <translation type="obsolete">Opravdu chcete&lt;BR&gt;&lt;B&gt; smazat&lt;/B&gt; tuto poznámku?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ano</translation>
+        <translation type="obsolete">Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Ne</translation>
+        <translation type="obsolete">Ne</translation>
     </message>
     <message>
         <source>Beam Out</source>
@@ -35,11 +35,28 @@
     </message>
     <message>
         <source>Search For...</source>
-        <translation>Hledat...</translation>
+        <translation type="obsolete">Hledat...</translation>
     </message>
     <message>
         <source>Toggle Maximized</source>
         <translation>Přepínač maximalizován</translation>
+    </message>
+    <message>
+        <source>Delete note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;empty file&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;no title&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

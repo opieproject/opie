@@ -15,11 +15,19 @@
     </message>
     <message>
         <source>Disable discovery</source>
-        <translation>Запретить обнаружение</translation>
+        <translation type="obsolete">Запретить обнаружение</translation>
     </message>
     <message>
         <source>Enable discovery</source>
-        <translation>Разрешить обнаружение</translation>
+        <translation type="obsolete">Разрешить обнаружение</translation>
+    </message>
+    <message>
+        <source>Disable receive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable receive</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

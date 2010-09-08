@@ -3,11 +3,11 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation>Vooruit</translation>
+        <translation type="obsolete">Vooruit</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Achteruit</translation>
+        <translation type="obsolete">Achteruit</translation>
     </message>
 </context>
 <context>
@@ -103,7 +103,7 @@ kaart wordt niet herkend</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Speel af</translation>
+        <translation type="obsolete">Speel af</translation>
     </message>
     <message>
         <source>Send with Ir</source>
@@ -138,15 +138,19 @@ kaart wordt niet herkend</translation>
         <translation>Auto Stil</translation>
     </message>
     <message>
-        <source>Del</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Stereo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please select file to play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

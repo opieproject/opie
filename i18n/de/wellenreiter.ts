@@ -4,83 +4,83 @@
     <name>MScanListView</name>
     <message>
         <source>Net/Station</source>
-        <translation>Netz/Station</translation>
+        <translation type="unfinished">Netz/Station</translation>
     </message>
     <message>
         <source>#</source>
-        <translation>#</translation>
+        <translation type="unfinished">#</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation>MAC-Adresse</translation>
+        <translation type="unfinished">MAC-Adresse</translation>
     </message>
     <message>
         <source>Chn</source>
-        <translation>Kanal</translation>
+        <translation type="unfinished">Kanal</translation>
     </message>
     <message>
         <source>W</source>
-        <translation>W</translation>
+        <translation type="unfinished">W</translation>
     </message>
     <message>
         <source>T</source>
-        <translation>T</translation>
+        <translation type="unfinished">T</translation>
     </message>
     <message>
         <source>Manufacturer</source>
-        <translation>Hersteller</translation>
+        <translation type="unfinished">Hersteller</translation>
     </message>
     <message>
         <source>First Seen</source>
-        <translation>Zuerst gesehen</translation>
+        <translation type="unfinished">Zuerst gesehen</translation>
     </message>
     <message>
         <source>Last Seen</source>
-        <translation>Zuletzt gesehen</translation>
-    </message>
-    <message>
-        <source>IP</source>
-        <translation></translation>
+        <translation type="unfinished">Zuletzt gesehen</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation>Ort</translation>
+        <translation type="unfinished">Ort</translation>
+    </message>
+    <message>
+        <source>IP</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MStatWindow</name>
     <message>
         <source>Protocol</source>
-        <translation>Protokoll</translation>
+        <translation type="unfinished">Protokoll</translation>
     </message>
     <message>
         <source>Count</source>
-        <translation>Anzahl</translation>
+        <translation type="unfinished">Anzahl</translation>
     </message>
 </context>
 <context>
     <name>ProtocolListView</name>
     <message>
         <source>Protocol Family</source>
-        <translation>Protokoll Familie</translation>
+        <translation type="unfinished">Protokoll Familie</translation>
     </message>
     <message>
         <source>Perform Action</source>
-        <translation>Aktion ausführen</translation>
+        <translation type="unfinished">Aktion ausführen</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Wellenreiter: trying to run as non-root!</source>
-        <translation>Wellenreiter nicht als Root gestartet!</translation>
+        <translation type="unfinished">Wellenreiter nicht als Root gestartet!</translation>
     </message>
     <message>
         <source>You have started Wellenreiter II
 as non-root. You will have
 only limited functionality.
 Proceed anyway?</source>
-        <translation>Sie haben Wellenreiter II ohne
+        <translation type="unfinished">Sie haben Wellenreiter II ohne
 Root-Berechtigung gestartet.
 Es wird nicht alle Funktionalität
 zur Verfügung stehen! Weitermachen?</translation>
@@ -98,7 +98,7 @@ Soll er abgeschaltet werden?</translation>
 (PID = %1)
 This can severly limit scanning!
 Should I kill it for you?</source>
-        <translation>Es läuft z.Z. ein dhcp Client
+        <translation type="unfinished">Es läuft z.Z. ein dhcp Client
 (PID = %1)
 Dieser kann das Scannen erheblich
 beeinflussen.
@@ -107,7 +107,7 @@ DHCP client stoppen?</translation>
     </message>
     <message>
         <source>Restart your dhcp client?</source>
-        <translation>DHCP Client neu starten?</translation>
+        <translation type="unfinished">DHCP Client neu starten?</translation>
     </message>
 </context>
 <context>
@@ -115,7 +115,7 @@ DHCP client stoppen?</translation>
     <message>
         <source>Your wireless card
 should now be usable again.</source>
-        <translation>Ihr Netwerkkarte ist
+        <translation type="unfinished">Ihr Netwerkkarte ist
 wieder im Normalbetrieb.</translation>
     </message>
     <message>
@@ -127,7 +127,7 @@ konfiguriert. Bitte rekonfigurieren!</translation>
     <message>
         <source>Bring your device into
 monitor mode now.</source>
-        <translation>Schalten Sie nun den
+        <translation type="unfinished">Schalten Sie nun den
 Monitormodus ein.</translation>
     </message>
     <message>
@@ -141,26 +141,26 @@ Monitormodus ein.</translation>
     </message>
     <message>
         <source>Wellenreiter II - replaying capture file...</source>
-        <translation>Wellenreiter II - Spiele Capturefile ab...</translation>
+        <translation type="unfinished">Wellenreiter II - Spiele Capturefile ab...</translation>
     </message>
     <message>
         <source>No device configured.
 Please reconfigure!</source>
-        <translation>Kein Device eingestellt.
+        <translation type="unfinished">Kein Device eingestellt.
 Bitte Einstellungen prüfen!</translation>
     </message>
     <message>
         <source>The configured device (%1)
 is not available on this system
 . Please reconfigure!</source>
-        <translation>Das eingestellte Device (%1)
+        <translation type="unfinished">Das eingestellte Device (%1)
 ist nicht vorhanden.
 Bitte Konfiguration prüfen!</translation>
     </message>
     <message>
         <source>Can&apos;t bring interface &apos;%1&apos; up:
 </source>
-        <translation>Interface &apos;%1&apos; konnte nicht gestartet werden:
+        <translation type="unfinished">Interface &apos;%1&apos; konnte nicht gestartet werden:
 </translation>
     </message>
     <message>
@@ -171,65 +171,65 @@ Bitte Konfiguration prüfen!</translation>
         <source>Can&apos;t set interface &apos;%1&apos;
 into monitor mode:
 </source>
-        <translation>Kann Monitormode für 
+        <translation type="unfinished">Kann Monitormode für 
 interface &apos;%1&apos; nicht setzen:
 </translation>
     </message>
     <message>
         <source>
 Continue with limited functionality?</source>
-        <translation>
+        <translation type="unfinished">
 Weiter machen mit beschränkter funktionalität?</translation>
     </message>
     <message>
         <source>Can&apos;t open packet capturer for
 &apos;%1&apos;:
 </source>
-        <translation>Kann Paketfilter nicht öffen für
+        <translation type="unfinished">Kann Paketfilter nicht öffen für
 &apos;%1&apos;:
 </translation>
     </message>
     <message>
         <source>Got packet with protocol &apos;%1&apos;</source>
         <comment>Protocol Name</comment>
-        <translation>Paket empfangen mit Protokoll &apos;%1&apos;
+        <translation type="unfinished">Paket empfangen mit Protokoll &apos;%1&apos;
 
 Protokoll Name</translation>
     </message>
     <message>
         <source>Can&apos;t do that!</source>
-        <translation>Das kann ich nicht machen!</translation>
+        <translation type="obsolete">Das kann ich nicht machen!</translation>
     </message>
     <message>
         <source>No wireless
 interface available.</source>
-        <translation>Kein Wireless LAN
+        <translation type="obsolete">Kein Wireless LAN
 Gerät verfügbar.</translation>
     </message>
     <message>
         <source>Stop sniffing before
 joining a net.</source>
-        <translation>Sniffer stoppen vor dem
+        <translation type="obsolete">Sniffer stoppen vor dem
 joinen eines Netzes.</translation>
     </message>
     <message>
         <source>Function only available on Embedded build</source>
-        <translation>Funktion nur bei einem Embedded Build verfügbar</translation>
+        <translation type="obsolete">Funktion nur bei einem Embedded Build verfügbar</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;do not match!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
-        <translation>&lt;p&gt;Die Wireless Extension Versionen&lt;br&gt;stimmen nicht!&lt;p&gt; Wellenreiter II: WE V%1&lt;br&gt;Treiber: WE V%2</translation>
+        <translation type="unfinished">&lt;p&gt;Die Wireless Extension Versionen&lt;br&gt;stimmen nicht!&lt;p&gt; Wellenreiter II: WE V%1&lt;br&gt;Treiber: WE V%2</translation>
     </message>
 </context>
 <context>
     <name>WellenreiterBase</name>
     <message>
         <source>Wellenreiter/Opie</source>
-        <translation>Wellenreiter für Opie</translation>
+        <translation type="unfinished">Wellenreiter für Opie</translation>
     </message>
     <message>
         <source>Wellenreiter/X11</source>
-        <translation>Wellenreiter für X11</translation>
+        <translation type="unfinished">Wellenreiter für X11</translation>
     </message>
     <message>
         <source>&lt;p align=center&gt;
@@ -249,31 +249,31 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Nets</source>
-        <translation>Netze</translation>
+        <translation type="unfinished">Netze</translation>
     </message>
     <message>
         <source>Graph</source>
-        <translation>Graph</translation>
+        <translation type="unfinished">Graph</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation>Log</translation>
+        <translation type="unfinished">Log</translation>
     </message>
     <message>
         <source>Hex</source>
-        <translation>Hex</translation>
+        <translation type="unfinished">Hex</translation>
     </message>
     <message>
         <source>Stat</source>
-        <translation>Stat</translation>
+        <translation type="unfinished">Stat</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation type="unfinished">Über</translation>
     </message>
     <message>
         <source>Networks</source>
-        <translation>Netze</translation>
+        <translation type="unfinished">Netze</translation>
     </message>
 </context>
 <context>
@@ -288,47 +288,47 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Choose the interface used for sniffing.</source>
-        <translation>Wählen Sie das gewünschte Netzwerkinterface zum Mithören aus.</translation>
+        <translation type="unfinished">Wählen Sie das gewünschte Netzwerkinterface zum Mithören aus.</translation>
     </message>
     <message>
         <source>&lt;select&gt;</source>
-        <translation>&lt;Auswählen&gt;</translation>
+        <translation type="unfinished">&lt;Auswählen&gt;</translation>
     </message>
     <message>
         <source>cisco</source>
-        <translation>Cisco</translation>
+        <translation type="unfinished">Cisco</translation>
     </message>
     <message>
         <source>wlan-ng</source>
-        <translation>wlan-ng</translation>
+        <translation type="unfinished">wlan-ng</translation>
     </message>
     <message>
         <source>hostap</source>
-        <translation>hostap</translation>
+        <translation type="unfinished">hostap</translation>
     </message>
     <message>
         <source>orinoco</source>
-        <translation>orinoco</translation>
+        <translation type="unfinished">orinoco</translation>
     </message>
     <message>
         <source>&lt;manual&gt;</source>
-        <translation>&lt;Manuell&gt;</translation>
+        <translation type="unfinished">&lt;Manuell&gt;</translation>
     </message>
     <message>
         <source>&lt;file&gt;</source>
-        <translation>&lt;Datei&gt;</translation>
+        <translation type="unfinished">&lt;Datei&gt;</translation>
     </message>
     <message>
         <source>Choose the type of driver used for sniffing.</source>
-        <translation>Wählen Sie den passenden Gerätetreiber für ihr Interface aus.</translation>
+        <translation type="unfinished">Wählen Sie den passenden Gerätetreiber für ihr Interface aus.</translation>
     </message>
     <message>
         <source> ms</source>
-        <translation>ms</translation>
+        <translation type="unfinished">ms</translation>
     </message>
     <message>
         <source>Choose the channel hop interval.</source>
-        <translation>Wählen Sie den Kanalwechsel-Intervall.</translation>
+        <translation type="unfinished">Wählen Sie den Kanalwechsel-Intervall.</translation>
     </message>
     <message>
         <source>Hop Interval</source>
@@ -345,10 +345,6 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     <message>
         <source>Fake MAC:</source>
         <translation type="obsolete">MAC-Adresse fälschen:</translation>
-    </message>
-    <message>
-        <source>44:44:44:44:44:44</source>
-        <translation></translation>
     </message>
     <message>
         <source>Active Scanning (caution!)</source>
@@ -399,260 +395,180 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
         <translation type="obsolete">Wellenreiter II Konfiguration</translation>
     </message>
     <message>
-        <source>Interface</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Driver:</source>
-        <translation>Treiber:</translation>
+        <translation type="unfinished">Treiber:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation type="unfinished">Name:</translation>
     </message>
     <message>
         <source>Perform Autodetection</source>
-        <translation>Auto-Erkennung</translation>
+        <translation type="unfinished">Auto-Erkennung</translation>
     </message>
     <message>
         <source>Retrigger the autodetection algorithm</source>
-        <translation>Auto-Erkennung neu starten</translation>
+        <translation type="unfinished">Auto-Erkennung neu starten</translation>
     </message>
     <message>
         <source>Use additional PRISM header</source>
-        <translation>PRISM header verwenden</translation>
+        <translation type="unfinished">PRISM header verwenden</translation>
     </message>
     <message>
         <source>Use additional PRISM headers, if available.</source>
-        <translation>PRISM header verwenden, wenn verfügbar.</translation>
-    </message>
-    <message>
-        <source>Hop Channels</source>
-        <translation></translation>
+        <translation type="unfinished">PRISM header verwenden, wenn verfügbar.</translation>
     </message>
     <message>
         <source>Check this, if you want to start a channel hopper.</source>
-        <translation>Hier clicken um einen Channel Hopper zu starten.</translation>
+        <translation type="unfinished">Hier clicken um einen Channel Hopper zu starten.</translation>
     </message>
     <message>
         <source>every</source>
-        <translation>alle</translation>
+        <translation type="unfinished">alle</translation>
     </message>
     <message>
         <source>Use Adaptive(TM) Hop Scheme</source>
-        <translation>Adaptives Sprung Schema verwenden</translation>
+        <translation type="unfinished">Adaptives Sprung Schema verwenden</translation>
     </message>
     <message>
         <source>An adaptive hopping interval dynamically changes the channel hopping parameters to listen longer on channels where traffic comes in.</source>
-        <translation>Ein adaptiver Sprungintervall ändert die die Sprungparameter dynamisch um Kanäle mit Verkehr länger abhören zu können.</translation>
+        <translation type="unfinished">Ein adaptiver Sprungintervall ändert die die Sprungparameter dynamisch um Kanäle mit Verkehr länger abhören zu können.</translation>
     </message>
     <message>
         <source>Scan on channel</source>
-        <translation>Scannen auf Kanal</translation>
+        <translation type="unfinished">Scannen auf Kanal</translation>
     </message>
     <message>
         <source>Check the channels which should be included in the channel hopping scheme. Note that due to the 802.11 channel overlay scheme you may receive data on neighbour channels of channels, even if they&apos;re not checked here.</source>
-        <translation>Wählen Sie die Kanäle für das Kanal Hopping. Auf Grund des 802.11 Standards können immer noch Daten aus Nachbarkanälen empfangen werden, auch wenn diese nicht ausgewählt sind.</translation>
-    </message>
-    <message>
-        <source>6</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>8</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>9</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation></translation>
+        <translation type="unfinished">Wählen Sie die Kanäle für das Kanal Hopping. Auf Grund des 802.11 Standards können immer noch Daten aus Nachbarkanälen empfangen werden, auch wenn diese nicht ausgewählt sind.</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Alle</translation>
-    </message>
-    <message>
-        <source>11</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>10</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>7</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>4</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>12</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>13</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>14</source>
-        <translation></translation>
+        <translation type="unfinished">Alle</translation>
     </message>
     <message>
         <source>Capture</source>
-        <translation>Scannen</translation>
+        <translation type="unfinished">Scannen</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation>Wählen</translation>
+        <translation type="unfinished">Wählen</translation>
     </message>
     <message>
         <source>Click to open a file requester to choose a capture file name.</source>
-        <translation>Clicken um eine Zieldatei auszuwählen.</translation>
+        <translation type="unfinished">Clicken um eine Zieldatei auszuwählen.</translation>
     </message>
     <message>
         <source>Write Capture Files To</source>
-        <translation>Capture Datei schreiben auf</translation>
+        <translation type="unfinished">Capture Datei schreiben auf</translation>
     </message>
     <message>
         <source>Check this to write an ethereal compatible capture file.</source>
-        <translation>Ethereal kompatible Capture Datei schreiben.</translation>
-    </message>
-    <message>
-        <source>/tmp/capture</source>
-        <translation></translation>
+        <translation type="unfinished">Ethereal kompatible Capture Datei schreiben.</translation>
     </message>
     <message>
         <source>Configure the name of the capture file.</source>
-        <translation>Namen der Capture Datei einstellen.</translation>
+        <translation type="unfinished">Namen der Capture Datei einstellen.</translation>
     </message>
     <message>
         <source>Hex View Buffer</source>
-        <translation>HEX Ansicht</translation>
+        <translation type="unfinished">HEX Ansicht</translation>
     </message>
     <message>
         <source>unlimited</source>
-        <translation>unbegrenzt</translation>
+        <translation type="unfinished">unbegrenzt</translation>
     </message>
     <message>
         <source>limited to</source>
-        <translation>begrenzt auf</translation>
+        <translation type="unfinished">begrenzt auf</translation>
     </message>
     <message>
         <source> Packets</source>
-        <translation>Pakete</translation>
+        <translation type="unfinished">Pakete</translation>
     </message>
     <message>
         <source>Parse</source>
-        <translation>Parsen</translation>
-    </message>
-    <message>
-        <source>UI</source>
-        <translation></translation>
+        <translation type="unfinished">Parsen</translation>
     </message>
     <message>
         <source>Lookup MAC vendor names</source>
-        <translation>MAC Hersteller anzeigen</translation>
+        <translation type="unfinished">MAC Hersteller anzeigen</translation>
     </message>
     <message>
         <source>Check this to lookup MAC vendor names.</source>
-        <translation>Hier clicken um den Hersteller der MAC Adresse anzuzeigen.</translation>
+        <translation type="unfinished">Hier clicken um den Hersteller der MAC Adresse anzuzeigen.</translation>
     </message>
     <message>
         <source>Open Tree On New Station</source>
-        <translation>Baumansicht bei euer Station öffnen</translation>
+        <translation type="unfinished">Baumansicht bei euer Station öffnen</translation>
     </message>
     <message>
         <source>Check this to automatically make a tree visible when a new station is detected.</source>
-        <translation>Hier clicken um die Baumansicht zu öffnen wenn eine neue Station entdeckt wird.</translation>
+        <translation type="unfinished">Hier clicken um die Baumansicht zu öffnen wenn eine neue Station entdeckt wird.</translation>
     </message>
     <message>
         <source>Disable Power Management</source>
-        <translation>Power Management abschalten</translation>
+        <translation type="unfinished">Power Management abschalten</translation>
     </message>
     <message>
         <source>Check this to disable power management while scanning.</source>
-        <translation>Hier clicken um das Power Management abzuschalten beim scannen.</translation>
+        <translation type="unfinished">Hier clicken um das Power Management abzuschalten beim scannen.</translation>
     </message>
     <message>
         <source>Action on detecting a new</source>
-        <translation>Aktion beim Erkennen von</translation>
+        <translation type="unfinished">Aktion beim Erkennen von</translation>
     </message>
     <message>
         <source>Wired Station:</source>
-        <translation>LAN Station:</translation>
+        <translation type="unfinished">LAN Station:</translation>
     </message>
     <message>
         <source>Network:</source>
-        <translation>Netzwerk:</translation>
+        <translation type="unfinished">Netzwerk:</translation>
     </message>
     <message>
         <source>&lt;Ignore&gt;</source>
-        <translation>&lt;ignorieren&gt;</translation>
+        <translation type="unfinished">&lt;ignorieren&gt;</translation>
     </message>
     <message>
         <source>Play Alarm</source>
-        <translation>Alarm abspielen</translation>
+        <translation type="unfinished">Alarm abspielen</translation>
     </message>
     <message>
         <source>Play Click</source>
-        <translation>Click abspielen</translation>
+        <translation type="unfinished">Click abspielen</translation>
     </message>
     <message>
         <source>Blink LED</source>
-        <translation>LEDs blinken lassen</translation>
+        <translation type="unfinished">LEDs blinken lassen</translation>
     </message>
     <message>
         <source>Run Script</source>
-        <translation>Script starten</translation>
+        <translation type="unfinished">Script starten</translation>
     </message>
     <message>
         <source>Choose an action to perform when a new wireless station is detected.</source>
-        <translation>Wählen Sie eine Aktion beim Entdecken einer neuen WLAN Station.</translation>
+        <translation type="unfinished">Wählen Sie eine Aktion beim Entdecken einer neuen WLAN Station.</translation>
     </message>
     <message>
         <source>The command line to execute when a script action is performed.</source>
-        <translation>Befehlszeile für das Scipt beim Auffinden einer neuen Station.</translation>
+        <translation type="unfinished">Befehlszeile für das Scipt beim Auffinden einer neuen Station.</translation>
     </message>
     <message>
         <source>Wireless Station:</source>
-        <translation>WLAN Station:</translation>
+        <translation type="unfinished">WLAN Station:</translation>
     </message>
     <message>
         <source>Choose the action to perform when a new wired station is detected.</source>
-        <translation>Aktion auswählen bei Erkennung einer neuen LAN Station.</translation>
+        <translation type="unfinished">Aktion auswählen bei Erkennung einer neuen LAN Station.</translation>
     </message>
     <message>
         <source>Choose an action to perform when a new network is detected.</source>
-        <translation>Aktion auswählen beim Erkennen eines neuen Netzwerkes.</translation>
-    </message>
-    <message>
-        <source>Intrusion</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Link Level</source>
-        <translation></translation>
+        <translation type="unfinished">Aktion auswählen beim Erkennen eines neuen Netzwerkes.</translation>
     </message>
     <message>
         <source>Fake Mac:</source>
-        <translation>Fake MAC:</translation>
+        <translation type="unfinished">Fake MAC:</translation>
     </message>
     <message>
         <source>Send proble requests</source>
@@ -660,255 +576,339 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>&lt;automatic&gt;</source>
-        <translation>&lt;automatisch&gt;</translation>
+        <translation type="unfinished">&lt;automatisch&gt;</translation>
     </message>
     <message>
         <source>Try to authenticate</source>
-        <translation>Anmeldung versuchen</translation>
+        <translation type="unfinished">Anmeldung versuchen</translation>
     </message>
     <message>
         <source>Enable active scanning</source>
-        <translation>Aktives Scannen einschalten</translation>
-    </message>
-    <message>
-        <source>IP Level</source>
-        <translation></translation>
+        <translation type="unfinished">Aktives Scannen einschalten</translation>
     </message>
     <message>
         <source>Request DHCP Address</source>
-        <translation>DHCP Adresse anfordern</translation>
+        <translation type="unfinished">DHCP Adresse anfordern</translation>
     </message>
     <message>
         <source>Fake IP:</source>
-        <translation>Fake IP:</translation>
-    </message>
-    <message>
-        <source>192.168.125.1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>GPS</source>
-        <translation></translation>
+        <translation type="unfinished">Fake IP:</translation>
     </message>
     <message>
         <source>Enable GPS logging w/ gpsd</source>
-        <translation>GPD Logging mittels gpsd</translation>
+        <translation type="unfinished">GPD Logging mittels gpsd</translation>
     </message>
     <message>
         <source>Check this to log GPS coordinates.</source>
-        <translation>GPS Koordinaten loggen.</translation>
-    </message>
-    <message>
-        <source>Host</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>localhost</source>
-        <translation></translation>
+        <translation type="unfinished">GPS Koordinaten loggen.</translation>
     </message>
     <message>
         <source>Hostadress where the gps daemon listens on.</source>
-        <translation>Adresse des gps deamons.</translation>
+        <translation type="unfinished">Adresse des gps deamons.</translation>
     </message>
     <message>
         <source>:</source>
-        <translation>:</translation>
+        <translation type="unfinished">:</translation>
     </message>
     <message>
         <source>Port number where the gps daemon listens on.</source>
-        <translation>Port des gps deamons.</translation>
+        <translation type="unfinished">Port des gps deamons.</translation>
     </message>
     <message>
         <source>Start gpsd on localhost</source>
-        <translation>gpsd auf localhost starten</translation>
+        <translation type="unfinished">gpsd auf localhost starten</translation>
     </message>
     <message>
         <source>Check to start the GPS daemon on localhost.</source>
-        <translation>Auswählen um gpsd auf localhost starten.</translation>
-    </message>
-    <message>
-        <source>gpsd -p /dev/ttyS3 -s 4800</source>
-        <translation></translation>
+        <translation type="unfinished">Auswählen um gpsd auf localhost starten.</translation>
     </message>
     <message>
         <source>Command line to start the gps daemon.</source>
-        <translation>Befehlszeile um den gps deamon zu starten.</translation>
+        <translation type="unfinished">Befehlszeile um den gps deamon zu starten.</translation>
     </message>
     <message>
         <source>Wellenreiter II Configuration Dialog</source>
-        <translation>Wellenreiter II Einstellungen</translation>
+        <translation type="unfinished">Wellenreiter II Einstellungen</translation>
     </message>
     <message>
         <source>Send probe requests</source>
-        <translation>Probe senden</translation>
+        <translation type="unfinished">Probe senden</translation>
+    </message>
+    <message>
+        <source>Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hop Channels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>12</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>14</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/tmp/capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intrusion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>44:44:44:44:44:44</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>192.168.125.1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>localhost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>gpsd -p /dev/ttyS3 -s 4800</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WellenreiterMainWindow</name>
     <message>
         <source>&amp;Session...</source>
-        <translation>&amp;Sitzung...</translation>
+        <translation type="unfinished">&amp;Sitzung...</translation>
     </message>
     <message>
         <source>&amp;Text Log...</source>
-        <translation>&amp;Text Log...</translation>
+        <translation type="unfinished">&amp;Text Log...</translation>
     </message>
     <message>
         <source>&amp;Hex Log...</source>
-        <translation>&amp;Hex Log...</translation>
+        <translation type="unfinished">&amp;Hex Log...</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Neu</translation>
+        <translation type="unfinished">&amp;Neu</translation>
     </message>
     <message>
         <source>&amp;Load</source>
-        <translation>&amp;Laden</translation>
+        <translation type="unfinished">&amp;Laden</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Speichern</translation>
+        <translation type="unfinished">&amp;Speichern</translation>
     </message>
     <message>
         <source>&amp;Exit</source>
-        <translation>&amp;Schließen</translation>
+        <translation type="unfinished">&amp;Schließen</translation>
     </message>
     <message>
         <source>&amp;Configure...</source>
-        <translation>&amp;Konfigurieren...</translation>
+        <translation type="unfinished">&amp;Konfigurieren...</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation>&amp;Start</translation>
+        <translation type="unfinished">&amp;Start</translation>
     </message>
     <message>
         <source>Sto&amp;p</source>
-        <translation>Sto&amp;pp</translation>
+        <translation type="unfinished">Sto&amp;pp</translation>
     </message>
     <message>
         <source>&amp;Add something</source>
-        <translation>&amp;Etwas hinzufügen</translation>
+        <translation type="unfinished">&amp;Etwas hinzufügen</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
+        <translation type="unfinished">&amp;Datei</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;Ansicht</translation>
+        <translation type="unfinished">&amp;Ansicht</translation>
     </message>
     <message>
         <source>&amp;Sniffer</source>
-        <translation>&amp;Schnüffler</translation>
+        <translation type="unfinished">&amp;Schnüffler</translation>
     </message>
     <message>
         <source>&amp;Demo</source>
-        <translation>&amp;Demo</translation>
+        <translation type="unfinished">&amp;Demo</translation>
     </message>
     <message>
         <source>Ready.</source>
-        <translation>Bereit.</translation>
+        <translation type="unfinished">Bereit.</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Konfiguriere</translation>
+        <translation type="unfinished">Konfiguriere</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Alle</translation>
+        <translation type="unfinished">Alle</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Text</translation>
+        <translation type="unfinished">Text</translation>
     </message>
     <message>
         <source>Sniffing in progress!
 Please stop sniffing before closing.</source>
-        <translation>Wellenreiter im Monitormodus!
+        <translation type="unfinished">Wellenreiter im Monitormodus!
 Unterbrechen Sie den Monitormodus
 vor dem Schließen.</translation>
     </message>
     <message>
         <source>Click here to start scanning.</source>
-        <translation>Hier clicken um zu Scannen.</translation>
+        <translation type="unfinished">Hier clicken um zu Scannen.</translation>
     </message>
     <message>
         <source>Click here to stop scanning.</source>
-        <translation>Hier clicken um das Scannen zu beenden.</translation>
+        <translation type="unfinished">Hier clicken um das Scannen zu beenden.</translation>
     </message>
     <message>
         <source>Click here to open the configure dialog.</source>
-        <translation>Hier clicken um die Konfiguration zu starten.</translation>
+        <translation type="unfinished">Hier clicken um die Konfiguration zu starten.</translation>
     </message>
     <message>
         <source>Click here to upload a capture session.</source>
-        <translation>Hier clicken um eine Capture Datei hochzuloaden.</translation>
+        <translation type="unfinished">Hier clicken um eine Capture Datei hochzuloaden.</translation>
     </message>
     <message>
         <source>&amp;Upload Session</source>
-        <translation>Sitz&amp;ung hochladen</translation>
+        <translation type="unfinished">Sitz&amp;ung hochladen</translation>
     </message>
     <message>
         <source>&amp;Expand All</source>
-        <translation>All&amp;e öffnen</translation>
+        <translation type="unfinished">All&amp;e öffnen</translation>
     </message>
     <message>
         <source>&amp;Collapse All</source>
-        <translation>Alle s&amp;chliessen</translation>
+        <translation type="unfinished">Alle s&amp;chliessen</translation>
     </message>
     <message>
         <source>GPS said:
 %1</source>
-        <translation>GPS sagte:
+        <translation type="unfinished">GPS sagte:
 %1</translation>
     </message>
     <message>
         <source>Upload Session</source>
-        <translation>Sitzung hochladen</translation>
+        <translation type="unfinished">Sitzung hochladen</translation>
     </message>
     <message>
         <source>From: </source>
-        <translation>Von:</translation>
+        <translation type="unfinished">Von:</translation>
     </message>
     <message>
         <source>Location: </source>
-        <translation>Ort:</translation>
+        <translation type="unfinished">Ort:</translation>
     </message>
     <message>
         <source>Comments: </source>
-        <translation>Kommentar:</translation>
+        <translation type="unfinished">Kommentar:</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;Ok</translation>
+        <translation type="unfinished">&amp;Ok</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>Abbre&amp;chen</translation>
+        <translation type="unfinished">Abbre&amp;chen</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>&lt;p&gt;Logfile &apos;%1&apos; doesn&apos;t exist&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Datei &apos;%1&apos; existiert nicht&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;p&gt;Datei &apos;%1&apos; existiert nicht&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Can&apos;t open Logfile &apos;%1&apos;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Kann Logfile &apos;%1&apos; nicht öffnen&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;p&gt;Kann Logfile &apos;%1&apos; nicht öffnen&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation>Erfolg</translation>
+        <translation type="unfinished">Erfolg</translation>
     </message>
     <message>
         <source>Capture Dump was uploaded to %1</source>
-        <translation>Capture Datei wurde hochgeladen auf %1</translation>
+        <translation type="unfinished">Capture Datei wurde hochgeladen auf %1</translation>
     </message>
     <message>
         <source>Connection to %1 failed</source>
-        <translation>Verbindung zu %1 fehlgeschlagen</translation>
+        <translation type="unfinished">Verbindung zu %1 fehlgeschlagen</translation>
     </message>
 </context>
 </TS>

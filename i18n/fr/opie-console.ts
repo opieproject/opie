@@ -535,6 +535,22 @@ de DTR (0=non)</translation>
         <source>Log</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Aucune</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scrollbar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ModemConfigWidget</name>

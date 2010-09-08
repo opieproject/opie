@@ -94,7 +94,7 @@ Tényleg meg akarja nyitni?</translation>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Tényleg hozzá akarja adni
+        <translation type="obsolete">Tényleg hozzá akarja adni
 %1-t a kapcsolatokhoz?</translation>
     </message>
     <message>
@@ -111,6 +111,11 @@ Tényleg meg akarja nyitni?</translation>
     </message>
     <message>
         <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1247,7 +1252,7 @@ ingyenesen elérhető !</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Kérem adja meg a kereszt-, középső- és vezetéknevet</translation>
+        <translation type="obsolete">Kérem adja meg a kereszt-, középső- és vezetéknevet</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1255,15 +1260,15 @@ ingyenesen elérhető !</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>Munkahelyi beosztás</translation>
+        <translation type="obsolete">Munkahelyi beosztás</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Mint például &quot;ifj.&quot;</translation>
+        <translation type="obsolete">Mint például &quot;ifj.&quot;</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>A kapcsolat munkahelye</translation>
+        <translation type="obsolete">A kapcsolat munkahelye</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1272,6 +1277,30 @@ ingyenesen elérhető !</translation>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Kattintson ide a tárolási (és a lista nézetben megjelenített) forma kiválasztásához</translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

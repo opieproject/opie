@@ -17,6 +17,10 @@
         <source>There was a problem setting your timezone.Your time may be wrong now...</source>
         <translation>Prišlo je do problema pri nastavitvi časovnega pasu. Čas bo mogoče napačen...</translation>
     </message>
+    <message>
+        <source>unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CityTimeBase</name>
@@ -66,6 +70,10 @@
     <message>
         <source>City</source>
         <translation>Mesto</translation>
+    </message>
+    <message>
+        <source>Timezone unavailable</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

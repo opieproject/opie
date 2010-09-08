@@ -92,15 +92,15 @@ Gegeugen wordt geklassificeerd als volgt:
     </message>
     <message>
         <source>RAM</source>
-        <translation>RAM</translation>
+        <translation type="obsolete">RAM</translation>
     </message>
     <message>
         <source>CF Card</source>
-        <translation>CF Kaart</translation>
+        <translation type="obsolete">CF Kaart</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation>SD Kaart</translation>
+        <translation type="obsolete">SD Kaart</translation>
     </message>
     <message>
         <source> On </source>
@@ -152,7 +152,7 @@ Gegeugen wordt geklassificeerd als volgt:
     </message>
     <message>
         <source>Swapfile activated.</source>
-        <translation>Swapfile ingeschakeld.</translation>
+        <translation type="obsolete">Swapfile ingeschakeld.</translation>
     </message>
     <message>
         <source></source>
@@ -164,6 +164,22 @@ Gegeugen wordt geklassificeerd als volgt:
     </message>
     <message>
         <source>Swap disabled in kernel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(None)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swapfile already active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swapfile not active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swap file currently active!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

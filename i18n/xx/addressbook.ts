@@ -52,7 +52,7 @@
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>&amp;All Yes</source>
@@ -104,6 +104,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1237,7 +1242,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1245,15 +1250,15 @@ is provided free !</source>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1265,6 +1270,30 @@ is provided free !</source>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

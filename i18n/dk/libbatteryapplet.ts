@@ -2,14 +2,6 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Failure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>could not open file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>no data</source>
         <translation type="unfinished"></translation>
     </message>

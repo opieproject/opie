@@ -96,7 +96,7 @@ Uscire comunque?</translation>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Vuoi veramente aggiungere un contatto per 
+        <translation type="obsolete">Vuoi veramente aggiungere un contatto per 
 %1?</translation>
     </message>
     <message>
@@ -113,6 +113,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1249,7 +1254,7 @@ rilasciato gratuitamente!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Premi pre inserire cognome e nome</translation>
+        <translation type="obsolete">Premi pre inserire cognome e nome</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1257,15 +1262,15 @@ rilasciato gratuitamente!</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>Titolo..</translation>
+        <translation type="obsolete">Titolo..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Qualcosa come &quot;jr.&quot;..</translation>
+        <translation type="obsolete">Qualcosa come &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>Il posto di lavoro del contatto</translation>
+        <translation type="obsolete">Il posto di lavoro del contatto</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1277,6 +1282,30 @@ rilasciato gratuitamente!</translation>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>Start with new file</source>
-        <translation>Spustit s novým souborem</translation>
+        <translation type="obsolete">Spustit s novým souborem</translation>
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation>Ptát se při ukončení</translation>
+        <translation type="obsolete">Ptát se při ukončení</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation>Otevření lišty hledání</translation>
+        <translation type="obsolete">Otevření lišty hledání</translation>
     </message>
     <message>
         <source>Auto Save 5 min.</source>
@@ -160,7 +160,7 @@
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation>Opravdu chcete&lt;BR&gt;&lt;B&gt;smazat&lt;/B&gt; aktuální soubor
+        <translation type="obsolete">Opravdu chcete&lt;BR&gt;&lt;B&gt;smazat&lt;/B&gt; aktuální soubor
 z disku?&lt;BR&gt;Je to &lt;B&gt;nevratné!&lt;/B&gt;</translation>
     </message>
     <message>
@@ -173,7 +173,7 @@ z disku?&lt;BR&gt;Je to &lt;B&gt;nevratné!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>Text Edit je copyrightován&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt; a je licencován pod GPL</translation>
+        <translation type="obsolete">Text Edit je copyrightován&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt; a je licencován pod GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
@@ -203,6 +203,31 @@ Chcete je uložit?</translation>
     <message>
         <source>Save Failed</source>
         <translation>Uložení selhalo</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The selected file already exists. Overwrite it?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from disk?&lt;BR&gt;This is &lt;B&gt;irreversible!&lt;/B&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

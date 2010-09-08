@@ -43,11 +43,11 @@
     </message>
     <message>
         <source>Failure</source>
-        <translation>Porażka</translation>
+        <translation type="obsolete">Porażka</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>nie można otworzyć pliku</translation>
+        <translation type="obsolete">nie można otworzyć pliku</translation>
     </message>
     <message>
         <source>Charging both devices</source>

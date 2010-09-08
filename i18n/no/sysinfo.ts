@@ -110,9 +110,6 @@
     </message>
 </context>
 <context>
-    <name>LoadInfo</name>
-</context>
-<context>
     <name>MemoryInfo</name>
     <message>
         <source>Used (%1 kB)</source>

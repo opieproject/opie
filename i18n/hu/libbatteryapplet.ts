@@ -43,11 +43,11 @@
     </message>
     <message>
         <source>Failure</source>
-        <translation>Hiba</translation>
+        <translation type="obsolete">Hiba</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>nem tudom megnyitni a fájlt</translation>
+        <translation type="obsolete">nem tudom megnyitni a fájlt</translation>
     </message>
     <message>
         <source>Charging both devices</source>

@@ -92,7 +92,7 @@ Voulez-vous vraiment l&apos;ouvrir ?</translation>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Voulez-vous vraimment&lt;br&gt;
+        <translation type="obsolete">Voulez-vous vraimment&lt;br&gt;
 ajouter un contact pour&lt;br&gt;
 %1 ?</translation>
     </message>
@@ -116,6 +116,11 @@ un nom de fichier !</translation>
     </message>
     <message>
         <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1251,7 +1256,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Cliquez ce bouton pour saisir nom, prénom et second prénom</translation>
+        <translation type="obsolete">Cliquez ce bouton pour saisir nom, prénom et second prénom</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1259,15 +1264,15 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>Fonction dans l&apos;entreprise..</translation>
+        <translation type="obsolete">Fonction dans l&apos;entreprise..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Par exemple &quot;jr.&quot;..</translation>
+        <translation type="obsolete">Par exemple &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>Le lieu de travail du contact</translation>
+        <translation type="obsolete">Le lieu de travail du contact</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1280,6 +1285,30 @@ founi gratuitement !</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

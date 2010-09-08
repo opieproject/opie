@@ -345,6 +345,13 @@ már szerkeszti a kategóriákat.</translation>
     </message>
 </context>
 <context>
+    <name>LocationCombo</name>
+    <message>
+        <source>No FileSystems Available!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OwnerDlg</name>
     <message>
         <source>Owner Information</source>
@@ -403,6 +410,85 @@ már szerkeszti a kategóriákat.</translation>
     </message>
 </context>
 <context>
+    <name>QDate</name>
+    <message>
+        <source>January</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>February</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>March</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>April</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>May</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>June</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>July</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>August</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>September</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>October</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>November</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>December</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Monday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wednesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thursday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saturday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sunday</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
@@ -448,27 +534,27 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation>É</translation>
+        <translation type="obsolete">É</translation>
     </message>
     <message>
         <source>day</source>
-        <translation>nap</translation>
+        <translation type="obsolete">nap</translation>
     </message>
     <message>
         <source>month</source>
-        <translation>hónap</translation>
+        <translation type="obsolete">hónap</translation>
     </message>
     <message>
         <source>year</source>
-        <translation>év</translation>
+        <translation type="obsolete">év</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>Du</translation>
+        <translation type="obsolete">Du</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation>De</translation>
+        <translation type="obsolete">De</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -834,12 +920,12 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
     <message>
         <source>D</source>
         <comment>Shortcut for Day</comment>
-        <translation type="unfinished">N</translation>
+        <translation type="obsolete">N</translation>
     </message>
     <message>
         <source>M</source>
         <comment>Shortcur for Month</comment>
-        <translation type="unfinished">H</translation>
+        <translation type="obsolete">H</translation>
     </message>
 </context>
 <context>
@@ -904,15 +990,15 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation>Merevlemez</translation>
+        <translation type="obsolete">Merevlemez</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation>SD kártya</translation>
+        <translation type="obsolete">SD kártya</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation>SCSI merevlemez</translation>
+        <translation type="obsolete">SCSI merevlemez</translation>
     </message>
     <message>
         <source>Internal Storage</source>
@@ -920,11 +1006,31 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation>Belső memória</translation>
+        <translation type="obsolete">Belső memória</translation>
     </message>
     <message>
         <source>MMC Card</source>
-        <translation>MMC kártya</translation>
+        <translation type="obsolete">MMC kártya</translation>
+    </message>
+    <message>
+        <source>IDE Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD/MMC Card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>USB Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SCSI Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -932,6 +1038,80 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
     <message>
         <source>None</source>
         <translation>Nincs</translation>
+    </message>
+</context>
+<context>
+    <name>TimeStringFormat</name>
+    <message>
+        <source>D</source>
+        <comment>first letter of the word &apos;Day&apos;</comment>
+        <translation type="unfinished">N</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>first letter of the word &apos;Month&apos;</comment>
+        <translation type="unfinished">H</translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <comment>first letter of the word &apos;Year&apos;</comment>
+        <translation type="unfinished">É</translation>
+    </message>
+    <message>
+        <source>day</source>
+        <comment>in month</comment>
+        <translation type="unfinished">nap</translation>
+    </message>
+    <message>
+        <source>month</source>
+        <translation type="unfinished">hónap</translation>
+    </message>
+    <message>
+        <source>year</source>
+        <translation type="unfinished">év</translation>
+    </message>
+    <message>
+        <source>@day</source>
+        <comment>day suffix - applies to some asian languages (e.g. Japanese and Trad. Chinese). If it doesn&apos;t apply to your language it has to be translated to an &apos;@day&apos; </comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>,</source>
+        <comment>day-date separator</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>@year</source>
+        <comment>year suffix - applies to some asian languages (e.g. Japanese and Trad. Chinese). If it doesn&apos;t apply to your language it has to be translated to an &apos;@year&apos; </comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>,</source>
+        <comment>year-date seperator</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2</source>
+        <comment>1=Monday 2=January 12</comment>
+        <translation type="unfinished">%1 %2</translation>
+    </message>
+    <message>
+        <source>%1, %2</source>
+        <comment>1=Monday 2=12 January</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PM</source>
+        <translation type="unfinished">Du</translation>
+    </message>
+    <message>
+        <source>AM</source>
+        <translation type="unfinished">De</translation>
+    </message>
+    <message>
+        <source>%1 %2</source>
+        <comment>1=Monday 2=12:45</comment>
+        <translation type="unfinished">%1 %2</translation>
     </message>
 </context>
 <context>

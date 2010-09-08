@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Start with new file</source>
-        <translation>開始新的檔案</translation>
+        <translation type="obsolete">開始新的檔案</translation>
     </message>
     <message>
         <source>File</source>
@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation>Prompt on Exit</translation>
+        <translation type="obsolete">Prompt on Exit</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation>開始Search Bar</translation>
+        <translation type="obsolete">開始Search Bar</translation>
     </message>
     <message>
         <source>Goto Line...</source>
@@ -162,10 +162,6 @@
         <translation type="unfinished">否</translation>
     </message>
     <message>
-        <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Textedit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -193,12 +189,32 @@ Go ahead and save?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
-from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
+        <source>Save Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save Failed</source>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The selected file already exists. Overwrite it?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from disk?&lt;BR&gt;This is &lt;B&gt;irreversible!&lt;/B&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

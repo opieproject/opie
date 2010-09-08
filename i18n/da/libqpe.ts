@@ -346,6 +346,13 @@ redigere kategorierne.</translation>
     </message>
 </context>
 <context>
+    <name>LocationCombo</name>
+    <message>
+        <source>No FileSystems Available!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OwnerDlg</name>
     <message>
         <source>Owner Information</source>
@@ -404,6 +411,85 @@ redigere kategorierne.</translation>
     </message>
 </context>
 <context>
+    <name>QDate</name>
+    <message>
+        <source>January</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>February</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>March</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>April</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>May</source>
+        <translation type="unfinished">Maj</translation>
+    </message>
+    <message>
+        <source>June</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>July</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>August</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>September</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>October</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>November</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>December</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Monday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wednesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thursday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saturday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sunday</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
@@ -453,28 +539,16 @@ Free some memory and try again.</source>
 Frigør noget hukommelse og prøv igen.</translation>
     </message>
     <message>
-        <source>Y</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>day</source>
-        <translation>dag</translation>
+        <translation type="obsolete">dag</translation>
     </message>
     <message>
         <source>month</source>
-        <translation>måned</translation>
+        <translation type="obsolete">måned</translation>
     </message>
     <message>
         <source>year</source>
-        <translation>år</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation></translation>
+        <translation type="obsolete">år</translation>
     </message>
     <message>
         <source>All</source>
@@ -834,16 +908,6 @@ Frigør noget hukommelse og prøv igen.</translation>
         <source>Dec</source>
         <translation>Dec</translation>
     </message>
-    <message>
-        <source>D</source>
-        <comment>Shortcut for Day</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>M</source>
-        <comment>Shortcur for Month</comment>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -907,27 +971,47 @@ Frigør noget hukommelse og prøv igen.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation>Harddisk</translation>
+        <translation type="obsolete">Harddisk</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation>SD Kort</translation>
+        <translation type="obsolete">SD Kort</translation>
     </message>
     <message>
         <source>MMC Card</source>
-        <translation>MMC Kort</translation>
+        <translation type="obsolete">MMC Kort</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation>SCSI Harddisk</translation>
+        <translation type="obsolete">SCSI Harddisk</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation>Intern Hukommelse</translation>
+        <translation type="obsolete">Intern Hukommelse</translation>
     </message>
     <message>
         <source>Internal Storage</source>
         <translation>Internt Lager</translation>
+    </message>
+    <message>
+        <source>IDE Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD/MMC Card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>USB Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SCSI Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -935,6 +1019,80 @@ Frigør noget hukommelse og prøv igen.</translation>
     <message>
         <source>None</source>
         <translation>Ingen</translation>
+    </message>
+</context>
+<context>
+    <name>TimeStringFormat</name>
+    <message>
+        <source>D</source>
+        <comment>first letter of the word &apos;Day&apos;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>first letter of the word &apos;Month&apos;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <comment>first letter of the word &apos;Year&apos;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>day</source>
+        <comment>in month</comment>
+        <translation type="unfinished">dag</translation>
+    </message>
+    <message>
+        <source>month</source>
+        <translation type="unfinished">måned</translation>
+    </message>
+    <message>
+        <source>year</source>
+        <translation type="unfinished">år</translation>
+    </message>
+    <message>
+        <source>@day</source>
+        <comment>day suffix - applies to some asian languages (e.g. Japanese and Trad. Chinese). If it doesn&apos;t apply to your language it has to be translated to an &apos;@day&apos; </comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>,</source>
+        <comment>day-date separator</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>@year</source>
+        <comment>year suffix - applies to some asian languages (e.g. Japanese and Trad. Chinese). If it doesn&apos;t apply to your language it has to be translated to an &apos;@year&apos; </comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>,</source>
+        <comment>year-date seperator</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2</source>
+        <comment>1=Monday 2=January 12</comment>
+        <translation type="unfinished">%1 %2</translation>
+    </message>
+    <message>
+        <source>%1, %2</source>
+        <comment>1=Monday 2=12 January</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2</source>
+        <comment>1=Monday 2=12:45</comment>
+        <translation type="unfinished">%1 %2</translation>
     </message>
 </context>
 <context>

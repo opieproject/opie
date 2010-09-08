@@ -3,11 +3,11 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation>Předchozí</translation>
+        <translation type="obsolete">Předchozí</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Vpřed</translation>
+        <translation type="obsolete">Vpřed</translation>
     </message>
 </context>
 <context>
@@ -18,7 +18,7 @@
     </message>
     <message>
         <source>Play</source>
-        <translation>Přehrát</translation>
+        <translation type="obsolete">Přehrát</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -140,7 +140,7 @@ nelze rozpoznat kartu</translation>
     </message>
     <message>
         <source>Del</source>
-        <translation>Smazat</translation>
+        <translation type="obsolete">Smazat</translation>
     </message>
     <message>
         <source>Stereo</source>
@@ -149,6 +149,14 @@ nelze rozpoznat kartu</translation>
     <message>
         <source>Please select file to play</source>
         <translation>Prosím vyberte soubor pro přehrátí</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

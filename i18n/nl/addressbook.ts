@@ -89,7 +89,7 @@ Toch stoppen?</translation>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Wilt U inderdaad een contact
+        <translation type="obsolete">Wilt U inderdaad een contact
 toevoegen voor %1?</translation>
     </message>
     <message>
@@ -110,6 +110,11 @@ toevoegen voor %1?</translation>
     </message>
     <message>
         <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1247,7 +1252,7 @@ geleverd!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Druk hier om volledige naam in te vullen</translation>
+        <translation type="obsolete">Druk hier om volledige naam in te vullen</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1255,15 +1260,15 @@ geleverd!</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>De functienaam..</translation>
+        <translation type="obsolete">De functienaam..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Iets als &quot;jr.&quot;..</translation>
+        <translation type="obsolete">Iets als &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>De plaats waar het contact werkt</translation>
+        <translation type="obsolete">De plaats waar het contact werkt</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1276,6 +1281,30 @@ geleverd!</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -62,7 +62,7 @@ Opravdu ho chcete otevřít?</translation>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Opravdu chcete přidat kontakt pro 
+        <translation type="obsolete">Opravdu chcete přidat kontakt pro 
 %1?</translation>
     </message>
     <message>
@@ -112,6 +112,11 @@ Chcete přesto skončit?</translation>
     <message>
         <source>Edit Contact</source>
         <translation>Upravit kontakt</translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -296,7 +301,7 @@ je poskytován zdarma!
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Vložte příjmení střední a křestní jméno</translation>
+        <translation type="obsolete">Vložte příjmení střední a křestní jméno</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -308,7 +313,7 @@ je poskytován zdarma!
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>Název prac. pozice..</translation>
+        <translation type="obsolete">Název prac. pozice..</translation>
     </message>
     <message>
         <source>Suffix</source>
@@ -316,7 +321,7 @@ je poskytován zdarma!
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Něco jako &quot;jr.&quot;..</translation>
+        <translation type="obsolete">Něco jako &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>Organization</source>
@@ -324,7 +329,7 @@ je poskytován zdarma!
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>Pracovní pozice kontaktu</translation>
+        <translation type="obsolete">Pracovní pozice kontaktu</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1277,6 +1282,30 @@ je poskytován zdarma!
     <message>
         <source></source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

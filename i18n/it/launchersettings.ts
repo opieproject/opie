@@ -7,10 +7,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -198,7 +194,7 @@
     </message>
     <message>
         <source>New</source>
-        <translation>Nuovo</translation>
+        <translation type="obsolete">Nuovo</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -206,7 +202,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Elimina</translation>
+        <translation type="obsolete">Elimina</translation>
     </message>
     <message>
         <source>Enable big busy indicator</source>
@@ -218,7 +214,7 @@
     </message>
     <message>
         <source>Adds a new Tab to the Launcher.</source>
-        <translation>Aggiungi un nuovo Tab al Launcher.</translation>
+        <translation type="obsolete">Aggiungi un nuovo Tab al Launcher.</translation>
     </message>
     <message>
         <source>Opens a new dialog to customize the select Tab.</source>
@@ -226,7 +222,7 @@
     </message>
     <message>
         <source>Deletes a Tab from the Launcher.</source>
-        <translation>Elimina un Tab dal Launcher.</translation>
+        <translation type="obsolete">Elimina un Tab dal Launcher.</translation>
     </message>
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>

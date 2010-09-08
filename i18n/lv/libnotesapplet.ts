@@ -15,19 +15,19 @@
     </message>
     <message>
         <source>Delete?</source>
-        <translation>Dzēst?</translation>
+        <translation type="obsolete">Dzēst?</translation>
     </message>
     <message>
         <source>Do you really want to&lt;BR&gt;&lt;B&gt; delete&lt;/B&gt; this note ?</source>
-        <translation>Vai tiešām vēlaties &lt;BR&gt;&lt;B&gt; dzēst&lt;/B&gt; šo piezīmi ?</translation>
+        <translation type="obsolete">Vai tiešām vēlaties &lt;BR&gt;&lt;B&gt; dzēst&lt;/B&gt; šo piezīmi ?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Jā</translation>
+        <translation type="obsolete">Jā</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nē</translation>
+        <translation type="obsolete">Nē</translation>
     </message>
     <message>
         <source>Beam Out</source>
@@ -35,11 +35,28 @@
     </message>
     <message>
         <source>Search For...</source>
-        <translation>Meklēt...</translation>
+        <translation type="obsolete">Meklēt...</translation>
     </message>
     <message>
         <source>Toggle Maximized</source>
         <translation>Nomaksimizēt</translation>
+    </message>
+    <message>
+        <source>Delete note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;empty file&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;no title&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -198,7 +198,7 @@
     </message>
     <message>
         <source>Couldn&apos;t create tempory status file - </source>
-        <translation>No pude crear fichero temporal de estado - </translation>
+        <translation type="obsolete">No pude crear fichero temporal de estado - </translation>
     </message>
     <message>
         <source>Couldn&apos;t start ipkg process</source>
@@ -219,6 +219,18 @@
 </source>
         <translation type="unfinished">Enlace simbólico hecho con éxitoto
 </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create temporary status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t rename temporary status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to status file - </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

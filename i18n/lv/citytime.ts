@@ -17,6 +17,10 @@
         <source>There was a problem setting your timezone.Your time may be wrong now...</source>
         <translation>Bija problēma uzstādot laika zonu. Jūsu laiks tagad var būt nepareizs...</translation>
     </message>
+    <message>
+        <source>unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CityTimeBase</name>
@@ -66,6 +70,10 @@
     <message>
         <source>&lt;p&gt;Couldn&apos;t load map: %1, exiting</source>
         <translation>&lt;p&gt;Nevaru ielādēt karti: %1, pārtraucu darbu</translation>
+    </message>
+    <message>
+        <source>Timezone unavailable</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

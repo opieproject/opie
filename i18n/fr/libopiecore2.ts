@@ -89,12 +89,67 @@
         <source>Rotate Button</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Joypad + Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Softkey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail Softkey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts Softkey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calendar Softkey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dictionary Softkey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK + Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slider Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slider Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lock Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suspend Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ComboAction</name>
+    <message>
+        <source>Recalibrate screen</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Trash</source>
         <translation>Poubelle</translation>
+    </message>
+    <message>
+        <source>(no card)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

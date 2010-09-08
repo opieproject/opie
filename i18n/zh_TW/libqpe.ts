@@ -345,6 +345,13 @@ editing categories.</source>
     </message>
 </context>
 <context>
+    <name>LocationCombo</name>
+    <message>
+        <source>No FileSystems Available!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OwnerDlg</name>
     <message>
         <source>Owner Information</source>
@@ -403,6 +410,85 @@ editing categories.</source>
     </message>
 </context>
 <context>
+    <name>QDate</name>
+    <message>
+        <source>January</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>February</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>March</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>April</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>May</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>June</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>July</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>August</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>September</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>October</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>November</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>December</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Monday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wednesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thursday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saturday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sunday</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
@@ -449,27 +535,27 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Y</source>
-        <translation>Y</translation>
+        <translation type="obsolete">Y</translation>
     </message>
     <message>
         <source>day</source>
-        <translation>日</translation>
+        <translation type="obsolete">日</translation>
     </message>
     <message>
         <source>month</source>
-        <translation>月</translation>
+        <translation type="obsolete">月</translation>
     </message>
     <message>
         <source>year</source>
-        <translation>年</translation>
+        <translation type="obsolete">年</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation type="obsolete">PM</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation>AM</translation>
+        <translation type="obsolete">AM</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -835,12 +921,12 @@ Free some memory and try again.</source>
     <message>
         <source>D</source>
         <comment>Shortcut for Day</comment>
-        <translation type="unfinished">D</translation>
+        <translation type="obsolete">D</translation>
     </message>
     <message>
         <source>M</source>
         <comment>Shortcur for Month</comment>
-        <translation type="unfinished">M</translation>
+        <translation type="obsolete">M</translation>
     </message>
 </context>
 <context>
@@ -905,15 +991,15 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation>硬碟</translation>
+        <translation type="obsolete">硬碟</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation>SD 卡</translation>
+        <translation type="obsolete">SD 卡</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation>SCSI 硬碟</translation>
+        <translation type="obsolete">SCSI 硬碟</translation>
     </message>
     <message>
         <source>Internal Storage</source>
@@ -921,11 +1007,31 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation>內部記憶體</translation>
+        <translation type="obsolete">內部記憶體</translation>
     </message>
     <message>
         <source>MMC Card</source>
-        <translation>MMC 卡</translation>
+        <translation type="obsolete">MMC 卡</translation>
+    </message>
+    <message>
+        <source>IDE Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD/MMC Card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>USB Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SCSI Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -933,6 +1039,80 @@ Free some memory and try again.</source>
     <message>
         <source>None</source>
         <translation>無</translation>
+    </message>
+</context>
+<context>
+    <name>TimeStringFormat</name>
+    <message>
+        <source>D</source>
+        <comment>first letter of the word &apos;Day&apos;</comment>
+        <translation type="unfinished">D</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>first letter of the word &apos;Month&apos;</comment>
+        <translation type="unfinished">M</translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <comment>first letter of the word &apos;Year&apos;</comment>
+        <translation type="unfinished">Y</translation>
+    </message>
+    <message>
+        <source>day</source>
+        <comment>in month</comment>
+        <translation type="unfinished">日</translation>
+    </message>
+    <message>
+        <source>month</source>
+        <translation type="unfinished">月</translation>
+    </message>
+    <message>
+        <source>year</source>
+        <translation type="unfinished">年</translation>
+    </message>
+    <message>
+        <source>@day</source>
+        <comment>day suffix - applies to some asian languages (e.g. Japanese and Trad. Chinese). If it doesn&apos;t apply to your language it has to be translated to an &apos;@day&apos; </comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>,</source>
+        <comment>day-date separator</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>@year</source>
+        <comment>year suffix - applies to some asian languages (e.g. Japanese and Trad. Chinese). If it doesn&apos;t apply to your language it has to be translated to an &apos;@year&apos; </comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>,</source>
+        <comment>year-date seperator</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2</source>
+        <comment>1=Monday 2=January 12</comment>
+        <translation type="unfinished">%1 %2</translation>
+    </message>
+    <message>
+        <source>%1, %2</source>
+        <comment>1=Monday 2=12 January</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PM</source>
+        <translation type="unfinished">PM</translation>
+    </message>
+    <message>
+        <source>AM</source>
+        <translation type="unfinished">AM</translation>
+    </message>
+    <message>
+        <source>%1 %2</source>
+        <comment>1=Monday 2=12:45</comment>
+        <translation type="unfinished">%1 %2</translation>
     </message>
 </context>
 <context>

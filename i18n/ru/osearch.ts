@@ -65,6 +65,10 @@
         <source>Case sensitive</source>
         <translation>Учет регистра</translation>
     </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>

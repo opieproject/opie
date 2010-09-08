@@ -3,69 +3,69 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation>Календар</translation>
+        <translation type="obsolete">Календар</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Нов</translation>
+        <translation type="obsolete">Нов</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Денес</translation>
+        <translation type="obsolete">Денес</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Ден</translation>
+        <translation type="obsolete">Ден</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Недела</translation>
+        <translation type="obsolete">Недела</translation>
     </message>
     <message>
         <source>WeekLst</source>
-        <translation>Листа на недели</translation>
+        <translation type="obsolete">Листа на недели</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Месец</translation>
+        <translation type="obsolete">Месец</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Пронајди</translation>
+        <translation type="obsolete">Пронајди</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation>Уреди...</translation>
+        <translation type="obsolete">Уреди...</translation>
     </message>
     <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
-        <translation>ТЅраењето на настанот е подолго околку 
+        <translation type="obsolete">ТЅраењето на настанот е подолго околку 
 интервалот помежу повторувањата.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Неможе да се менуваат податоците, во моментов се синхронизира</translation>
+        <translation type="obsolete">Неможе да се менуваат податоците, во моментов се синхронизира</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation>Дупликат на настан</translation>
+        <translation type="obsolete">Дупликат на настан</translation>
     </message>
     <message>
         <source>Edit Event</source>
-        <translation>Уреди настан</translation>
+        <translation type="obsolete">Уреди настан</translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation>Минути)</translation>
+        <translation type="obsolete">Минути)</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>ОК</translation>
+        <translation type="obsolete">ОК</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Нема доволно простор</translation>
+        <translation type="obsolete">Нема доволно простор</translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -73,7 +73,7 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation>Календарот неможеше 
+        <translation type="obsolete">Календарот неможеше 
 да ги зачува промените
 Ослободи простор и овиди се повторно
 
@@ -82,23 +82,19 @@ Quit anyway?</source>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation>(Непознато)</translation>
+        <translation type="obsolete">(Непознато)</translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation>Грешка!</translation>
+        <translation type="obsolete">Грешка!</translation>
     </message>
     <message>
         <source>Fix it</source>
-        <translation>Поправи</translation>
+        <translation type="obsolete">Поправи</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation>Продолжи</translation>
-    </message>
-    <message>
-        <source>error box</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Продолжи</translation>
     </message>
 </context>
 <context>
@@ -151,6 +147,10 @@ Quit anyway?</source>
         <source>Sunday</source>
         <translation>Недела</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -167,11 +167,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Start</source>
-        <translation>Почеток</translation>
+        <translation type="obsolete">Почеток</translation>
     </message>
     <message>
         <source>End</source>
-        <translation>Крај</translation>
+        <translation type="obsolete">Крај</translation>
     </message>
     <message>
         <source>Time</source>
@@ -183,23 +183,19 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Уреди</translation>
+        <translation type="obsolete">Уреди</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Дуплирај</translation>
+        <translation type="obsolete">Дуплирај</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Избриши</translation>
+        <translation type="obsolete">Избриши</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Испрати</translation>
-    </message>
-    <message>
-        <source>Beam this occurence</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Испрати</translation>
     </message>
 </context>
 <context>
@@ -228,6 +224,14 @@ Quit anyway?</source>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Configure Descriptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure Locations</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -245,55 +249,55 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Day</source>
-        <translation>Ден</translation>
+        <translation type="obsolete">Ден</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Недела</translation>
+        <translation type="obsolete">Недела</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation>Листа на недели</translation>
+        <translation type="obsolete">Листа на недели</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>1Месец</translation>
+        <translation type="obsolete">1Месец</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation>Скокни на моментално време</translation>
+        <translation type="obsolete">Скокни на моментално време</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation>Стил на редови:</translation>
+        <translation type="obsolete">Стил на редови:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Основен</translation>
+        <translation type="obsolete">Основен</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation>Среден</translation>
+        <translation type="obsolete">Среден</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Голем</translation>
+        <translation type="obsolete">Голем</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation>Приказ на време</translation>
+        <translation type="obsolete">Приказ на време</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Ништо</translation>
+        <translation type="obsolete">Ништо</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Почеток</translation>
+        <translation type="obsolete">Почеток</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation>Почеток-Крај</translation>
+        <translation type="obsolete">Почеток-Крај</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -301,15 +305,15 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Alarm Settings</source>
-        <translation>Подесувања за аларм</translation>
+        <translation type="obsolete">Подесувања за аларм</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation>Претпоставки за Аларм</translation>
+        <translation type="obsolete">Претпоставки за Аларм</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>минути</translation>
+        <translation type="obsolete">минути</translation>
     </message>
     <message>
         <source>Start viewing events</source>
@@ -351,12 +355,40 @@ Quit anyway?</source>
         <source>Pluginlist</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snooze:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">денови</translation>
+    </message>
+    <message>
+        <source>Descriptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locations...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation>Ова е настан кој трае цел ден.</translation>
+        <translation type="obsolete">Ова е настан кој трае цел ден.</translation>
     </message>
 </context>
 <context>
@@ -385,19 +417,19 @@ Quit anyway?</source>
     <name>DateBookWeekLstEvent</name>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Уреди</translation>
+        <translation type="obsolete">Уреди</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Дуплирај</translation>
+        <translation type="obsolete">Дуплирај</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Избриши</translation>
+        <translation type="obsolete">Избриши</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Испрати</translation>
+        <translation type="obsolete">Испрати</translation>
     </message>
 </context>
 <context>
@@ -480,19 +512,19 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Meeting</source>
-        <translation>Состанок</translation>
+        <translation type="obsolete">Состанок</translation>
     </message>
     <message>
         <source>Lunch</source>
-        <translation>Ручек</translation>
+        <translation type="obsolete">Ручек</translation>
     </message>
     <message>
         <source>Dinner</source>
-        <translation>Ручек</translation>
+        <translation type="obsolete">Ручек</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Патување</translation>
+        <translation type="obsolete">Патување</translation>
     </message>
     <message>
         <source>Description </source>
@@ -500,11 +532,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Office</source>
-        <translation>Канцеларија</translation>
+        <translation type="obsolete">Канцеларија</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Дома</translation>
+        <translation type="obsolete">Дома</translation>
     </message>
     <message>
         <source>Start - End </source>
@@ -555,10 +587,6 @@ Quit anyway?</source>
         <translation>Забелешка...</translation>
     </message>
     <message>
-        <source>minutes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>hours</source>
         <translation type="unfinished"></translation>
     </message>
@@ -566,11 +594,153 @@ Quit anyway?</source>
         <source>days</source>
         <translation type="unfinished">денови</translation>
     </message>
+    <message>
+        <source>mins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate Event</source>
+        <translation type="unfinished">Дупликат на настан</translation>
+    </message>
+    <message>
+        <source>Edit Event</source>
+        <translation type="unfinished">Уреди настан</translation>
+    </message>
 </context>
 <context>
     <name>DatebookAlldayDisp</name>
+</context>
+<context>
+    <name>DayView</name>
     <message>
-        <source>Info</source>
+        <source>Day</source>
+        <translation type="unfinished">Ден</translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished">Скокни на моментално време</translation>
+    </message>
+    <message>
+        <source>Row style:</source>
+        <translation type="unfinished">Стил на редови:</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Основен</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation type="unfinished">Среден</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation type="unfinished">Голем</translation>
+    </message>
+</context>
+<context>
+    <name>Exceptions</name>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Календар</translation>
+    </message>
+</context>
+<context>
+    <name>ExceptionsBase</name>
+    <message>
+        <source>Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Календар</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;A new event has arrived. Would you like to add it to your calendar?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 new events have arrived. Would you like to add them to your calendar?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a recurring event.
+
+Do you want to apply changes to
+all occurrences or just this one?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished">Денес</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Пронајди</translation>
+    </message>
+    <message>
+        <source>Beam this occurrence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transmit the specific occurrence of the selected recurring item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meeting</source>
+        <translation type="unfinished">Состанок</translation>
+    </message>
+    <message>
+        <source>Lunch</source>
+        <translation type="unfinished">Ручек</translation>
+    </message>
+    <message>
+        <source>Dinner</source>
+        <translation type="unfinished">Ручек</translation>
+    </message>
+    <message>
+        <source>Travel</source>
+        <translation type="unfinished">Патување</translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Канцеларија</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Дома</translation>
+    </message>
+    <message>
+        <source>This is a recurring event.
+
+Do you want to delete all
+occurrences or just this one?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calendar Alarm</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -643,6 +813,56 @@ Quit anyway?</source>
         <source>Sunday</source>
         <translation>Недела</translation>
     </message>
+    <message>
+        <source>Error!</source>
+        <translation type="unfinished">Грешка!</translation>
+    </message>
+    <message>
+        <source>Fix it</source>
+        <translation type="unfinished">Поправи</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished">Продолжи</translation>
+    </message>
+    <message>
+        <source>Event duration is potentially longer
+than interval between repeats.</source>
+        <translation type="unfinished">ТЅраењето на настанот е подолго околку 
+интервалот помежу повторувањата.</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Ден</translation>
+    </message>
+    <message>
+        <source>View a single day&apos;s events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished">Недела</translation>
+    </message>
+    <message>
+        <source>View a single week&apos;s events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished">Листа на недели</translation>
+    </message>
+    <message>
+        <source>View a week&apos;s events in a list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block style calendar view</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QWidget</name>
@@ -661,6 +881,10 @@ Quit anyway?</source>
     <message>
         <source>th</source>
         <translation>тх</translation>
+    </message>
+    <message>
+        <source>New Events</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -836,6 +1060,90 @@ and </source>
     <message>
         <source>years</source>
         <translation>години</translation>
+    </message>
+    <message>
+        <source>Exceptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StringManagerDialog</name>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TemplateDialog</name>
+    <message>
+        <source>Template Names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re&amp;move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WeekLstView</name>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished">Листа на недели</translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished">Приказ на време</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Ништо</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Почеток</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished">Почеток-Крај</translation>
+    </message>
+</context>
+<context>
+    <name>WeekView</name>
+    <message>
+        <source>This is an all day event.</source>
+        <translation type="unfinished">Ова е настан кој трае цел ден.</translation>
     </message>
 </context>
 </TS>

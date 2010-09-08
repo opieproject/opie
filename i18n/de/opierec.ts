@@ -4,11 +4,11 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation>Rückwärts</translation>
+        <translation type="obsolete">Rückwärts</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Vorwärts</translation>
+        <translation type="obsolete">Vorwärts</translation>
     </message>
 </context>
 <context>
@@ -105,7 +105,7 @@ wurde nicht erkannt</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Apspielen</translation>
+        <translation type="obsolete">Apspielen</translation>
     </message>
     <message>
         <source>Send with Ir</source>
@@ -140,16 +140,20 @@ wurde nicht erkannt</translation>
         <translation></translation>
     </message>
     <message>
-        <source>Del</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Stereo</source>
         <translation></translation>
     </message>
     <message>
         <source>Please select file to play</source>
         <translation>Datei zum Abpielen wählen</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

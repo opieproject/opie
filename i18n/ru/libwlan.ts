@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>&amp;Enable Encryption</source>
-        <translation>&amp;Включить шифрование</translation>
+        <translation type="obsolete">&amp;Включить шифрование</translation>
     </message>
     <message>
         <source>&amp;Key Setting</source>
@@ -96,6 +96,22 @@
     <message>
         <source>&amp;Reject</source>
         <translation>&amp;Отвергать</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WEP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WPA / WPA2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

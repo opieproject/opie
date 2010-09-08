@@ -69,6 +69,12 @@
         <source>0</source>
         <translation>0</translation>
     </message>
+    <message>
+        <source>Incoming
+connection from
+[Bluetooth address]</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

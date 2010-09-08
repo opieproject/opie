@@ -42,14 +42,6 @@
         <translation>外部電源切斷</translation>
     </message>
     <message>
-        <source>Failure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>could not open file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Charging both devices</source>
         <translation type="unfinished"></translation>
     </message>

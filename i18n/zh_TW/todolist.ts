@@ -2,20 +2,16 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unfiled</source>
         <translation type="unfinished">未分類的</translation>
+    </message>
+    <message>
+        <source>Todo Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -272,7 +268,19 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation>%1 天</translation>
+        <translation type="obsolete">%1 天</translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -299,6 +307,10 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm time</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

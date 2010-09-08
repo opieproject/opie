@@ -78,23 +78,35 @@ Color if below </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthdays in next %1 days:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tomorrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No birthdays in next %1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anniversaries in next %1 days:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No anniversaries in next %1 days</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

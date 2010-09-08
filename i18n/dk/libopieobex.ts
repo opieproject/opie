@@ -1,5 +1,27 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>BtObex</name>
+    <message>
+        <source>Object send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No services found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No OBEX Push service</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ObexServer</name>
+    <message>
+        <source>ObexServer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OpieObex::OtherHandler</name>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>
@@ -15,6 +37,10 @@
     </message>
     <message>
         <source>&lt;p&gt;You received a file of type %1 (&lt;img src=&quot;%2&quot;&gt; )What do you want to do?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File received</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -54,6 +80,22 @@
     </message>
     <message>
         <source>searching...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sending.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>noaddress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>load.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

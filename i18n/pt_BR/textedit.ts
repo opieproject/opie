@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>Start with new file</source>
-        <translation>Iniciar com novo arquivo</translation>
+        <translation type="obsolete">Iniciar com novo arquivo</translation>
     </message>
     <message>
         <source>Font</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation>Perguntar ao Sair</translation>
+        <translation type="obsolete">Perguntar ao Sair</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation>Abrir Barra de Busca</translation>
+        <translation type="obsolete">Abrir Barra de Busca</translation>
     </message>
     <message>
         <source>Goto Line...</source>
@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>O Editor de Texto é copyright&lt;BR&gt;2000 Trolltech AS, e&lt;BR&gt;2002 por &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;e é licenciado sob a GPL</translation>
+        <translation type="obsolete">O Editor de Texto é copyright&lt;BR&gt;2000 Trolltech AS, e&lt;BR&gt;2002 por &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;e é licenciado sob a GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
@@ -199,12 +199,37 @@ Ir em frente e salvar?
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation>Você realmente deseja&lt;BR&gt;
+        <translation type="obsolete">Você realmente deseja&lt;BR&gt;
 &lt;B&gt;remover&lt;/B&gt; o arquivo atual
 do disco?&lt;BR&gt;Isto é &lt;B&gt;irreversível!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The selected file already exists. Overwrite it?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from disk?&lt;BR&gt;This is &lt;B&gt;irreversible!&lt;/B&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

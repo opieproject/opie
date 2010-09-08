@@ -3,11 +3,11 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>&lt;h1&gt;Alarm om %1&lt;/h1&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;h1&gt;Alarm om %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>All</source>
@@ -16,6 +16,10 @@
     <message>
         <source>Unfiled</source>
         <translation type="unfinished">Onbenoemd</translation>
+    </message>
+    <message>
+        <source>Todo Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -299,11 +303,23 @@ Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak ka
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation>%1 Dag(en)</translation>
+        <translation type="obsolete">%1 Dag(en)</translation>
     </message>
     <message>
         <source>None</source>
         <translation>Geen</translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -331,6 +347,10 @@ Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak ka
     <message>
         <source>Delete</source>
         <translation>Verwijder</translation>
+    </message>
+    <message>
+        <source>Alarm time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

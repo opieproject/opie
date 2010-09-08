@@ -19,11 +19,11 @@
     </message>
     <message>
         <source>Add</source>
-        <translation>Voeg toe</translation>
+        <translation type="obsolete">Voeg toe</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Verwijder</translation>
+        <translation type="obsolete">Verwijder</translation>
     </message>
     <message>
         <source>Pickboard</source>
@@ -60,6 +60,14 @@
     <message>
         <source>Move Down</source>
         <translation>Omlaag</translation>
+    </message>
+    <message>
+        <source>Add keymap...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove keymap</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

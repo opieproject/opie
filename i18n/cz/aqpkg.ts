@@ -199,7 +199,7 @@
     </message>
     <message>
         <source>Couldn&apos;t create tempory status file - </source>
-        <translation>Nelze vytvořit dočasný soubor stavu - 
+        <translation type="obsolete">Nelze vytvořit dočasný soubor stavu - 
 </translation>
     </message>
     <message>
@@ -219,6 +219,18 @@
         <source>Symbolic linking succeeded.
 </source>
         <translation>Vytvoření symbolického linku proběhlo.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create temporary status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t rename temporary status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to status file - </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

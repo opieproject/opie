@@ -3,81 +3,81 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation>Kalendārs</translation>
+        <translation type="obsolete">Kalendārs</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Jauns</translation>
+        <translation type="obsolete">Jauns</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Šodien</translation>
+        <translation type="obsolete">Šodien</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Diena</translation>
+        <translation type="obsolete">Diena</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Nedēļa</translation>
+        <translation type="obsolete">Nedēļa</translation>
     </message>
     <message>
         <source>WeekLst</source>
-        <translation>Nedēļu saraksts</translation>
+        <translation type="obsolete">Nedēļu saraksts</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Mēnesis</translation>
+        <translation type="obsolete">Mēnesis</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Meklēt</translation>
+        <translation type="obsolete">Meklēt</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation>Labot...</translation>
+        <translation type="obsolete">Labot...</translation>
     </message>
     <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
-        <translation>Notikuma ilgums ir lielāks
+        <translation type="obsolete">Notikuma ilgums ir lielāks
 kā intervāls starp atkārtojumiem.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Nevaru labot datus, patreiz sinhronizēju</translation>
+        <translation type="obsolete">Nevaru labot datus, patreiz sinhronizēju</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation>Dubults Notikums</translation>
+        <translation type="obsolete">Dubults Notikums</translation>
     </message>
     <message>
         <source>error box</source>
-        <translation>kļūdas logs</translation>
+        <translation type="obsolete">kļūdas logs</translation>
     </message>
     <message>
         <source>Fix it</source>
-        <translation>Labot to</translation>
+        <translation type="obsolete">Labot to</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation>Turpināt</translation>
+        <translation type="obsolete">Turpināt</translation>
     </message>
     <message>
         <source>Edit Event</source>
-        <translation>Labot Notikumu</translation>
+        <translation type="obsolete">Labot Notikumu</translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation>minūtes)</translation>
+        <translation type="obsolete">minūtes)</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Labi</translation>
+        <translation type="obsolete">Labi</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Pietrūkst vietas</translation>
+        <translation type="obsolete">Pietrūkst vietas</translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -85,7 +85,7 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation>Kalendāram neizdevās saglabāt
+        <translation type="obsolete">Kalendāram neizdevās saglabāt
 jūsu izmaiņās.
 Atbrīvojat nedaudz vietas un mēģiniet atkal.
 
@@ -93,11 +93,11 @@ Vai Pārtraukt?</translation>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation>(Nezināms)</translation>
+        <translation type="obsolete">(Nezināms)</translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation>Kļūda!</translation>
+        <translation type="obsolete">Kļūda!</translation>
     </message>
 </context>
 <context>
@@ -150,6 +150,10 @@ Vai Pārtraukt?</translation>
         <source>Sunday</source>
         <translation>Svētdiena</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -166,11 +170,11 @@ Vai Pārtraukt?</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Sākums</translation>
+        <translation type="obsolete">Sākums</translation>
     </message>
     <message>
         <source>End</source>
-        <translation>Beigas</translation>
+        <translation type="obsolete">Beigas</translation>
     </message>
     <message>
         <source>Time</source>
@@ -182,24 +186,24 @@ Vai Pārtraukt?</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>
+        <translation type="obsolete">
 Labot</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Duplicēt</translation>
+        <translation type="obsolete">Duplicēt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Dzēst</translation>
+        <translation type="obsolete">Dzēst</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Bīmot</translation>
+        <translation type="obsolete">Bīmot</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation>Bīmot šo ierakstu</translation>
+        <translation type="obsolete">Bīmot šo ierakstu</translation>
     </message>
 </context>
 <context>
@@ -228,6 +232,14 @@ Labot</translation>
         <source>:00</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Configure Descriptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure Locations</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -245,55 +257,55 @@ Labot</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Diena</translation>
+        <translation type="obsolete">Diena</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Nedēļa</translation>
+        <translation type="obsolete">Nedēļa</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation>Nedēļas</translation>
+        <translation type="obsolete">Nedēļas</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Mēnesis</translation>
+        <translation type="obsolete">Mēnesis</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation>Pārvietoties uz tekošo laiku</translation>
+        <translation type="obsolete">Pārvietoties uz tekošo laiku</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation>Rindas stils:</translation>
+        <translation type="obsolete">Rindas stils:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Noklusēts</translation>
+        <translation type="obsolete">Noklusēts</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation>Vidējs</translation>
+        <translation type="obsolete">Vidējs</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Liels</translation>
+        <translation type="obsolete">Liels</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation>Laika displejs</translation>
+        <translation type="obsolete">Laika displejs</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Nekas</translation>
+        <translation type="obsolete">Nekas</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Sākums</translation>
+        <translation type="obsolete">Sākums</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation>Sākums-Beigas</translation>
+        <translation type="obsolete">Sākums-Beigas</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -301,15 +313,15 @@ Labot</translation>
     </message>
     <message>
         <source>Alarm Settings</source>
-        <translation>Atgādinājuma Uzstādījumi</translation>
+        <translation type="obsolete">Atgādinājuma Uzstādījumi</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation>Atgādinājums Pēc</translation>
+        <translation type="obsolete">Atgādinājums Pēc</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>minūtes</translation>
+        <translation type="obsolete">minūtes</translation>
     </message>
     <message>
         <source>Start viewing events</source>
@@ -351,12 +363,40 @@ Labot</translation>
         <source>Pluginlist</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snooze:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">dienas</translation>
+    </message>
+    <message>
+        <source>Descriptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locations...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation>Šis ir visas dienas notikums.</translation>
+        <translation type="obsolete">Šis ir visas dienas notikums.</translation>
     </message>
 </context>
 <context>
@@ -385,20 +425,20 @@ Labot</translation>
     <name>DateBookWeekLstEvent</name>
     <message>
         <source>Edit</source>
-        <translation>
+        <translation type="obsolete">
 Labot</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Duplicēt</translation>
+        <translation type="obsolete">Duplicēt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Dzēst</translation>
+        <translation type="obsolete">Dzēst</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Bīmot</translation>
+        <translation type="obsolete">Bīmot</translation>
     </message>
 </context>
 <context>
@@ -481,19 +521,19 @@ Labot</translation>
     </message>
     <message>
         <source>Meeting</source>
-        <translation>Tikšanās</translation>
+        <translation type="obsolete">Tikšanās</translation>
     </message>
     <message>
         <source>Lunch</source>
-        <translation>Pusdienas</translation>
+        <translation type="obsolete">Pusdienas</translation>
     </message>
     <message>
         <source>Dinner</source>
-        <translation>Vakariņas</translation>
+        <translation type="obsolete">Vakariņas</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Ceļojums</translation>
+        <translation type="obsolete">Ceļojums</translation>
     </message>
     <message>
         <source>Description </source>
@@ -501,11 +541,11 @@ Labot</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Ofiss</translation>
+        <translation type="obsolete">Ofiss</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Mājas</translation>
+        <translation type="obsolete">Mājas</translation>
     </message>
     <message>
         <source>Start - End </source>
@@ -556,10 +596,6 @@ Labot</translation>
         <translation>Piezīme...</translation>
     </message>
     <message>
-        <source>minutes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>hours</source>
         <translation type="unfinished"></translation>
     </message>
@@ -567,12 +603,158 @@ Labot</translation>
         <source>days</source>
         <translation type="unfinished">dienas</translation>
     </message>
+    <message>
+        <source>mins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate Event</source>
+        <translation type="unfinished">Dubults Notikums</translation>
+    </message>
+    <message>
+        <source>Edit Event</source>
+        <translation type="unfinished">Labot Notikumu</translation>
+    </message>
 </context>
 <context>
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation>Info</translation>
+        <translation type="obsolete">Info</translation>
+    </message>
+</context>
+<context>
+    <name>DayView</name>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished">Pārvietoties uz tekošo laiku</translation>
+    </message>
+    <message>
+        <source>Row style:</source>
+        <translation type="unfinished">Rindas stils:</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Noklusēts</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation type="unfinished">Vidējs</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation type="unfinished">Liels</translation>
+    </message>
+</context>
+<context>
+    <name>Exceptions</name>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Kalendārs</translation>
+    </message>
+</context>
+<context>
+    <name>ExceptionsBase</name>
+    <message>
+        <source>Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Kalendārs</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;A new event has arrived. Would you like to add it to your calendar?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 new events have arrived. Would you like to add them to your calendar?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a recurring event.
+
+Do you want to apply changes to
+all occurrences or just this one?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished">Šodien</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Meklēt</translation>
+    </message>
+    <message>
+        <source>Beam this occurrence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transmit the specific occurrence of the selected recurring item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meeting</source>
+        <translation type="unfinished">Tikšanās</translation>
+    </message>
+    <message>
+        <source>Lunch</source>
+        <translation type="unfinished">Pusdienas</translation>
+    </message>
+    <message>
+        <source>Dinner</source>
+        <translation type="unfinished">Vakariņas</translation>
+    </message>
+    <message>
+        <source>Travel</source>
+        <translation type="unfinished">Ceļojums</translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Ofiss</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Mājas</translation>
+    </message>
+    <message>
+        <source>This is a recurring event.
+
+Do you want to delete all
+occurrences or just this one?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calendar Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -644,6 +826,56 @@ Labot</translation>
         <source>Sunday</source>
         <translation>Svētdienu</translation>
     </message>
+    <message>
+        <source>Error!</source>
+        <translation type="unfinished">Kļūda!</translation>
+    </message>
+    <message>
+        <source>Fix it</source>
+        <translation type="unfinished">Labot to</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished">Turpināt</translation>
+    </message>
+    <message>
+        <source>Event duration is potentially longer
+than interval between repeats.</source>
+        <translation type="unfinished">Notikuma ilgums ir lielāks
+kā intervāls starp atkārtojumiem.</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View a single day&apos;s events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View a single week&apos;s events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished">Nedēļas</translation>
+    </message>
+    <message>
+        <source>View a week&apos;s events in a list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block style calendar view</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QWidget</name>
@@ -662,6 +894,10 @@ Labot</translation>
     <message>
         <source>th</source>
         <translation>ais</translation>
+    </message>
+    <message>
+        <source>New Events</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -838,6 +1074,90 @@ and </source>
     <message>
         <source>years</source>
         <translation>gadi</translation>
+    </message>
+    <message>
+        <source>Exceptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StringManagerDialog</name>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TemplateDialog</name>
+    <message>
+        <source>Template Names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re&amp;move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WeekLstView</name>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished">Nedēļas</translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished">Laika displejs</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Nekas</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished">Sākums-Beigas</translation>
+    </message>
+</context>
+<context>
+    <name>WeekView</name>
+    <message>
+        <source>This is an all day event.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

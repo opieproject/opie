@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Start with new file</source>
-        <translation>Démarrer avec un nouveau fichier</translation>
+        <translation type="obsolete">Démarrer avec un nouveau fichier</translation>
     </message>
     <message>
         <source>File</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation>Demandé avant de quitter</translation>
+        <translation type="obsolete">Demandé avant de quitter</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation>Barre de recherche ouverte</translation>
+        <translation type="obsolete">Barre de recherche ouverte</translation>
     </message>
     <message>
         <source>Goto Line...</source>
@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>L&apos;éditeur de texte est sous copyrigth&lt;br&gt;2000 Trolltech AS, et &lt;BR&gt;2002 par &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt; et est sous license GPL</translation>
+        <translation type="obsolete">L&apos;éditeur de texte est sous copyrigth&lt;br&gt;2000 Trolltech AS, et &lt;BR&gt;2002 par &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt; et est sous license GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
@@ -197,10 +197,35 @@ Continuer et sauvegarder ?</translation>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation>Confirmez-vous la &lt;B&gt;suppression&lt;/B&gt; du fichier courant ?&lt;BR&gt;&lt;B&gt;Cette suppression est irréversible !&lt;/B&gt;</translation>
+        <translation type="obsolete">Confirmez-vous la &lt;B&gt;suppression&lt;/B&gt; du fichier courant ?&lt;BR&gt;&lt;B&gt;Cette suppression est irréversible !&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The selected file already exists. Overwrite it?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from disk?&lt;BR&gt;This is &lt;B&gt;irreversible!&lt;/B&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -14,10 +14,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;qt&gt;Starting to convert the database for %1&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No SQLite2 database could be found!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -34,19 +30,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;qt&gt;Are you really sure that you want to convert your database from sqlite V2 to sqlite V3?&lt;/qt&gt;</source>
+        <source>Plain text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;qt&gt;An internal error occurred: sqlite was not accessible! Please correct the PATH or install this packages!&lt;/qt&gt;</source>
+        <source>XML</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;qt&gt;An internal error occurred: sqlite3 was not accessible! Please correct the PATH or install this packages!&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Conversion is finished!</source>
+        <source>&lt;qt&gt;Starting convert of database %1&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -54,18 +46,6 @@
     <name>converter_base</name>
     <message>
         <source>PIM-Database Converter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Converter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upgrade to SQLite3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Database:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -78,10 +58,6 @@
     </message>
     <message>
         <source>Datebook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Source/Destination:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -101,19 +77,51 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Config:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Erase before copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Progress:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Go!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source / Destination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erase destination before copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Database Formats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plain text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

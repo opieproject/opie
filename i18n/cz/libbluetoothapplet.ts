@@ -15,11 +15,19 @@
     </message>
     <message>
         <source>Disable discovery</source>
-        <translation>Vypnout prohledávání</translation>
+        <translation type="obsolete">Vypnout prohledávání</translation>
     </message>
     <message>
         <source>Enable discovery</source>
-        <translation>Zapnout prohledávání</translation>
+        <translation type="obsolete">Zapnout prohledávání</translation>
+    </message>
+    <message>
+        <source>Disable receive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable receive</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

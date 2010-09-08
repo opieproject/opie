@@ -54,7 +54,7 @@
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Вы действительно хотите добавить контакт для
+        <translation type="obsolete">Вы действительно хотите добавить контакт для
 %1?</translation>
     </message>
     <message>
@@ -111,6 +111,11 @@ Quit anyway?</source>
     <message>
         <source>Edit Contact</source>
         <translation>Правка контакта</translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1245,7 +1250,7 @@ Opie-Mail - свободная программа!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Нажать для ввода ФИО</translation>
+        <translation type="obsolete">Нажать для ввода ФИО</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1253,15 +1258,15 @@ Opie-Mail - свободная программа!</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>Работа...</translation>
+        <translation type="obsolete">Работа...</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Что-нибудь типа &quot;jr.&quot;..</translation>
+        <translation type="obsolete">Что-нибудь типа &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>Место работы контакта</translation>
+        <translation type="obsolete">Место работы контакта</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1274,6 +1279,30 @@ Opie-Mail - свободная программа!</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

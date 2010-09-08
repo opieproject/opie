@@ -4,11 +4,11 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>&lt;h1&gt;Allarme alle %1&lt;/h1&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;h1&gt;Allarme alle %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>All</source>
@@ -17,6 +17,10 @@
     <message>
         <source>Unfiled</source>
         <translation type="unfinished">Vuota</translation>
+    </message>
+    <message>
+        <source>Todo Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -298,11 +302,23 @@ Ti permette di aggiungere velocemente una nuova attività.  Quest&apos;area può
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation>%1 giorno(i)</translation>
+        <translation type="obsolete">%1 giorno(i)</translation>
     </message>
     <message>
         <source>None</source>
         <translation>Nessuna</translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -330,6 +346,10 @@ Ti permette di aggiungere velocemente una nuova attività.  Quest&apos;area può
     <message>
         <source>Delete</source>
         <translation>Elimina</translation>
+    </message>
+    <message>
+        <source>Alarm time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

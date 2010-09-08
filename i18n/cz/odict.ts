@@ -1,112 +1,111 @@
-<!DOCTYPE TS>
-<TS>
-  <context>
+<!DOCTYPE TS><TS>
+<context>
     <name>ConfigDlg</name>
     <message>
-      <source>Options</source>
-      <translation>Možnosti</translation>
+        <source>Options</source>
+        <translation>Možnosti</translation>
     </message>
     <message>
-      <source>Searchmethod</source>
-      <translation>Metoda vyhledávání</translation>
+        <source>Searchmethod</source>
+        <translation>Metoda vyhledávání</translation>
     </message>
     <message>
-      <source>New</source>
-      <translation>Nový</translation>
+        <source>New</source>
+        <translation>Nový</translation>
     </message>
     <message>
-      <source>Change</source>
-      <translation>Změnit</translation>
+        <source>Change</source>
+        <translation>Změnit</translation>
     </message>
     <message>
-      <source>Delete</source>
-      <translation>Smazat</translation>
+        <source>Delete</source>
+        <translation>Smazat</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>ODict</name>
     <message>
-      <source>Opie-Dictionary</source>
-      <translation>Opie-Slovník</translation>
+        <source>Opie-Dictionary</source>
+        <translation>Opie-Slovník</translation>
     </message>
     <message>
-      <source>Query:</source>
-      <translation>Dotaz:</translation>
+        <source>Query:</source>
+        <translation>Dotaz:</translation>
     </message>
     <message>
-      <source>&amp;Ok</source>
-      <translation>&amp;Ok</translation>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
-      <source>OPIE-Dictionary</source>
-      <translation>OPIE-Slovník</translation>
+        <source>OPIE-Dictionary</source>
+        <translation>OPIE-Slovník</translation>
     </message>
     <message>
-      <source>No dictionary defined</source>
-      <translation>Nebyl definován slovník</translation>
+        <source>No dictionary defined</source>
+        <translation>Nebyl definován slovník</translation>
     </message>
     <message>
-      <source>&amp;Define one</source>
-      <translation>&amp;Definujte jeden</translation>
+        <source>&amp;Define one</source>
+        <translation>&amp;Definujte jeden</translation>
     </message>
     <message>
-      <source>&amp;Cancel</source>
-      <translation>&amp;Storno</translation>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Storno</translation>
     </message>
     <message>
-      <source>Configuration</source>
-      <translation>Konfigurace</translation>
+        <source>Configuration</source>
+        <translation>Konfigurace</translation>
     </message>
     <message>
-      <source>Settings</source>
-      <translation>Nastavení</translation>
+        <source>Settings</source>
+        <translation>Nastavení</translation>
     </message>
     <message>
-      <source>Parameter</source>
-      <translation>Parametr</translation>
+        <source>Parameter</source>
+        <translation>Parametr</translation>
     </message>
     <message>
-      <source>Search methods</source>
-      <translation>Metody hledání</translation>
+        <source>Search methods</source>
+        <translation>Metody hledání</translation>
     </message>
     <message>
-      <source>Case sensitive</source>
-      <translation>Rozlišovat velikost písmen</translation>
+        <source>Case sensitive</source>
+        <translation>Rozlišovat velikost písmen</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>SearchMethodDlg</name>
     <message>
-      <source>Name:</source>
-      <translation>Název:</translation>
+        <source>Name:</source>
+        <translation>Název:</translation>
     </message>
     <message>
-      <source>Dictionary file</source>
-      <translation>Slovníkový soubor</translation>
+        <source>Dictionary file</source>
+        <translation>Slovníkový soubor</translation>
     </message>
     <message>
-      <source>Browse</source>
-      <translation>Prohlížet</translation>
+        <source>Browse</source>
+        <translation>Prohlížet</translation>
     </message>
     <message>
-      <source>Language 1</source>
-      <translation>Jazyk 1</translation>
+        <source>Language 1</source>
+        <translation>Jazyk 1</translation>
     </message>
     <message>
-      <source>Decollator</source>
-      <translation>Nerovnítko</translation>
+        <source>Decollator</source>
+        <translation>Nerovnítko</translation>
     </message>
     <message>
-      <source>Language 2</source>
-      <translation>Jazyk 2</translation>
+        <source>Language 2</source>
+        <translation>Jazyk 2</translation>
     </message>
     <message>
-      <source>New Searchmethod</source>
-      <translation>Nová metoda vyhledávání</translation>
+        <source>New Searchmethod</source>
+        <translation>Nová metoda vyhledávání</translation>
     </message>
     <message>
-      <source>Change Searchmethod</source>
-      <translation>Změnit metodu vyhledávání</translation>
+        <source>Change Searchmethod</source>
+        <translation>Změnit metodu vyhledávání</translation>
     </message>
-  </context>
+</context>
 </TS>

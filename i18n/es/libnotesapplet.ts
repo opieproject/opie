@@ -15,19 +15,19 @@
     </message>
     <message>
         <source>Delete?</source>
-        <translation>¿Borrar?</translation>
+        <translation type="obsolete">¿Borrar?</translation>
     </message>
     <message>
         <source>Do you really want to&lt;BR&gt;&lt;B&gt; delete&lt;/B&gt; this note ?</source>
-        <translation>¿Seguro que quiere &lt;BR&gt;&lt;B&gt; borrar&lt;/B&gt; esta nota?</translation>
+        <translation type="obsolete">¿Seguro que quiere &lt;BR&gt;&lt;B&gt; borrar&lt;/B&gt; esta nota?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sí</translation>
+        <translation type="obsolete">Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="obsolete">No</translation>
     </message>
     <message>
         <source>Beam Out</source>
@@ -35,11 +35,28 @@
     </message>
     <message>
         <source>Search For...</source>
-        <translation>Búscar...</translation>
+        <translation type="obsolete">Búscar...</translation>
     </message>
     <message>
         <source>Toggle Maximized</source>
         <translation>Conmutar maximizado</translation>
+    </message>
+    <message>
+        <source>Delete note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;empty file&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;no title&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

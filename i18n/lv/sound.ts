@@ -3,18 +3,18 @@
     <name>SoundSettings</name>
     <message>
         <source>Shows icon</source>
-        <translation>Rāda ikonu</translation>
+        <translation type="obsolete">Rāda ikonu</translation>
     </message>
     <message>
         <source>Hides icon</source>
-        <translation>Slēpj ikonu</translation>
+        <translation type="obsolete">Slēpj ikonu</translation>
     </message>
 </context>
 <context>
     <name>SoundSettingsBase</name>
     <message>
         <source>Vmemo Settings</source>
-        <translation>Vmemo Uzstādījumi</translation>
+        <translation type="obsolete">Vmemo Uzstādījumi</translation>
     </message>
     <message>
         <source>Stereo</source>
@@ -26,11 +26,11 @@
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation>Vizuālie Brīdinājumi</translation>
+        <translation type="obsolete">Vizuālie Brīdinājumi</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation>Intensitāte:</translation>
+        <translation type="obsolete">Intensitāte:</translation>
     </message>
     <message>
         <source>8000</source>
@@ -54,79 +54,115 @@
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation>Ieraksta Direktorija:</translation>
+        <translation type="obsolete">Ieraksta Direktorija:</translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation>Ieraksta Atslēga:</translation>
+        <translation type="obsolete">Ieraksta Atslēga:</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation>Uzdevumjoslas Ikona</translation>
+        <translation type="obsolete">Uzdevumjoslas Ikona</translation>
     </message>
     <message>
         <source>Key_Record</source>
-        <translation>Taustiņš_Ieraksts</translation>
+        <translation type="obsolete">Taustiņš_Ieraksts</translation>
     </message>
     <message>
         <source>Key_Space</source>
-        <translation>Taustiņš_Atstarpe</translation>
+        <translation type="obsolete">Taustiņš_Atstarpe</translation>
     </message>
     <message>
         <source>Key_Home</source>
-        <translation>Taustiņš_Mājas</translation>
+        <translation type="obsolete">Taustiņš_Mājas</translation>
     </message>
     <message>
         <source>Key_Calender</source>
-        <translation>Taustiņš_Kalendārs</translation>
+        <translation type="obsolete">Taustiņš_Kalendārs</translation>
     </message>
     <message>
         <source>Key_Contacts</source>
-        <translation>Taustiņš_Kontakti</translation>
+        <translation type="obsolete">Taustiņš_Kontakti</translation>
     </message>
     <message>
         <source>Key_Menu</source>
-        <translation>Taustiņš_Izvēlne</translation>
+        <translation type="obsolete">Taustiņš_Izvēlne</translation>
     </message>
     <message>
         <source>Key_Mail</source>
-        <translation>Taustiņš_Pasts</translation>
+        <translation type="obsolete">Taustiņš_Pasts</translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation>Ieraksta Limits sekundēs:</translation>
+        <translation type="obsolete">Ieraksta Limits sekundēs:</translation>
     </message>
     <message>
         <source>30</source>
-        <translation>30</translation>
+        <translation type="obsolete">30</translation>
     </message>
     <message>
         <source>20</source>
-        <translation>20</translation>
+        <translation type="obsolete">20</translation>
     </message>
     <message>
         <source>15</source>
-        <translation>15</translation>
+        <translation type="obsolete">15</translation>
     </message>
     <message>
         <source>10</source>
-        <translation>10</translation>
+        <translation type="obsolete">10</translation>
     </message>
     <message>
         <source>5</source>
-        <translation>5</translation>
+        <translation type="obsolete">5</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation>Neierobežots</translation>
+        <translation type="obsolete">Neierobežots</translation>
     </message>
     <message>
         <source>Restart Opie if needed</source>
-        <translation>Pārlaist Opie ja nepieciešams</translation>
+        <translation type="obsolete">Pārlaist Opie ja nepieciešams</translation>
     </message>
     <message>
         <source>Use ADPCM compression</source>
         <translation>Lietot ADPCM kompresiju</translation>
+    </message>
+    <message>
+        <source>Sound Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vmemo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Limit to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display status</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

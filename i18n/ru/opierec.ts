@@ -3,11 +3,11 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation>Назад</translation>
+        <translation type="obsolete">Назад</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Вперед</translation>
+        <translation type="obsolete">Вперед</translation>
     </message>
 </context>
 <context>
@@ -104,7 +104,7 @@ or a card isn&apos;t being recognized</source>
     </message>
     <message>
         <source>Play</source>
-        <translation>Играть</translation>
+        <translation type="obsolete">Играть</translation>
     </message>
     <message>
         <source>Send with Ir</source>
@@ -140,7 +140,7 @@ or a card isn&apos;t being recognized</source>
     </message>
     <message>
         <source>Del</source>
-        <translation>Удалить</translation>
+        <translation type="obsolete">Удалить</translation>
     </message>
     <message>
         <source>Stereo</source>
@@ -149,6 +149,14 @@ or a card isn&apos;t being recognized</source>
     <message>
         <source>Please select file to play</source>
         <translation>Пожалуйста выберите файл</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -4,11 +4,11 @@
     <name>BatteryStatus</name>
     <message>
         <source>Failure</source>
-        <translation>Fehler</translation>
+        <translation type="obsolete">Fehler</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>konnte Datei nicht öffnen</translation>
+        <translation type="obsolete">konnte Datei nicht öffnen</translation>
     </message>
     <message>
         <source>Charging both devices</source>

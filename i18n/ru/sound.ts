@@ -3,11 +3,11 @@
     <name>SoundSettings</name>
     <message>
         <source>Shows icon</source>
-        <translation>Показать иконку</translation>
+        <translation type="obsolete">Показать иконку</translation>
     </message>
     <message>
         <source>Hides icon</source>
-        <translation>Скрыть иконку</translation>
+        <translation type="obsolete">Скрыть иконку</translation>
     </message>
 </context>
 <context>
@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>Vmemo Settings</source>
-        <translation>Настройки Vmemo</translation>
+        <translation type="obsolete">Настройки Vmemo</translation>
     </message>
     <message>
         <source>8000</source>
@@ -46,87 +46,123 @@
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation>Визуальные извещения</translation>
+        <translation type="obsolete">Визуальные извещения</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation>Иконка на панели</translation>
+        <translation type="obsolete">Иконка на панели</translation>
     </message>
     <message>
         <source>Key_Space</source>
-        <translation>Кнопка_Пробел</translation>
+        <translation type="obsolete">Кнопка_Пробел</translation>
     </message>
     <message>
         <source>Key_Home</source>
-        <translation>Кнопка_Домой</translation>
+        <translation type="obsolete">Кнопка_Домой</translation>
     </message>
     <message>
         <source>Key_Calender</source>
-        <translation>Кнопка_Календарь</translation>
+        <translation type="obsolete">Кнопка_Календарь</translation>
     </message>
     <message>
         <source>Key_Contacts</source>
-        <translation>Кнопка_Контакты</translation>
+        <translation type="obsolete">Кнопка_Контакты</translation>
     </message>
     <message>
         <source>Key_Menu</source>
-        <translation>Кнопка_Меню</translation>
+        <translation type="obsolete">Кнопка_Меню</translation>
     </message>
     <message>
         <source>Key_Mail</source>
-        <translation>Кнопка_Почта</translation>
+        <translation type="obsolete">Кнопка_Почта</translation>
     </message>
     <message>
         <source>30</source>
-        <translation>30</translation>
+        <translation type="obsolete">30</translation>
     </message>
     <message>
         <source>20</source>
-        <translation>20</translation>
+        <translation type="obsolete">20</translation>
     </message>
     <message>
         <source>15</source>
-        <translation>15</translation>
+        <translation type="obsolete">15</translation>
     </message>
     <message>
         <source>10</source>
-        <translation>10</translation>
+        <translation type="obsolete">10</translation>
     </message>
     <message>
         <source>5</source>
-        <translation>5</translation>
+        <translation type="obsolete">5</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation>Частота дискретизации:</translation>
+        <translation type="obsolete">Частота дискретизации:</translation>
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation>Каталог для записей:</translation>
+        <translation type="obsolete">Каталог для записей:</translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation>Запуск записи кнопкой:</translation>
+        <translation type="obsolete">Запуск записи кнопкой:</translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation>Предел длины в секундах:</translation>
+        <translation type="obsolete">Предел длины в секундах:</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation>Неограниченная</translation>
+        <translation type="obsolete">Неограниченная</translation>
     </message>
     <message>
         <source>Restart Opie if needed</source>
-        <translation>Перезапустить Opie если нужно</translation>
+        <translation type="obsolete">Перезапустить Opie если нужно</translation>
     </message>
     <message>
         <source>Key_Record</source>
-        <translation>Кнопка_Запись</translation>
+        <translation type="obsolete">Кнопка_Запись</translation>
     </message>
     <message>
         <source>Use ADPCM compression</source>
         <translation>Использовать сжатие ADPCM</translation>
+    </message>
+    <message>
+        <source>Sound Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vmemo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Limit to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display status</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

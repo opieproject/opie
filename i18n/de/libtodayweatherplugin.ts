@@ -114,5 +114,9 @@ Druck:</translation>
         <source> kPa</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Could not start wget process.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

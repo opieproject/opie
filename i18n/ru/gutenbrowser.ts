@@ -317,6 +317,10 @@ http://www.trolltech.com
         <source>Last name first.</source>
         <translation>Сначала фамилия.</translation>
     </message>
+    <message>
+        <source>   </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NetworkDialog</name>

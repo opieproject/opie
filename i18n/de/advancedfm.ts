@@ -176,7 +176,7 @@
     </message>
     <message>
         <source>File Search</source>
-        <translation>Dateisuche</translation>
+        <translation type="obsolete">Dateisuche</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
@@ -261,6 +261,85 @@
     <message>
         <source>&lt;p&gt;Could not copy %1 to %2&lt;/p&gt;</source>
         <translation>&lt;p&gt;Kann %1 nicht nach %2 kopieren&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Info for %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1MB (%2 bytes)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1kB (%2 bytes)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>symbolic link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>executable file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FileInfoDialog</name>
+    <message>
+        <source>FileInfoDialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Owner:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Permissions:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Times</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accessed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Modified:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

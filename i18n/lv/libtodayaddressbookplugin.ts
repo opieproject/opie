@@ -84,19 +84,47 @@ Krāsa ja zemāk</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Nākamās dzimšanas dienas pēc &lt;b&gt; %1 &lt;/b&gt; dienām:</translation>
+        <translation type="obsolete">Nākamās dzimšanas dienas pēc &lt;b&gt; %1 &lt;/b&gt; dienām:</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Nav dzimšanasdienu &lt;b&gt; %1 &lt;/b&gt; dienās!</translation>
+        <translation type="obsolete">Nav dzimšanasdienu &lt;b&gt; %1 &lt;/b&gt; dienās!</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Nākamās dzimšanas dienas &lt;b&gt; %1 &lt;/b&gt; dienās:</translation>
+        <translation type="obsolete">Nākamās dzimšanas dienas &lt;b&gt; %1 &lt;/b&gt; dienās:</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Nav svinamdienu &lt;b&gt; %1 &lt;/b&gt; dienās!</translation>
+        <translation type="obsolete">Nav svinamdienu &lt;b&gt; %1 &lt;/b&gt; dienās!</translation>
+    </message>
+    <message>
+        <source>Birthdays in next %1 days:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tomorrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No birthdays in next %1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anniversaries in next %1 days:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No anniversaries in next %1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

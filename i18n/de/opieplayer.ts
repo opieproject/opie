@@ -254,6 +254,14 @@ wirklich löschen?</translation>
         <source>Path</source>
         <translation>Pfad</translation>
     </message>
+    <message>
+        <source>&lt;p&gt;Error unable to parse file.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Sorry, could not find the requested document.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VideoWidget</name>

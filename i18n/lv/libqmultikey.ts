@@ -19,11 +19,11 @@
     </message>
     <message>
         <source>Add</source>
-        <translation>Pievienot</translation>
+        <translation type="obsolete">Pievienot</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Izņemt</translation>
+        <translation type="obsolete">Izņemt</translation>
     </message>
     <message>
         <source>Pickboard</source>
@@ -60,6 +60,14 @@
     <message>
         <source>Move Down</source>
         <translation>Lejup</translation>
+    </message>
+    <message>
+        <source>Add keymap...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove keymap</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

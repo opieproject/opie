@@ -23,11 +23,11 @@
     </message>
     <message>
         <source>Add</source>
-        <translation>Přidat</translation>
+        <translation type="obsolete">Přidat</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Odstranit</translation>
+        <translation type="obsolete">Odstranit</translation>
     </message>
     <message>
         <source>Pickboard</source>
@@ -60,6 +60,14 @@
     <message>
         <source>Colors</source>
         <translation>Barvy</translation>
+    </message>
+    <message>
+        <source>Add keymap...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove keymap</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

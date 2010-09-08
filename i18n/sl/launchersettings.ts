@@ -6,10 +6,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -197,7 +193,7 @@
     </message>
     <message>
         <source>New</source>
-        <translation>Nov</translation>
+        <translation type="obsolete">Nov</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -205,7 +201,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Izbriši</translation>
+        <translation type="obsolete">Izbriši</translation>
     </message>
     <message>
         <source>Enable big busy indicator</source>
@@ -217,7 +213,7 @@
     </message>
     <message>
         <source>Adds a new Tab to the Launcher.</source>
-        <translation>Doda nov zavihek v zaganjalnik.</translation>
+        <translation type="obsolete">Doda nov zavihek v zaganjalnik.</translation>
     </message>
     <message>
         <source>Opens a new dialog to customize the select Tab.</source>
@@ -225,7 +221,7 @@
     </message>
     <message>
         <source>Deletes a Tab from the Launcher.</source>
-        <translation>Izbriše zavihek iz zaganjalnika.</translation>
+        <translation type="obsolete">Izbriše zavihek iz zaganjalnika.</translation>
     </message>
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>

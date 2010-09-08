@@ -344,6 +344,10 @@ immediately.</source>
         <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
         <translation>&lt;p&gt;Запасной аккумулятор разряжен.&lt;p&gt;Пожалуйста зарядите его</translation>
     </message>
+    <message>
+        <source>Suspending...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ShutdownImpl</name>
@@ -396,11 +400,19 @@ immediately.</source>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;&lt;p&gt;Неавторизованная система требует доступа к устройству.&lt;p&gt;Вы выбрали IntelliSync так что вы можете разрешить или запретить это соединение.&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;&lt;p&gt;Неавторизованная система требует доступа к устройству.&lt;p&gt;Вы выбрали IntelliSync так что вы можете разрешить или запретить это соединение.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
-        <translation>&lt;p&gt;Неавторизованная система требует доступа к устройству.&lt;p&gt;Если у Вас Qtopia Desktop 1.5.1 и меньше, пожалуйста обновите или изменитье настройки под IntelliSync.</translation>
+        <translation type="obsolete">&lt;p&gt;Неавторизованная система требует доступа к устройству.&lt;p&gt;Если у Вас Qtopia Desktop 1.5.1 и меньше, пожалуйста обновите или изменитье настройки под IntelliSync.</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may allow or deny this connection.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;An unauthorized system is requesting access to this device with no password.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.&lt;p&gt;Otherwise, check that the correct sync application is selected in the Security settings, and ensure that a sync password has been set in the sync application if it allows one.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

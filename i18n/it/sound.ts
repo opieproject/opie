@@ -4,18 +4,18 @@
     <name>SoundSettings</name>
     <message>
         <source>Shows icon</source>
-        <translation>Mostra icona</translation>
+        <translation type="obsolete">Mostra icona</translation>
     </message>
     <message>
         <source>Hides icon</source>
-        <translation>Nascondi icona</translation>
+        <translation type="obsolete">Nascondi icona</translation>
     </message>
 </context>
 <context>
     <name>SoundSettingsBase</name>
     <message>
         <source>Vmemo Settings</source>
-        <translation>ImpostazioniVmemo</translation>
+        <translation type="obsolete">ImpostazioniVmemo</translation>
     </message>
     <message>
         <source>Stereo</source>
@@ -27,11 +27,11 @@
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation>Allarmi Visivi</translation>
+        <translation type="obsolete">Allarmi Visivi</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation>Freq. Campionamento:</translation>
+        <translation type="obsolete">Freq. Campionamento:</translation>
     </message>
     <message>
         <source>8000</source>
@@ -55,78 +55,114 @@
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation>Directory di Registrazione:</translation>
+        <translation type="obsolete">Directory di Registrazione:</translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation>Tasto di Registrazione:</translation>
+        <translation type="obsolete">Tasto di Registrazione:</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation>Icona Taskbar</translation>
+        <translation type="obsolete">Icona Taskbar</translation>
     </message>
     <message>
         <source>Key_Record</source>
-        <translation>Key_Record</translation>
+        <translation type="obsolete">Key_Record</translation>
     </message>
     <message>
         <source>Key_Space</source>
-        <translation>Key_Space</translation>
+        <translation type="obsolete">Key_Space</translation>
     </message>
     <message>
         <source>Key_Home</source>
-        <translation>Key_Home</translation>
+        <translation type="obsolete">Key_Home</translation>
     </message>
     <message>
         <source>Key_Calender</source>
-        <translation>Key_Calender</translation>
+        <translation type="obsolete">Key_Calender</translation>
     </message>
     <message>
         <source>Key_Contacts</source>
-        <translation>Key_Contacts</translation>
+        <translation type="obsolete">Key_Contacts</translation>
     </message>
     <message>
         <source>Key_Menu</source>
-        <translation>Key_Menu</translation>
+        <translation type="obsolete">Key_Menu</translation>
     </message>
     <message>
         <source>Key_Mail</source>
-        <translation>Key_Mail</translation>
+        <translation type="obsolete">Key_Mail</translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation>Limite di Registrazione in secondi:</translation>
+        <translation type="obsolete">Limite di Registrazione in secondi:</translation>
     </message>
     <message>
         <source>30</source>
-        <translation>30</translation>
+        <translation type="obsolete">30</translation>
     </message>
     <message>
         <source>20</source>
-        <translation>20</translation>
+        <translation type="obsolete">20</translation>
     </message>
     <message>
         <source>15</source>
-        <translation>15</translation>
+        <translation type="obsolete">15</translation>
     </message>
     <message>
         <source>10</source>
-        <translation>10</translation>
+        <translation type="obsolete">10</translation>
     </message>
     <message>
         <source>5</source>
-        <translation>5</translation>
+        <translation type="obsolete">5</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation>Illimitato</translation>
+        <translation type="obsolete">Illimitato</translation>
     </message>
     <message>
         <source>Restart Opie if needed</source>
-        <translation>Riavvia Opie se necessario</translation>
+        <translation type="obsolete">Riavvia Opie se necessario</translation>
     </message>
     <message>
         <source>Use ADPCM compression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vmemo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Limit to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display status</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

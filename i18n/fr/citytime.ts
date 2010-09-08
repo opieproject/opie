@@ -18,6 +18,10 @@
         <source>There was a problem setting your timezone.Your time may be wrong now...</source>
         <translation>Un problème est survenu lors de la définition de votre fuseau horaire. L&apos;heure est sans doute incorrecte maintenant...</translation>
     </message>
+    <message>
+        <source>unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CityTimeBase</name>
@@ -68,6 +72,10 @@ puis sélectionnez une ville</translation>
     <message>
         <source>City</source>
         <translation>Ville</translation>
+    </message>
+    <message>
+        <source>Timezone unavailable</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

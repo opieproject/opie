@@ -200,7 +200,7 @@
     </message>
     <message>
         <source>Couldn&apos;t create tempory status file - </source>
-        <translation>Не могу создать временный файл статуса - </translation>
+        <translation type="obsolete">Не могу создать временный файл статуса - </translation>
     </message>
     <message>
         <source>Couldn&apos;t start ipkg process</source>
@@ -221,6 +221,18 @@
 </source>
         <translation>Ссылки созданы.
 </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create temporary status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t rename temporary status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to status file - </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

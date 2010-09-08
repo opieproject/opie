@@ -43,11 +43,11 @@
     </message>
     <message>
         <source>Failure</source>
-        <translation>Napaka</translation>
+        <translation type="obsolete">Napaka</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>ne morem odpreti datoteke</translation>
+        <translation type="obsolete">ne morem odpreti datoteke</translation>
     </message>
     <message>
         <source>Charging both devices</source>

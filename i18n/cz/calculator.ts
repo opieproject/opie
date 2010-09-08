@@ -1,332 +1,331 @@
-<!DOCTYPE TS>
-<TS>
-  <context>
+<!DOCTYPE TS><TS>
+<context>
     <name>Calculator</name>
     <message>
-      <source>M+</source>
-      <translation>M+</translation>
+        <source>M+</source>
+        <translation>M+</translation>
     </message>
     <message>
-      <source>MR</source>
-      <translation>MR</translation>
+        <source>MR</source>
+        <translation>MR</translation>
     </message>
     <message>
-      <source>MC</source>
-      <translation>MC</translation>
+        <source>MC</source>
+        <translation>MC</translation>
     </message>
     <message>
-      <source>CE</source>
-      <translation>CE</translation>
+        <source>CE</source>
+        <translation>CE</translation>
     </message>
     <message>
-      <source>log</source>
-      <translation>log</translation>
+        <source>log</source>
+        <translation>log</translation>
     </message>
     <message>
-      <source>ln</source>
-      <translation>ln</translation>
+        <source>ln</source>
+        <translation>ln</translation>
     </message>
     <message>
-      <source>(</source>
-      <translation>(</translation>
+        <source>(</source>
+        <translation>(</translation>
     </message>
     <message>
-      <source>)</source>
-      <translation>)</translation>
+        <source>)</source>
+        <translation>)</translation>
     </message>
     <message>
-      <source>sin</source>
-      <translation>sin</translation>
+        <source>sin</source>
+        <translation>sin</translation>
     </message>
     <message>
-      <source>cos</source>
-      <translation>cos</translation>
+        <source>cos</source>
+        <translation>cos</translation>
     </message>
     <message>
-      <source>tan</source>
-      <translation>tan</translation>
+        <source>tan</source>
+        <translation>tan</translation>
     </message>
     <message>
-      <source>%</source>
-      <translation>%</translation>
+        <source>%</source>
+        <translation>%</translation>
     </message>
     <message>
-      <source>+/-</source>
-      <translation>+/-</translation>
+        <source>+/-</source>
+        <translation>+/-</translation>
     </message>
     <message>
-      <source>3</source>
-      <translation>3</translation>
+        <source>3</source>
+        <translation>3</translation>
     </message>
     <message>
-      <source>6</source>
-      <translation>6</translation>
+        <source>6</source>
+        <translation>6</translation>
     </message>
     <message>
-      <source>=</source>
-      <translation>=</translation>
+        <source>=</source>
+        <translation>=</translation>
     </message>
     <message>
-      <source>0</source>
-      <translation>0</translation>
+        <source>0</source>
+        <translation>0</translation>
     </message>
     <message>
-      <source>-</source>
-      <translation>-</translation>
+        <source>-</source>
+        <translation>-</translation>
     </message>
     <message>
-      <source>x</source>
-      <translation>x</translation>
+        <source>x</source>
+        <translation>x</translation>
     </message>
     <message>
-      <source>4</source>
-      <translation>4</translation>
+        <source>4</source>
+        <translation>4</translation>
     </message>
     <message>
-      <source>8</source>
-      <translation>8</translation>
+        <source>8</source>
+        <translation>8</translation>
     </message>
     <message>
-      <source>/</source>
-      <translation>/</translation>
+        <source>/</source>
+        <translation>/</translation>
     </message>
     <message>
-      <source>+</source>
-      <translation>+</translation>
+        <source>+</source>
+        <translation>+</translation>
     </message>
     <message>
-      <source>1</source>
-      <translation>1</translation>
+        <source>1</source>
+        <translation>1</translation>
     </message>
     <message>
-      <source>.</source>
-      <translation>.</translation>
+        <source>.</source>
+        <translation>.</translation>
     </message>
     <message>
-      <source>5</source>
-      <translation>5</translation>
+        <source>5</source>
+        <translation>5</translation>
     </message>
     <message>
-      <source>7</source>
-      <translation>7</translation>
+        <source>7</source>
+        <translation>7</translation>
     </message>
     <message>
-      <source>9</source>
-      <translation>9</translation>
+        <source>9</source>
+        <translation>9</translation>
     </message>
     <message>
-      <source>2</source>
-      <translation>2</translation>
+        <source>2</source>
+        <translation>2</translation>
     </message>
     <message>
-      <source>Calculator</source>
-      <translation>Kalkulačka</translation>
+        <source>Calculator</source>
+        <translation>Kalkulačka</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>CalculatorImpl</name>
     <message>
-      <source>Standard</source>
-      <translation>Standard</translation>
+        <source>Standard</source>
+        <translation>Standard</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>QObject</name>
     <message>
-      <source>Standard</source>
-      <translation>Standard</translation>
+        <source>Standard</source>
+        <translation>Standard</translation>
     </message>
     <message>
-      <source>Weight</source>
-      <translation>Váhy</translation>
+        <source>Weight</source>
+        <translation>Váhy</translation>
     </message>
     <message>
-      <source>Distance</source>
-      <translation>Vzdálenost</translation>
+        <source>Distance</source>
+        <translation>Vzdálenost</translation>
     </message>
     <message>
-      <source>Area</source>
-      <translation>Prostor</translation>
+        <source>Area</source>
+        <translation>Prostor</translation>
     </message>
     <message>
-      <source>Temperatures</source>
-      <translation>Teploty</translation>
+        <source>Temperatures</source>
+        <translation>Teploty</translation>
     </message>
     <message>
-      <source>Volume</source>
-      <translation>Hlasitost</translation>
+        <source>Volume</source>
+        <translation>Hlasitost</translation>
     </message>
     <message>
-      <source>acres</source>
-      <translation>akry</translation>
+        <source>acres</source>
+        <translation>akry</translation>
     </message>
     <message>
-      <source>carats</source>
-      <translation>karáty</translation>
+        <source>carats</source>
+        <translation>karáty</translation>
     </message>
     <message>
-      <source>cm</source>
-      <translation>cm</translation>
+        <source>cm</source>
+        <translation>cm</translation>
     </message>
     <message>
-      <source>cu cm</source>
-      <translation>cu cm</translation>
+        <source>cu cm</source>
+        <translation>cu cm</translation>
     </message>
     <message>
-      <source>cu ft</source>
-      <translation>cu ft</translation>
+        <source>cu ft</source>
+        <translation>cu ft</translation>
     </message>
     <message>
-      <source>cu in</source>
-      <translation>cu in</translation>
+        <source>cu in</source>
+        <translation>cu in</translation>
     </message>
     <message>
-      <source>fl oz (US)</source>
-      <translation>fl oz (US)</translation>
+        <source>fl oz (US)</source>
+        <translation>fl oz (US)</translation>
     </message>
     <message>
-      <source>ft</source>
-      <translation>ft</translation>
+        <source>ft</source>
+        <translation>ft</translation>
     </message>
     <message>
-      <source>g</source>
-      <translation>g</translation>
+        <source>g</source>
+        <translation>g</translation>
     </message>
     <message>
-      <source>gal (US)</source>
-      <translation>gal (US)</translation>
+        <source>gal (US)</source>
+        <translation>gal (US)</translation>
     </message>
     <message>
-      <source>hectares</source>
-      <translation>hektary</translation>
+        <source>hectares</source>
+        <translation>hektary</translation>
     </message>
     <message>
-      <source>in</source>
-      <translation>in</translation>
+        <source>in</source>
+        <translation>in</translation>
     </message>
     <message>
-      <source>kg</source>
-      <translation>kg</translation>
+        <source>kg</source>
+        <translation>kg</translation>
     </message>
     <message>
-      <source>km</source>
-      <translation>km</translation>
+        <source>km</source>
+        <translation>km</translation>
     </message>
     <message>
-      <source>l</source>
-      <translation>l</translation>
+        <source>l</source>
+        <translation>l</translation>
     </message>
     <message>
-      <source>lb</source>
-      <translation>lb</translation>
+        <source>lb</source>
+        <translation>lb</translation>
     </message>
     <message>
-      <source>Lg tons</source>
-      <translation>Lg tuny</translation>
+        <source>Lg tons</source>
+        <translation>Lg tuny</translation>
     </message>
     <message>
-      <source>m</source>
-      <translation>m</translation>
+        <source>m</source>
+        <translation>m</translation>
     </message>
     <message>
-      <source>mg</source>
-      <translation>mg</translation>
+        <source>mg</source>
+        <translation>mg</translation>
     </message>
     <message>
-      <source>mi</source>
-      <translation>mi</translation>
+        <source>mi</source>
+        <translation>mi</translation>
     </message>
     <message>
-      <source>ml</source>
-      <translation>ml</translation>
+        <source>ml</source>
+        <translation>ml</translation>
     </message>
     <message>
-      <source>mm</source>
-      <translation>mm</translation>
+        <source>mm</source>
+        <translation>mm</translation>
     </message>
     <message>
-      <source>naut. mi</source>
-      <translation>námořní mi</translation>
+        <source>naut. mi</source>
+        <translation>námořní mi</translation>
     </message>
     <message>
-      <source>oz</source>
-      <translation>oz</translation>
+        <source>oz</source>
+        <translation>oz</translation>
     </message>
     <message>
-      <source>points</source>
-      <translation>body</translation>
+        <source>points</source>
+        <translation>body</translation>
     </message>
     <message>
-      <source>pt</source>
-      <translation>pt</translation>
+        <source>pt</source>
+        <translation>pt</translation>
     </message>
     <message>
-      <source>qt</source>
-      <translation>qt</translation>
+        <source>qt</source>
+        <translation>qt</translation>
     </message>
     <message>
-      <source>sq cm</source>
-      <translation>sq cm</translation>
+        <source>sq cm</source>
+        <translation>sq cm</translation>
     </message>
     <message>
-      <source>sq ft</source>
-      <translation>sq ft</translation>
+        <source>sq ft</source>
+        <translation>sq ft</translation>
     </message>
     <message>
-      <source>sq in</source>
-      <translation>sq in</translation>
+        <source>sq in</source>
+        <translation>sq in</translation>
     </message>
     <message>
-      <source>sq km</source>
-      <translation>sq km</translation>
+        <source>sq km</source>
+        <translation>sq km</translation>
     </message>
     <message>
-      <source>sq m</source>
-      <translation>sq m</translation>
+        <source>sq m</source>
+        <translation>sq m</translation>
     </message>
     <message>
-      <source>sq mi</source>
-      <translation>sq mi</translation>
+        <source>sq mi</source>
+        <translation>sq mi</translation>
     </message>
     <message>
-      <source>sq mm</source>
-      <translation>sq mm</translation>
+        <source>sq mm</source>
+        <translation>sq mm</translation>
     </message>
     <message>
-      <source>sq yd</source>
-      <translation>sq yd</translation>
+        <source>sq yd</source>
+        <translation>sq yd</translation>
     </message>
     <message>
-      <source>st</source>
-      <translation>st</translation>
+        <source>st</source>
+        <translation>st</translation>
     </message>
     <message>
-      <source>St tons</source>
-      <translation>St tuny</translation>
+        <source>St tons</source>
+        <translation>St tuny</translation>
     </message>
     <message>
-      <source>tblspoon</source>
-      <translation>tblspoon</translation>
+        <source>tblspoon</source>
+        <translation>tblspoon</translation>
     </message>
     <message>
-      <source>teaspoons</source>
-      <translation>teaspoons</translation>
+        <source>teaspoons</source>
+        <translation>teaspoons</translation>
     </message>
     <message>
-      <source>tonnes</source>
-      <translation>tonnes</translation>
+        <source>tonnes</source>
+        <translation>tonnes</translation>
     </message>
     <message>
-      <source>yd</source>
-      <translation>yd</translation>
+        <source>yd</source>
+        <translation>yd</translation>
     </message>
     <message>
-      <source>C</source>
-      <translation>C</translation>
+        <source>C</source>
+        <translation>C</translation>
     </message>
     <message>
-      <source>F</source>
-      <translation>F</translation>
+        <source>F</source>
+        <translation>F</translation>
     </message>
-  </context>
+</context>
 </TS>

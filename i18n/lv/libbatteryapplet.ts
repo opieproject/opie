@@ -3,11 +3,11 @@
     <name>BatteryStatus</name>
     <message>
         <source>Failure</source>
-        <translation>Problēma</translation>
+        <translation type="obsolete">Problēma</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>nevaru atvērt failu</translation>
+        <translation type="obsolete">nevaru atvērt failu</translation>
     </message>
     <message>
         <source>no data</source>

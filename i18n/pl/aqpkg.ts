@@ -199,7 +199,7 @@
     </message>
     <message>
         <source>Couldn&apos;t create tempory status file - </source>
-        <translation>Nie mozna utworzyc tymczasowego pliku statusu - </translation>
+        <translation type="obsolete">Nie mozna utworzyc tymczasowego pliku statusu - </translation>
     </message>
     <message>
         <source>Couldn&apos;t start ipkg process</source>
@@ -217,6 +217,18 @@
     <message>
         <source>Symbolic linking succeeded.
 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create temporary status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t rename temporary status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to status file - </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

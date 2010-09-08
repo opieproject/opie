@@ -4,61 +4,61 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation>Agenda</translation>
+        <translation type="obsolete">Agenda</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nuovo</translation>
+        <translation type="obsolete">Nuovo</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Oggi</translation>
+        <translation type="obsolete">Oggi</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Giorno</translation>
+        <translation type="obsolete">Giorno</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Settimana</translation>
+        <translation type="obsolete">Settimana</translation>
     </message>
     <message>
         <source>WeekLst</source>
-        <translation>Lista Settimana</translation>
+        <translation type="obsolete">Lista Settimana</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Mese</translation>
+        <translation type="obsolete">Mese</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Trova</translation>
+        <translation type="obsolete">Trova</translation>
     </message>
     <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
-        <translation>La durata dell&apos;evento è probabilmente più
+        <translation type="obsolete">La durata dell&apos;evento è probabilmente più
 lunga dell&apos;intervallo tra le ripetizioni.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Impossibile modificare i dati, sincronizzazione in corso</translation>
+        <translation type="obsolete">Impossibile modificare i dati, sincronizzazione in corso</translation>
     </message>
     <message>
         <source>Edit Event</source>
-        <translation>Modifica Evento</translation>
+        <translation type="obsolete">Modifica Evento</translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation> minuti)</translation>
+        <translation type="obsolete"> minuti)</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Spazio esaurito</translation>
+        <translation type="obsolete">Spazio esaurito</translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -66,7 +66,7 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation>Impossibile salvare le
+        <translation type="obsolete">Impossibile salvare le
 modifiche.
 Liberare dello spazio e riprovare.
 
@@ -74,31 +74,31 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation>(Sconosciuto)</translation>
+        <translation type="obsolete">(Sconosciuto)</translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation>Errore!</translation>
+        <translation type="obsolete">Errore!</translation>
     </message>
     <message>
         <source>Fix it</source>
-        <translation>Ripara</translation>
+        <translation type="obsolete">Ripara</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation>Continua</translation>
+        <translation type="obsolete">Continua</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation>Copia Evento</translation>
+        <translation type="obsolete">Copia Evento</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation>Modifica...</translation>
+        <translation type="obsolete">Modifica...</translation>
     </message>
     <message>
         <source>error box</source>
-        <translation>box di errore</translation>
+        <translation type="obsolete">box di errore</translation>
     </message>
 </context>
 <context>
@@ -151,6 +151,10 @@ Uscire comunque?</translation>
         <source>Sunday</source>
         <translation>Domenica</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -167,23 +171,23 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Inizio</translation>
+        <translation type="obsolete">Inizio</translation>
     </message>
     <message>
         <source>End</source>
-        <translation>Fine</translation>
+        <translation type="obsolete">Fine</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Modifica</translation>
+        <translation type="obsolete">Modifica</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Elimina</translation>
+        <translation type="obsolete">Elimina</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Trasmetti via IrDA</translation>
+        <translation type="obsolete">Trasmetti via IrDA</translation>
     </message>
     <message>
         <source>Time</source>
@@ -195,11 +199,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Copia</translation>
+        <translation type="obsolete">Copia</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation>Trasmetti questa occorrenza</translation>
+        <translation type="obsolete">Trasmetti questa occorrenza</translation>
     </message>
 </context>
 <context>
@@ -228,6 +232,14 @@ Uscire comunque?</translation>
         <source>Calendar</source>
         <translation>Agenda</translation>
     </message>
+    <message>
+        <source>Configure Descriptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure Locations</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -249,15 +261,15 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Alarm Settings</source>
-        <translation>Impostazioni Allarme</translation>
+        <translation type="obsolete">Impostazioni Allarme</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation>Regolazione Allarme</translation>
+        <translation type="obsolete">Regolazione Allarme</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation> minuti</translation>
+        <translation type="obsolete"> minuti</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -265,19 +277,19 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation>Stile riga:</translation>
+        <translation type="obsolete">Stile riga:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Predefinito</translation>
+        <translation type="obsolete">Predefinito</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation>Medio</translation>
+        <translation type="obsolete">Medio</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Grande</translation>
+        <translation type="obsolete">Grande</translation>
     </message>
     <message>
         <source>Views</source>
@@ -289,39 +301,39 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Giorno</translation>
+        <translation type="obsolete">Giorno</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Settimana</translation>
+        <translation type="obsolete">Settimana</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation>Lista Settimana</translation>
+        <translation type="obsolete">Lista Settimana</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Mese</translation>
+        <translation type="obsolete">Mese</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation>Vai all&apos;orario corrente</translation>
+        <translation type="obsolete">Vai all&apos;orario corrente</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation>Mostra orario</translation>
+        <translation type="obsolete">Mostra orario</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Nessuno</translation>
+        <translation type="obsolete">Nessuno</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Inizio</translation>
+        <translation type="obsolete">Inizio</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation>Inizio-Fine</translation>
+        <translation type="obsolete">Inizio-Fine</translation>
     </message>
     <message>
         <source>Defaults</source>
@@ -351,12 +363,40 @@ Uscire comunque?</translation>
         <source>Pluginlist</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snooze:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">giorni</translation>
+    </message>
+    <message>
+        <source>Descriptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locations...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation>Questo è un evento per tutto il giorno.</translation>
+        <translation type="obsolete">Questo è un evento per tutto il giorno.</translation>
     </message>
 </context>
 <context>
@@ -385,19 +425,19 @@ Uscire comunque?</translation>
     <name>DateBookWeekLstEvent</name>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Modifica</translation>
+        <translation type="obsolete">Modifica</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Copia</translation>
+        <translation type="obsolete">Copia</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Elimina</translation>
+        <translation type="obsolete">Elimina</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Trasmetti via IrDA</translation>
+        <translation type="obsolete">Trasmetti via IrDA</translation>
     </message>
 </context>
 <context>
@@ -480,19 +520,19 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Meeting</source>
-        <translation>Appuntamento</translation>
+        <translation type="obsolete">Appuntamento</translation>
     </message>
     <message>
         <source>Lunch</source>
-        <translation>Pranzo</translation>
+        <translation type="obsolete">Pranzo</translation>
     </message>
     <message>
         <source>Dinner</source>
-        <translation>Cena</translation>
+        <translation type="obsolete">Cena</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Viaggio</translation>
+        <translation type="obsolete">Viaggio</translation>
     </message>
     <message>
         <source>Description </source>
@@ -500,11 +540,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Ufficio</translation>
+        <translation type="obsolete">Ufficio</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Abitazione</translation>
+        <translation type="obsolete">Abitazione</translation>
     </message>
     <message>
         <source>Start - End </source>
@@ -555,10 +595,6 @@ Uscire comunque?</translation>
         <translation>Note...</translation>
     </message>
     <message>
-        <source>minutes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>hours</source>
         <translation type="unfinished"></translation>
     </message>
@@ -566,12 +602,158 @@ Uscire comunque?</translation>
         <source>days</source>
         <translation type="unfinished">giorni</translation>
     </message>
+    <message>
+        <source>mins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate Event</source>
+        <translation type="unfinished">Copia Evento</translation>
+    </message>
+    <message>
+        <source>Edit Event</source>
+        <translation type="unfinished">Modifica Evento</translation>
+    </message>
 </context>
 <context>
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation>Info</translation>
+        <translation type="obsolete">Info</translation>
+    </message>
+</context>
+<context>
+    <name>DayView</name>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Giorno</translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished">Vai all&apos;orario corrente</translation>
+    </message>
+    <message>
+        <source>Row style:</source>
+        <translation type="unfinished">Stile riga:</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Predefinito</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation type="unfinished">Medio</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation type="unfinished">Grande</translation>
+    </message>
+</context>
+<context>
+    <name>Exceptions</name>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Agenda</translation>
+    </message>
+</context>
+<context>
+    <name>ExceptionsBase</name>
+    <message>
+        <source>Exceptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Agenda</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;A new event has arrived. Would you like to add it to your calendar?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 new events have arrived. Would you like to add them to your calendar?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a recurring event.
+
+Do you want to apply changes to
+all occurrences or just this one?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished">Oggi</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Trova</translation>
+    </message>
+    <message>
+        <source>Beam this occurrence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transmit the specific occurrence of the selected recurring item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meeting</source>
+        <translation type="unfinished">Appuntamento</translation>
+    </message>
+    <message>
+        <source>Lunch</source>
+        <translation type="unfinished">Pranzo</translation>
+    </message>
+    <message>
+        <source>Dinner</source>
+        <translation type="unfinished">Cena</translation>
+    </message>
+    <message>
+        <source>Travel</source>
+        <translation type="unfinished">Viaggio</translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Ufficio</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Abitazione</translation>
+    </message>
+    <message>
+        <source>This is a recurring event.
+
+Do you want to delete all
+occurrences or just this one?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calendar Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -643,6 +825,56 @@ Uscire comunque?</translation>
         <source>Sunday</source>
         <translation>Domenica</translation>
     </message>
+    <message>
+        <source>Error!</source>
+        <translation type="unfinished">Errore!</translation>
+    </message>
+    <message>
+        <source>Fix it</source>
+        <translation type="unfinished">Ripara</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation type="unfinished">Continua</translation>
+    </message>
+    <message>
+        <source>Event duration is potentially longer
+than interval between repeats.</source>
+        <translation type="unfinished">La durata dell&apos;evento è probabilmente più
+lunga dell&apos;intervallo tra le ripetizioni.</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Giorno</translation>
+    </message>
+    <message>
+        <source>View a single day&apos;s events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished">Settimana</translation>
+    </message>
+    <message>
+        <source>View a single week&apos;s events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished">Lista Settimana</translation>
+    </message>
+    <message>
+        <source>View a week&apos;s events in a list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished">Mese</translation>
+    </message>
+    <message>
+        <source>Block style calendar view</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QWidget</name>
@@ -661,6 +893,10 @@ Uscire comunque?</translation>
     <message>
         <source>th</source>
         <translation>°</translation>
+    </message>
+    <message>
+        <source>New Events</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -837,6 +1073,90 @@ e </translation>
     <message>
         <source>years</source>
         <translation>anni</translation>
+    </message>
+    <message>
+        <source>Exceptions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StringManagerDialog</name>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TemplateDialog</name>
+    <message>
+        <source>Template Names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re&amp;move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WeekLstView</name>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished">Lista Settimana</translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished">Mostra orario</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Nessuno</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Inizio</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished">Inizio-Fine</translation>
+    </message>
+</context>
+<context>
+    <name>WeekView</name>
+    <message>
+        <source>This is an all day event.</source>
+        <translation type="unfinished">Questo è un evento per tutto il giorno.</translation>
     </message>
 </context>
 </TS>

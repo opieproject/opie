@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>Snooze</source>
-        <translation>Iemigt</translation>
+        <translation type="obsolete">Iemigt</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Aizvērt</translation>
+        <translation type="obsolete">Aizvērt</translation>
     </message>
 </context>
 <context>
@@ -112,6 +112,38 @@ izvēlēties vismaz vienu dienu.</translation>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
+    <message>
+        <source>Default alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play file in background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play file with OpiePlayer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play file with OpiePlayer 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click OK to stop player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No player found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;No suitable background player was found.&lt;p&gt;Please install mpg321, mpg123, or madplay to enable this functionality.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ClockBase</name>
@@ -201,7 +233,19 @@ izvēlēties vismaz vienu dienu.</translation>
     </message>
     <message>
         <source>Play File</source>
-        <translation>Atskaņot Failu</translation>
+        <translation type="obsolete">Atskaņot Failu</translation>
+    </message>
+    <message>
+        <source>Snooze time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

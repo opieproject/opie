@@ -17,6 +17,10 @@
         <source>There was a problem setting your timezone.Your time may be wrong now...</source>
         <translation>C&apos;è stato un problema nell&apos;impostare il fuso orario. L&apos;orario può essere sbagliato...</translation>
     </message>
+    <message>
+        <source>unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CityTimeBase</name>
@@ -66,6 +70,10 @@
     <message>
         <source>&lt;p&gt;Couldn&apos;t load map: %1, exiting</source>
         <translation>&lt;p&gt;Impossibile caricare mappa: %1, esco</translation>
+    </message>
+    <message>
+        <source>Timezone unavailable</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

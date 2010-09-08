@@ -20,11 +20,11 @@
     </message>
     <message>
         <source>Add</source>
-        <translation>Hinzufügen</translation>
+        <translation type="obsolete">Hinzufügen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation type="obsolete">Entfernen</translation>
     </message>
     <message>
         <source>Pickboard</source>
@@ -61,6 +61,14 @@
     <message>
         <source>Move Down</source>
         <translation>Nach unten</translation>
+    </message>
+    <message>
+        <source>Add keymap...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove keymap</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

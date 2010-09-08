@@ -29,12 +29,59 @@
         <source>Be careful: if this was not a &lt;b&gt;simulation&lt;/b&gt;, you would have to go back through all the steps now.</source>
         <translation>Pozor: jestliže toto není &lt;b&gt;simulace&lt;/b&gt;, měli byste jít hned zpět přes všechny kroky. </translation>
     </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Opie::Security::SecOwnerDlg</name>
     <message>
         <source>Please contact the owner (directions follow), or try again clicking of this screen (and waiting for the penalty time) if you are the legitimate owner</source>
-        <translation>Prosím kontaktujte vlastníka (instrukce následují), nebo to zkuste znovu (a počkejte po časové sankci), pokud jste legitimní uživatel</translation>
+        <translation type="obsolete">Prosím kontaktujte vlastníka (instrukce následují), nebo to zkuste znovu (a počkejte po časové sankci), pokud jste legitimní uživatel</translation>
+    </message>
+    <message>
+        <source>Owner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mobile:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Owner information has not been entered</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -26,10 +26,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Test1:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>no services found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -43,6 +39,22 @@
     </message>
     <message>
         <source>&amp;Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forwarder Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forwarder start error:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forwarder start error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -124,6 +136,34 @@
         <source>&amp;Edit RFCOMM Bind Table</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>encrypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Services Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cell Forwarder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start gateway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial device:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speed:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DeviceDialog</name>
@@ -169,6 +209,49 @@
     </message>
 </context>
 <context>
+    <name>DunDialog</name>
+    <message>
+        <source>DUN connection </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter an ppp script name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>encrypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>persist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work in progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finished with result </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exited abnormally</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DunPopup</name>
     <message>
         <source>connect</source>
@@ -180,6 +263,52 @@
     </message>
     <message>
         <source>disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DUN Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DUN Disconnected</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HidPopup</name>
+    <message>
+        <source>connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HID Connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HID Connection
+to device </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HID Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HID Disconnected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HID Connect
+started</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -195,6 +324,179 @@
     </message>
     <message>
         <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: couln&apos;t start process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finished with result </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finished: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exited abnormally
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exited abnormally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ObexFtpDialog</name>
+    <message>
+        <source>Connecting to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ObexFTP error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CD failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receiving file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong file selected </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sending file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to remove
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Still trying to connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saving</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log file saved to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ObexFtpDialogBase</name>
+    <message>
+        <source>Browse device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Put</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>uuid type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FBS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S45</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Retry to connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -224,11 +526,70 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter an ppp script name:</source>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a ppp script name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work in progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finished with result </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exited abnormally</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PanDialog</name>
+    <message>
+        <source>PAN connection </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>encrypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>secure connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work in progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finished with result </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exited abnormally</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -244,6 +605,14 @@
     </message>
     <message>
         <source>disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pan Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PAN Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -318,6 +687,125 @@
     </message>
     <message>
         <source>Comment:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bind automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ServicesDialogBase</name>
+    <message>
+        <source>Configure Services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HCID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host Controller Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SDPD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Service Discovery Protocol </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HIDD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Human Interface Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RFCOMM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DUND</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DialUp Network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Persist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable SDP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PPPD Options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify pppd path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timeout: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Microsoft dialup networking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PAND</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Personal Area Network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Secure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encrypt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Role: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PANU</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NAP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GN</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

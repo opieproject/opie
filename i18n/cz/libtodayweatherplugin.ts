@@ -113,5 +113,9 @@ Tlak:</translation>
         <source> kPa</source>
         <translation>kPa</translation>
     </message>
+    <message>
+        <source>Could not start wget process.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

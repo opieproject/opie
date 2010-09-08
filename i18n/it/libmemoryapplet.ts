@@ -85,18 +85,6 @@ Memory is categorized as follows:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>RAM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CF Card</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SD Card</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source> On </source>
         <translation type="unfinished"></translation>
     </message>
@@ -145,10 +133,6 @@ Memory is categorized as follows:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Swapfile activated.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source></source>
         <translation type="unfinished"></translation>
     </message>
@@ -158,6 +142,22 @@ Memory is categorized as follows:
     </message>
     <message>
         <source>Swap disabled in kernel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(None)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swapfile already active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swapfile not active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swap file currently active!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

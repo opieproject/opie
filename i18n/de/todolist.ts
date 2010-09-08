@@ -4,11 +4,11 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>&lt;h1&gt;Alarm um %1&gt;&lt;/h1&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;h1&gt;Alarm um %1&gt;&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>All</source>
@@ -17,6 +17,10 @@
     <message>
         <source>Unfiled</source>
         <translation>Nicht eingeteilt</translation>
+    </message>
+    <message>
+        <source>Todo Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -298,7 +302,19 @@ Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann e
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation>%1 Tag(e)</translation>
+        <translation type="obsolete">%1 Tag(e)</translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -326,6 +342,10 @@ Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann e
     <message>
         <source>Type</source>
         <translation>Art</translation>
+    </message>
+    <message>
+        <source>Alarm time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

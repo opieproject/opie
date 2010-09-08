@@ -95,7 +95,7 @@ no termina en &quot;.vcf&quot;.
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>¿Seguro que quiere añadir el contacto para 
+        <translation type="obsolete">¿Seguro que quiere añadir el contacto para 
 %1?</translation>
     </message>
     <message>
@@ -112,6 +112,11 @@ no termina en &quot;.vcf&quot;.
     </message>
     <message>
         <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1248,7 +1253,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Pulse para introducir nombre y apellidos</translation>
+        <translation type="obsolete">Pulse para introducir nombre y apellidos</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1256,15 +1261,15 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>El cargo..</translation>
+        <translation type="obsolete">El cargo..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Algo como &quot;jr.&quot;..</translation>
+        <translation type="obsolete">Algo como &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>El lugar de trabajo del contacto</translation>
+        <translation type="obsolete">El lugar de trabajo del contacto</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1277,6 +1282,30 @@ suministra gratis!</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

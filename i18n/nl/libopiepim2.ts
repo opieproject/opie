@@ -1,5 +1,75 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>OPimAlarmDlg</name>
+    <message>
+        <source>Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> (now)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> (in %1h %2m)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> (%1h %2m ago)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> (in %1 mins)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> (%1 mins ago)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OPimAlarmDlgBase</name>
+    <message>
+        <source>Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snooze</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">dagen</translation>
+    </message>
+    <message>
+        <source>View...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dismiss</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OPimRecurrenceBase</name>
     <message>
         <source>Repeating Event </source>
@@ -702,6 +772,34 @@ and </source>
     </message>
     <message>
         <source>No completed-date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opie is now able to store your PIM data in a new database format, offering improved performance and functionality. Would you like to convert over to the new format now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Converting data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data converted successfully. If you are happy with the results you can delete the old data files (please see the documentation for details on how to do this).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data conversion failed. Please ensure you have enough disk space and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data conversion failed - unable to load source or destination data format.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

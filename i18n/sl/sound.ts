@@ -1,14 +1,6 @@
 <!DOCTYPE TS><TS>
 <context>
     <name>SoundSettings</name>
-    <message>
-        <source>Shows icon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hides icon</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>SoundSettingsBase</name>
@@ -34,7 +26,7 @@
     </message>
     <message>
         <source>Vmemo Settings</source>
-        <translation>Vmemo nastavitve</translation>
+        <translation type="obsolete">Vmemo nastavitve</translation>
     </message>
     <message>
         <source>8000</source>
@@ -46,86 +38,114 @@
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation>Vizualni alarmi</translation>
+        <translation type="obsolete">Vizualni alarmi</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation>Ikona opravilne vrstice</translation>
+        <translation type="obsolete">Ikona opravilne vrstice</translation>
     </message>
     <message>
         <source>Key_Space</source>
-        <translation>Tipka_presledek</translation>
+        <translation type="obsolete">Tipka_presledek</translation>
     </message>
     <message>
         <source>Key_Home</source>
-        <translation>Tipka_dom</translation>
+        <translation type="obsolete">Tipka_dom</translation>
     </message>
     <message>
         <source>Key_Calender</source>
-        <translation>Tipka_koledar</translation>
+        <translation type="obsolete">Tipka_koledar</translation>
     </message>
     <message>
         <source>Key_Contacts</source>
-        <translation>Tipka_Kontakti</translation>
+        <translation type="obsolete">Tipka_Kontakti</translation>
     </message>
     <message>
         <source>Key_Menu</source>
-        <translation>Tipka_menu</translation>
+        <translation type="obsolete">Tipka_menu</translation>
     </message>
     <message>
         <source>Key_Mail</source>
-        <translation>Tipka_pošta</translation>
+        <translation type="obsolete">Tipka_pošta</translation>
     </message>
     <message>
         <source>30</source>
-        <translation>30</translation>
+        <translation type="obsolete">30</translation>
     </message>
     <message>
         <source>20</source>
-        <translation>20</translation>
+        <translation type="obsolete">20</translation>
     </message>
     <message>
         <source>15</source>
-        <translation>15</translation>
+        <translation type="obsolete">15</translation>
     </message>
     <message>
         <source>10</source>
-        <translation>10</translation>
+        <translation type="obsolete">10</translation>
     </message>
     <message>
         <source>5</source>
-        <translation>5</translation>
+        <translation type="obsolete">5</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation>Vzorčna stopnja:</translation>
+        <translation type="obsolete">Vzorčna stopnja:</translation>
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation>Snemalni imenik:</translation>
+        <translation type="obsolete">Snemalni imenik:</translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation>Snemalna tipka:</translation>
+        <translation type="obsolete">Snemalna tipka:</translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation>Omejitev snemanja v sekundah:</translation>
+        <translation type="obsolete">Omejitev snemanja v sekundah:</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation>Neomejeno</translation>
-    </message>
-    <message>
-        <source>Restart Opie if needed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key_Record</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Neomejeno</translation>
     </message>
     <message>
         <source>Use ADPCM compression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vmemo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Limit to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display status</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

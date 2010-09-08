@@ -3,11 +3,11 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation>Anterior</translation>
+        <translation type="obsolete">Anterior</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Próximo</translation>
+        <translation type="obsolete">Próximo</translation>
     </message>
 </context>
 <context>
@@ -103,7 +103,7 @@ espaço livre</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Tocar</translation>
+        <translation type="obsolete">Tocar</translation>
     </message>
     <message>
         <source>Send with Ir</source>
@@ -138,15 +138,19 @@ espaço livre</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Del</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Stereo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please select file to play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

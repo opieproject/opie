@@ -62,10 +62,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Enable Encryption</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Key Setting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -95,6 +91,22 @@
     </message>
     <message>
         <source>&amp;Reject</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WEP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WPA / WPA2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

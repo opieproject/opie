@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>Snooze</source>
-        <translation>Zdřímnout is</translation>
+        <translation type="obsolete">Zdřímnout is</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Zavřít</translation>
+        <translation type="obsolete">Zavřít</translation>
     </message>
 </context>
 <context>
@@ -113,6 +113,38 @@ alespoň jeden den.
         <source>Audio</source>
         <translation>Zvuk</translation>
     </message>
+    <message>
+        <source>Default alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play file in background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play file with OpiePlayer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play file with OpiePlayer 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click OK to stop player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No player found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;No suitable background player was found.&lt;p&gt;Please install mpg321, mpg123, or madplay to enable this functionality.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ClockBase</name>
@@ -202,7 +234,19 @@ alespoň jeden den.
     </message>
     <message>
         <source>Play File</source>
-        <translation>Zahrát soubor</translation>
+        <translation type="obsolete">Zahrát soubor</translation>
+    </message>
+    <message>
+        <source>Snooze time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

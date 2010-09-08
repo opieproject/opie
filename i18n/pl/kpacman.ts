@@ -1,68 +1,67 @@
-<!DOCTYPE TS>
-<TS>
-  <context>
+<!DOCTYPE TS><TS>
+<context>
     <name>Keys</name>
     <message>
-      <source>Ok</source>
-      <translation>Ok</translation>
+        <source>Ok</source>
+        <translation>Ok</translation>
     </message>
     <message>
-      <source>Defaults</source>
-      <translation>Domyślne</translation>
+        <source>Defaults</source>
+        <translation>Domyślne</translation>
     </message>
     <message>
-      <source>Cancel</source>
-      <translation>Anuluj</translation>
+        <source>Cancel</source>
+        <translation>Anuluj</translation>
     </message>
     <message>
-      <source>Change Direction Keys</source>
-      <translation>Zmień przyciski kierunków</translation>
+        <source>Change Direction Keys</source>
+        <translation>Zmień przyciski kierunków</translation>
     </message>
     <message>
-      <source>Undefined key</source>
-      <translation>Niezdefiniowany przycisk</translation>
+        <source>Undefined key</source>
+        <translation>Niezdefiniowany przycisk</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>Kpacman</name>
     <message>
-      <source>&amp;New</source>
-      <translation>&amp;Nowa</translation>
+        <source>&amp;New</source>
+        <translation>&amp;Nowa</translation>
     </message>
     <message>
-      <source>&amp;Pause</source>
-      <translation>&amp;Pauza</translation>
+        <source>&amp;Pause</source>
+        <translation>&amp;Pauza</translation>
     </message>
     <message>
-      <source>&amp;Hall of fame</source>
-      <translation>&amp;Sala sławy</translation>
+        <source>&amp;Hall of fame</source>
+        <translation>&amp;Sala sławy</translation>
     </message>
     <message>
-      <source>&amp;Quit</source>
-      <translation>&amp;Koniec</translation>
+        <source>&amp;Quit</source>
+        <translation>&amp;Koniec</translation>
     </message>
     <message>
-      <source>&amp;Hide Mousecursor</source>
-      <translation>&amp;Ukryj kursor</translation>
+        <source>&amp;Hide Mousecursor</source>
+        <translation>&amp;Ukryj kursor</translation>
     </message>
     <message>
-      <source>&amp;Select graphic scheme</source>
-      <translation>&amp;Wybierz schemat grafiki</translation>
+        <source>&amp;Select graphic scheme</source>
+        <translation>&amp;Wybierz schemat grafiki</translation>
     </message>
     <message>
-      <source>&amp;Pause in Background</source>
-      <translation>Pauzuj w &amp;tle</translation>
+        <source>&amp;Pause in Background</source>
+        <translation>Pauzuj w &amp;tle</translation>
     </message>
     <message>
-      <source>&amp;Continue in Foreground</source>
-      <translation>Kontynuuj na &amp;pierwszym planie</translation>
+        <source>&amp;Continue in Foreground</source>
+        <translation>Kontynuuj na &amp;pierwszym planie</translation>
     </message>
     <message>
-      <source>Change &amp;keys...</source>
-      <translation>&amp;Zmień przyciski...</translation>
+        <source>Change &amp;keys...</source>
+        <translation>&amp;Zmień przyciski...</translation>
     </message>
     <message>
-      <source>@PACKAGE@ - @VERSION@
+        <source>@PACKAGE@ - @VERSION@
 
 Joerg Thoennissen (joe@dsite.de)
 
@@ -76,157 +75,157 @@ The design was strongly influenced by the pacman
 I like to thank my girlfriend Elke Krueers for
 the last 10 years of her friendship.
 </source>
-      <translation type="unfinished" />
+        <translation type="unfinished"></translation>
     </message>
     <message>
-      <source>&amp;Help</source>
-      <translation>&amp;Pomoc</translation>
+        <source>&amp;Help</source>
+        <translation>&amp;Pomoc</translation>
     </message>
     <message>
-      <source>KPacman</source>
-      <translation>KPacman</translation>
+        <source>KPacman</source>
+        <translation>KPacman</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>KpacmanWidget</name>
     <message>
-      <source>The bitfont could not be contructed.
+        <source>The bitfont could not be contructed.
 
-The file '@FONTNAME@' does not exist,
+The file &apos;@FONTNAME@&apos; does not exist,
 or is of an unknown format.</source>
-      <translation type="unfinished" />
+        <translation type="unfinished"></translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>Referee</name>
     <message>
-      <source>GAME  OVER</source>
-      <translation>KONIEC GRY</translation>
+        <source>GAME  OVER</source>
+        <translation>KONIEC GRY</translation>
     </message>
     <message>
-      <source>PLAYER ONE</source>
-      <translation>GRACZ 1</translation>
+        <source>PLAYER ONE</source>
+        <translation>GRACZ 1</translation>
     </message>
     <message>
-      <source>READY!</source>
-      <translation>SZYKUJ SIE!</translation>
+        <source>READY!</source>
+        <translation>SZYKUJ SIE!</translation>
     </message>
     <message>
-      <source>PAUSED</source>
-      <translation>PAUZA</translation>
+        <source>PAUSED</source>
+        <translation>PAUZA</translation>
     </message>
     <message>
-      <source>CHARACTER</source>
-      <translation>POSTAĆ</translation>
+        <source>CHARACTER</source>
+        <translation>POSTAĆ</translation>
     </message>
     <message>
-      <source>/</source>
-      <translation>/</translation>
+        <source>/</source>
+        <translation>/</translation>
     </message>
     <message>
-      <source>NICKNAME</source>
-      <translation>KSYWKA</translation>
+        <source>NICKNAME</source>
+        <translation>KSYWKA</translation>
     </message>
     <message>
-      <source>-SHADOW</source>
-      <translation>-SHADOW</translation>
+        <source>-SHADOW</source>
+        <translation>-SHADOW</translation>
     </message>
     <message>
-      <source>&quot;BLINKY&quot;</source>
-      <translation>&quot;BLINKY&quot;</translation>
+        <source>&quot;BLINKY&quot;</source>
+        <translation>&quot;BLINKY&quot;</translation>
     </message>
     <message>
-      <source>-SPEEDY</source>
-      <translation>-SPEEDY</translation>
+        <source>-SPEEDY</source>
+        <translation>-SPEEDY</translation>
     </message>
     <message>
-      <source>&quot;PINKY&quot;</source>
-      <translation>&quot;PINKY&quot;</translation>
+        <source>&quot;PINKY&quot;</source>
+        <translation>&quot;PINKY&quot;</translation>
     </message>
     <message>
-      <source>-BASHFUL</source>
-      <translation>-BASHFUL</translation>
+        <source>-BASHFUL</source>
+        <translation>-BASHFUL</translation>
     </message>
     <message>
-      <source>&quot;INKY&quot;</source>
-      <translation>&quot;INKY&quot;</translation>
+        <source>&quot;INKY&quot;</source>
+        <translation>&quot;INKY&quot;</translation>
     </message>
     <message>
-      <source>-POKEY</source>
-      <translation>-POKEY</translation>
+        <source>-POKEY</source>
+        <translation>-POKEY</translation>
     </message>
     <message>
-      <source>&quot;CLYDE&quot;</source>
-      <translation>&quot;CLYDE&quot;</translation>
+        <source>&quot;CLYDE&quot;</source>
+        <translation>&quot;CLYDE&quot;</translation>
     </message>
     <message>
-      <source>QTOPIA PORT: CATALIN CLIMOV</source>
-      <translation>PORT NA QTOPIA: CATALIN CLIMOV</translation>
+        <source>QTOPIA PORT: CATALIN CLIMOV</source>
+        <translation>PORT NA QTOPIA: CATALIN CLIMOV</translation>
     </message>
     <message>
-      <source>PRESS CURSOR TO START</source>
-      <translation>WCISNIJ KURSOR BY ZACZĄĆ</translation>
+        <source>PRESS CURSOR TO START</source>
+        <translation>WCISNIJ KURSOR BY ZACZĄĆ</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>Score</name>
     <message>
-      <source>  1UP </source>
-      <translation>1UP</translation>
+        <source>  1UP </source>
+        <translation>1UP</translation>
     </message>
     <message>
-      <source> HIGH SCORE </source>
-      <translation>WYSOKI WYNIK</translation>
+        <source> HIGH SCORE </source>
+        <translation>WYSOKI WYNIK</translation>
     </message>
     <message>
-      <source>  2UP </source>
-      <translation>2UP</translation>
+        <source>  2UP </source>
+        <translation>2UP</translation>
     </message>
     <message>
-      <source>     CONGRATULATIONS      </source>
-      <translation>    GRATULACJE</translation>
+        <source>     CONGRATULATIONS      </source>
+        <translation>    GRATULACJE</translation>
     </message>
     <message>
-      <source>    YOU HAVE ARCHIEVED    </source>
-      <translation>   OSIĄGNĄŁEŚ</translation>
+        <source>    YOU HAVE ARCHIEVED    </source>
+        <translation>   OSIĄGNĄŁEŚ</translation>
     </message>
     <message>
-      <source>  A SCORE IN THE TOP 10.  </source>
-      <translation>PUNKTACJA W PIERWSZEJ 10.</translation>
+        <source>  A SCORE IN THE TOP 10.  </source>
+        <translation>PUNKTACJA W PIERWSZEJ 10.</translation>
     </message>
     <message>
-      <source>RNK   SCORE  NAME   DATE</source>
-      <translation>RNK   PUNKTY  IMIE   DATA</translation>
+        <source>RNK   SCORE  NAME   DATE</source>
+        <translation>RNK   PUNKTY  IMIE   DATA</translation>
     </message>
     <message>
-      <source>PAUSED</source>
-      <translation>PAUZA</translation>
+        <source>PAUSED</source>
+        <translation>PAUZA</translation>
     </message>
     <message>
-      <source>@YY@/@MM@/@DD@</source>
-      <translation>@YY@/@MM@/@DD@</translation>
+        <source>@YY@/@MM@/@DD@</source>
+        <translation>@YY@/@MM@/@DD@</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished" />
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished" />
+        <source>                          </source>
+        <translation type="unfinished"></translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>Status</name>
     <message>
-      <source>The pixmap could not be contructed.
+        <source>The pixmap could not be contructed.
 
-The file '@PIXMAPNAME@' does not exist,
+The file &apos;@PIXMAPNAME@&apos; does not exist,
 or is of an unknown format.</source>
-      <translation>Obrazek </translation>
+        <translation>Obrazek </translation>
     </message>
     <message>
-      <source>Initialization Error</source>
-      <translation>Błąd inicjalizacji</translation>
+        <source>Initialization Error</source>
+        <translation>Błąd inicjalizacji</translation>
     </message>
-  </context>
+</context>
 </TS>

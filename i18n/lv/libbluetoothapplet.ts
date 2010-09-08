@@ -15,11 +15,19 @@
     </message>
     <message>
         <source>Disable discovery</source>
-        <translation>Azliegt atklāšanu</translation>
+        <translation type="obsolete">Azliegt atklāšanu</translation>
     </message>
     <message>
         <source>Enable discovery</source>
-        <translation>Atļaut atklāšanu</translation>
+        <translation type="obsolete">Atļaut atklāšanu</translation>
+    </message>
+    <message>
+        <source>Disable receive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable receive</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

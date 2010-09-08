@@ -3,11 +3,11 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation>Retour</translation>
+        <translation type="obsolete">Retour</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Avancer</translation>
+        <translation type="obsolete">Avancer</translation>
     </message>
 </context>
 <context>
@@ -104,7 +104,7 @@ votre carte n&apos;est pas reconnue</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Jouer</translation>
+        <translation type="obsolete">Jouer</translation>
     </message>
     <message>
         <source>Send with Ir</source>
@@ -139,15 +139,19 @@ votre carte n&apos;est pas reconnue</translation>
         <translation>Silence auto</translation>
     </message>
     <message>
-        <source>Del</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Stereo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please select file to play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

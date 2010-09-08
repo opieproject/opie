@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>Start with new file</source>
-        <translation>Begin met nieuw bestand</translation>
+        <translation type="obsolete">Begin met nieuw bestand</translation>
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation>Vraag bij weggaan</translation>
+        <translation type="obsolete">Vraag bij weggaan</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation>Zoekregel openen</translation>
+        <translation type="obsolete">Zoekregel openen</translation>
     </message>
     <message>
         <source>Auto Save 5 min.</source>
@@ -163,7 +163,7 @@
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>Tekst Editor is een copyright van &lt;BR&gt;2000 Trolltech AS, en&lt;BR&gt;2002 door &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;en is gelicenseerd onder de GPL</translation>
+        <translation type="obsolete">Tekst Editor is een copyright van &lt;BR&gt;2000 Trolltech AS, en&lt;BR&gt;2002 door &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;en is gelicenseerd onder de GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
@@ -199,12 +199,37 @@ Doorgaan met opslaan?
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation>Moet dit bestand echt&lt;br&gt;
+        <translation type="obsolete">Moet dit bestand echt&lt;br&gt;
 van de schijf&lt;b&gt;verwijderd&lt;/b&gt;
 worden? Dit is onomkeerbaar!</translation>
     </message>
     <message>
         <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The selected file already exists. Overwrite it?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from disk?&lt;BR&gt;This is &lt;B&gt;irreversible!&lt;/B&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

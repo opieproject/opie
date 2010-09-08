@@ -3,11 +3,11 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation>Labi</translation>
+        <translation type="obsolete">Labi</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>&lt;h1&gt;Brﾄｫdinﾄ）ums uz %1&lt;/h1&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;h1&gt;Brﾄｫdinﾄ）ums uz %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>All</source>
@@ -16,6 +16,10 @@
     <message>
         <source>Unfiled</source>
         <translation type="unfinished">Neaizpildﾄｫts</translation>
+    </message>
+    <message>
+        <source>Todo Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -299,11 +303,23 @@ Tas ﾄｼauj jums ﾄ》ri pievienot sarakstam jaunus uzdevumus.  ﾅo laukumu var parﾄ
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation>%1 diena(s)</translation>
+        <translation type="obsolete">%1 diena(s)</translation>
     </message>
     <message>
         <source>None</source>
         <translation>Nekas</translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -331,6 +347,10 @@ Tas ﾄｼauj jums ﾄ》ri pievienot sarakstam jaunus uzdevumus.  ﾅo laukumu var parﾄ
     <message>
         <source>Delete</source>
         <translation>Dzﾄ都t</translation>
+    </message>
+    <message>
+        <source>Alarm time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

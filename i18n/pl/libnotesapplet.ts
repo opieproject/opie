@@ -1,46 +1,62 @@
-<!DOCTYPE TS>
-<TS>
-  <context>
+<!DOCTYPE TS><TS>
+<context>
     <name>NotesControl</name>
     <message>
-      <source>New</source>
-      <translation>Nowy</translation>
+        <source>New</source>
+        <translation>Nowy</translation>
     </message>
     <message>
-      <source>Save</source>
-      <translation>Zapisz</translation>
+        <source>Save</source>
+        <translation>Zapisz</translation>
     </message>
     <message>
-      <source>Delete</source>
-      <translation>Usuń</translation>
+        <source>Delete</source>
+        <translation>Usuń</translation>
     </message>
     <message>
-      <source>Delete?</source>
-      <translation>Usunąć?</translation>
+        <source>Delete?</source>
+        <translation type="obsolete">Usunąć?</translation>
     </message>
     <message>
-      <source>Do you really want to&lt;BR>&lt;B> delete&lt;/B> this note ?</source>
-      <translation>Czy na pewno chcesz&lt;BR>&lt;b> usunąć&lt;/b> ta notatkę?</translation>
+        <source>Do you really want to&lt;BR&gt;&lt;B&gt; delete&lt;/B&gt; this note ?</source>
+        <translation type="obsolete">Czy na pewno chcesz&lt;BR&gt;&lt;b&gt; usunąć&lt;/b&gt; ta notatkę?</translation>
     </message>
     <message>
-      <source>Yes</source>
-      <translation>Tak</translation>
+        <source>Yes</source>
+        <translation type="obsolete">Tak</translation>
     </message>
     <message>
-      <source>No</source>
-      <translation>Nie</translation>
+        <source>No</source>
+        <translation type="obsolete">Nie</translation>
     </message>
     <message>
-      <source>Beam Out</source>
-      <translation>Emituj przez IrDA</translation>
+        <source>Beam Out</source>
+        <translation>Emituj przez IrDA</translation>
     </message>
     <message>
-      <source>Search For...</source>
-      <translation>Szukaj...</translation>
+        <source>Search For...</source>
+        <translation type="obsolete">Szukaj...</translation>
     </message>
     <message>
-      <source>Toggle Maximized</source>
-      <translation>Przełącz maksymalizacje</translation>
+        <source>Toggle Maximized</source>
+        <translation>Przełącz maksymalizacje</translation>
     </message>
-  </context>
+    <message>
+        <source>Delete note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;empty file&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;no title&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

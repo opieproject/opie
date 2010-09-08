@@ -4,11 +4,11 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation>Indietro</translation>
+        <translation type="obsolete">Indietro</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Avanti</translation>
+        <translation type="obsolete">Avanti</translation>
     </message>
 </context>
 <context>
@@ -105,7 +105,7 @@ scheda non è stata riconosciuta</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Riproduci</translation>
+        <translation type="obsolete">Riproduci</translation>
     </message>
     <message>
         <source>Send with Ir</source>
@@ -140,15 +140,19 @@ scheda non è stata riconosciuta</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Del</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Stereo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please select file to play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

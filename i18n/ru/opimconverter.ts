@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>&lt;qt&gt;Starting to convert the database for %1&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Начинаю преобразование базы данных для %1&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;Начинаю преобразование базы данных для %1&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>No SQLite2 database could be found!</source>
@@ -35,19 +35,31 @@
     </message>
     <message>
         <source>&lt;qt&gt;Are you really sure that you want to convert your database from sqlite V2 to sqlite V3?&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Вы уверены, что хотите сконвертировать вашу базу данных из sqlite V2 в sqlite V3?&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;Вы уверены, что хотите сконвертировать вашу базу данных из sqlite V2 в sqlite V3?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;An internal error occurred: sqlite was not accessible! Please correct the PATH or install this packages!&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Произошла внутренняя ошибка: sqlite недоступен! Пожалуйста исправьте PATH или установите этот пакет!&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;Произошла внутренняя ошибка: sqlite недоступен! Пожалуйста исправьте PATH или установите этот пакет!&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;An internal error occurred: sqlite3 was not accessible! Please correct the PATH or install this packages!&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Произошла внутренняя ошибка: sqlite3 недоступен! Пожалуйста исправьте PATH или установите этот пакет!&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;Произошла внутренняя ошибка: sqlite3 недоступен! Пожалуйста исправьте PATH или установите этот пакет!&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Conversion is finished!</source>
-        <translation>Конвертирование закончено!</translation>
+        <translation type="obsolete">Конвертирование закончено!</translation>
+    </message>
+    <message>
+        <source>Plain text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XML</source>
+        <translation type="unfinished">XML</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Starting convert of database %1&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -58,15 +70,15 @@
     </message>
     <message>
         <source>Converter</source>
-        <translation>Конвертер</translation>
+        <translation type="obsolete">Конвертер</translation>
     </message>
     <message>
         <source>Upgrade to SQLite3</source>
-        <translation>Обновить до SQLite3</translation>
+        <translation type="obsolete">Обновить до SQLite3</translation>
     </message>
     <message>
         <source>Select Database:</source>
-        <translation>Выберите базу данных:</translation>
+        <translation type="obsolete">Выберите базу данных:</translation>
     </message>
     <message>
         <source>Addressbook</source>
@@ -82,7 +94,7 @@
     </message>
     <message>
         <source>Source/Destination:</source>
-        <translation>Исходник/Назначение:</translation>
+        <translation type="obsolete">Исходник/Назначение:</translation>
     </message>
     <message>
         <source>to</source>
@@ -102,19 +114,63 @@
     </message>
     <message>
         <source>Config:</source>
-        <translation>Настройки:</translation>
+        <translation type="obsolete">Настройки:</translation>
     </message>
     <message>
         <source>Erase before copy</source>
-        <translation>Удалить до копирования</translation>
+        <translation type="obsolete">Удалить до копирования</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Прогресс:</translation>
+        <translation type="obsolete">Прогресс:</translation>
     </message>
     <message>
         <source>Go!</source>
         <translation>Вперед!</translation>
+    </message>
+    <message>
+        <source>Convert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source / Destination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erase destination before copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Database Formats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plain text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

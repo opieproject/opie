@@ -34,10 +34,6 @@ You can only select an actually configured user.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load which plugins in what order:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the order they will appear in</source>
         <translation type="unfinished"></translation>
     </message>
@@ -47,10 +43,6 @@ You can only select an actually configured user.</source>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>plugins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -101,6 +93,34 @@ You can only select an actually configured user.</source>
         <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-securityplugin-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Authentication plugins to use (in order):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Owner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Authentication is enabled, but no individual plugins have been enabled.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Please enable one or more authentication plugins.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Please enable one or more authentication plugins, or turn off authentication on start / resume.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No plugins enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MultiauthGeneralConfig</name>
@@ -109,23 +129,7 @@ You can only select an actually configured user.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>on Opie start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>on Opie resume</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Multiple plugins authentication</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Required successes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Don&apos;t protect this config screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -134,10 +138,6 @@ You can only select an actually configured user.</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -162,6 +162,93 @@ You can only select an actually configured user.</source>
     </message>
     <message>
         <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On Opie start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On Opie resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only after suspended</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiple plugin authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protect this settings screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OwnerInfoConfigWidget</name>
+    <message>
+        <source>When to show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specifies when the owner information should be shown.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Never</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentication failure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home mobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work mobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Owner Info</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

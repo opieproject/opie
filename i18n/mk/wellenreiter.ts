@@ -117,6 +117,10 @@ is not available on this system
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;do not match!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Bring your device into
 monitor mode now.</source>
         <translation type="unfinished"></translation>
@@ -145,28 +149,6 @@ Continue with limited functionality?</source>
     <message>
         <source>Got packet with protocol &apos;%1&apos;</source>
         <comment>Protocol Name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Can&apos;t do that!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No wireless
-interface available.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stop sniffing before
-joining a net.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Function only available on Embedded build</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;do not match!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -211,6 +193,10 @@ joining a net.</source>
 </context>
 <context>
     <name>WellenreiterConfigBase</name>
+    <message>
+        <source>Wellenreiter II Configuration Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Interface</source>
         <translation type="unfinished"></translation>
@@ -512,6 +498,10 @@ joining a net.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Send probe requests</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;automatic&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -589,14 +579,6 @@ joining a net.</source>
     </message>
     <message>
         <source>Command line to start the gps daemon.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wellenreiter II Configuration Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Send probe requests</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

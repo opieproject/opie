@@ -3,11 +3,7 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
         <source>All</source>
@@ -16,6 +12,10 @@
     <message>
         <source>Unfiled</source>
         <translation type="unfinished">Ikke-arkiverede</translation>
+    </message>
+    <message>
+        <source>Todo Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -303,7 +303,19 @@ Det hjælper dig med hurtigt at tilføje en ny opgave til din liste. Dette områ
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation>%1 dag(e)</translation>
+        <translation type="obsolete">%1 dag(e)</translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -331,6 +343,10 @@ Det hjælper dig med hurtigt at tilføje en ny opgave til din liste. Dette områ
     <message>
         <source>Type</source>
         <translation>Type</translation>
+    </message>
+    <message>
+        <source>Alarm time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

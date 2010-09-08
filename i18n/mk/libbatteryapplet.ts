@@ -3,11 +3,11 @@
     <name>BatteryStatus</name>
     <message>
         <source>Failure</source>
-        <translation>Грешка</translation>
+        <translation type="obsolete">Грешка</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>неможе да се отвори датотека</translation>
+        <translation type="obsolete">неможе да се отвори датотека</translation>
     </message>
     <message>
         <source>Charging both devices</source>

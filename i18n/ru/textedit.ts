@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Start with new file</source>
-        <translation>Начать с нового файла</translation>
+        <translation type="obsolete">Начать с нового файла</translation>
     </message>
     <message>
         <source>File</source>
@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation>Подтверждение выхода</translation>
+        <translation type="obsolete">Подтверждение выхода</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation>Показывать панель поиска</translation>
+        <translation type="obsolete">Показывать панель поиска</translation>
     </message>
     <message>
         <source>Goto Line...</source>
@@ -163,7 +163,7 @@
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>Text Edit копирайт&lt;BR&gt;2000 Trolltech AS и &lt;BR&gt;2002 &lt;B&gt;L. J. Potter&lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt; и лицензирован на условиях GPL</translation>
+        <translation type="obsolete">Text Edit копирайт&lt;BR&gt;2000 Trolltech AS и &lt;BR&gt;2002 &lt;B&gt;L. J. Potter&lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt; и лицензирован на условиях GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
@@ -197,12 +197,37 @@ Go ahead and save?
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation>Вы действительно хотите&lt;BR&gt;&lt;B&gt;удалить&lt;/B&gt; текущий файл
+        <translation type="obsolete">Вы действительно хотите&lt;BR&gt;&lt;B&gt;удалить&lt;/B&gt; текущий файл
 с диска?&lt;BR&gt;Удаление &lt;B&gt;безвозвратное!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Save Failed</source>
         <translation>Не могу сохранить</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The selected file already exists. Overwrite it?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from disk?&lt;BR&gt;This is &lt;B&gt;irreversible!&lt;/B&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

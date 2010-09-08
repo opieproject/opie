@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation>&lt;b&gt;Note :&lt;/b&gt; Modifier ce paramètre peut nécessiter le redémarrage d&apos;Opie pour qu&apos;il preinne effet.</translation>
+        <translation type="obsolete">&lt;b&gt;Note :&lt;/b&gt; Modifier ce paramètre peut nécessiter le redémarrage d&apos;Opie pour qu&apos;il preinne effet.</translation>
     </message>
     <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
@@ -198,7 +198,7 @@
     </message>
     <message>
         <source>New</source>
-        <translation>Nouveau</translation>
+        <translation type="obsolete">Nouveau</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -206,7 +206,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation type="obsolete">Effacer</translation>
     </message>
     <message>
         <source>Enable big busy indicator</source>
@@ -218,7 +218,7 @@
     </message>
     <message>
         <source>Adds a new Tab to the Launcher.</source>
-        <translation>Ajouter un nouvel onglet au bureau.</translation>
+        <translation type="obsolete">Ajouter un nouvel onglet au bureau.</translation>
     </message>
     <message>
         <source>Opens a new dialog to customize the select Tab.</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>Deletes a Tab from the Launcher.</source>
-        <translation>Effacer un onglet du bureau.</translation>
+        <translation type="obsolete">Effacer un onglet du bureau.</translation>
     </message>
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>

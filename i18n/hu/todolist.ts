@@ -2,20 +2,16 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unfiled</source>
         <translation type="unfinished">Iktatatlan</translation>
+    </message>
+    <message>
+        <source>Todo Alarm</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -303,7 +299,19 @@ Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terül
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation>%1 nap</translation>
+        <translation type="obsolete">%1 nap</translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -330,6 +338,10 @@ Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terül
     </message>
     <message>
         <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm time</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

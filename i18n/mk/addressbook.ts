@@ -62,7 +62,7 @@
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Дали сакате да додадете контакт за
+        <translation type="obsolete">Дали сакате да додадете контакт за
 %1?</translation>
     </message>
     <message>
@@ -112,6 +112,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -296,7 +301,7 @@ SHARP основниот ROM.
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Притиснете enter за да внесете презиме, средно име и име</translation>
+        <translation type="obsolete">Притиснете enter за да внесете презиме, средно име и име</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -308,7 +313,7 @@ SHARP основниот ROM.
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>Работно Место..</translation>
+        <translation type="obsolete">Работно Место..</translation>
     </message>
     <message>
         <source>Suffix</source>
@@ -316,7 +321,7 @@ SHARP основниот ROM.
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Нешто како „јр.“..</translation>
+        <translation type="obsolete">Нешто како „јр.“..</translation>
     </message>
     <message>
         <source>Organization</source>
@@ -324,7 +329,7 @@ SHARP основниот ROM.
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>Работно место на контактот</translation>
+        <translation type="obsolete">Работно место на контактот</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1276,6 +1281,30 @@ SHARP основниот ROM.
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

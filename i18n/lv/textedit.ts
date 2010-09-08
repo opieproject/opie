@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>Start with new file</source>
-        <translation>Sākt ar jaunu failu</translation>
+        <translation type="obsolete">Sākt ar jaunu failu</translation>
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation>Brīdināt Izejot</translation>
+        <translation type="obsolete">Brīdināt Izejot</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation>Atvērt Meklēšanas Rindu</translation>
+        <translation type="obsolete">Atvērt Meklēšanas Rindu</translation>
     </message>
     <message>
         <source>Auto Save 5 min.</source>
@@ -160,7 +160,7 @@
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation>Vai tiešām vēlaties &lt;BR&gt;&lt;B&gt;dzēst&lt;/B&gt; tekošo failu
+        <translation type="obsolete">Vai tiešām vēlaties &lt;BR&gt;&lt;B&gt;dzēst&lt;/B&gt; tekošo failu
 no diska?  &lt;BR&gt;Tas ir &lt;B&gt;neatgriezeniski!&lt;/B&gt;</translation>
     </message>
     <message>
@@ -173,7 +173,7 @@ no diska?  &lt;BR&gt;Tas ir &lt;B&gt;neatgriezeniski!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>Teksta Redaktora tiesības rezervētas&lt;BR&gt;2000 Trolltech AS, un &lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt; llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;un licenzēts ar GPL</translation>
+        <translation type="obsolete">Teksta Redaktora tiesības rezervētas&lt;BR&gt;2000 Trolltech AS, un &lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt; llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;un licenzēts ar GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
@@ -202,6 +202,31 @@ Vai saglabāt?</translation>
     </message>
     <message>
         <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The selected file already exists. Overwrite it?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from disk?&lt;BR&gt;This is &lt;B&gt;irreversible!&lt;/B&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

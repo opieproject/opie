@@ -345,6 +345,10 @@ direct afsluiten.</translation>
         <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
         <translation>&lt;p&gt;De backup-batterij lading is kritiek laag!&lt;p&gt;Aub backup-batterij opladen</translation>
     </message>
+    <message>
+        <source>Suspending...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ShutdownImpl</name>
@@ -397,11 +401,19 @@ direct afsluiten.</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
-        <translation>&lt;p&gt;Een ongeauthoriseerd systeem vraagt om toegang tot dit apparaat.&lt;p&gt;Als u een versie van Qtopia Desktop ouder dan 1.5.1 gebruikt, kunt u het best upgraden, anders de veiligheidsinstellingen wijzigen naar IntelliSync.</translation>
+        <translation type="obsolete">&lt;p&gt;Een ongeauthoriseerd systeem vraagt om toegang tot dit apparaat.&lt;p&gt;Als u een versie van Qtopia Desktop ouder dan 1.5.1 gebruikt, kunt u het best upgraden, anders de veiligheidsinstellingen wijzigen naar IntelliSync.</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;&lt;p&gt;Een ongeauthoriseerd systeem vraagt om toegang tot dit apparaat.&lt;p&gt;Instellingen staan op IntelliSync, dus ik kan deze verbinding weigeren of toelaten.&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;&lt;p&gt;Een ongeauthoriseerd systeem vraagt om toegang tot dit apparaat.&lt;p&gt;Instellingen staan op IntelliSync, dus ik kan deze verbinding weigeren of toelaten.&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may allow or deny this connection.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;An unauthorized system is requesting access to this device with no password.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.&lt;p&gt;Otherwise, check that the correct sync application is selected in the Security settings, and ensure that a sync password has been set in the sync application if it allows one.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

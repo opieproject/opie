@@ -58,24 +58,24 @@
         <translation></translation>
     </message>
     <message>
-        <source>0</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>8</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>9</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Enter</source>
         <translation></translation>
     </message>
     <message>
         <source>Skip</source>
         <translation>Überspringen</translation>
+    </message>
+    <message>
+        <source>  9  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>  0  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

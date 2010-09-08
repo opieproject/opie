@@ -95,7 +95,7 @@ Ali jo res želite odpreti?</translation>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Ali res želite dodati stik za 
+        <translation type="obsolete">Ali res želite dodati stik za 
 %1?</translation>
     </message>
     <message>
@@ -112,6 +112,11 @@ Ali jo res želite odpreti?</translation>
     </message>
     <message>
         <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1248,7 +1253,7 @@ je zastonj!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Pritisnite, da vpišete priimek- in ime</translation>
+        <translation type="obsolete">Pritisnite, da vpišete priimek- in ime</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1256,15 +1261,15 @@ je zastonj!</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>Naziv delovnega mesta..</translation>
+        <translation type="obsolete">Naziv delovnega mesta..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Nekaj kot &quot;ml.&quot;..</translation>
+        <translation type="obsolete">Nekaj kot &quot;ml.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>Delovno mesto stika</translation>
+        <translation type="obsolete">Delovno mesto stika</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1276,6 +1281,30 @@ je zastonj!</translation>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

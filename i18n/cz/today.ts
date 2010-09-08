@@ -1,143 +1,142 @@
-<!DOCTYPE TS>
-<TS>
-  <context>
+<!DOCTYPE TS><TS>
+<context>
     <name>Today</name>
     <message>
-      <source>Owned by </source>
-      <translation>Vlastník</translation>
+        <source>Owned by </source>
+        <translation>Vlastník</translation>
     </message>
     <message>
-      <source>Please fill out the business card</source>
-      <translation>Prosím vyplňte vizitku</translation>
+        <source>Please fill out the business card</source>
+        <translation>Prosím vyplňte vizitku</translation>
     </message>
     <message>
-      <source>Click here to launch the associated app</source>
-      <translation>Klikněte pro spuštění přidružené aplikace</translation>
+        <source>Click here to launch the associated app</source>
+        <translation>Klikněte pro spuštění přidružené aplikace</translation>
     </message>
     <message>
-      <source>No plugins activated</source>
-      <translation>Nejsou aktivovány žádné pluginy</translation>
+        <source>No plugins activated</source>
+        <translation>Nejsou aktivovány žádné pluginy</translation>
     </message>
     <message>
-      <source>Today</source>
-      <translation>Today</translation>
+        <source>Today</source>
+        <translation>Today</translation>
     </message>
     <message>
-      <source>Today Error</source>
-      <translation>Today Chyba</translation>
+        <source>Today Error</source>
+        <translation>Today Chyba</translation>
     </message>
     <message>
-      <source>&lt;qt>The plugin '%1' caused Today to crash. It could be that the plugin is not properly installed.&lt;br>Today tries to continue loading plugins.&lt;/qt></source>
-      <translation>&lt;qt>Plugin '%1' způsobil havárii Today. Je možné, že plugin není řádně nainstalován.&lt;br>Today zkusí pokračovat v nahrávání pluginů.&lt;/qt></translation>
+        <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;Plugin &apos;%1&apos; způsobil havárii Today. Je možné, že plugin není řádně nainstalován.&lt;br&gt;Today zkusí pokračovat v nahrávání pluginů.&lt;/qt&gt;</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>TodayBase</name>
     <message>
-      <source>Today</source>
-      <translation>Today</translation>
+        <source>Today</source>
+        <translation>Today</translation>
     </message>
     <message>
-      <source>Click here to get to the config dialog</source>
-      <translation>Zde klikněte pro okno s nastavením</translation>
+        <source>Click here to get to the config dialog</source>
+        <translation>Zde klikněte pro okno s nastavením</translation>
     </message>
     <message>
-      <source>Today by Maximilian Reiï¿½</source>
-      <translation>Today napsal Maximilian Reiï¿½</translation>
+        <source>Today by Maximilian Rei&#xef;&#xbf;&#xbd;</source>
+        <translation>Today napsal Maximilian Reiï¿½</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>TodayConfig</name>
     <message>
-      <source>Today Config</source>
-      <translation>Konfigurace Today</translation>
+        <source>Today Config</source>
+        <translation>Konfigurace Today</translation>
     </message>
     <message>
-      <source>Load which plugins in what order:</source>
-      <translation>V jakém pořadí nahrát jaké pluginy:</translation>
+        <source>Load which plugins in what order:</source>
+        <translation>V jakém pořadí nahrát jaké pluginy:</translation>
     </message>
     <message>
-      <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-      <translation>Pro aktivaci pluginu jej zaškrtněte, nebo použijte šipky na pravé straně pro změnu pořadí spouštění</translation>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
+        <translation>Pro aktivaci pluginu jej zaškrtněte, nebo použijte šipky na pravé straně pro změnu pořadí spouštění</translation>
     </message>
     <message>
-      <source>Move Up</source>
-      <translation>Posunout nahoru</translation>
+        <source>Move Up</source>
+        <translation>Posunout nahoru</translation>
     </message>
     <message>
-      <source>Move Down</source>
-      <translation>Posunout dolů</translation>
+        <source>Move Down</source>
+        <translation>Posunout dolů</translation>
     </message>
     <message>
-      <source>active/order</source>
-      <translation>aktivní/pořadí</translation>
+        <source>active/order</source>
+        <translation>aktivní/pořadí</translation>
     </message>
     <message>
-      <source>Misc</source>
-      <translation>Ostatní</translation>
+        <source>Misc</source>
+        <translation>Ostatní</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>TodayConfigMiscBase</name>
     <message>
-      <source>Form1</source>
-      <translation>Form1</translation>
+        <source>Form1</source>
+        <translation>Form1</translation>
     </message>
     <message>
-      <source>Check this if today should be autostarted on resume.</source>
-      <translation>Zaškrtněte, pokud se má Today automaticky spustit po probuzení.</translation>
+        <source>Check this if today should be autostarted on resume.</source>
+        <translation>Zaškrtněte, pokud se má Today automaticky spustit po probuzení.</translation>
     </message>
     <message>
-      <source>autostart on resume?</source>
-      <translation>Spustit po probuzení?</translation>
+        <source>autostart on resume?</source>
+        <translation>Spustit po probuzení?</translation>
     </message>
     <message>
-      <source>tiny banner</source>
-      <translation>malý banner</translation>
+        <source>tiny banner</source>
+        <translation>malý banner</translation>
     </message>
     <message>
-      <source>Have small banner </source>
-      <translation>Požít malý banner</translation>
+        <source>Have small banner </source>
+        <translation>Požít malý banner</translation>
     </message>
     <message>
-      <source> min</source>
-      <translation>min</translation>
+        <source> min</source>
+        <translation>min</translation>
     </message>
     <message>
-      <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-      <translation>Kolik minut má být PDA uspáno předtím, než ho funkce automatické spuštění probudí</translation>
+        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
+        <translation>Kolik minut má být PDA uspáno předtím, než ho funkce automatické spuštění probudí</translation>
     </message>
     <message>
-      <source>minutes inactive</source>
-      <translation>minut neaktivní</translation>
+        <source>minutes inactive</source>
+        <translation>minut neaktivní</translation>
     </message>
     <message>
-      <source> pixel</source>
-      <translation>bod</translation>
+        <source> pixel</source>
+        <translation>bod</translation>
     </message>
     <message>
-      <source>Set the icon size in pixel</source>
-      <translation>Nastavte velikost ikon v bodech</translation>
+        <source>Set the icon size in pixel</source>
+        <translation>Nastavte velikost ikon v bodech</translation>
     </message>
     <message>
-      <source>icon size</source>
-      <translation>velikost ikon</translation>
+        <source>icon size</source>
+        <translation>velikost ikon</translation>
     </message>
     <message>
-      <source> sec</source>
-      <translation>sek</translation>
+        <source> sec</source>
+        <translation>sek</translation>
     </message>
     <message>
-      <source>never</source>
-      <translation>nikdy</translation>
+        <source>never</source>
+        <translation>nikdy</translation>
     </message>
     <message>
-      <source>How often should Today refresh itself</source>
-      <translation>Jak často se má Today obnovovat</translation>
+        <source>How often should Today refresh itself</source>
+        <translation>Jak často se má Today obnovovat</translation>
     </message>
     <message>
-      <source>refresh</source>
-      <translation>obnovení</translation>
+        <source>refresh</source>
+        <translation>obnovení</translation>
     </message>
-  </context>
+</context>
 </TS>

@@ -123,5 +123,13 @@ Signal beendet: %1</translation>
         <source>&lt;qt&gt;The entered password is not a valid password.Please try entering a valid password.&lt;/qt&gt;</source>
         <translation>&lt;qt&gt;Das eingegebene Passwort ist ungültig&lt;/qt&gt;</translation>
     </message>
+    <message>
+        <source>Rename /etc/passwd failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Renaming /etc/passwd.new to /etc/passwd failed.Please check your /etc/passed file, your /etc directory or your filesystem.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

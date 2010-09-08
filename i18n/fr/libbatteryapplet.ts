@@ -44,11 +44,11 @@
     </message>
     <message>
         <source>Failure</source>
-        <translation>Echec</translation>
+        <translation type="obsolete">Echec</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>le fichier ne peut pas être ouvert</translation>
+        <translation type="obsolete">le fichier ne peut pas être ouvert</translation>
     </message>
     <message>
         <source>Charging both devices</source>

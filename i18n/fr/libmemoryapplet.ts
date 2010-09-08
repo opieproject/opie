@@ -92,15 +92,15 @@ La mémoire (i.e RAM) est divisée en catégories comme suit :
     </message>
     <message>
         <source>RAM</source>
-        <translation>RAM</translation>
+        <translation type="obsolete">RAM</translation>
     </message>
     <message>
         <source>CF Card</source>
-        <translation>Carte CF</translation>
+        <translation type="obsolete">Carte CF</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation>Carte SD</translation>
+        <translation type="obsolete">Carte SD</translation>
     </message>
     <message>
         <source> On </source>
@@ -152,7 +152,7 @@ La mémoire (i.e RAM) est divisée en catégories comme suit :
     </message>
     <message>
         <source>Swapfile activated.</source>
-        <translation>Fichier d&apos;échange activé.</translation>
+        <translation type="obsolete">Fichier d&apos;échange activé.</translation>
     </message>
     <message>
         <source></source>
@@ -164,6 +164,22 @@ La mémoire (i.e RAM) est divisée en catégories comme suit :
     </message>
     <message>
         <source>Swap disabled in kernel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(None)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swapfile already active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swapfile not active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swap file currently active!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

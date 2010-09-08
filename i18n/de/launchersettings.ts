@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation>&lt;b&gt;Hinweis:&lt;/b&gt; Das Ändern dieses Settings macht unter Umstand einen Opie-Neustart notwendig.</translation>
+        <translation type="obsolete">&lt;b&gt;Hinweis:&lt;/b&gt; Das Ändern dieses Settings macht unter Umstand einen Opie-Neustart notwendig.</translation>
     </message>
     <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
@@ -198,7 +198,7 @@
     </message>
     <message>
         <source>New</source>
-        <translation>Neu</translation>
+        <translation type="obsolete">Neu</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -206,7 +206,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>LÖschen</translation>
+        <translation type="obsolete">LÖschen</translation>
     </message>
     <message>
         <source>Enable big busy indicator</source>
@@ -218,7 +218,7 @@
     </message>
     <message>
         <source>Adds a new Tab to the Launcher.</source>
-        <translation>Fügt einen neuen Reiter in den Launcher ein.</translation>
+        <translation type="obsolete">Fügt einen neuen Reiter in den Launcher ein.</translation>
     </message>
     <message>
         <source>Opens a new dialog to customize the select Tab.</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>Deletes a Tab from the Launcher.</source>
-        <translation>Löscht einen Reiter aus dem Launcher.</translation>
+        <translation type="obsolete">Löscht einen Reiter aus dem Launcher.</translation>
     </message>
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>

@@ -110,9 +110,6 @@
     </message>
 </context>
 <context>
-    <name>LoadInfo</name>
-</context>
-<context>
     <name>MemoryInfo</name>
     <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your device.

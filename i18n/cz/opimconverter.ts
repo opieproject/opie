@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>&lt;qt&gt;Starting to convert the database for %1&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Začíná převod databáze pro %1&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;Začíná převod databáze pro %1&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>No SQLite2 database could be found!</source>
@@ -35,19 +35,31 @@
     </message>
     <message>
         <source>&lt;qt&gt;Are you really sure that you want to convert your database from sqlite V2 to sqlite V3?&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Jste si opravdu jisti, že chcete zkonvertovat vaší databázi z sqlite V2 na sqlite V3?&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;Jste si opravdu jisti, že chcete zkonvertovat vaší databázi z sqlite V2 na sqlite V3?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;An internal error occurred: sqlite was not accessible! Please correct the PATH or install this packages!&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Nastala interní chyba: sqlite není přístupná! Prosím opravte cestu, nebo nainstalujte balíčky!&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;Nastala interní chyba: sqlite není přístupná! Prosím opravte cestu, nebo nainstalujte balíčky!&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;An internal error occurred: sqlite3 was not accessible! Please correct the PATH or install this packages!&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Nastala interní chyba: sqlite3 není přístupná! Prosím opravte cestu, nebo nainstalujte balíčky!&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;Nastala interní chyba: sqlite3 není přístupná! Prosím opravte cestu, nebo nainstalujte balíčky!&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Conversion is finished!</source>
-        <translation>Konverze je dokončena!</translation>
+        <translation type="obsolete">Konverze je dokončena!</translation>
+    </message>
+    <message>
+        <source>Plain text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XML</source>
+        <translation type="unfinished">XML</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Starting convert of database %1&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -58,15 +70,15 @@
     </message>
     <message>
         <source>Converter</source>
-        <translation>Konvertor</translation>
+        <translation type="obsolete">Konvertor</translation>
     </message>
     <message>
         <source>Upgrade to SQLite3</source>
-        <translation>Upgrade na SQLite3</translation>
+        <translation type="obsolete">Upgrade na SQLite3</translation>
     </message>
     <message>
         <source>Select Database:</source>
-        <translation>Vyberte databázi:</translation>
+        <translation type="obsolete">Vyberte databázi:</translation>
     </message>
     <message>
         <source>Addressbook</source>
@@ -82,7 +94,7 @@
     </message>
     <message>
         <source>Source/Destination:</source>
-        <translation>Zdroj/Cíl:</translation>
+        <translation type="obsolete">Zdroj/Cíl:</translation>
     </message>
     <message>
         <source>to</source>
@@ -102,19 +114,63 @@
     </message>
     <message>
         <source>Config:</source>
-        <translation>Konfigurace:</translation>
+        <translation type="obsolete">Konfigurace:</translation>
     </message>
     <message>
         <source>Erase before copy</source>
-        <translation>Vymazat před kopírováním</translation>
+        <translation type="obsolete">Vymazat před kopírováním</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Postup:</translation>
+        <translation type="obsolete">Postup:</translation>
     </message>
     <message>
         <source>Go!</source>
         <translation>Jeď!</translation>
+    </message>
+    <message>
+        <source>Convert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source / Destination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erase destination before copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Database Formats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plain text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

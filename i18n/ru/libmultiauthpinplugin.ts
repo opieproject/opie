@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>0</source>
-        <translation>0</translation>
+        <translation type="obsolete">0</translation>
     </message>
     <message>
         <source>8</source>
@@ -66,15 +66,27 @@
     </message>
     <message>
         <source>9</source>
-        <translation>9</translation>
+        <translation type="obsolete">9</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation>Ввод</translation>
+        <translation type="obsolete">Ввод</translation>
     </message>
     <message>
         <source>Skip</source>
         <translation>Пропустить</translation>
+    </message>
+    <message>
+        <source>  9  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>  0  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

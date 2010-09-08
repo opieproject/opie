@@ -92,15 +92,15 @@ Memory is categorized as follows:
     </message>
     <message>
         <source>RAM</source>
-        <translation>ОЗУ</translation>
+        <translation type="obsolete">ОЗУ</translation>
     </message>
     <message>
         <source>CF Card</source>
-        <translation>CF карта</translation>
+        <translation type="obsolete">CF карта</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation>SD карта</translation>
+        <translation type="obsolete">SD карта</translation>
     </message>
     <message>
         <source> On </source>
@@ -152,7 +152,7 @@ Memory is categorized as follows:
     </message>
     <message>
         <source>Swapfile activated.</source>
-        <translation>Файл подкачки подключен.</translation>
+        <translation type="obsolete">Файл подкачки подключен.</translation>
     </message>
     <message>
         <source></source>
@@ -165,6 +165,22 @@ Memory is categorized as follows:
     <message>
         <source>Swap disabled in kernel</source>
         <translation>Подкачка отключена в ядре</translation>
+    </message>
+    <message>
+        <source>(None)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swapfile already active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swapfile not active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swap file currently active!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

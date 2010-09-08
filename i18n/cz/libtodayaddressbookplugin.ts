@@ -84,19 +84,47 @@ barvu dole</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Další narozeniny za &lt;b&gt; %1 &lt;/b&gt; dnů:</translation>
+        <translation type="obsolete">Další narozeniny za &lt;b&gt; %1 &lt;/b&gt; dnů:</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Za &lt;b&gt; %1 &lt;/b&gt; dnů nejsou žádné narozeniny!</translation>
+        <translation type="obsolete">Za &lt;b&gt; %1 &lt;/b&gt; dnů nejsou žádné narozeniny!</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Další výročí za &lt;b&gt; %1 &lt;/b&gt; dnů:</translation>
+        <translation type="obsolete">Další výročí za &lt;b&gt; %1 &lt;/b&gt; dnů:</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Za &lt;b&gt; %1 &lt;/b&gt; dnů nejsou žádná výročí!</translation>
+        <translation type="obsolete">Za &lt;b&gt; %1 &lt;/b&gt; dnů nejsou žádná výročí!</translation>
+    </message>
+    <message>
+        <source>Birthdays in next %1 days:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tomorrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No birthdays in next %1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anniversaries in next %1 days:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No anniversaries in next %1 days</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -95,7 +95,7 @@ Wollen Sie sie trotzdem öffnen ?</translation>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Wollen Sie den Kontakt %1 wirklich
+        <translation type="obsolete">Wollen Sie den Kontakt %1 wirklich
 hinzufügen?</translation>
     </message>
     <message>
@@ -113,6 +113,11 @@ hinzufügen?</translation>
     <message>
         <source>Edit Contact</source>
         <translation>Kontakt bearbeiten</translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1249,7 +1254,7 @@ wird nach dem Neustart der Anwendung aktiv!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Hier Klicken, um Vor-, Mittel- und Nachnamen einzugeben</translation>
+        <translation type="obsolete">Hier Klicken, um Vor-, Mittel- und Nachnamen einzugeben</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1257,15 +1262,15 @@ wird nach dem Neustart der Anwendung aktiv!</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>Die Berufsbezeichnug..</translation>
+        <translation type="obsolete">Die Berufsbezeichnug..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Suffixe wie bspw. &quot;jr.&quot;..</translation>
+        <translation type="obsolete">Suffixe wie bspw. &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>Die Arbeitsstelle des Kontakts</translation>
+        <translation type="obsolete">Die Arbeitsstelle des Kontakts</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1278,6 +1283,30 @@ wird nach dem Neustart der Anwendung aktiv!</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

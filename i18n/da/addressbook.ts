@@ -54,7 +54,7 @@
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Er du sikker på du vil tilføje kontakten for %1?</translation>
+        <translation type="obsolete">Er du sikker på du vil tilføje kontakten for %1?</translation>
     </message>
     <message>
         <source>&amp;All Yes</source>
@@ -111,6 +111,11 @@ dette søge mønster!</translation>
     </message>
     <message>
         <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to add 
+%1 to your contacts?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1247,7 +1252,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Tryk for at indtaste efter-, mellem- og fornavn</translation>
+        <translation type="obsolete">Tryk for at indtaste efter-, mellem- og fornavn</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1255,15 +1260,15 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>Stillingsbetegnelse..</translation>
+        <translation type="obsolete">Stillingsbetegnelse..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Noget i retning af &quot;jr.&quot;..</translation>
+        <translation type="obsolete">Noget i retning af &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>Arbejdsstedet for kontakten</translation>
+        <translation type="obsolete">Arbejdsstedet for kontakten</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1275,6 +1280,30 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to enter last, middle and first name, and suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The workplace of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The job title of the contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The contact&apos;s department within their workplace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact name suffix (e.g. &quot;jr.&quot;).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

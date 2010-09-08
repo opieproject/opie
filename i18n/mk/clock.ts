@@ -7,11 +7,7 @@
     </message>
     <message>
         <source>Snooze</source>
-        <translation type="unfinished">Одложи</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Одложи</translation>
     </message>
 </context>
 <context>
@@ -111,6 +107,38 @@ one day to be selected.</source>
         <source>Audio</source>
         <translation type="unfinished">Аудио</translation>
     </message>
+    <message>
+        <source>Default alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play file in background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play file with OpiePlayer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play file with OpiePlayer 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click OK to stop player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No player found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;No suitable background player was found.&lt;p&gt;Please install mpg321, mpg123, or madplay to enable this functionality.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ClockBase</name>
@@ -199,7 +227,15 @@ one day to be selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play File</source>
+        <source>Snooze time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

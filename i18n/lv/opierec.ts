@@ -3,11 +3,11 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation>Atpakaļ</translation>
+        <translation type="obsolete">Atpakaļ</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Uz priekšu</translation>
+        <translation type="obsolete">Uz priekšu</translation>
     </message>
 </context>
 <context>
@@ -18,7 +18,7 @@
     </message>
     <message>
         <source>Play</source>
-        <translation>Spēlēt</translation>
+        <translation type="obsolete">Spēlēt</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -140,7 +140,7 @@ vai arī karte nav atpazīta</translation>
     </message>
     <message>
         <source>Del</source>
-        <translation>Dzēst</translation>
+        <translation type="obsolete">Dzēst</translation>
     </message>
     <message>
         <source>Stereo</source>
@@ -149,6 +149,14 @@ vai arī karte nav atpazīta</translation>
     <message>
         <source>Please select file to play</source>
         <translation>Lūdzu izvēlaties failu spēlēšanai</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -3,11 +3,11 @@
     <name>BatteryStatus</name>
     <message>
         <source>Failure</source>
-        <translation>Mislukt</translation>
+        <translation type="obsolete">Mislukt</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>kan bestand niet openen</translation>
+        <translation type="obsolete">kan bestand niet openen</translation>
     </message>
     <message>
         <source>Charging both devices</source>

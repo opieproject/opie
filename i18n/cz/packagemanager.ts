@@ -157,6 +157,10 @@
         <source>Text</source>
         <translation>Text</translation>
     </message>
+    <message>
+        <source>Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -463,6 +467,94 @@ Klikněte do čtverečku nalevo pro výběr balíčku.  Klikněte a podržte pro
         <source>Links removed for: %1</source>
         <translation>Linky odstraněny pro: %1</translation>
     </message>
+    <message>
+        <source>Update failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upgrade failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package:  %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version:  %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Architecture:  %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source:  %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:  %1
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tags:  %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:  %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not installed</source>
+        <translation type="unfinished">Nenainstalované</translation>
+    </message>
+    <message>
+        <source>Unpacked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Partially configured</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installed</source>
+        <translation type="unfinished">Instalované</translation>
+    </message>
+    <message>
+        <source>Partially installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postinst failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removal failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Neznámý</translation>
+    </message>
+    <message>
+        <source>Status:  %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OIpkgConfigDlg</name>
@@ -654,6 +746,22 @@ Klikněte do čtverečku nalevo pro výběr balíčku.  Klikněte a podržte pro
         <source>Tap here to select the directory where package source feed information is stored.</source>
         <translation>Klikněte pro výběr adresáře, kde je uložen seznam zdrojů balíčků.</translation>
     </message>
+    <message>
+        <source>Force Recursive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to enable or disable the &apos;-recursive&apos; option for Ipkg.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Verbose fetch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to enable or disable the &apos;-verbose_wget&apos; option for Ipkg.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OIpkgDestDlg</name>
@@ -783,6 +891,37 @@ Klikněte do čtverečku nalevo pro výběr balíčku.  Klikněte a podržte pro
     <message>
         <source>Tap here to retrieve list of files contained in this package.</source>
         <translation>Klikněte pro stažení seznamu souborů obsažených v balíčku.</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Installing %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removing %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downloading %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downloading</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
