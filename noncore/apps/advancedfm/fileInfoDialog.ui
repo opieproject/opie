@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>225</width>
+            <width>217</width>
             <height>303</height>
         </rect>
     </property>
@@ -63,13 +63,13 @@
                     <property stdset="1">
                         <name>sizePolicy</name>
                         <sizepolicy>
-                            <hsizetype>1</hsizetype>
+                            <hsizetype>5</hsizetype>
                             <vsizetype>1</vsizetype>
                         </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>executable file</string>
+                        <string></string>
                     </property>
                 </widget>
                 <widget row="1"  column="1" >
@@ -82,12 +82,12 @@
                         <name>sizePolicy</name>
                         <sizepolicy>
                             <hsizetype>1</hsizetype>
-                            <vsizetype>1</vsizetype>
+                            <vsizetype>5</vsizetype>
                         </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>3kb (3100 bytes)</string>
+                        <string></string>
                     </property>
                 </widget>
                 <widget row="2"  column="1" >
@@ -100,7 +100,7 @@
                         <name>sizePolicy</name>
                         <sizepolicy>
                             <hsizetype>1</hsizetype>
-                            <vsizetype>1</vsizetype>
+                            <vsizetype>5</vsizetype>
                         </sizepolicy>
                     </property>
                     <property stdset="1">
@@ -112,7 +112,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>bill (100)</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -188,16 +188,9 @@
                     <property stdset="1">
                         <name>sizePolicy</name>
                         <sizepolicy>
-                            <hsizetype>1</hsizetype>
+                            <hsizetype>5</hsizetype>
                             <vsizetype>1</vsizetype>
                         </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>maximumSize</name>
-                        <size>
-                            <width>60</width>
-                            <height>32767</height>
-                        </size>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -218,8 +211,22 @@
                         </sizepolicy>
                     </property>
                     <property stdset="1">
+                        <name>maximumSize</name>
+                        <size>
+                            <width>32767</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property stdset="1">
                         <name>text</name>
                         <string>Group:</string>
+                    </property>
+                    <property stdset="1">
+                        <name>alignment</name>
+                        <set>AlignVCenter|AlignLeft</set>
+                    </property>
+                    <property>
+                        <name>hAlign</name>
                     </property>
                 </widget>
                 <widget row="3"  column="1" >
@@ -232,12 +239,12 @@
                         <name>sizePolicy</name>
                         <sizepolicy>
                             <hsizetype>1</hsizetype>
-                            <vsizetype>1</vsizetype>
+                            <vsizetype>5</vsizetype>
                         </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>users (500)</string>
+                        <string></string>
                     </property>
                 </widget>
                 <widget row="4"  column="0" >
@@ -268,12 +275,12 @@
                         <name>sizePolicy</name>
                         <sizepolicy>
                             <hsizetype>1</hsizetype>
-                            <vsizetype>1</vsizetype>
+                            <vsizetype>5</vsizetype>
                         </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>rwxrwxrwx</string>
+                        <string></string>
                     </property>
                 </widget>
             </grid>
@@ -304,8 +311,15 @@
                         <cstring>lastReadLabel</cstring>
                     </property>
                     <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>5</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
                         <name>text</name>
-                        <string>users (500)</string>
+                        <string></string>
                     </property>
                 </widget>
                 <widget row="1"  column="1" >
@@ -318,7 +332,7 @@
                         <name>sizePolicy</name>
                         <sizepolicy>
                             <hsizetype>1</hsizetype>
-                            <vsizetype>1</vsizetype>
+                            <vsizetype>5</vsizetype>
                         </sizepolicy>
                     </property>
                     <property stdset="1">
@@ -330,7 +344,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>users (500)</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -352,13 +366,6 @@
                             <hsizetype>1</hsizetype>
                             <vsizetype>1</vsizetype>
                         </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>maximumSize</name>
-                        <size>
-                            <width>60</width>
-                            <height>32767</height>
-                        </size>
                     </property>
                     <property stdset="1">
                         <name>text</name>
