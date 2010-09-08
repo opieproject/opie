@@ -261,7 +261,7 @@ void BlueBase::initGui()
     passkeyLine->setText( m_defaultPasskey );
     // set info tab
     setInfo();
-    serDevName->setText(tr("/dev/ircomm0"));
+    serDevName->setText("/dev/ircomm0"); // no tr
     for (unsigned int i = 0; i < (sizeof(speeds) / sizeof(speeds[0])); i++) {
         serSpeed->insertItem(speeds[i].str);
     }

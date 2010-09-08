@@ -63,11 +63,11 @@ void DunPopup::slotDisconnect()  {
     OProcess dunDis;
     OProcess pppDis;
     OProcess dunKill;
-    dunDis << tr("dund") << tr("--kill") << m_item->mac();
+    dunDis << "dund" << "--kill" << m_item->mac();
     dunDis.start(OProcess::DontCare, OProcess::NoCommunication);
-    dunKill << tr("killall") << tr("-q") << tr("dund");
+    dunKill << "killall" << "-q" << "dund";
     dunKill.start(OProcess::DontCare, OProcess::NoCommunication);
-    pppDis << tr("killall") << tr("-q") << tr("pppd");
+    pppDis << "killall" << "-q" << "pppd";
     pppDis.start(OProcess::DontCare, OProcess::NoCommunication);
     sleep(1);
     QMessageBox::information(this, tr("DUN Disconnect"), tr("DUN Disconnected"));

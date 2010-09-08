@@ -62,7 +62,7 @@ PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,
     serPort = new QComboBox(this);
     for (i = 0; i < NCONNECTS; i++) {
         if (!PPPDialog::conns[i].proc.isRunning())
-            serPort->insertItem(tr("rfcomm%1").arg(i));
+            serPort->insertItem(QString("rfcomm%1").arg(i));
     }
 
     layout->addWidget(info);
@@ -95,7 +95,7 @@ void PPPDialog::connectToDevice() {
     }
     else {
         PPPDialog::conns[portNum].proc << "pppd"
-            << tr("/dev/bluetooth/rfcomm/%1").arg(portNum)
+            << QString("/dev/bluetooth/rfcomm/%1").arg(portNum)
             << "call"
             << cmdLine->currentText();
     }

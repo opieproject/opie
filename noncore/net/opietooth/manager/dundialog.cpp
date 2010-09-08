@@ -93,15 +93,15 @@ void DunDialog::connectToDevice() {
     outPut->clear();
 
     // Fill process command line
-    *m_dunConnect << tr("dund")
-            << tr("--connect") << m_device
-            << tr("--channel") << QString::number(m_port)
-            << tr("--nodetach");
+    *m_dunConnect << "dund"
+            << "--connect" << m_device
+            << "--channel" << QString::number(m_port)
+            << "--nodetach"; // no tr on any of these
     if (doEnc)
-        *m_dunConnect << tr("--encrypt");
+        *m_dunConnect << "--encrypt";
     if (doPersist)
-        *m_dunConnect << tr("--persist");
-    *m_dunConnect << tr("call")
+        *m_dunConnect << "--persist";
+    *m_dunConnect << "call"
             << cmdLine->currentText();
     if (!m_dunConnect->start(OProcess::NotifyOnExit,
         OProcess::All)) {

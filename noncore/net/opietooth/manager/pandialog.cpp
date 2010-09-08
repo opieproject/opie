@@ -73,13 +73,13 @@ void PanDialog::connectToDevice() {
     outPut->clear();
 
     // Fill process command line
-    *m_panConnect << tr("pand")
-            << tr("--connect") << m_device
-            << tr("--nodetach");
+    *m_panConnect << "pand"
+            << "--connect" << m_device
+            << "--nodetach";
     if (doEnc)
-        *m_panConnect << tr("--encrypt");
+        *m_panConnect << "--encrypt";
     if (doSec)
-        *m_panConnect << tr("--secure");
+        *m_panConnect << "--secure";
     if (!m_panConnect->start(OProcess::NotifyOnExit,
         OProcess::All)) {
         outPut->append(tr("Couldn't start"));
