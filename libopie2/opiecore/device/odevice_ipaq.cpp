@@ -116,6 +116,32 @@ struct i_button ipaq_buttons [] = {
     "QPE/VMemo", "toggleRecord()",
     "sound", "raise()" },
 
+    { Model_iPAQ_RX1950,
+    Qt::Key_F1, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
+    "devicebuttons/ipaq_calendar",
+    "datebook", "nextView()",
+    "today", "raise()" },
+    { Model_iPAQ_RX1950,
+    Qt::Key_F2, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
+    "devicebuttons/ipaq_contact",
+    "addressbook", "raise()",
+    "addressbook", "beamBusinessCard()" },
+    { Model_iPAQ_RX1950,
+    Qt::Key_F3, QT_TRANSLATE_NOOP("Button", "Mail Button"),
+    "devicebuttons/ipaq_mail",
+    "opiemail", "raise()",
+    "opiemail", "newMail()" },
+    { Model_iPAQ_RX1950,
+    Qt::Key_F4, QT_TRANSLATE_NOOP("Button", "Home Button"),
+    "devicebuttons/ipaq_home",
+    "QPE/Launcher", "home()",
+    "buttonsettings", "raise()" },
+    { Model_iPAQ_RX1950,
+    Qt::Key_F5, QT_TRANSLATE_NOOP("Button", "Record Button"),
+    "devicebuttons/ipaq_record",
+    "QPE/VMemo", "toggleRecord()",
+    "sound", "raise()" },
+
     // Devices with 2.4 kernel
     { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
     Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
@@ -195,7 +221,7 @@ void iPAQ::init(const QString& model)
         d->m_model = Model_iPAQ_H4xxx;
     else if ( d->m_modelstr == "H4300" )
         d->m_model = Model_iPAQ_H4xxx;
-    else if ( d->m_modelstr == "RX3000" )
+    else {if ( d->m_modelstr == "RX3000" )
         d->m_model = Model_iPAQ_RX3xxx;
     else if ( d->m_modelstr == "RX1950" )
         d->m_model = Model_iPAQ_RX1950;
