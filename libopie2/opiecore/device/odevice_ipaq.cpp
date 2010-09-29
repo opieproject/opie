@@ -221,13 +221,16 @@ void iPAQ::init(const QString& model)
         d->m_model = Model_iPAQ_H4xxx;
     else if ( d->m_modelstr == "H4300" )
         d->m_model = Model_iPAQ_H4xxx;
-    else {if ( d->m_modelstr == "RX3000" )
-        d->m_model = Model_iPAQ_RX3xxx;
-    else if ( d->m_modelstr == "RX1950" )
-        d->m_model = Model_iPAQ_RX1950;
+    else {
+            d->m_modelstr = model.mid(model.findRev("RX"));
+            if ( d->m_modelstr == "RX3000" )
+                d->m_model = Model_iPAQ_RX3xxx;
+            else if ( d->m_modelstr == "RX1950" )
+                d->m_model = Model_iPAQ_RX1950;
+            else
+                d->m_model = Model_Unknown;
+    }
 
-    else
-        d->m_model = Model_Unknown;
 
     switch ( d->m_model ) {
         case Model_iPAQ_H31xx:
