@@ -79,6 +79,7 @@ bool PowerStatusManager::getSysFsStatus()
     QStringList props;
     props += "type";
     props += "charge_full";
+    props += "charge_full_design";
     props += "charge_now";
     props += "energy_full";
     props += "energy_now";
@@ -108,6 +109,11 @@ bool PowerStatusManager::getSysFsStatus()
                 if( propmap["type"] == "Battery" ) {
                     int charge_full = propmap["charge_full"].toInt();
                     int charge_now = 0, current_now = 0;
+
+                    if( charge_full == 0 ) {
+                        charge_full = propmap["charge_full_design"].toInt();
+                    }
+
                     if( charge_full == 0 ) {
                         charge_full = propmap["energy_full"].toInt();
                         charge_now = propmap["energy_now"].toInt();
@@ -117,7 +123,7 @@ bool PowerStatusManager::getSysFsStatus()
                         charge_now = propmap["charge_now"].toInt();
                         current_now = propmap["current_now"].toInt();
                     }
-                    
+
                     int pc;
 
                     if( current_now > 0 )
