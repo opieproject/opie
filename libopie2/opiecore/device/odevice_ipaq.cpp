@@ -516,6 +516,8 @@ bool iPAQ::hasLightSensor() const
         case Model_iPAQ_H22xx:
         case Model_iPAQ_H4xxx:
         case Model_iPAQ_RX3xxx:
+        case Model_iPAQ_RX1950:
+        case Model_iPAQ_H1940:
             return false;
         default:
             return true;
