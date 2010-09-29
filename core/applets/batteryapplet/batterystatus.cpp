@@ -27,7 +27,9 @@ void BatteryStatus::UpdateBatteryStatus() {
 	jackPercent = 0;
 
 	if ( ODevice::inst ( )-> series ( ) == Model_iPAQ ) {
-		if ( ODevice::inst ( ) -> model() != Model_iPAQ_H191x )
+		if ( ODevice::inst ( ) -> model() != Model_iPAQ_H191x &&
+			ODevice::inst ( ) -> model () != Model_iPAQ_H1940 &&
+			ODevice::inst ( ) -> model () != Model_iPAQ_RX1950)
 			getProcApmStatusIpaq();
 	}
 	percent = ps->batteryPercentRemaining();
