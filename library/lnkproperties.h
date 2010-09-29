@@ -45,8 +45,8 @@ public:
 //      have this class.
 #ifdef QTOPIA_INTERNAL_FSLP
     LnkProperties( AppLnk* lnk, QWidget* parent = 0 );
-    ~LnkProperties();
 #endif
+    ~LnkProperties();
 
     void done(int);
 private slots:
