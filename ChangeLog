@@ -1,4 +1,4 @@
-2009-??-??  Opie 1.2.5
+2010-??-??  Opie 1.2.5
 	
 	
 	New Features
@@ -17,8 +17,9 @@
 
 	Fixed Bugs
 	----------
+	* #1931 - Make SQLite backend the default for all PIM apps (with prompt to convert from XML)
 	* #1171 - Datebook: add ability to delay alarm popups
-	* #1845 - Datebook: save and restore selected timezone
+	* #1845 - Datebook: save and restore selected timezone for each event
 	* #0605 - Datebook: allow changing timezone of existing event
 	* #0767 - Datebook: allow editing drop-down lists for location/event
 	* #1688 - Datebook: allow alarm time in days or hours as well as minutes
@@ -40,12 +41,17 @@
 	* n.a.  - Date/Time Settings: hide AM/PM box when 24-hour time format set
 	* #1598 - Clock: allow configuring default snooze time
 	* n.a.  - Today: tidy up display of birthdays/anniversaries
+	* n.a.  - Today: Stockticker: fix disabling items to be included in display
+	* n.a.  - Today: Stockticker: fix URL for fetching stock data
+	* n.a.  - Today: Fortune: improve scrolling message behaviour
 	* n.a.  - Launcher: fix using different default sync protocol than what Security settings application showed until first set
 	* #0774 - Launcher: show "Suspending..." in taskbar when device is suspending
+	* #1802 - Launcher: fix menu disappearing when dragging O button slightly
 	* n.a.  - ScreenShotApplet: send actual device model and resolution with upload
 	* n.a.  - ScreenShotApplet: display correct URL for retrieving uploaded screenshots
 	* n.a.  - TextEdit: don't create a documents entry for new file until saving
 	* n.a.  - TextEdit: improve Delete function behaviour (and safety)
+	* n.a.  - TextEdit: remove non-standard OK button on window
 	* #1912 - PackageManager: add support for opkg (selectable at build time)
 	* n.a.  - Opie-Eye: fix erroneous 1-pixel scrolling when "fit to screen" is enabled
 	* n.a.  - Opie-rdesktop: fix crash on connect
@@ -62,6 +68,9 @@
 	* n.a.  - AutoRotateApplet: fix showing as disabled when actually enabled (until first set)
 	* n.a.  - VolumeApplet: enable tapping on muting LED buttons
 	* n.a.  - BatteryApplet: retrieve battery status from sysfs (with fallback to old APM method)
+	* n.a.  - BatteryApplet: fix crash when holding down on applet icon to change style
+	* n.a.  - BatteryApplet: fix multiple drawing issues
+	* n.a.  - BrightnessApplet: scale to screen resolution
 	* #1560 - Opie-Console: fix unexpected changes when editing default profile
 	* #1436 - Opie-Console: close tab on Ctrl+D / exit (or application if last tab)
 	* #1920 - MemoryApplet: allow selecting any storage location for swapfile
@@ -74,11 +83,16 @@
 	* n.a.  - Allow typing file name and pressing enter in standard file dialog
 	* #1909 - Fix detection of SCSI hard disks as removable
 	* #1923 - Remove usage of deprecated PCMCIA ioctls
+	* n.a.  - Fix detection of Motorola EZX devices (Angelo Stefanos Mavridis Bartolome)
+	* n.a.  - iPAQ h1940 support improvements (Vasily Khoruzhick)
+	* n.a.  - Fix backlight path for Sharp Zaurus SL-6000 (tosa) (Dmitry Eremin-Solenikov)
+	* n.a.  - Fix compilation of libqpe with -fvisibility-inlines-hidden (Khem Raj)
 
 	Internal
 	--------
-	* libopiepim2 code improvements - serialization, timezone fixes, refactoring etc.
-	* libopiemm2 now has simple audio playback & recording classes
+	* libopiepim2: code improvements - serialization, timezone fixes, refactoring etc.
+	* libopiemm2: added simple audio playback & recording classes
+	* libqtaux: Improved behaviour of OTicker (as used in Opie-MediaPlayer 1/2 & several today plugins)
 	* qcop command line client now supports QDate parameters
 	* More potential crash fixes and code quality improvements
 	* Various code style fixes and tidy-ups
