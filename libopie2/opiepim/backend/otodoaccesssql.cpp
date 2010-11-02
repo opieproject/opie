@@ -2,7 +2,7 @@
                              This file is part of the Opie Project
                              Copyright (C) Stefan Eilers (Eilers.Stefan@epost.de)
                              Copyright (C) Holger Freyther (zecke@handhelds.org)
-              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+              =.             Copyright (C) The Opie Team <opie-devel@lists.sourceforge.net>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can

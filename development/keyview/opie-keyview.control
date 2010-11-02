@@ -2,7 +2,7 @@ Package: opie-keyview
 Files: plugins/inputmethods/libkeyview.so*
 Priority: optional
 Section: opie/inputmethods
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal

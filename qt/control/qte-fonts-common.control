@@ -2,7 +2,7 @@ Package: qte-fonts-common
 Files: root/usr/sbin/update-qtfontdir
 Priority: required
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Version: 1:$QTE_VERSION-$QTE_REVISION
 Description: Qt/Embedded font common files

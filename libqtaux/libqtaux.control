@@ -2,7 +2,7 @@ Package: libqtaux2
 Files: lib/libqtaux2.so.*
 Priority: optional
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Version: 2.3.7$EXTRAVERSION
 Depends: libqte2

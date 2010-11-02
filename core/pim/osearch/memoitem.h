@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
 
-              =.             Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
+              =.             Copyright (C) 2009 The Opie Team <opie-devel@lists.sourceforge.net>
             .=l.             Portions copyright (C) 2003 Patrick S. Vogt <tille@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can

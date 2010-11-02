@@ -2,7 +2,7 @@ Package: timezones-america
 Files: root/usr/share/zoneinfo/America
 Priority: optional
 Section: base
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Depends: timezones-common
 Provides: timezones
 Version: 1.0.1-1

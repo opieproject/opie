@@ -2,7 +2,7 @@ Package: opie-backup-help-en
 Files: help/en/html/backup.html help/en/html/backup
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: opie-backup
 License: GPL

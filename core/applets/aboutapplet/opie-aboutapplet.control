@@ -2,7 +2,7 @@ Package: opie-aboutapplet
 Files: plugins/applets/libaboutapplet.so*
 Priority: optional
 Section: opie/applets
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Depends: task-opie-minimal, libopiecore2
 Conflicts: opie-aboutapplet-ipaq

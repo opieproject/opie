@@ -2,7 +2,7 @@ Package: qpf-cyberbit-120-50-t10
 Files: $QTDIR/lib/fonts/cyberbit_120_50_t10.qpf
 Priority: required
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Version: 2.3.0-6
 Depends: qte-fonts-common

@@ -2,7 +2,7 @@ Package: opie-qasteroids-help-en
 Files: help/en/html/qasteroids.html help/en/html/qasteroids
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: opie-qasteroids
 License: GPL

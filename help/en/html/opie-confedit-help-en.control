@@ -2,7 +2,7 @@ Package: opie-confedit-help-en
 Files: help/en/html/confedit.html help/en/html/confedit
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: opie-confedit
 License: GPL

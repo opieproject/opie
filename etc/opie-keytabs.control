@@ -2,7 +2,7 @@ Package: opie-keytabs
 Files: etc/keytabs/*
 Priority: optional
 Section: opie/applications
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Version: 0.6$EXTRAVERSION
 License: GPL

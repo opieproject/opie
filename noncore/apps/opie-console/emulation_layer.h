@@ -19,7 +19,7 @@
 /*									      */
 /* made to a layer between io_layer and widget                                */
 /*									      */
-/* Copyright (C) 2002 by opie developers <opie@handhelds.org>                 */
+/* Copyright (C) 2002 by opie developers <opie-users@lists.sourceforge.net>                 */
 /*									      */
 /* -------------------------------------------------------------------------- */
 

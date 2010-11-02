@@ -1,6 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
-** Copyright (C) 2003-2005 The Opie Team <opie-devel@handhelds.org>
+** Copyright (C) 2003-2005 The Opie Team <opie-devel@lists.sourceforge.net>
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software

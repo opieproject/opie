@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the Opie Project
-             .=l.            Copyright (C) 2004 Opie Developer Team <opie-devel@handhelds.org>
+             .=l.            Copyright (C) 2004 Opie Developer Team <opie-devel@lists.sourceforge.net>
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under

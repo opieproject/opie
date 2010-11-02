@@ -32,7 +32,7 @@
 	* Kill memleak in OPimTodo
 	* Add SortVector implementations for OPimTodo and OPimContact
 	
-2004-??-??	The Opie Team <opie@handhelds.org>
+2004-??-??	The Opie Team <opie-users@lists.sourceforge.net>
 	* Implemented some important modifications to allow to use OPimRecords as it is, without
 	  have to cast them. This makes it possible to write applications which handling pim
 	  data in a generic manner (see opimconvertion tool) (eilers)

@@ -2,7 +2,7 @@ Package: opie-lockapplet
 Files: plugins/applets/liblockapplet.so* pics/security/lock.png
 Priority: optional
 Section: opie/applets
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Depends: task-opie-minimal, libopiecore2, libopiesecurity2
 Description: Lock Opie now

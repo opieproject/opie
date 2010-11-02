@@ -2,7 +2,7 @@ Package: opie-common
 Files: etc/colors bin/opie-reorgfiles apps/*/.directory etc/mime.types apps/Settings/quit.desktop pics/logo/*
 Priority: required
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Depends: libqpe1, qte-fonts, qpf-bitstream-vera-small
 Replaces: opie-base

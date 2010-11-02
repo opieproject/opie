@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2004 The Opie Team <opie-devel@handhelds.org>
+                             Copyright (C) 2004 The Opie Team <opie-devel@lists.sourceforge.net>
               =.
             .=l.
            .>+-=

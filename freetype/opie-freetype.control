@@ -2,7 +2,7 @@ Package: opie-freetype
 Files: plugins/fontfactories/libfreetypefactory*
 Priority: optional
 Section: libs
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal, libfreetype6

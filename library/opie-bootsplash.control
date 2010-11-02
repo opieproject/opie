@@ -2,7 +2,7 @@ Package: opie-bootsplash
 Files: etc/init.d/bootsplash etc/rcS.d/S01bootsplash pics/bootsplash/bootlogo
 Priority: optinal
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Description: Splash screen aptempt
 Version: $QPE_VERSION$EXTRAVERSION

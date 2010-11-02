@@ -2,7 +2,7 @@ Package: opie-console
 Files: bin/opie-console apps/Applications/opie-console.desktop pics/console/* share/opie-console/*
 Priority: optional
 Section: opie/applications
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Version: $QPE_VERSION$EXTRAVERSION
 Depends: qpe-base, libopiecore2, libopieui2, opie-console-help-en, lrzsz, opie-keytabs

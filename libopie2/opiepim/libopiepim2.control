@@ -2,7 +2,7 @@ Package: libopiepim2
 Files: lib/libopiepim2.so.*
 Priority: optional
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Version: 1.8.3$EXTRAVERSION
 Depends: libqpe1, libopiecore2 (>=1.8.0)

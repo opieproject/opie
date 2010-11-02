@@ -2,7 +2,7 @@ Package: task-opie-minimal
 Files: 
 Priority: required
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Depends: libqte2 (>=$QTE_VERSION), qte-fonts (>=$QTE_VERSION), opie-common, libqpe1, opie-qcop, opie-sounds, apmd, opie-pics, timezones | libc6, opie-packagemanager, opie-quicklauncher, opie-taskbar, opie-opiealarm, opie-login, libopiecore2, libopiesecurity2
 Provides: opie-base, qpe-base

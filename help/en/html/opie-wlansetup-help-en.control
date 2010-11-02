@@ -2,7 +2,7 @@ Package: opie-wlansetup-help-en
 Files: help/en/html/wlansetup.html help/en/html/wlansetup
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: opie-wlansetup
 License: GPL

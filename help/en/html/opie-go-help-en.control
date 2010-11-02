@@ -2,7 +2,7 @@ Package: opie-go-help-en
 Files: help/en/html/go.html help/en/html/go
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: opie-go
 License: GPL

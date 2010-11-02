@@ -2,7 +2,7 @@ Package: opie-pickboard
 Files: plugins/inputmethods/libqpickboard.so*
 Priority: optional
 Section: opie/inputmethods
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Pickboard input method

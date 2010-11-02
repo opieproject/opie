@@ -2,7 +2,7 @@ Package: opie-kpacman-help-en
 Files: help/en/html/kpacman.html help/en/html/kpacman
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: opie-kpacman
 License: GPL

@@ -2,7 +2,7 @@ Package: opie-networksettings-help-en
 Files: help/en/html/networksettings.html help/en/html/networksettings
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: opie-networksettings
 License: GPL

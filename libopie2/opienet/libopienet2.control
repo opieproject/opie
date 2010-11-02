@@ -2,7 +2,7 @@ Package: libopienet2
 Files: lib/libopienet2.so.* etc/manufacturers
 Priority: optional
 Section: opie/libs
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Version: 1.8.4$EXTRAVERSION
 Depends: libopiecore2, libpcap0.8 (>=0.7.2)

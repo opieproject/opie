@@ -2,7 +2,7 @@ Package: opie-wordgame-help-en
 Files: help/en/html/wordgame.html help/en/html/wordgame
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: opie-wordgame
 License: GPL

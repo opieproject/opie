@@ -2,7 +2,7 @@ Package: opie-pics
 Files: pics/??*.* pics/opie/* pics/addressbook/*.png pics/todo/*.png pics/datebook/*.png
 Priority: required
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Description: Including unassigned and PIM pics (TodoList, Addressbook, Datebook).
  These icons are available to all Opie applications.

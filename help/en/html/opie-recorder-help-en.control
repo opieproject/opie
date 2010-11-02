@@ -2,7 +2,7 @@ Package: opie-recorder-help-en
 Files: help/en/html/opierec.html
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Depends: opie-recorder
 License: GPL

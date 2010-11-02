@@ -2,7 +2,7 @@ Package: opie-unikeyboard
 Files: plugins/inputmethods/libqunikeyboard.so*
 Priority: optional
 Section: opie/inputmethods
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Unicode input method

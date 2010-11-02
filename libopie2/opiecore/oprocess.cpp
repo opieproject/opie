@@ -1,7 +1,7 @@
 /*
                             This file is part of the Opie Project
                             Copyright (C) 2002-2004 Holger Freyther <zecke@handhelds.org>
-                            and The Opie Team <opie-devel@handhelds.org>
+                            and The Opie Team <opie-devel@lists.sourceforge.net>
              =.             Based on KProcess (C) 1997 Christian Czezatke (e9025461@student.tuwien.ac.at)
            .=l.
           .>+-=

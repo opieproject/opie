@@ -3,23 +3,23 @@ n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a
 Sharp SL-5500
 240010 dhrys,41.498 sec,88 char/sec,1786 gops/sec,50.123 kb/sec,41.7329 kb/sec,105.873 kb/sec
 Sharp SL-5600
-not,yet,contributed,please,mail,to,opie@handhelds.org
+not,yet,contributed,please,mail,to,opie-users@lists.sourceforge.net
 Sharp C-700
-not,yet,contributed,please,mail,to,opie@handhelds.org
+not,yet,contributed,please,mail,to,opie-users@lists.sourceforge.net
 Sharp C-750
 490677 dhrys,2.452 sec,437 char/sec,1396 gops/sec,132.061 kb/sec,129.752 kb/sec,n/a
 Sharp C-760
-not,yet,contributed,please,mail,to,opie@handhelds.org
+not,yet,contributed,please,mail,to,opie-users@lists.sourceforge.net
 Sharp C-860
-not,yet,contributed,please,mail,to,opie@handhelds.org
+not,yet,contributed,please,mail,to,opie-users@lists.sourceforge.net
 HP iPAQ 36xx
-not,yet,contributed,please,mail,to,opie@handhelds.org
+not,yet,contributed,please,mail,to,opie-users@lists.sourceforge.net
 HP iPAQ 37xx
-not,yet,contributed,please,mail,to,opie@handhelds.org
+not,yet,contributed,please,mail,to,opie-users@lists.sourceforge.net
 HP iPAQ 38xx
 234880 dhrys,42.37 sec,418 char/sec,1788 gops/sec,51.6911 kb/sec,31.1029 kb/sec,untested
 HP iPAQ 54xx
-not,yet,contributed,please,mail,to,opie@handhelds.org
+not,yet,contributed,please,mail,to,opie-users@lists.sourceforge.net
 HP iPAQ 55xx
 494071 dhrys,23.86 secs,285 chars/sec,2031.71 gops/sec,49.45 MB/s;53.51MB/s, 49.76 MB/s, 20.30 kb/s, 51.06 MB/s; 57.44 MB/s
 HP Jornada 56x
@@ -29,4 +29,4 @@ M&N MNCI
 SIEMENS SIMpad
 213402 dhrys,6.18 secs,551 chars/sec,1176.50 gops/sec,22.84 MB/s,n/a,23,32 MB/s; 19.15 MB/s
 MASTERIA Beagle
-not,yet,contributed,please,mail,to,opie@handhelds.org
+not,yet,contributed,please,mail,to,opie-users@lists.sourceforge.net

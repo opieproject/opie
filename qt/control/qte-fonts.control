@@ -2,7 +2,7 @@ Package: qte-fonts
 Files:
 Priority: required
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: qte-fonts-common, qpf-fixed, qpf-micro
 Provides: libqt2-emb-fonts

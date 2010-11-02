@@ -2,7 +2,7 @@ Package: opie-parashoot-help-en
 Files: help/en/html/parashoot.html help/en/html/parashoot
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: opie-parashoot
 License: GPL

@@ -2,7 +2,7 @@ Package: opie-tinykate
 Files: plugins/application/libtinykate.so* bin/tinykate apps/Applications/tinykate.desktop pics/tinykate lib/libkate.so*
 Priority: optional
 Section: opie/applications
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Depends: task-opie-minimal, libopiecore2, libopieui2
 Description: Kate for Opie

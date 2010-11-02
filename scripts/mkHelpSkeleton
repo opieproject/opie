@@ -71,7 +71,7 @@ def makecontrol( directory, application, cc, desktop ):
     print >> c, "Files: help/%s/html/%s.html help/%s/html/%s" % ( cc, application, cc, application )
     print >> c, "Priority: optional"
     print >> c, "Section: opie/onlinedoc"
-    print >> c, "Maintainer: %s" % desktop.get( "Maintainer", "Team Opie <opie@handhelds.org>" )
+    print >> c, "Maintainer: %s" % desktop.get( "Maintainer", "Team Opie <opie-users@lists.sourceforge.net>" )
     print >> c, "Version: $QPE_VERSION-$SUB_VERSION"
     print >> c, "Depends: opie-%s" % application
     print >> c, "License: GPL"

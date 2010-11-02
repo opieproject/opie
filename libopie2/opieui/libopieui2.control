@@ -2,7 +2,7 @@ Package: libopieui2
 Files: lib/libopieui2.so.*
 Priority: optional
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Version: $QPE_VERSION$EXTRAVERSION
 Depends: libqpe1, libopiecore2 (1.8.5)

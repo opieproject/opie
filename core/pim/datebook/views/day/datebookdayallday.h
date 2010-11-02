@@ -2,7 +2,7 @@
                              This file is part of the Opie Project
 
                              Copyright (C) Rajko Albrecht <>
-                             Copyright (C) Opie Team <opie-devel@handhelds.org>
+                             Copyright (C) Opie Team <opie-devel@lists.sourceforge.net>
               =.
             .=l.
            .>+-=

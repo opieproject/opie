@@ -18,7 +18,7 @@
 /*		     							      */
 /* Modified to suit opie-console                                              */
 /*									      */
-/* Copyright (C) 2002 by opie developers <opie@handhelds.org>                 */
+/* Copyright (C) 2002 by opie developers <opie-users@lists.sourceforge.net>                 */
 /*									      */
 /* -------------------------------------------------------------------------- */
 

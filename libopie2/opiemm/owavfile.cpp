@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-              =.             (C) 2009 Team Opie <opie@handhelds.org>
+              =.             (C) 2009 Team Opie <opie-users@lists.sourceforge.net>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can

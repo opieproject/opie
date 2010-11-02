@@ -2,7 +2,7 @@ Package: opie-background-plain
 Files: pics/backgrounds/opie-background1a.jpg
 Priority: optional
 Section: opie/backgrounds
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: task-opie-minimal
 Description: Simple background image for Opie. Opiezilla in his bubble.

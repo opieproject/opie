@@ -2,7 +2,7 @@ Package: libqpe1
 Files: lib/libqpe.so.1 lib/libqpe.so.1.5 lib/libqpe.so.1.5.0 pics/RoH/star/*.png
 Priority: required
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Depends: libqte2 (>=2.3.4-beta4), qte-fonts (>=$QTE_VERSION)
 Description: libqpe, base qtopia/opie library.

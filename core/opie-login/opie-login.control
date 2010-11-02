@@ -2,7 +2,7 @@ Package: opie-login
 Files: bin/opie-login share/opie-login/opie-session share/opie-login/pre-session share/opie-login/post-session root/opt/QtPalmtop/etc/opie-login.conf
 Priority: optional
 Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: arm
 Depends: task-opie-minimal, libopiecore2, opie-security
 Description: Multiuser login for Opie

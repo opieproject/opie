@@ -2,7 +2,7 @@ Package: opie-opie-write-help-en
 Files: help/en/html/opie-write.html help/en/html/opie-write
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie Team <opie@handhelds.org>
+Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
 Depends: opie-opie-write
 License: GPL
