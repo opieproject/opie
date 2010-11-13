@@ -14,7 +14,7 @@ case "$1" in
     INDEXER="~/ipkg-make-index ."
     ;;
 -hh.org)
-    RHOST=opie.handhelds.org
+    RHOST=opie.sourceforge.net
     RDIR=/home/opie/website/html/feed/ipaq
     INDEXER="/home/opie/ipkg-make-index ."
     ;;

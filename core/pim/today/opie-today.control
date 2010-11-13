@@ -10,5 +10,5 @@ License: GPL
 Description: Today screen application
  This app gives an overview of appointments and todos.
  It also shows incoming and outgoing mails from opiemail.
- When using Opie (opie.handhelds.org) today can be autostarted
+ When using Opie (opie.sourceforge.net) today can be autostarted
  on resume.  It is highly configurable.

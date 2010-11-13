@@ -115,7 +115,7 @@ class OGlobalSettings
      *
      * @return @p true if single click mode, or @p false if double click mode.
      *
-     * see @ref http://opie.handhelds.org/documentation/standards/opie/style/mouse/index.html
+     * see @ref http://opie.sourceforge.net/documentation/standards/opie/style/mouse/index.html
      **/
     static bool singleClick();
 
@@ -162,7 +162,7 @@ class OGlobalSettings
 
     /**
      * This enum describes the completion mode used for by the @ref OCompletion class.
-     * See <a href="http://opie.handhelds.org/documentation/standards/opie/style/keys/completion.html">
+     * See <a href="http://opie.sourceforge.net/documentation/standards/opie/style/keys/completion.html">
      * the styleguide</a>.
      **/
     enum Completion {
@@ -201,7 +201,7 @@ class OGlobalSettings
 
     /**
      * This enum describes the debug mode used for by the @ref odbgstream class.
-     * See <a href="http://opie.handhelds.org/documentation/standards/opie/style/debug/debug.html">
+     * See <a href="http://opie.sourceforge.net/documentation/standards/opie/style/debug/debug.html">
      * the styleguide</a>.
      **/
     enum Debug {

@@ -60,7 +60,7 @@ ToDo:
  
 Install:
  - Qpdf is now fully integrated into Opie. For compilation and installation
-   instructions see http://opie.handhelds.org.
+   instructions see http://opie.sourceforge.net.
 
  - compress / uncompress
    If you run a normal familiar installation, the standard gzip (I tested

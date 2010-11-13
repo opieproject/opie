@@ -28,7 +28,7 @@ The &lt;b&gt;Open Palmtop Integrated Environment&lt;/b&gt; is written and mainta
 No single group, company or organization controls the Opie source code. Everyone is welcome to contribute to Opie.
 &lt;/p&gt;
 &lt;p&gt;
-Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the Opie Project.
+Visit &lt;i&gt;http://opie.sourceforge.net&lt;/i&gt; for more information on the Opie Project.
 &lt;/p&gt;</source>
         <translation>&lt;p&gt;
 &lt;b&gt;Open Palmtop Integrated Environment&lt;/b&gt; je napsán a udržován Opie Teamem, celosvětovou sítí softwarových inženýrů zapojených do free softwarového vývoje.
@@ -37,7 +37,7 @@ Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the O
 Žádná skupina, firma, nebo organizace nemá v rukou zdrojový kód Opie. Každý, kdo chce přispívat do Opie, je vítán.
 &lt;/p&gt;
 &lt;p&gt;
-Pro více informaci o projektu Opie navštivte&lt;i&gt;http://opie.handhelds.org&lt;/i&gt;.
+Pro více informaci o projektu Opie navštivte&lt;i&gt;http://opie.sourceforge.net&lt;/i&gt;.
 &lt;/p&gt;</translation>
     </message>
     <message>
@@ -50,10 +50,10 @@ Pro více informaci o projektu Opie navštivte&lt;i&gt;http://opie.handhelds.org
     </message>
     <message>
         <source>&lt;p&gt;Software can always be improved, and the Opie Team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.&lt;/p&gt;
-&lt;p&gt;The Open Palmtop Integrated Environment has a bug tracking system. Visit &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; to report bugs.&lt;/p&gt;
+&lt;p&gt;The Open Palmtop Integrated Environment has a bug tracking system. Visit &lt;i&gt;http://opie.sourceforge.net/&lt;/i&gt; to report bugs.&lt;/p&gt;
 &lt;p&gt;If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called &quot;Feature Wish&quot;.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Software může být vždy ještě lepší a team Opie je připraven to udělat. Ale Vy,- uživatel - nám musíte říci, pokud něco nefunguje, jak má, nebo může být uděláno lépe.&lt;/p&gt;
-&lt;p&gt;Open Palmtop Integrated Environment má systém na sledování chyb. Pro nahlášení chyb navštivte &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt;.&lt;/p&gt;
+&lt;p&gt;Open Palmtop Integrated Environment má systém na sledování chyb. Pro nahlášení chyb navštivte &lt;i&gt;http://opie.sourceforge.net/&lt;/i&gt;.&lt;/p&gt;
 &lt;p&gt;Jestliže máte nějaké návrhy na zlepšení, tak jste vítáni do našeho systému sledování chyb pro zaregistrování vašeho přání. Ujistěte se, že použijete kód závažnosti nazvaný &quot;Feature Wish&quot;.&lt;/p&gt;</translation>
     </message>
     <message>
@@ -62,11 +62,11 @@ Pro více informaci o projektu Opie navštivte&lt;i&gt;http://opie.handhelds.org
     </message>
     <message>
         <source>&lt;p&gt;You don&apos;t have to be a software developer to be a member of the Opie Team. You can join the national teams that translate program interfaces. You can provide graphics, themes, sounds and improved documentation. You decide!&lt;/p&gt;
-&lt;p&gt;Visit &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; for information on some projects in which you can participate.&lt;/p&gt;
-&lt;p&gt;If you need more information or documentation, then a visit to &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; will provide you with what you need.&lt;/p&gt;</source>
+&lt;p&gt;Visit &lt;i&gt;http://opie.sourceforge.net/&lt;/i&gt; for information on some projects in which you can participate.&lt;/p&gt;
+&lt;p&gt;If you need more information or documentation, then a visit to &lt;i&gt;http://opie.sourceforge.net/&lt;/i&gt; will provide you with what you need.&lt;/p&gt;</source>
         <translation>&lt;p&gt; Nemusíte být vývojář software, abyste se stal členem Opie týmu. Můžete se přidat k národním týmům, které překládají uživatelské rozhraní programů. Můžete poskytnout grafiku, témata, zvuky a vylepšenou dokumentaci. Rozhodněte se!&lt;/p&gt;
-&lt;p&gt;Pro informace na kterých projektech můžete spolupracovat, navštivte &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt;.&lt;/p&gt;
-&lt;p&gt;Jestliže potřebujete více informací, nebo dokumentaci, tak navštivte &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt;.&lt;/p&gt;</translation>
+&lt;p&gt;Pro informace na kterých projektech můžete spolupracovat, navštivte &lt;i&gt;http://opie.sourceforge.net/&lt;/i&gt;.&lt;/p&gt;
+&lt;p&gt;Jestliže potřebujete více informací, nebo dokumentaci, tak navštivte &lt;i&gt;http://opie.sourceforge.net/&lt;/i&gt;.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.2&lt;/b&gt;&lt;/center&gt;</source>

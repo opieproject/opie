@@ -211,7 +211,7 @@ QMessageBox::about( this, "About Euroconv",
                          "Copyright 2003 TALC Informatique.\n"
                          "Under GPL license\n\n"
                          "Written by Eric Santonacci for Opie\n"
-                         "http://opie.handhelds.org\n\n"
+                         "http://opie.sourceforge.net\n\n"
                          "Version 0.5\n\n"
                          "Any comment or feedback to:\n"
                          "Eric.Santonacci@talc.fr\n");

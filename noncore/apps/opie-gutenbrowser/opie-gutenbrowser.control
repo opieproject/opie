@@ -3,7 +3,7 @@ Files: bin/gutenbrowser apps/Applications/gutenbrowser.desktop etc/gutenbrowser/
 Priority: optional
 Section: opie
 Maintainer: ljp <lpotter@trolltech.com>
-Source: opie.handhelds.org
+Source: opie.sourceforge.net
 Architecture: arm
 Version: $QPE_VERSION$EXTRAVERSION
 Depends: ftplib, libopiecore2, libopieui2

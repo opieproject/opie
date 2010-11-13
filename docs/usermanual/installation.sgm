@@ -36,9 +36,9 @@
 
   <section>
     <title>Zaurus</title>
-    <para>&opie; applications will install and run on the default &zaurus; ROM (Linux-based distribution, as well as Familiar) with no problems,except for Launcher. It is not compatible with the default ROM, and should not be installed. You should be able to find the fine &opie; packages for you &zaurus; default ROM at this feed address: <ulink url="http://opie.handhelds.org/feed/sharprom/">http://opie.handhelds.org/feed/sharprom/</ulink>.</para>
+    <para>&opie; applications will install and run on the default &zaurus; ROM (Linux-based distribution, as well as Familiar) with no problems,except for Launcher. It is not compatible with the default ROM, and should not be installed. You should be able to find the fine &opie; packages for you &zaurus; default ROM at this feed address: <ulink url="http://opie.sourceforge.net/feed/sharprom/">http://opie.sourceforge.net/feed/sharprom/</ulink>.</para>
 
-    <para>Another option is to replace the default &zaurus; ROM with the OpenZaurus ROM image. OpenZaurus is a openly developed Linux distribution designed to run on the &zaurus;, and uses &opie; as its default user interface. For more information and installation instructions, please visit <ulink url="http://www.openzaurus.org/">OpenZaurus.org web site</ulink>. Notice you will access the Opie 1.0 feeds at the address <ulink url="http://opie.handhelds.org/feed/openzaurus/">http://opie.handhelds.org/feed/openzaurus/</ulink>.</para>
+    <para>Another option is to replace the default &zaurus; ROM with the OpenZaurus ROM image. OpenZaurus is a openly developed Linux distribution designed to run on the &zaurus;, and uses &opie; as its default user interface. For more information and installation instructions, please visit <ulink url="http://www.openzaurus.org/">OpenZaurus.org web site</ulink>. Notice you will access the Opie 1.0 feeds at the address <ulink url="http://opie.sourceforge.net/feed/openzaurus/">http://opie.sourceforge.net/feed/openzaurus/</ulink>.</para>
   </section>
 
 </chapter>
