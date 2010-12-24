@@ -28,6 +28,9 @@
 
 #include "owavrecorder.h"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+
 extern "C" {
 #include "ima_rw.h"
 }
