@@ -1,9 +1,0 @@
-*moc
-*.~
-Makefile*
-moc_*
-opieobj
-obj
-moc_
-.moc
-.obj
