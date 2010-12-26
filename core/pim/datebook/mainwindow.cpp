@@ -190,8 +190,11 @@ void MainWindow::beam( int uid ) {
 }
 
 void MainWindow::show( int uid ) {
-
-    eventShow()->show( manager()->event( uid ) );
+    Show *show = eventShow();
+    if(show)
+        show->show( manager()->event( uid ) );
+    else
+        edit( uid );
 }
 
 void MainWindow::add( const OPimRecord& ad) {
