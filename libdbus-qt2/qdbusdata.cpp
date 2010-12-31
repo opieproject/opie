@@ -616,8 +616,8 @@ QDBusData QDBusData::fromStruct(const QValueList<QDBusData>& memberList)
 {
     QDBusData data;
 
-    QValueList<QDBusData>::const_iterator it    = memberList.begin();
-    QValueList<QDBusData>::const_iterator endIt = memberList.end();
+    QValueList<QDBusData>::ConstIterator it    = memberList.begin();
+    QValueList<QDBusData>::ConstIterator endIt = memberList.end();
     for (; it != endIt; ++it)
     {
         if ((*it).d->type == Invalid) return data;
@@ -954,8 +954,8 @@ QCString QDBusData::buildDBusSignature() const
             QValueList<QDBusData>* memberList =
                 (QValueList<QDBusData>*) d->value.pointer;
 
-            QValueList<QDBusData>::const_iterator it    = (*memberList).begin();
-            QValueList<QDBusData>::const_iterator endIt = (*memberList).end();
+            QValueList<QDBusData>::ConstIterator it    = (*memberList).begin();
+            QValueList<QDBusData>::ConstIterator endIt = (*memberList).end();
             for (; it != endIt; ++it)
             {
                 signature += (*it).buildDBusSignature();

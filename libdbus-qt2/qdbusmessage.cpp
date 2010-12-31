@@ -31,6 +31,8 @@
 #include "qdbusmarshall.h"
 #include "qdbusmessage_p.h"
 
+#define Q_ASSERT ASSERT
+
 QDBusMessagePrivate::QDBusMessagePrivate(QDBusMessage *qq)
     : msg(0), reply(0), q(qq), type(DBUS_MESSAGE_TYPE_INVALID), timeout(-1), ref(1)
 {

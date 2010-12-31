@@ -39,8 +39,8 @@ QDBusDataConverter::Result QDBusDataConverter::convertFromQDBusData<QRect>(const
     
     Q_INT32 values[4];
     
-    QValueList<QDBusData>::const_iterator it    = members.begin();
-    QValueList<QDBusData>::const_iterator endIt = members.end();
+    QValueList<QDBusData>::ConstIterator it    = members.begin();
+    QValueList<QDBusData>::ConstIterator endIt = members.end();
     for (uint i = 0; it != endIt; ++it, ++i)
     {
         bool ok = false;
@@ -78,8 +78,8 @@ QDBusDataConverter::Result QDBusDataConverter::convertFromQDBusData<QPoint>(cons
     
     Q_INT32 values[2];
     
-    QValueList<QDBusData>::const_iterator it    = members.begin();
-    QValueList<QDBusData>::const_iterator endIt = members.end();
+    QValueList<QDBusData>::ConstIterator it    = members.begin();
+    QValueList<QDBusData>::ConstIterator endIt = members.end();
     for (uint i = 0; it != endIt; ++it, ++i)
     {
         bool ok = false;
@@ -115,8 +115,8 @@ QDBusDataConverter::Result QDBusDataConverter::convertFromQDBusData<QSize>(const
     
     Q_INT32 values[2];
     
-    QValueList<QDBusData>::const_iterator it    = members.begin();
-    QValueList<QDBusData>::const_iterator endIt = members.end();
+    QValueList<QDBusData>::ConstIterator it    = members.begin();
+    QValueList<QDBusData>::ConstIterator endIt = members.end();
     for (uint i = 0; it != endIt; ++it, ++i)
     {
         bool ok = false;

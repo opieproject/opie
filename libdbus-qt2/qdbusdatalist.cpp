@@ -75,8 +75,8 @@ QDBusDataList::QDBusDataList(const QValueList<QDBusData>& other) : d(new Private
 {
     if (other.isEmpty()) return;
 
-    QValueList<QDBusData>::const_iterator it    = other.begin();
-    QValueList<QDBusData>::const_iterator endIt = other.end();
+    QValueList<QDBusData>::ConstIterator it    = other.begin();
+    QValueList<QDBusData>::ConstIterator endIt = other.end();
 
     d->type = (*it).type();
 
@@ -117,8 +117,8 @@ QDBusDataList::QDBusDataList(const QValueList<bool>& other) : d(new Private())
 
     if (other.isEmpty()) return;
 
-    QValueList<bool>::const_iterator it    = other.begin();
-    QValueList<bool>::const_iterator endIt = other.end();
+    QValueList<bool>::ConstIterator it    = other.begin();
+    QValueList<bool>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromBool(*it);
@@ -131,8 +131,8 @@ QDBusDataList::QDBusDataList(const QValueList<Q_UINT8>& other) : d(new Private()
 
     if (other.isEmpty()) return;
 
-    QValueList<Q_UINT8>::const_iterator it    = other.begin();
-    QValueList<Q_UINT8>::const_iterator endIt = other.end();
+    QValueList<Q_UINT8>::ConstIterator it    = other.begin();
+    QValueList<Q_UINT8>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromByte(*it);
@@ -145,8 +145,8 @@ QDBusDataList::QDBusDataList(const QValueList<Q_INT16>& other) : d(new Private()
 
     if (other.isEmpty()) return;
 
-    QValueList<Q_INT16>::const_iterator it    = other.begin();
-    QValueList<Q_INT16>::const_iterator endIt = other.end();
+    QValueList<Q_INT16>::ConstIterator it    = other.begin();
+    QValueList<Q_INT16>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromInt16(*it);
@@ -159,8 +159,8 @@ QDBusDataList::QDBusDataList(const QValueList<Q_UINT16>& other) : d(new Private(
 
     if (other.isEmpty()) return;
 
-    QValueList<Q_UINT16>::const_iterator it    = other.begin();
-    QValueList<Q_UINT16>::const_iterator endIt = other.end();
+    QValueList<Q_UINT16>::ConstIterator it    = other.begin();
+    QValueList<Q_UINT16>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromUInt16(*it);
@@ -173,8 +173,8 @@ QDBusDataList::QDBusDataList(const QValueList<Q_INT32>& other) : d(new Private()
 
     if (other.isEmpty()) return;
 
-    QValueList<Q_INT32>::const_iterator it    = other.begin();
-    QValueList<Q_INT32>::const_iterator endIt = other.end();
+    QValueList<Q_INT32>::ConstIterator it    = other.begin();
+    QValueList<Q_INT32>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromInt32(*it);
@@ -187,8 +187,8 @@ QDBusDataList::QDBusDataList(const QValueList<Q_UINT32>& other) : d(new Private(
 
     if (other.isEmpty()) return;
 
-    QValueList<Q_UINT32>::const_iterator it    = other.begin();
-    QValueList<Q_UINT32>::const_iterator endIt = other.end();
+    QValueList<Q_UINT32>::ConstIterator it    = other.begin();
+    QValueList<Q_UINT32>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromUInt32(*it);
@@ -201,8 +201,8 @@ QDBusDataList::QDBusDataList(const QValueList<Q_INT64>& other) : d(new Private()
 
     if (other.isEmpty()) return;
 
-    QValueList<Q_INT64>::const_iterator it    = other.begin();
-    QValueList<Q_INT64>::const_iterator endIt = other.end();
+    QValueList<Q_INT64>::ConstIterator it    = other.begin();
+    QValueList<Q_INT64>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromInt64(*it);
@@ -215,8 +215,8 @@ QDBusDataList::QDBusDataList(const QValueList<Q_UINT64>& other) : d(new Private(
 
     if (other.isEmpty()) return;
 
-    QValueList<Q_UINT64>::const_iterator it    = other.begin();
-    QValueList<Q_UINT64>::const_iterator endIt = other.end();
+    QValueList<Q_UINT64>::ConstIterator it    = other.begin();
+    QValueList<Q_UINT64>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromUInt64(*it);
@@ -229,8 +229,8 @@ QDBusDataList::QDBusDataList(const QValueList<double>& other) : d(new Private())
 
     if (other.isEmpty()) return;
 
-    QValueList<double>::const_iterator it    = other.begin();
-    QValueList<double>::const_iterator endIt = other.end();
+    QValueList<double>::ConstIterator it    = other.begin();
+    QValueList<double>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromDouble(*it);
@@ -244,8 +244,8 @@ QDBusDataList::QDBusDataList(const QValueList<QDBusVariant>& other)
 
     if (other.isEmpty()) return;
 
-    QValueList<QDBusVariant>::const_iterator it    = other.begin();
-    QValueList<QDBusVariant>::const_iterator endIt = other.end();
+    QValueList<QDBusVariant>::ConstIterator it    = other.begin();
+    QValueList<QDBusVariant>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromVariant(*it);
@@ -258,8 +258,8 @@ QDBusDataList::QDBusDataList(const QStringList& other) : d(new Private())
 
     if (other.isEmpty()) return;
 
-    QStringList::const_iterator it    = other.begin();
-    QStringList::const_iterator endIt = other.end();
+    QStringList::ConstIterator it    = other.begin();
+    QStringList::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromString(*it);
@@ -273,8 +273,8 @@ QDBusDataList::QDBusDataList(const QValueList<QDBusObjectPath>& other)
 
     if (other.isEmpty()) return;
 
-    QValueList<QDBusObjectPath>::const_iterator it    = other.begin();
-    QValueList<QDBusObjectPath>::const_iterator endIt = other.end();
+    QValueList<QDBusObjectPath>::ConstIterator it    = other.begin();
+    QValueList<QDBusObjectPath>::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromObjectPath(*it);
@@ -305,8 +305,8 @@ QDBusDataList& QDBusDataList::operator=(const QValueList<QDBusData>& other)
 
     if (other.isEmpty()) return *this;
 
-    QValueList<QDBusData>::const_iterator it    = other.begin();
-    QValueList<QDBusData>::const_iterator endIt = other.end();
+    QValueList<QDBusData>::ConstIterator it    = other.begin();
+    QValueList<QDBusData>::ConstIterator endIt = other.end();
 
     d->type = (*it).type();
 
@@ -350,8 +350,8 @@ QDBusDataList& QDBusDataList::operator=(const QStringList& other)
     d->type = QDBusData::String;
     d->containerItem = QDBusData();
 
-    QStringList::const_iterator it    = other.begin();
-    QStringList::const_iterator endIt = other.end();
+    QStringList::ConstIterator it    = other.begin();
+    QStringList::ConstIterator endIt = other.end();
     for (; it != endIt; ++it)
     {
         d->list << QDBusData::fromString(*it);
@@ -488,8 +488,8 @@ QStringList QDBusDataList::toQStringList(bool* ok) const
 
     QStringList result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toString();
@@ -510,8 +510,8 @@ QValueList<bool> QDBusDataList::toBoolList(bool* ok) const
 
     QValueList<bool> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toBool();
@@ -532,8 +532,8 @@ QValueList<Q_UINT8> QDBusDataList::toByteList(bool* ok) const
 
     QValueList<Q_UINT8> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toByte();
@@ -554,8 +554,8 @@ QValueList<Q_INT16> QDBusDataList::toInt16List(bool* ok) const
 
     QValueList<Q_INT16> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toInt16();
@@ -576,8 +576,8 @@ QValueList<Q_UINT16> QDBusDataList::toUInt16List(bool* ok) const
 
     QValueList<Q_UINT16> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toUInt16();
@@ -598,8 +598,8 @@ QValueList<Q_INT32> QDBusDataList::toInt32List(bool* ok) const
 
     QValueList<Q_INT32> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toInt32();
@@ -620,8 +620,8 @@ QValueList<Q_UINT32> QDBusDataList::toUInt32List(bool* ok) const
 
     QValueList<Q_UINT32> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toUInt32();
@@ -642,8 +642,8 @@ QValueList<Q_INT64> QDBusDataList::toInt64List(bool* ok) const
 
     QValueList<Q_INT64> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toInt64();
@@ -664,8 +664,8 @@ QValueList<Q_UINT64> QDBusDataList::toUInt64List(bool* ok) const
 
     QValueList<Q_UINT64> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toUInt64();
@@ -686,8 +686,8 @@ QValueList<double> QDBusDataList::toDoubleList(bool* ok) const
 
     QValueList<double> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toDouble();
@@ -713,8 +713,8 @@ QValueList<QDBusObjectPath> QDBusDataList::toObjectPathList(bool* ok) const
 
     QValueList<QDBusObjectPath> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toObjectPath();
@@ -735,8 +735,8 @@ QValueList<QDBusVariant> QDBusDataList::toVariantList(bool* ok) const
 
     QValueList<QDBusVariant> result;
 
-    QValueList<QDBusData>::const_iterator it    = d->list.begin();
-    QValueList<QDBusData>::const_iterator endIt = d->list.end();
+    QValueList<QDBusData>::ConstIterator it    = d->list.begin();
+    QValueList<QDBusData>::ConstIterator endIt = d->list.end();
     for (; it != endIt; ++it)
     {
         result << (*it).toVariant();

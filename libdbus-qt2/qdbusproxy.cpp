@@ -206,4 +206,4 @@ void QDBusProxy::handleAsyncReply(const QDBusMessage& message)
     emit asyncReply(message.replySerialNumber(), message);
 }
 
-#include "qdbusproxy.moc"
+//#include "qdbusproxy.moc"

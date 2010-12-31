@@ -28,6 +28,8 @@
 
 #include <qmap.h>
 
+#define Q_ASSERT ASSERT
+
 typedef QMap<QString, QDBusError::ErrorType> ErrorNameMap;
 static ErrorNameMap errorTypesByName;
 
@@ -107,7 +109,7 @@ static QDBusError::ErrorType qDBusErrorTypeForName(const QString& name)
     if (errorTypesByName.isEmpty())
         qDBusErrorSetupNameMapping();
 
-    ErrorNameMap::const_iterator it = errorTypesByName.find(name);
+    ErrorNameMap::ConstIterator it = errorTypesByName.find(name);
     if (it != errorTypesByName.end()) return it.data();
 
     return QDBusError::UserDefined;

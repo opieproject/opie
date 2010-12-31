@@ -31,6 +31,8 @@
 #include "qdbusconnection_p.h"
 #include "dbus/qdbusmessage.h"
 
+#define Q_ASSERT ASSERT
+
 Atomic::Atomic(int value) : m_value(value)
 {
 }
@@ -80,22 +82,22 @@ static void qDBusRemoveTimeout(DBusTimeout *timeout, void *data)
   //  qDebug("removeTimeout");
 
     QDBusConnectionPrivate *d = static_cast<QDBusConnectionPrivate *>(data);
-    for (QValueList<DBusTimeout*>::iterator it = d->pendingTimeouts.begin();
+    for (QValueList<DBusTimeout*>::Iterator it = d->pendingTimeouts.begin();
          it != d->pendingTimeouts.end();) {
         if ((*it) == timeout) {
-            it = d->pendingTimeouts.erase(it);
+            it = d->pendingTimeouts.remove(it);
         }
       else
         ++it;
     }
 
-    QDBusConnectionPrivate::TimeoutHash::iterator it = d->timeouts.begin();
+    QDBusConnectionPrivate::TimeoutHash::Iterator it = d->timeouts.begin();
     while (it != d->timeouts.end()) {
         if (it.data() == timeout) {
             d->killTimer(it.key());
-            QDBusConnectionPrivate::TimeoutHash::iterator copyIt = it;
+            QDBusConnectionPrivate::TimeoutHash::Iterator copyIt = it;
             ++it;
-            d->timeouts.erase(copyIt);
+            d->timeouts.remove(copyIt);
         } else {
             ++it;
         }
@@ -145,7 +147,7 @@ static dbus_bool_t qDBusAddWatch(DBusWatch *watch, void *data)
         }
     }
     // FIXME-QT4 d->watchers.insertMulti(fd, watcher);
-    QDBusConnectionPrivate::WatcherHash::iterator it = d->watchers.find(fd);
+    QDBusConnectionPrivate::WatcherHash::Iterator it = d->watchers.find(fd);
     if (it == d->watchers.end())
     {
         it = d->watchers.insert(fd, QDBusConnectionPrivate::WatcherList());
@@ -165,11 +167,11 @@ static void qDBusRemoveWatch(DBusWatch *watch, void *data)
     QDBusConnectionPrivate *d = static_cast<QDBusConnectionPrivate *>(data);
     int fd = dbus_watch_get_unix_fd(watch);
 
-    QDBusConnectionPrivate::WatcherHash::iterator it = d->watchers.find(fd);
+    QDBusConnectionPrivate::WatcherHash::Iterator it = d->watchers.find(fd);
     if (it != d->watchers.end())
     {
         QDBusConnectionPrivate::WatcherList& list = *it;
-        for (QDBusConnectionPrivate::WatcherList::iterator wit = list.begin();
+        for (QDBusConnectionPrivate::WatcherList::Iterator wit = list.begin();
              wit != list.end(); ++wit)
         {
             if ((*wit).watch == watch)
@@ -207,10 +209,10 @@ static void qDBusToggleWatch(DBusWatch *watch, void *data)
     QDBusConnectionPrivate *d = static_cast<QDBusConnectionPrivate *>(data);
     int fd = dbus_watch_get_unix_fd(watch);
 
-    QDBusConnectionPrivate::WatcherHash::iterator it = d->watchers.find(fd);
+    QDBusConnectionPrivate::WatcherHash::Iterator it = d->watchers.find(fd);
     if (it != d->watchers.end()) {
         QDBusConnectionPrivate::WatcherList& list = *it;
-        for (QDBusConnectionPrivate::WatcherList::iterator wit = list.begin(); wit != list.end();
+        for (QDBusConnectionPrivate::WatcherList::Iterator wit = list.begin(); wit != list.end();
              ++wit)
         {
             if ((*wit).watch == watch) {
@@ -275,8 +277,7 @@ QDBusConnectionPrivate::QDBusConnectionPrivate(QObject *parent)
     : QObject(parent), ref(1), mode(InvalidMode), connection(0), server(0),
       dispatcher(0)
 {
-    static const int msgType = registerMessageMetaType();
-    Q_UNUSED(msgType);
+    registerMessageMetaType();
 
     dbus_error_init(&error);
 
@@ -336,10 +337,10 @@ void QDBusConnectionPrivate::bindToApplication()
     WatcherHash oldWatchers = watchers;
     watchers.clear();
     // FIXME-QT4 QHashIterator<int, QDBusConnectionPrivate::Watcher> it(oldWatchers);
-    for (WatcherHash::const_iterator it = oldWatchers.begin(); it != oldWatchers.end(); ++it)
+    for (WatcherHash::ConstIterator it = oldWatchers.begin(); it != oldWatchers.end(); ++it)
     {
         const WatcherList& list = *it;
-        for (WatcherList::const_iterator wit = list.begin(); wit != list.end(); ++wit)
+        for (WatcherList::ConstIterator wit = list.begin(); wit != list.end(); ++wit)
         {
             if (!(*wit).read && !(*wit).write) {
                 qDBusAddWatch((*wit).watch, this);
@@ -350,17 +351,17 @@ void QDBusConnectionPrivate::bindToApplication()
     // Re-add all timeouts
     while (!pendingTimeouts.isEmpty()) {
        qDBusAddTimeout(pendingTimeouts.first(), this);
-       pendingTimeouts.pop_front();
+       pendingTimeouts.remove(pendingTimeouts.first());
     }
 }
 
 void QDBusConnectionPrivate::socketRead(int fd)
 {
     // FIXME-QT4 QHashIterator<int, QDBusConnectionPrivate::Watcher> it(watchers);
-    WatcherHash::const_iterator it = watchers.find(fd);
+    WatcherHash::ConstIterator it = watchers.find(fd);
     if (it != watchers.end()) {
         const WatcherList& list = *it;
-        for (WatcherList::const_iterator wit = list.begin(); wit != list.end(); ++wit) {
+        for (WatcherList::ConstIterator wit = list.begin(); wit != list.end(); ++wit) {
             if ((*wit).read && (*wit).read->isEnabled()) {
                 if (!dbus_watch_handle((*wit).watch, DBUS_WATCH_READABLE))
                     qDebug("OUT OF MEM");
@@ -374,10 +375,10 @@ void QDBusConnectionPrivate::socketRead(int fd)
 void QDBusConnectionPrivate::socketWrite(int fd)
 {
     // FIXME-QT4 QHashIterator<int, QDBusConnectionPrivate::Watcher> it(watchers);
-    WatcherHash::const_iterator it = watchers.find(fd);
+    WatcherHash::ConstIterator it = watchers.find(fd);
     if (it != watchers.end()) {
         const WatcherList& list = *it;
-        for (WatcherList::const_iterator wit = list.begin(); wit != list.end(); ++wit) {
+        for (WatcherList::ConstIterator wit = list.begin(); wit != list.end(); ++wit) {
             if ((*wit).write && (*wit).write->isEnabled()) {
                 if (!dbus_watch_handle((*wit).watch, DBUS_WATCH_WRITABLE))
                     qDebug("OUT OF MEM");
@@ -389,18 +390,18 @@ void QDBusConnectionPrivate::socketWrite(int fd)
 void QDBusConnectionPrivate::objectDestroyed(QObject* object)
 {
     //qDebug("Object destroyed");
-    for (PendingCallMap::iterator it = pendingCalls.begin(); it != pendingCalls.end();)
+    for (PendingCallMap::Iterator it = pendingCalls.begin(); it != pendingCalls.end();)
     {
         QObject* receiver = (QObject*) it.data()->receiver;
         if (receiver == object || receiver == 0)
         {
-            PendingCallMap::iterator copyIt = it;
+            PendingCallMap::Iterator copyIt = it;
             ++it;
 
             dbus_pending_call_cancel(copyIt.key());
             dbus_pending_call_unref(copyIt.key());
             delete copyIt.data();
-            pendingCalls.erase(copyIt);
+            pendingCalls.remove(copyIt);
         }
         else
             ++it;
@@ -411,7 +412,7 @@ void QDBusConnectionPrivate::purgeRemovedWatches()
 {
     if (removedWatches.isEmpty()) return;
 
-    WatcherList::iterator listIt = removedWatches.begin();
+    WatcherList::Iterator listIt = removedWatches.begin();
     for (; listIt != removedWatches.end(); ++listIt)
     {
         delete (*listIt).read;
@@ -420,7 +421,7 @@ void QDBusConnectionPrivate::purgeRemovedWatches()
     removedWatches.clear();
 
     uint count = 0;
-    WatcherHash::iterator it = watchers.begin();
+    WatcherHash::Iterator it = watchers.begin();
     while (it != watchers.end())
     {
         WatcherList& list = *it;
@@ -429,16 +430,16 @@ void QDBusConnectionPrivate::purgeRemovedWatches()
         {
             if (!((*listIt).read) && !((*listIt).write))
             {
-                listIt = list.erase(listIt);
+                listIt = list.remove(listIt);
                 ++count;
             }
         }
 
         if (list.isEmpty())
         {
-            WatcherHash::iterator copyIt = it;
+            WatcherHash::Iterator copyIt = it;
             ++it;
-            watchers.erase(copyIt);
+            watchers.remove(copyIt);
         }
         else
             ++it;
@@ -466,7 +467,7 @@ bool QDBusConnectionPrivate::handleObjectCall(DBusMessage *message)
 {
     QDBusMessage msg = QDBusMessage::fromDBusMessage(message);
 
-    ObjectMap::iterator it = registeredObjects.find(msg.path());
+    ObjectMap::Iterator it = registeredObjects.find(msg.path());
     if (it == registeredObjects.end())
         return false;
 
@@ -559,7 +560,7 @@ static void qDBusResultReceived(DBusPendingCall *pending, void *user_data)
 {
     //qDebug("Pending Call Result received");
     QDBusConnectionPrivate* d = reinterpret_cast<QDBusConnectionPrivate*>(user_data);
-    QDBusConnectionPrivate::PendingCallMap::iterator it = d->pendingCalls.find(pending);
+    QDBusConnectionPrivate::PendingCallMap::Iterator it = d->pendingCalls.find(pending);
 
     DBusMessage *dbusReply = dbus_pending_call_steal_reply(pending);
 
@@ -583,7 +584,7 @@ static void qDBusResultReceived(DBusPendingCall *pending, void *user_data)
     dbus_pending_call_unref(pending);
     delete it.data();
 
-    d->pendingCalls.erase(it);
+    d->pendingCalls.remove(it);
 }
 
 int QDBusConnectionPrivate::sendWithReplyAsync(const QDBusMessage &message, QObject *receiver,

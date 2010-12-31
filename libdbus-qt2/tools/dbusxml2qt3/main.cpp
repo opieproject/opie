@@ -158,9 +158,9 @@ int main(int argc, char** argv)
         {
             QStringList nameParts = QStringList::split("::", options["classname"]);
 
-            interfaces[0].name = nameParts.back();
+            interfaces[0].name = nameParts.last();
 
-            nameParts.pop_back();
+            nameParts.remove(nameParts.last());
             interfaces[0].namespaces = nameParts;
         }
     }
@@ -169,8 +169,8 @@ int main(int argc, char** argv)
     {
         QStringList nameParts = QStringList::split("::", options["namespace"]);
 
-        QValueList<Class>::iterator it    = interfaces.begin();
-        QValueList<Class>::iterator endIt = interfaces.end();
+        QValueList<Class>::Iterator it    = interfaces.begin();
+        QValueList<Class>::Iterator endIt = interfaces.end();
         for (; it != endIt; ++it)
         {
             (*it).namespaces = nameParts;
@@ -195,8 +195,8 @@ int main(int argc, char** argv)
             }
         }
 
-        QValueList<Class>::const_iterator it    = interfaces.begin();
-        QValueList<Class>::const_iterator endIt = interfaces.end();
+        QValueList<Class>::ConstIterator it    = interfaces.begin();
+        QValueList<Class>::ConstIterator endIt = interfaces.end();
         for (; it != endIt; ++it)
         {
             if (baseName.isEmpty())
@@ -243,8 +243,8 @@ int main(int argc, char** argv)
             }
         }
 
-        QValueList<Class>::const_iterator it    = interfaces.begin();
-        QValueList<Class>::const_iterator endIt = interfaces.end();
+        QValueList<Class>::ConstIterator it    = interfaces.begin();
+        QValueList<Class>::ConstIterator endIt = interfaces.end();
         for (; it != endIt; ++it)
         {
             if (baseName.isEmpty())
@@ -336,15 +336,15 @@ int main(int argc, char** argv)
                 exit(3);
             }
 
-            nodeClassName.replace('/', "_");
+            nodeClassName.replace(QRegExp("/"), "_");
         }
 
         QStringList nameParts = QStringList::split("::", nodeClassName);
 
         Class classData;
-        classData.name = nameParts.back();
+        classData.name = nameParts.last();
 
-        nameParts.pop_back();
+        nameParts.remove(nameParts.last());
         classData.namespaces = nameParts;
 
         if (checkForOption(options, "namespace"))
@@ -451,7 +451,7 @@ void usage()
 
 bool testAndSetOption(OptionMap& options, const QString& option, const QString& value)
 {
-    OptionMap::iterator it = options.find(option);
+    OptionMap::Iterator it = options.find(option);
     if (it == options.end())
     {
         options.insert(option, value);
@@ -473,12 +473,12 @@ OptionMap parseOptions(int argc, char** argv)
 
     while (!args.isEmpty())
     {
-        QString arg = args.front();
-        args.pop_front();
+        QString arg = args.first();
+        args.remove(args.first());
 
         if (arg.startsWith("-"))
         {
-            if (arg.endsWith("help"))
+            if (arg.right(4) == "help")
             {
                 usage();
                 exit(0);
@@ -489,8 +489,8 @@ OptionMap parseOptions(int argc, char** argv)
                 QString value;
                 if (!args.isEmpty() > 0 && !args[0].startsWith("-"))
                 {
-                    value = args.front();
-                    args.pop_front();
+                    value = args.first();
+                    args.remove(args.first());
                 }
 
                 if (!testAndSetOption(options, "proxy", value))
@@ -513,8 +513,8 @@ OptionMap parseOptions(int argc, char** argv)
                 QString value;
                 if (!args.isEmpty() > 0 && !args[0].startsWith("-"))
                 {
-                    value = args.front();
-                    args.pop_front();
+                    value = args.first();
+                    args.remove(args.first());
                 }
 
                 if (!testAndSetOption(options, "interface", value))
@@ -537,8 +537,8 @@ OptionMap parseOptions(int argc, char** argv)
                 QString value;
                 if (!args.isEmpty() > 0 && !args[0].startsWith("-"))
                 {
-                    value = args.front();
-                    args.pop_front();
+                    value = args.first();
+                    args.remove(args.first());
                 }
 
                 if (!testAndSetOption(options, "node", value))
@@ -561,8 +561,8 @@ OptionMap parseOptions(int argc, char** argv)
                 QString value;
                 if (!args.isEmpty() > 0 && !args[0].startsWith("-"))
                 {
-                    value = args.front();
-                    args.pop_front();
+                    value = args.first();
+                    args.remove(args.first());
                 }
 
                 if (!testAndSetOption(options, "namespace", value))
@@ -591,8 +591,8 @@ OptionMap parseOptions(int argc, char** argv)
                     exit(1);
                 }
 
-                QString value = args.front();
-                args.pop_front();
+                QString value = args.first();
+                args.remove(args.first());
 
                 if (!testAndSetOption(options, "classname", value))
                 {

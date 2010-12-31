@@ -78,7 +78,7 @@ public:
      * Constant iterator. A QMapConstIterator with value type specified
      * as QDBusData
      */
-    typedef QMapConstIterator<T, QDBusData> const_iterator;
+    typedef QMapConstIterator<T, QDBusData> ConstIterator;
 
     /**
      * @brief Creates an empty and invalid map
@@ -149,7 +149,7 @@ public:
     QDBusDataMap<T>(const QMap<T, QDBusData>& other)
         : QMap<T, QDBusData>(other), m_valueType(QDBusData::Invalid)
     {
-        const_iterator it = begin();
+        ConstIterator it = begin();
         if (it == end()) return;
 
         m_valueType = (*it).type();
@@ -200,8 +200,8 @@ public:
     QDBusDataMap<T>(const QMap<T, bool>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::Bool)
     {
-        typename QMap<T, bool>::const_iterator it    = other.begin();
-        typename QMap<T, bool>::const_iterator endIt = other.end();
+        typename QMap<T, bool>::ConstIterator it    = other.begin();
+        typename QMap<T, bool>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromBool(it.data()));
@@ -223,8 +223,8 @@ public:
     QDBusDataMap<T>(const QMap<T, Q_UINT8>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::Byte)
     {
-        typename QMap<T, Q_UINT8>::const_iterator it    = other.begin();
-        typename QMap<T, Q_UINT8>::const_iterator endIt = other.end();
+        typename QMap<T, Q_UINT8>::ConstIterator it    = other.begin();
+        typename QMap<T, Q_UINT8>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromByte(it.data()));
@@ -246,8 +246,8 @@ public:
     QDBusDataMap<T>(const QMap<T, Q_INT16>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::Int16)
     {
-        typename QMap<T, Q_INT16>::const_iterator it    = other.begin();
-        typename QMap<T, Q_INT16>::const_iterator endIt = other.end();
+        typename QMap<T, Q_INT16>::ConstIterator it    = other.begin();
+        typename QMap<T, Q_INT16>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromInt16(it.data()));
@@ -269,8 +269,8 @@ public:
     QDBusDataMap<T>(const QMap<T, Q_UINT16>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::UInt16)
     {
-        typename QMap<T, Q_UINT16>::const_iterator it    = other.begin();
-        typename QMap<T, Q_UINT16>::const_iterator endIt = other.end();
+        typename QMap<T, Q_UINT16>::ConstIterator it    = other.begin();
+        typename QMap<T, Q_UINT16>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromUInt16(it.data()));
@@ -292,8 +292,8 @@ public:
     QDBusDataMap<T>(const QMap<T, Q_INT32>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::Int32)
     {
-        typename QMap<T, Q_INT32>::const_iterator it    = other.begin();
-        typename QMap<T, Q_INT32>::const_iterator endIt = other.end();
+        typename QMap<T, Q_INT32>::ConstIterator it    = other.begin();
+        typename QMap<T, Q_INT32>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromInt32(it.data()));
@@ -315,8 +315,8 @@ public:
     QDBusDataMap<T>(const QMap<T, Q_UINT32>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::UInt32)
     {
-        typename QMap<T, Q_UINT32>::const_iterator it    = other.begin();
-        typename QMap<T, Q_UINT32>::const_iterator endIt = other.end();
+        typename QMap<T, Q_UINT32>::ConstIterator it    = other.begin();
+        typename QMap<T, Q_UINT32>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromUInt32(it.data()));
@@ -338,8 +338,8 @@ public:
     QDBusDataMap<T>(const QMap<T, Q_INT64>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::Int64)
     {
-        typename QMap<T, Q_INT64>::const_iterator it    = other.begin();
-        typename QMap<T, Q_INT64>::const_iterator endIt = other.end();
+        typename QMap<T, Q_INT64>::ConstIterator it    = other.begin();
+        typename QMap<T, Q_INT64>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromInt64(it.data()));
@@ -361,8 +361,8 @@ public:
     QDBusDataMap<T>(const QMap<T, Q_UINT64>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::UInt64)
     {
-        typename QMap<T, Q_UINT64>::const_iterator it    = other.begin();
-        typename QMap<T, Q_UINT64>::const_iterator endIt = other.end();
+        typename QMap<T, Q_UINT64>::ConstIterator it    = other.begin();
+        typename QMap<T, Q_UINT64>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromUInt64(it.data()));
@@ -384,8 +384,8 @@ public:
     QDBusDataMap<T>(const QMap<T, double>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::Double)
     {
-        typename QMap<T, double>::const_iterator it    = other.begin();
-        typename QMap<T, double>::const_iterator endIt = other.end();
+        typename QMap<T, double>::ConstIterator it    = other.begin();
+        typename QMap<T, double>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromDouble(it.data()));
@@ -407,8 +407,8 @@ public:
     QDBusDataMap<T>(const QMap<T, QString>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::String)
     {
-        typename QMap<T, QString>::const_iterator it    = other.begin();
-        typename QMap<T, QString>::const_iterator endIt = other.end();
+        typename QMap<T, QString>::ConstIterator it    = other.begin();
+        typename QMap<T, QString>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromString(it.data()));
@@ -430,8 +430,8 @@ public:
     QDBusDataMap<T>(const QMap<T, QDBusObjectPath>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::ObjectPath)
     {
-        typename QMap<T, QDBusObjectPath>::const_iterator it    = other.begin();
-        typename QMap<T, QDBusObjectPath>::const_iterator endIt = other.end();
+        typename QMap<T, QDBusObjectPath>::ConstIterator it    = other.begin();
+        typename QMap<T, QDBusObjectPath>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromObjectPath(it.data()));
@@ -453,8 +453,8 @@ public:
     QDBusDataMap<T>(const QMap<T, QDBusVariant>& other)
         : QMap<T, QDBusData>(), m_valueType(QDBusData::Variant)
     {
-        typename QMap<T, QDBusVariant>::const_iterator it    = other.begin();
-        typename QMap<T, QDBusVariant>::const_iterator endIt = other.end();
+        typename QMap<T, QDBusVariant>::ConstIterator it    = other.begin();
+        typename QMap<T, QDBusVariant>::ConstIterator endIt = other.end();
         for (; it != endIt; ++it)
         {
             insert(it.key(), QDBusData::fromVariant(it.data()));
@@ -502,7 +502,7 @@ public:
         m_valueType = QDBusData::Invalid;
         m_containerValueType = QDBusData();
 
-        const_iterator it = begin();
+        ConstIterator it = begin();
         if (it == end()) return *this;
 
         m_valueType = (*it).type();
@@ -651,8 +651,8 @@ public:
                 other.m_containerValueType.buildDBusSignature()) return false;
         }
 
-        const_iterator it = begin();
-        const_iterator otherIt = other.begin();
+        ConstIterator it = begin();
+        ConstIterator otherIt = other.begin();
         for (; it != end() && otherIt != other.end(); ++it, ++otherIt)
         {
             if (it.key() != otherIt.key()) return false;
@@ -675,7 +675,7 @@ public:
      *
      * @see QMap::begin()
      */
-    const_iterator begin() const
+    ConstIterator begin() const
     {
         return QMap<T, QDBusData>::begin();
     }
@@ -685,7 +685,7 @@ public:
      *
      * @see QMap::end()
      */
-    const_iterator end() const
+    ConstIterator end() const
     {
         return QMap<T, QDBusData>::end();
     }
@@ -779,8 +779,8 @@ public:
 
         QMap<T, bool> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toBool());
@@ -817,8 +817,8 @@ public:
 
         QMap<T, Q_UINT8> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toByte());
@@ -856,8 +856,8 @@ public:
 
         QMap<T, Q_INT16> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toInt16());
@@ -895,8 +895,8 @@ public:
 
         QMap<T, Q_UINT16> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toUInt16());
@@ -934,8 +934,8 @@ public:
 
         QMap<T, Q_INT32> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toInt32());
@@ -973,8 +973,8 @@ public:
 
         QMap<T, Q_UINT32> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toUInt32());
@@ -1012,8 +1012,8 @@ public:
 
         QMap<T, Q_INT64> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toInt64());
@@ -1051,8 +1051,8 @@ public:
 
         QMap<T, Q_UINT64> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toUInt64());
@@ -1089,8 +1089,8 @@ public:
 
         QMap<T, double> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toDouble());
@@ -1127,8 +1127,8 @@ public:
 
         QMap<T, QString> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toString());
@@ -1162,8 +1162,8 @@ public:
 
         QMap<T, QDBusObjectPath> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toObjectPath());
@@ -1200,8 +1200,8 @@ public:
 
         QMap<T, QDBusVariant> result;
 
-        const_iterator it    = begin();
-        const_iterator endIt = end();
+        ConstIterator it    = begin();
+        ConstIterator endIt = end();
         for (; it != endIt; ++it)
         {
             result.insert(it.key(), (*it).toVariant());
