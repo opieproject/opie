@@ -30,6 +30,7 @@
 
 #include "qdbusconnection_p.h"
 #include "dbus/qdbusmessage.h"
+#include "qdestroyedsignalconnector.h"
 
 #define Q_ASSERT ASSERT
 
@@ -593,7 +594,8 @@ int QDBusConnectionPrivate::sendWithReplyAsync(const QDBusMessage &message, QObj
     if (!receiver || !method)
         return 0;
 
-    if (!QObject::connect(receiver, SIGNAL(destroyed(QObject*)),
+    QDestroyedSignalConnector *connector = new QDestroyedSignalConnector(receiver);
+    if (!QObject::connect(connector, SIGNAL(objectDestroyed(QObject*)),
                           this, SLOT(objectDestroyed(QObject*))))
         return false;
 

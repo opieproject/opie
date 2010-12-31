@@ -3,7 +3,8 @@ TEMPLATE    = lib
 CONFIG      += qt warn_on debug
 HEADERS     = dbus/qdbusproxy.h \
               dbus/qdbusserver.h \
-              qdbusconnection_p.h
+              qdbusconnection_p.h \
+              qdestroyedsignalconnector.h
 
 SOURCES     = qdbusconnection.cpp \
               qdbuserror.cpp \
