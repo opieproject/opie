@@ -1,0 +1,51 @@
+2008-06-05 krake: Updating changelog after forgetting about it for a long
+                  time. Rather incomplete list, listing only major changes.
+    * Added dbusxml2qt3 code generation tool for creating client and server side
+      code based on D-Bus XML introspection data
+    * Added cross-bindings test suite support
+    * Added QDBusDataConverter template to build helper classes for
+      transforming native C++ types into QDBusData objects and vice versa
+    * Added support for nested containers
+    * Added support for empty containers
+    * Added support for D-Bus variant
+    * Handling D-Bus object path different than String
+
+2006-01-28 krake:
+    * Added a default constructor to QDBusConnection which creates empty/null
+      connections suitable for variable initialization
+    * Fixed initialization of the connection member in QDBusProxy
+    * Use pkg-config to determine linker flags for the D-BUS base library
+      when building examples
+    * Added documentation on object registering to the service overview docs
+    * Added documentation on requesting service names to overview docs
+    * Added documentation on handling interfaces to service overview docs
+    * Added table of contents to client and service overview docs
+
+2006-01-25 krake:
+    * Fixed pkg-config input files and got them installed
+    * Fixed build files to use new package name dbus-1-qt3 instead of the too
+      generic qdbus
+
+2006-01-22 krake:
+    * API docs for QDBusMessage
+
+2006-01-21 krake:
+    * API docs for QDBusProxy and overview documentation for using the bindings
+      in a client.
+    * Adjusted example programs to changed build situation
+    * Changed example programs to use non-GUI QApplication
+    * API docs for QDBusError, QDBusObjectBase and overview documentation for
+      using the bindings to provide services.
+    * Fixed service example
+    * API docs for QDBusConnection
+
+2006-01-20 krake:
+    * Changed build files to be able to build with KDE 3.5 admin/ directory
+
+2006-01-19 krake:
+    * Changed library name to from dbus-qt3-1 dbus-1-qt3. Seems more logical to
+      to me having the DBus version number closer to "dbus"
+
+2006-01-17 krake:
+    * Imported my backport to the SVN directory originally created by Will
+    * Fixed licences (FSF address, missing licence in examle files)

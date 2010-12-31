@@ -1,0 +1,192 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/Test">
+   <interface name="org.freedesktop.DBus.Binding.SingleTests">
+   <annotation name="org.freedesktop.DBus.Description" value="A single test to check overloading"/>
+      <method name="Sum" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns the sum of the values in the input list"/>
+         <arg type="ay" name="input" direction="in"/>
+         <arg type="u" name="output" direction="out"/>
+      </method>
+   </interface>
+
+   <interface name="org.freedesktop.DBus.Binding.Tests">
+   <annotation name="org.freedesktop.DBus.Description" value="Contains all the tests to run on the bindings."/>
+
+      <method name="Identity" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="v" name="input" direction="in"/>
+         <arg type="v" name="output" direction="out"/>
+      </method>
+      <method name="IdentityByte" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="y" name="input" direction="in"/>
+         <arg type="y" name="output" direction="out"/>
+      </method>
+      <method name="IdentityBool" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="b" name="input" direction="in"/>
+         <arg type="b" name="output" direction="out"/>
+      </method>
+      <method name="IdentityInt16" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="n" name="input" direction="in"/>
+         <arg type="n" name="output" direction="out"/>
+      </method>
+      <method name="IdentityUInt16" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="q" name="input" direction="in"/>
+         <arg type="q" name="output" direction="out"/>
+      </method>
+      <method name="IdentityInt32" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="i" name="input" direction="in"/>
+         <arg type="i" name="output" direction="out"/>
+      </method>
+      <method name="IdentityUInt32" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="u" name="input" direction="in"/>
+         <arg type="u" name="output" direction="out"/>
+      </method>
+      <method name="IdentityInt64" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="x" name="input" direction="in"/>
+         <arg type="x" name="output" direction="out"/>
+      </method>
+      <method name="IdentityUInt64" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="t" name="input" direction="in"/>
+         <arg type="t" name="output" direction="out"/>
+      </method>
+      <method name="IdentityDouble" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="d" name="input" direction="in"/>
+         <arg type="d" name="output" direction="out"/>
+      </method>
+      <method name="IdentityString" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="s" name="input" direction="in"/>
+         <arg type="s" name="output" direction="out"/>
+      </method>
+      <method name="IdentityArray" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="av" name="input" direction="in"/>
+         <arg type="av" name="output" direction="out"/>
+      </method>
+      <method name="IdentityByteArray" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="ay" name="input" direction="in"/>
+         <arg type="ay" name="output" direction="out"/>
+      </method>
+      <method name="IdentityBoolArray" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="ab" name="input" direction="in"/>
+         <arg type="ab" name="output" direction="out"/>
+      </method>
+      <method name="IdentityInt16Array" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="an" name="input" direction="in"/>
+         <arg type="an" name="output" direction="out"/>
+      </method>
+      <method name="IdentityUInt16Array" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="aq" name="input" direction="in"/>
+         <arg type="aq" name="output" direction="out"/>
+      </method>
+      <method name="IdentityInt32Array" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="ai" name="input" direction="in"/>
+         <arg type="ai" name="output" direction="out"/>
+      </method>
+      <method name="IdentityUInt32Array" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="au" name="input" direction="in"/>
+         <arg type="au" name="output" direction="out"/>
+      </method>
+      <method name="IdentityInt64Array" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="ax" name="input" direction="in"/>
+         <arg type="ax" name="output" direction="out"/>
+      </method>
+      <method name="IdentityUInt64Array" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="at" name="input" direction="in"/>
+         <arg type="at" name="output" direction="out"/>
+      </method>
+      <method name="IdentityDoubleArray" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="ad" name="input" direction="in"/>
+         <arg type="ad" name="output" direction="out"/>
+      </method>
+      <method name="IdentityStringArray" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns whatever it is passed"/>
+         <arg type="as" name="input" direction="in"/>
+         <arg type="as" name="output" direction="out"/>
+      </method>
+
+
+
+
+      <method name="Sum" >
+         <annotation name="org.freedesktop.DBus.Description" value="Returns the sum of the values in the input list"/>
+         <arg type="ai" name="input" direction="in"/>
+         <arg type="x" name="output" direction="out"/>
+      </method>
+
+      <method name="InvertMapping" >
+         <annotation name="org.freedesktop.DBus.Description" value="Given a map of A => B, should return a map of B => a list of all the As which mapped to B"/>
+         <arg type="a{ss}" name="input" direction="in"/>
+         <arg type="a{sas}" name="output" direction="out"/>
+      </method>
+
+      <method name="DeStruct" >
+         <annotation name="org.freedesktop.DBus.Description" value="This method returns the contents of a struct as separate values"/>
+         <arg type="(sun)" name="input" direction="in"/>
+         <arg type="s" name="outstring" direction="out"/>
+         <arg type="u" name="outuint32" direction="out"/>
+         <arg type="n" name="outuint16" direction="out"/>
+      </method>
+
+      <method name="Primitize" >
+         <annotation name="org.freedesktop.DBus.Description" value="Given any compound type as a variant, return all the primitive types recursively contained within as an array of variants"/>
+         <arg type="v" name="input" direction="in"/>
+         <arg type="av" name="output" direction="out"/>
+      </method>
+
+      <method name="Invert" >
+         <annotation name="org.freedesktop.DBus.Description" value="inverts it's input"/>
+         <arg type="b" name="input" direction="in"/>
+         <arg type="b" name="output" direction="out"/>
+      </method>
+
+      <method name="Trigger" >
+         <annotation name="org.freedesktop.DBus.Description" value="triggers sending of a signal from the supplied object with the given parameter"/>
+         <arg type="s" name="object" direction="in"/>
+         <arg type="t" name="parameter" direction="in"/>
+      </method>
+      <method name="Exit" >
+         <annotation name="org.freedesktop.DBus.Description" value="Causes server process to exit"/>
+      </method>
+   </interface>
+
+   <interface name="org.freedesktop.DBus.Binding.TestSignals">
+   <annotation name="org.freedesktop.DBus.Description" value="Signals that can be sent within the tests."/>
+      <signal name="Triggered">
+         <annotation name="org.freedesktop.DBus.Description" value="Sent in response to method call Tests.Trigger"/>
+         <arg type="t" name="parameter"/>
+      </signal>
+   </interface>
+
+   <interface name="org.freedesktop.DBus.Binding.TestClient">
+   <annotation name="org.freedesktop.DBus.Description" value="Interface on the client side"/>
+      <method name="Response" >
+         <annotation name="org.freedesktop.DBus.Description" value="To be called by the server upon receiving signal TestClient.Trigger using the path it came from"/>
+         <arg type="q" name="input1" direction="in"/>
+         <arg type="d" name="input2" direction="in"/>
+      </method>
+      <signal name="Trigger">
+         <annotation name="org.freedesktop.DBus.Description" value="Causes a callback to TestClient.Response"/>
+         <arg type="q" name="parameter1"/>
+         <arg type="d" name="parameter2"/>
+      </signal>
+   </interface>
+</node>
