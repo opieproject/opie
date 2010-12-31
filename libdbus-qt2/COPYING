@@ -1,0 +1,10 @@
+The software of this project is distributed under the terms of three
+licenses.
+
+The Qt3 D-Bus bindings library is distributed under the terms of
+the Academic Free License version 2.1 (see COPYING.AFL for details)
+as well as the GNU General Public License 2.1 (or at your option any later
+version, see COPYING.GPL for details)
+
+The binding generator tool dbusxml2q3 is distributed under the terms
+of the MIT licence (see tools/dbusxml2qt3/LICENSE for details)

@@ -1,0 +1,20 @@
+This is a backport of Harald Fernengel's Qt4 D-Bus bindings.
+
+Some Qt4 based code had no direct equivalent in Qt3. Cases where this
+transition to Qt3 might not be fully correct are marked with FIXME-QT4
+
+Depending on the use case it might be necessary to extend QDBusMesssage
+to allow marshalling/de-marshalling based on an application provided
+helper as the Qt3 QVariant can not handle all cases the Qt4 pendant can
+(user defined types, etc)
+
+In order to build you need to copy or symlink the kde-common/admin directory
+into this directory and then run
+
+make -f Makefile.cvs
+
+to generate the configure script.
+
+
+
+

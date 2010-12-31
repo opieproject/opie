@@ -1,0 +1,11 @@
+- Have someone with Qt4 experience check the code marked with FIXME-QT4
+
+- Port the Qt4 bindings' unit tests to something available for Qt3
+
+- Add static methods for D-BUS standard errors to QDBusError.
+  At least for those a service implementation might need more often
+
+- Check possibility of a QObject adapter implementation of QDBusObjectBase,
+  i.e. a making an QObject's slots callable through D-BUS
+
+
