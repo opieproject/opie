@@ -88,7 +88,7 @@ void ExampleClient::slotConnect()
             QStringList nameList = list.toQStringList();
             qDebug("Bus knows %d names:", nameList.count());
 
-            QStringList::iterator it = nameList.begin();
+            QStringList::Iterator it = nameList.begin();
             for (; it != nameList.end(); ++it)
             {
                 qDebug("%s", (*it).local8Bit().data());
@@ -133,7 +133,7 @@ void ExampleClient::slotDBusSignal(const QDBusMessage& message)
     qDebug("Received signal '%s' from peer: %d values",
            message.member().local8Bit().data(), message.count());
 
-    for (QDBusMessage::const_iterator it = message.begin(); it != message.end(); ++it)
+    for (QDBusMessage::ConstIterator it = message.begin(); it != message.end(); ++it)
     {
         qDebug("Value of type %s: '%s'", (*it).typeName(), (*it).toString().local8Bit().data());
     }
@@ -162,7 +162,7 @@ void ExampleClient::slotAsyncReply(int callID, const QDBusMessage& reply)
         {
             qDebug("Reply from peer: %d values", reply.count());
 
-            for (QDBusMessage::const_iterator it = reply.begin(); it != reply.end(); ++it)
+            for (QDBusMessage::ConstIterator it = reply.begin(); it != reply.end(); ++it)
             {
                 qDebug("Value of type %s: '%d'",
                        (*it).typeName(), (*it).toUInt32());

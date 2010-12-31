@@ -33,9 +33,10 @@
 #include <qvaluelist.h>
 #include <qmap.h>
 #include <qstringlist.h>
-#include <qvaluevector.h>
 
 #include <dbus/dbus.h>
+
+#define Q_ASSERT ASSERT
 
 template <typename T>
 inline T qIterGet(DBusMessageIter *it)
@@ -645,7 +646,7 @@ static void qDBusByteKeyMapToIterator(DBusMessageIter* it, const QDBusData& var)
 
     dbus_message_iter_open_container(it, DBUS_TYPE_ARRAY, sig.data(), &sub);
 
-    QDBusDataMap<Q_UINT8>::const_iterator mit = map.begin();
+    QDBusDataMap<Q_UINT8>::ConstIterator mit = map.begin();
     for (; mit != map.end(); ++mit)
     {
         DBusMessageIter itemIterator;
@@ -679,7 +680,7 @@ static void qDBusInt16KeyMapToIterator(DBusMessageIter* it, const QDBusData& var
 
     dbus_message_iter_open_container(it, DBUS_TYPE_ARRAY, sig.data(), &sub);
 
-    QDBusDataMap<Q_INT16>::const_iterator mit = map.begin();
+    QDBusDataMap<Q_INT16>::ConstIterator mit = map.begin();
     for (; mit != map.end(); ++mit)
     {
         DBusMessageIter itemIterator;
@@ -713,7 +714,7 @@ static void qDBusUInt16KeyMapToIterator(DBusMessageIter* it, const QDBusData& va
 
     dbus_message_iter_open_container(it, DBUS_TYPE_ARRAY, sig.data(), &sub);
 
-    QDBusDataMap<Q_UINT16>::const_iterator mit = map.begin();
+    QDBusDataMap<Q_UINT16>::ConstIterator mit = map.begin();
     for (; mit != map.end(); ++mit)
     {
         DBusMessageIter itemIterator;
@@ -747,7 +748,7 @@ static void qDBusInt32KeyMapToIterator(DBusMessageIter* it, const QDBusData& var
 
     dbus_message_iter_open_container(it, DBUS_TYPE_ARRAY, sig.data(), &sub);
 
-    QDBusDataMap<Q_INT32>::const_iterator mit = map.begin();
+    QDBusDataMap<Q_INT32>::ConstIterator mit = map.begin();
     for (; mit != map.end(); ++mit)
     {
         DBusMessageIter itemIterator;
@@ -781,7 +782,7 @@ static void qDBusUInt32KeyMapToIterator(DBusMessageIter* it, const QDBusData& va
 
     dbus_message_iter_open_container(it, DBUS_TYPE_ARRAY, sig.data(), &sub);
 
-    QDBusDataMap<Q_UINT32>::const_iterator mit = map.begin();
+    QDBusDataMap<Q_UINT32>::ConstIterator mit = map.begin();
     for (; mit != map.end(); ++mit)
     {
         DBusMessageIter itemIterator;
@@ -815,7 +816,7 @@ static void qDBusInt64KeyMapToIterator(DBusMessageIter* it, const QDBusData& var
 
     dbus_message_iter_open_container(it, DBUS_TYPE_ARRAY, sig.data(), &sub);
 
-    QDBusDataMap<Q_INT64>::const_iterator mit = map.begin();
+    QDBusDataMap<Q_INT64>::ConstIterator mit = map.begin();
     for (; mit != map.end(); ++mit)
     {
         DBusMessageIter itemIterator;
@@ -849,7 +850,7 @@ static void qDBusUInt64KeyMapToIterator(DBusMessageIter* it, const QDBusData& va
 
     dbus_message_iter_open_container(it, DBUS_TYPE_ARRAY, sig.data(), &sub);
 
-    QDBusDataMap<Q_UINT64>::const_iterator mit = map.begin();
+    QDBusDataMap<Q_UINT64>::ConstIterator mit = map.begin();
     for (; mit != map.end(); ++mit)
     {
         DBusMessageIter itemIterator;
@@ -883,7 +884,7 @@ static void qDBusStringKeyMapToIterator(DBusMessageIter* it, const QDBusData& va
 
     dbus_message_iter_open_container(it, DBUS_TYPE_ARRAY, sig.data(), &sub);
 
-    QDBusDataMap<QString>::const_iterator mit = map.begin();
+    QDBusDataMap<QString>::ConstIterator mit = map.begin();
     for (; mit != map.end(); ++mit)
     {
         DBusMessageIter itemIterator;
@@ -918,7 +919,7 @@ static void qDBusObjectPathKeyMapToIterator(DBusMessageIter* it,
 
     dbus_message_iter_open_container(it, DBUS_TYPE_ARRAY, sig.data(), &sub);
 
-    QDBusDataMap<QDBusObjectPath>::const_iterator mit = map.begin();
+    QDBusDataMap<QDBusObjectPath>::ConstIterator mit = map.begin();
     for (; mit != map.end(); ++mit)
     {
         DBusMessageIter itemIterator;
@@ -1005,8 +1006,8 @@ static void qDBusDataToIterator(DBusMessageIter* it, const QDBusData& var)
                                              signature.data(), &sub);
 
             const QValueList<QDBusData> valueList = var.toQValueList();
-            QValueList<QDBusData>::const_iterator listIt    = valueList.begin();
-            QValueList<QDBusData>::const_iterator listEndIt = valueList.end();
+            QValueList<QDBusData>::ConstIterator listIt    = valueList.begin();
+            QValueList<QDBusData>::ConstIterator listEndIt = valueList.end();
             for (; listIt != listEndIt; ++listIt)
             {
                 qDBusDataToIterator(&sub, *listIt);
@@ -1071,8 +1072,8 @@ static void qDBusDataToIterator(DBusMessageIter* it, const QDBusData& var)
             DBusMessageIter sub;
             dbus_message_iter_open_container(it, DBUS_TYPE_STRUCT, NULL, &sub);
 
-            QValueList<QDBusData>::const_iterator memberIt    = memberList.begin();
-            QValueList<QDBusData>::const_iterator memberEndIt = memberList.end();
+            QValueList<QDBusData>::ConstIterator memberIt    = memberList.begin();
+            QValueList<QDBusData>::ConstIterator memberEndIt = memberList.end();
             for (; memberIt != memberEndIt; ++memberIt)
             {
                 qDBusDataToIterator(&sub, *memberIt);
@@ -1101,8 +1102,8 @@ void qListToIterator(DBusMessageIter* it, const QValueList<QDBusData>& list)
 {
     if (list.isEmpty()) return;
 
-    QValueList<QDBusData>::const_iterator listIt    = list.begin();
-    QValueList<QDBusData>::const_iterator listEndIt = list.end();
+    QValueList<QDBusData>::ConstIterator listIt    = list.begin();
+    QValueList<QDBusData>::ConstIterator listEndIt = list.end();
     for (; listIt != listEndIt; ++listIt)
     {
         qDBusDataToIterator(it, *listIt);

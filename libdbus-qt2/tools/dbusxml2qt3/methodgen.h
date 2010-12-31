@@ -85,7 +85,7 @@ public:
     QString dbusName;
     QStringList namespaces;
     QValueList<Method> methods;
-    QValueList<Method> signals;
+    QValueList<Method> msignals;
     QValueList<Property> properties;
 
     QValueList<Method> asyncMethods;

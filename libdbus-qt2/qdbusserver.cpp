@@ -57,4 +57,4 @@ QString QDBusServer::address() const
     return addr;
 }
 
-#include "qdbusserver.moc"
+//#include "qdbusserver.moc"

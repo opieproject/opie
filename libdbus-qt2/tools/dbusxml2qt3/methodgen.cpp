@@ -177,9 +177,9 @@ static bool parseDBusSignature(const QString& signature, Argument& argument)
                     argument.sourceIncludes["qdbus"].append("<dbus/qdbusdata.h>");
                     argument.sourceIncludes["qdbus"].append("<dbus/qdbusdatamap.h>");
 
-                    QMap<QString, QStringList>::const_iterator it =
+                    QMap<QString, QStringList>::ConstIterator it =
                         value.sourceIncludes.begin();
-                    QMap<QString, QStringList>::const_iterator endIt =
+                    QMap<QString, QStringList>::ConstIterator endIt =
                         value.sourceIncludes.end();
                     for (; it != endIt; ++it)
                     {
@@ -222,9 +222,9 @@ static bool parseDBusSignature(const QString& signature, Argument& argument)
                 argument.sourceIncludes["Qt"].append("<qvaluelist.h>");
                 argument.sourceIncludes["qdbus"].append("<dbus/qdbusdatalist.h>");
 
-                QMap<QString, QStringList>::const_iterator it =
+                QMap<QString, QStringList>::ConstIterator it =
                     item.sourceIncludes.begin();
-                QMap<QString, QStringList>::const_iterator endIt =
+                QMap<QString, QStringList>::ConstIterator endIt =
                     item.sourceIncludes.end();
                 for (; it != endIt; ++it)
                 {
@@ -407,8 +407,8 @@ static void writeVariables(const QString& prefix, const Method& method,
         QTextStream& stream)
 {
     uint count = 0;
-    QValueList<Argument>::const_iterator it    = method.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = method.arguments.end();
+    QValueList<Argument>::ConstIterator it    = method.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = method.arguments.end();
     for (; it != endIt; ++it)
     {
         writeVariable(*it, count, prefix, stream);
@@ -421,8 +421,8 @@ static void writeSignalEmit(const Method& signal, QTextStream& stream)
 {
     stream << "        emit " << signal.name << "(";
 
-    QValueList<Argument>::const_iterator it    = signal.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = signal.arguments.end();
+    QValueList<Argument>::ConstIterator it    = signal.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = signal.arguments.end();
     for (; it != endIt;)
     {
         stream << "_" << (*it).name;
@@ -440,8 +440,8 @@ static void writeMethodIntrospection(const Method& method, bool& firstArgument,
     stream << "    methodElement.setAttribute(\"name\", \""
            << method.name << "\");" << endl;
 
-    QValueList<Argument>::const_iterator it    = method.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = method.arguments.end();
+    QValueList<Argument>::ConstIterator it    = method.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = method.arguments.end();
     for (; it != endIt; ++it)
     {
         stream << endl;
@@ -506,8 +506,8 @@ static void writeNodeInitialization(const Class& classData,
     stream << "        QDBusObjectBase* interface = m_private;" << endl;
     stream << "        m_private->interfaces.insert(name, interface);" << endl;
 
-    QValueList<Class>::const_iterator it    = interfaces.begin();
-    QValueList<Class>::const_iterator endIt = interfaces.end();
+    QValueList<Class>::ConstIterator it    = interfaces.begin();
+    QValueList<Class>::ConstIterator endIt = interfaces.end();
     for (; it != endIt; ++it)
     {
         stream << endl;
@@ -538,8 +538,8 @@ static void writeNodeIntrospection(const Class& classData,
            << "::buildIntrospectionData(interfaceElement);" << endl;
     stream << "    nodeElement.appendChild(interfaceElement);" << endl;
 
-    QValueList<Class>::const_iterator it    = interfaces.begin();
-    QValueList<Class>::const_iterator endIt = interfaces.end();
+    QValueList<Class>::ConstIterator it    = interfaces.begin();
+    QValueList<Class>::ConstIterator endIt = interfaces.end();
     for (; it != endIt; ++it)
     {
         if ((*it).dbusName == "org.freedesktop.DBus.Introspectable") continue;
@@ -594,7 +594,7 @@ bool MethodGenerator::extractMethods(const QDomElement& interfaceElement,
                 classData.methods.append(method);
             }
             else
-                classData.signals.append(method);
+                classData.msignals.append(method);
         }
         else if (element.tagName() == "property")
         {
@@ -634,7 +634,7 @@ bool MethodGenerator::extractMethods(const QDomElement& interfaceElement,
         }
     }
 
-    return !classData.methods.isEmpty() || !classData.signals.isEmpty() ||
+    return !classData.methods.isEmpty() || !classData.msignals.isEmpty() ||
            !classData.properties.isEmpty();
 }
 
@@ -643,8 +643,8 @@ void MethodGenerator::writeMethodDeclaration(const Method& method, bool pureVirt
 {
     stream << method.name << "(";
 
-    QValueList<Argument>::const_iterator it    = method.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = method.arguments.end();
+    QValueList<Argument>::ConstIterator it    = method.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = method.arguments.end();
     for (; it != endIt;)
     {
         if (!(*it).isPrimitive && (*it).direction == Argument::In)
@@ -736,7 +736,7 @@ void MethodGenerator::writeMethodCall(const Class& classData,
     {
         // FIXME: using writeVariables by removing asyncCallId argument
         Method reducedMethod = method;
-        reducedMethod.arguments.pop_front();
+        reducedMethod.arguments.remove(reducedMethod.arguments.begin());
 
         writeVariables("    ", reducedMethod, stream);
     }
@@ -767,8 +767,8 @@ void MethodGenerator::writeMethodCall(const Class& classData,
     else
         stream << "    if (" << method.name << "(";
 
-    QValueList<Argument>::const_iterator it    = method.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = method.arguments.end();
+    QValueList<Argument>::ConstIterator it    = method.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = method.arguments.end();
     while (it != endIt)
     {
         stream << "_" << (*it).name;
@@ -837,8 +837,8 @@ void MethodGenerator::writeMethodCall(const Class& classData,
     stream << "        {" << endl;
     stream << "            qWarning(\"Call to implementation of ";
 
-    QStringList::const_iterator nsIt    = classData.namespaces.begin();
-    QStringList::const_iterator nsEndIt = classData.namespaces.end();
+    QStringList::ConstIterator nsIt    = classData.namespaces.begin();
+    QStringList::ConstIterator nsEndIt = classData.namespaces.end();
     for (; nsIt != nsEndIt; ++nsIt)
     {
         stream << *nsIt << "::";
@@ -874,8 +874,8 @@ void MethodGenerator::writeSignalEmitter(const Class& classData,
 {
     stream << "bool " << classData.name << "::emit" << method.name << "(";
 
-    QValueList<Argument>::const_iterator it    = method.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = method.arguments.end();
+    QValueList<Argument>::ConstIterator it    = method.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = method.arguments.end();
     for (; it != endIt;)
     {
         if (!(*it).isPrimitive && (*it).direction == Argument::In)
@@ -956,8 +956,8 @@ void MethodGenerator::writeInterfaceAsyncReplyHandler(const Class& classData,
     stream << "void " << classData.name << "::" << method.name
            << "AsyncReply(";
 
-    QValueList<Argument>::const_iterator it    = method.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = method.arguments.end();
+    QValueList<Argument>::ConstIterator it    = method.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = method.arguments.end();
     while (it != endIt)
     {
         if (!(*it).isPrimitive && (*it).direction == Argument::In)
@@ -1058,8 +1058,8 @@ void MethodGenerator::writeInterfaceMainMethod(const Class& classData,
            << "\") return false;" << endl;
     stream << endl;
 
-    QValueList<Method>::const_iterator it    = classData.methods.begin();
-    QValueList<Method>::const_iterator endIt = classData.methods.end();
+    QValueList<Method>::ConstIterator it    = classData.methods.begin();
+    QValueList<Method>::ConstIterator endIt = classData.methods.end();
     for (; it != endIt; ++it)
     {
         stream << "    if (message.member() == \"" << (*it).name << "\")" << endl;
@@ -1094,8 +1094,8 @@ void MethodGenerator::writeSignalHandler(const Class& classData,
            << "::slotHandleDBusSignal(const QDBusMessage& message)" << endl;
     stream << "{" << endl;
 
-    QValueList<Method>::const_iterator it    = classData.signals.begin();
-    QValueList<Method>::const_iterator endIt = classData.signals.end();
+    QValueList<Method>::ConstIterator it    = classData.msignals.begin();
+    QValueList<Method>::ConstIterator endIt = classData.msignals.end();
     bool first = true;
     for (; it != endIt; ++it)
     {
@@ -1134,7 +1134,7 @@ void MethodGenerator::writeProxyBegin(const Class& classData, QTextStream& strea
     stream << "    m_baseProxy->setService(service);" << endl;
     stream << endl;
 
-    if (!classData.signals.isEmpty())
+    if (!classData.msignals.isEmpty())
     {
         stream << "    QObject::connect(m_baseProxy, "
                << "SIGNAL(dbusSignal(const QDBusMessage&))," << endl;
@@ -1176,8 +1176,8 @@ void MethodGenerator::writeProxyMethod(const QString& className,
     stream << "bool " << className << "::" << method.name
            << (method.async ? "Async(" : "(");
 
-    QValueList<Argument>::const_iterator it    = method.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = method.arguments.end();
+    QValueList<Argument>::ConstIterator it    = method.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = method.arguments.end();
     for (; it != endIt; ++it)
     {
         if (!(*it).isPrimitive && (*it).direction == Argument::In)
@@ -1552,8 +1552,8 @@ void MethodGenerator::writeProxyAsyncReplyHandler(const Class& classData,
     stream << "    m_asyncCalls.erase(findIt);" << endl;
     stream << endl;
 
-    QValueList<Method>::const_iterator it    = classData.asyncReplySignals.begin();
-    QValueList<Method>::const_iterator endIt = classData.asyncReplySignals.end();
+    QValueList<Method>::ConstIterator it    = classData.asyncReplySignals.begin();
+    QValueList<Method>::ConstIterator endIt = classData.asyncReplySignals.end();
     bool first = true;
     for (; it != endIt; ++it)
     {
@@ -1572,7 +1572,7 @@ void MethodGenerator::writeProxyAsyncReplyHandler(const Class& classData,
         stream << "        int _asyncCallId = asyncCallId;" << endl;
 
         Method signal = *it;
-        signal.arguments.pop_front();
+        signal.arguments.remove(signal.arguments.begin());
 
         writeVariables("        ", signal, stream);
         stream << endl;
@@ -1603,8 +1603,8 @@ void MethodGenerator::writeIntrospectionDataMethod(const Class& classData,
     bool firstMethod   = true;
     bool firstArgument = true;
 
-    QValueList<Method>::const_iterator it    = classData.methods.begin();
-    QValueList<Method>::const_iterator endIt = classData.methods.end();
+    QValueList<Method>::ConstIterator it    = classData.methods.begin();
+    QValueList<Method>::ConstIterator endIt = classData.methods.end();
     for (; it != endIt; ++it)
     {
         if (firstMethod)
@@ -1626,8 +1626,8 @@ void MethodGenerator::writeIntrospectionDataMethod(const Class& classData,
         stream << "    interfaceElement.appendChild(methodElement);" << endl;
     }
 
-    it    = classData.signals.begin();
-    endIt = classData.signals.end();
+    it    = classData.msignals.begin();
+    endIt = classData.msignals.end();
     for (; it != endIt; ++it)
     {
         if (firstMethod)
@@ -1733,9 +1733,9 @@ void MethodGenerator::writeNodeMethods(const Class& classData,
 
     stream << classData.name << "::Private::~Private()" << endl;
     stream << "{" << endl;
-    stream << "    QMap<QString, QDBusObjectBase*>::const_iterator it    = "
+    stream << "    QMap<QString, QDBusObjectBase*>::ConstIterator it    = "
            << "interfaces.begin();" << endl;
-    stream << "    QMap<QString, QDBusObjectBase*>::const_iterator endIt = "
+    stream << "    QMap<QString, QDBusObjectBase*>::ConstIterator endIt = "
            << "interfaces.end();" << endl;
     stream << "    for (; it != endIt; ++it)" << endl;
     stream << "    {" << endl;

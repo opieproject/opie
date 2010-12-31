@@ -40,13 +40,13 @@ public:
 
     void removeString(const QString& key)
     {
-        erase(key);
+        remove(key);
     }
 
     void insertStringList(const QStringList& list)
     {
-        QStringList::const_iterator it    = list.begin();
-        QStringList::const_iterator endIt = list.end();
+        QStringList::ConstIterator it    = list.begin();
+        QStringList::ConstIterator endIt = list.end();
         for (; it != endIt; ++it)
         {
             insert(*it, true);
@@ -81,8 +81,8 @@ static void closeIncludeGuard(const QString& className, QTextStream& stream)
 
 static void openNamespaces(const QStringList& namespaces, QTextStream& stream)
 {
-    QStringList::const_iterator it    = namespaces.begin();
-    QStringList::const_iterator endIt = namespaces.end();
+    QStringList::ConstIterator it    = namespaces.begin();
+    QStringList::ConstIterator endIt = namespaces.end();
     for (; it != endIt; ++it)
     {
         stream << "namespace " << *it << endl;
@@ -93,8 +93,8 @@ static void openNamespaces(const QStringList& namespaces, QTextStream& stream)
 
 static void closeNamespaces(const QStringList& namespaces, QTextStream& stream)
 {
-    QStringList::const_iterator it    = namespaces.end();
-    QStringList::const_iterator endIt = namespaces.end();
+    QStringList::ConstIterator it    = namespaces.end();
+    QStringList::ConstIterator endIt = namespaces.end();
     for (--it; it != endIt; --it)
     {
         stream << "}; // namespace " << *it << endl;
@@ -102,18 +102,18 @@ static void closeNamespaces(const QStringList& namespaces, QTextStream& stream)
     }
 }
 
-static void writeIncludes(const QString& description, const QStringList& includes,
+static void writeIncludes(const QString& description, const Set & includes,
         QTextStream& stream)
 {
     if (includes.isEmpty()) return;
 
     stream << "// " << description << " includes" << endl;
 
-    QStringList::const_iterator it    = includes.begin();
-    QStringList::const_iterator endIt = includes.end();
+    Set::ConstIterator it    = includes.begin();
+    Set::ConstIterator endIt = includes.end();
     for (;it != endIt; ++it)
     {
-        stream << "#include " << *it << endl;
+        stream << "#include " << it.key() << endl;
     }
 
     stream << endl;
@@ -122,15 +122,15 @@ static void writeIncludes(const QString& description, const QStringList& include
 static void extractHeaderIncludes(const Method& method,
         QMap<QString, Set>& includes)
 {
-    QValueList<Argument>::const_iterator it    = method.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = method.arguments.end();
+    QValueList<Argument>::ConstIterator it    = method.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = method.arguments.end();
     for (; it != endIt; ++it)
     {
         if ((*it).headerIncludes.isEmpty()) continue;
 
-        QMap<QString, QStringList>::const_iterator mapIt =
+        QMap<QString, QStringList>::ConstIterator mapIt =
             (*it).headerIncludes.begin();
-        QMap<QString, QStringList>::const_iterator mapEndIt =
+        QMap<QString, QStringList>::ConstIterator mapEndIt =
             (*it).headerIncludes.end();
 
         for (; mapIt != mapEndIt; ++mapIt)
@@ -142,8 +142,8 @@ static void extractHeaderIncludes(const Method& method,
 
 static void extractForwardDeclarations(const Method& method, Set& forwards)
 {
-    QValueList<Argument>::const_iterator it    = method.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = method.arguments.end();
+    QValueList<Argument>::ConstIterator it    = method.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = method.arguments.end();
     for (; it != endIt; ++it)
     {
         if ((*it).forwardDeclarations.isEmpty()) continue;
@@ -158,8 +158,8 @@ static void writeHeaderIncludes(const Class& classData, Class::Role role,
     QMap<QString, Set> includes;
     Set forwards;
 
-    QValueList<Method>::const_iterator it    = classData.methods.begin();
-    QValueList<Method>::const_iterator endIt = classData.methods.end();
+    QValueList<Method>::ConstIterator it    = classData.methods.begin();
+    QValueList<Method>::ConstIterator endIt = classData.methods.end();
     for (; it != endIt; ++it)
     {
         if ((*it).arguments.isEmpty()) continue;
@@ -168,8 +168,8 @@ static void writeHeaderIncludes(const Class& classData, Class::Role role,
         extractForwardDeclarations(*it, forwards);
     }
 
-    it    = classData.signals.begin();
-    endIt = classData.signals.end();
+    it    = classData.msignals.begin();
+    endIt = classData.msignals.end();
     for (; it != endIt; ++it)
     {
         if ((*it).arguments.isEmpty()) continue;
@@ -179,15 +179,15 @@ static void writeHeaderIncludes(const Class& classData, Class::Role role,
     }
 
 
-    QValueList<Property>::const_iterator propertyIt = classData.properties.begin();
-    QValueList<Property>::const_iterator propertyEndIt = classData.properties.end();
+    QValueList<Property>::ConstIterator propertyIt = classData.properties.begin();
+    QValueList<Property>::ConstIterator propertyEndIt = classData.properties.end();
     for (; propertyIt != propertyEndIt; ++propertyIt)
     {
         if (!(*propertyIt).headerIncludes.isEmpty())
         {
-            QMap<QString, QStringList>::const_iterator mapIt =
+            QMap<QString, QStringList>::ConstIterator mapIt =
                 (*propertyIt).headerIncludes.begin();
-            QMap<QString, QStringList>::const_iterator mapEndIt =
+            QMap<QString, QStringList>::ConstIterator mapEndIt =
                 (*propertyIt).headerIncludes.end();
 
             for (; mapIt != mapEndIt; ++mapIt)
@@ -208,15 +208,15 @@ static void writeHeaderIncludes(const Class& classData, Class::Role role,
             includes["qdbus"].insertString("<dbus/qdbusobject.h>");
             forwards.insertString("class QDBusError");
             forwards.insertString("class QDomElement");
-            if (!classData.signals.isEmpty())
+            if (!classData.msignals.isEmpty())
                 forwards.insertString("class QString");
             if (!classData.asyncMethods.isEmpty())
             {
                 includes["Qt"].insertString("<qmap.h>");
-                forwards.erase("template <typename K, typename V> class QMap");
+                forwards.remove("template <typename K, typename V> class QMap");
 
                 includes["qdbus"].insertString("<dbus/qdbusmessage.h>");
-                forwards.erase("class QDBusMessage");
+                forwards.remove("class QDBusMessage");
             }
             break;
 
@@ -232,7 +232,7 @@ static void writeHeaderIncludes(const Class& classData, Class::Role role,
             if (!classData.asyncMethods.isEmpty())
             {
                 includes["Qt"].insertString("<qmap.h>");
-                forwards.erase("template <typename K, typename V> class QMap");
+                forwards.remove("template <typename K, typename V> class QMap");
             }
             break;
 
@@ -244,17 +244,17 @@ static void writeHeaderIncludes(const Class& classData, Class::Role role,
     }
 
     if (!includes["Qt"].isEmpty())
-        writeIncludes("Qt", includes["Qt"].keys(), stream);
+        writeIncludes("Qt", includes["Qt"], stream);
 
     if (!includes["qdbus"].isEmpty())
-        writeIncludes("Qt D-Bus", includes["qdbus"].keys(), stream);
+        writeIncludes("Qt D-Bus", includes["qdbus"], stream);
 
     if (!includes["local"].isEmpty())
-        writeIncludes("local", includes["local"].keys(), stream);
+        writeIncludes("local", includes["local"], stream);
 
     stream << "// forward declarations" << endl;
-    Set::const_iterator setIt    = forwards.begin();
-    Set::const_iterator setEndIt = forwards.end();
+    Set::ConstIterator setIt    = forwards.begin();
+    Set::ConstIterator setEndIt = forwards.end();
     for (; setIt != setEndIt; ++setIt)
     {
         stream << setIt.key() << ";" << endl;
@@ -265,15 +265,15 @@ static void writeHeaderIncludes(const Class& classData, Class::Role role,
 static void extractSourceIncludes(const Method& method,
         QMap<QString, Set>& includes)
 {
-    QValueList<Argument>::const_iterator it    = method.arguments.begin();
-    QValueList<Argument>::const_iterator endIt = method.arguments.end();
+    QValueList<Argument>::ConstIterator it    = method.arguments.begin();
+    QValueList<Argument>::ConstIterator endIt = method.arguments.end();
     for (; it != endIt; ++it)
     {
         if ((*it).sourceIncludes.isEmpty()) continue;
 
-        QMap<QString, QStringList>::const_iterator mapIt =
+        QMap<QString, QStringList>::ConstIterator mapIt =
             (*it).sourceIncludes.begin();
-        QMap<QString, QStringList>::const_iterator mapEndIt =
+        QMap<QString, QStringList>::ConstIterator mapEndIt =
             (*it).sourceIncludes.end();
 
         for (; mapIt != mapEndIt; ++mapIt)
@@ -288,8 +288,8 @@ static void writeSourceIncludes(const Class& classData, Class::Role role,
 {
     QMap<QString, Set> includes;
 
-    QValueList<Method>::const_iterator it    = classData.methods.begin();
-    QValueList<Method>::const_iterator endIt = classData.methods.end();
+    QValueList<Method>::ConstIterator it    = classData.methods.begin();
+    QValueList<Method>::ConstIterator endIt = classData.methods.end();
     for (; it != endIt; ++it)
     {
         if ((*it).arguments.isEmpty()) continue;
@@ -297,8 +297,8 @@ static void writeSourceIncludes(const Class& classData, Class::Role role,
         extractSourceIncludes(*it, includes);
     }
 
-    it    = classData.signals.begin();
-    endIt = classData.signals.end();
+    it    = classData.msignals.begin();
+    endIt = classData.msignals.end();
     for (; it != endIt; ++it)
     {
         if ((*it).arguments.isEmpty()) continue;
@@ -306,15 +306,15 @@ static void writeSourceIncludes(const Class& classData, Class::Role role,
         extractSourceIncludes(*it, includes);
     }
 
-    QValueList<Property>::const_iterator propertyIt = classData.properties.begin();
-    QValueList<Property>::const_iterator propertyEndIt = classData.properties.end();
+    QValueList<Property>::ConstIterator propertyIt = classData.properties.begin();
+    QValueList<Property>::ConstIterator propertyEndIt = classData.properties.end();
     for (; propertyIt != propertyEndIt; ++propertyIt)
     {
         if ((*propertyIt).sourceIncludes.isEmpty()) continue;
 
-        QMap<QString, QStringList>::const_iterator mapIt =
+        QMap<QString, QStringList>::ConstIterator mapIt =
             (*propertyIt).sourceIncludes.begin();
-        QMap<QString, QStringList>::const_iterator mapEndIt =
+        QMap<QString, QStringList>::ConstIterator mapEndIt =
             (*propertyIt).sourceIncludes.end();
 
         for (; mapIt != mapEndIt; ++mapIt)
@@ -351,13 +351,13 @@ static void writeSourceIncludes(const Class& classData, Class::Role role,
     }
 
     if (!includes["Qt"].isEmpty())
-        writeIncludes("Qt", includes["Qt"].keys(), stream);
+        writeIncludes("Qt", includes["Qt"], stream);
 
     if (!includes["qdbus"].isEmpty())
-        writeIncludes("Qt D-Bus", includes["qdbus"].keys(), stream);
+        writeIncludes("Qt D-Bus", includes["qdbus"], stream);
 
     if (!includes["local"].isEmpty())
-        writeIncludes("local", includes["local"].keys(), stream);
+        writeIncludes("local", includes["local"], stream);
 
     stream << endl;
 }
@@ -367,8 +367,8 @@ static void writeInterfaceIncludes(const QValueList<Class> interfaces,
 {
     stream << "// interface classes includes" << endl;
 
-    QValueList<Class>::const_iterator it    = interfaces.begin();
-    QValueList<Class>::const_iterator endIt = interfaces.end();
+    QValueList<Class>::ConstIterator it    = interfaces.begin();
+    QValueList<Class>::ConstIterator endIt = interfaces.end();
     for (; it != endIt; ++it)
     {
         stream << "#include \"" << (*it).name.lower() << ".h\"" << endl;
@@ -475,9 +475,9 @@ static void writeMethodDeclarations(const Class& classData, Class::Role role,
     {
         stream << "public:" << endl;
 
-        QValueList<Method>::const_iterator it =
+        QValueList<Method>::ConstIterator it =
             classData.asyncReplyMethods.begin();
-        QValueList<Method>::const_iterator endIt =
+        QValueList<Method>::ConstIterator endIt =
             classData.asyncReplyMethods.end();
         for (; it != endIt; ++it)
         {
@@ -513,8 +513,8 @@ static void writeMethodDeclarations(const Class& classData, Class::Role role,
                 break;
         }
 
-        QValueList<Method>::const_iterator it    = classData.methods.begin();
-        QValueList<Method>::const_iterator endIt = classData.methods.end();
+        QValueList<Method>::ConstIterator it    = classData.methods.begin();
+        QValueList<Method>::ConstIterator endIt = classData.methods.end();
         for (; it != endIt; ++it)
         {
             if ((*it).async) continue;
@@ -577,8 +577,8 @@ static void writeMethodDeclarations(const Class& classData, Class::Role role,
 
         if (!skip)
         {
-            QValueList<Property>::const_iterator it    = classData.properties.begin();
-            QValueList<Property>::const_iterator endIt = classData.properties.end();
+            QValueList<Property>::ConstIterator it    = classData.properties.begin();
+            QValueList<Property>::ConstIterator endIt = classData.properties.end();
             for (; it != endIt; ++it)
             {
                 MethodGenerator::writePropertyDeclaration(*it, pureVirtual, stream);
@@ -606,7 +606,7 @@ static void writeMethodDeclarations(const Class& classData, Class::Role role,
 
         case Class::Proxy:
         {
-            if (!classData.signals.isEmpty())
+            if (!classData.msignals.isEmpty())
             {
                 stream << "protected slots: // usually no need to reimplement" << endl;
                 stream << "    virtual void slotHandleDBusSignal(const QDBusMessage& message);" << endl;
@@ -615,7 +615,7 @@ static void writeMethodDeclarations(const Class& classData, Class::Role role,
 
             if (!classData.asyncReplySignals.isEmpty())
             {
-                if (classData.signals.isEmpty())
+                if (classData.msignals.isEmpty())
                 {
                     stream << "protected slots: // usually no need to reimplement" << endl;
                 }
@@ -645,7 +645,7 @@ static void writeMethodDeclarations(const Class& classData, Class::Role role,
 static void writeSignalDeclarations(const Class& classData, Class::Role role,
         QTextStream& stream)
 {
-    if (classData.signals.isEmpty() && classData.asyncReplySignals.isEmpty())
+    if (classData.msignals.isEmpty() && classData.asyncReplySignals.isEmpty())
         return;
 
     QString prefix;
@@ -669,8 +669,8 @@ static void writeSignalDeclarations(const Class& classData, Class::Role role,
             break;
     }
 
-    QValueList<Method>::const_iterator it    = classData.signals.begin();
-    QValueList<Method>::const_iterator endIt = classData.signals.end();
+    QValueList<Method>::ConstIterator it    = classData.msignals.begin();
+    QValueList<Method>::ConstIterator endIt = classData.msignals.end();
     for (; it != endIt; ++it)
     {
         stream << prefix;
@@ -694,10 +694,10 @@ static void writeSignalDeclarations(const Class& classData, Class::Role role,
 
 static void writeSignalEmitters(const Class& classData, QTextStream& stream)
 {
-    if (classData.signals.isEmpty()) return;
+    if (classData.msignals.isEmpty()) return;
 
-    QValueList<Method>::const_iterator it    = classData.signals.begin();
-    QValueList<Method>::const_iterator endIt = classData.signals.end();
+    QValueList<Method>::ConstIterator it    = classData.msignals.begin();
+    QValueList<Method>::ConstIterator endIt = classData.msignals.end();
     for (; it != endIt; ++it)
     {
         MethodGenerator::writeSignalEmitter(classData, *it, stream);
@@ -709,8 +709,8 @@ static void writeSignalEmitters(const Class& classData, QTextStream& stream)
 static void writeMethodCallDeclarations(const Class& classData,
         QTextStream& stream)
 {
-    QValueList<Method>::const_iterator it    = classData.methods.begin();
-    QValueList<Method>::const_iterator endIt = classData.methods.end();
+    QValueList<Method>::ConstIterator it    = classData.methods.begin();
+    QValueList<Method>::ConstIterator endIt = classData.methods.end();
     for (; it != endIt; ++it)
     {
         stream << "    ";
@@ -730,8 +730,8 @@ static void writeInterfaceAsyncReplyHandlers(const Class& classData,
 {
     if (classData.asyncReplyMethods.isEmpty()) return;
 
-    QValueList<Method>::const_iterator it    = classData.asyncReplyMethods.begin();
-    QValueList<Method>::const_iterator endIt = classData.asyncReplyMethods.end();
+    QValueList<Method>::ConstIterator it    = classData.asyncReplyMethods.begin();
+    QValueList<Method>::ConstIterator endIt = classData.asyncReplyMethods.end();
     for (; it != endIt; ++it)
     {
         MethodGenerator::writeInterfaceAsyncReplyHandler(classData, *it, stream);
@@ -740,8 +740,8 @@ static void writeInterfaceAsyncReplyHandlers(const Class& classData,
 
 static void writeMethodCalls(const Class& classData, QTextStream& stream)
 {
-    QValueList<Method>::const_iterator it    = classData.methods.begin();
-    QValueList<Method>::const_iterator endIt = classData.methods.end();
+    QValueList<Method>::ConstIterator it    = classData.methods.begin();
+    QValueList<Method>::ConstIterator endIt = classData.methods.end();
     for (; it != endIt; ++it)
     {
         if ((*it).async) continue;
@@ -759,8 +759,8 @@ static void writeMethodCalls(const Class& classData, QTextStream& stream)
 
 static void writeProxyMethods(const Class& classData, QTextStream& stream)
 {
-    QValueList<Method>::const_iterator it    = classData.methods.begin();
-    QValueList<Method>::const_iterator endIt = classData.methods.end();
+    QValueList<Method>::ConstIterator it    = classData.methods.begin();
+    QValueList<Method>::ConstIterator endIt = classData.methods.end();
     for (; it != endIt; ++it)
     {
         if ((*it).async) continue;
@@ -782,8 +782,8 @@ static void writeProxyProperties(const Class& classData, QTextStream& stream)
 
     MethodGenerator::writeProxyGenericProperty(classData, stream);
 
-    QValueList<Property>::const_iterator it    = classData.properties.begin();
-    QValueList<Property>::const_iterator endIt = classData.properties.end();
+    QValueList<Property>::ConstIterator it    = classData.properties.begin();
+    QValueList<Property>::ConstIterator endIt = classData.properties.end();
     for (; it != endIt; ++it)
     {
         MethodGenerator::writeProxyProperty(classData, *it, stream);
@@ -802,8 +802,8 @@ static void splitAsyncProxyMethods(Class& classData)
     Argument idArgSignal = idArgMethod;
     idArgSignal.direction = Argument::In;
 
-    QValueList<Method>::iterator it    = classData.methods.begin();
-    QValueList<Method>::iterator endIt = classData.methods.end();
+    QValueList<Method>::Iterator it    = classData.methods.begin();
+    QValueList<Method>::Iterator endIt = classData.methods.end();
     for (; it != endIt; ++it)
     {
         if (!(*it).async) continue;
@@ -818,8 +818,8 @@ static void splitAsyncProxyMethods(Class& classData)
         signalArgs << idArgSignal;
 
         // split in/out arguments: "in" belong to the method, "out" to the new signal
-        QValueList<Argument>::const_iterator argIt    = method.arguments.begin();
-        QValueList<Argument>::const_iterator argEndIt = method.arguments.end();
+        QValueList<Argument>::ConstIterator argIt    = method.arguments.begin();
+        QValueList<Argument>::ConstIterator argEndIt = method.arguments.end();
         for (; argIt != argEndIt; ++argIt)
         {
             if ((*argIt).direction == Argument::Out)
@@ -859,8 +859,8 @@ static void splitAsyncInterfaceMethods(Class& classData)
 
     Argument idArgReply = idArgMethod;
 
-    QValueList<Method>::iterator it    = classData.methods.begin();
-    QValueList<Method>::iterator endIt = classData.methods.end();
+    QValueList<Method>::Iterator it    = classData.methods.begin();
+    QValueList<Method>::Iterator endIt = classData.methods.end();
     for (; it != endIt; ++it)
     {
         if (!(*it).async) continue;
@@ -875,8 +875,8 @@ static void splitAsyncInterfaceMethods(Class& classData)
         replyArgs  << idArgReply;
 
         // split in/out arguments: "in" belong to the call, "out" to the reply
-        QValueList<Argument>::const_iterator argIt    = method.arguments.begin();
-        QValueList<Argument>::const_iterator argEndIt = method.arguments.end();
+        QValueList<Argument>::ConstIterator argIt    = method.arguments.begin();
+        QValueList<Argument>::ConstIterator argEndIt = method.arguments.end();
         for (; argIt != argEndIt; ++argIt)
         {
             if ((*argIt).direction == Argument::Out)
@@ -967,8 +967,8 @@ bool ClassGenerator::extractClass(const QDomElement& interfaceElement,
 
     if (nameParts.count() < 2) return false;
 
-    classData.name = nameParts.back();
-    nameParts.pop_back();
+    classData.name = nameParts.last();
+    nameParts.remove(nameParts.last());
     classData.namespaces = nameParts;
 
     return MethodGenerator::extractMethods(interfaceElement, classData);
@@ -1042,7 +1042,7 @@ bool ClassGenerator::generateProxy(const Class& classData,
 
     writeProxyProperties(classDataCopy, sourceStream);
 
-    if (!classDataCopy.signals.isEmpty())
+    if (!classDataCopy.msignals.isEmpty())
         MethodGenerator::writeSignalHandler(classDataCopy, sourceStream);
 
     if (!classDataCopy.asyncReplySignals.isEmpty())
