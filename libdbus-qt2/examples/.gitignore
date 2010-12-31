@@ -1,0 +1,6 @@
+mocdir/
+objdir/
+Makefile
+example-client
+example-service
+
