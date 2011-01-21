@@ -73,6 +73,17 @@ public:
     }
 
     /**
+     * @brief Creates a variant object the given value
+     *
+     * @param data the data value to initialise the variant with
+     */
+    QDBusVariant(const QDBusData &data)
+    {
+        value     = data;
+        signature = value.buildDBusSignature();
+    }
+
+    /**
      * @brief Checks if the given @p other variant is equal to this one
      *
      * @param other the variant object to compare with
