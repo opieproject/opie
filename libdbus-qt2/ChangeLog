@@ -1,3 +1,8 @@
+2011-01-20 Paul Eggleton:
+    * Backport Qt3 bindings to Qt2, with a focus on Qt Embedded 2.3.10 (for 
+      Opie)
+    * Convert from autotools to qmake
+
 2008-06-05 krake: Updating changelog after forgetting about it for a long
                   time. Rather incomplete list, listing only major changes.
     * Added dbusxml2qt3 code generation tool for creating client and server side
