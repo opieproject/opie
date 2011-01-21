@@ -42,7 +42,7 @@ struct DBusMessage;
  * A QDBusMessage is implicitly shared, similar to a QString, i.e. copying
  * a message creates just a shallow copy.
  *
- * The QDBusMessage is the Qt3 bindings means of encapsulating data for a
+ * The QDBusMessage is the Qt2 bindings means of encapsulating data for a
  * method call, a method reply or an error.
  *
  * Data specifying the sender and receipient is directly accessible through
@@ -476,7 +476,7 @@ public:
 
 //protected:
     /**
-     * @brief Creates a raw D-Bus message from this Qt3-bindings message
+     * @brief Creates a raw D-Bus message from this Qt2-bindings message
      *
      * Marshalls data contained in the message's value list into D-Bus data
      * format and creates a low level API D-Bus message for it.
@@ -490,7 +490,7 @@ public:
     DBusMessage *toDBusMessage() const;
 
     /**
-     * @brief Creates a Qt3-bindings message from the given raw D-Bus message
+     * @brief Creates a Qt2-bindings message from the given raw D-Bus message
      *
      * De-marshalls data contained in the message to a list of QDBusData.
      *
@@ -501,7 +501,7 @@ public:
      *
      * @param dmsg a C API D-Bus message
      *
-     * @return a Qt3 bindings message. Can be an #InvalidMessage if the given
+     * @return a Qt2 bindings message. Can be an #InvalidMessage if the given
      *         message was @c 0 or if de-marshalling failed
      */
     static QDBusMessage fromDBusMessage(DBusMessage *dmsg);

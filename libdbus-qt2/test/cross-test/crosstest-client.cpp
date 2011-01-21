@@ -332,7 +332,7 @@ void TestClientNode::testIdentity()
     QDBusVariant output;
 
     input.signature = "s";
-    input.value     = QDBusData::fromString("Qt3 D-Bus bindings");
+    input.value     = QDBusData::fromString("Qt2 D-Bus bindings");
 
     QDBusError error;
     if (!m_mainProxy->Identity(input, output, error))
@@ -939,7 +939,7 @@ void TestClientNode::testPrimitize()
     QValueList<QDBusVariant> output;
 
     input.signature = "s";
-    input.value     = QDBusData::fromString("Qt3 D-Bus bindings");
+    input.value     = QDBusData::fromString("Qt2 D-Bus bindings");
 
     QDBusError error;
     if (!m_mainProxy->Primitize(input, output, error))

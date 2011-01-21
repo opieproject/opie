@@ -14,7 +14,7 @@ isEmpty( BUILDDIR ) {
 
 INCLUDEPATH += ../
 
-LIBS += -L$$(BUILDDIR)/.libs -L$$(BUILDDIR)  -ldbus-1-qt3 
+LIBS += -L$$(BUILDDIR)/.libs -L$$(BUILDDIR)  -ldbus-qt2 
 
 # use pkg-config to query for the main DBus lib
 LIBS += $$system(pkg-config --libs dbus-1)

@@ -36,7 +36,7 @@
  *
  * @section dbusservice-introduction Introduction
  *
- * The Qt3 bindings do not support autogeneration of service objects yet. In
+ * The Qt2 bindings do not support autogeneration of service objects yet. In
  * order to provide interfaces over D-Bus, an application has to implement the
  * QDBusObjectBase interface and register an instance of the resulting class
  * with the QDBusConnection.

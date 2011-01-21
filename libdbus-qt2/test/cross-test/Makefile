@@ -23,7 +23,7 @@ crosstest-client.mak: crosstest-client.pro
 	qmake -o crosstest-client.mak crosstest-client.pro
 
 $(GENERATED): test-introspect.xml
-	../../tools/dbusxml2qt3/dbusxml2qt3 test-introspect.xml
+	../../tools/dbusxml2qt2/dbusxml2qt2 test-introspect.xml
 
 cross-test-server: crosstest-server
 	./crosstest-server 2>>server.err
@@ -50,6 +50,6 @@ distclean-server: crosstest-server.mak
 distclean-client: crosstest-client.mak
 	$(MAKE) -f crosstest-client.mak distclean
 
-dbusxml2tq3:
-	cd ../../tools/dbusxml2qt3 && qmake dbusxml2qt3.pro
-	cd ../../tools/dbusxml2qt3 && $(MAKE)
+dbusxml2tq2:
+	cd ../../tools/dbusxml2qt2 && qmake dbusxml2qt2.pro
+	cd ../../tools/dbusxml2qt2 && $(MAKE)

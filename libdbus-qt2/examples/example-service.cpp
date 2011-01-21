@@ -1,4 +1,4 @@
-/* example-service.cpp Qt3 D-Bus bindings service example
+/* example-service.cpp Qt2 D-Bus bindings service example
  *
  * Copyright (C) 2005 Kevin Krammer <kevin.krammer@gmx.at>
  *

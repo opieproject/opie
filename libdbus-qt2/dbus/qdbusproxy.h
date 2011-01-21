@@ -76,7 +76,7 @@
  *       proxy.setPath("/org/freedesktop/DBus");     // which object inside the peer work with
  *       proxy.setInterface("org.freedesktop.DBus"); // which of its interfaces we will use
  *
- *       // call the "ListNames" method. It returns an array of string, in Qt3 terms
+ *       // call the "ListNames" method. It returns an array of string, in Qt2 terms
  *       // a QStringList, it expects no parameters
  *
  *       QValueList<QDBusData> params;
