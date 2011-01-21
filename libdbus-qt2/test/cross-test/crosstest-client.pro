@@ -13,8 +13,8 @@ HEADERS += crosstest-client.h \
 TARGET = crosstest-client
 
 # use pkg-config to query for the main DBus lib
-QMAKE_CXXFLAGS += $$system(pkg-config --cflags dbus-1-qt3)
-LIBS += $$system(pkg-config --libs dbus-1-qt3)
+QMAKE_CXXFLAGS += $$system(pkg-config --cflags dbus-qt2)
+LIBS += $$system(pkg-config --libs dbus-qt2)
 
 MOC_DIR = mocdir
 OBJECTS_DIR = objdir

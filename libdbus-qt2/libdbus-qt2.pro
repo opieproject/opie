@@ -20,5 +20,5 @@ SOURCES     = qdbusconnection.cpp \
 
 INCLUDEPATH += $$system(pkg-config --cflags-only-I dbus-1 | sed 's/-I//g')
 LIBS        += $$system(pkg-config --libs dbus-1)
-TARGET      = dbus-qt3
+TARGET      = dbus-qt2
 VERSION     = 1.0

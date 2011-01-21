@@ -51,7 +51,7 @@ int main(int argc, char** argv)
 
     if (!checkForOption(options, "filename"))
     {
-        std::cerr << "dbusxml2qt3: introspection data file missing" << std::endl;
+        std::cerr << "dbusxml2qt2: introspection data file missing" << std::endl;
         usage();
         exit(1);
     }
@@ -60,7 +60,7 @@ int main(int argc, char** argv)
     QFile file(fileName);
     if (!file.exists())
     {
-        std::cerr << "dbusxml2qt3: introspection data file '"
+        std::cerr << "dbusxml2qt2: introspection data file '"
                   << fileName.local8Bit().data()
                   << "' does not exist" << std::endl;
         exit(2);
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
 
     if (!file.open(IO_ReadOnly))
     {
-        std::cerr << "dbusxml2qt3: introspection data file '"
+        std::cerr << "dbusxml2qt2: introspection data file '"
                   << fileName.local8Bit().data()
                   << "' cannot be read" << std::endl;
         exit(2);
@@ -80,7 +80,7 @@ int main(int argc, char** argv)
     {
         file.close();
 
-        std::cerr << "dbusxml2qt3: introspection data file '"
+        std::cerr << "dbusxml2qt2: introspection data file '"
                   << fileName.local8Bit().data()
                   << "' cannot be parsed" << std::endl;
         exit(2);
@@ -91,7 +91,7 @@ int main(int argc, char** argv)
     QDomElement rootElement = document.documentElement();
     if (rootElement.isNull() || rootElement.tagName() != "node")
     {
-        std::cerr << "dbusxml2qt3: introspection data file '"
+        std::cerr << "dbusxml2qt2: introspection data file '"
                   << fileName.local8Bit().data()
                   << "' does not have a 'node' element as its root node"
                   << std::endl;
@@ -126,7 +126,7 @@ int main(int argc, char** argv)
 
     if (interfaces.isEmpty())
     {
-        std::cerr << "dbusxml2qt3: introspection data file '"
+        std::cerr << "dbusxml2qt2: introspection data file '"
                   << fileName.local8Bit().data()
                   << "' does not contain any valid interface descriptions"
                   << std::endl;
@@ -145,7 +145,7 @@ int main(int argc, char** argv)
         // class name only useful for single interfaces or just node
         if (interfaces.count() > 1 && (generateAll || generateInterfaces || generateProxies))
         {
-            std::cerr << "dbusxml2qt3: class name option specified but "
+            std::cerr << "dbusxml2qt2: class name option specified but "
                       << "introspection data file '"
                       << fileName.local8Bit().data()
                       << "' contains more than one interface description"
@@ -187,7 +187,7 @@ int main(int argc, char** argv)
         {
             if (!ClassGenerator::initStreams(baseName, headerStream, sourceStream))
             {
-                std::cerr << "dbusxml2qt3: proxy files, using base name '"
+                std::cerr << "dbusxml2qt2: proxy files, using base name '"
                           << baseName.local8Bit().data()
                           << "', could not be opened for writing"
                           << std::endl;
@@ -204,7 +204,7 @@ int main(int argc, char** argv)
                 if (!ClassGenerator::initStreams((*it).name.lower() + "interface",
                                                  headerStream, sourceStream))
                 {
-                    std::cerr << "dbusxml2qt3: interface files, using base name '"
+                    std::cerr << "dbusxml2qt2: interface files, using base name '"
                             << baseName.local8Bit().data()
                             << "', could not be opened for writing"
                             << std::endl;
@@ -235,7 +235,7 @@ int main(int argc, char** argv)
         {
             if (!ClassGenerator::initStreams(baseName, headerStream, sourceStream))
             {
-                std::cerr << "dbusxml2qt3: proxy files, using base name '"
+                std::cerr << "dbusxml2qt2: proxy files, using base name '"
                           << baseName.local8Bit().data()
                           << "', could not be opened for writing"
                           << std::endl;
@@ -252,7 +252,7 @@ int main(int argc, char** argv)
                 if (!ClassGenerator::initStreams((*it).name.lower() + "proxy",
                                                  headerStream, sourceStream))
                 {
-                    std::cerr << "dbusxml2qt3: proxy files, using base name '"
+                    std::cerr << "dbusxml2qt2: proxy files, using base name '"
                             << baseName.local8Bit().data()
                             << "', could not be opened for writing"
                             << std::endl;
@@ -310,7 +310,7 @@ int main(int argc, char** argv)
             if (!ClassGenerator::initStreams(classData.name.lower() + "interface",
                                              headerStream, sourceStream))
             {
-                std::cerr << "dbusxml2qt3: interface files, using base name '"
+                std::cerr << "dbusxml2qt2: interface files, using base name '"
                         << classData.name.lower().local8Bit().data() << "interface"
                         << "', could not be opened for writing"
                         << std::endl;
@@ -331,7 +331,7 @@ int main(int argc, char** argv)
             if (nodeClassName.startsWith("/")) nodeClassName = nodeClassName.mid(1);
             if (nodeClassName.isEmpty())
             {
-                std::cerr << "dbusxml2qt3: cannot generate node without class name."
+                std::cerr << "dbusxml2qt2: cannot generate node without class name."
                           << std::endl;
                 exit(3);
             }
@@ -362,7 +362,7 @@ int main(int argc, char** argv)
 
         if (!ClassGenerator::initStreams(baseName, headerStream, sourceStream))
         {
-            std::cerr << "dbusxml2qt3: interface files, using base name '"
+            std::cerr << "dbusxml2qt2: interface files, using base name '"
                       << baseName.local8Bit().data()
                       << "', could not be opened for writing"
                       << std::endl;
@@ -380,7 +380,7 @@ int main(int argc, char** argv)
 
 void usage()
 {
-    std::cout << "usage: dbusxml2qt3 [options] <introspectionfile>" << std::endl;
+    std::cout << "usage: dbusxml2qt2 [options] <introspectionfile>" << std::endl;
     std::cout << std::endl;
 
     std::cout << "Options:" << std::endl;
@@ -414,7 +414,7 @@ void usage()
     std::cout << std::endl;
 
     std::cout << "Examples:" << std::endl;
-    std::cout << "dbusxml2qt3 myinterface.xml" << std::endl;
+    std::cout << "dbusxml2qt2 myinterface.xml" << std::endl;
     std::cout << "\tGenerates as much as possible, i.e. interfaces, proxies and, "
               << "if a node name is specified in 'myinterface.xml', the node files"
               << std::endl;
@@ -422,28 +422,28 @@ void usage()
               << "for the file names" << std::endl;
     std::cout << std::endl;
 
-    std::cout << "dbusxml2qt3 myinterface.xml -N" << std::endl;
+    std::cout << "dbusxml2qt2 myinterface.xml -N" << std::endl;
     std::cout << "\tSame as first example but does not use namespaces"
               << std::endl;
     std::cout << std::endl;
 
-    std::cout << "dbusxml2qt3 myinterface.xml -N org::myorg" << std::endl;
+    std::cout << "dbusxml2qt2 myinterface.xml -N org::myorg" << std::endl;
     std::cout << "\tSame as first example but overrides namespaces with 'org::myorg'"
               << std::endl;
     std::cout << std::endl;
 
-    std::cout << "dbusxml2qt3 myinterface.xml -n mynode -c MyNode" << std::endl;
+    std::cout << "dbusxml2qt2 myinterface.xml -n mynode -c MyNode" << std::endl;
     std::cout << "\tGenerate only node files, use 'mynode' as the file basename "
               << "and classname 'MyClass'"
               << std::endl;
     std::cout << std::endl;
 
-    std::cout << "dbusxml2qt3 myinterface.xml -p" << std::endl;
+    std::cout << "dbusxml2qt2 myinterface.xml -p" << std::endl;
     std::cout << "\tGenerate only proxy files, use default file basename"
               << std::endl;
     std::cout << std::endl;
 
-    std::cout << "dbusxml2qt3 myinterface.xml -p myproxy" << std::endl;
+    std::cout << "dbusxml2qt2 myinterface.xml -p myproxy" << std::endl;
     std::cout << "\tGenerate only proxy files, use 'myproxy' as the file basename"
               << std::endl;
     std::cout << std::endl;

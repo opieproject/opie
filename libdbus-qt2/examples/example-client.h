@@ -1,4 +1,4 @@
-/* example-client.h Qt3 D-Bus bindings client example
+/* example-client.h Qt2 D-Bus bindings client example
  *
  * Copyright (C) 2005 Kevin Krammer <kevin.krammer@gmx.at>
  *

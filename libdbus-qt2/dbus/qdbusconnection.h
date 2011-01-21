@@ -26,7 +26,7 @@
 #define QDBUSCONNECTION_H
 
 /**
- * @mainpage Qt3 Bindings for D-Bus
+ * @mainpage Qt2 Bindings for D-Bus
  *
  * D-Bus is an IPC (inter process communication) technology designed to allow
  * applications to interoperate without requiring tight coupling.
@@ -34,8 +34,8 @@
  * For more information about D-Bus itself see its website:
  * http://www.freedesktop.org/wiki/Software_2fdbus
  *
- * The Qt3 D-Bus bindings described here are a Qt3 style API around the base
- * implementation to enable Qt3 developers to use D-Bus in their applications
+ * The Qt2 D-Bus bindings described here are a Qt2 style API around the base
+ * implementation to enable Qt2 developers to use D-Bus in their applications
  * without requiring them to know about the details of the C based D-Bus API.
  *
  * The two main use cases are:

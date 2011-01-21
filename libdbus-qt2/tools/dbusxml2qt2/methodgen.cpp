@@ -251,7 +251,7 @@ static bool parseDBusSignature(const QString& signature, Argument& argument)
 
 static QMap<QString, QString> extractTypeAnnotations(const QDomElement& element)
 {
-    const QString annotationPrefix = "org.freedesktop.DBus.Qt3.Type.";
+    const QString annotationPrefix = "org.freedesktop.DBus.Qt2.Type.";
 
     QMap<QString, QString> annotations;
 
