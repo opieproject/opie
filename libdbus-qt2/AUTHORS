@@ -2,4 +2,7 @@ Harald Fernengel <harry@kdevelop.org>
 	Original developer
 
 Kevin Krammer <kevin.krammer@gmx.at>
-	Initial port, current maintainer
+	Backport to Qt3
+
+Paul Eggleton <bluelightning@bluelightning.org>
+	Backport to Qt2

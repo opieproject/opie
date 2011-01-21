@@ -1,3 +1,5 @@
+From the Qt3 bindings TODO:
+
 - Have someone with Qt4 experience check the code marked with FIXME-QT4
 
 - Port the Qt4 bindings' unit tests to something available for Qt3
