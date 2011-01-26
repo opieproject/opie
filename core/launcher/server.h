@@ -67,6 +67,7 @@ private slots:
     //@{
     void startSoundServer();
     void soundServerExited();
+    void startBluetoothServer();
     //@}
     void activate(const Opie::Core::ODeviceButton*,bool);
     void syncConnectionClosed( const QHostAddress & );
