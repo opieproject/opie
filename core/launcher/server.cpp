@@ -173,6 +173,7 @@ Server::Server() :
 #endif
 
     soundServerExited();
+    startBluetoothServer();
 
     // start services
     startTransferServer();
@@ -1037,6 +1038,14 @@ void Server::finishedQueuedRequests()
         qrr->readyToDelete = TRUE;
         QTimer::singleShot( 0, this, SLOT(finishedQueuedRequests()) );
     }
+}
+
+void Server::startBluetoothServer()
+{
+    Opie::Core::OProcess *btprocess = new Opie::Core::OProcess( this );
+    *btprocess << QPEApplication::qpeDir() + "bin/opiebluetoothd";
+    if (!btprocess->start())
+        owarn << "opiebluetoothd process did not start" << oendl;
 }
 
 void Server::startSoundServer()
