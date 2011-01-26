@@ -31,9 +31,6 @@
 
 #include <qwidget.h>
 #include <qpixmap.h>
-#include <qtimer.h>
-#include <manager.h>
-#include <opie2/oprocess.h>
 
 namespace OpieTooth {
     class Device;
@@ -44,47 +41,35 @@ namespace OpieTooth {
         BluezApplet( QWidget *parent = 0, const char *name=0 );
         ~BluezApplet();
         static int position();
-    protected:
-        void timerEvent(QTimerEvent *te );
 
-public slots:
-        void fillList( const QString& device, RemoteDevice::ValueList list );
+    public slots:
+//        void fillList( const QString& device, RemoteDevice::ValueList list );
 
     private:
         void mousePressEvent( QMouseEvent * );
         void paintEvent( QPaintEvent* );
         void launchManager();
-        bool checkBluezStatus();
-        int setBluezStatus(int, bool sync = false);
+        void setBluezStatus(bool enable);
         int checkBluezDiscoveryStatus();
         int setBluezDiscoveryStatus(int);
         int setObexRecieveStatus(int);
 
     private:
-        Device* btDevice;
-        Manager *btManager;
         QPixmap bluezOnPixmap;
         QPixmap bluezOffPixmap;
         QPixmap bluezDiscoveryOnPixmap;
         QPixmap bluezReceiveOnPixmap;
-        bool bluezactive;
+        bool m_powered;
         bool bluezDiscoveryActive;
         bool bluezReceiveActive;
         bool bluezReceiveChanged;
         bool doListDevice; //If I have to list devices after bringing BT up?
         bool isScanning; //If I'm scanning devices
-        bool m_wasOn; //If BT was started by menu?
-    protected:
-        bool m_sync; //If we have to bring BT synchronously
+        bool m_statusRequested;
+        bool m_adapter;
 
 private slots:
         void slotMessage( const QCString& , const QByteArray& );
-        /**
-         * Reacts on device up
-         * @param name device name
-         * @param up if device was brought up
-         */
-        void slotDevice(const QString&, bool);
     };
 };
 

@@ -5,9 +5,8 @@ SOURCES       =  bluezapplet.cpp
 TARGET        =  bluetoothapplet
 DESTDIR       =  $(OPIEDIR)/plugins/applets
 INCLUDEPATH   += $(OPIEDIR)/include
-INCLUDEPATH   += $(OPIEDIR)/noncore/net/opietooth/lib
 DEPENDPATH    += $(OPIEDIR)/include
-LIBS          += -lqpe -lopietooth1
-VERSION       = 0.0.4
+LIBS          += -lqpe
+VERSION       = 0.0.5
 
 include( $(OPIEDIR)/include.pro )
