@@ -1,4 +1,6 @@
   config MULTIAUTH_BLUEPING
     boolean "opie-multiauth-blueping (blueping authentication plugin)"
     default "y"
-    depends SECURITY
+    depends SECURITY && OPIETOOTH
+    comment "opie-multiauth-blueping requires Bluetooth support"
+    depends !(OPIETOOTH)
