@@ -110,11 +110,11 @@ int Receiver::checkFile( QString& file )
     int ret;
     QString ending;
 
-    if (file.right(4) == ".vcs" ) {
+    if (file.right(4).lower() == ".vcs" ) {
         ret = Datebook;
         ending = QString::fromLatin1(".vcs");
     }
-    else if ( file.right(4) == ".vcf") {
+    else if ( file.right(4).lower() == ".vcf") {
         ret = AddressBook;
         ending = QString::fromLatin1(".vcf");
     }
