@@ -47,7 +47,7 @@ namespace OpieObex {
     protected:
         void closeEvent( QCloseEvent* );
 #ifdef BLUETOOTH
-	void read_receivers();
+        void read_receivers();
 #endif
 
     public slots:
@@ -60,7 +60,7 @@ namespace OpieObex {
         virtual void userDone();
         virtual void send_to_receivers();
         virtual void scan_for_receivers();
-	virtual void toggle_receiver(QListViewItem* item);
+        virtual void toggle_receiver(QListViewItem* item);
 
     private slots: // QCOP slots
         /* IrDa Names*/
@@ -85,9 +85,9 @@ namespace OpieObex {
 
     private:
         void initUI();
-	int addReceiver(const QString& str, const char *icon);
-	void setReceiverStatus( int id, const QString& status );
-	bool receiverSelected(int id);
+        int addReceiver(const QString& str, const char *icon);
+        void setReceiverStatus( int id, const QString& status );
+        bool receiverSelected(int id);
 
         int m_start;
         QMap<int, QString> m_irDa;
@@ -96,7 +96,7 @@ namespace OpieObex {
         QMap<int, Pair > m_bt;
         QMap<int, Pair>::Iterator m_btIt;
 #endif
-	QMap<int, QListViewItem *> receivers;
+        QMap<int, QListViewItem *> receivers;
         QString m_file;
         Obex* m_obex;
 #ifdef BLUETOOTH

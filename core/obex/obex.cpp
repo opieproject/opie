@@ -40,7 +40,7 @@
 
 
 
-using namespace  OpieObex;
+using namespace OpieObex;
 
 using namespace Opie::Core;
 /* TRANSLATOR OpieObex::Obex */
@@ -50,12 +50,16 @@ Obex::Obex( QObject *parent, const char* name )
 {
     m_rec = 0;
     m_send = 0;
-};
-Obex::~Obex() {
+}
+
+Obex::~Obex() 
+{
     delete m_rec;
     delete m_send;
 }
-void Obex::receive()  {
+
+void Obex::receive()
+{
     ObexBase::receive();
     m_rec = new ObexServer(OBEX_TRANS_IRDA);
     // connect to the necessary slots
@@ -73,7 +77,8 @@ void Obex::receive()  {
 }
 
 // if currently receiving stop it send receive
-void Obex::send(const QString& fileName, const QString& addr) {
+void Obex::send(const QString& fileName, const QString& addr)
+{
     ObexBase::send(fileName, addr);
     if (m_rec != 0 ) {
         if (m_rec->isRunning() ) {
@@ -87,7 +92,9 @@ void Obex::send(const QString& fileName, const QString& addr) {
     }
     sendNow();
 }
-void Obex::sendNow(){
+
+void Obex::sendNow()
+{
     if ( m_count >= 25 ) { // could not send
         emit error(-1 );
         emit sent(false);
@@ -118,14 +125,16 @@ void Obex::sendNow(){
     emit currentTry( m_count );
 }
 
-void Obex::slotExited(OProcess* proc ){
+void Obex::slotExited(OProcess* proc )
+{
     if (proc == m_rec )  // receive process
         received();
     else if ( proc == m_send )
         sendEnd();
-
 }
-void Obex::slotStdOut(OProcess* proc, char* buf, int len){
+
+void Obex::slotStdOut(OProcess* proc, char* buf, int len)
+{
     if ( proc == m_rec ) { // only receive
         QByteArray ar( len  );
         memcpy( ar.data(), buf, len );
@@ -133,55 +142,63 @@ void Obex::slotStdOut(OProcess* proc, char* buf, int len){
     }
 }
 
-void Obex::received() {
-  if (m_rec->normalExit() ) {
-      if ( m_rec->exitStatus() == 0 ) { // we got one
-          QString filename = parseOut();
-          emit receivedFile( filename );
-      }
-  }else{
-      emit done(false);
-  };
-  delete m_rec;
-  m_rec = 0;
-  receive();
-}
-
-void Obex::sendEnd() {
-  if (m_send->normalExit() ) {
-    if ( m_send->exitStatus() == 0 ) {
-      delete m_send;
-      m_send=0;
-      emit sent(true);
-    }else if (m_send->exitStatus() == 255 ) { // it failed maybe the other side wasn't ready
-      // let's try it again
-      delete m_send;
-      m_send = 0;
-      sendNow();
-    }
-  }else {
-    emit error( -1 );
-    delete m_send;
-    m_send = 0;
-  }
-}
-QString Obex::parseOut(     ){
-  QString path;
-  QStringList list = QStringList::split("\n",  m_outp);
-  QStringList::Iterator it;
-  for (it = list.begin(); it != list.end(); ++it ) {
-    if ( (*it).startsWith("Wrote"  ) ) {
-        int pos = (*it).findRev('(' );
-        if ( pos > 0 ) {
-
-            path = (*it).remove( pos, (*it).length() - pos );
-            path = path.mid(6 );
-            path = path.stripWhiteSpace();
+void Obex::received()
+{
+    if (m_rec->normalExit() ) {
+        if ( m_rec->exitStatus() == 0 ) { // we got one
+            QString filename = parseOut();
+            emit receivedFile( filename );
         }
     }
-  }
-  return path;
+    else {
+        emit done(false);
+    }
+    delete m_rec;
+    m_rec = 0;
+    receive();
 }
+
+void Obex::sendEnd()
+{
+    if (m_send->normalExit() ) {
+        if ( m_send->exitStatus() == 0 ) {
+            delete m_send;
+            m_send=0;
+            emit sent(true);
+        }
+        else if (m_send->exitStatus() == 255 ) { // it failed maybe the other side wasn't ready
+            // let's try it again
+            delete m_send;
+            m_send = 0;
+            sendNow();
+        }
+    }
+    else {
+        emit error( -1 );
+        delete m_send;
+        m_send = 0;
+    }
+}
+
+QString Obex::parseOut()
+{
+    QString path;
+    QStringList list = QStringList::split("\n",  m_outp);
+    QStringList::Iterator it;
+    for (it = list.begin(); it != list.end(); ++it ) {
+        if ( (*it).startsWith("Wrote"  ) ) {
+            int pos = (*it).findRev('(' );
+            if ( pos > 0 ) {
+
+                path = (*it).remove( pos, (*it).length() - pos );
+                path = path.mid(6 );
+                path = path.stripWhiteSpace();
+            }
+        }
+    }
+    return path;
+}
+
 /**
  * when sent is done slotError is called we  will start receive again
  */
@@ -189,8 +206,10 @@ void Obex::slotError() {
     ObexBase::slotError();
     if ( m_receive )
         receive();
-};
-void Obex::setReceiveEnabled( bool receive ) {
+}
+
+void Obex::setReceiveEnabled( bool receive )
+{
     ObexBase::setReceiveEnabled(receive);
     if ( !receive ) { //
         m_receive = false;
@@ -198,7 +217,8 @@ void Obex::setReceiveEnabled( bool receive ) {
     }
 }
 
-void Obex::shutDownReceive() {
+void Obex::shutDownReceive()
+{
     if (m_rec != 0 ) {
         if (m_rec->isRunning() ) {
             emit error(-1 );
@@ -206,5 +226,4 @@ void Obex::shutDownReceive() {
             m_rec = 0;
         }
     }
-
 }

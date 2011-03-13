@@ -38,74 +38,74 @@
 
 namespace Opie {namespace Core {class OProcess;}}
 class QCopChannel;
+
 namespace OpieObex {
-  class Obex : public ObexBase {
-      Q_OBJECT
-  public:
-      /**
-       * Obex c'tor look
-       */
-      Obex( QObject *parent, const char* name);
-      /**
-       * d'tor
-       */
-      ~Obex();
+    class Obex : public ObexBase {
+        Q_OBJECT
+    public:
+        /**
+        * Obex c'tor look
+        */
+        Obex( QObject *parent, const char* name);
+        /**
+        * d'tor
+        */
+        ~Obex();
 
-      /**
-       *  Starting listening to irda after enabled by the applet
-       * a  signal gets emitted when received a file
-       */
-      virtual void receive();
-      virtual void send(const QString& filename, const QString& addr);
-      virtual void setReceiveEnabled( bool = false );
-  signals:
+        /**
+        *  Starting listening to irda after enabled by the applet
+        * a  signal gets emitted when received a file
+        */
+        virtual void receive();
+        virtual void send(const QString& filename, const QString& addr);
+        virtual void setReceiveEnabled( bool = false );
+    signals:
 
-      /**
-       * a signal
-       * @param path The path to the received file
-       */
-      void receivedFile( const QString& path);
-      /**
-       * error signal if the program couldn't be started or the
-       * the connection timed out
-       */
-      void error( int );
-      /**
-       *  The current try to receive data
-       */
-      void currentTry(unsigned int);
-      /**
-       * signal sent The file got beamed to the remote location
-       */
-      void sent(bool);
-      void done(bool);
+        /**
+        * a signal
+        * @param path The path to the received file
+        */
+        void receivedFile( const QString& path);
+        /**
+        * error signal if the program couldn't be started or the
+        * the connection timed out
+        */
+        void error( int );
+        /**
+        *  The current try to receive data
+        */
+        void currentTry(unsigned int);
+        /**
+        * signal sent The file got beamed to the remote location
+        */
+        void sent(bool);
+        void done(bool);
 
-  private:
-      Opie::Core::OProcess *m_send;
-      ObexServer* m_rec; //The OBEX server
-      void shutDownReceive();
+    private:
+        Opie::Core::OProcess *m_send;
+        ObexServer* m_rec; //The OBEX server
+        void shutDownReceive();
 
-private slots:
+    private slots:
 
-      /**
-       * send over palm obex
-       */
+        /**
+        * send over palm obex
+        */
 
-      //void send(const QString&);
+        //void send(const QString&);
 
-      // the process exited
-      void slotExited(Opie::Core::OProcess* proc) ;
-      void slotStdOut(Opie::Core::OProcess*, char*, int);
-      virtual void slotError();
+        // the process exited
+        void slotExited(Opie::Core::OProcess* proc) ;
+        void slotStdOut(Opie::Core::OProcess*, char*, int);
+        virtual void slotError();
 
-  private:
-      void sendNow();
-      QString parseOut();
-      void received();
-      void sendEnd();
+    private:
+        void sendNow();
+        QString parseOut();
+        void received();
+        void sendEnd();
 
-  };
+    };
 };
-
 
 #endif

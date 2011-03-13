@@ -54,7 +54,7 @@ namespace OpieObex {
     class ObexServer : public Opie::Core::OProcess {
         Q_OBJECT
     private:
-	int transport; //The OBEX transport type
+        int transport; //The OBEX transport type
     public:
         /**
          * ObexServer constructor

@@ -7,20 +7,25 @@ using namespace OpieObex;
 
 /* TRANSLATOR OpieObex::ObexImpl */
 
-ObexImpl::ObexImpl() {
+ObexImpl::ObexImpl()
+{
     m_handler = new ObexHandler;
 }
-ObexImpl::~ObexImpl() {
+
+ObexImpl::~ObexImpl()
+{
     delete m_handler;
 }
-QRESULT ObexImpl::queryInterface( const QUuid& uuid, QUnknownInterface **iface ) {
+
+QRESULT ObexImpl::queryInterface( const QUuid& uuid, QUnknownInterface **iface )
+{
     *iface = 0;
-    if ( uuid == IID_QUnknown ) {
+    if ( uuid == IID_QUnknown )
         *iface = this;
-    }else if ( uuid == IID_ObexInterface )
+    else if ( uuid == IID_ObexInterface )
         *iface = this;
     else
-	return QS_FALSE;
+        return QS_FALSE;
 
     if (*iface)
         (*iface)->addRef();

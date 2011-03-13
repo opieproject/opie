@@ -50,25 +50,30 @@ ObexBase::ObexBase(QObject *parent, const char* name)
              SLOT(slotError() ) );
 }
 
-ObexBase::~ObexBase() {
+ObexBase::~ObexBase()
+{
 }
 
-void ObexBase::receive()  {
+void ObexBase::receive()
+{
     m_receive = true;
     m_outp = QString::null;
 }
 
-void ObexBase::send( const QString& fileName, const QString& bdaddr) {
+void ObexBase::send( const QString& fileName, const QString& bdaddr)
+{
     // if currently receiving stop it send receive
     m_count = 0;
     m_file = fileName;
     m_bdaddr = bdaddr;
 }
 
-void ObexBase::setReceiveEnabled(bool) {
+void ObexBase::setReceiveEnabled(bool)
+{
 }
 
-void ObexBase::slotError() {
+void ObexBase::slotError()
+{
 }
 
 //eof

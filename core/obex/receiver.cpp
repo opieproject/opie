@@ -28,7 +28,8 @@ using namespace Opie::Core;
 
 /* TRANSLATOR OpieObex::Receiver */
 
-Receiver::Receiver(RecType type) {
+Receiver::Receiver(RecType type)
+{
     if (type == REC_IRDA)
         m_obex = new Obex(this, "Receiver");
 #ifdef BLUETOOTH
@@ -39,11 +40,15 @@ Receiver::Receiver(RecType type) {
             this, SLOT(slotReceived(const QString&) ) );
     m_obex->receive();
 }
-Receiver::~Receiver() {
+
+Receiver::~Receiver()
+{
     m_obex->setReceiveEnabled( false );
     delete m_obex;
 }
-void Receiver::slotReceived( const QString& _file ) {
+
+void Receiver::slotReceived( const QString& _file )
+{
     QString file = _file;
     int check = checkFile(file);
     if ( check == AddressBook )
@@ -53,26 +58,34 @@ void Receiver::slotReceived( const QString& _file ) {
     else
         handleOther( file );
 }
-void Receiver::handleAddr( const QString& str ) {
+
+void Receiver::handleAddr( const QString& str )
+{
     QCopEnvelope e("QPE/Application/addressbook", "setDocument(QString)" );
     e << str;
 }
+
 /* we can not say for sure if it's a VEevent ot VTodo */
-void Receiver::handleDateTodo( const QString& str ) {
+void Receiver::handleDateTodo( const QString& str )
+{
     QCopEnvelope e0("QPE/Application/todolist", "setDocument(QString)");
     e0 << str;
     QCopEnvelope e1("QPE/Application/datebook", "setDocument(QString)" );
     e1 << str;
 }
+
 /*
  * Handle other asks if it should accept the
  * beamed object and creates a DocLnk
  */
-void Receiver::handleOther( const QString& other ) {
+void Receiver::handleOther( const QString& other )
+{
     OtherHandler* hand =  new OtherHandler();
     hand->handle( other );
 }
-void Receiver::tidyUp( QString& _file, const QString& ending) {
+
+void Receiver::tidyUp( QString& _file, const QString& ending)
+{
     /* libversit fails on BASE64 encoding we try to sed it away */
     QString file = _file;
     char foo[24]; // big enough
@@ -91,17 +104,21 @@ void Receiver::tidyUp( QString& _file, const QString& ending) {
     cmd = QString("rm %1").arg( Global::shellQuote(file) );
     (void)::system( QFile::encodeName(cmd) );
 }
-int Receiver::checkFile( QString& file ) {
+
+int Receiver::checkFile( QString& file )
+{
     int ret;
     QString ending;
 
     if (file.right(4) == ".vcs" ) {
         ret = Datebook;
         ending = QString::fromLatin1(".vcs");
-    }else if ( file.right(4) == ".vcf") {
+    }
+    else if ( file.right(4) == ".vcf") {
         ret = AddressBook;
         ending = QString::fromLatin1(".vcf");
-    }else
+    }
+    else
         ret = Other;
 
 
@@ -149,10 +166,14 @@ OtherHandler::OtherHandler()
     raise();
     showMaximized();
 }
-OtherHandler::~OtherHandler() {
+
+OtherHandler::~OtherHandler()
+{
 
 }
-void OtherHandler::handle( const QString& file ) {
+
+void OtherHandler::handle( const QString& file )
+{
     m_file = file;
     m_na->setText(file);
     DocLnk lnk(file);
@@ -165,7 +186,8 @@ void OtherHandler::handle( const QString& file ) {
  * hehe evil evil mmap ahead :)
  * we quickly copy the file and then we'll create a DocLnk for it
  */
-void OtherHandler::accept() {
+void OtherHandler::accept()
+{
     QString na = targetName( m_file );
     copy(m_file, na );
     DocLnk lnk(na);
@@ -173,11 +195,15 @@ void OtherHandler::accept() {
     QFile::remove(m_file);
     delete this;
 }
-void OtherHandler::deny() {
+
+void OtherHandler::deny()
+{
     QFile::remove( m_file );
     delete this;
 }
-QString OtherHandler::targetName( const QString& file ) {
+
+QString OtherHandler::targetName( const QString& file )
+{
     QFileInfo info( file );
 
     /* $HOME needs to be set!!!! */
@@ -199,7 +225,6 @@ QString OtherHandler::targetName( const QString& file ) {
 /* fast cpy */
 void OtherHandler::copy(const QString& src, const QString& file) {
     FileManager *fm;
-    if(!fm->copyFile(src,file)) {
-    owarn << "Copy failed" << oendl;
-    }
+    if(!fm->copyFile(src,file))
+        owarn << "Copy failed" << oendl;
 }

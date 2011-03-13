@@ -207,19 +207,19 @@ static void obex_conn_event (obex_t *handle, obex_object_t *object,
             /* Comes when a server-request has been received. */
             handle_request (handle, object, event, obex_cmd);
             break;
-	case OBEX_EV_REQDONE:
-	    switch(obex_cmd) {
-		case OBEX_CMD_PUT:
-		case OBEX_CMD_CONNECT:
-		    break;
-		case OBEX_CMD_DISCONNECT:
-		    OBEX_TransportDisconnect(handle);
-		    _exit(0);
-		    break;
-		default:
-		    break;
-	    }
-	    break;
+        case OBEX_EV_REQDONE:
+            switch(obex_cmd) {
+            case OBEX_CMD_PUT:
+            case OBEX_CMD_CONNECT:
+                break;
+            case OBEX_CMD_DISCONNECT:
+                OBEX_TransportDisconnect(handle);
+                _exit(0);
+                break;
+            default:
+                break;
+            }
+            break;
         case OBEX_EV_LINKERR:
             break;
     }
@@ -342,29 +342,32 @@ int ObexServer::initObex(void)
     int channel = 10; //Channel on which we do listen
     if (m_obex)
         return 0;
+
     m_obex = ::OBEX_Init(transport, obex_event, 0);
     if (!m_obex) {
         printf("OBEX initialization error %d\n", errno);
         return -1;
     }
+
     if (transport == OBEX_TRANS_BLUETOOTH) {
-	::BtOBEX_ServerRegister(m_obex, NULL, channel);
-	m_session = addOpushSvc(channel, "OBEX Object Push");
-	if (!m_session) {
-	    printf("OBEX registration error %d\n", errno);
-	    ::OBEX_Cleanup(m_obex);
-	    m_obex = NULL;
-	    return -1;
-	}
-    } else if (transport == OBEX_TRANS_IRDA)
-	::IrOBEX_ServerRegister(m_obex, "OBEX");
+        ::BtOBEX_ServerRegister(m_obex, NULL, channel);
+        m_session = addOpushSvc(channel, "OBEX Object Push");
+        if (!m_session) {
+            printf("OBEX registration error %d\n", errno);
+            ::OBEX_Cleanup(m_obex);
+            m_obex = NULL;
+            return -1;
+        }
+    } 
+    else if (transport == OBEX_TRANS_IRDA)
+        ::IrOBEX_ServerRegister(m_obex, "OBEX");
+
     return 0;
 }
 
 bool ObexServer::start(RunMode runmode, Communication comm)
 {
-    if ( runs )
-    {
+    if ( runs ) {
         return false;  // cannot start a process that is already running
         // or if no executable has been assigned
     }
@@ -384,8 +387,7 @@ bool ObexServer::start(RunMode runmode, Communication comm)
 #endif
 
     int fd[ 2 ];
-    if ( 0 > pipe( fd ) )
-    {
+    if ( 0 > pipe( fd ) ) {
         fd[ 0 ] = fd[ 1 ] = 0; // Pipe failed.. continue
     }
 
@@ -397,12 +399,10 @@ bool ObexServer::start(RunMode runmode, Communication comm)
     // vfork() has unclear semantics and is not standardized.
     pid_ = fork();
 
-    if ( 0 == pid_ )
-    {
+    if ( 0 == pid_ ) {
         if ( fd[ 0 ] )
             close( fd[ 0 ] );
-        if ( !runPrivileged() )
-        {
+        if ( !runPrivileged() ) {
             setgid( gid );
 #if defined( HAVE_INITGROUPS)
 
@@ -435,15 +435,15 @@ bool ObexServer::start(RunMode runmode, Communication comm)
             fcntl( fd[ 1 ], F_SETFD, FD_CLOEXEC );
 
         if (initObex() == 0) {
-	    if ( fd[ 1 ] ) {
-		::close(fd[1]);
-		fd[1] = 0;
-	    }
+            if ( fd[ 1 ] ) {
+            ::close(fd[1]);
+            fd[1] = 0;
+            }
             do {
                 if (OBEX_HandleInput(m_obex, 60) < 0) {
-		    fprintf(stderr,"failed to OBEX_HandleInput(), errno=%d\n",errno);
+                    fprintf(stderr,"failed to OBEX_HandleInput(), errno=%d\n",errno);
                     _exit(errno?errno:-1);
-		}
+                }
             } while(1);
         }
         char resultByte = 1;
@@ -451,15 +451,12 @@ bool ObexServer::start(RunMode runmode, Communication comm)
             write( fd[ 1 ], &resultByte, 1 );
         _exit( -1 );
     }
-    else if ( -1 == pid_ )
-    {
+    else if ( -1 == pid_ ) {
         // forking failed
-
         runs = false;
         return false;
     }
-    else
-    {
+    else {
         if ( fd[ 1 ] )
             close( fd[ 1 ] );
         // the parent continues here
@@ -468,9 +465,8 @@ bool ObexServer::start(RunMode runmode, Communication comm)
         input_data = 0;
 
         // Check whether client could be started.
-        if ( fd[ 0 ] )
-            for ( ;; )
-            {
+        if ( fd[ 0 ] ) {
+            for ( ;; ) {
                 char resultByte;
                 int n = ::read( fd[ 0 ], &resultByte, 1 );
                 if ( n == 1 )
@@ -488,14 +484,15 @@ bool ObexServer::start(RunMode runmode, Communication comm)
                 }
                 break; // success
             }
+        }
+
         if ( fd[ 0 ] )
             close( fd[ 0 ] );
 
         if ( !commSetupDoneP() )   // finish communication socket setup for the parent
             qWarning( "Could not finish comm setup in parent!" );
 
-        if ( run_mode == Block )
-        {
+        if ( run_mode == Block ) {
             commClose();
 
             // The SIGCHLD handler of the process controller will catch

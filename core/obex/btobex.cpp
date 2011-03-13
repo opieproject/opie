@@ -53,7 +53,7 @@ BtObex::BtObex( QObject *parent, const char* name )
   : ObexBase(parent, name )
 {
     m_rec = 0;
-    m_send=0;
+    m_send = 0;
     btManager = NULL;
 };
 
@@ -63,7 +63,8 @@ BtObex::~BtObex() {
     delete m_send;
 }
 
-void BtObex::receive()  {
+void BtObex::receive()
+{
     ObexBase::receive();
     m_rec = new ObexServer(OBEX_TRANS_BLUETOOTH);
 
@@ -83,7 +84,8 @@ void BtObex::receive()  {
     }
 }
 
-void BtObex::send( const QString& fileName, const QString& bdaddr) {
+void BtObex::send( const QString& fileName, const QString& bdaddr)
+{
     ObexBase::send(fileName, bdaddr);
     // if currently receiving stop it send receive
     if (m_send != 0) {
@@ -100,7 +102,8 @@ void BtObex::send( const QString& fileName, const QString& bdaddr) {
             delete m_rec;
             m_rec = 0;
 
-        }else{
+        }
+        else {
             emit error( -1 ); // we did not delete yet but it's not running slotExited is pending
             return;
         }
@@ -153,7 +156,8 @@ void BtObex::slotFoundServices(const QString&, Services::ValueList svcList)
     sendNow();
 }
 
-void BtObex::sendNow(){
+void BtObex::sendNow()
+{
     QString m_dst = "";
     int result; //function call result
     if ( m_count >= 25 ) { // could not send
@@ -191,14 +195,17 @@ void BtObex::sendNow(){
     emit currentTry( m_count );
 }
 
-void BtObex::slotExited(OProcess* proc ){
+void BtObex::slotExited(OProcess* proc )
+{
     odebug << proc->name() << " exited with result "
            << proc->exitStatus() << oendl;
     if (proc == m_rec )  // receive process
         received();
 
 }
-void BtObex::slotStdOut(OProcess* proc, char* buf, int len){
+
+void BtObex::slotStdOut(OProcess* proc, char* buf, int len)
+{
     if ( proc == m_rec ) { // only receive
         QByteArray ar( len  );
         memcpy( ar.data(), buf, len );
@@ -208,12 +215,14 @@ void BtObex::slotStdOut(OProcess* proc, char* buf, int len){
     }
 }
 
-void BtObex::slotPushComplete(int result) {
+void BtObex::slotPushComplete(int result)
+{
     if (result == 0) {
       delete m_send;
       m_send=0;
       emit sent(true);
-    } else { // it failed maybe the other side wasn't ready
+    }
+    else { // it failed maybe the other side wasn't ready
       // let's try it again
       delete m_send;
       m_send = 0;
@@ -221,59 +230,68 @@ void BtObex::slotPushComplete(int result) {
    }
 }
 
-void BtObex::slotPushError(int) {
+void BtObex::slotPushError(int)
+{
     emit error( -1 );
     delete m_send;
     m_send = 0;
 }
 
-void BtObex::slotPushStatus(QCString& str) {
+void BtObex::slotPushStatus(QCString& str)
+{
     odebug << str << oendl;
 }
 
-void BtObex::received() {
-  if (m_rec->normalExit() ) {
-      if ( m_rec->exitStatus() == 0 ) { // we got one
-          QString filename = parseOut();
-          odebug << "OBEX " << filename << " received" << oendl;
-          emit receivedFile( filename );
-      }
-  }else{
-      emit done(false);
-  };
-  delete m_rec;
-  m_rec = 0;
-  receive();
+void BtObex::received()
+{
+    if (m_rec->normalExit() ) {
+        if ( m_rec->exitStatus() == 0 ) { // we got one
+            QString filename = parseOut();
+            odebug << "OBEX " << filename << " received" << oendl;
+            emit receivedFile( filename );
+        }
+    }
+    else {
+        emit done(false);
+    }
+    delete m_rec;
+    m_rec = 0;
+    receive();
 }
 
 // This probably doesn't do anything useful for bt.
-QString BtObex::parseOut(){
-  QString path;
-  QStringList list = QStringList::split("\n",  m_outp);
-  QStringList::Iterator it;
-  for (it = list.begin(); it != list.end(); ++it ) {
-    odebug << (*it) << oendl;
-    if ( (*it).startsWith("Wrote"  ) ) {
-        int pos = (*it).findRev('(' );
-        if ( pos > 0 ) {
+QString BtObex::parseOut()
+{
+    QString path;
+    QStringList list = QStringList::split("\n",  m_outp);
+    QStringList::Iterator it;
+    for (it = list.begin(); it != list.end(); ++it ) {
+        odebug << (*it) << oendl;
+        if ( (*it).startsWith("Wrote"  ) ) {
+            int pos = (*it).findRev('(' );
+            if ( pos > 0 ) {
 
-            path = (*it).remove( pos, (*it).length() - pos );
-            path = path.mid(6 );
-            path = path.stripWhiteSpace();
+                path = (*it).remove( pos, (*it).length() - pos );
+                path = path.mid(6 );
+                path = path.stripWhiteSpace();
+            }
         }
     }
-  }
-  return path;
+    return path;
 }
+
 /**
  * when sent is done slotError is called we  will start receive again
  */
-void BtObex::slotError() {
+void BtObex::slotError()
+{
     ObexBase::slotError();
     if ( m_receive )
         receive();
 };
-void BtObex::setReceiveEnabled( bool receive ) {
+
+void BtObex::setReceiveEnabled( bool receive )
+{
     odebug << "BT OBEX setReceiveEnabled " << receive << oendl;
     ObexBase::setReceiveEnabled(receive);
     if ( !receive ) { //
@@ -282,7 +300,8 @@ void BtObex::setReceiveEnabled( bool receive ) {
     }
 }
 
-void BtObex::shutDownReceive() {
+void BtObex::shutDownReceive()
+{
     if (m_rec != 0 ) {
         if (m_rec->isRunning() ) {
             emit error(-1 );
@@ -290,5 +309,4 @@ void BtObex::shutDownReceive() {
             m_rec = 0;
         }
     }
-
 }
