@@ -232,10 +232,14 @@ void AddressbookWindow::setDocument( const QString &filename )
         slotPersonalView();
     }
 
-    if ( filename.find(".vcf") != int(filename.length()) - 4 ) {
+    // Handle if we're passed a desktop link to a vcard file
+    QString fn = filename;
+    if ( fn.right(8).lower() == ".desktop" ) {
+        DocLnk df(fn);
+        fn = df.file();
+    }
 
-
-
+    if ( fn.right(4).lower() != ".vcf" ) {
         switch( QMessageBox::information( this, tr ( "Right file type ?" ),
                           tr( "The selected file \n does not end with \".vcf\".\n Do you really want to open it?" ),
                           tr( "&Yes" ), tr( "&No" ), QString::null,
@@ -251,8 +255,7 @@ void AddressbookWindow::setDocument( const QString &filename )
         }
     }
 
-    Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
-                                     filename );
+    Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null, fn );
     Opie::OPimContactAccess* access = new Opie::OPimContactAccess ( "addressbook", QString::null , vcard_backend, true );
     access->load();
     Opie::OPimContactAccess::List allList = access->allRecords();
