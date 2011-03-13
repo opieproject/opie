@@ -101,7 +101,7 @@ void SendWidget::send( const QString& file, const QString& desc )
         btStatus->setText(tr("not enabled."));
     }
     else {
-        QCopEnvelope e1("QPE/Bluetooth", "enableBluetooth()");
+        QCopEnvelope e1("QPE/Bluetooth", "enableBluetoothTemp()");
         btStatus->setText(tr("ready."));
         sendButton->setEnabled( true );
     }
@@ -352,7 +352,7 @@ void SendWidget::closeEvent( QCloseEvent* evt)
     }
 #ifdef BLUETOOTH
     {
-        QCopEnvelope e("QPE/Bluetooth", "disableBluetooth()");
+        QCopEnvelope e("QPE/Bluetooth", "disableBluetoothTemp()");
     }
 #endif
 }
