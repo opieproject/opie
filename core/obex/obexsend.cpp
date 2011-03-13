@@ -34,11 +34,6 @@ using namespace Opie::Core;
 #include <unistd.h>
 /* TRANSLATOR OpieObex::SendWidget */
 
-/* Just for backward compatibility */
-#if OPIE_VERSION < 102010
-    #define OResource Resource
-#endif
-
 SendWidget::SendWidget( QWidget* parent, const char* name )
     : obexSendBase( parent, name ) 
 {
