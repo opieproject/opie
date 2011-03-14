@@ -184,8 +184,8 @@ QString  BatteryStatus::statusText() const {
     if ( ps->batteryTimeRemaining() >= 0 )
     {
         text.append( '\n' );
-        text.append( tr("Remaining Time: %1m %2s" ).arg( ps->batteryTimeRemaining() / 60 )
-                                                   .arg( ps->batteryTimeRemaining() % 60, 2 ) );
+        text.append( tr("Remaining Time: %1h %2m" ).arg( ps->batteryTimeRemaining() / 3600 )
+                                                   .arg( ( ps->batteryTimeRemaining() / 60 ) % 60, 2 ) );
 /*        text += "\n" + QString().sprintf(  tr("Remaining Time") + ": %im %02is",
               ps->batteryTimeRemaining() / 60, ps->batteryTimeRemaining() % 60 );*/
     }
