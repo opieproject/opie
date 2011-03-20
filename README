@@ -10,7 +10,7 @@ There's also a tutorial document at:
 
 The API reference currently is at:
 
-  http://opie.sourceforge.net/apidocs/
+  http://handhelds.org/~zecke/apidocs/index.html
 
 You will need qvfb, uic and (if you want to develop applications) designer
 compiled and linked against Qt/X11. That means you must download and 
@@ -57,8 +57,8 @@ Framebuffer and is mostly meant for development on your host system.
 For cross compiling, you will need to use the -xplatform switch.
 See ./configure --help for details about the possible options.
 
-Once you have these compiled, be sure to set the PATH to ensure your (cross)compiler
-is available.
+Once you have these compiled, be sure to set the PATH to ensure your 
+(cross)-compiler is available.
 
 Then do the following in the opie source tree:
 
@@ -73,7 +73,8 @@ Have fun!
 2. Required Libraries
 =====================
 
-For a successful Opie build, you need to install the following libraries and headers:
+For a successful Opie build, you need to install the following libraries and
+headers:
 
 * libsdl >= 1.2.0
   http://www.libsdl.org/download-1.2.php
@@ -122,19 +123,17 @@ For a successful usage of Opie, you should install the following programs:
 4. Supported Devices
 ====================
 
-Sharp Zaurus SL-5x00, SL-B500, SL-Cxx0, SL-Cxx00, SL-6000
+Note that device support is not limited to these devices - if the Linux 2.6 
+kernel works on your device it can probably be supported with only minor
+changes.
 
-HP iPAQ h36xx, h37xx, h38xx, h39xx, h54xx, h55xx, h22xx, h191x, h194x, h4xxx, hx4700
-
-SIEMENS SIMpad CL4, SL4, SLC, T-SinusPAD
-
-MasterIA Beagle, Tradesquare.NL Tuxpad 1
-
-GMate Yopy 3x00
-
-Motorola EZX A780, E680
-
-Palm Tungsten T/T2/T3/T5/C/E/E2, LifeDrive, TX, Zire 71/72, Treo 600/650/680/700w/700p/750/755p, Foleo
-
-HTC Universal
-
+ * Sharp Zaurus SL-5x00, SL-B500, SL-Cxx0, SL-Cxx00, SL-6000
+ * HP iPAQ h36xx, h37xx, h38xx, h39xx, h54xx, h55xx, h22xx, h191x, h194x, 
+   h4xxx, hx4700, rx1950
+ * SIEMENS SIMpad CL4, SL4, SLC, T-SinusPAD
+ * MasterIA Beagle, Tradesquare.NL Tuxpad 1
+ * GMate Yopy 3x00
+ * Motorola EZX A780, E680
+ * Palm Tungsten T/T2/T3/T5/C/E/E2, LifeDrive, TX, Zire 71/72, 
+   Treo 600/650/680/700w/700p/750/755p, Foleo
+ * HTC Universal
