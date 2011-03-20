@@ -3,6 +3,21 @@
 # small shell script to generate our API docs
 # it'll copy over qt
 
+if [ "$OPIEDIR" == "" ] ; then
+  echo "OPIEDIR is not set, please run your environment setup script"
+  exit 1
+fi
+if [ "$QTDIR" == "" ] ; then
+  echo "QTDIR is not set, please run your environment setup script"
+  exit 1
+fi
+
+which doxygen &> /dev/null
+if [ $? -gt 0 ] ; then
+  echo "Doxygen is not installed, you must install it first"
+  exit 1
+fi
+
 #
 # create directory structure
 echo "Creating directory structure"
@@ -12,8 +27,6 @@ mkdir $OPIEDIR/apidocs/api
 mkdir $OPIEDIR/apidocs/common
 mkdir $OPIEDIR/apidocs/qt
 mkdir $OPIEDIR/apidocs/libqpe
-mkdir $OPIEDIR/apidocs/libopie
-mkdir $OPIEDIR/apidocs/pim
 mkdir $OPIEDIR/apidocs/network
 mkdir $OPIEDIR/apidocs/net2
 mkdir $OPIEDIR/apidocs/core2
@@ -33,20 +46,6 @@ cp -r $OPIEDIR/doc/common/* $OPIEDIR/apidocs/common
 echo "Creating docu for qpe"
 cp $OPIEDIR/doc/Doxyfile_libqpe $OPIEDIR/library/Doxyfile
 cd $OPIEDIR/library
-doxygen Doxyfile
-rm -f Doxyfile
-
-# now do libopie
-echo "Creating docu for libopie"
-cp $OPIEDIR/doc/Doxyfile_libopie $OPIEDIR/libopie/Doxyfile
-cd $OPIEDIR/libopie
-doxygen Doxyfile
-rm -f Doxyfile
-
-echo "Creating docu for PIM"
-# now it's time for libopie/pim
-cp $OPIEDIR/doc/Doxyfile_pim $OPIEDIR/libopie/pim/Doxyfile
-cd $OPIEDIR/libopie/pim
 doxygen Doxyfile
 rm -f Doxyfile
 
@@ -109,3 +108,4 @@ rm -f Doxyfile
 rm -f Mainpage.dox
 
 echo "Done with generation!!! hopefully grin"
+
