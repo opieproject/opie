@@ -1,17 +1,26 @@
 1. How to use the Opie build system
 ====================================
-There's a tutorial document at:
-http://www.uv-ac.de/opiedev/opiedev.html
+For more complete instructions on getting started, please see:
+
+  http://opie.sourceforge.net/cgi-bin/moin.cgi/BuildOpie
+
+There's also a tutorial document at:
+
+  http://www.uv-ac.de/opiedev/opiedev.html
 
 The API reference currently is at:
-http://handhelds.org/~zecke/apidocs/index.html
 
-You will need qvfb, uic and
-(if you want to develop applications) designer
-compiled and linked against Qt/X11.
-That means you must download and configure/make it:
-wget ftp://ftp.trolltech.com/qt/source/qt-x11-2.3.2.tar.gz
-(Alternatively, you can get static binaries from http://www.vanille.de/tools)
+  http://opie.sourceforge.net/apidocs/
+
+You will need qvfb, uic and (if you want to develop applications) designer
+compiled and linked against Qt/X11. That means you must download and 
+configure/make it:
+
+  wget ftp://ftp.trolltech.com/qt/source/qt-x11-2.3.2.tar.gz
+
+Alternatively, you can get static binaries from here: 
+
+  http://www.bluelightning.org/files/opie/qt2-dev-tools-bin.tar.gz
 
 You will need Qt/Embedded 2.3.10. Note that we don't support any
 other Qt/Embedded version anymore. Qt/Embedded 2.3.12 is not recommended atm.
@@ -81,8 +90,13 @@ For a successful Opie build, you need to install the following libraries and hea
 * libsqlite >= 3.0.0
   http://www.sqlite.org/download.html
 
-* libipk >= 138
-  ftp://handhelds.org/linux/packages/ipkg
+* One of:
+
+  * libipk >= 138
+    ftp://handhelds.org/linux/packages/ipkg (currently unavailable)
+
+  * libopkg 0.1.8 with C++ patch applied (or 0.1.9 when it is released)
+    http://code.google.com/p/opkg/
 
 * libobexftp >= 0.19
   http://triq.net/obexftp.html
@@ -103,6 +117,7 @@ For a successful usage of Opie, you should install the following programs:
 
 * obexftpd
 * obextool
+* ussp-push
 
 4. Supported Devices
 ====================
@@ -122,3 +137,4 @@ Motorola EZX A780, E680
 Palm Tungsten T/T2/T3/T5/C/E/E2, LifeDrive, TX, Zire 71/72, Treo 600/650/680/700w/700p/750/755p, Foleo
 
 HTC Universal
+
