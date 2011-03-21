@@ -190,7 +190,7 @@ bool QDBusData::operator==(const QDBusData& other) const
                 return d->value.int32Value == other.d->value.int32Value;
 
             case QDBusData::UInt32:
-                return d->value.uint32Value == other.d->value.uint64Value;
+                return d->value.uint32Value == other.d->value.uint32Value;
 
             case QDBusData::Int64:
                 return d->value.int64Value == other.d->value.int64Value;
