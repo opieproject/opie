@@ -203,6 +203,7 @@ menu "Base"
   endchoice
   source libopie2/config.in
   source libqtaux/config.in
+  source libdbus-qt2/config.in
   source rsync/config.in
   source core/opie-login/config.in
   source core/opiealarm/config.in

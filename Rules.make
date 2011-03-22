@@ -182,7 +182,8 @@ $(OPIEDIR)/stamp-headers :
 		$(TOPDIR)/include/opie2/private \
 		$(TOPDIR)/include/qtopia/private \
 		$(TOPDIR)/include/sl \
-		$(TOPDIR)/include/opietooth
+		$(TOPDIR)/include/opietooth \
+		$(TOPDIR)/include/dbus
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
 	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
 	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
@@ -209,6 +210,7 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/ && ln -sf ../noncore/net/ftplib/*.h .; )
 	( cd include/ && ln -sf ../inputmethods/pickboard/pickboardcfg.h .; )
 	( cd include/ && ln -sf ../inputmethods/pickboard/pickboardpicks.h .; )
+	( cd include/dbus && ln -sf ../../libdbus-qt2/dbus/*.h .; )
 	# all
 	( cd include/opie2; for generatedHeader in `cd ../../libopie2/opieui; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie2/opieui/$$generatedHeader $$generatedHeader; done )
