@@ -21,4 +21,8 @@ SOURCES     = qdbusconnection.cpp \
 INCLUDEPATH += $$system(pkg-config --cflags-only-I dbus-1 | sed 's/-I//g')
 LIBS        += $$system(pkg-config --libs dbus-1)
 TARGET      = dbus-qt2
+DESTDIR     = $(OPIEDIR)/lib$(PROJMAK)
 VERSION     = 1.0
+
+include( $(OPIEDIR)/include.pro )
+
