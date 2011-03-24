@@ -454,13 +454,20 @@ void QDBusConnectionPrivate::scheduleDispatch()
 
 void QDBusConnectionPrivate::dispatch()
 {
-    if (mode == ClientMode)
+    static bool in_dispatch = false;
+    if (mode == ClientMode && !in_dispatch)
     {
+        // FIXME: this is not thread-safe; however, we're never intending
+        // to use this in a threaded application and without it you will get
+        // deadlocks if you receive a message while you're still in the middle
+        // of processing another one
+        in_dispatch = true;
         if (dbus_connection_dispatch(connection) != DBUS_DISPATCH_DATA_REMAINS)
         {
             // stop dispatch timer
             dispatcher->stop();
         }
+        in_dispatch = false;
     }
 }
 
