@@ -28,6 +28,7 @@
 */
 
 #include "opiebluetoothd.h"
+#include "bluetoothagent.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -59,6 +60,7 @@ OBluetoothDaemon::OBluetoothDaemon()
             this, SLOT(slotMessage(const QCString&,const QByteArray&) ) );
 
     m_bluezAdapterProxy = NULL;
+    m_agent = NULL;
     m_tempEnabled = false;
     m_receiveEnabled = false;
     m_propCallID = -1;
@@ -70,6 +72,8 @@ OBluetoothDaemon::OBluetoothDaemon()
 OBluetoothDaemon::~OBluetoothDaemon()
 {
     odebug << "opiebluetoothd ended" << oendl;
+    delete m_agent;
+    delete m_bluezAdapterProxy;
 }
 
 void OBluetoothDaemon::slotDBusConnect()
@@ -110,7 +114,9 @@ void OBluetoothDaemon::slotAdapterChange()
 
     if( m_bluezAdapterProxy ) {
         delete m_bluezAdapterProxy;
+        delete m_agent;
         m_bluezAdapterProxy = NULL;
+        m_agent = NULL;
     }
 
     if( m_adapterPath != "" ) {
@@ -131,6 +137,8 @@ void OBluetoothDaemon::slotAdapterChange()
         // Reset state variables
         m_tempEnabled = false;
         m_propCallID = m_bluezAdapterProxy->sendWithAsyncReply( "GetProperties", QValueList<QDBusData>() );
+
+        m_agent = new OBluetoothAgent(connection, m_bluezAdapterProxy);
     }
     else {
         sendStatus(true);

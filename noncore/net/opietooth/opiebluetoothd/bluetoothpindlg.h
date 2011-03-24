@@ -1,8 +1,8 @@
 /*
                              This file is part of the Opie Project
 
-              =.             Copyright (C) 2011 Paul Eggleton <bluelightning@bluelightning.org>
-            .=l.
+              =.             Copyright (C) 2002 The Opie Team <opie-devel@lists.sourceforge.net>
+            .=l.             Copyright (C) 2011 Paul Eggleton <bluelightning@bluelightning.org>
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or modify it under
@@ -27,50 +27,33 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OBLUETOOTHD_H
-#define OBLUETOOTHD_H
 
-#include <qobject.h>
+#include <qdialog.h>
+#include "bluetoothpindlgbase.h"
 
-// forward declarations
-class QDBusMessage;
-class QDBusProxy;
-class QDBusData;
-class OBluetoothAgent;
-
-#define BT_STATUS_ADAPTER       1
-#define BT_STATUS_ENABLED       2
-#define BT_STATUS_ENABLED_TEMP  4
-#define BT_STATUS_DISCOVERABLE  8
-#define BT_STATUS_RECEIVE       16
-
-class OBluetoothDaemon: public QObject {
+class PinDlg : public PinDlgBase {
         Q_OBJECT
     public:
-        OBluetoothDaemon();
-        ~OBluetoothDaemon();
-    protected:
-        void startBluetooth();
-        void stopBluetooth();
-        void sendStatus(bool change);
-        QString dataToString(const QDBusData &data);
+        PinDlg(QWidget* parent = 0, const char* name = 0, Qt::WFlags f = 0);
+
+        ~PinDlg();
+        void setBdAddr( const QString& );
+        void setRemoteName( const QString& );
+        void setDirection( bool );
+        QString pin() const;
+
+    signals:
+        void dialogClosed(bool);
+
+    private:
+        QString m_bdaddr;
+        QString m_remoteName;
+        bool m_outgoing;
+
     protected slots:
-        void slotAdapterChange();
-        void slotDBusConnect();
-        void slotMessage(const QCString&, const QByteArray&);
-        void slotDBusSignal(const QDBusMessage& message);
-        void slotAsyncReply(int callID, const QDBusMessage& reply);
-    protected:
-        QString m_adapterPath;
-        bool m_tempEnabled;
-        bool m_powered;
-        bool m_discoverEnabled;
-        bool m_receiveEnabled;
-        int m_propCallID;
-        QDBusProxy *m_bluezManagerProxy;
-        QDBusProxy *m_bluezAdapterProxy;
-        OBluetoothAgent *m_agent;
+        void accept();
+        void reject();
+        void addnum();
+        void delnum();
+        void polish();
 };
-
-
-#endif
