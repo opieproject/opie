@@ -1,2 +1,6 @@
-opiebluetoothd
-Makefile
+Makefile*
+bluetoothpindlgbase.cpp
+bluetoothpindlgbase.h
+moc_*
+.moc
+.obj
