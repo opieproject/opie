@@ -32,6 +32,8 @@
 #include "btobex.h"
 #include <manager.h>
 #include <services.h>
+#include <openobex/obex_const.h>
+
 
 /* OPIE */
 #include <opie2/oprocess.h>
@@ -218,23 +220,28 @@ void BtObex::slotStdOut(OProcess* proc, char* buf, int len)
 void BtObex::slotPushComplete(int result)
 {
     if (result == 0) {
-      delete m_send;
-      m_send=0;
-      emit sent(true);
+        delete m_send;
+        m_send=0;
+        emit sent(true);
+    }
+    else if( result == OBEX_RSP_FORBIDDEN ) {
+        delete m_send;
+        m_send = 0;
+        emit error( result );
     }
     else { // it failed maybe the other side wasn't ready
-      // let's try it again
-      delete m_send;
-      m_send = 0;
-      sendNow();
-   }
+        // let's try it again
+        delete m_send;
+        m_send = 0;
+        sendNow();
+    }
 }
 
 void BtObex::slotPushError(int)
 {
-    emit error( -1 );
     delete m_send;
     m_send = 0;
+    emit error( -1 );
 }
 
 void BtObex::slotPushStatus(QCString& str)

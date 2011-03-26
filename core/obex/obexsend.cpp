@@ -21,6 +21,7 @@ using namespace OpieTooth;
 #ifdef BLUETOOTH
 #include <devicehandler.h>
 #include "remotedevice.h"
+#include "openobex/obex_const.h"
 #endif
 
 using namespace Opie::Core;
@@ -221,9 +222,20 @@ void SendWidget::dispatchBt( const QCString& str, const QByteArray& ar )
     }
 }
 
-void SendWidget::slotBtError( int ) 
+void SendWidget::slotBtError( int error ) 
 {
-    btStatus->setText(tr("error :("));
+#ifdef BLUETOOTH
+    if( error == OBEX_RSP_FORBIDDEN ) {
+        setReceiverStatus( m_btIt.key(), tr("refused") );
+        btStatus->setText(tr("refused"));
+    }
+    else {
+        setReceiverStatus( m_btIt.key(), tr("error :(") );
+        btStatus->setText(tr("error :("));
+    }
+#else
+    (int)error;
+#endif
 }
 
 void SendWidget::slotBtSent( bool b ) 
