@@ -116,9 +116,8 @@ headers:
 
 For a successful usage of Opie, you should install the following programs:
 
+* obexftp
 * obexftpd
-* obextool
-* ussp-push
 
 4. Supported Devices
 ====================

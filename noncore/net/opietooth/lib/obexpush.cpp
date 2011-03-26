@@ -12,8 +12,8 @@
 
 #include <qfileinfo.h>
 #include <qfile.h>
+#include <qstringlist.h>
 
-#include <opie2/odebug.h>
 #include <opie2/odebug.h>
 
 using namespace Opie::Core;
@@ -49,13 +49,19 @@ ObexPush::~ObexPush()
  */
 int ObexPush::send(QString& mac, int port, QString& src, QString& dst)
 {
-    QString execName = "obextool";
     if (pushProc->isRunning())
         return 1;
     pushProc->clearArguments();
-    *pushProc << execName << "push" << QFile::encodeName(src) << mac << QString::number(port);
-    odebug << execName << " " << src << " " << mac << " " << port << oendl;
-    //pushProc->setUseShell(true);
+    *pushProc << "obexftp" << "-b" << mac << "-B" << QString::number(port) 
+            << "-H" << "-S" << "-U" << "none" << "-p" << QFile::encodeName(src);
+
+    const QValueList<QCString> &args = pushProc->args();
+    QString argStr;
+    for ( QValueList<QCString>::ConstIterator it = args.begin(); it != args.end(); ++it ) {
+        argStr += (*it) + " ";
+    }
+    odebug << argStr << oendl;
+
     if (!pushProc->start(OProcess::NotifyOnExit, OProcess::All))
         return -1;
     else
