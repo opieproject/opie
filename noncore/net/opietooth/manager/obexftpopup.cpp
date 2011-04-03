@@ -58,10 +58,8 @@ void ObexFtpPopup::slotPush()
 {
     QString device = m_item->mac();
     int port = m_service.protocolDescriptorList().last().port();
-    device += "@";
-    device += QString::number(port);
-    owarn << "push something to " << device << oendl;
-    ObexDialog obexDialog(device);
+    owarn << "push something to " << device << " on port " << port << oendl;
+    ObexDialog obexDialog(device, port);
     QPEApplication::execDialog( &obexDialog );
 }
 
