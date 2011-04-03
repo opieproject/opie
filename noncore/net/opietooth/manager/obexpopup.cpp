@@ -28,13 +28,11 @@ ObexPopup::ObexPopup(const OpieTooth::Services& service,  OpieTooth::BTDeviceIte
     connect(m_push, SIGNAL(activated()), SLOT(slotPush()));
 }
 
-
 ObexPopup::~ObexPopup()
 {
     m_push->removeFrom( this );
     delete m_push;
 }
-
 
 void ObexPopup::slotPush()
 {
