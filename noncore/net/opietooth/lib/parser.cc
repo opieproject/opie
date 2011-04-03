@@ -51,12 +51,28 @@ int convert( const QString& line, QString& ret )
 
 Parser::Parser(const QString& output )
 {
+    reset();
     parse( output );
 }
 
 void Parser::setText(const QString& output)
 {
+    reset();
     parse( output );
+}
+
+void Parser::reset()
+{
+    m_complete = false;
+    m_ok = false;
+    m_classOver = false;
+    m_profOver = false;
+    m_protocolOver = false;
+    m_protocolAdded = false;
+    m_protName = "";
+    m_protId = 0;
+    QString m_profName = "";
+    m_profId = 0;
 }
 
 Services::ValueList Parser::services() const
