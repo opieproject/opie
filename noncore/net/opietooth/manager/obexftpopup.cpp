@@ -38,7 +38,6 @@ ObexFtpPopup::ObexFtpPopup(const OpieTooth::Services& service,
     connect(m_browse, SIGNAL(activated()), SLOT(slotBrowse()));
 }
 
-
 ObexFtpPopup::~ObexFtpPopup()
 {
     m_push->removeFrom(this);

@@ -20,10 +20,12 @@ using namespace OpieTooth;
 using namespace Opie::Core;
 using namespace Opie::Ui;
 using namespace Opie::Core;
+
+
 ObexDialog::ObexDialog(const QString& device, int port,
     QWidget* parent,  const char* name, bool modal, WFlags fl)
-    : QDialog( parent, name, modal, fl ) {
-
+    : QDialog( parent, name, modal, fl )
+{
     if ( !name )
         setName( "ObexDialog" );
     setCaption( tr( "beam files " ) ) ;
@@ -73,13 +75,14 @@ ObexDialog::ObexDialog(const QString& device, int port,
 
 }
 
-ObexDialog::~ObexDialog() {
-  delete obexSend;
-  obexSend = NULL;
+ObexDialog::~ObexDialog()
+{
+    delete obexSend;
+    obexSend = NULL;
 }
 
-void ObexDialog::browse() {
-
+void ObexDialog::browse()
+{
     MimeTypes types;
     QStringList all;
     all << "*/*";
@@ -90,7 +93,8 @@ void ObexDialog::browse() {
     statLine->setText( tr("Ready") );
 }
 
-void ObexDialog::sendData() {
+void ObexDialog::sendData()
+{
     int result; //function call result
     QString fileURL = cmdLine->text();
     QString modifiedName = chNameLine->text();
@@ -98,25 +102,28 @@ void ObexDialog::sendData() {
     if (result > 0)
         return;
     else if (result < 0)
-		    statLine->setText( tr("Error: couln't start process") );
+        statLine->setText( tr("Error: couln't start process") );
     else
         statLine->setText( tr("Sending") );
 }
 
-void ObexDialog::slotPushStatus(QCString& str) {
-  status->append(str);
+void ObexDialog::slotPushStatus(QCString& str)
+{
+    status->append(str);
 }
 
-void ObexDialog::slotPushComplete(int result) {
-  status->append( tr("Finished with result ") );
-  status->append( QString::number(result) );
-  status->append( tr("\n") );
-  odebug << result << oendl;
-  statLine->setText( tr("Finished: ") + tr(strerror(result)) );
+void ObexDialog::slotPushComplete(int result)
+{
+    status->append( tr("Finished with result ") );
+    status->append( QString::number(result) );
+    status->append( tr("\n") );
+    odebug << result << oendl;
+    statLine->setText( tr("Finished: ") + tr(strerror(result)) );
 }
 
-void ObexDialog::slotPushError(int) {
-  status->append( tr("Exited abnormally\n") );
-  statLine->setText( tr("Exited abnormally") );
+void ObexDialog::slotPushError(int)
+{
+    status->append( tr("Exited abnormally\n") );
+    statLine->setText( tr("Exited abnormally") );
 }
 //eof
