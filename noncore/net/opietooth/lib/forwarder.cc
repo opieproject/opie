@@ -37,8 +37,7 @@ bool SerialForwarder::start(RunMode runmode, Communication comm)
     int htmp; //temporary device
     int result; //call result
 
-    if ( runs )
-    {
+    if ( runs ) {
         return false;  // cannot start a process that is already running
         // or if no executable has been assigned
     }
@@ -67,8 +66,7 @@ bool SerialForwarder::start(RunMode runmode, Communication comm)
 #endif
 
     int fd[ 2 ];
-    if ( 0 > pipe( fd ) )
-    {
+    if ( 0 > pipe( fd ) ) {
         fd[ 0 ] = fd[ 1 ] = 0; // Pipe failed.. continue
     }
 
@@ -80,12 +78,10 @@ bool SerialForwarder::start(RunMode runmode, Communication comm)
     // vfork() has unclear semantics and is not standardized.
     pid_ = fork();
 
-    if ( 0 == pid_ )
-    {
+    if ( 0 == pid_ ) {
         if ( fd[ 0 ] )
             close( fd[ 0 ] );
-        if ( !runPrivileged() )
-        {
+        if ( !runPrivileged() ) {
             setgid( gid );
 #if defined( HAVE_INITGROUPS)
 
@@ -130,15 +126,13 @@ bool SerialForwarder::start(RunMode runmode, Communication comm)
             write( fd[ 1 ], &resultByte, 1 );
         _exit( -1 );
     }
-    else if ( -1 == pid_ )
-    {
+    else if ( -1 == pid_ ) {
         // forking failed
 
         runs = false;
         return false;
     }
-    else
-    {
+    else {
         if ( fd[ 1 ] )
             close( fd[ 1 ] );
         // the parent continues here
@@ -147,40 +141,38 @@ bool SerialForwarder::start(RunMode runmode, Communication comm)
         input_data = 0;
 
         // Check whether client could be started.
-        if ( fd[ 0 ] )
-            for ( ;; )
-            {
+        if ( fd[ 0 ] ) {
+            for ( ;; ) {
                 char resultByte;
                 int n = ::read( fd[ 0 ], &resultByte, 1 );
-                if ( n == 1 )
-                {
+                if ( n == 1 ) {
                     // Error
                     runs = false;
                     close( fd[ 0 ] );
                     pid_ = 0;
                     return false;
                 }
-                if ( n == -1 )
-                {
+
+                if ( n == -1 ) {
                     if ( ( errno == ECHILD ) || ( errno == EINTR ) )
                         continue; // Ignore
                 }
                 break; // success
             }
+        }
+
         if ( fd[ 0 ] )
             close( fd[ 0 ] );
 
         if ( !commSetupDoneP() )   // finish communication socket setup for the parent
             qWarning( "Could not finish comm setup in parent!" );
 
-        if ( run_mode == Block )
-        {
+        if ( run_mode == Block ) {
             commClose();
 
             // The SIGCHLD handler of the process controller will catch
             // the exit and set the status
-            while ( runs )
-            {
+            while ( runs ) {
                 OProcessController::theOProcessController->
                 slotDoHousekeeping( 0 );
             }

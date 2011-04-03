@@ -18,7 +18,8 @@ namespace {
     // @param ret Test Foo Bar
     // @eturn 13398
     // tactic find " (
-int convert( const QString& line, QString& ret ) {
+int convert( const QString& line, QString& ret )
+{
 //    owarn << "called" << oendl;
     ret = QString::null;
     int i = 0;
@@ -48,16 +49,23 @@ int convert( const QString& line, QString& ret ) {
 };
 
 
-Parser::Parser(const QString& output ) {
+Parser::Parser(const QString& output )
+{
     parse( output );
 }
-void Parser::setText(const QString& output) {
+
+void Parser::setText(const QString& output)
+{
     parse( output );
 }
-Services::ValueList Parser::services() const {
+
+Services::ValueList Parser::services() const
+{
     return m_list;
 }
-void Parser::parse( const QString& string) {
+
+void Parser::parse( const QString& string)
+{
     m_list.clear();
     m_complete = true;
     QStringList list = QStringList::split('\n', string,TRUE );
@@ -94,11 +102,14 @@ void Parser::parse( const QString& string) {
 
     if (m_list.isEmpty() )
         owarn << "m_list is empty" << oendl;
+
     for (it2 = m_list.begin(); it2 != m_list.end(); ++it2 ) {
         owarn << "name " << (*it2).serviceName().latin1() << oendl;
     }
 }
-bool Parser::parseName( const QString& str) {
+
+bool Parser::parseName( const QString& str )
+{
     if (str.startsWith("Service Name:") ) {
         m_item.setServiceName( str.mid(13).stripWhiteSpace() );
         owarn << m_item.serviceName() << oendl;
@@ -106,7 +117,9 @@ bool Parser::parseName( const QString& str) {
     }
     return false;
 }
-bool Parser::parseRecHandle( const QString& str) {
+
+bool Parser::parseRecHandle( const QString& str )
+{
     if (str.startsWith("Service RecHandle:" ) ) {
         QString out = str.mid(18 ).stripWhiteSpace();
         owarn << "out " << out.latin1() << oendl;
@@ -122,13 +135,16 @@ bool Parser::parseRecHandle( const QString& str) {
     }
     return false;
 }
-bool Parser::parseClassId( const QString& str) {
+
+bool Parser::parseClassId( const QString& str )
+{
     if (str.startsWith("Service Class ID List:") ) {
         owarn << "found class id" << oendl;
         owarn << "line: " << str.latin1() << oendl;
         m_classOver = true;
         return true;
-    }else if ( m_classOver && str.startsWith("  " )  ){ // ok now are the informations in place
+    }
+    else if ( m_classOver && str.startsWith("  " ) ) { // ok now are the informations in place
         owarn << "line with class id" << oendl;
         owarn << str.latin1() << oendl;
 
@@ -143,19 +159,23 @@ bool Parser::parseClassId( const QString& str) {
         m_item.insertClassId( ids, classes );
 
         return true;
-    }else{
+    }
+    else {
         owarn << "Else " << m_classOver << oendl;
         m_classOver = false;
     }
     return false;
 }
-bool Parser::parseProtocol( const QString& str) {
+
+bool Parser::parseProtocol( const QString& str)
+{
     if (str.startsWith("Protocol Descriptor List:") ) {
         m_protocolOver = true;
         m_protocolAdded = false;
         return true;
 
-    }else if (m_protocolOver && str.startsWith("   ") ) {
+    }
+    else if (m_protocolOver && str.startsWith("   ") ) {
         m_protocolAdded = true;
         QString dummy = str.stripWhiteSpace();
         int pos = dummy.findRev(':');
@@ -165,7 +185,8 @@ bool Parser::parseProtocol( const QString& str) {
             m_item.insertProtocolDescriptor( desc );
         }
         return true;
-    }else if (m_protocolOver && str.startsWith("  ") ) { // "L2CAP" (0x0100)
+    }
+    else if (m_protocolOver && str.startsWith("  ") ) { // "L2CAP" (0x0100)
 
         if (!m_protocolAdded ) { // the protocol does neither supply a channel nor port so add it now
             Services::ProtocolDescriptor desc(  m_protName,  m_protId );
@@ -176,17 +197,22 @@ bool Parser::parseProtocol( const QString& str) {
             m_protId = convert(str, m_protName );
         }
         return true;
-    }else if (m_protocolOver ) {
+    }
+    else if (m_protocolOver ) {
         m_protocolOver = false;
     }
     return false;
 }
-bool Parser::parseProfile( const QString& str) {
+
+bool Parser::parseProfile( const QString& str)
+{
     if (str.startsWith("Profile Descriptor List:") ) {
         m_profOver = true;
-    }else if ( m_profOver && str.startsWith("  ") ) {
+    }
+    else if ( m_profOver && str.startsWith("  ") ) {
         m_profId = convert( str,  m_profName );
-    }else if ( m_profOver && str.startsWith("   ") ) {
+    }
+    else if ( m_profOver && str.startsWith("   ") ) {
     //  now find
         int pos = str.findRev(':');
         if ( pos > 0 ) {
@@ -195,9 +221,9 @@ bool Parser::parseProfile( const QString& str) {
             Services::ProfileDescriptor desc( m_profName, m_profId, dummy );
             m_item.insertProfileDescriptor(desc);
         }
-    }else
+    }
+    else
         m_profOver = false;
-
 
     return false;
 }

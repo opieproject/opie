@@ -21,15 +21,15 @@ namespace OpieTooth {
 
     public:
 
-    /**
-     * Brings up an device.
-     * Usage example: new Device(/dev/ttySB0, csr)
-     *
-     * @param &device QString the device name
-     * @param &mode QString the mode
-     * @param &speed QString the speed of the device, can be left blank
-     */
-    Device(const QString &device, const QString& mode, const QString& speed);
+        /**
+        * Brings up an device.
+        * Usage example: new Device(/dev/ttySB0, csr)
+        *
+        * @param &device QString the device name
+        * @param &mode QString the mode
+        * @param &speed QString the speed of the device, can be left blank
+        */
+        Device(const QString &device, const QString& mode, const QString& speed);
 
         /**
          * unloads the device
@@ -49,7 +49,7 @@ namespace OpieTooth {
         /**
          * Is the device loaded?
          * @return bool, if the device is loaded
-	 */
+        */
         bool isLoaded()const;
 
         /**
@@ -69,19 +69,19 @@ namespace OpieTooth {
     private slots:
         virtual void slotExited( Opie::Core::OProcess* );
         virtual void slotStdOut(Opie::Core::OProcess*, char*, int );
-	virtual void slotStdErr(Opie::Core::OProcess*, char*, int );
+        virtual void slotStdErr(Opie::Core::OProcess*, char*, int );
     private:
-	class Private;
-	Private *d;
-	QString m_device;
-	bool m_attached:1;
-	Opie::Core::OProcess* m_hci;
-	Opie::Core::OProcess* m_process;
-	QString m_devId;
-	QString m_mode;
+        class Private;
+        Private *d;
+        QString m_device;
+        bool m_attached:1;
+        Opie::Core::OProcess* m_hci;
+        Opie::Core::OProcess* m_process;
+        QString m_devId;
+        QString m_mode;
         QString m_speed;
-	pid_t pid;
-	QCString m_output;
+        pid_t pid;
+        QCString m_output;
     };
 };
 

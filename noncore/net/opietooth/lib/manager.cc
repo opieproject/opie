@@ -11,36 +11,46 @@ using namespace OpieTooth;
 
 using Opie::Core::OProcess;
 Manager::Manager( const QString& dev )
-  : QObject()
+    : QObject()
 {
     odebug << "Manager: created" << oendl;
     m_device = dev;
     m_hcitool = 0;
     m_sdp = 0;
 }
+
 Manager::Manager( Device* /*dev*/ )
   : QObject()
 {
     m_hcitool = 0;
     m_sdp = 0;
 }
+
 Manager::Manager()
   : QObject()
 {
     m_hcitool = 0;
     m_sdp = 0;
 }
-Manager::~Manager(){
+
+Manager::~Manager()
+{
     delete m_hcitool;
     delete m_sdp;
 }
-void Manager::setDevice( const QString& dev ){
+
+void Manager::setDevice( const QString& dev )
+{
     m_device = dev;
 }
-void Manager::setDevice( Device* /*dev*/ ){
+
+void Manager::setDevice( Device* /*dev*/ )
+{
 
 }
-void Manager::isAvailable( const QString& device ){
+
+void Manager::isAvailable( const QString& device )
+{
     OProcess* l2ping = new OProcess();
     l2ping->setName( device.latin1() );
     *l2ping << "l2ping" << "-c1" << device;
@@ -53,11 +63,12 @@ void Manager::isAvailable( const QString& device ){
 
 }
 
-void Manager::isAvailable( Device* /*dev*/ ){
-
-
+void Manager::isAvailable( Device* /*dev*/ )
+{
 }
-void Manager::searchDevices( const QString& device ){
+
+void Manager::searchDevices( const QString& device )
+{
     odebug << "Manager: search devices" << oendl;
     m_hcitool = new OProcess();
     m_hcitool->setName( device.isEmpty() ? "hci0" : device.latin1() );
@@ -75,11 +86,12 @@ void Manager::searchDevices( const QString& device ){
     }
 }
 
-void Manager::searchDevices(Device* /*d*/ ){
-
-
+void Manager::searchDevices(Device* /*d*/ )
+{
 }
-void Manager::addService(const QString& name ){
+
+void Manager::addService(const QString& name )
+{
     OProcess proc;
     proc << "sdptool" << "add" << name;
     bool bo = true;
@@ -87,12 +99,16 @@ void Manager::addService(const QString& name ){
         bo = false;
     emit addedService( name,  bo );
 }
-void Manager::addServices(const QStringList& list){
+
+void Manager::addServices(const QStringList& list)
+{
     QStringList::ConstIterator it;
     for (it = list.begin(); it != list.end(); ++it )
         addService( (*it) );
 }
-void Manager::removeService( const QString& name ){
+
+void Manager::removeService( const QString& name )
+{
     OProcess prc;
     prc << "sdptool" << "del" << name;
     bool bo = true;
@@ -100,12 +116,16 @@ void Manager::removeService( const QString& name ){
         bo = false;
     emit removedService( name,  bo );
 }
-void Manager::removeServices( const QStringList& list){
+
+void Manager::removeServices( const QStringList& list)
+{
     QStringList::ConstIterator it;
     for (it = list.begin(); it != list.end(); ++it )
         removeService( (*it) );
 }
-void Manager::searchServices( const QString& remDevice, bool userecords ){
+
+void Manager::searchServices( const QString& remDevice, bool userecords )
+{
     m_sdp =new OProcess();
     if(userecords)
         *m_sdp << "sdptool" << "records" << remDevice;
@@ -125,16 +145,24 @@ void Manager::searchServices( const QString& remDevice, bool userecords ){
         emit foundServices( remDevice, list );
     }
 }
-void Manager::searchServices( const RemoteDevice& dev, bool userecords ){
+
+void Manager::searchServices( const RemoteDevice& dev, bool userecords )
+{
     searchServices( dev.mac(), userecords );
 }
-QString Manager::toDevice( const QString& /*mac*/ ){
+
+QString Manager::toDevice( const QString& /*mac*/ )
+{
     return QString::null;
 }
-QString Manager::toMac( const QString &/*device*/ ){
+
+QString Manager::toMac( const QString &/*device*/ )
+{
     return QString::null;
 }
-void Manager::slotProcessExited(OProcess* proc ) {
+
+void Manager::slotProcessExited(OProcess* proc )
+{
     bool conn= false;
     if (proc->normalExit() && proc->exitStatus() == 0 )
         conn = true;
@@ -143,6 +171,7 @@ void Manager::slotProcessExited(OProcess* proc ) {
     emit available( name, conn );
     delete proc;
 }
+
 void Manager::slotSDPOut(OProcess* proc, char* ch, int len)
 {
     QCString str(ch,  len+1 );
@@ -157,6 +186,7 @@ void Manager::slotSDPOut(OProcess* proc, char* ch, int len)
     m_out.replace( proc->name(), string );
 
 }
+
 void Manager::slotSDPExited( OProcess* proc)
 {
     odebug << "Manager: proc name " << proc->name() << oendl;
@@ -186,7 +216,9 @@ void Manager::slotSDPExited( OProcess* proc)
         delete proc;
     }
 }
-Services::ValueList Manager::parseSDPOutput( const QString& out ) {
+
+Services::ValueList Manager::parseSDPOutput( const QString& out )
+{
     Services::ValueList list;
     odebug << "Manager: parsing output" << oendl;
     Parser parser( out );
@@ -194,7 +226,8 @@ Services::ValueList Manager::parseSDPOutput( const QString& out ) {
     return list;
 }
 
-void Manager::slotHCIExited(OProcess* proc ) {
+void Manager::slotHCIExited(OProcess* proc )
+{
     odebug << "Manager: process exited" << oendl;
     RemoteDevice::ValueList list;
     if (proc->normalExit() ) {
@@ -211,7 +244,9 @@ void Manager::slotHCIExited(OProcess* proc ) {
         m_hcitool = 0;
     delete proc;
 }
-void Manager::slotHCIOut(OProcess* proc,  char* ch,  int len) {
+
+void Manager::slotHCIOut(OProcess* proc,  char* ch,  int len)
+{
     QCString str( ch, len+1 );
     odebug << "Manager: hci: " << str.data() << oendl;
     QMap<QString, QString>::Iterator it;
@@ -226,7 +261,9 @@ void Manager::slotHCIOut(OProcess* proc,  char* ch,  int len) {
 
     m_devices.replace( proc->name(),  string );
 }
-RemoteDevice::ValueList Manager::parseHCIOutput(const QString& output ) {
+
+RemoteDevice::ValueList Manager::parseHCIOutput(const QString& output )
+{
     odebug << "Manager: parseHCI " << output.latin1() << oendl;
     RemoteDevice::ValueList list;
     QStringList strList = QStringList::split('\n',  output );
@@ -255,7 +292,8 @@ RemoteDevice::ValueList Manager::parseHCIOutput(const QString& output ) {
  * so we don't need to care for it
  * cause hcitool gets reparented
  */
-void Manager::connectTo( const QString& mac) {
+void Manager::connectTo( const QString& mac)
+{
     OProcess proc;
     proc << "hcitool";
     proc << "cc";
@@ -263,8 +301,8 @@ void Manager::connectTo( const QString& mac) {
     proc.start(OProcess::DontCare); // the lib does not care at this point
 }
 
-
-void Manager::searchConnections() {
+void Manager::searchConnections()
+{
     odebug << "Manager: searchConnections()" << oendl;
     OProcess* proc = new OProcess();
     m_hcitoolCon = QString::null;
@@ -282,18 +320,24 @@ void Manager::searchConnections() {
         delete proc;
     }
 }
-void Manager::slotConnectionExited( OProcess* proc ) {
+
+void Manager::slotConnectionExited( OProcess* proc )
+{
     ConnectionState::ValueList list;
     list = parseConnections( m_hcitoolCon );
     emit connections(list );
     delete proc;
 }
-void Manager::slotConnectionOutput(OProcess* /*proc*/, char* cha, int len) {
+
+void Manager::slotConnectionOutput(OProcess* /*proc*/, char* cha, int len)
+{
     QCString str(cha, len );
     m_hcitoolCon.append( str );
     //delete proc;
 }
-ConnectionState::ValueList Manager::parseConnections( const QString& out ) {
+
+ConnectionState::ValueList Manager::parseConnections( const QString& out )
+{
     ConnectionState::ValueList list2;
     QStringList list = QStringList::split('\n',  out );
     QStringList::Iterator it;
@@ -324,8 +368,8 @@ ConnectionState::ValueList Manager::parseConnections( const QString& out ) {
     return list2;
 }
 
-void Manager::signalStrength( const QString &mac ) {
-
+void Manager::signalStrength( const QString &mac )
+{
     OProcess* sig_proc = new OProcess();
 
     connect(sig_proc, SIGNAL(processExited(Opie::Core::OProcess*) ),
@@ -344,14 +388,15 @@ void Manager::signalStrength( const QString &mac ) {
     }
 }
 
-void Manager::slotSignalStrengthOutput(OProcess* proc, char* cha, int len) {
+void Manager::slotSignalStrengthOutput(OProcess* proc, char* cha, int len)
+{
     QCString str(cha, len );
     QString temp = QString(str).stripWhiteSpace();
     QStringList value = QStringList::split(' ', temp );
     emit signalStrength( proc->name(), value[2].latin1() );
 }
 
-
-void Manager::slotSignalStrengthExited( OProcess* proc ) {
+void Manager::slotSignalStrengthExited( OProcess* proc )
+{
      delete proc;
 }

@@ -8,32 +8,29 @@
 namespace OpieTooth {
 
     class StartDunConnection : StartConnection {
+        Q_OBJECT
+        public:
+            StartDunConnection();
+            StartDunConnection( QString mac );
+            ~StartDunConnection();
 
-	Q_OBJECT
+            QString name();
+            void setName( QString name );
+            StartConnection::ConnectionType type();
+            void setConnectionType( );
+            void start();
+            void stop();
 
-    public:
-	StartDunConnection();
-	StartDunConnection( QString mac );
-	~StartDunConnection();
+        private:
+            QString m_name;
+            QString m_mac;
+            ConnectionType m_connectionType;
+            Opie::Core::OProcess* m_dunConnect;
 
-	QString name();
-	void setName( QString name );
-	StartConnection::ConnectionType type();
-	void setConnectionType( );
-	void start();
-	void stop();
-
-    private:
-	QString m_name;
-	QString m_mac;
-	ConnectionType m_connectionType;
-	Opie::Core::OProcess* m_dunConnect;
-
-    private slots:
-	void slotExited( Opie::Core::OProcess* proc );
-                void slotStdOut( Opie::Core::OProcess* proc, char* chars, int len );
+        private slots:
+            void slotExited( Opie::Core::OProcess* proc );
+            void slotStdOut( Opie::Core::OProcess* proc, char* chars, int len );
     };
-
 
 }
 

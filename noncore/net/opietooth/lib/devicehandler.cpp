@@ -12,14 +12,16 @@ using namespace OpieTooth;
 
 DeviceHandler::DeviceHandler() {
 
-};
+}
+
 DeviceHandler::~DeviceHandler() {
 
 }
 
-RemoteDevice::ValueList DeviceHandler::load() {
+RemoteDevice::ValueList DeviceHandler::load()
+{
     RemoteDevice::ValueList list;
-QString path = QDir::homeDirPath() + "/Settings/bluetooth";
+    QString path = QDir::homeDirPath() + "/Settings/bluetooth";
     QDir deviceListSave( path);
 
     // list of .conf files
@@ -49,12 +51,14 @@ QString path = QDir::homeDirPath() + "/Settings/bluetooth";
         }
     }
     return list;
-};
+}
+
 /*
  * This is some how rude but make sure all old devices
  * are getting deleted
  */
-void DeviceHandler::save( const RemoteDevice::ValueList& list) {
+void DeviceHandler::save( const RemoteDevice::ValueList& list)
+{
     QCString rm;
     rm += "rm -rf ";
     rm += QDir::homeDirPath() + "/Settings/bluetooth";
@@ -85,5 +89,4 @@ void DeviceHandler::save( const RemoteDevice::ValueList& list) {
         conf.writeEntry( "name", (*it).name() );
         conf.writeEntry( "mac", (*it).mac() );
     }
-
 }

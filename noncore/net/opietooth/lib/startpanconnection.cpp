@@ -3,41 +3,48 @@
 
 using namespace OpieTooth;
 
+using namespace Opie::Core;
 
-using namespace Opie::Core;
-using namespace Opie::Core;
-StartPanConnection::StartPanConnection() {
+StartPanConnection::StartPanConnection()
+{
     m_panConnect = 0l;
     setConnectionType();
 }
 
-StartPanConnection::~StartPanConnection() {
+StartPanConnection::~StartPanConnection()
+{
     delete m_panConnect;
 }
 
-StartPanConnection::StartPanConnection( QString mac )  {
+StartPanConnection::StartPanConnection( QString mac )
+{
     m_panConnect = 0l;
     m_mac = mac;
     setConnectionType();
 }
 
-void StartPanConnection::setName( QString name ) {
+void StartPanConnection::setName( QString name )
+{
     m_name = name;
 }
 
-QString StartPanConnection::name()  {
+QString StartPanConnection::name()
+{
     return m_name;
 }
 
-void StartPanConnection::setConnectionType() {
+void StartPanConnection::setConnectionType()
+{
     m_connectionType = Pan;
 }
 
-StartConnection::ConnectionType StartPanConnection::type() {
+StartConnection::ConnectionType StartPanConnection::type()
+{
     return m_connectionType;
 }
 
-void StartPanConnection::start()  {
+void StartPanConnection::start()
+{
     m_panConnect = new OProcess();
     odebug << "IM START " + m_mac << oendl;
     *m_panConnect << "pand" << "--connect" << m_mac;
@@ -52,18 +59,19 @@ void StartPanConnection::start()  {
     }
 }
 
-
-void StartPanConnection::slotExited( OProcess* proc ) {
+void StartPanConnection::slotExited( OProcess* proc )
+{
     delete m_panConnect;
     m_panConnect = 0l;
 }
 
 void StartPanConnection::slotStdOut(OProcess* proc, char* chars, int len)
-{}
+{
+}
 
-
-void StartPanConnection::stop()  {
-    if ( m_panConnect )  {
+void StartPanConnection::stop()
+{
+    if ( m_panConnect ) {
         delete m_panConnect;
         m_panConnect = 0l;
     }
@@ -81,4 +89,3 @@ void StartPanConnection::stop()  {
         delete m_panConnect;
     }
 }
-
