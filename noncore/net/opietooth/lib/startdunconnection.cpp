@@ -4,40 +4,48 @@
 
 using namespace OpieTooth;
 
-
 using namespace Opie::Core;
-StartDunConnection::StartDunConnection() {
+
+StartDunConnection::StartDunConnection()
+{
     m_dunConnect = 0l;
     setConnectionType();
 }
 
-StartDunConnection::~StartDunConnection() {
+StartDunConnection::~StartDunConnection()
+{
     delete m_dunConnect;
 }
 
-StartDunConnection::StartDunConnection( QString mac )  {
+StartDunConnection::StartDunConnection( QString mac )
+{
     m_dunConnect = 0l;
     m_mac = mac;
     setConnectionType();
 }
 
-void StartDunConnection::setName( QString name ) {
+void StartDunConnection::setName( QString name )
+{
     m_name = name;
 }
 
-QString StartDunConnection::name()  {
+QString StartDunConnection::name()
+{
     return m_name;
 }
 
-void StartDunConnection::setConnectionType() {
+void StartDunConnection::setConnectionType()
+{
     m_connectionType = Pan;
 }
 
-StartConnection::ConnectionType StartDunConnection::type() {
+StartConnection::ConnectionType StartDunConnection::type()
+{
     return m_connectionType;
 }
 
-void StartDunConnection::start()  {
+void StartDunConnection::start()
+{
     m_dunConnect = new OProcess();
     *m_dunConnect << "dund" << "--listen" << "--connect"  << m_mac;
 
@@ -51,19 +59,19 @@ void StartDunConnection::start()  {
     }
 }
 
-
-void StartDunConnection::slotExited( OProcess* proc ) {
+void StartDunConnection::slotExited( OProcess* proc )
+{
     delete m_dunConnect;
 }
 
 void StartDunConnection::slotStdOut(OProcess* proc, char* chars, int len)
-{}
+{
+}
 
-
-void StartDunConnection::stop()  {
+void StartDunConnection::stop()
+{
     if ( m_dunConnect )  {
         delete m_dunConnect;
         m_dunConnect = 0l;
     }
 }
-

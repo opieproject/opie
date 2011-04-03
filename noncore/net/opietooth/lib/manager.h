@@ -124,7 +124,7 @@ namespace OpieTooth {
          */
         void searchConnections();
 
-	void signalStrength( const QString &mac );
+        void signalStrength( const QString &mac );
 //// not implemented yet
         /*static*/ QString toDevice( const QString& mac );
         /*static*/ QString toMac( const QString &device );
@@ -139,9 +139,9 @@ namespace OpieTooth {
         void foundServices( const QString& device, Services::ValueList );
         void foundDevices( const QString& device, RemoteDevice::ValueList );
         void connections( ConnectionState::ValueList );
-	void signalStrength( const QString& mac, const QString& strengh );
+        void signalStrength( const QString& mac, const QString& strengh );
 
-private slots:
+    private slots:
         void slotProcessExited(Opie::Core::OProcess* );
 
         void slotSDPExited(Opie::Core::OProcess*);
@@ -153,8 +153,8 @@ private slots:
         void slotConnectionExited(Opie::Core::OProcess* );
         void slotConnectionOutput(Opie::Core::OProcess*, char*, int );
 
-	void slotSignalStrengthOutput( Opie::Core::OProcess*, char*, int );
-	void slotSignalStrengthExited( Opie::Core::OProcess* );
+        void slotSignalStrengthOutput( Opie::Core::OProcess*, char*, int );
+        void slotSignalStrengthExited( Opie::Core::OProcess* );
     private:
         Services::ValueList parseSDPOutput( const QString& );
         RemoteDevice::ValueList parseHCIOutput( const QString& );
@@ -162,10 +162,10 @@ private slots:
         Opie::Core::OProcess *m_hcitool;
         Opie::Core::OProcess *m_sdp; // not only one
         QString m_device;
-	QMap<QString, int> m_signalStrength;
+        QMap<QString, int> m_signalStrength;
         QMap<QString, QString> m_out;
         QMap<QString, QString> m_devices;
-	QMap<Opie::Core::OProcess*, QString> m_signalMac;
+        QMap<Opie::Core::OProcess*, QString> m_signalMac;
         QString m_hcitoolCon;
     };
 };
