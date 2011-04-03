@@ -594,7 +594,8 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList )
             {
                 connectionItem = new BTConnectionItem( connectionsView, (*it) );
 
-                if( m_deviceList.find((*it).mac()).data() )
+                QMap<QString,BTDeviceItem*>::Iterator item = m_deviceList.find((*it).mac());
+                if( item != m_deviceList.end() && item.data() )
                 {
                     connectionItem->setName( m_deviceList.find( (*it).mac()).data()->name() );
                 }
