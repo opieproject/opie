@@ -15,6 +15,7 @@ namespace OpieTooth {
         Services::ValueList m_list;
         Services m_item;
 
+        void reset();
         void parse( const QString& );
         bool parseName(const QString& );
         bool parseRecHandle( const QString& );
