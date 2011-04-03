@@ -73,8 +73,12 @@ void ObexPush::slotPushExited(Opie::Core::OProcess* proc)
     if (pushProc != proc)
         return;
     odebug << "Process exited" << oendl;
-    if (pushProc->normalExit())
-        emit sendComplete(pushProc->exitStatus());
+    if (pushProc->normalExit()) {
+        int ret = pushProc->exitStatus();
+        if( ret == 255 )  // apparently this means success for obexftp (!)
+            ret = 0;
+        emit sendComplete(ret);
+    }
     else
         emit sendError(-1);
 }
