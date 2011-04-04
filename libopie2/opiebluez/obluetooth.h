@@ -33,6 +33,11 @@
 #include <qobject.h>
 #include <qdict.h>
 
+class QDBusProxy;
+class QDBusMessage;
+class QDBusObjectPath;
+template <typename T> class QDBusDataMap;
+
 namespace Opie {
 namespace Bluez {
 
@@ -89,10 +94,12 @@ class OBluetooth : public QObject
 
   protected:
     OBluetooth();
+    ~OBluetooth();
 
   private:
     static OBluetooth* _instance;
     InterfaceMap _interfaces;
+    QDBusProxy *m_bluezManagerProxy;
     class OBluetoothPrivate;
     OBluetoothPrivate *d;
     int _fd;
@@ -124,7 +131,7 @@ class OBluetoothInterface : public QObject
      * Constructor. Normally you don't create @ref OBluetoothInterface objects yourself,
      * but access them via @ref OBluetooth::interface().
      */
-    OBluetoothInterface( QObject* parent, const char* name, void* devinfo, int ctlfd );
+    OBluetoothInterface( QObject* parent, const char* name, const QDBusObjectPath &path );
     /**
      * Destructor.
      */
@@ -146,6 +153,9 @@ class OBluetoothInterface : public QObject
       */
     DeviceIterator neighbourhood();
 
+  protected slots:
+    void slotDBusSignal(const QDBusMessage& message);
+//    void slotAsyncReply(int callID, const QDBusMessage& reply);
   private:
     DeviceMap _devices;
     class Private;
@@ -170,7 +180,8 @@ class OBluetoothDevice : public QObject
     /**
      * Constructor.
      */
-    OBluetoothDevice( QObject* parent, const char* name, void* inqinfo );
+    OBluetoothDevice( QObject* parent, const QDBusObjectPath &path );
+    OBluetoothDevice( QObject* parent, const QDBusDataMap<QString> &props );
     /**
      * Destructor.
      */

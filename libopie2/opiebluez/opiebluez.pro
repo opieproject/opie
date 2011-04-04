@@ -8,7 +8,7 @@ TARGET      = opiebluez2
 VERSION     = 0.0.0
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lopiecore2
+LIBS        += -lopiecore2 -ldbus-qt2 $$system(pkg-config --libs dbus-1)
 
 !contains( platform, x11 ) {
   include( $(OPIEDIR)/include.pro )

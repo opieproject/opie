@@ -1,10 +1,12 @@
+#include "main.h"
+
 #include <opie2/odebug.h>
 #include <opie2/obluetooth.h>
 
 using namespace Opie::Core;
 using namespace Opie::Bluez;
 
-int main( int argc, char** argv )
+App::App( int argc, char** argv ) : QApplication( argc, argv )
 {
     OBluetooth* sys = OBluetooth::instance();
     OBluetooth::InterfaceIterator it = sys->iterator();
@@ -29,6 +31,13 @@ int main( int argc, char** argv )
 
         ++it;
     }
+}
+
+int main( int argc, char** argv )
+{
+    App* app = new App( argc, argv );
+    delete app;
+
     return 0;
 }
 
