@@ -1,7 +1,6 @@
   config LIBOPIE2BLUEZ
     boolean "libopie2bluez (Linux Bluetooth subsystem BlueZ related classes)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBBLUEZ_DEP
-    comment "libopie2net needs a libqpe, libopie2core, and libbluez"
-    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBBLUEZ_DEP)
-
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBDBUSQT2
+    comment "libopie2bluez needs a libqpe, libopie2core and Qt2 DBus bindings"
+    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBDBUSQT2)
