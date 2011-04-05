@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>269</width>
+            <width>265</width>
             <height>368</height>
         </rect>
     </property>
@@ -272,55 +272,22 @@
                                 <class>QCheckBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>encCheckBox</cstring>
+                                    <cstring>chkShowPasskey</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>encrypt</string>
+                                    <string>show passkey</string>
                                 </property>
                             </widget>
                             <widget row="3"  column="0"  rowspan="1"  colspan="2" >
                                 <class>QCheckBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>authCheckBox</cstring>
+                                    <cstring>chkDiscoverable</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>enable authentification</string>
-                                </property>
-                            </widget>
-                            <widget row="4"  column="0"  rowspan="1"  colspan="2" >
-                                <class>QCheckBox</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>cryptCheckBox</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>enable encryption</string>
-                                </property>
-                            </widget>
-                            <widget row="5"  column="0"  rowspan="1"  colspan="2" >
-                                <class>QCheckBox</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>pagescanCheckBox</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Enable Page scan</string>
-                                </property>
-                            </widget>
-                            <widget row="6"  column="0"  rowspan="1"  colspan="2" >
-                                <class>QCheckBox</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>inquiryscanCheckBox</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Enable Inquiry scan</string>
+                                    <string>Discoverable by other devices</string>
                                 </property>
                             </widget>
                             <widget row="7"  column="0"  rowspan="1"  colspan="2" >
@@ -373,7 +340,7 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>0</number>
+                        <number>10</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
@@ -388,6 +355,13 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>Status Label</string>
+                        </property>
+                        <property stdset="1">
+                            <name>alignment</name>
+                            <set>AlignTop|AlignLeft</set>
+                        </property>
+                        <property>
+                            <name>vAlign</name>
                         </property>
                     </widget>
                 </vbox>
@@ -519,11 +493,8 @@
     <tabstop>connectionsView</tabstop>
     <tabstop>deviceNameLine</tabstop>
     <tabstop>passkeyLine</tabstop>
-    <tabstop>encCheckBox</tabstop>
-    <tabstop>authCheckBox</tabstop>
-    <tabstop>cryptCheckBox</tabstop>
-    <tabstop>pagescanCheckBox</tabstop>
-    <tabstop>inquiryscanCheckBox</tabstop>
+    <tabstop>chkShowPasskey</tabstop>
+    <tabstop>chkDiscoverable</tabstop>
     <tabstop>configApplyButton</tabstop>
     <tabstop>rfcommBindButton</tabstop>
     <tabstop>serDevName</tabstop>

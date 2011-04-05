@@ -3,7 +3,7 @@ HEADERS         = btconnectionitem.h btdeviceitem.h \
                   btserviceitem.h stdpopups.h \ 
 		  popuphelper.h bluebase.h \ 
 		  scandialog.h btlistitem.h filistitem.h \ 
-		  hciconfwrapper.h bticonloader.h \
+		  bticonloader.h \
 		  pppdialog.h dundialog.h pandialog.h \
 		  obexdialog.h obexftpdialog.h \
 		  rfcommassigndialogimpl.h rfcommassigndialogitem.h \
@@ -15,7 +15,7 @@ SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \
 	          btserviceitem.cpp filelistitem.cpp stdpopups.cpp \
 		  popuphelper.cpp main.cpp \
 		  bluebase.cpp scandialog.cpp \ 
-		  btlistitem.cpp hciconfwrapper.cpp \ 
+		  btlistitem.cpp \
 		  bticonloader.cpp pppdialog.cpp dundialog.cpp pandialog.cpp \
 		  rfcommassigndialogimpl.cpp rfcommassigndialogitem.cpp \
 		  obexdialog.cpp \
@@ -25,7 +25,7 @@ SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \
 INCLUDEPATH     += $(OPIEDIR)/include
 INCLUDEPATH     += $(OPIEDIR)/noncore/net/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe -lbluetooth -lopietooth1 -lopiecore2 -lopieui2 -lopenobex -lobexftp
+LIBS            += -lqpe -lbluetooth -lopietooth1 -lopiecore2 -lopieui2 -lopiebluez2 -lopenobex -lobexftp
 INTERFACES      = bluetoothbase.ui  devicedialog.ui rfcommassigndialogbase.ui \
                   rfcommdialogitembase.ui obexftpdialogbase.ui \
                   servicesdialogbase.ui
