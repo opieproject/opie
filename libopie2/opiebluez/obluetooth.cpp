@@ -53,16 +53,29 @@ namespace Bluez {
  * OBluetooth
  *======================================================================================*/
 
+class OBluetooth::Private
+{
+  public:
+    Private()
+    {
+        defaultIntf = NULL;
+    }
+  public:
+    OBluetoothInterface *defaultIntf;
+};
+
 OBluetooth* OBluetooth::_instance = 0;
 
 OBluetooth::OBluetooth()
-    : m_bluezManagerProxy(0), d( 0 )
+    : m_bluezManagerProxy(0)
 {
+    d = new OBluetooth::Private();
     synchronize();
 }
 
 OBluetooth::~OBluetooth()
 {
+    delete d;
     delete m_bluezManagerProxy;
 }
 
@@ -82,9 +95,19 @@ int OBluetooth::count() const
     return _interfaces.count();
 }
 
+bool OBluetooth::isPresent( const char* interface ) const
+{
+    return ( _interfaces.find( QString(interface) ) != 0 );
+}
+
 OBluetoothInterface* OBluetooth::interface( const QString& iface ) const
 {
     return _interfaces[iface];
+}
+
+OBluetoothInterface* OBluetooth::defaultInterface() const
+{
+    return d->defaultIntf;
 }
 
 void OBluetooth::synchronize()
@@ -107,8 +130,8 @@ void OBluetooth::synchronize()
         m_bluezManagerProxy->setPath("/");
         m_bluezManagerProxy->setInterface("org.bluez.Manager");
         m_bluezManagerProxy->setConnection(connection);
-        //QObject::connect(m_bluezManagerProxy, SIGNAL(dbusSignal(const QDBusMessage&)),
-        //                this, SLOT(slotDBusSignal(const QDBusMessage&)));
+        QObject::connect(m_bluezManagerProxy, SIGNAL(dbusSignal(const QDBusMessage&)),
+                        this, SLOT(slotDBusSignal(const QDBusMessage&)));
         //QObject::connect(m_bluezManagerProxy, SIGNAL(asyncReply(int, const QDBusMessage&)),
         //                this, SLOT(slotAsyncReply(int, const QDBusMessage&)));
     }
@@ -123,11 +146,40 @@ void OBluetooth::synchronize()
                 const QValueList<QDBusObjectPath> list = it.data().toVariant().value.toList().toObjectPathList();
                 QValueList<QDBusObjectPath>::ConstIterator it2 = list.begin();
                 for (; it2 != list.end(); ++it2) {
-                    odebug << "OBluetooth::synchronize() - found device " << (*it2) << oendl;
-                    OBluetoothInterface *iface  = new OBluetoothInterface( this, 0, (*it2) );
-                    _interfaces.insert( iface->name(), iface );
+                    OBluetoothInterface *iface  = new OBluetoothInterface( this, (*it2) );
+                    odebug << "OBluetooth::synchronize() - found device " << iface->name() << oendl;
+                    _interfaces.insert( (*it2), iface );
                 }
             }
+        }
+    }
+
+    reply = m_bluezManagerProxy->sendWithReply("DefaultAdapter", QValueList<QDBusData>());
+    if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
+        d->defaultIntf = _interfaces.find( reply[0].toObjectPath() );
+    }
+}
+
+void OBluetooth::slotDBusSignal(const QDBusMessage& message)
+{
+    if( message.member() == "DefaultAdapterChanged" ) {
+        d->defaultIntf = _interfaces.find( message[0].toObjectPath() );
+        emit defaultInterfaceChanged( d->defaultIntf );
+    }
+    else if( message.member() == "AdapterAdded" ) {
+        OBluetoothInterface *intf = new OBluetoothInterface( this, message[0].toObjectPath() );
+        _interfaces.insert( message[0].toObjectPath(), intf );
+        emit interfaceAdded( intf );
+    }
+    else if( message.member() == "AdapterRemoved" ) {
+        OBluetoothInterface *intf = _interfaces.find( message[0].toObjectPath() );
+        if( intf ) {
+            emit interfaceRemoved( intf );
+            if( intf == d->defaultIntf ) {
+                d->defaultIntf = NULL;
+                emit defaultInterfaceChanged( NULL ); // for convenience
+            }
+            _interfaces.remove( message[0].toObjectPath() );
         }
     }
 }
@@ -149,52 +201,33 @@ class OBluetoothInterface::Private
         adapterProxy->setInterface("org.bluez.Adapter");
         adapterProxy->setConnection(connection);
         reloadInfo();
+        interfaceName = path.mid(path.findRev('/')+1);
     }
 
-    ~Private() {
+    ~Private()
+    {
         delete adapterProxy;
     }
 
     void reloadInfo()
     {
-        adapterName = "";
-        adapterClass = 0;
-        bdaddr = "";
-        powered = false;
         QDBusMessage reply = adapterProxy->sendWithReply("GetProperties", QValueList<QDBusData>());
         if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
-            const QDBusDataMap<QString> adapterProps = reply[0].toStringKeyMap();
-            QDBusDataMap<QString>::ConstIterator it = adapterProps.begin();
-            for (; it != adapterProps.end(); ++it) {
-                if( it.key() == "Name" ) {
-                    adapterName = it.data().toVariant().value.toString();
-                }
-                else if( it.key() == "Class" ) {
-                    adapterClass = it.data().toVariant().value.toUInt32();
-                }
-                else if( it.key() == "Address" ) {
-                    bdaddr = it.data().toVariant().value.toString();
-                }
-                else if( it.key() == "Powered" ) {
-                    powered = it.data().toVariant().value.toBool();
-                }
-            }
+            adapterProps = reply[0].toStringKeyMap().toVariantMap();
         }
     }
 
     QDBusProxy *adapterProxy;
-    QString adapterName;
-    QString bdaddr;
-    Q_UINT32 adapterClass;
-    bool powered;
+    QMap<QString,QDBusVariant> adapterProps;
+    QString interfaceName;
     bool discovering;
 };
 
-OBluetoothInterface::OBluetoothInterface( QObject* parent, const char* name, const QDBusObjectPath &path )
-                    :QObject( parent, name )
+OBluetoothInterface::OBluetoothInterface( QObject* parent, const QDBusObjectPath &path )
+                    :QObject( parent )
 {
     d = new OBluetoothInterface::Private( path );
-    setName( d->adapterName );
+    setName( d->interfaceName );
     QObject::connect(d->adapterProxy, SIGNAL(dbusSignal(const QDBusMessage&)),
                     this, SLOT(slotDBusSignal(const QDBusMessage&)));
 }
@@ -206,7 +239,27 @@ OBluetoothInterface::~OBluetoothInterface()
 
 QString OBluetoothInterface::macAddress() const
 {
-    return d->bdaddr;
+    return d->adapterProps["Address"].value.toString();
+}
+
+QString OBluetoothInterface::deviceClass() const
+{
+    return OBluetoothDevice::deviceClassString( d->adapterProps["Class"].value.toUInt32() );
+}
+
+QString OBluetoothInterface::publicName() const
+{
+    return d->adapterProps["Name"].value.toString();
+}
+
+bool OBluetoothInterface::discoverable() const
+{
+    return d->adapterProps["Discoverable"].value.toBool();
+}
+
+bool OBluetoothInterface::discovering() const
+{
+    return d->discovering;
 }
 
 bool OBluetoothInterface::setUp( bool b )
@@ -223,33 +276,71 @@ bool OBluetoothInterface::setUp( bool b )
 
 bool OBluetoothInterface::isUp() const
 {
-    return d->powered;
+    return d->adapterProps["Powered"].value.toBool();
+}
+
+bool OBluetoothInterface::setDiscoverable( bool b )
+{
+    QValueList<QDBusData> parameters;
+    parameters << QDBusData::fromString("Discoverable");
+    parameters << QDBusData::fromVariant(QDBusVariant(QDBusData::fromBool(b)));
+    QDBusMessage reply = d->adapterProxy->sendWithReply("SetProperty", parameters);
+    if (reply.type() == QDBusMessage::ReplyMessage)
+        return true;
+    else
+        return false;
+}
+
+bool OBluetoothInterface::setPublicName( const QString &name )
+{
+    QValueList<QDBusData> parameters;
+    parameters << QDBusData::fromString("Name");
+    parameters << QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(name)));
+    QDBusMessage reply = d->adapterProxy->sendWithReply("SetProperty", parameters);
+    if (reply.type() == QDBusMessage::ReplyMessage)
+        return true;
+    else
+        return false;
 }
 
 OBluetoothInterface::DeviceIterator OBluetoothInterface::neighbourhood()
 {
-    QDBusConnection connection = QDBusConnection::systemBus();
-
-    _devices.clear();
-    d->discovering = true;
-    d->adapterProxy->send("StartDiscovery", QValueList<QDBusData>());
+    startDiscovery();
     while( d->discovering )
         qApp->processEvents();
 
     return DeviceIterator( _devices );
 }
 
+void OBluetoothInterface::startDiscovery()
+{
+    if( ! d->discovering ) {
+        _devices.clear();
+        d->discovering = true;
+        d->adapterProxy->send("StartDiscovery", QValueList<QDBusData>());
+    }
+}
+
+void OBluetoothInterface::stopDiscovery()
+{
+    d->adapterProxy->send("StopDiscovery", QValueList<QDBusData>());
+}
+
 void OBluetoothInterface::slotDBusSignal(const QDBusMessage& message)
 {
     if( message.member() == "PropertyChanged" ) {
-        if( message[0].toString() == "Discovering" ) {
+        QString propName = message[0].toString();
+        if( propName == "Discovering" ) {
             d->discovering = message[1].toVariant().value.toBool();
         }
+        d->adapterProps[propName] = message[1].toVariant();
+        emit propertyChanged( propName );
     }
     else if( message.member() == "DeviceFound" ) {
         const QDBusDataMap<QString> adapterProps = message[1].toStringKeyMap();
         OBluetoothDevice *dev = new OBluetoothDevice( this, adapterProps );
         _devices.insert( message[0].toString(), dev );
+        emit deviceFound(dev);
     }
 }
 
@@ -289,36 +380,20 @@ class OBluetoothDevice::Private
 
     void reloadInfo()
     {
-        devName = "";
-        devClass = 0;
-        bdaddr = "";
         QDBusMessage reply = devProxy->sendWithReply("GetProperties", QValueList<QDBusData>());
         if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
-            const QDBusDataMap<QString> adapterProps = reply[0].toStringKeyMap();
-            loadInfo( adapterProps );
+            const QDBusDataMap<QString> props = reply[0].toStringKeyMap();
+            loadInfo( props );
         }
     }
 
     void loadInfo(const QDBusDataMap<QString> &props)
     {
-        QDBusDataMap<QString>::ConstIterator it = props.begin();
-        for (; it != props.end(); ++it) {
-            if( it.key() == "Name" ) {
-                devName = it.data().toVariant().value.toString();
-            }
-            else if( it.key() == "Class" ) {
-                devClass = it.data().toVariant().value.toUInt32();
-            }
-            else if( it.key() == "Address" ) {
-                bdaddr = it.data().toVariant().value.toString();
-            }
-        }
+        devProps = props.toVariantMap();
     }
 
     QDBusProxy *devProxy;
-    QString devName;
-    QString bdaddr;
-    Q_UINT32 devClass;
+    QMap<QString,QDBusVariant> devProps;
 };
 
 OBluetoothDevice::OBluetoothDevice( QObject* parent, const QDBusDataMap<QString> &props )
@@ -326,7 +401,7 @@ OBluetoothDevice::OBluetoothDevice( QObject* parent, const QDBusDataMap<QString>
 {
 //    odebug << "OBluetoothDevice::OBluetoothDevice() - '" << name << "'" << oendl;
     d = new OBluetoothDevice::Private( props );
-    setName( d->devName );
+    setName( d->devProps["Name"].value.toString() );
 }
 
 OBluetoothDevice::OBluetoothDevice( QObject* parent, const QDBusObjectPath &path )
@@ -334,7 +409,7 @@ OBluetoothDevice::OBluetoothDevice( QObject* parent, const QDBusObjectPath &path
 {
 //    odebug << "OBluetoothDevice::OBluetoothDevice() - '" << path << "'" << oendl;
     d = new OBluetoothDevice::Private( path );
-    setName( d->devName );
+    setName( d->devProps["Name"].value.toString() );
 }
 
 OBluetoothDevice::~OBluetoothDevice()
@@ -345,12 +420,17 @@ OBluetoothDevice::~OBluetoothDevice()
 
 QString OBluetoothDevice::macAddress() const
 {
-    return d->bdaddr;
+    return d->devProps["Address"].value.toString();
 }
 
 QString OBluetoothDevice::deviceClass() const
 {
-    int devClass = d->devClass & 0xfff;
+    return OBluetoothDevice::deviceClassString( d->devProps["Class"].value.toUInt32() );
+}
+
+QString OBluetoothDevice::deviceClassString(Q_UINT32 dev_class)
+{
+    int devClass = dev_class & 0xfff;
     int maj = devClass >> 8;
     int min = (devClass & 0x1f) >> 2;
 
