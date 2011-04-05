@@ -17,7 +17,6 @@
 
 #include "bluebase.h"
 #include "scandialog.h"
-#include "hciconfwrapper.h"
 #include "devicehandler.h"
 #include "btconnectionitem.h"
 #include "rfcommassigndialogimpl.h"
@@ -32,6 +31,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <opie2/odebug.h>
+#include <opie2/obluetooth.h>
 #ifdef Q_WS_QWS
 #include <qpe/qcopenvelope_qws.h>
 #endif
@@ -66,6 +66,8 @@ using namespace Opie::Core;
 #include <stdlib.h>
 
 using namespace OpieTooth;
+using namespace Opie::Bluez;
+
 //Array of possible speeds of the serial port
 struct SerSpeed {
     const char* str; //string value
@@ -82,6 +84,11 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 {
     m_loadedDevices = false;
     m_localDevice = new Manager( "hci0" );
+    m_bluetooth = OBluetooth::instance();
+
+    OBluetoothInterface *intf = m_bluetooth->defaultInterface();
+    connectInterface( intf );
+    connect( m_bluetooth,  SIGNAL( defaultInterfaceChanged( OBluetoothInterface*) ), this, SLOT( defaultInterfaceChanged( OBluetoothInterface*) ) );
 
     connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
     connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
@@ -101,7 +108,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     connect( m_localDevice, SIGNAL( signalStrength(const QString&,const QString&) ),
              this, SLOT( addSignalStrength(const QString&,const QString&) ) );
     connect(runButton, SIGNAL(clicked()), this, SLOT(doForward()));
-    connect(encCheckBox, SIGNAL(toggled(bool)), this, SLOT(doEncrypt(bool)));
+    connect(chkShowPasskey, SIGNAL(toggled(bool)), this, SLOT(doShowPasskey(bool)));
     connect(servicesEditButton, SIGNAL(clicked()), this, SLOT(editServices()));
 
     // let hold be rightButtonPressed()
@@ -129,7 +136,6 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     devicesView->setRootIsDecorated(true);
     devicesView->setColumnWidthMode(0,QListView::Manual);
     m_iconLoader = new BTIconLoader();
-    writeToHciConfig();
     addConnectedDevices();
     readSavedDevices();
     forwarder = NULL;
@@ -141,6 +147,19 @@ void BlueBase::showEvent(QShowEvent *e)
     devicesView->setColumnWidth(0,devicesView->visibleWidth() - devicesView->columnWidth(1));
 }
 
+void BlueBase::defaultInterfaceChanged( OBluetoothInterface *intf )
+{
+    connectInterface( intf );
+    updateStatus();
+}
+
+void BlueBase::connectInterface( const OBluetoothInterface *intf )
+{
+    if( intf ) {
+        connect( intf,  SIGNAL( propertyChanged(const QString&) ), this, SLOT(interfacePropertyChanged(const QString&) ) );
+    }
+}
+
 /**
  * Reads all options from the config file
  */
@@ -150,12 +169,9 @@ void BlueBase::readConfig()
     Config cfg( "bluetoothmanager" );
     cfg.setGroup( "bluezsettings" );
 
-    m_deviceName = cfg.readEntry( "name" , "No name" ); // name the device should identify with
+    // FIXME remove m_deviceName
+    //m_deviceName = cfg.readEntry( "name" , "No name" ); // name the device should identify with
     m_defaultPasskey = cfg.readEntryCrypt( "passkey" , "" ); // <- hmm, look up how good the trolls did that, maybe too weak
-    m_useEncryption = cfg.readBoolEntry( "useEncryption" , TRUE );
-    m_enableAuthentification = cfg.readBoolEntry( "enableAuthentification" , TRUE );
-    m_enablePagescan = cfg.readBoolEntry( "enablePagescan" , TRUE );
-    m_enableInquiryscan = cfg.readBoolEntry( "enableInquiryscan" , TRUE );
 }
 
 /**
@@ -167,41 +183,9 @@ void BlueBase::writeConfig()
     Config cfg( "bluetoothmanager" );
     cfg.setGroup( "bluezsettings" );
 
-    cfg.writeEntry( "name" , m_deviceName );
+    //cfg.writeEntry( "name" , m_deviceName );
     cfg.writeEntryCrypt( "passkey" , m_defaultPasskey );
-    cfg.writeEntry( "useEncryption" , m_useEncryption );
-    cfg.writeEntry( "enableAuthentification" , m_enableAuthentification );
-    cfg.writeEntry( "enablePagescan" , m_enablePagescan );
-    cfg.writeEntry( "enableInquiryscan" , m_enableInquiryscan );
-
-    writeToHciConfig();
 }
-
-/**
- * Modify the hcid.conf file to our needs
- */
-void BlueBase::writeToHciConfig()
-{
-    QFile pinFile("/etc/bluetooth/pin"); // /etc/bluetooth/pin file
-    owarn << "writeToHciConfig" << oendl;
-    //Write /etc/bluetooth/hcid.conf file
-    HciConfWrapper hciconf ( "/etc/bluetooth/hcid.conf" );
-    hciconf.load();
-    hciconf.setPinHelper( QPEApplication::qpeDir() + "bin/bluepin" );
-    hciconf.setName( m_deviceName );
-    hciconf.setEncrypt( m_useEncryption );
-    hciconf.setAuth( m_enableAuthentification );
-    hciconf.setPscan( m_enablePagescan );
-    hciconf.setIscan( m_enableInquiryscan );
-    hciconf.save();
-    // Write /etc/bluetooth/pin (default PIN file)
-    pinFile.open(IO_WriteOnly | IO_Truncate);
-    pinFile.writeBlock(m_defaultPasskey, m_defaultPasskey.length());
-    pinFile.writeBlock("\n", sizeof("\n"));
-    pinFile.flush();
-    pinFile.close();
-}
-
 
 /**
  * Read the list of already known devices
@@ -252,35 +236,48 @@ void BlueBase::writeSavedDevices()
  */
 void BlueBase::initGui()
 {
-    StatusLabel->setText( status() ); // maybe move it to getStatus()
-    cryptCheckBox->setChecked( m_useEncryption );
-    authCheckBox->setChecked( m_enableAuthentification );
-    pagescanCheckBox->setChecked( m_enablePagescan );
-    inquiryscanCheckBox->setChecked( m_enableInquiryscan );
-    deviceNameLine->setText( m_deviceName );
+    OBluetoothInterface *intf = m_bluetooth->defaultInterface();
+    if( intf ) {
+        chkDiscoverable->setChecked( intf->discoverable() );
+        deviceNameLine->setText( intf->publicName() );
+    }
     passkeyLine->setText( m_defaultPasskey );
-    // set info tab
-    setInfo();
     serDevName->setText("/dev/ircomm0"); // no tr
     for (unsigned int i = 0; i < (sizeof(speeds) / sizeof(speeds[0])); i++) {
         serSpeed->insertItem(speeds[i].str);
     }
     serSpeed->setCurrentItem((sizeof(speeds) / sizeof(speeds[0])) - 1);
-    encCheckBox->setChecked(true);
+    updateStatus();
 }
 
 
 /**
- * Get the status informations and returns it
- * @return QString the status informations gathered
+ * Set the informations about the local device in information Tab
  */
-QString BlueBase::status()const
+void BlueBase::updateStatus()
 {
-    QString infoString = tr( "<b>Device name : </b> Ipaq" );
-    infoString += QString( "<br><b>" + tr( "MAC adress: " ) +"</b> No idea" );
-    infoString += QString(  "<br><b>" + tr( "Class" ) + "</b> PDA" );
+    OBluetoothInterface *intf = m_bluetooth->defaultInterface();
+    QString publicName, bdaddr, devClass;
+    if( intf ) {
+        publicName = intf->publicName();
+        bdaddr = intf->macAddress();
+        devClass = intf->deviceClass();
+        PushButton2->setEnabled(true);
+    }
+    else {
+        publicName = tr("(none)");
+        bdaddr = tr("(none)");
+        devClass = tr("(none)");
+        PushButton2->setEnabled(false);
+    }
 
-    return (infoString);
+    QString infoString = "<table>";
+    infoString += QString( "<tr><td><b>" + tr( "Device Name:" ) + "</b></td><td>" + publicName + "</td></tr>" );
+    infoString += QString( "<tr><td><b>" + tr( "Device Address:" ) + "</b></td><td>" + bdaddr + "</td></tr>" );
+    infoString += QString( "<tr><td><b>" + tr( "Class:" ) + "</b></td><td>" + devClass + "</td></tr>" );
+    infoString += "</table>";
+
+    StatusLabel->setText( infoString );
 }
 
 
@@ -289,16 +286,14 @@ QString BlueBase::status()const
  */
 void BlueBase::applyConfigChanges()
 {
-    m_deviceName =  deviceNameLine->text();
+    //m_deviceName =  deviceNameLine->text();
+    OBluetoothInterface *intf = m_bluetooth->defaultInterface();
+    if( intf ) {
+        intf->setDiscoverable( chkDiscoverable->isChecked() );
+        intf->setPublicName( deviceNameLine->text() );
+    }
     m_defaultPasskey = passkeyLine->text();
-    m_useEncryption = cryptCheckBox->isChecked();
-    m_enableAuthentification = authCheckBox->isChecked();
-    m_enablePagescan = pagescanCheckBox->isChecked();
-    m_enableInquiryscan = inquiryscanCheckBox->isChecked();
-
     writeConfig();
-
-    QMessageBox::information( this, tr("Test") , tr("Changes were applied.") );
 }
 
 /**
@@ -506,8 +501,7 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
             serviceItem->setPixmap( 0, m_iconLoader->serviceIcon( classId ) );
         }
     }
-    else
-    {
+    else {
         Services s1;
         s1.setServiceName( tr("no services found") );
         serviceItem = new BTServiceItem( deviceItem, s1 );
@@ -662,15 +656,6 @@ void BlueBase::startScan()
 
 
 /**
- * Set the informations about the local device in information Tab
- */
-void BlueBase::setInfo()
-{
-    StatusLabel->setText( status() );
-}
-
-
-/**
  * Decontructor
  */
 BlueBase::~BlueBase()
@@ -774,12 +759,12 @@ void BlueBase::forwardExit(Opie::Core::OProcess* proc)
 }
 
 /**
- * Encrypt entered passkey
- * doit - do encryption of the key
+ * Show the entered passkey or hide it (****)
+ * show - true to show the key, false to hide it
  */
-void BlueBase::doEncrypt(bool doit)
+void BlueBase::doShowPasskey(bool show)
 {
-    passkeyLine->setEchoMode((doit)? QLineEdit::Password: QLineEdit::Normal);
+    passkeyLine->setEchoMode( show ? QLineEdit::Normal : QLineEdit::Password );
 }
 
 /**
@@ -794,6 +779,13 @@ void BlueBase::editServices()
         WStyle_ContextHelp);
 
     if (QPEApplication::execDialog(&svcEdit) == QDialog::Accepted) {
+    }
+}
+
+void BlueBase::interfacePropertyChanged( const QString &propName )
+{
+    if( propName == "Name" ) {
+        updateStatus();
     }
 }
 

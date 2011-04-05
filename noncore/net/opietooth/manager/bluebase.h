@@ -31,7 +31,14 @@ class QPushButton;
 class QTabWidget;
 class QCheckBox;
 class BTConnectionItem;
+namespace Opie {
+namespace Bluez {
+    class OBluetooth;
+    class OBluetoothInterface;
+}
+}
 
+using namespace Opie::Bluez;
 
 namespace OpieTooth {
 
@@ -57,13 +64,13 @@ namespace OpieTooth {
         void writeConfig();
         void readSavedDevices();
         void writeSavedDevices();
-        void writeToHciConfig();
-        QString status()const;
         void initGui();
-        void setInfo();
+        void updateStatus();
+        void connectInterface(const OBluetoothInterface *);
 
         PopupHelper m_popHelper;
         Manager *m_localDevice;
+        OBluetooth *m_bluetooth;
         QMap<QString,BTDeviceItem*> m_deviceList;
         QMap<QString,BTDeviceItem*> m_deviceListSrv;
 
@@ -71,10 +78,6 @@ namespace OpieTooth {
 
         QString m_deviceName;
         QString m_defaultPasskey;
-        bool m_useEncryption;
-        bool m_enableAuthentification;
-        bool m_enablePagescan;
-        bool m_enableInquiryscan;
 
         QPixmap m_offPix;
         QPixmap m_onPix;
@@ -97,13 +100,15 @@ namespace OpieTooth {
         void deviceActive( const QString& mac, bool connected  );
         void applyConfigChanges();
         void doForward();
-        void doEncrypt(bool);
+        void doShowPasskey(bool);
         void forwardExit(Opie::Core::OProcess* proc);
         void editServices();
         void addSignalStrength();
         void addSignalStrength( const QString& mac, const QString& strengh );
         void rfcommDialog();
         void showEvent(QShowEvent *);
+        void interfacePropertyChanged(const QString&);
+        void defaultInterfaceChanged( OBluetoothInterface *);
 
     };
 
