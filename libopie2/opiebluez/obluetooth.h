@@ -77,14 +77,15 @@ class OBluetooth : public QObject
      */
     bool isPresent( const char* interface ) const;
     /**
-     * @returns true, if the @a interface supports the wireless extension protocol.
-     */
-    bool isWirelessInterface( const char* interface ) const;
-    /**
      * @returns a pointer to the @ref OBluetoothInterface object for the specified @a interface or 0, if not found.
      * @see OBluetoothInterface
      */
     OBluetoothInterface* interface( const QString& interface ) const;
+    /**
+     * @returns a pointer to the @ref OBluetoothInterface object for the default @a interface or 0, if none present.
+     * @see OBluetoothInterface
+     */
+    OBluetoothInterface* defaultInterface() const;
     /**
      * @internal Rebuild the internal interface database
      * @note Sometimes it might be useful to call this from client code,
@@ -92,17 +93,24 @@ class OBluetooth : public QObject
      */
     void synchronize();
 
+  signals:
+    void defaultInterfaceChanged( OBluetoothInterface *intf );
+    void interfaceAdded( OBluetoothInterface *intf );
+    void interfaceRemoved( OBluetoothInterface *intf );
+
   protected:
     OBluetooth();
     ~OBluetooth();
+
+  protected slots:
+    void slotDBusSignal(const QDBusMessage& message);
 
   private:
     static OBluetooth* _instance;
     InterfaceMap _interfaces;
     QDBusProxy *m_bluezManagerProxy;
-    class OBluetoothPrivate;
-    OBluetoothPrivate *d;
-    int _fd;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -131,7 +139,7 @@ class OBluetoothInterface : public QObject
      * Constructor. Normally you don't create @ref OBluetoothInterface objects yourself,
      * but access them via @ref OBluetooth::interface().
      */
-    OBluetoothInterface( QObject* parent, const char* name, const QDBusObjectPath &path );
+    OBluetoothInterface( QObject* parent, const QDBusObjectPath &path );
     /**
      * Destructor.
      */
@@ -141,6 +149,22 @@ class OBluetoothInterface : public QObject
      */
     QString macAddress() const;
     /**
+     * @returns the name used when making the interface visible to other devices.
+     */
+    QString publicName() const;
+    /**
+     * @returns the class of device.
+     */
+    QString deviceClass() const;
+    /**
+     * @returns the discoverable status of the interface
+     */
+    bool discoverable() const;
+    /**
+     * @returns true if discovery is in progress
+     */
+    bool discovering() const;
+    /**
      * Setting an interface to up enables it to receive packets.
      */
     bool setUp( bool );
@@ -149,9 +173,38 @@ class OBluetoothInterface : public QObject
      */
     bool isUp() const;
     /**
-      * @returns an iterator usable for iterating through the devices in range.
-      */
+     * Set discoverable status of the interface
+     */
+    bool setDiscoverable( bool );
+    /**
+     * Set the used when making the interface visible to other devices.
+     */
+    bool setPublicName( const QString & );
+    /**
+     * Starts discovery, enumerates devices and then returns when discovery times out.
+     * @returns an iterator usable for iterating through the devices in range.
+     */
     DeviceIterator neighbourhood();
+
+  public slots:
+    /**
+     * Starts discovery
+     */
+    void startDiscovery();
+    /**
+     * Stops discovery
+     */
+    void stopDiscovery();
+
+  signals:
+    /**
+     * Triggered when a device is found during discovery.
+     */
+    void deviceFound(const OBluetoothDevice *dev);
+    /**
+     * Triggered when a property of the interface changes.
+     */
+    void propertyChanged(const QString &prop);
 
   protected slots:
     void slotDBusSignal(const QDBusMessage& message);
@@ -194,6 +247,11 @@ class OBluetoothDevice : public QObject
      * @returns the class of device.
      */
     QString deviceClass() const;
+
+    /**
+     * @internal Convert a device class number to a string
+     */
+    static QString deviceClassString(Q_UINT32 dev_class);
 
   private:
     class Private;
