@@ -165,6 +165,10 @@ class OBluetoothInterface : public QObject
      */
     bool discovering() const;
     /**
+     * @returns the dbus path to the adapter, for extensions
+     */
+    const QString &adapterPath();
+    /**
      * Setting an interface to up enables it to receive packets.
      */
     bool setUp( bool );

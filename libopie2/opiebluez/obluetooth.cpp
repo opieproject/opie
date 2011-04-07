@@ -202,6 +202,7 @@ class OBluetoothInterface::Private
         adapterProxy->setConnection(connection);
         reloadInfo();
         interfaceName = path.mid(path.findRev('/')+1);
+        adapterPath = path;
     }
 
     ~Private()
@@ -220,6 +221,7 @@ class OBluetoothInterface::Private
     QDBusProxy *adapterProxy;
     QMap<QString,QDBusVariant> adapterProps;
     QString interfaceName;
+    QString adapterPath;
     bool discovering;
 };
 
@@ -260,6 +262,11 @@ bool OBluetoothInterface::discoverable() const
 bool OBluetoothInterface::discovering() const
 {
     return d->discovering;
+}
+
+const QString &OBluetoothInterface::adapterPath()
+{
+    return d->adapterPath;
 }
 
 bool OBluetoothInterface::setUp( bool b )
