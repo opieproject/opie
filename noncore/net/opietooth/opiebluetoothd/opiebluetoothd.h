@@ -33,10 +33,16 @@
 #include <qobject.h>
 
 // forward declarations
-class QDBusMessage;
-class QDBusProxy;
-class QDBusData;
 class OBluetoothAgent;
+
+namespace Opie {
+namespace Bluez {
+    class OBluetooth;
+    class OBluetoothInterface;
+}
+}
+
+using namespace Opie::Bluez;
 
 #define BT_STATUS_ADAPTER       1
 #define BT_STATUS_ENABLED       2
@@ -53,22 +59,16 @@ class OBluetoothDaemon: public QObject {
         void startBluetooth();
         void stopBluetooth();
         void sendStatus(bool change);
-        QString dataToString(const QDBusData &data);
     protected slots:
         void slotAdapterChange();
-        void slotDBusConnect();
         void slotMessage(const QCString&, const QByteArray&);
-        void slotDBusSignal(const QDBusMessage& message);
-        void slotAsyncReply(int callID, const QDBusMessage& reply);
+        void propertyChanged( const QString& );
+        void defaultInterfaceChanged( OBluetoothInterface * );
     protected:
-        QString m_adapterPath;
         bool m_tempEnabled;
-        bool m_powered;
-        bool m_discoverEnabled;
         bool m_receiveEnabled;
-        int m_propCallID;
-        QDBusProxy *m_bluezManagerProxy;
-        QDBusProxy *m_bluezAdapterProxy;
+        OBluetooth *m_bluetooth;
+        OBluetoothInterface *m_btinterface;
         OBluetoothAgent *m_agent;
 };
 
