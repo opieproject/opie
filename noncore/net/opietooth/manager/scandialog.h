@@ -21,7 +21,6 @@
 #include <qdialog.h>
 #include <qlist.h>
 
-#include <remotedevice.h>
 class QVBoxLayout;
 class QGridLayout;
 class QLabel;
@@ -30,11 +29,19 @@ class QListViewItem;
 class QPushButton;
 class QProgressBar;
 
+namespace Opie {
+namespace Bluez {
+    class OBluetooth;
+    class OBluetoothInterface;
+    class OBluetoothDevice;
+}
+}
+
+using namespace Opie::Bluez;
 
 namespace OpieTooth {
 
-class Manager;
-class Device;
+class RemoteDevice;
 
     class ScanDialog : public QDialog {
         Q_OBJECT
@@ -44,7 +51,7 @@ class Device;
         ~ScanDialog();
 
     private:
-	QProgressBar* progress;
+        QProgressBar* progress;
         QPushButton* StartStopButton;
         QListView* serviceView;
 
@@ -58,13 +65,19 @@ class Device;
         void stopSearch();
         void startSearch();
         void progressTimer();
-        void fillList( const QString& device, RemoteDevice::ValueList list );
+        void deviceFound( const OBluetoothDevice* );
+        void propertyChanged( const QString& );
+        void defaultInterfaceChanged( OBluetoothInterface * );
 
     private:
         bool m_search:1;
         void emitToManager();
-        Manager *localDevice;
         int progressStat;
+        OBluetooth *m_bluetooth;
+        OBluetoothInterface *m_btinterface;
+
+        void connectInterface();
+        void searchStopped();
 
     signals:
         void selectedDevices( const QValueList<RemoteDevice>& );

@@ -28,16 +28,14 @@
 #include <qprogressbar.h>
 #include <qlist.h>
 
-#include <manager.h>
-#include <device.h>
-
+#include <opie2/obluetooth.h>
 #include <opie2/odebug.h>
 using namespace Opie::Core;
-
-
-namespace OpieTooth {
+using namespace Opie::Bluez;
 
 #include <remotedevice.h>
+
+namespace OpieTooth {
 
 /**
  */
@@ -66,11 +64,14 @@ namespace OpieTooth {
         Layout11->addWidget( progress );
         Layout11->addWidget( StartStopButton );
 
-        localDevice = new Manager( "hci0" );
+        m_bluetooth = OBluetooth::instance();
+        connect( m_bluetooth, SIGNAL( defaultInterfaceChanged( OBluetoothInterface* ) ),
+                 this, SLOT( defaultInterfaceChanged( OBluetoothInterface* ) ) ) ;
+        m_btinterface = m_bluetooth->defaultInterface();
+        if( m_btinterface )
+            connectInterface();
 
         connect( StartStopButton, SIGNAL( clicked() ), this, SLOT( startSearch() ) );
-        connect( localDevice, SIGNAL( foundDevices(const QString&,RemoteDevice::ValueList) ),
-                 this, SLOT( fillList(const QString&,RemoteDevice::ValueList) ) ) ;
 
         progressStat = 0;
         m_search = false;
@@ -109,27 +110,54 @@ namespace OpieTooth {
         // checken ob initialisiert , qcop ans applet.
         StartStopButton->setText( tr( "Stop scan" ) );
 
-        localDevice->searchDevices();
-
+        m_btinterface->startDiscovery();
     }
 
     void ScanDialog::stopSearch() {
-        m_search = true;
+        m_btinterface->stopDiscovery();
     }
 
-    void ScanDialog::fillList(const QString&, RemoteDevice::ValueList deviceList) {
-        progress->setProgress(0);
-        progressStat = 0;
-        QCheckListItem * deviceItem;
-
-        RemoteDevice::ValueList::Iterator it;
-        for( it = deviceList.begin(); it != deviceList.end(); ++it ) {
-
-            deviceItem = new QCheckListItem( serviceView, (*it).name(),  QCheckListItem::CheckBox );
-            deviceItem->setText( 1, (*it).mac() );
+    void ScanDialog::propertyChanged( const QString &prop )
+    {
+        if( prop == "Discovering" ) {
+            if( ! m_btinterface->discovering() )
+                searchStopped();
         }
+    }
+
+    void ScanDialog::deviceFound( const OBluetoothDevice *dev )
+    {
+        QCheckListItem *deviceItem = new QCheckListItem( serviceView, dev->name(),  QCheckListItem::CheckBox );
+        deviceItem->setText( 1, dev->macAddress() );
+    }
+
+    void ScanDialog::defaultInterfaceChanged( OBluetoothInterface *intf )
+    {
+        if( m_search )
+            searchStopped();
+        m_btinterface = intf;
+        if( m_btinterface )
+            connectInterface();
+        else
+            reject();
+    }
+
+    void ScanDialog::searchStopped()
+    {
         m_search = false;
         StartStopButton->setText( tr( "Start scan" ) );
+        progress->setProgress(0);
+        progressStat = 0;
+    }
+
+    void ScanDialog::connectInterface()
+    {
+        disconnect( this, SLOT( deviceFound( const OBluetoothDevice* ) ) );
+        disconnect( this, SLOT( propertyChanged( const QString& ) ) );
+        connect( m_btinterface, SIGNAL( deviceFound( const OBluetoothDevice* ) ),
+                this, SLOT( deviceFound( const OBluetoothDevice* ) ) ) ;
+        connect( m_btinterface, SIGNAL( propertyChanged( const QString& ) ),
+                this, SLOT( propertyChanged( const QString& ) ) ) ;
     }
 
 /**
@@ -158,7 +186,5 @@ namespace OpieTooth {
  * Cleanup
  */
     ScanDialog::~ScanDialog() {
-        owarn << "delete scan dialog" << oendl;
-        delete localDevice;
     }
 }
