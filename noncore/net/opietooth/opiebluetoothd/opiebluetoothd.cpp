@@ -36,6 +36,7 @@
 
 /* QT */
 #include <qapplication.h>
+#include <qmap.h>
 #include <qpe/qcopenvelope_qws.h>
 
 /* STD */
@@ -135,6 +136,20 @@ void OBluetoothDaemon::slotMessage( const QCString& msg, const QByteArray& data 
     }
     else if ( msg == "sendStatus()" )
         sendStatus(false);
+    else if ( msg == "listDevices()" ) {
+        static bool listing = false;
+        if( !listing ) {
+            listing = true;
+            OBluetoothInterface::DeviceIterator devit = m_btinterface->neighbourhood();
+            QMap<QString, QString> devmap;
+            for( ; devit.current() ; ++devit ) {
+                devmap[devit.current()->name()] = devit.current()->macAddress();
+            }
+            QCopEnvelope e("QPE/BluetoothBack", "devices(QStringMap)");
+            e << devmap;
+            listing = false;
+        }
+    }
 }
 
 void OBluetoothDaemon::startBluetooth()
