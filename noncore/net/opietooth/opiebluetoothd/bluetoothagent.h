@@ -42,7 +42,7 @@ class PinDlg;
 class OBluetoothAgent: public QObject, public QDBusObjectBase {
         Q_OBJECT
     public:
-        OBluetoothAgent(const QDBusConnection& connection, QDBusProxy *adapterProxy);
+        OBluetoothAgent( const QString &adapterPath );
         ~OBluetoothAgent();
     protected:
         virtual bool handleMethodCall(const QDBusMessage& message);
@@ -51,6 +51,7 @@ class OBluetoothAgent: public QObject, public QDBusObjectBase {
         void pinDialogClosed(bool);
     private:
         QDBusConnection m_connection;
+        QDBusProxy *m_bluezAdapterProxy;
         PinDlg *m_pinDlg;
         QDBusMessage *m_authMsg;
 };

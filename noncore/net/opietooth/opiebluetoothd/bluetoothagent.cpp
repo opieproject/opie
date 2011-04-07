@@ -54,10 +54,17 @@
 
 #define AGENT_OBJECT_PATH   "/org/opie/bluetooth/agent"
 
-OBluetoothAgent::OBluetoothAgent(const QDBusConnection& connection, QDBusProxy *adapterProxy)
-    : m_connection(connection)
+OBluetoothAgent::OBluetoothAgent( const QString &adapterPath )
 {
     m_pinDlg = NULL;
+
+    m_connection = QDBusConnection::systemBus();
+    m_bluezAdapterProxy = new QDBusProxy(this);
+    m_bluezAdapterProxy->setService("org.bluez");
+    m_bluezAdapterProxy->setPath(adapterPath);
+    m_bluezAdapterProxy->setInterface("org.bluez.Adapter");
+    m_bluezAdapterProxy->setConnection(m_connection);
+
     m_connection.registerObject(AGENT_OBJECT_PATH, this);
 
     odebug << "Object registered for path " << AGENT_OBJECT_PATH << " on unique name " <<
@@ -67,12 +74,13 @@ OBluetoothAgent::OBluetoothAgent(const QDBusConnection& connection, QDBusProxy *
     QValueList<QDBusData> parameters;
     parameters << QDBusData::fromObjectPath(QDBusObjectPath(AGENT_OBJECT_PATH));
     parameters << QDBusData::fromString("DisplayYesNo");
-    adapterProxy->sendWithAsyncReply("RegisterAgent", parameters);
+    m_bluezAdapterProxy->sendWithAsyncReply("RegisterAgent", parameters);
 }
 
 OBluetoothAgent::~OBluetoothAgent()
 {
     m_connection.unregisterObject(AGENT_OBJECT_PATH);
+    delete m_bluezAdapterProxy;
     delete m_pinDlg;
 }
 
