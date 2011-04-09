@@ -109,7 +109,7 @@ void Motorola_EZX::init(const QString& cpu_info)
     } else assert( 0 );
 
     // set path to backlight device in kernel 2.6
-    m_backlightdev = "/sys/class/backlight/ezx-bl/";
+    m_backlightdev = "/sys/class/backlight/pwm-backlight.0/";
     d->m_rotation = Rot0;
     //initHingeSensor();
 
@@ -182,7 +182,7 @@ bool Motorola_EZX::setDisplayBrightness( int bright )
 bool Motorola_EZX::setDisplayStatus( bool on )
 {
     bool res = false;
-    int fd = ::open( m_backlightdev + "power", O_WRONLY|O_NONBLOCK );
+    int fd = ::open( m_backlightdev + "bl_power", O_WRONLY|O_NONBLOCK );
     if ( fd >= 0 )
     {
         char buf[10];
