@@ -682,6 +682,12 @@ connection from
         <receiver>Form1</receiver>
         <slot>addnum()</slot>
     </connection>
+    <connection>
+        <sender>lnePin</sender>
+        <signal>returnPressed()</signal>
+        <receiver>PushButton1</receiver>
+        <slot>animateClick()</slot>
+    </connection>
     <slot access="protected">addnum()</slot>
 </connections>
 <tabstops>
