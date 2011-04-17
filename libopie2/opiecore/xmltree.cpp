@@ -309,6 +309,11 @@ XMLElement *XMLElement::load( const QString &fileName )
     QTextStream stream( &f );
     stream.setEncoding( QTextStream::UnicodeUTF8 );
     QXmlInputSource src( stream );
+    return load(src);
+}
+
+XMLElement *XMLElement::load( QXmlInputSource &src )
+{
     QXmlSimpleReader reader;
     Handler handler;
 
@@ -316,7 +321,7 @@ XMLElement *XMLElement::load( const QString &fileName )
     reader.setContentHandler( &handler );
     reader.parse( src );
 
-    return handler.root();;
+    return handler.root();
 }
 
 /* vim: et sw=4
