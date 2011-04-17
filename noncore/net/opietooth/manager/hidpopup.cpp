@@ -23,7 +23,7 @@ using namespace OpieTooth;
 /*
  * c'tor init the QAction
  */
-HidPopup::HidPopup(const OpieTooth::Services&, OpieTooth::BTDeviceItem* item) :
+HidPopup::HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* item) :
     QPopupMenu()  {
 
     owarn << "HidPopup c'tor" << oendl;

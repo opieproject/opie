@@ -13,7 +13,7 @@
 
 #include <qpopupmenu.h>
 #include <qaction.h>
-#include <services.h>
+#include <opie2/obluetoothservices.h>
 
 #include "btdeviceitem.h"
 
@@ -25,13 +25,13 @@ namespace OpieTooth {
 	Q_OBJECT
 
     public:
-        DunPopup(const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
+        DunPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* );
         ~DunPopup();
 
     private:
         QAction* m_push;
         OpieTooth::BTDeviceItem *m_item; //device item
-        Services m_service; //device service (port)
+        Opie::Bluez::OBluetoothServices m_service; //device service (port)
     private slots:
         void slotConnect();
         void slotDisconnect();

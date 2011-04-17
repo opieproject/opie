@@ -15,7 +15,7 @@ using namespace OpieTooth;
 /*
  * c'tor init the QAction
  */
-ObexPopup::ObexPopup(const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item)
+ObexPopup::ObexPopup(const Opie::Bluez::OBluetoothServices& service,  OpieTooth::BTDeviceItem* item)
         : QPopupMenu(), m_service(service)
 {
     odebug << "ObexPopup c'tor" << oendl;

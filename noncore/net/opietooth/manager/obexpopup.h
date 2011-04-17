@@ -3,7 +3,7 @@
 
 #include <qpopupmenu.h>
 #include <qaction.h>
-#include <services.h>
+#include <opie2/obluetoothservices.h>
 #include "btdeviceitem.h"
 
 namespace OpieTooth {
@@ -11,12 +11,12 @@ namespace OpieTooth {
     class ObexPopup : public QPopupMenu {
         Q_OBJECT
     public:
-        ObexPopup(const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item);
+        ObexPopup(const Opie::Bluez::OBluetoothServices& service,  OpieTooth::BTDeviceItem* item);
         ~ObexPopup();
     protected:
         QAction* m_push;
         OpieTooth::BTDeviceItem *m_item;
-        Services m_service;
+        Opie::Bluez::OBluetoothServices m_service;
     protected slots:
         void slotPush();
     };

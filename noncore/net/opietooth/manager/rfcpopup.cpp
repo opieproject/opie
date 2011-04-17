@@ -18,7 +18,7 @@ using namespace OpieTooth;
 /*
  * c'tor init the QAction
  */
-RfcCommPopup::RfcCommPopup(const OpieTooth::Services& service,
+RfcCommPopup::RfcCommPopup(const Opie::Bluez::OBluetoothServices& service,
   OpieTooth::BTDeviceItem* item)
         : QPopupMenu(), m_service(service)
 {

@@ -5,18 +5,18 @@
 #include <qlistview.h>
 #include <qpopupmenu.h>
 
-#include <services.h>
+#include <opie2/obluetoothservices.h>
 
 #include "btdeviceitem.h"
 
 extern "C" {
 
-    QPopupMenu* newRfcComPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* );
-    QPopupMenu* newObexPushPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* );
-    QPopupMenu* newPanPopup( const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
-    QPopupMenu* newDunPopup( const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
-    QPopupMenu* newHidPopup( const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
-    QPopupMenu* newObexFtpPopup( const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
+    QPopupMenu* newRfcComPopup( const Opie::Bluez::OBluetoothServices&,  OpieTooth::BTDeviceItem* );
+    QPopupMenu* newObexPushPopup( const Opie::Bluez::OBluetoothServices&,  OpieTooth::BTDeviceItem* );
+    QPopupMenu* newPanPopup( const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* );
+    QPopupMenu* newDunPopup( const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* );
+    QPopupMenu* newHidPopup( const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* );
+    QPopupMenu* newObexFtpPopup( const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* );
 }
 
 #endif

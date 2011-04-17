@@ -15,7 +15,7 @@ void PopupHelper::insert( int id, popupFactory fact ) {
     m_map.insert(id, fact );
 }
 
-QPopupMenu* PopupHelper::find( int id, const Services& ser, BTDeviceItem* item ) {
+QPopupMenu* PopupHelper::find( int id, const Opie::Bluez::OBluetoothServices& ser, BTDeviceItem* item ) {
     //owarn << "find" << oendl;
     FactoryMap::Iterator it = m_map.find(id );
     if ( it != m_map.end() ) {

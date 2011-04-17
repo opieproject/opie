@@ -62,7 +62,6 @@ using namespace Opie::Core;
 
 /* STD */
 #include <remotedevice.h>
-#include <services.h>
 #include <stdlib.h>
 
 using namespace OpieTooth;
@@ -99,8 +98,6 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
              this, SLOT( startServiceActionClicked(QListViewItem*) ) );
     connect( devicesView, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
              this,  SLOT(startServiceActionHold(QListViewItem*,const QPoint&,int) ) );
-    connect( m_localDevice , SIGNAL( foundServices(const QString&,Services::ValueList) ),
-             this, SLOT( addServicesToDevice(const QString&,Services::ValueList) ) );
     connect( m_localDevice, SIGNAL( available(const QString&,bool) ),
              this, SLOT( deviceActive(const QString&,bool) ) );
     connect( m_localDevice, SIGNAL( connections(ConnectionState::ValueList) ),
@@ -319,10 +316,20 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices )
     BTDeviceItem * deviceItem;
     QValueList<RemoteDevice>::ConstIterator it;
 
+    OBluetoothInterface *intf = m_bluetooth->defaultInterface();
+
     for( it = newDevices.begin(); it != newDevices.end() ; ++it ) {
 
         if (find( (*it)  )) // is already inserted
             continue;
+
+        // Initialise the device since it was found by discovery and won't have the
+        // internal proxy set up
+        if( intf ) {
+            OBluetoothDevice *dev = intf->findDevice( (*it).mac() );
+            if( dev )
+                dev->initialise();
+        }
 
         deviceItem = new BTDeviceItem( devicesView , (*it) );
         deviceItem->setPixmap( 1, m_findPix );
@@ -375,6 +382,7 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
                 QString mac = static_cast<BTDeviceItem*>( item )->mac();
                 m_deviceList.remove( mac );
                 m_deviceListSrv.remove( mac );
+                removeDevice( mac );
                 // Delete item and child items
                 delete item;
                 break;
@@ -428,6 +436,15 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
     delete menu;
 }
 
+void BlueBase::removeDevice( const QString &bdaddr )
+{
+    OBluetoothInterface *intf = m_bluetooth->defaultInterface();
+    if( intf ) {
+        OBluetoothDevice *dev = intf->findDevice( bdaddr );
+        if( dev )
+            intf->removeDevice( dev );
+    }
+}
 
 void BlueBase::addServicesToDevices()
 {
@@ -445,12 +462,18 @@ void BlueBase::addServicesToDevices()
  */
 void BlueBase::addServicesToDevice( BTDeviceItem * item )
 {
-    odebug << "BlueBase::addServicesToDevice" << oendl;
-    // row of mac adress text(3)
-    RemoteDevice device = item->remoteDevice();
-    m_deviceListSrv.insert( item->mac() , item );
-    // and some time later I get a signal foundServices( const QString& device, Services::ValueList ); back
-    m_localDevice->searchServices( device );
+    odebug << "BlueBase::addServicesToDevice for " << item->mac() << oendl;
+    OBluetoothInterface *intf = m_bluetooth->defaultInterface();
+    if( intf ) {
+        OBluetoothDevice *dev = intf->findDevice( item->mac() );
+        if( dev ) {
+            disconnect( dev, SIGNAL( servicesFound( OBluetoothDevice * ) ), this, SLOT( servicesFound( OBluetoothDevice * ) ) );
+            connect( dev, SIGNAL( servicesFound( OBluetoothDevice * ) ), this, SLOT( servicesFound( OBluetoothDevice * ) ) );
+            dev->discoverServices();
+        }
+        else
+            odebug << "****** unable to find device for bdaddr " << item->mac() << oendl;
+    }
 }
 
 
@@ -458,18 +481,23 @@ void BlueBase::addServicesToDevice( BTDeviceItem * item )
  * @param device the mac address of the remote device
  * @param servicesList the list with the service the device has.
  */
-void BlueBase::addServicesToDevice( const QString& device, Services::ValueList servicesList )
+void BlueBase::servicesFound( OBluetoothDevice *dev )
 {
-    odebug << "BlueBase::fill services list for '" << device << "'"  << oendl;
+    odebug << "BlueBase::fill services list for '" << dev->macAddress() << "'"  << oendl;
 
-    QMap<QString,BTDeviceItem*>::Iterator it;
     BTDeviceItem* deviceItem = 0;
 
-    // get the right devices which requested the search
-    it = m_deviceListSrv.find( device );
-    if( it == m_deviceListSrv.end() )
+    BTDeviceItem* item = (BTDeviceItem*) devicesView->firstChild();
+    while ( item ) {
+        if( item->mac() == dev->macAddress() ) {
+            deviceItem = item;
+            break;
+        }
+        item = (BTDeviceItem*) static_cast<QListViewItem*>( item )->nextSibling();
+    }
+
+    if( !deviceItem )
         return;
-    deviceItem = it.data();
 
     // remove previous entries
     QList<QListViewItem> tempList;
@@ -481,10 +509,10 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
     }
     tempList.clear();
 
-    QValueList<OpieTooth::Services>::Iterator it2;
+    OBluetoothServices::ValueList::Iterator it2;
     BTServiceItem* serviceItem;
 
-
+    OBluetoothServices::ValueList servicesList = dev->services();
     if (!servicesList.isEmpty() ) {
         // add services
         QMap<int, QString> list;
@@ -502,12 +530,10 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
         }
     }
     else {
-        Services s1;
+        OBluetoothServices s1;
         s1.setServiceName( tr("no services found") );
         serviceItem = new BTServiceItem( deviceItem, s1 );
     }
-    // now remove them from the  list
-    m_deviceListSrv.remove( it );
 }
 
 void BlueBase::addSignalStrength()

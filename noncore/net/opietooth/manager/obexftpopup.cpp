@@ -18,7 +18,7 @@
 using namespace Opie::Core;
 using namespace OpieTooth;
 
-ObexFtpPopup::ObexFtpPopup(const OpieTooth::Services& service,
+ObexFtpPopup::ObexFtpPopup(const Opie::Bluez::OBluetoothServices& service,
     OpieTooth::BTDeviceItem* item)
     : QPopupMenu(), m_service(service)
 {
