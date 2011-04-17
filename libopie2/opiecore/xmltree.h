@@ -24,6 +24,7 @@
 #include <qstring.h>
 #include <qmap.h>
 #include <qtextstream.h>
+#include <qxml.h>
 
 namespace Opie {
 namespace Core  {
@@ -96,6 +97,7 @@ public:
     XMLElement *clone() const;
 
     static XMLElement *load( const QString &fileName );
+    static XMLElement *load( QXmlInputSource &src );
 
 private:
     QString m_tag;
