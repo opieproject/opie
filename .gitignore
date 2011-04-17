@@ -16,3 +16,4 @@ a
 .obj/
 *~
 coverity
+.directory
