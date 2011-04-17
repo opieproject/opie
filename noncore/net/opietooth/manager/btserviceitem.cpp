@@ -3,7 +3,7 @@
 
 using namespace OpieTooth;
 
-BTServiceItem::BTServiceItem( QListViewItem* item,  const Services& serv )
+BTServiceItem::BTServiceItem( QListViewItem* item,  const Opie::Bluez::OBluetoothServices& serv )
     : BTListItem( item ) {
     int port = serv.protocolDescriptorList().last().port();
     m_service = serv;
@@ -20,7 +20,7 @@ QString BTServiceItem::type() const {
 int BTServiceItem::typeId() const {
     return Service;
 }
-Services BTServiceItem::services() const {
+Opie::Bluez::OBluetoothServices BTServiceItem::services() const {
     return m_service;
 }
 int BTServiceItem::serviceId() const {

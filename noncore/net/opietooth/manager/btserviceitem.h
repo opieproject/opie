@@ -3,7 +3,7 @@
 #ifndef OPIE_TOOTH_BT_SERVICE_ITEM
 #define OPIE_TOOTH_BT_SERVICE_ITEM
 
-#include <services.h>
+#include <opie2/obluetoothservices.h>
 
 #include "btlistitem.h"
 
@@ -11,14 +11,14 @@ namespace OpieTooth {
 
     class BTServiceItem : public BTListItem {
     public:
-        BTServiceItem( QListViewItem* item, const Services& );
+        BTServiceItem( QListViewItem* item, const Opie::Bluez::OBluetoothServices& );
         ~BTServiceItem();
         QString type() const;
         int typeId() const;
-        Services services() const;
+        Opie::Bluez::OBluetoothServices services() const;
         int serviceId() const;
     private:
-        Services m_service;
+        Opie::Bluez::OBluetoothServices m_service;
 
     };
 };

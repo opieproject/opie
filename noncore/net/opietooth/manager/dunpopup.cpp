@@ -23,7 +23,7 @@ using namespace OpieTooth;
 /*
  * c'tor init the QAction
  */
-DunPopup::DunPopup( const Services& service,
+DunPopup::DunPopup( const Opie::Bluez::OBluetoothServices& service,
     BTDeviceItem* item ) : QPopupMenu(), m_service(service) {
 
     owarn << "DunPopup c'tor" << oendl;

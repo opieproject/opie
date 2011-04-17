@@ -12,7 +12,7 @@
 #define _OBEXFTPPOPUP_H_
 #include <qpopupmenu.h>
 #include <qaction.h>
-#include <services.h>
+#include <opie2/obluetoothservices.h>
 #include "btdeviceitem.h"
 namespace OpieTooth {
 
@@ -20,13 +20,13 @@ namespace OpieTooth {
         Q_OBJECT
 
     public:
-        ObexFtpPopup(const OpieTooth::Services&, OpieTooth::BTDeviceItem*);
+        ObexFtpPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem*);
         ~ObexFtpPopup();
     private:
         QAction* m_push;
         QAction* m_browse;
         OpieTooth::BTDeviceItem *m_item;
-        Services m_service;
+        Opie::Bluez::OBluetoothServices m_service;
     protected slots:
         void slotBrowse();
         void slotPush();

@@ -14,7 +14,7 @@
 #include <qpopupmenu.h>
 #include <qaction.h>
 #include <opie2/oprocess.h>
-#include <services.h>
+#include <opie2/obluetoothservices.h>
 #include "btdeviceitem.h"
 
 namespace OpieTooth {
@@ -24,7 +24,7 @@ namespace OpieTooth {
 	Q_OBJECT
 
     public:
-        HidPopup(const OpieTooth::Services&, OpieTooth::BTDeviceItem*);
+        HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem*);
         ~HidPopup();
 
     private:

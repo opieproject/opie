@@ -35,6 +35,7 @@ namespace Opie {
 namespace Bluez {
     class OBluetooth;
     class OBluetoothInterface;
+    class OBluetoothDevice;
 }
 }
 
@@ -67,6 +68,7 @@ namespace OpieTooth {
         void initGui();
         void updateStatus();
         void connectInterface(const OBluetoothInterface *);
+        void removeDevice( const QString &bdaddr );
 
         PopupHelper m_popHelper;
         Manager *m_localDevice;
@@ -92,7 +94,6 @@ namespace OpieTooth {
         void addSearchedDevices( const QValueList<RemoteDevice> &newDevices );
         void addServicesToDevices();
         void addServicesToDevice( BTDeviceItem *item );
-        void addServicesToDevice( const QString& device, Services::ValueList );
         void addConnectedDevices();
         void addConnectedDevices( ConnectionState::ValueList );
         void startServiceActionClicked( QListViewItem *item );
@@ -109,6 +110,7 @@ namespace OpieTooth {
         void showEvent(QShowEvent *);
         void interfacePropertyChanged(const QString&);
         void defaultInterfaceChanged( OBluetoothInterface *);
+        void servicesFound( OBluetoothDevice *dev );
 
     };
 
