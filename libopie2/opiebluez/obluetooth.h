@@ -32,10 +32,14 @@
 
 #include <qobject.h>
 #include <qdict.h>
+#include <qmap.h>
+
+#include <opie2/obluetoothservices.h>
 
 class QDBusProxy;
 class QDBusMessage;
 class QDBusObjectPath;
+class QDBusVariant;
 template <typename T> class QDBusDataMap;
 
 namespace Opie {
@@ -190,6 +194,19 @@ class OBluetoothInterface : public QObject
      */
     DeviceIterator neighbourhood();
 
+    /**
+     * Find a specific device, if it is available
+     */
+    OBluetoothDevice *findDevice(const QString &bdaddr);
+    /**
+     * Find a specific device node, if it is available
+     */
+    QDBusObjectPath findDevicePath( const QString &bdaddr, bool create );
+    /**
+     * Remove a device node, including pairing information. 
+     */
+    void removeDevice( OBluetoothDevice *dev );
+
   public slots:
     /**
      * Starts discovery
@@ -235,10 +252,13 @@ class OBluetoothDevice : public QObject
 
   public:
     /**
-     * Constructor.
+     * Constructor for manually added device
      */
-    OBluetoothDevice( QObject* parent, const QDBusObjectPath &path );
-    OBluetoothDevice( QObject* parent, const QDBusDataMap<QString> &props );
+    OBluetoothDevice( OBluetoothInterface *parent, const QDBusObjectPath &path );
+    /**
+     * Constructor for device added through discovery
+     */
+    OBluetoothDevice( OBluetoothInterface *parent, const QMap<QString,QDBusVariant> &props );
     /**
      * Destructor.
      */
@@ -251,11 +271,40 @@ class OBluetoothDevice : public QObject
      * @returns the class of device.
      */
     QString deviceClass() const;
-
+    /**
+     * @returns the dbus path to the device, for extensions
+     */
+    const QString &devicePath() const;
+    /**
+     * Initialise the device's internal structures if this device was found
+     * via discovery. Does nothing if called a second time or called on a
+     * device that was manually created (typically through findDevice())
+     */
+    void initialise();
+    /**
+     * Discover the device's available services
+     * servicesFound signal will be emitted when discovery is complete
+     */
+    void discoverServices();
+    /**
+     * The device's available services
+     * available after calling discoverServices()
+     */
+    OBluetoothServices::ValueList services();
+    /**
+     * Set whether the device is trusted or not
+     */
+    bool setTrusted(bool);
     /**
      * @internal Convert a device class number to a string
      */
     static QString deviceClassString(Q_UINT32 dev_class);
+
+  signals:
+    void servicesFound( OBluetoothDevice *dev ); 
+
+  protected slots:
+    void slotAsyncReply(int, const QDBusMessage&);
 
   private:
     class Private;

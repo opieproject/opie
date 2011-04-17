@@ -31,10 +31,12 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/xmltree.h>
 using namespace Opie::Core;
 
 /* Qt */
 #include <qapplication.h>
+#include <qxml.h>
 
 // Qt DBUS includes
 #include <dbus/qdbusdatalist.h>
@@ -45,6 +47,7 @@ using namespace Opie::Core;
 #include <dbus/qdbusobjectpath.h>
 #include <dbus/qdbusvariant.h>
 #include <dbus/qdbusdatamap.h>
+
 
 namespace Opie {
 namespace Bluez {
@@ -112,7 +115,7 @@ OBluetoothInterface* OBluetooth::defaultInterface() const
 
 void OBluetooth::synchronize()
 {
-    odebug << "OBluetooth::synchronize() - gathering available HCI devices" << oendl;
+//    odebug << "OBluetooth::synchronize() - gathering available HCI devices" << oendl;
     _interfaces.clear();
 
     // get a connection to the session bus
@@ -147,7 +150,7 @@ void OBluetooth::synchronize()
                 QValueList<QDBusObjectPath>::ConstIterator it2 = list.begin();
                 for (; it2 != list.end(); ++it2) {
                     OBluetoothInterface *iface  = new OBluetoothInterface( this, (*it2) );
-                    odebug << "OBluetooth::synchronize() - found device " << iface->name() << oendl;
+//                    odebug << "OBluetooth::synchronize() - found device " << iface->name() << oendl;
                     _interfaces.insert( (*it2), iface );
                 }
             }
@@ -333,6 +336,43 @@ void OBluetoothInterface::stopDiscovery()
     d->adapterProxy->send("StopDiscovery", QValueList<QDBusData>());
 }
 
+OBluetoothDevice *OBluetoothInterface::findDevice( const QString &bdaddr )
+{
+    OBluetoothDevice *dev = _devices.find(bdaddr);
+    if( !dev ) {
+        QDBusObjectPath path = findDevicePath( bdaddr, true );
+        if( path.isValid() ) {
+            dev = new OBluetoothDevice( this, path );
+            _devices.insert( dev->macAddress(), dev );
+        }
+    }
+
+    return dev;
+}
+
+QDBusObjectPath OBluetoothInterface::findDevicePath( const QString &bdaddr, bool create )
+{
+    QValueList<QDBusData> parameters;
+    parameters << QDBusData::fromString(bdaddr);
+    QDBusMessage reply = d->adapterProxy->sendWithReply("FindDevice", parameters);
+    if (reply.type() == QDBusMessage::ReplyMessage)
+        return reply[0].toObjectPath();
+    else if( create ) {
+        reply = d->adapterProxy->sendWithReply("CreateDevice", parameters);
+        if (reply.type() == QDBusMessage::ReplyMessage)
+            return reply[0].toObjectPath();
+    }
+
+    return QDBusObjectPath();
+}
+
+void OBluetoothInterface::removeDevice( OBluetoothDevice *dev )
+{
+    QValueList<QDBusData> parameters;
+    parameters << QDBusData::fromObjectPath(QDBusObjectPath(QCString(dev->devicePath())));
+    d->adapterProxy->sendWithReply("RemoveDevice", parameters);
+}
+
 void OBluetoothInterface::slotDBusSignal(const QDBusMessage& message)
 {
     if( message.member() == "PropertyChanged" ) {
@@ -344,8 +384,8 @@ void OBluetoothInterface::slotDBusSignal(const QDBusMessage& message)
         emit propertyChanged( propName );
     }
     else if( message.member() == "DeviceFound" ) {
-        const QDBusDataMap<QString> adapterProps = message[1].toStringKeyMap();
-        OBluetoothDevice *dev = new OBluetoothDevice( this, adapterProps );
+        const QMap<QString,QDBusVariant> devProps = message[1].toStringKeyMap().toVariantMap();
+        OBluetoothDevice *dev = new OBluetoothDevice( this, devProps );
         _devices.insert( message[0].toString(), dev );
         emit deviceFound(dev);
     }
@@ -358,26 +398,9 @@ void OBluetoothInterface::slotDBusSignal(const QDBusMessage& message)
 class OBluetoothDevice::Private
 {
   public:
-    Private( const QDBusObjectPath &path )
+    Private()
     {
-        setupProxy(path);
-        reloadInfo();
-    }
-
-    Private( const QDBusDataMap<QString> &props )
-    {
-        devProxy = NULL;
-        loadInfo(props);
-    }
-
-    void setupProxy( const QDBusObjectPath &path )
-    {
-        QDBusConnection connection = QDBusConnection::systemBus();
         devProxy = new QDBusProxy(0);
-        devProxy->setService("org.bluez");
-        devProxy->setPath(path);
-        devProxy->setInterface("org.bluez.Device");
-        devProxy->setConnection(connection);
     }
 
     ~Private()
@@ -385,37 +408,139 @@ class OBluetoothDevice::Private
         delete devProxy;
     }
 
+    void setupProxy( OBluetoothDevice *dev )
+    {
+        QDBusConnection connection = QDBusConnection::systemBus();
+        devProxy->setService("org.bluez");
+        devProxy->setPath(devPath);
+        devProxy->setInterface("org.bluez.Device");
+        devProxy->setConnection(connection);
+        QObject::connect(devProxy, SIGNAL(asyncReply(int, const QDBusMessage&)),
+                        dev, SLOT(slotAsyncReply(int, const QDBusMessage&)));
+    }
+
     void reloadInfo()
     {
         QDBusMessage reply = devProxy->sendWithReply("GetProperties", QValueList<QDBusData>());
         if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
             const QDBusDataMap<QString> props = reply[0].toStringKeyMap();
-            loadInfo( props );
+            devProps = props.toVariantMap();
         }
     }
 
-    void loadInfo(const QDBusDataMap<QString> &props)
+    void parseServiceRecord( XMLElement *recelem )
     {
-        devProps = props.toVariantMap();
+        OBluetoothServices rec;
+        XMLElement *elem = recelem->firstChild();
+        while( elem ) {
+            if( elem->tagName() == "attribute" ) {
+                QString id = elem->attributes()["id"];
+                if( id == "0x0000" ) {
+                    // ServiceRecordHandle
+                    XMLElement *elem2 = elem->firstChild();
+                    if( elem2 )
+                        rec.setRecHandle(elem2->attributes()["value"].mid(2).toUInt(0, 16));
+                }
+                else if( id == "0x0001" ) {
+                    // ServiceClassIDList
+                    XMLElement *seqelem = elem->firstChild();
+                    while( seqelem ) {
+                        XMLElement *elem2 = seqelem->firstChild();
+                        if( elem2 ) {
+                            rec.insertClassId( elem2->attributes()["value"].mid(2).toUInt(0, 16), "");
+                        }
+                        seqelem = seqelem->nextChild();
+                    }
+                }
+                else if( id == "0x0004" ) {
+                    // ProtocolDescriptorList
+                    XMLElement *seqelem = elem->firstChild();
+                    if( seqelem ) // sequence
+                        seqelem = seqelem->firstChild();
+                    while( seqelem ) {
+                        OBluetoothServices::ProtocolDescriptor prtdesc;
+                        XMLElement *seq2elem = seqelem->firstChild();
+                        while( seq2elem ) {
+                            if( seq2elem->tagName() == "uuid" )
+                                prtdesc.setId( seq2elem->attributes()["value"].mid(2).toUInt(0, 16) );
+                            else if( seq2elem->tagName().startsWith( "uint" ) )
+                                prtdesc.setPort( seq2elem->attributes()["value"].mid(2).toUInt(0, 16) );
+                            seq2elem = seq2elem->nextChild();
+                        }
+                        if( prtdesc.id() > 0 && prtdesc.id() != 0x0100 ) // no L2CAP
+                            rec.insertProtocolDescriptor( prtdesc );
+                        seqelem = seqelem->nextChild();
+                    }
+                }
+                else if( id == "0x0009" ) {
+                    // BluetoothProfileDescriptorList
+                    XMLElement *seqelem = elem->firstChild();
+                    if( seqelem ) // sequence
+                        seqelem = seqelem->firstChild();
+                    while( seqelem ) {
+                        OBluetoothServices::ProfileDescriptor prfdesc;
+                        XMLElement *seq2elem = seqelem->firstChild();
+                        while( seq2elem ) {
+                            if( seq2elem->tagName() == "uuid" )
+                                prfdesc.setId( seq2elem->attributes()["value"].mid(2).toUInt(0, 16) );
+                            else if( seq2elem->tagName().startsWith( "uint" ) )
+                                prfdesc.setVersion( seq2elem->attributes()["value"].mid(2).toUInt(0, 16) );
+                            seq2elem = seq2elem->nextChild();
+                        }
+                        if( prfdesc.idInt() > 0 )
+                            rec.insertProfileDescriptor( prfdesc );
+                        seqelem = seqelem->nextChild();
+                    }
+                }
+                else if( id == "0x0100" ) {
+                    // ServiceName
+                    XMLElement *elem2 = elem->firstChild();
+                    if( elem2 )
+                        rec.setServiceName( elem2->attributes()["value"] );
+                }
+            }
+
+            elem = elem->nextChild();
+        }
+
+        if( rec.recHandle() && rec.classIdList().count() > 0 && !rec.classIdList().contains( 0x1200 ) ) { // PnP class ID
+            services.append( rec );
+        }
+    }
+
+    void parseServices( XMLElement *root )
+    {
+        XMLElement *elem = root->firstChild();
+        while( elem ) {
+            if( elem->tagName() == "record" ) 
+                parseServiceRecord( elem );
+            elem = elem->nextChild();
+        }
     }
 
     QDBusProxy *devProxy;
     QMap<QString,QDBusVariant> devProps;
+    QString devPath;
+    OBluetoothServices::ValueList services;
 };
 
-OBluetoothDevice::OBluetoothDevice( QObject* parent, const QDBusDataMap<QString> &props )
+OBluetoothDevice::OBluetoothDevice( OBluetoothInterface *parent, const QDBusObjectPath &path )
                  :QObject( parent )
 {
-//    odebug << "OBluetoothDevice::OBluetoothDevice() - '" << name << "'" << oendl;
-    d = new OBluetoothDevice::Private( props );
+    d = new OBluetoothDevice::Private();
+    d->devPath = path;
+    d->setupProxy(this);
+    d->reloadInfo();
+
     setName( d->devProps["Name"].value.toString() );
 }
 
-OBluetoothDevice::OBluetoothDevice( QObject* parent, const QDBusObjectPath &path )
+OBluetoothDevice::OBluetoothDevice( OBluetoothInterface *parent, const QMap<QString,QDBusVariant> &props )
                  :QObject( parent )
 {
-//    odebug << "OBluetoothDevice::OBluetoothDevice() - '" << path << "'" << oendl;
-    d = new OBluetoothDevice::Private( path );
+    d = new OBluetoothDevice::Private();
+    d->devProps = props;
+
     setName( d->devProps["Name"].value.toString() );
 }
 
@@ -433,6 +558,65 @@ QString OBluetoothDevice::macAddress() const
 QString OBluetoothDevice::deviceClass() const
 {
     return OBluetoothDevice::deviceClassString( d->devProps["Class"].value.toUInt32() );
+}
+
+const QString &OBluetoothDevice::devicePath() const
+{
+    return d->devPath;
+}
+
+void OBluetoothDevice::initialise()
+{
+    if( d->devPath.isEmpty() ) {
+        d->devPath = ((OBluetoothInterface *)parent())->findDevicePath( d->devProps["Address"].value.toString(), true );
+        d->setupProxy(this);
+    }
+}
+
+void OBluetoothDevice::discoverServices()
+{
+    d->services.clear();
+    QValueList<QDBusData> parameters;
+    parameters << QDBusData::fromString("");
+    d->devProxy->sendWithAsyncReply("DiscoverServices", parameters);
+}
+
+OBluetoothServices::ValueList OBluetoothDevice::services()
+{
+    return d->services;
+}
+
+bool OBluetoothDevice::setTrusted( bool b )
+{
+    QValueList<QDBusData> parameters;
+    parameters << QDBusData::fromString("Trusted");
+    parameters << QDBusData::fromVariant(QDBusVariant(QDBusData::fromBool(b)));
+    QDBusMessage reply = d->devProxy->sendWithReply("SetProperty", parameters);
+    if (reply.type() == QDBusMessage::ReplyMessage)
+        return true;
+    else
+        return false;
+}
+
+void OBluetoothDevice::slotAsyncReply( int, const QDBusMessage& msg )
+{
+    // At the moment we get away with not checking anything about the message
+    // as we don't use async messages on devices for anything except service discovery
+    d->services.clear();
+    if( msg.type() == QDBusMessage::ReplyMessage && msg.count() == 1 ) {
+        QMap<Q_UINT32,QString> map = msg[0].toUInt32KeyMap().toStringMap();
+
+        d->services.clear();
+        QMap<Q_UINT32,QString>::Iterator it = map.begin();
+        for( ; it != map.end(); ++it ) {
+            QXmlInputSource src;
+            src.setData( it.data() );
+            XMLElement *root = XMLElement::load( src );
+            if( root )
+                d->parseServices(root);
+        }
+    }
+    emit servicesFound( this );
 }
 
 QString OBluetoothDevice::deviceClassString(Q_UINT32 dev_class)
