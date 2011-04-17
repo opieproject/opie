@@ -27,12 +27,12 @@ QPopupMenu* PopupHelper::find( int id, const Services& ser, BTDeviceItem* item )
 }
 
 void PopupHelper::init() {
-    insert( 4353, newRfcComPopup );
-    insert( 4354, newDunPopup );
-    insert( 4355, newRfcComPopup );
-    insert( 4357, newObexPushPopup );
-    insert( 4358, newObexFtpPopup );
-    insert( 4374, newPanPopup );
-    insert( 4375, newPanPopup );
-    insert( 4388, newHidPopup );
+    insert( 0x1101, newRfcComPopup );   // SerialPort
+    insert( 0x1102, newDunPopup );      // LanAccessUsingPPP
+    insert( 0x1103, newRfcComPopup );   // DialupNetworking
+    insert( 0x1105, newObexPushPopup ); // OBEXObjectPush
+    insert( 0x1106, newObexFtpPopup );  // OBEXFileTransfer
+    insert( 0x1116, newPanPopup );      // NAP
+    insert( 0x1117, newPanPopup );      // GN
+    insert( 0x1124, newHidPopup );      // HumanInterfaceDeviceService
 }
