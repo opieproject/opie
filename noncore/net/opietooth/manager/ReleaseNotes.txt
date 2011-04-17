@@ -1,9 +1,5 @@
-Sun 19 Mar 2006 17:29:28
-1. In order to build manager you need to build obexftp >= 0.18 
-   (http://triq.net/obexftp/) with crosscompiler and put client.h, obexftp.h,
-   object.h and uuid.h files to $LIBBLUEZ_INC_DIR/obexftp and libobexftp.a,
-   libmulticobex.a and libbfb.a to $LIBBLUEZ_LIB_DIR.
-2. In "ppp connection" dialog if you press connect with an empty ppp script
+Sun 18 Apr 2011
+1. In "ppp connection" dialog if you press connect with an empty ppp script
    name it runs rfcomm connect <number of a port selected> <device> <port>.
    
 //eof

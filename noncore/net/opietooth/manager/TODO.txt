@@ -1,4 +1,0 @@
-1. Improve hcid.conf parsing algorithm.
-2. Collect requirements from others.
-
-//eof
