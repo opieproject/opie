@@ -13,7 +13,7 @@
 
 #include <qpopupmenu.h>
 #include <qaction.h>
-#include <opie2/oprocess.h>
+
 #include <opie2/obluetoothservices.h>
 #include "btdeviceitem.h"
 
@@ -30,13 +30,9 @@ namespace OpieTooth {
     private:
         QAction* m_push;
         OpieTooth::BTDeviceItem *m_item;
-        Opie::Core::OProcess* m_hidConnect; //HID process
     private slots:
         void slotConnect();
         void slotDisconnect();
-        void fillOutPut( Opie::Core::OProcess* pppDial, char* cha, int len );
-        void fillErr(Opie::Core::OProcess*, char*, int);
-        void slotProcessExited(Opie::Core::OProcess* proc);
     };
 };
 
