@@ -8,14 +8,25 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <qpe/qcopenvelope_qws.h>
 #include <qmessagebox.h>
 #include <opie2/odebug.h>
-#include <opie2/oprocess.h>
+#include <opie2/obluetooth.h>
 #include <qpe/qpeapplication.h>
 using namespace Opie::Core;
+using namespace Opie::Bluez;
+
+// Qt DBUS includes
+#include <dbus/qdbusdatalist.h>
+#include <dbus/qdbuserror.h>
+#include <dbus/qdbusconnection.h>
+#include <dbus/qdbusmessage.h>
+#include <dbus/qdbusproxy.h>
+#include <dbus/qdbusobjectpath.h>
+#include <dbus/qdbusvariant.h>
+#include <dbus/qdbusdatamap.h>
 
 #include <qtimer.h>
+
 #include "hidpopup.h"
 
 using namespace OpieTooth;
@@ -24,7 +35,8 @@ using namespace OpieTooth;
  * c'tor init the QAction
  */
 HidPopup::HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* item) :
-    QPopupMenu()  {
+    QPopupMenu()  
+{
 
     owarn << "HidPopup c'tor" << oendl;
 
@@ -32,7 +44,6 @@ HidPopup::HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceIt
     QAction* a;
     QAction* c;
 
-    m_hidConnect = 0l;
     /* connect action */
 
     a = new QAction(); // so it's get deleted
@@ -47,59 +58,56 @@ HidPopup::HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceIt
 
 };
 
-HidPopup::~HidPopup() {
-    delete m_hidConnect;
+HidPopup::~HidPopup()
+{
 }
 
-void HidPopup::slotConnect() {
+void HidPopup::slotConnect()
+{
     odebug << "connect" << oendl;
-    m_hidConnect = new OProcess();
-    *m_hidConnect << "hidd" << "--connect" << m_item->mac();
-    connect(m_hidConnect,
-        SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int)),
-        this, SLOT(fillOutPut(Opie::Core::OProcess*, char*, int)));
-    connect(m_hidConnect,
-        SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int)),
-        this,    SLOT(fillErr(Opie::Core::OProcess*, char*, int)));
-    connect(m_hidConnect,
-        SIGNAL(processExited(Opie::Core::OProcess*)),
-        this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
-    if (!m_hidConnect->start(OProcess::Block, OProcess::AllOutput)) {
-        QMessageBox::critical(this, tr("HID Connection"),
-            tr("HID Connection\nto device ") + m_item->mac() + tr("\nfailed"));
-        delete m_hidConnect;
-        m_hidConnect = 0l;
+    OBluetooth *bt = OBluetooth::instance();
+    OBluetoothInterface *intf = bt->defaultInterface();
+    OBluetoothDevice *dev = intf->findDevice( m_item->mac() );
+    if( dev ) {
+        QDBusConnection connection = QDBusConnection::systemBus();
+        QDBusProxy *devProxy = new QDBusProxy(0);
+        devProxy->setService("org.bluez");
+        devProxy->setPath(dev->devicePath());
+        devProxy->setInterface("org.bluez.Input");
+        devProxy->setConnection(connection);
+        QDBusMessage reply = devProxy->sendWithReply("Connect", QValueList<QDBusData>());
+        if (reply.type() == QDBusMessage::ReplyMessage) {
+            odebug << "********* connect success" << oendl;
+        }
+        else if (reply.type() == QDBusMessage::ErrorMessage)
+            odebug << "********* connect fail: " << reply.error().name() << ": " << reply.error().message() << oendl;
+    }
+    else {
+        odebug << "no device" << oendl;
     }
 }
 
-void HidPopup::slotDisconnect()  {
-    OProcess hidKill;
-    hidKill << "hidd" << "--kill" << m_item->mac();
-    hidKill.start(OProcess::DontCare, OProcess::NoCommunication);
-    sleep(1);
-    QMessageBox::information(this, tr("HID Disconnect"), tr("HID Disconnected"));
-}
-
-void HidPopup::fillOutPut( OProcess*, char* cha, int len ) {
-    QCString str(cha, len);
-    odebug << str << oendl;
-}
-
-void HidPopup::fillErr(OProcess*, char* buf, int len)
+void HidPopup::slotDisconnect()
 {
-    QCString str(buf, len);
-    odebug << str << oendl;
+    odebug << "disconnect" << oendl;
+    OBluetooth *bt = OBluetooth::instance();
+    OBluetoothInterface *intf = bt->defaultInterface();
+    OBluetoothDevice *dev = intf->findDevice( m_item->mac() );
+    if( dev ) {
+        QDBusConnection connection = QDBusConnection::systemBus();
+        QDBusProxy *devProxy = new QDBusProxy(0);
+        devProxy->setService("org.bluez");
+        devProxy->setPath(dev->devicePath());
+        devProxy->setInterface("org.bluez.Input");
+        devProxy->setConnection(connection);
+        QDBusMessage reply = devProxy->sendWithReply("Disconnect", QValueList<QDBusData>());
+        if (reply.type() == QDBusMessage::ReplyMessage ) {
+            odebug << "********* disconnect success" << oendl;
+        }
+        else if (reply.type() == QDBusMessage::ErrorMessage)
+            odebug << "********* disconnect fail: " << reply.error().name() << ": " << reply.error().message() << oendl;
+    }
+    else {
+        odebug << "no device" << oendl;
+    }
 }
-
-void HidPopup::slotProcessExited(OProcess* proc) {
-    if (m_hidConnect->normalExit())
-        QMessageBox::information(this, tr("HID Connection"),
-            tr("HID Connect\nstarted"));
-    else
-        QMessageBox::critical(this, tr("HID Connection"),
-            tr("HID Connection\nto device ") + m_item->mac() + tr("\nfailed"));
-    delete m_hidConnect;
-    m_hidConnect = 0l;
-}
-
-//eof
