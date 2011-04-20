@@ -626,85 +626,85 @@ QString OBluetoothDevice::deviceClassString(Q_UINT32 dev_class)
     int min = (devClass & 0x1f) >> 2;
 
     QString major,minor;
-    major.sprintf( "Unknown(%d)", maj );
-    minor.sprintf( "Unknown(%d)", min );
+    major = tr("Unknown(%1)").arg(maj);
+    minor = tr("Unknown(%1)").arg(min);
 
     switch ( maj )
     {
-        case 0: major = "Miscellaneous";
+        case 0: major = tr("Miscellaneous");
         break;
 
-        case 1: major = "Computer";
+        case 1: major = tr("Computer");
         switch ( min )
         {
-            case 0: minor = "Uncategorized"; break;
-            case 1: minor = "Desktop workstation"; break;
-            case 2: minor = "Server"; break;
-            case 3: minor = "Laptop"; break;
-            case 4: minor = "Handheld"; break;
-            case 5: minor = "Palm"; break;
-            case 6: minor = "Wearable"; break;
+            case 0: minor = tr("Uncategorized"); break;
+            case 1: minor = tr("Desktop workstation"); break;
+            case 2: minor = tr("Server"); break;
+            case 3: minor = tr("Laptop"); break;
+            case 4: minor = tr("Handheld"); break;
+            case 5: minor = tr("Palm"); break;
+            case 6: minor = tr("Wearable"); break;
         }
         break;
 
-        case 2: major = "Phone";
+        case 2: major = tr("Phone");
         switch ( min )
         {
-            case 0: minor = "Uncategorized"; break;
-            case 1: minor = "Cellular"; break;
-            case 2: minor = "Cordless"; break;
-            case 3: minor = "Smart phone"; break;
-            case 4: minor = "Wired modem or voice gateway"; break;
-            case 5: minor = "Common ISDN Access"; break;
-            case 6: minor = "Sim Card Reader"; break;
+            case 0: minor = tr("Uncategorized"); break;
+            case 1: minor = tr("Cellular"); break;
+            case 2: minor = tr("Cordless"); break;
+            case 3: minor = tr("Smart phone"); break;
+            case 4: minor = tr("Wired modem or voice gateway"); break;
+            case 5: minor = tr("Common ISDN Access"); break;
+            case 6: minor = tr("Sim Card Reader"); break;
         }
         break;
 
-        case 3: major = "LAN Access";
+        case 3: major = tr("LAN Access");
         break;
 
-        case 4: major = "Audio/Video";
+        case 4: major = tr("Audio/Video");
         switch ( min )
         {
-            case 0: minor = "Uncategorized"; break;
-            case 1: minor = "Device conforms to the Headset profile"; break;
-            case 2: minor = "Hands-free"; break;
-            case 3: minor = "Reserved(3)"; break;
-            case 4: minor = "Microphone"; break;
-            case 5: minor = "Loudspeaker"; break;
-            case 6: minor = "Headphones"; break;
-            case 7: minor = "Portable Audio"; break;
-            case 8: minor = "Car Audio"; break;
-            case 9: minor = "Set-top box"; break;
-            case 10: minor = "HiFi Audio Device"; break;
-            case 11: minor = "VCR"; break;
-            case 12: minor = "Video Camera"; break;
-            case 13: minor = "Camcorder"; break;
-            case 14: minor = "Video Monitor"; break;
-            case 15: minor = "Video Display and Loudspeaker"; break;
-            case 16: minor = "Video Conferencing"; break;
-            case 17: minor = "Reserved(17)"; break;
-            case 18: minor = "Gaming/Toy"; break;
+            case 0: minor = tr("Uncategorized"); break;
+            case 1: minor = tr("Device conforms to the Headset profile"); break;
+            case 2: minor = tr("Hands-free"); break;
+            case 3: minor = tr("Reserved(3)"); break;
+            case 4: minor = tr("Microphone"); break;
+            case 5: minor = tr("Loudspeaker"); break;
+            case 6: minor = tr("Headphones"); break;
+            case 7: minor = tr("Portable Audio"); break;
+            case 8: minor = tr("Car Audio"); break;
+            case 9: minor = tr("Set-top box"); break;
+            case 10: minor = tr("HiFi Audio Device"); break;
+            case 11: minor = tr("VCR"); break;
+            case 12: minor = tr("Video Camera"); break;
+            case 13: minor = tr("Camcorder"); break;
+            case 14: minor = tr("Video Monitor"); break;
+            case 15: minor = tr("Video Display and Loudspeaker"); break;
+            case 16: minor = tr("Video Conferencing"); break;
+            case 17: minor = tr("Reserved(17)"); break;
+            case 18: minor = tr("Gaming/Toy"); break;
         }
         break;
 
-        case 5: major = "Peripheral";
+        case 5: major = tr("Peripheral");
         switch ( min )
         {
-            case 16: minor = "Keyboard"; break;
-            case 32: minor = "Pointing Device"; break;
-            case 48: minor = "Keyboard and Pointing Device"; break;
+            case 16: minor = tr("Keyboard"); break;
+            case 32: minor = tr("Pointing Device"); break;
+            case 48: minor = tr("Keyboard and Pointing Device"); break;
         }
         break;
 
-        case 6: major = "Imaging";
-        if (min & 4) minor = "Display";
-        else if (min & 8) minor = "Camera";
-        else if (min & 16) minor = "Scanner";
-        else if (min & 32) minor = "Printer";
+        case 6: major = tr("Imaging");
+        if (min & 4) minor = tr("Display");
+        else if (min & 8) minor = tr("Camera");
+        else if (min & 16) minor = tr("Scanner");
+        else if (min & 32) minor = tr("Printer");
         break;
 
-        case 63: major = "Uncategorized";
+        case 63: major = tr("Uncategorized");
         break;
     }
 
