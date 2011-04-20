@@ -12,10 +12,8 @@ SOURCES += \
         backend/omemoaccessbackend.cpp          \
         backend/omemoaccessbackend_text.cpp     \
         backend/omemoaccessbackend_xml.cpp      \
-        backend/opimchangelog_sql.cpp           \
-        backend/opimio.cpp                      \
-        backend/opimsql.cpp
-        
+        backend/opimio.cpp
+
 HEADERS += \
         backend/obackendfactory.h              \
         backend/ocontactaccessbackend.h        \
@@ -32,9 +30,7 @@ HEADERS += \
         backend/omemoaccessbackend.h           \
         backend/omemoaccessbackend_text.h      \
         backend/omemoaccessbackend_xml.h       \
-        backend/opimchangelog_sql.h            \
-        backend/opimio.h                       \
-        backend/opimsql.h
+        backend/opimio.h
 
 contains( ENABLE_SQL_PIM_BACKEND, y ) {
 	message ( Enabling the SQL Backend for libopiepim2 )
@@ -42,11 +38,16 @@ contains( ENABLE_SQL_PIM_BACKEND, y ) {
 	LIBS    += -lopiedb2
 	HEADERS += backend/otodoaccesssql.h             \
                    backend/ocontactaccessbackend_sql.h  \
-                   backend/odatebookaccessbackend_sql.h 
+                   backend/odatebookaccessbackend_sql.h \
+                   backend/omemoaccessbackend_sql.h \
+                   backend/opimchangelog_sql.h \
+                   backend/opimsql.h
 	SOURCES += backend/otodoaccesssql.cpp            \
 		   backend/ocontactaccessbackend_sql.cpp \
 		   backend/odatebookaccessbackend_sql.cpp \
-           backend/omemoaccessbackend_sql.cpp
+           backend/omemoaccessbackend_sql.cpp \
+        backend/opimchangelog_sql.cpp           \
+        backend/opimsql.cpp
 }
 
 !contains( ENABLE_SQL_PIM_BACKEND, y ) {
