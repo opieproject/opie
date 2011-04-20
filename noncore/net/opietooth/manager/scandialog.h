@@ -57,6 +57,7 @@ class RemoteDevice;
 
     public slots:
          void accept();
+         void reject();
 
     protected:
         QVBoxLayout* Layout11;
@@ -71,11 +72,11 @@ class RemoteDevice;
 
     private:
         bool m_search:1;
-        void emitToManager();
         int progressStat;
         OBluetooth *m_bluetooth;
         OBluetoothInterface *m_btinterface;
 
+        void emitToManager();
         void connectInterface();
         void searchStopped();
 
