@@ -75,6 +75,8 @@ namespace OpieTooth {
 
         progressStat = 0;
         m_search = false;
+
+        QTimer::singleShot( 0, this, SLOT( startSearch() ) );
     }
 
 // hack, make cleaner later
@@ -87,11 +89,20 @@ namespace OpieTooth {
         }
     }
 
-    void ScanDialog::accept() {
+    void ScanDialog::accept()
+    {
+        if( m_search )
+            stopSearch();
         emitToManager();
         QDialog::accept();
     }
 
+    void ScanDialog::reject()
+    {
+        if( m_search )
+            stopSearch();
+        QDialog::reject();
+    }
 
     void ScanDialog::startSearch() {
         if ( m_search ) {
@@ -127,8 +138,10 @@ namespace OpieTooth {
 
     void ScanDialog::deviceFound( const OBluetoothDevice *dev )
     {
-        QCheckListItem *deviceItem = new QCheckListItem( serviceView, dev->name(),  QCheckListItem::CheckBox );
-        deviceItem->setText( 1, dev->macAddress() );
+        if( m_search ) {
+            QCheckListItem *deviceItem = new QCheckListItem( serviceView, dev->name(),  QCheckListItem::CheckBox );
+            deviceItem->setText( 1, dev->macAddress() );
+        }
     }
 
     void ScanDialog::defaultInterfaceChanged( OBluetoothInterface *intf )
