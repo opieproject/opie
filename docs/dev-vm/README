@@ -1,0 +1,65 @@
+Welcome to the Opie development VM!
+===================================
+
+This is a pre-configured virtual machine running OpenSUSE 11.2, with all of
+the required development software installed for Opie development and testing
+(on i386). It also includes pre-compiled source trees for opkg and libetpan
+to allow opie-packagemanager and opie-mail development.
+
+Note that this VM is not set up for any kind of cross-compilation. (For that
+you should set up and use OpenEmbedded or Scratchbox etc.) On the other hand,
+there's still a lot of development that can be done without having to run 
+Opie on an actual device, and this VM should help with that.
+
+
+Setting up the environment
+--------------------------
+
+Before running or building Opie you will need to run the following (for
+each new session):
+
+cd ~/opie
+source ./setupenv
+
+Note that this environment will of course only persist within the terminal
+session it is typed into.
+
+
+Running
+-------
+
+To run an Opie session, ensure the Qt2 Virtual Framebuffer application is
+running (icon on the desktop) then run the following commands:
+
+cd opie/bin
+./qpe -qws
+
+
+Updating sources
+----------------
+
+To get the latest source code, simply run the following:
+
+git pull
+
+Rebuilding should usually be as simple as:
+
+make
+
+
+Misc
+----
+
+* Qt2 Designer and Virtual Framebuffer tools are linked from the desktop &
+  launch menu.
+* Firefox has been set up with links to the Opie website, Opie project on 
+  gitorious.org, and the (local) Qt 2.3 reference documentation.
+* Passwords for root and the default user (opiedev) are set to "opiedev". You
+  should probably change these if you intend to make regular use of the VM.
+
+
+More info
+---------
+
+Please see the Opie website at http://opie.sourceforge.net for further details.
+
