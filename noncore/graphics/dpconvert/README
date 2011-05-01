@@ -1,0 +1,41 @@
+dpconvert
+=========
+
+About
+-----
+
+This is a simple standalone utility to convert drawpad.xml file saved
+by the Opie DrawPad application into separate PNG files.
+
+
+Building
+--------
+
+Build requirements: libxml2, glib-2.x, pkg-config
+
+To build, just run "make".
+
+
+Usage
+-----
+
+  dpconvert /path/to/drawpad.xml /path/to/outputdir
+
+Images will be named with their title in DrawPad, or untitledX if no
+title has been specified.
+
+
+
+Credits
+-------
+
+Written by Paul Eggleton <bluelighting@bluelightning.org>
+Based on DrawPad source by S. Prud'homme
+Licenced under the GNU GPL.
+
+
+History
+-------
+
+0.1 - 2009-10-02
+  * first release
