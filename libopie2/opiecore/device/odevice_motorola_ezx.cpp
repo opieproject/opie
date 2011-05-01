@@ -176,7 +176,18 @@ int Motorola_EZX::displayBrightnessResolution() const
 
 bool Motorola_EZX::setDisplayBrightness( int bright )
 {
-    return false;
+    bool res = false;
+    int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
+    if ( fd >= 0 )
+    {
+        char buf[10];
+        int val = bright * displayBrightnessResolution() / 255;
+        int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
+        if (len > 0)
+            res = ( ::write( fd, &buf[0], len ) == 0 );
+        ::close( fd );
+    }
+    return res;
 }
 
 bool Motorola_EZX::setDisplayStatus( bool on )
