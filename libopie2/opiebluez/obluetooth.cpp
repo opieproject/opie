@@ -277,11 +277,7 @@ bool OBluetoothInterface::setUp( bool b )
     QValueList<QDBusData> parameters;
     parameters << QDBusData::fromString("Powered");
     parameters << QDBusData::fromVariant(QDBusVariant(QDBusData::fromBool(b)));
-    QDBusMessage reply = d->adapterProxy->sendWithReply("SetProperty", parameters);
-    if (reply.type() == QDBusMessage::ReplyMessage)
-        return true;
-    else
-        return false;
+    return d->adapterProxy->send("SetProperty", parameters);
 }
 
 bool OBluetoothInterface::isUp() const
@@ -294,11 +290,7 @@ bool OBluetoothInterface::setDiscoverable( bool b )
     QValueList<QDBusData> parameters;
     parameters << QDBusData::fromString("Discoverable");
     parameters << QDBusData::fromVariant(QDBusVariant(QDBusData::fromBool(b)));
-    QDBusMessage reply = d->adapterProxy->sendWithReply("SetProperty", parameters);
-    if (reply.type() == QDBusMessage::ReplyMessage)
-        return true;
-    else
-        return false;
+    return d->adapterProxy->send("SetProperty", parameters);
 }
 
 bool OBluetoothInterface::setPublicName( const QString &name )
@@ -306,11 +298,7 @@ bool OBluetoothInterface::setPublicName( const QString &name )
     QValueList<QDBusData> parameters;
     parameters << QDBusData::fromString("Name");
     parameters << QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(name)));
-    QDBusMessage reply = d->adapterProxy->sendWithReply("SetProperty", parameters);
-    if (reply.type() == QDBusMessage::ReplyMessage)
-        return true;
-    else
-        return false;
+    return d->adapterProxy->send("SetProperty", parameters);
 }
 
 OBluetoothInterface::DeviceIterator OBluetoothInterface::neighbourhood()
@@ -370,7 +358,7 @@ void OBluetoothInterface::removeDevice( OBluetoothDevice *dev )
 {
     QValueList<QDBusData> parameters;
     parameters << QDBusData::fromObjectPath(QDBusObjectPath(QCString(dev->devicePath())));
-    d->adapterProxy->sendWithReply("RemoveDevice", parameters);
+    d->adapterProxy->send("RemoveDevice", parameters);
 }
 
 void OBluetoothInterface::slotDBusSignal(const QDBusMessage& message)
@@ -591,11 +579,7 @@ bool OBluetoothDevice::setTrusted( bool b )
     QValueList<QDBusData> parameters;
     parameters << QDBusData::fromString("Trusted");
     parameters << QDBusData::fromVariant(QDBusVariant(QDBusData::fromBool(b)));
-    QDBusMessage reply = d->devProxy->sendWithReply("SetProperty", parameters);
-    if (reply.type() == QDBusMessage::ReplyMessage)
-        return true;
-    else
-        return false;
+    return d->devProxy->send("SetProperty", parameters);
 }
 
 void OBluetoothDevice::slotAsyncReply( int, const QDBusMessage& msg )
