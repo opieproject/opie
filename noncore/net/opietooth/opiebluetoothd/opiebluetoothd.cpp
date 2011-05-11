@@ -29,6 +29,8 @@
 
 #include "opiebluetoothd.h"
 #include "bluetoothagent.h"
+#include "hciattach.h"
+#include "rfkill.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -37,6 +39,7 @@
 /* QT */
 #include <qapplication.h>
 #include <qmap.h>
+#include <qfile.h>
 #include <qpe/qcopenvelope_qws.h>
 
 /* STD */
@@ -54,6 +57,15 @@ OBluetoothDaemon::OBluetoothDaemon()
     m_tempEnabled = false;
     m_receiveEnabled = false;
 
+    // Set up hciattach handling if required
+    m_hciattach = new OHciAttach();
+    if( ! m_hciattach->isConfigured() ) {
+        delete m_hciattach;
+        m_hciattach = NULL;
+    }
+
+    m_rfkill = new ORfKill();
+
     m_bluetooth = OBluetooth::instance();
     connect( m_bluetooth, SIGNAL( defaultInterfaceChanged( OBluetoothInterface* ) ),
                 this, SLOT( defaultInterfaceChanged( OBluetoothInterface* ) ) ) ;
@@ -68,6 +80,8 @@ OBluetoothDaemon::~OBluetoothDaemon()
 {
     odebug << "opiebluetoothd ended" << oendl;
     delete m_agent;
+    delete m_hciattach;
+    delete m_rfkill;
 }
 
 void OBluetoothDaemon::slotAdapterChange()
@@ -154,35 +168,49 @@ void OBluetoothDaemon::slotMessage( const QCString& msg, const QByteArray& data 
 
 void OBluetoothDaemon::startBluetooth()
 {
-    if( m_btinterface ) {
-        odebug << "starting bluetooth" << oendl;
-        if( ! m_btinterface->setUp( true ) ) {
-            odebug << "startBluetooth: failed to power on adapter" << oendl;
-            QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
-            e << tr("Failed to power on adapter");
+    bool rfkill = m_rfkill->restore();
+
+    if( m_hciattach )
+        m_hciattach->start();
+
+    if( !rfkill ) {
+        if( m_btinterface ) {
+            odebug << "starting bluetooth" << oendl;
+            if( ! m_btinterface->setUp( true ) ) {
+                odebug << "startBluetooth: failed to power on adapter" << oendl;
+                QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
+                e << tr("Failed to power on adapter");
+            }
         }
-    }
-    else {
-        odebug << "startBluetooth: no adapter" << oendl;
-        QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
-        e << tr("No Bluetooth adapter available");
+        else {
+            odebug << "startBluetooth: no adapter" << oendl;
+            QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
+            e << tr("No Bluetooth adapter available");
+        }
     }
 }
 
 void OBluetoothDaemon::stopBluetooth()
 {
-    if( m_btinterface ) {
-        odebug << "stopping bluetooth" << oendl;
-        if( ! m_btinterface->setUp( false ) ) {
-            odebug << "stopBluetooth: failed to power down adapter" << oendl;
-            QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
-            e << tr("Failed to power off adapter");
+    if( m_hciattach )
+        m_hciattach->stop();
+
+    if( ! m_rfkill->kill() ) {
+        if( ! m_hciattach ) { // no point doing this if hciattach is in use and was stopped
+            if( m_btinterface ) {
+                odebug << "stopping bluetooth" << oendl;
+                if( ! m_btinterface->setUp( false ) ) {
+                    odebug << "stopBluetooth: failed to power down adapter" << oendl;
+                    QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
+                    e << tr("Failed to power off adapter");
+                }
+            }
+            else {
+                odebug << "stopBluetooth: no adapter" << oendl;
+                QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
+                e << tr("No Bluetooth adapter available");
+            }
         }
-    }
-    else {
-        odebug << "stopBluetooth: no adapter" << oendl;
-        QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
-        e << tr("No Bluetooth adapter available");
     }
 }
 
@@ -201,13 +229,15 @@ void OBluetoothDaemon::sendStatus(bool change)
                 status |= BT_STATUS_RECEIVE;
         }
     }
+    else if( m_rfkill->isAvailable() )
+        status |= BT_STATUS_ADAPTER;  // assume the presence of rfkill indicates built-in bluetooth
 
     QCString msg;
     if( change )
         msg = "statusChange(int)";
     else
         msg = "status(int)";
-        
+
     QCopEnvelope e( "QPE/Bluetooth", msg );
     e << status;
 
