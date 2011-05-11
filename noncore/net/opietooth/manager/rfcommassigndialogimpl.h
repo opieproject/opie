@@ -22,24 +22,23 @@
 namespace OpieTooth {
 
     class RfcommAssignDialog: public RfcommAssignDialogBase {
-    	Q_OBJECT
+        Q_OBJECT
     public:
-    	RfcommAssignDialog(QWidget* parent = 0, const char* name = 0,
-            bool modal = 0, WFlags fl = 0);
-	    ~RfcommAssignDialog();
+        RfcommAssignDialog(QWidget* parent = 0, const char* name = 0, bool modal = 0, WFlags fl = 0);
+        ~RfcommAssignDialog();
 
-	    void loadConfig();
-	    void saveConfig();
+        void loadConfig();
+        void saveConfig();
 
-	    void newDevice( const QString & mac, int channel );
+        void newDevice( const QString & mac, int channel );
 
     private:
-	    QScrollView *m_scrollView;
-	    // how many rfcomm devices are possible
-	    int m_range;
-	    QMap< int, RfcommDialogItem* > m_itemList;
-	    QVBox *m_box;
-	    RfCommConfHandler *confHandler;
+        QScrollView *m_scrollView;
+        // how many rfcomm devices are possible
+        int m_range;
+        QMap< int, RfcommDialogItem* > m_itemList;
+        QVBox *m_box;
+        RfCommConfHandler *confHandler;
     protected slots:
         virtual void accept();
 };

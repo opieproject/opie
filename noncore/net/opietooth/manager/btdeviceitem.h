@@ -12,9 +12,9 @@ namespace OpieTooth {
         BTDeviceItem( QListView* parent, const RemoteDevice& dev );
         ~BTDeviceItem();
         RemoteDevice remoteDevice() const;
-        QString type()const;
-        int typeId()const;
-        QString mac()const;
+        QString type() const;
+        int typeId() const;
+        QString mac() const;
         QString name() const;
     private:
         RemoteDevice m_device;

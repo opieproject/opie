@@ -39,170 +39,173 @@ namespace OpieTooth {
 
 /**
  */
-    ScanDialog::ScanDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
-        : QDialog( parent, name, modal, fl ) {
+ScanDialog::ScanDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+    : QDialog( parent, name, modal, fl )
+{
 
-        setCaption( tr( "Scan for devices" ) );
+    setCaption( tr( "Scan for devices" ) );
 
-        Layout11 = new QVBoxLayout( this );
-        Layout11->setSpacing( 6 );
-        Layout11->setMargin( 0 );
+    Layout11 = new QVBoxLayout( this );
+    Layout11->setSpacing( 6 );
+    Layout11->setMargin( 0 );
 
-        progress = new QProgressBar( this, "progbar");
-        progress->setTotalSteps(20);
+    progress = new QProgressBar( this, "progbar");
+    progress->setTotalSteps(20);
 
-        StartStopButton = new QPushButton( this, "StartButton" );
-        StartStopButton->setText( tr( "Start scan" ) );
+    StartStopButton = new QPushButton( this, "StartButton" );
+    StartStopButton->setText( tr( "Start scan" ) );
 
-        serviceView = new QListView( this, "serviceView" );
+    serviceView = new QListView( this, "serviceView" );
 
-        //serviceView->addColumn( tr( "Add" ) );
-        serviceView->addColumn( tr( "Add Device" ) );
-        //serviceView->addColumn( tr( "Type" ) );
+    //serviceView->addColumn( tr( "Add" ) );
+    serviceView->addColumn( tr( "Add Device" ) );
+    //serviceView->addColumn( tr( "Type" ) );
 
-        Layout11->addWidget( serviceView );
-        Layout11->addWidget( progress );
-        Layout11->addWidget( StartStopButton );
+    Layout11->addWidget( serviceView );
+    Layout11->addWidget( progress );
+    Layout11->addWidget( StartStopButton );
 
-        m_bluetooth = OBluetooth::instance();
-        connect( m_bluetooth, SIGNAL( defaultInterfaceChanged( OBluetoothInterface* ) ),
-                 this, SLOT( defaultInterfaceChanged( OBluetoothInterface* ) ) ) ;
-        m_btinterface = m_bluetooth->defaultInterface();
-        if( m_btinterface )
-            connectInterface();
+    m_bluetooth = OBluetooth::instance();
+    connect( m_bluetooth, SIGNAL( defaultInterfaceChanged( OBluetoothInterface* ) ),
+                this, SLOT( defaultInterfaceChanged( OBluetoothInterface* ) ) ) ;
+    m_btinterface = m_bluetooth->defaultInterface();
+    if( m_btinterface )
+        connectInterface();
 
-        connect( StartStopButton, SIGNAL( clicked() ), this, SLOT( startSearch() ) );
+    connect( StartStopButton, SIGNAL( clicked() ), this, SLOT( startSearch() ) );
 
-        progressStat = 0;
-        m_search = false;
+    m_progressStat = 0;
+    m_search = false;
 
-        QTimer::singleShot( 0, this, SLOT( startSearch() ) );
-    }
+    QTimer::singleShot( 0, this, SLOT( startSearch() ) );
+}
+
+ScanDialog::~ScanDialog()
+{
+}
 
 // hack, make cleaner later
-    void ScanDialog::progressTimer() {
-
-        progressStat++;
-        if ( progressStat++ < 20 && m_search ) {
-            QTimer::singleShot( 2000, this, SLOT( progressTimer() ) );
-            progress->setProgress( progressStat++ );
-        }
+void ScanDialog::progressTimer()
+{
+    m_progressStat++;
+    if ( m_progressStat++ < 20 && m_search ) {
+        QTimer::singleShot( 2000, this, SLOT( progressTimer() ) );
+        progress->setProgress( m_progressStat++ );
     }
+}
 
-    void ScanDialog::accept()
-    {
-        if( m_search )
-            stopSearch();
-        emitToManager();
-        QDialog::accept();
+void ScanDialog::accept()
+{
+    if( m_search )
+        stopSearch();
+    emitToManager();
+    QDialog::accept();
+}
+
+void ScanDialog::reject()
+{
+    if( m_search )
+        stopSearch();
+    QDialog::reject();
+}
+
+void ScanDialog::startSearch()
+{
+    if ( m_search ) {
+        stopSearch();
+        return;
     }
+    m_added.clear();
+    m_search = true;
+    progress->setProgress(0);
+    m_progressStat = 0;
 
-    void ScanDialog::reject()
-    {
-        if( m_search )
-            stopSearch();
-        QDialog::reject();
-    }
+    // empty list before a new scan
+    serviceView->clear();
 
-    void ScanDialog::startSearch() {
-        if ( m_search ) {
-            stopSearch();
-            return;
-        }
-        m_added.clear();
-        m_search = true;
-        progress->setProgress(0);
-        progressStat = 0;
+    progressTimer();
+    // when finished, it emmite foundDevices()
+    // checken ob initialisiert , qcop ans applet.
+    StartStopButton->setText( tr( "Stop scan" ) );
 
-        // empty list before a new scan
-        serviceView->clear();
+    m_btinterface->startDiscovery();
+}
 
-        progressTimer();
-        // when finished, it emmite foundDevices()
-        // checken ob initialisiert , qcop ans applet.
-        StartStopButton->setText( tr( "Stop scan" ) );
+void ScanDialog::stopSearch()
+{
+    m_btinterface->stopDiscovery();
+}
 
-        m_btinterface->startDiscovery();
-    }
-
-    void ScanDialog::stopSearch() {
-        m_btinterface->stopDiscovery();
-    }
-
-    void ScanDialog::propertyChanged( const QString &prop )
-    {
-        if( prop == "Discovering" ) {
-            if( ! m_btinterface->discovering() )
-                searchStopped();
-        }
-    }
-
-    void ScanDialog::deviceFound( const OBluetoothDevice *dev )
-    {
-        if( m_search ) {
-            QString macAddress = dev->macAddress();
-            if( !m_added.contains( macAddress ) ) {
-                m_added.append( macAddress );
-                QCheckListItem *deviceItem = new QCheckListItem( serviceView, dev->name(),  QCheckListItem::CheckBox );
-                deviceItem->setText( 1, macAddress );
-            }
-        }
-    }
-
-    void ScanDialog::defaultInterfaceChanged( OBluetoothInterface *intf )
-    {
-        if( m_search )
+void ScanDialog::propertyChanged( const QString &prop )
+{
+    if( prop == "Discovering" ) {
+        if( ! m_btinterface->discovering() )
             searchStopped();
-        m_btinterface = intf;
-        if( m_btinterface )
-            connectInterface();
-        else
-            reject();
     }
+}
 
-    void ScanDialog::searchStopped()
-    {
-        m_search = false;
-        StartStopButton->setText( tr( "Start scan" ) );
-        progress->setProgress(0);
-        progressStat = 0;
+void ScanDialog::deviceFound( const OBluetoothDevice *dev )
+{
+    if( m_search ) {
+        QString macAddress = dev->macAddress();
+        if( !m_added.contains( macAddress ) ) {
+            m_added.append( macAddress );
+            QCheckListItem *deviceItem = new QCheckListItem( serviceView, dev->name(),  QCheckListItem::CheckBox );
+            deviceItem->setText( 1, macAddress );
+        }
     }
+}
 
-    void ScanDialog::connectInterface()
-    {
-        disconnect( this, SLOT( deviceFound( const OBluetoothDevice* ) ) );
-        disconnect( this, SLOT( propertyChanged( const QString& ) ) );
-        connect( m_btinterface, SIGNAL( deviceFound( const OBluetoothDevice* ) ),
-                this, SLOT( deviceFound( const OBluetoothDevice* ) ) ) ;
-        connect( m_btinterface, SIGNAL( propertyChanged( const QString& ) ),
-                this, SLOT( propertyChanged( const QString& ) ) ) ;
-    }
+void ScanDialog::defaultInterfaceChanged( OBluetoothInterface *intf )
+{
+    if( m_search )
+        searchStopped();
+    m_btinterface = intf;
+    if( m_btinterface )
+        connectInterface();
+    else
+        reject();
+}
+
+void ScanDialog::searchStopped()
+{
+    m_search = false;
+    StartStopButton->setText( tr( "Start scan" ) );
+    progress->setProgress(0);
+    m_progressStat = 0;
+}
+
+void ScanDialog::connectInterface()
+{
+    disconnect( this, SLOT( deviceFound( const OBluetoothDevice* ) ) );
+    disconnect( this, SLOT( propertyChanged( const QString& ) ) );
+    connect( m_btinterface, SIGNAL( deviceFound( const OBluetoothDevice* ) ),
+            this, SLOT( deviceFound( const OBluetoothDevice* ) ) ) ;
+    connect( m_btinterface, SIGNAL( propertyChanged( const QString& ) ),
+            this, SLOT( propertyChanged( const QString& ) ) ) ;
+}
 
 /**
  * Iterates trough the items, and collects the checked items.
  * Then it emits it, so the manager can connect to the signal to fill the listing.
  */
-    void ScanDialog::emitToManager() {
+void ScanDialog::emitToManager()
+{
 
-        if (!serviceView) {
-            return;
-        }
-
-        QValueList<RemoteDevice> deviceList;
-
-        QListViewItemIterator it( serviceView );
-        for ( ; it.current(); ++it ) {
-            if ( ( (QCheckListItem*)it.current() )->isOn() ) {
-                RemoteDevice device(  it.current()->text(1), it.current()->text(0) );
-                deviceList.append( device );
-            }
-        }
-        emit selectedDevices( deviceList );
+    if (!serviceView) {
+        return;
     }
 
-/**
- * Cleanup
- */
-    ScanDialog::~ScanDialog() {
+    QValueList<RemoteDevice> deviceList;
+
+    QListViewItemIterator it( serviceView );
+    for ( ; it.current(); ++it ) {
+        if ( ( (QCheckListItem*)it.current() )->isOn() ) {
+            RemoteDevice device(  it.current()->text(1), it.current()->text(0) );
+            deviceList.append( device );
+        }
     }
+    emit selectedDevices( deviceList );
+}
+
 }

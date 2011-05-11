@@ -179,7 +179,6 @@ void BlueBase::readConfig()
  */
 void BlueBase::writeConfig()
 {
-
     Config cfg( "bluetoothmanager" );
     cfg.setGroup( "bluezsettings" );
 
@@ -192,7 +191,6 @@ void BlueBase::writeConfig()
  */
 void BlueBase::readSavedDevices()
 {
-
     QValueList<RemoteDevice> loadedDevices;
     DeviceHandler handler;
     loadedDevices = handler.load();
@@ -541,7 +539,6 @@ void BlueBase::servicesFound( OBluetoothDevice *dev )
 
 void BlueBase::addSignalStrength()
 {
-
     QListViewItemIterator it( connectionsView );
     for ( ; it.current(); ++it ) {
         m_localDevice->signalStrength( ((BTConnectionItem*)it.current() )->connection().mac() );
@@ -577,7 +574,6 @@ void BlueBase::addConnectedDevices()
  */
 void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList )
 {
-
     QValueList<OpieTooth::ConnectionState>::Iterator it;
     BTConnectionItem * connectionItem;
 

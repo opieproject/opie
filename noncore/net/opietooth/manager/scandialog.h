@@ -72,7 +72,7 @@ class RemoteDevice;
 
     private:
         bool m_search:1;
-        int progressStat;
+        int m_progressStat;
         OBluetooth *m_bluetooth;
         OBluetoothInterface *m_btinterface;
         QStringList m_added;
