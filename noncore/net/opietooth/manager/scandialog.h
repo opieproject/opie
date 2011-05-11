@@ -75,6 +75,7 @@ class RemoteDevice;
         int progressStat;
         OBluetooth *m_bluetooth;
         OBluetoothInterface *m_btinterface;
+        QStringList m_added;
 
         void emitToManager();
         void connectInterface();

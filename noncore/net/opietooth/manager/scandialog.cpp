@@ -109,6 +109,7 @@ namespace OpieTooth {
             stopSearch();
             return;
         }
+        m_added.clear();
         m_search = true;
         progress->setProgress(0);
         progressStat = 0;
@@ -139,8 +140,12 @@ namespace OpieTooth {
     void ScanDialog::deviceFound( const OBluetoothDevice *dev )
     {
         if( m_search ) {
-            QCheckListItem *deviceItem = new QCheckListItem( serviceView, dev->name(),  QCheckListItem::CheckBox );
-            deviceItem->setText( 1, dev->macAddress() );
+            QString macAddress = dev->macAddress();
+            if( !m_added.contains( macAddress ) ) {
+                m_added.append( macAddress );
+                QCheckListItem *deviceItem = new QCheckListItem( serviceView, dev->name(),  QCheckListItem::CheckBox );
+                deviceItem->setText( 1, macAddress );
+            }
         }
     }
 
