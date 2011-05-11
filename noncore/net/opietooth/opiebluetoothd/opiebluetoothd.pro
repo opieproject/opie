@@ -1,7 +1,7 @@
 CONFIG          = qt warn_on
 DESTDIR         = $(OPIEDIR)/bin
-HEADERS         = opiebluetoothd.h bluetoothagent.h bluetoothpindlg.h
-SOURCES         = main.cpp opiebluetoothd.cpp bluetoothagent.cpp bluetoothpindlg.cpp
+HEADERS         = opiebluetoothd.h bluetoothagent.h bluetoothpindlg.h hciattach.h rfkill.h
+SOURCES         = main.cpp opiebluetoothd.cpp bluetoothagent.cpp bluetoothpindlg.cpp hciattach.cpp rfkill.cpp
 INTERFACES      = bluetoothpindlgbase.ui
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include

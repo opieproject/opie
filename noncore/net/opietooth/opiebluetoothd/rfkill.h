@@ -27,56 +27,26 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OBLUETOOTHD_H
-#define OBLUETOOTHD_H
+#ifndef RFKILL_H
+#define RFKILL_H
 
 #include <qobject.h>
 
-// forward declarations
-class OBluetoothAgent;
-class OHciAttach;
-class ORfKill;
-
-namespace Opie {
-namespace Bluez {
-    class OBluetooth;
-    class OBluetoothInterface;
-}
-}
-
-using namespace Opie::Bluez;
-
-#define BT_STATUS_ADAPTER       1
-#define BT_STATUS_ENABLED       2
-#define BT_STATUS_ENABLED_TEMP  4
-#define BT_STATUS_DISCOVERABLE  8
-#define BT_STATUS_RECEIVE       16
-
-class OBluetoothDaemon: public QObject {
+class ORfKill: public QObject {
         Q_OBJECT
     public:
-        OBluetoothDaemon();
-        ~OBluetoothDaemon();
-    protected:
-        void startBluetooth();
-        void stopBluetooth();
-        void sendStatus(bool change);
-        void checkHciAttachRequired();
-        QString getRfKillDevice();
-    protected slots:
-        void slotAdapterChange();
-        void slotMessage(const QCString&, const QByteArray&);
-        void propertyChanged( const QString& );
-        void defaultInterfaceChanged( OBluetoothInterface * );
-    protected:
-        bool m_tempEnabled;
-        bool m_receiveEnabled;
-        OBluetooth *m_bluetooth;
-        OBluetoothInterface *m_btinterface;
-        OBluetoothAgent *m_agent;
-        OHciAttach *m_hciattach;
-        ORfKill *m_rfkill;
-};
+        ORfKill();
+        ~ORfKill();
 
+        bool kill();
+        bool restore();
+
+        bool isAvailable();
+
+    protected:
+        QString findNode();
+
+        QString m_device;
+};
 
 #endif
