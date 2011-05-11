@@ -108,6 +108,9 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     connect(chkShowPasskey, SIGNAL(toggled(bool)), this, SLOT(doShowPasskey(bool)));
     connect(servicesEditButton, SIGNAL(clicked()), this, SLOT(editServices()));
 
+    // FIXME service configuration is completely broken atm
+    servicesEditButton->hide();
+
     // let hold be rightButtonPressed()
     QPEApplication::setStylusOperation( devicesView->viewport(), QPEApplication::RightOnHold);
     QPEApplication::setStylusOperation( connectionsView->viewport(), QPEApplication::RightOnHold);
