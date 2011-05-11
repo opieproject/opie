@@ -11,7 +11,7 @@
 
 extern "C" {
 
-    QPopupMenu* newRfcComPopup( const Opie::Bluez::OBluetoothServices&,  OpieTooth::BTDeviceItem* );
+    QPopupMenu* newRfCommPopup( const Opie::Bluez::OBluetoothServices&,  OpieTooth::BTDeviceItem* );
     QPopupMenu* newObexPushPopup( const Opie::Bluez::OBluetoothServices&,  OpieTooth::BTDeviceItem* );
     QPopupMenu* newPanPopup( const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* );
     QPopupMenu* newDunPopup( const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* );

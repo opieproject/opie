@@ -27,9 +27,9 @@ QPopupMenu* PopupHelper::find( int id, const Opie::Bluez::OBluetoothServices& se
 }
 
 void PopupHelper::init() {
-    insert( 0x1101, newRfcComPopup );   // SerialPort
+    insert( 0x1101, newRfCommPopup );   // SerialPort
     insert( 0x1102, newDunPopup );      // LanAccessUsingPPP
-    insert( 0x1103, newRfcComPopup );   // DialupNetworking
+    insert( 0x1103, newRfCommPopup );   // DialupNetworking
     insert( 0x1105, newObexPushPopup ); // OBEXObjectPush
     insert( 0x1106, newObexFtpPopup );  // OBEXFileTransfer
     insert( 0x1116, newPanPopup );      // NAP

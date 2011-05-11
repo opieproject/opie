@@ -18,11 +18,11 @@ using namespace OpieTooth;
 /*
  * c'tor init the QAction
  */
-RfcCommPopup::RfcCommPopup(const Opie::Bluez::OBluetoothServices& service,
+RfCommPopup::RfCommPopup(const Opie::Bluez::OBluetoothServices& service,
   OpieTooth::BTDeviceItem* item)
         : QPopupMenu(), m_service(service)
 {
-    owarn << "RfcCommPopup c'tor" << oendl;
+    owarn << "RfCommPopup c'tor" << oendl;
 
     QAction* a;
     int port = service.protocolDescriptorList().last().port();
@@ -65,7 +65,7 @@ RfcCommPopup::RfcCommPopup(const Opie::Bluez::OBluetoothServices& service,
 };
 
 
-RfcCommPopup::~RfcCommPopup()
+RfCommPopup::~RfCommPopup()
 {
     /*  delete m_con;
         delete m_dis;
@@ -73,7 +73,7 @@ RfcCommPopup::~RfcCommPopup()
 }
 
 
-void RfcCommPopup::slotConnect()
+void RfCommPopup::slotConnect()
 {
 
     owarn << "connect" << oendl;
@@ -84,7 +84,7 @@ void RfcCommPopup::slotConnect()
 }
 
 
-void RfcCommPopup::slotDisconnect()
+void RfCommPopup::slotDisconnect()
 {
     owarn << "slot disconnected " << procId << oendl;
     if (procId >= 0)
@@ -92,7 +92,7 @@ void RfcCommPopup::slotDisconnect()
 }
 
 
-void RfcCommPopup::slotBind()
+void RfCommPopup::slotBind()
 {
     RfcommAssignDialog rfcommAssign ( this, "RfcommAssignDialog", true, WStyle_ContextHelp  );
 
