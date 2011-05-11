@@ -15,11 +15,11 @@ namespace OpieTooth {
      * slots. After the work is done everything must
      * be deleted.
      */
-    class RfcCommPopup : public QPopupMenu {
+    class RfCommPopup : public QPopupMenu {
         Q_OBJECT
     public:
-        RfcCommPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem*);
-        ~RfcCommPopup();
+        RfCommPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem*);
+        ~RfCommPopup();
 
     private:
         QAction* m_con;

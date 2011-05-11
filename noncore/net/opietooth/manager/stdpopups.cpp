@@ -10,8 +10,8 @@
 
 extern "C" {
 
-    QPopupMenu* newRfcComPopup( const Opie::Bluez::OBluetoothServices& service,  OpieTooth::BTDeviceItem* item ) {
-        return new OpieTooth::RfcCommPopup(service, item); // fix spellin RfComm vs. RfcComm and paramaters
+    QPopupMenu* newRfCommPopup( const Opie::Bluez::OBluetoothServices& service,  OpieTooth::BTDeviceItem* item ) {
+        return new OpieTooth::RfCommPopup(service, item);
     }
     QPopupMenu* newObexPushPopup( const Opie::Bluez::OBluetoothServices& service,  OpieTooth::BTDeviceItem* item) {
         return  new OpieTooth::ObexPopup(service, item);
