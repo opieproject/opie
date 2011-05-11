@@ -10,9 +10,9 @@ using namespace OpieTooth;
 
 // move to lib
 
-
 RfCommConfObject::RfCommConfObject(int number, QString mac, int channel,
-    QString comment, bool bind) {
+    QString comment, bool bind)
+{
     m_number = number;
     m_mac = mac;
     m_channel = channel;
@@ -20,38 +20,43 @@ RfCommConfObject::RfCommConfObject(int number, QString mac, int channel,
     m_doBind = bind;
 }
 
-void RfCommConfObject::setNumber( int number )  {
+RfCommConfObject::~RfCommConfObject()
+{
+}
+
+void RfCommConfObject::setNumber( int number )
+{
     m_number = number;
 }
 
-void RfCommConfObject::setMac( QString mac )  {
+void RfCommConfObject::setMac( QString mac )
+{
     m_mac = mac;
 }
 
-void RfCommConfObject::setChannel( int channel )  {
+void RfCommConfObject::setChannel( int channel )
+{
     m_channel = channel;
 }
 
-void RfCommConfObject::setComment( QString comment )  {
+void RfCommConfObject::setComment( QString comment )
+{
     m_comment = comment;
 }
 
-
-RfCommConfObject::~RfCommConfObject()  {
-}
-
-
-RfCommConfHandler::RfCommConfHandler( const QString & filename ) {
+RfCommConfHandler::RfCommConfHandler( const QString & filename )
+{
     m_filename = filename;
     load();
 }
 
-RfCommConfHandler::~RfCommConfHandler() {
+RfCommConfHandler::~RfCommConfHandler()
+{
 
 }
 
-void RfCommConfHandler::save( QMap<QString, RfCommConfObject*> devices )  {
-
+void RfCommConfHandler::save( QMap<QString, RfCommConfObject*> devices )
+{
 ////    For debugging purposes
 ////    QFile rfCommConf( "/mnt/net/opie/bin/rfcomm.conf" );
     QFile rfCommConf( m_filename );
@@ -82,12 +87,13 @@ void RfCommConfHandler::save( QMap<QString, RfCommConfObject*> devices )  {
     }
 }
 
-
-QMap<QString, RfCommConfObject*> RfCommConfHandler::foundEntries()  {
+QMap<QString, RfCommConfObject*> RfCommConfHandler::foundEntries()
+{
     return m_foundEntries;
 }
 
-void RfCommConfHandler::load()  {
+void RfCommConfHandler::load()
+{
     //Keywords
     QCString k_rfcomm("rfcomm");
     QCString k_device("device ");
@@ -97,7 +103,7 @@ void RfCommConfHandler::load()  {
 
     m_foundEntries.clear();
     QFile rfCommConf(m_filename); //File we read
-    if (rfCommConf.open(IO_ReadOnly))  {
+    if (rfCommConf.open(IO_ReadOnly)) {
 
         QStringList list;
         QTextStream inStream( &rfCommConf );
@@ -110,28 +116,31 @@ void RfCommConfHandler::load()  {
         bool bbind;
         QString number;
 
-        for (QStringList::Iterator line = list.begin();
-            line != list.end(); line++)  {
+        for (QStringList::Iterator line = list.begin(); line != list.end(); line++) {
 
             QString tmpLine = (*line).simplifyWhiteSpace();
 
-            if (tmpLine.startsWith(k_rfcomm))  {
+            if (tmpLine.startsWith(k_rfcomm)) {
                 number = tmpLine.mid( k_rfcomm.length(), 1 );
                 odebug << tmpLine << oendl;
                 odebug << "device " << number << oendl;
-            } else if ( tmpLine.startsWith( "}" ) ) {
+            }
+            else if ( tmpLine.startsWith( "}" ) ) {
                 m_foundEntries.insert(number,
                     new RfCommConfObject(number.toInt(), mac, channel.toInt(),
                     comment, bbind));
-            } else if ( tmpLine.startsWith(k_device) )  {
+            }
+            else if ( tmpLine.startsWith(k_device) ) {
                 mac = tmpLine.mid(k_device.length(),
                     tmpLine.find(';') - k_device.length());
                 odebug << "mac " + mac << oendl;
-            } else if ( tmpLine.startsWith(k_channel) ) {
+            }
+            else if ( tmpLine.startsWith(k_channel) ) {
                 channel = tmpLine.mid(k_channel.length(),
                     tmpLine.find(';') - k_channel.length());
                 odebug << "Channel: " << channel << oendl;
-            } else if ( tmpLine.startsWith(k_comment) ) {
+            }
+            else if ( tmpLine.startsWith(k_comment) ) {
                 comment = tmpLine.mid(k_comment.length(),
                     tmpLine.find(';') - k_comment.length());
                 if (comment.left(1) == "\"")
@@ -139,7 +148,8 @@ void RfCommConfHandler::load()  {
                 if (comment.right(1) == "\"")
                     comment.remove(comment.length() - 1, 1);
                 odebug << "Comment: " + comment << oendl;
-            } else if ( tmpLine.startsWith(k_bind) ) {
+            }
+            else if ( tmpLine.startsWith(k_bind) ) {
                 bind = tmpLine.mid(k_bind.length(),
                     tmpLine.find(';') - k_bind.length());
                 if (bind == "no")

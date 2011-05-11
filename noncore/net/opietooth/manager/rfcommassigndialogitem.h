@@ -8,32 +8,27 @@
 namespace OpieTooth {
 
     class RfcommDialogItem : public RfcommDialogItemBase {
-
-	Q_OBJECT
-
+        Q_OBJECT
     public:
-	RfcommDialogItem( QWidget* parent = 0,  const char* name = 0, WFlags fl = 0 );
-	~RfcommDialogItem();
+        RfcommDialogItem( QWidget* parent = 0,  const char* name = 0, WFlags fl = 0 );
+        ~RfcommDialogItem();
 
-	// number if the rfcomm device
-	int ident();
-	// devices mac address
-	QString mac();
-	int channel();
-	QString comment();
-    bool isBind();
+        // number if the rfcomm device
+        int ident();
+        // devices mac address
+        QString mac();
+        int channel();
+        QString comment();
+        bool isBind();
 
-    void setIdent( int ident );
-	void setMac( const QString& mac  );
-	void setChannel( int channel );
-	void setComment( const QString& comment );
-    void setBind(bool dobind);
+        void setIdent( int ident );
+        void setMac( const QString& mac  );
+        void setChannel( int channel );
+        void setComment( const QString& comment );
+        void setBind(bool dobind);
 
     private:
-
-
-	int m_ident;
-
+        int m_ident;
 };
 
 

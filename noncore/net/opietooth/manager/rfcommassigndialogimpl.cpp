@@ -50,23 +50,18 @@ RfcommAssignDialog::RfcommAssignDialog( QWidget* parent,  const char* name, bool
 
 RfcommAssignDialog::~RfcommAssignDialog()
 {
-    if ( confHandler )
-    {
+    if ( confHandler ) {
         delete confHandler;
     }
 }
 
-
 void RfcommAssignDialog::newDevice(const QString & mac, int channel)
 {
-
-    for ( int i = 0 ; i < m_range; i++ )
-    {
+    for ( int i = 0 ; i < m_range; i++ ) {
         QMap<QString, RfCommConfObject*>::Iterator it;
         it = confHandler->foundEntries().find(QString::number(i));
         // make sure that rfcommX is not assigned yet
-        if ( it == confHandler->foundEntries().end() )
-        {
+        if ( it == confHandler->foundEntries().end() ) {
             QDialog dialog( this,  "newdevice", true, WStyle_ContextHelp );
             dialog.setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7,
                 (QSizePolicy::SizeType)7, sizePolicy().hasHeightForWidth()));
@@ -80,8 +75,7 @@ void RfcommAssignDialog::newDevice(const QString & mac, int channel)
             newDev.setChannel( channel );
             layout.addWidget(&newDev);
 
-            if ( QPEApplication::execDialog( &dialog ) == QDialog::Accepted )
-            {
+            if ( QPEApplication::execDialog( &dialog ) == QDialog::Accepted ) {
                 QMap<int, RfcommDialogItem*>::Iterator it;
                 it = m_itemList.find( i );
                 RfcommDialogItem *rfcomm = it.data();
@@ -102,15 +96,13 @@ void RfcommAssignDialog::newDevice(const QString & mac, int channel)
  */
 void RfcommAssignDialog::loadConfig()
 {
-    for ( int i = 0 ; i < m_range; i++ )
-    {
+    for ( int i = 0 ; i < m_range; i++ ) {
         RfcommDialogItem *rfcomm = new RfcommDialogItem( m_box );
         m_itemList.insert(i, rfcomm);
         rfcomm->setIdent(i);
         QMap<QString, RfCommConfObject*>::Iterator it;
         it = confHandler->foundEntries().find(QString::number(i));
-        if (it != confHandler->foundEntries().end())
-        {
+        if (it != confHandler->foundEntries().end()) {
             rfcomm->setMac(it.data()->mac());
             rfcomm->setChannel(it.data()->channel());
             rfcomm->setComment(it.data()->comment());
@@ -118,7 +110,6 @@ void RfcommAssignDialog::loadConfig()
         }
     }
 }
-
 
 /*
  * Save rfcomm bind configuration
