@@ -166,7 +166,7 @@ void BlueBase::connectInterface( const OBluetoothInterface *intf )
 void BlueBase::readConfig()
 {
 
-    Config cfg( "bluetoothmanager" );
+    Config cfg( "bluetooth-manager" );
     cfg.setGroup( "bluezsettings" );
 
     // FIXME remove m_deviceName
@@ -179,7 +179,7 @@ void BlueBase::readConfig()
  */
 void BlueBase::writeConfig()
 {
-    Config cfg( "bluetoothmanager" );
+    Config cfg( "bluetooth-manager" );
     cfg.setGroup( "bluezsettings" );
 
     //cfg.writeEntry( "name" , m_deviceName );
