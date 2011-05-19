@@ -28,7 +28,7 @@
 
 /* OPIE */
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <qpe/config.h>
 #include <opie2/odebug.h>
 #include <opie2/obluetooth.h>
@@ -116,9 +116,9 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     QPEApplication::setStylusOperation( connectionsView->viewport(), QPEApplication::RightOnHold);
 
     //Load all icons needed
-    m_offPix = Resource::loadPixmap( "opietooth/notconnected" );
-    m_onPix = Resource::loadPixmap( "opietooth/connected" );
-    m_findPix = Resource::loadPixmap( "opietooth/find" );
+    m_offPix = OResource::loadPixmap( "opietooth/notconnected" );
+    m_onPix = OResource::loadPixmap( "opietooth/connected" );
+    m_findPix = OResource::loadPixmap( "opietooth/find" );
 
     QPalette pal = this->palette();
     QColor col = pal.color( QPalette::Active, QColorGroup::Background );
@@ -170,8 +170,6 @@ void BlueBase::readConfig()
     Config cfg( "bluetooth-manager" );
     cfg.setGroup( "bluezsettings" );
 
-    // FIXME remove m_deviceName
-    //m_deviceName = cfg.readEntry( "name" , "No name" ); // name the device should identify with
     m_defaultPasskey = cfg.readEntryCrypt( "passkey" , "" ); // <- hmm, look up how good the trolls did that, maybe too weak
 }
 
@@ -183,7 +181,6 @@ void BlueBase::writeConfig()
     Config cfg( "bluetooth-manager" );
     cfg.setGroup( "bluezsettings" );
 
-    //cfg.writeEntry( "name" , m_deviceName );
     cfg.writeEntryCrypt( "passkey" , m_defaultPasskey );
 }
 
@@ -285,7 +282,6 @@ void BlueBase::updateStatus()
  */
 void BlueBase::applyConfigChanges()
 {
-    //m_deviceName =  deviceNameLine->text();
     OBluetoothInterface *intf = m_bluetooth->defaultInterface();
     if( intf ) {
         intf->setDiscoverable( chkDiscoverable->isChecked() );
@@ -352,12 +348,9 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
     QPopupMenu *menu = new QPopupMenu();
 
     if ( static_cast<BTListItem*>( item )->type() == "device") {
-        // QPopupMenu *groups = new QPopupMenu();
-
         menu->insertItem( static_cast<BTDeviceItem*>( item )->name(), 0 );
         menu->insertSeparator( 1 );
         menu->insertItem( tr( "&Rescan services" ), 2);
-        // menu->insertItem( tr( "&Add to group" ), groups, 3);
         menu->insertItem( tr( "&Delete"),  4);
         int ret = menu->exec( point, 0);
 
@@ -373,13 +366,11 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
                 // services or status asynchronously
                 QString mac = static_cast<BTDeviceItem*>( item )->mac();
                 m_deviceList.remove( mac );
-                m_deviceListSrv.remove( mac );
                 removeDevice( mac );
                 // Delete item and child items
                 delete item;
                 break;
         }
-        // delete groups;
     }
 
     /*
@@ -478,17 +469,7 @@ void BlueBase::servicesFound( OBluetoothDevice *dev )
 {
     odebug << "BlueBase::fill services list for '" << dev->macAddress() << "'"  << oendl;
 
-    BTDeviceItem* deviceItem = 0;
-
-    BTDeviceItem* item = (BTDeviceItem*) devicesView->firstChild();
-    while ( item ) {
-        if( item->mac() == dev->macAddress() ) {
-            deviceItem = item;
-            break;
-        }
-        item = (BTDeviceItem*) static_cast<QListViewItem*>( item )->nextSibling();
-    }
-
+    BTDeviceItem* deviceItem = findDeviceItem( dev->macAddress() );
     if( !deviceItem )
         return;
 
@@ -527,6 +508,17 @@ void BlueBase::servicesFound( OBluetoothDevice *dev )
         s1.setServiceName( tr("no services found") );
         serviceItem = new BTServiceItem( deviceItem, s1 );
     }
+}
+
+BTDeviceItem *BlueBase::findDeviceItem( const QString &bdaddr )
+{
+    BTDeviceItem* item = (BTDeviceItem*) devicesView->firstChild();
+    while ( item ) {
+        if( item->mac() == bdaddr )
+            return item;
+        item = (BTDeviceItem*) static_cast<QListViewItem*>( item )->nextSibling();
+    }
+    return NULL;
 }
 
 void BlueBase::addSignalStrength()

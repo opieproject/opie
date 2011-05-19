@@ -20,7 +20,6 @@ enum dtype { IS_DIR = 0, IS_FILE = 1 };
 namespace OpieTooth {
 
     class FileListItem : public QListViewItem {
-        Q_OBJECT
     public:
         FileListItem(QListView * parent, stat_entry_t* ent, int size = 0);
         FileListItem(QListViewItem * parent, stat_entry_t* ent, int size = 0);
