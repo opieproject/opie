@@ -355,6 +355,13 @@ void OBluetoothInterface::findDeviceCreate( const QString &bdaddr )
         addDevice( bdaddr );
 }
 
+void OBluetoothInterface::insertDevice( OBluetoothDevice *dev )
+{
+    _devices.insert( dev->macAddress(), dev );
+    connect( dev, SIGNAL( propertyChanged( OBluetoothDevice *, const QString& ) ), this, SIGNAL( devicePropertyChanged( OBluetoothDevice *, const QString& ) ) );
+    connect( dev, SIGNAL( servicesFound( OBluetoothDevice * ) ), this, SIGNAL( deviceServicesFound( OBluetoothDevice * ) ) );
+}
+
 void OBluetoothInterface::addDevice( const QString &bdaddr )
 {
     QValueList<QDBusData> parameters;
@@ -397,7 +404,7 @@ void OBluetoothInterface::slotAsyncReply( int callId, const QDBusMessage& reply 
                     }
                     else {
                         OBluetoothDevice *dev = new OBluetoothDevice( this, path );
-                        _devices.insert( dev->macAddress(), dev );
+                        insertDevice( dev );
                         emit deviceFound( dev, true );
                     }
                     break;
@@ -441,7 +448,7 @@ void OBluetoothInterface::slotDBusSignal(const QDBusMessage& message)
         // FIXME update existing device props
         if( !dev ) {
             dev = new OBluetoothDevice( this, devProps );
-            _devices.insert( bdaddr, dev );
+            insertDevice( dev );
         }
         emit deviceDiscovered(dev);
     }
@@ -472,6 +479,8 @@ class OBluetoothDevice::Private
         devProxy->setPath(devPath);
         devProxy->setInterface("org.bluez.Device");
         devProxy->setConnection(connection);
+        QObject::connect(devProxy, SIGNAL(dbusSignal(const QDBusMessage&)),
+                        dev, SLOT(slotDBusSignal(const QDBusMessage&)));
         QObject::connect(devProxy, SIGNAL(asyncReply(int, const QDBusMessage&)),
                         dev, SLOT(slotAsyncReply(int, const QDBusMessage&)));
     }
@@ -623,6 +632,11 @@ const QString &OBluetoothDevice::devicePath() const
     return d->devPath;
 }
 
+bool OBluetoothDevice::isConnected() const
+{
+    return d->devProps["Connected"].value.toBool();
+}
+
 void OBluetoothDevice::setDevicePath( const QString &path )
 {
     if( d->devPath.isEmpty() ) {
@@ -687,6 +701,15 @@ void OBluetoothDevice::slotAsyncReply( int, const QDBusMessage& msg )
             discoverServices(); // just try again
         else
             emit servicesFound( this ); // so we get something back
+    }
+}
+
+void OBluetoothDevice::slotDBusSignal(const QDBusMessage& message)
+{
+    if( message.member() == "PropertyChanged" ) {
+        QString propName = message[0].toString();
+        d->devProps[propName] = message[1].toVariant();
+        emit propertyChanged( this, propName );
     }
 }
 
