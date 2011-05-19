@@ -157,6 +157,7 @@ void BlueBase::connectInterface( const OBluetoothInterface *intf )
 {
     if( intf ) {
         connect( intf,  SIGNAL( propertyChanged(const QString&) ), this, SLOT(interfacePropertyChanged(const QString&) ) );
+        connect( intf, SIGNAL( deviceFound( OBluetoothDevice *, bool ) ), this, SLOT( deviceFound( OBluetoothDevice *, bool ) ) );
     }
 }
 
@@ -317,20 +318,10 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices )
     BTDeviceItem * deviceItem;
     QValueList<RemoteDevice>::ConstIterator it;
 
-    OBluetoothInterface *intf = m_bluetooth->defaultInterface();
-
     for( it = newDevices.begin(); it != newDevices.end() ; ++it ) {
 
         if (find( (*it)  )) // is already inserted
             continue;
-
-        // Initialise the device since it was found by discovery and won't have the
-        // internal proxy set up
-        if( intf ) {
-            OBluetoothDevice *dev = intf->findDevice( (*it).mac() );
-            if( dev )
-                dev->initialise();
-        }
 
         deviceItem = new BTDeviceItem( devicesView , (*it) );
         deviceItem->setPixmap( 1, m_findPix );
@@ -440,11 +431,8 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
 void BlueBase::removeDevice( const QString &bdaddr )
 {
     OBluetoothInterface *intf = m_bluetooth->defaultInterface();
-    if( intf ) {
-        OBluetoothDevice *dev = intf->findDevice( bdaddr );
-        if( dev )
-            intf->removeDevice( dev );
-    }
+    if( intf )
+        intf->removeDevice( bdaddr );
 }
 
 void BlueBase::addServicesToDevices()
@@ -466,17 +454,21 @@ void BlueBase::addServicesToDevice( BTDeviceItem * item )
     odebug << "BlueBase::addServicesToDevice for " << item->mac() << oendl;
     OBluetoothInterface *intf = m_bluetooth->defaultInterface();
     if( intf ) {
-        OBluetoothDevice *dev = intf->findDevice( item->mac() );
-        if( dev ) {
-            disconnect( dev, SIGNAL( servicesFound( OBluetoothDevice * ) ), this, SLOT( servicesFound( OBluetoothDevice * ) ) );
-            connect( dev, SIGNAL( servicesFound( OBluetoothDevice * ) ), this, SLOT( servicesFound( OBluetoothDevice * ) ) );
-            dev->discoverServices();
-        }
-        else
-            odebug << "****** unable to find device for bdaddr " << item->mac() << oendl;
+        m_servicesDevices.append( item->mac() );
+        intf->findDeviceCreate( item->mac() );
     }
 }
 
+void BlueBase::deviceFound( OBluetoothDevice *dev, bool /*newDevice*/ )
+{
+    if( m_servicesDevices.find( dev->macAddress() ) != m_servicesDevices.end() ) {
+        // We asked to find this device in addServicesToDevice
+        m_servicesDevices.remove( dev->macAddress() );
+        disconnect( dev, SIGNAL( servicesFound( OBluetoothDevice * ) ), this, SLOT( servicesFound( OBluetoothDevice * ) ) );
+        connect( dev, SIGNAL( servicesFound( OBluetoothDevice * ) ), this, SLOT( servicesFound( OBluetoothDevice * ) ) );
+        dev->discoverServices();
+    }
+}
 
 /**
  * @param device the mac address of the remote device

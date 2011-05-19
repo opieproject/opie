@@ -66,7 +66,7 @@ class RemoteDevice;
         void stopSearch();
         void startSearch();
         void progressTimer();
-        void deviceFound( const OBluetoothDevice* );
+        void deviceDiscovered( OBluetoothDevice* );
         void propertyChanged( const QString& );
         void defaultInterfaceChanged( OBluetoothInterface * );
 

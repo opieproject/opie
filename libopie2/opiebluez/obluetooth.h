@@ -134,6 +134,9 @@ class OBluetooth : public QObject
 class OBluetoothInterface : public QObject
 {
   Q_OBJECT
+
+  friend class OBluetoothDevice;
+
   public:
     typedef QDict<OBluetoothDevice> DeviceMap;
     typedef QDictIterator<OBluetoothDevice> DeviceIterator;
@@ -195,17 +198,18 @@ class OBluetoothInterface : public QObject
     DeviceIterator neighbourhood();
 
     /**
-     * Find a specific device, if it is available
+     * Find a specific device, if we know about it
      */
     OBluetoothDevice *findDevice(const QString &bdaddr);
     /**
-     * Find a specific device node, if it is available
+     * Find a specific device asynchronously, adding it if we don't already know about it
+     * Emits deviceFound when device is found
      */
-    QDBusObjectPath findDevicePath( const QString &bdaddr, bool create );
+    void findDeviceCreate(const QString &bdaddr);
     /**
      * Remove a device node, including pairing information. 
      */
-    void removeDevice( OBluetoothDevice *dev );
+    void removeDevice( const QString &bdaddr );
 
   public slots:
     /**
@@ -221,15 +225,21 @@ class OBluetoothInterface : public QObject
     /**
      * Triggered when a device is found during discovery.
      */
-    void deviceFound(const OBluetoothDevice *dev);
+    void deviceDiscovered(OBluetoothDevice *dev);
     /**
      * Triggered when a property of the interface changes.
      */
     void propertyChanged(const QString &prop);
+    /**
+     * Triggered when a device is found/added (during discovery, or in response to findDeviceCreate).
+     */
+    void deviceFound( OBluetoothDevice *dev, bool newDevice);
 
   protected slots:
     void slotDBusSignal(const QDBusMessage& message);
-//    void slotAsyncReply(int callID, const QDBusMessage& reply);
+    void slotAsyncReply(int callID, const QDBusMessage& reply);
+  protected:
+    void addDevice( const QString &bdaddr );
   private:
     DeviceMap _devices;
     class Private;
@@ -276,11 +286,9 @@ class OBluetoothDevice : public QObject
      */
     const QString &devicePath() const;
     /**
-     * Initialise the device's internal structures if this device was found
-     * via discovery. Does nothing if called a second time or called on a
-     * device that was manually created (typically through findDevice())
+     * @internal sets the dbus path to the device
      */
-    void initialise();
+    void setDevicePath( const QString &path );
     /**
      * Discover the device's available services
      * servicesFound signal will be emitted when discovery is complete
