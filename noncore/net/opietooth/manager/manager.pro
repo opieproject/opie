@@ -2,7 +2,7 @@ CONFIG          = qt warn_on  quick-app
 HEADERS         = btconnectionitem.h btdeviceitem.h \
                   btserviceitem.h stdpopups.h \ 
 		  popuphelper.h bluebase.h \ 
-		  scandialog.h btlistitem.h filistitem.h \ 
+		  scandialog.h btlistitem.h filelistitem.h \
 		  bticonloader.h \
 		  pppdialog.h dundialog.h pandialog.h \
 		  obexdialog.h obexftpdialog.h \
