@@ -234,12 +234,21 @@ class OBluetoothInterface : public QObject
      * Triggered when a device is found/added (during discovery, or in response to findDeviceCreate).
      */
     void deviceFound( OBluetoothDevice *dev, bool newDevice);
+    /**
+     * Triggered when a device's property changes
+     */
+    void devicePropertyChanged( OBluetoothDevice *dev, const QString &prop );
+    /**
+     * Triggered when a device finishes service discovery
+     */
+    void deviceServicesFound( OBluetoothDevice *dev );
 
   protected slots:
     void slotDBusSignal(const QDBusMessage& message);
     void slotAsyncReply(int callID, const QDBusMessage& reply);
   protected:
     void addDevice( const QString &bdaddr );
+    void insertDevice( OBluetoothDevice *dev );
   private:
     DeviceMap _devices;
     class Private;
@@ -286,6 +295,10 @@ class OBluetoothDevice : public QObject
      */
     const QString &devicePath() const;
     /**
+     * @returns true if connected
+     */
+    bool isConnected() const;
+    /**
      * @internal sets the dbus path to the device
      */
     void setDevicePath( const QString &path );
@@ -310,8 +323,10 @@ class OBluetoothDevice : public QObject
 
   signals:
     void servicesFound( OBluetoothDevice *dev ); 
+    void propertyChanged( OBluetoothDevice *dev, const QString &prop );
 
   protected slots:
+    void slotDBusSignal(const QDBusMessage& message);
     void slotAsyncReply(int, const QDBusMessage&);
 
   private:
