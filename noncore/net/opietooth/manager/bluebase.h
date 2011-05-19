@@ -74,7 +74,7 @@ namespace OpieTooth {
         Manager *m_localDevice;
         OBluetooth *m_bluetooth;
         QMap<QString,BTDeviceItem*> m_deviceList;
-        QMap<QString,BTDeviceItem*> m_deviceListSrv;
+        QStringList m_servicesDevices;
 
         void deviceActive( BTDeviceItem * item );
 
@@ -110,6 +110,7 @@ namespace OpieTooth {
         void showEvent(QShowEvent *);
         void interfacePropertyChanged(const QString&);
         void defaultInterfaceChanged( OBluetoothInterface *);
+        void deviceFound( OBluetoothDevice *dev, bool newDevice );
         void servicesFound( OBluetoothDevice *dev );
 
     };

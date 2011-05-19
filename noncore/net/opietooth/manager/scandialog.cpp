@@ -144,7 +144,7 @@ void ScanDialog::propertyChanged( const QString &prop )
     }
 }
 
-void ScanDialog::deviceFound( const OBluetoothDevice *dev )
+void ScanDialog::deviceDiscovered( OBluetoothDevice *dev )
 {
     if( m_search ) {
         QString macAddress = dev->macAddress();
@@ -177,10 +177,10 @@ void ScanDialog::searchStopped()
 
 void ScanDialog::connectInterface()
 {
-    disconnect( this, SLOT( deviceFound( const OBluetoothDevice* ) ) );
+    disconnect( this, SLOT( deviceDiscovered( OBluetoothDevice* ) ) );
     disconnect( this, SLOT( propertyChanged( const QString& ) ) );
-    connect( m_btinterface, SIGNAL( deviceFound( const OBluetoothDevice* ) ),
-            this, SLOT( deviceFound( const OBluetoothDevice* ) ) ) ;
+    connect( m_btinterface, SIGNAL( deviceDiscovered( OBluetoothDevice* ) ),
+            this, SLOT( deviceDiscovered( OBluetoothDevice* ) ) ) ;
     connect( m_btinterface, SIGNAL( propertyChanged( const QString& ) ),
             this, SLOT( propertyChanged( const QString& ) ) ) ;
 }

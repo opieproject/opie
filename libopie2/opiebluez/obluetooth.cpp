@@ -36,6 +36,7 @@ using namespace Opie::Core;
 
 /* Qt */
 #include <qapplication.h>
+#include <qintdict.h>
 #include <qxml.h>
 
 // Qt DBUS includes
@@ -135,8 +136,6 @@ void OBluetooth::synchronize()
         m_bluezManagerProxy->setConnection(connection);
         QObject::connect(m_bluezManagerProxy, SIGNAL(dbusSignal(const QDBusMessage&)),
                         this, SLOT(slotDBusSignal(const QDBusMessage&)));
-        //QObject::connect(m_bluezManagerProxy, SIGNAL(asyncReply(int, const QDBusMessage&)),
-        //                this, SLOT(slotAsyncReply(int, const QDBusMessage&)));
     }
 
     QDBusMessage reply = m_bluezManagerProxy->sendWithReply("GetProperties", QValueList<QDBusData>());
@@ -191,6 +190,20 @@ void OBluetooth::slotDBusSignal(const QDBusMessage& message)
  * OBluetoothInterface
  *======================================================================================*/
 
+class CallRecord
+{
+public:
+    enum CallMode { MODE_FIND, MODE_CREATE, MODE_FINDREMOVE };
+
+    CallRecord( const QString &bdaddr, CallMode mode ) {
+        this->bdaddr = bdaddr;
+        this->mode = mode;
+    }
+
+    QString bdaddr;
+    CallMode mode;
+};
+
 class OBluetoothInterface::Private
 {
   public:
@@ -206,6 +219,7 @@ class OBluetoothInterface::Private
         reloadInfo();
         interfaceName = path.mid(path.findRev('/')+1);
         adapterPath = path;
+        callRecs.setAutoDelete( true );
     }
 
     ~Private()
@@ -226,6 +240,7 @@ class OBluetoothInterface::Private
     QString interfaceName;
     QString adapterPath;
     bool discovering;
+    QIntDict<CallRecord> callRecs;
 };
 
 OBluetoothInterface::OBluetoothInterface( QObject* parent, const QDBusObjectPath &path )
@@ -235,6 +250,8 @@ OBluetoothInterface::OBluetoothInterface( QObject* parent, const QDBusObjectPath
     setName( d->interfaceName );
     QObject::connect(d->adapterProxy, SIGNAL(dbusSignal(const QDBusMessage&)),
                     this, SLOT(slotDBusSignal(const QDBusMessage&)));
+    QObject::connect(d->adapterProxy, SIGNAL(asyncReply(int, const QDBusMessage&)),
+                    this, SLOT(slotAsyncReply(int, const QDBusMessage&)));
 }
 
 OBluetoothInterface::~OBluetoothInterface()
@@ -326,39 +343,84 @@ void OBluetoothInterface::stopDiscovery()
 
 OBluetoothDevice *OBluetoothInterface::findDevice( const QString &bdaddr )
 {
-    OBluetoothDevice *dev = _devices.find(bdaddr);
-    if( !dev ) {
-        QDBusObjectPath path = findDevicePath( bdaddr, true );
-        if( path.isValid() ) {
-            dev = new OBluetoothDevice( this, path );
-            _devices.insert( dev->macAddress(), dev );
-        }
-    }
-
-    return dev;
+    return _devices.find(bdaddr);
 }
 
-QDBusObjectPath OBluetoothInterface::findDevicePath( const QString &bdaddr, bool create )
+void OBluetoothInterface::findDeviceCreate( const QString &bdaddr )
+{
+    OBluetoothDevice *dev = _devices.find(bdaddr);
+    if( dev )
+        emit deviceFound( dev, false );
+    else
+        addDevice( bdaddr );
+}
+
+void OBluetoothInterface::addDevice( const QString &bdaddr )
 {
     QValueList<QDBusData> parameters;
     parameters << QDBusData::fromString(bdaddr);
-    QDBusMessage reply = d->adapterProxy->sendWithReply("FindDevice", parameters);
-    if (reply.type() == QDBusMessage::ReplyMessage)
-        return reply[0].toObjectPath();
-    else if( create ) {
-        reply = d->adapterProxy->sendWithReply("CreateDevice", parameters);
-        if (reply.type() == QDBusMessage::ReplyMessage)
-            return reply[0].toObjectPath();
-    }
-
-    return QDBusObjectPath();
+    int callId = d->adapterProxy->sendWithAsyncReply("FindDevice", parameters);
+    d->callRecs.insert( callId, new CallRecord( bdaddr, CallRecord::MODE_FIND ) );
 }
 
-void OBluetoothInterface::removeDevice( OBluetoothDevice *dev )
+void OBluetoothInterface::removeDevice( const QString &bdaddr )
 {
+    OBluetoothDevice *dev = findDevice( bdaddr );
+    if( dev )
+        _devices.remove( bdaddr );
     QValueList<QDBusData> parameters;
-    parameters << QDBusData::fromObjectPath(QDBusObjectPath(QCString(dev->devicePath())));
-    d->adapterProxy->send("RemoveDevice", parameters);
+    parameters << QDBusData::fromString(bdaddr);
+    int callId = d->adapterProxy->sendWithAsyncReply("FindDevice", parameters);
+    d->callRecs.insert( callId, new CallRecord( bdaddr, CallRecord::MODE_FINDREMOVE ) );
+}
+
+void OBluetoothInterface::slotAsyncReply( int callId, const QDBusMessage& reply )
+{
+    CallRecord *rec = d->callRecs[callId];
+    if( rec ) {
+        if (reply.type() == QDBusMessage::ReplyMessage) {
+            // Either FindDevice or CreateDevice, both return the path on success
+            QDBusObjectPath path = reply[0].toObjectPath();
+            switch( rec->mode ) {
+                case CallRecord::MODE_FINDREMOVE: {
+                    QValueList<QDBusData> parameters;
+                    parameters << QDBusData::fromObjectPath( path );
+                    d->adapterProxy->send("RemoveDevice", parameters);
+                    break;
+                }
+                case CallRecord::MODE_FIND: // fall through
+                case CallRecord::MODE_CREATE: {
+                    OBluetoothDevice *dev = _devices.find( rec->bdaddr );
+                    if( dev ) {
+                        dev->setDevicePath( path );
+                        emit deviceFound( dev, false );
+                    }
+                    else {
+                        OBluetoothDevice *dev = new OBluetoothDevice( this, path );
+                        _devices.insert( dev->macAddress(), dev );
+                        emit deviceFound( dev, true );
+                    }
+                    break;
+                }
+            }
+        }
+        else {
+            if( rec->mode == CallRecord::MODE_CREATE ) {
+                // Failed to create the device
+                // FIXME raise an error here
+                odebug << "CreateDevice " << rec->bdaddr << " failed: " << reply.error().name() << ": " << reply.error().message() << oendl;
+            }
+            else if( rec->mode == CallRecord::MODE_FIND ) {
+                odebug << "FindDevice " << rec->bdaddr << " failed: " << reply.error().name() << ": " << reply.error().message() << oendl;
+                // Device not found, let's create it (which will try to contact the device)
+                QValueList<QDBusData> parameters;
+                parameters << QDBusData::fromString(rec->bdaddr);
+                int newCallId = d->adapterProxy->sendWithAsyncReply("CreateDevice", parameters);
+                d->callRecs.insert( newCallId, new CallRecord( rec->bdaddr, CallRecord::MODE_CREATE ) );
+            }
+        }
+        d->callRecs.remove( callId );
+    }
 }
 
 void OBluetoothInterface::slotDBusSignal(const QDBusMessage& message)
@@ -372,10 +434,16 @@ void OBluetoothInterface::slotDBusSignal(const QDBusMessage& message)
         emit propertyChanged( propName );
     }
     else if( message.member() == "DeviceFound" ) {
+        // Device discovered
         const QMap<QString,QDBusVariant> devProps = message[1].toStringKeyMap().toVariantMap();
-        OBluetoothDevice *dev = new OBluetoothDevice( this, devProps );
-        _devices.insert( message[0].toString(), dev );
-        emit deviceFound(dev);
+        QString bdaddr = message[0].toString();
+        OBluetoothDevice *dev = _devices.find( bdaddr );
+        // FIXME update existing device props
+        if( !dev ) {
+            dev = new OBluetoothDevice( this, devProps );
+            _devices.insert( bdaddr, dev );
+        }
+        emit deviceDiscovered(dev);
     }
 }
 
@@ -389,6 +457,7 @@ class OBluetoothDevice::Private
     Private()
     {
         devProxy = new QDBusProxy(0);
+        autoDiscover = false;
     }
 
     ~Private()
@@ -510,6 +579,7 @@ class OBluetoothDevice::Private
     QMap<QString,QDBusVariant> devProps;
     QString devPath;
     OBluetoothServices::ValueList services;
+    bool autoDiscover;
 };
 
 OBluetoothDevice::OBluetoothDevice( OBluetoothInterface *parent, const QDBusObjectPath &path )
@@ -553,20 +623,30 @@ const QString &OBluetoothDevice::devicePath() const
     return d->devPath;
 }
 
-void OBluetoothDevice::initialise()
+void OBluetoothDevice::setDevicePath( const QString &path )
 {
     if( d->devPath.isEmpty() ) {
-        d->devPath = ((OBluetoothInterface *)parent())->findDevicePath( d->devProps["Address"].value.toString(), true );
+        d->devPath = path;
         d->setupProxy(this);
+        if( d->autoDiscover ) {
+            d->autoDiscover = false;
+            discoverServices();
+        }
     }
 }
 
 void OBluetoothDevice::discoverServices()
 {
-    d->services.clear();
-    QValueList<QDBusData> parameters;
-    parameters << QDBusData::fromString("");
-    d->devProxy->sendWithAsyncReply("DiscoverServices", parameters);
+    if( d->devPath.isEmpty() ) {
+        d->autoDiscover = true;
+        ((OBluetoothInterface *)parent())->addDevice( macAddress() );
+    }
+    else {
+        d->services.clear();
+        QValueList<QDBusData> parameters;
+        parameters << QDBusData::fromString("");
+        d->devProxy->sendWithAsyncReply("DiscoverServices", parameters);
+    }
 }
 
 OBluetoothServices::ValueList OBluetoothDevice::services()
@@ -599,8 +679,15 @@ void OBluetoothDevice::slotAsyncReply( int, const QDBusMessage& msg )
             if( root )
                 d->parseServices(root);
         }
+        emit servicesFound( this );
     }
-    emit servicesFound( this );
+    else if (msg.type() == QDBusMessage::ErrorMessage) {
+        odebug << "********* serv disc fail: " << msg.error().name() << ": " << msg.error().message() << oendl;
+        if( msg.error().name() == "org.bluez.Error.InProgress" )
+            discoverServices(); // just try again
+        else
+            emit servicesFound( this ); // so we get something back
+    }
 }
 
 QString OBluetoothDevice::deviceClassString(Q_UINT32 dev_class)
