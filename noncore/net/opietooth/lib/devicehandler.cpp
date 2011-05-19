@@ -10,83 +10,54 @@ using namespace Opie::Core;
 
 using namespace OpieTooth;
 
-DeviceHandler::DeviceHandler() {
-
+DeviceHandler::DeviceHandler()
+{
 }
 
-DeviceHandler::~DeviceHandler() {
-
+DeviceHandler::~DeviceHandler()
+{
 }
 
 RemoteDevice::ValueList DeviceHandler::load()
 {
     RemoteDevice::ValueList list;
-    QString path = QDir::homeDirPath() + "/Settings/bluetooth";
-    QDir deviceListSave( path);
 
-    // list of .conf files
-    QStringList devicesFileList = deviceListSave.entryList();
+    Config conf("bluetooth-devices");
+    QStringList grps = conf.allGroups();
 
-
-    // cut .conf of to get the mac and also read the name entry in it.
-    if (!devicesFileList.isEmpty() ) {
-        QString name;
-        QString mac;
+    if (!grps.isEmpty() ) {
         QStringList::Iterator it;
-        for (it = devicesFileList.begin(); it != devicesFileList.end(); ++it ) {
-            if ( (*it) == "." || (*it) == ".." )
-                continue;
-
-            odebug << (*it).latin1() << oendl;
-            Config conf(path + "/"+(*it),  Config::File);
-            conf.setGroup("Info");
-            name = conf.readEntry("name", "Error");
-            mac = conf.readEntry("mac", QString::null);
-            odebug << "MAC: " + mac << oendl;
-            odebug << "NAME: " + name << oendl;
-            if (mac.isEmpty() )
-                continue;
-            RemoteDevice currentDevice( mac , name  );
+        for (it = grps.begin(); it != grps.end(); ++it ) {
+            conf.setGroup(*it);
+            QString name = conf.readEntry("name", "Unknown");
+            RemoteDevice currentDevice( (*it), name  );
             list.append( currentDevice );
         }
     }
     return list;
 }
 
-/*
- * This is some how rude but make sure all old devices
- * are getting deleted
- */
 void DeviceHandler::save( const RemoteDevice::ValueList& list)
 {
-    QCString rm;
-    rm += "rm -rf ";
-    rm += QDir::homeDirPath() + "/Settings/bluetooth";
-    system ( rm.data() );
+    Config conf("bluetooth-devices");
 
-    if (list.isEmpty() ) // no need to create the dir
-        return;
-
-    /**
-     * Create a new dir
-     */
-    rm = "mkdir ";
-    rm += QDir::homeDirPath() + "/Settings/bluetooth";
-    owarn << "out " << rm.data() << "" << oendl;
-    system( rm.data() );
-
+    // Get the current list of groups
+    QStringList grps = conf.allGroups();
+    // Remove all current devices from list
     RemoteDevice::ValueList::ConstIterator it;
-    // write the config
-
     for ( it = list.begin(); it != list.end(); ++it ) {
-        odebug << "/Settings/bluetooth/" + (*it).mac() + ".conf" << oendl;
-
-        Config conf( QDir::homeDirPath() +
-                     "/Settings/bluetooth/" +
-                     (*it).mac() + ".conf", Config::File );
-
-        conf.setGroup( "Info" );
+        grps.remove( (*it).mac() );
+    }
+    // If there are any remaining, they've been deleted, so delete them from the file
+    if (!grps.isEmpty() ) {
+        QStringList::Iterator it2;
+        for (it2 = grps.begin(); it2 != grps.end(); ++it2 ) {
+            conf.removeGroup(*it2);
+        }
+    }
+    // Write out the new values
+    for ( it = list.begin(); it != list.end(); ++it ) {
+        conf.setGroup( (*it).mac() );
         conf.writeEntry( "name", (*it).name() );
-        conf.writeEntry( "mac", (*it).mac() );
     }
 }

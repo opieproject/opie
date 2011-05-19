@@ -24,12 +24,12 @@ namespace OpieTooth {
         ~DeviceHandler();
 
         /**
-         * loads from $HOME/Settings/bluetooth/ *
+         * loads from bluetooth-devices.conf
          */
         RemoteDevice::ValueList load();
 
         /**
-         * Saves to $HOME/Settings/bluetooth
+         * Saves to bluetooth-devices.conf
          */
         void save( const RemoteDevice::ValueList & );
 
