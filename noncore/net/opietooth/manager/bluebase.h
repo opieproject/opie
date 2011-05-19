@@ -69,15 +69,13 @@ namespace OpieTooth {
         void updateStatus();
         void connectInterface(const OBluetoothInterface *);
         void removeDevice( const QString &bdaddr );
+        void updateDeviceActive( BTDeviceItem * item );
         BTDeviceItem *findDeviceItem( const QString &bdaddr );
 
         PopupHelper m_popHelper;
         Manager *m_localDevice;
         OBluetooth *m_bluetooth;
-        QMap<QString,BTDeviceItem*> m_deviceList;
         QStringList m_servicesDevices;
-
-        void deviceActive( BTDeviceItem * item );
 
         QString m_defaultPasskey;
 
@@ -98,7 +96,6 @@ namespace OpieTooth {
         void addConnectedDevices( ConnectionState::ValueList );
         void startServiceActionClicked( QListViewItem *item );
         void startServiceActionHold( QListViewItem *, const QPoint &, int );
-        void deviceActive( const QString& mac, bool connected  );
         void applyConfigChanges();
         void doForward();
         void doShowPasskey(bool);
@@ -109,6 +106,7 @@ namespace OpieTooth {
         void rfcommDialog();
         void showEvent(QShowEvent *);
         void interfacePropertyChanged(const QString&);
+        void devicePropertyChanged(OBluetoothDevice *, const QString&);
         void defaultInterfaceChanged( OBluetoothInterface *);
         void deviceFound( OBluetoothDevice *dev, bool newDevice );
         void servicesFound( OBluetoothDevice *dev );

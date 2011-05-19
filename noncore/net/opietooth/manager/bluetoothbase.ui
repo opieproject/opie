@@ -78,7 +78,7 @@
                         <column>
                             <property>
                                 <name>text</name>
-                                <string>Online</string>
+                                <string>Status</string>
                             </property>
                             <property>
                                 <name>clickable</name>

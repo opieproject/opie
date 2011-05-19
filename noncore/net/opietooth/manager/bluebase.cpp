@@ -98,8 +98,6 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
              this, SLOT( startServiceActionClicked(QListViewItem*) ) );
     connect( devicesView, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
              this,  SLOT(startServiceActionHold(QListViewItem*,const QPoint&,int) ) );
-    connect( m_localDevice, SIGNAL( available(const QString&,bool) ),
-             this, SLOT( deviceActive(const QString&,bool) ) );
     connect( m_localDevice, SIGNAL( connections(ConnectionState::ValueList) ),
              this, SLOT( addConnectedDevices(ConnectionState::ValueList) ) );
     connect( m_localDevice, SIGNAL( signalStrength(const QString&,const QString&) ),
@@ -158,6 +156,8 @@ void BlueBase::connectInterface( const OBluetoothInterface *intf )
     if( intf ) {
         connect( intf,  SIGNAL( propertyChanged(const QString&) ), this, SLOT(interfacePropertyChanged(const QString&) ) );
         connect( intf, SIGNAL( deviceFound( OBluetoothDevice *, bool ) ), this, SLOT( deviceFound( OBluetoothDevice *, bool ) ) );
+        connect( intf, SIGNAL( deviceServicesFound( OBluetoothDevice * ) ), this, SLOT( servicesFound( OBluetoothDevice * ) ) );
+        connect( intf, SIGNAL( devicePropertyChanged( OBluetoothDevice *, const QString& ) ), this, SLOT( devicePropertyChanged( OBluetoothDevice *, const QString& ) ) );
     }
 }
 
@@ -323,7 +323,7 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices )
         deviceItem->setPixmap( 1, m_findPix );
 
         // look if device is avail. atm, async
-        deviceActive( deviceItem );
+        updateDeviceActive( deviceItem );
     }
     addServicesToDevices();
 }
@@ -365,7 +365,6 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
                 // Remove item from device lists in case we are getting
                 // services or status asynchronously
                 QString mac = static_cast<BTDeviceItem*>( item )->mac();
-                m_deviceList.remove( mac );
                 removeDevice( mac );
                 // Delete item and child items
                 delete item;
@@ -455,8 +454,6 @@ void BlueBase::deviceFound( OBluetoothDevice *dev, bool /*newDevice*/ )
     if( m_servicesDevices.find( dev->macAddress() ) != m_servicesDevices.end() ) {
         // We asked to find this device in addServicesToDevice
         m_servicesDevices.remove( dev->macAddress() );
-        disconnect( dev, SIGNAL( servicesFound( OBluetoothDevice * ) ), this, SLOT( servicesFound( OBluetoothDevice * ) ) );
-        connect( dev, SIGNAL( servicesFound( OBluetoothDevice * ) ), this, SLOT( servicesFound( OBluetoothDevice * ) ) );
         dev->discoverServices();
     }
 }
@@ -508,6 +505,9 @@ void BlueBase::servicesFound( OBluetoothDevice *dev )
         s1.setServiceName( tr("no services found") );
         serviceItem = new BTServiceItem( deviceItem, s1 );
     }
+
+    // Update device active status in case it has changed
+    updateDeviceActive( deviceItem );
 }
 
 BTDeviceItem *BlueBase::findDeviceItem( const QString &bdaddr )
@@ -576,10 +576,10 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList )
             if ( found == false ) {
                 connectionItem = new BTConnectionItem( connectionsView, (*it) );
 
-                QMap<QString,BTDeviceItem*>::Iterator item = m_deviceList.find((*it).mac());
-                if( item != m_deviceList.end() && item.data() ) {
-                    connectionItem->setName( m_deviceList.find( (*it).mac()).data()->name() );
-                }
+                // This is somewhat lazy but will shortly be ripped out anyway
+                BTDeviceItem* deviceItem = findDeviceItem( (*it).mac() );
+                if( deviceItem )
+                    connectionItem->setName( deviceItem->name() );
             }
 
         }
@@ -612,41 +612,22 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList )
 
 
 /**
- * Find out if a device can  currently be reached
- * @param device
+ * Show if a device can currently be reached
+ * @param item the device item
  */
-void BlueBase::deviceActive( BTDeviceItem * item )
+void BlueBase::updateDeviceActive( BTDeviceItem * item )
 {
     // search by mac, async, gets a signal back
-    m_deviceList.insert( item->mac(), item );
-    m_localDevice->isAvailable( item->mac() );
-}
-
-
-/**
- * The signal catcher. Set the avail. status on device.
- * @param device - the mac address
- * @param connected - if it is avail. or not
- */
-void BlueBase::deviceActive( const QString& device, bool connected  )
-{
-    odebug << "deviceActive slot" << oendl;
-
-    QMap<QString,BTDeviceItem*>::Iterator it;
-
-    it = m_deviceList.find( device );
-    if( it == m_deviceList.end() )
-        return;
-
-    BTDeviceItem* deviceItem = it.data();
-
-    if ( connected ) {
-        deviceItem->setPixmap( 1, m_onPix );
+    OBluetoothInterface *intf = m_bluetooth->defaultInterface();
+    if( intf ) {
+        OBluetoothDevice *dev = intf->findDevice( item->mac() );
+        if( dev ) {
+            if( dev->isConnected() )
+                item->setPixmap( 1, m_onPix );
+            else
+                item->setPixmap( 1, m_offPix );
+        }
     }
-    else {
-        deviceItem->setPixmap( 1, m_offPix );
-    }
-    m_deviceList.remove( it );
 }
 
 
@@ -795,6 +776,16 @@ void BlueBase::interfacePropertyChanged( const QString &propName )
 {
     if( propName == "Name" ) {
         updateStatus();
+    }
+}
+
+void BlueBase::devicePropertyChanged( OBluetoothDevice *dev, const QString &propName )
+{
+    if( propName == "Connected" ) {
+        BTDeviceItem *deviceItem = findDeviceItem( dev->macAddress() );
+        if( deviceItem ) {
+            updateDeviceActive( deviceItem );
+        }
     }
 }
 
