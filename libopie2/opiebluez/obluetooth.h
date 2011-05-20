@@ -52,8 +52,6 @@ class OBluetoothDevice;
  * @brief A container class for all bluetooth interfaces
  *
  * This class provides access to all available bluetooth interfaces.
- *
- * @author Michael 'Mickey' Lauer <mickey@vanille.de>
  */
 class OBluetooth : public QObject
 {
@@ -124,12 +122,8 @@ class OBluetooth : public QObject
 /**
  * @brief An bluetooth interface wrapper.
  *
- * This class provides a wrapper for a bluetooth HCI device. All the cumbersome details of
- * Linux ioctls are hidden under a convenient high-level interface.
- * @warning Most of the setting methods contained in this class require the appropriate
- * process permissions to work.
- *
- * @author Michael 'Mickey' Lauer <mickey@vanille.de>
+ * This class provides a wrapper for a bluetooth adapter, implemented using BlueZ 4.x's
+ * adapter DBUS API.
  */
 class OBluetoothInterface : public QObject
 {
@@ -144,7 +138,7 @@ class OBluetoothInterface : public QObject
   public:
     /**
      * Constructor. Normally you don't create @ref OBluetoothInterface objects yourself,
-     * but access them via @ref OBluetooth::interface().
+     * but access them via @ref OBluetooth::defaultInterface() or @ref OBluetooth::interface()
      */
     OBluetoothInterface( QObject* parent, const QDBusObjectPath &path );
     /**
@@ -231,7 +225,7 @@ class OBluetoothInterface : public QObject
      */
     void propertyChanged(const QString &prop);
     /**
-     * Triggered when a device is found/added (during discovery, or in response to findDeviceCreate).
+     * Triggered when a device is found/added (in response to findDeviceCreate, or initialising a discovered device).
      */
     void deviceFound( OBluetoothDevice *dev, bool newDevice);
     /**
@@ -266,8 +260,7 @@ class OBluetoothInterface : public QObject
 /**
  * @brief An bluetooth (remote) device abstraction.
  *
- * This class resembles a (remote) bluetooth device.
- * @author Michael 'Mickey' Lauer <mickey@vanille.de>
+ * This class represents a (remote) bluetooth device.
  */
 class OBluetoothDevice : public QObject
 {
