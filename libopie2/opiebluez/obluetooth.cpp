@@ -414,8 +414,8 @@ void OBluetoothInterface::slotAsyncReply( int callId, const QDBusMessage& reply 
         else {
             if( rec->mode == CallRecord::MODE_CREATE ) {
                 // Failed to create the device
-                // FIXME raise an error here
                 odebug << "CreateDevice " << rec->bdaddr << " failed: " << reply.error().name() << ": " << reply.error().message() << oendl;
+                emit deviceNotFound( rec->bdaddr );
             }
             else if( rec->mode == CallRecord::MODE_FIND ) {
                 odebug << "FindDevice " << rec->bdaddr << " failed: " << reply.error().name() << ": " << reply.error().message() << oendl;

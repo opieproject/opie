@@ -235,6 +235,10 @@ class OBluetoothInterface : public QObject
      */
     void deviceFound( OBluetoothDevice *dev, bool newDevice);
     /**
+     * Triggered when a device is not found (in response to findDeviceCreate).
+     */
+    void deviceNotFound( const QString &bdaddr );
+    /**
      * Triggered when a device's property changes
      */
     void devicePropertyChanged( OBluetoothDevice *dev, const QString &prop );
