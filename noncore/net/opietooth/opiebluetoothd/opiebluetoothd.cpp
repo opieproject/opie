@@ -164,6 +164,14 @@ void OBluetoothDaemon::slotMessage( const QCString& msg, const QByteArray& data 
             listing = false;
         }
     }
+    else if ( msg == "pairDevice(QString)" ) {
+        if( m_agent ) {
+            QDataStream stream ( data, IO_ReadOnly );
+            QString bdaddr;
+            stream >> bdaddr;
+            m_agent->pairDevice(bdaddr);
+        }
+    }
 }
 
 void OBluetoothDaemon::startBluetooth()

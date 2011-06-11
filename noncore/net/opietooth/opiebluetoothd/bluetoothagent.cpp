@@ -48,11 +48,15 @@
 
 // Qtopia includes
 #include <qpe/qpeapplication.h>
+#include <qpe/qcopenvelope_qws.h>
 
 // Opie includes
 #include <opie2/odebug.h>
 
-#define AGENT_OBJECT_PATH   "/org/opie/bluetooth/agent"
+// CreatePairedDevice insists on a different agent to the one used
+// for RegisterAgent for none other than internal reasons AFAICT
+#define AGENT_OBJECT_PATH        "/org/opie/bluetooth/agent"
+#define AGENT_OBJECT_PATH_SEND   "/org/opie/bluetooth/agent_send"
 
 OBluetoothAgent::OBluetoothAgent( const QString &adapterPath )
 {
@@ -65,9 +69,15 @@ OBluetoothAgent::OBluetoothAgent( const QString &adapterPath )
     m_bluezAdapterProxy->setInterface("org.bluez.Adapter");
     m_bluezAdapterProxy->setConnection(m_connection);
 
+    QObject::connect(m_bluezAdapterProxy, SIGNAL(asyncReply(int, const QDBusMessage&)),
+                    this, SLOT(slotAsyncReply(int, const QDBusMessage&)));
+
     m_connection.registerObject(AGENT_OBJECT_PATH, this);
+    m_connection.registerObject(AGENT_OBJECT_PATH_SEND, this);
 
     odebug << "Object registered for path " << AGENT_OBJECT_PATH << " on unique name " <<
+           m_connection.uniqueName().local8Bit().data() << oendl;
+    odebug << "Object registered for path " << AGENT_OBJECT_PATH_SEND << " on unique name " <<
            m_connection.uniqueName().local8Bit().data() << oendl;
 
     // Register agent
@@ -134,6 +144,24 @@ bool OBluetoothAgent::handleMethodCall(const QDBusMessage& message)
     return false;
 }
 
+void OBluetoothAgent::slotAsyncReply( int callId, const QDBusMessage& reply )
+{
+    if (reply.type() == QDBusMessage::ReplyMessage) {
+        odebug << "CreatePairedDevice succeeded" << oendl;
+        QCopEnvelope e("QPE/BluetoothBack", "devicePaired()");
+    }
+    else {
+        if( reply.error().name() == "org.bluez.Error.AlreadyExists" ) {
+            odebug << "CreatePairedDevice - already paired" << oendl;
+            QCopEnvelope e("QPE/BluetoothBack", "deviceAlreadyPaired()");
+        }
+        else {
+            odebug << "CreatePairedDevice failed: " << reply.error().name() << ": " << reply.error().message() << oendl;
+            QCopEnvelope e("QPE/BluetoothBack", "devicePairingFailed()");
+        }
+    }
+}
+
 void OBluetoothAgent::pinDialogClosed( bool accepted )
 {
     if( accepted ) {
@@ -157,4 +185,14 @@ void OBluetoothAgent::destroyDialog()
         delete m_authMsg;
         m_authMsg = NULL;
     }
+}
+
+void OBluetoothAgent::pairDevice(const QString &bdaddr)
+{
+    odebug << "pairDevice " << bdaddr << oendl;
+    QValueList<QDBusData> parameters;
+    parameters << QDBusData::fromString(bdaddr);
+    parameters << QDBusData::fromObjectPath(QDBusObjectPath(AGENT_OBJECT_PATH_SEND));
+    parameters << QDBusData::fromString("DisplayYesNo");
+    m_bluezAdapterProxy->sendWithAsyncReply("CreatePairedDevice", parameters);
 }

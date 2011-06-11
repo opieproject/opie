@@ -44,11 +44,13 @@ class OBluetoothAgent: public QObject, public QDBusObjectBase {
     public:
         OBluetoothAgent( const QString &adapterPath );
         ~OBluetoothAgent();
+        void pairDevice(const QString &bdaddr);
     protected:
         virtual bool handleMethodCall(const QDBusMessage& message);
         void destroyDialog();
     protected slots:
         void pinDialogClosed(bool);
+        void slotAsyncReply( int callId, const QDBusMessage& reply );
     private:
         QDBusConnection m_connection;
         QDBusProxy *m_bluezAdapterProxy;
