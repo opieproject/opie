@@ -11,7 +11,6 @@ CONFIG_BARTENDER noncore/apps/opie-bartender	bartender.pro
 CONFIG_BATTERYAPPLET	core/applets/batteryapplet	batteryapplet.pro
 CONFIG_BEND	noncore/unsupported/mail2/bend	bend.pro
 CONFIG_BIGSCREEN_EXAMPLE       unsupported/libopie/big-screen/example      osplitter_mail.pro
-CONFIG_BLUE-PIN	noncore/net/opietooth/blue-pin	blue-pin.pro
 CONFIG_BOUNCE	noncore/games/bounce	bounce.pro
 CONFIG_BRIGHTNESSAPPLET	noncore/applets/brightnessapplet	brightnessapplet.pro
 CONFIG_BUTTON-SETTINGS	core/settings/button	button.pro
