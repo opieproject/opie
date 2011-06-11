@@ -108,6 +108,10 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 
     // FIXME service configuration is completely broken atm
     servicesEditButton->hide();
+    // FIXME there's no use for this at the moment, should probably be removed
+    chkShowPasskey->hide();
+    passkeyLine->hide();
+    passkeyLabel->hide();
 
     // let hold be rightButtonPressed()
     QPEApplication::setStylusOperation( devicesView->viewport(), QPEApplication::RightOnHold);
