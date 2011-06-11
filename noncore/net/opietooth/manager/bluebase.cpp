@@ -263,12 +263,14 @@ void BlueBase::updateStatus()
         bdaddr = intf->macAddress();
         devClass = intf->deviceClass();
         PushButton2->setEnabled(true);
+        configApplyButton->setEnabled(true);
     }
     else {
         publicName = tr("(none)");
         bdaddr = tr("(none)");
         devClass = tr("(none)");
         PushButton2->setEnabled(false);
+        configApplyButton->setEnabled(false);
     }
 
     QString infoString = "<table>";
