@@ -69,6 +69,7 @@ namespace OpieTooth {
         void updateStatus();
         void connectInterface(const OBluetoothInterface *);
         void removeDevice( const QString &bdaddr );
+        void pairDevice( const QString &bdaddr );
         void updateDeviceActive( BTDeviceItem * item );
         BTDeviceItem *findDeviceItem( const QString &bdaddr );
 
