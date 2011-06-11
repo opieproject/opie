@@ -351,20 +351,23 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         menu->insertItem( static_cast<BTDeviceItem*>( item )->name(), 0 );
         menu->insertSeparator( 1 );
         menu->insertItem( tr( "&Rescan services" ), 2);
+        menu->insertItem( tr( "&Pair"),  3);
         menu->insertItem( tr( "&Delete"),  4);
         int ret = menu->exec( point, 0);
 
+        QString mac = static_cast<BTDeviceItem*>( item )->mac();
         switch(ret) {
             case -1:
                 break;
             case 2:
                 addServicesToDevice( static_cast<BTDeviceItem*>( item ) );
                 break;
-
+            case 3:
+                pairDevice( mac );
+                break;
             case 4:
                 // Remove item from device lists in case we are getting
                 // services or status asynchronously
-                QString mac = static_cast<BTDeviceItem*>( item )->mac();
                 removeDevice( mac );
                 // Delete item and child items
                 delete item;
@@ -423,6 +426,12 @@ void BlueBase::removeDevice( const QString &bdaddr )
     OBluetoothInterface *intf = m_bluetooth->defaultInterface();
     if( intf )
         intf->removeDevice( bdaddr );
+}
+
+void BlueBase::pairDevice( const QString &bdaddr )
+{
+    QCopEnvelope e("QPE/Bluetooth", "pairDevice(QString)" );
+    e << bdaddr;
 }
 
 void BlueBase::addServicesToDevices()
