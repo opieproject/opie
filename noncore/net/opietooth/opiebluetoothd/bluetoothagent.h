@@ -31,6 +31,7 @@
 #define BLUETOOTHAGENT_H
 
 #include <qobject.h>
+#include <qmap.h>
 #include <dbus/qdbusconnection.h>
 #include <dbus/qdbusobject.h>
 
@@ -56,6 +57,7 @@ class OBluetoothAgent: public QObject, public QDBusObjectBase {
         QDBusProxy *m_bluezAdapterProxy;
         PinDlg *m_pinDlg;
         QDBusMessage *m_authMsg;
+        QMap<int,QString> m_calls;
 };
 
 
