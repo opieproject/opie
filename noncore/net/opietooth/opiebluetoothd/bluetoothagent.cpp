@@ -84,7 +84,8 @@ OBluetoothAgent::OBluetoothAgent( const QString &adapterPath )
     QValueList<QDBusData> parameters;
     parameters << QDBusData::fromObjectPath(QDBusObjectPath(AGENT_OBJECT_PATH));
     parameters << QDBusData::fromString("DisplayYesNo");
-    m_bluezAdapterProxy->sendWithAsyncReply("RegisterAgent", parameters);
+    int callId = m_bluezAdapterProxy->sendWithAsyncReply("RegisterAgent", parameters);
+    m_calls[callId] = "RegisterAgent";
 }
 
 OBluetoothAgent::~OBluetoothAgent()
@@ -146,20 +147,30 @@ bool OBluetoothAgent::handleMethodCall(const QDBusMessage& message)
 
 void OBluetoothAgent::slotAsyncReply( int callId, const QDBusMessage& reply )
 {
-    if (reply.type() == QDBusMessage::ReplyMessage) {
-        odebug << "CreatePairedDevice succeeded" << oendl;
-        QCopEnvelope e("QPE/BluetoothBack", "devicePaired()");
-    }
-    else {
-        if( reply.error().name() == "org.bluez.Error.AlreadyExists" ) {
-            odebug << "CreatePairedDevice - already paired" << oendl;
-            QCopEnvelope e("QPE/BluetoothBack", "deviceAlreadyPaired()");
+    QString method = m_calls[callId];
+
+    if( method == "CreatePairedDevice" ) {
+        if (reply.type() == QDBusMessage::ReplyMessage) {
+            odebug << "CreatePairedDevice succeeded" << oendl;
+            QCopEnvelope e("QPE/BluetoothBack", "devicePaired()");
         }
         else {
-            odebug << "CreatePairedDevice failed: " << reply.error().name() << ": " << reply.error().message() << oendl;
-            QCopEnvelope e("QPE/BluetoothBack", "devicePairingFailed()");
+            if( reply.error().name() == "org.bluez.Error.AlreadyExists" ) {
+                odebug << "CreatePairedDevice - already paired" << oendl;
+                QCopEnvelope e("QPE/BluetoothBack", "deviceAlreadyPaired()");
+            }
+            else {
+                odebug << "CreatePairedDevice failed: " << reply.error().name() << ": " << reply.error().message() << oendl;
+                QCopEnvelope e("QPE/BluetoothBack", "devicePairingFailed()");
+            }
         }
     }
+    else {
+        if (reply.type() == QDBusMessage::ErrorMessage)
+            odebug << method << " failed: " << reply.error().name() << ": " << reply.error().message() << oendl;
+    }
+
+    m_calls.remove(callId);
 }
 
 void OBluetoothAgent::pinDialogClosed( bool accepted )
@@ -194,5 +205,6 @@ void OBluetoothAgent::pairDevice(const QString &bdaddr)
     parameters << QDBusData::fromString(bdaddr);
     parameters << QDBusData::fromObjectPath(QDBusObjectPath(AGENT_OBJECT_PATH_SEND));
     parameters << QDBusData::fromString("DisplayYesNo");
-    m_bluezAdapterProxy->sendWithAsyncReply("CreatePairedDevice", parameters);
+    int callId = m_bluezAdapterProxy->sendWithAsyncReply("CreatePairedDevice", parameters);
+    m_calls[callId] = "CreatePairedDevice";
 }
