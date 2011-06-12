@@ -138,9 +138,8 @@ void BluezApplet::mousePressEvent( QMouseEvent *)
 
     menu->insertItem( tr("Launch manager"), 2 );
 
-    menu->insertSeparator(6);
-
     if (m_powered) {
+        menu->insertSeparator(6);
         if (m_receive)
             menu->insertItem( tr("Disable receive"), 3 );
         else
