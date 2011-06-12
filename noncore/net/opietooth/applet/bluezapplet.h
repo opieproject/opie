@@ -42,9 +42,6 @@ namespace OpieTooth {
         ~BluezApplet();
         static int position();
 
-    public slots:
-//        void fillList( const QString& device, RemoteDevice::ValueList list );
-
     private:
         void mousePressEvent( QMouseEvent * );
         void paintEvent( QPaintEvent* );
@@ -60,19 +57,14 @@ namespace OpieTooth {
         QPixmap bluezDiscoveryOnPixmap;
         QPixmap bluezReceiveOnPixmap;
         bool m_powered;
-        bool bluezDiscoveryActive;
-        bool bluezReceiveActive;
-        bool bluezReceiveChanged;
-        bool doListDevice; //If I have to list devices after bringing BT up?
-        bool isScanning; //If I'm scanning devices
+        bool m_receive;
         bool m_statusRequested;
         bool m_adapter;
 
-private slots:
+    private slots:
         void slotMessage( const QCString& , const QByteArray& );
     };
-};
-
+}
 
 #endif
 
