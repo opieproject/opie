@@ -11,19 +11,10 @@
 #include <qmessagebox.h>
 #include <opie2/odebug.h>
 #include <opie2/obluetooth.h>
+#include <opie2/obluetoothdevicehandler.h>
 #include <qpe/qpeapplication.h>
 using namespace Opie::Core;
 using namespace Opie::Bluez;
-
-// Qt DBUS includes
-#include <dbus/qdbusdatalist.h>
-#include <dbus/qdbuserror.h>
-#include <dbus/qdbusconnection.h>
-#include <dbus/qdbusmessage.h>
-#include <dbus/qdbusproxy.h>
-#include <dbus/qdbusobjectpath.h>
-#include <dbus/qdbusvariant.h>
-#include <dbus/qdbusdatamap.h>
 
 #include <qtimer.h>
 
@@ -34,7 +25,7 @@ using namespace OpieTooth;
 /*
  * c'tor init the QAction
  */
-HidPopup::HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* item) :
+HidPopup::HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem* item, Opie::Bluez::DeviceHandlerPool *devHandlerPool ) :
     QPopupMenu()  
 {
 
@@ -45,7 +36,6 @@ HidPopup::HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceIt
     QAction* c;
 
     /* connect action */
-
     a = new QAction(); // so it's get deleted
     a->setText( tr("connect") );
     a->addTo( this );
@@ -56,7 +46,18 @@ HidPopup::HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceIt
     c->addTo( this );
     connect( c, SIGNAL( activated() ), this, SLOT( slotDisconnect() ) );
 
-};
+    OBluetooth *bt = OBluetooth::instance();
+    OBluetoothInterface *intf = bt->defaultInterface();
+    OBluetoothDevice *dev = intf->findDevice( m_item->mac() );
+
+    if( dev ) {
+        m_devHandler = (InputDeviceHandler *)devHandlerPool->getHandler( dev, InputDeviceHandler::dbusInterface() );
+    }
+    else {
+        m_devHandler = NULL;
+        odebug << "no device" << oendl;
+    }
+}
 
 HidPopup::~HidPopup()
 {
@@ -64,50 +65,10 @@ HidPopup::~HidPopup()
 
 void HidPopup::slotConnect()
 {
-    odebug << "connect" << oendl;
-    OBluetooth *bt = OBluetooth::instance();
-    OBluetoothInterface *intf = bt->defaultInterface();
-    OBluetoothDevice *dev = intf->findDevice( m_item->mac() );
-    if( dev ) {
-        QDBusConnection connection = QDBusConnection::systemBus();
-        QDBusProxy *devProxy = new QDBusProxy(0);
-        devProxy->setService("org.bluez");
-        devProxy->setPath(dev->devicePath());
-        devProxy->setInterface("org.bluez.Input");
-        devProxy->setConnection(connection);
-        QDBusMessage reply = devProxy->sendWithReply("Connect", QValueList<QDBusData>());
-        if (reply.type() == QDBusMessage::ReplyMessage) {
-            odebug << "********* connect success" << oendl;
-        }
-        else if (reply.type() == QDBusMessage::ErrorMessage)
-            odebug << "********* connect fail: " << reply.error().name() << ": " << reply.error().message() << oendl;
-    }
-    else {
-        odebug << "no device" << oendl;
-    }
+    m_devHandler->connect();
 }
 
 void HidPopup::slotDisconnect()
 {
-    odebug << "disconnect" << oendl;
-    OBluetooth *bt = OBluetooth::instance();
-    OBluetoothInterface *intf = bt->defaultInterface();
-    OBluetoothDevice *dev = intf->findDevice( m_item->mac() );
-    if( dev ) {
-        QDBusConnection connection = QDBusConnection::systemBus();
-        QDBusProxy *devProxy = new QDBusProxy(0);
-        devProxy->setService("org.bluez");
-        devProxy->setPath(dev->devicePath());
-        devProxy->setInterface("org.bluez.Input");
-        devProxy->setConnection(connection);
-        QDBusMessage reply = devProxy->sendWithReply("Disconnect", QValueList<QDBusData>());
-        if (reply.type() == QDBusMessage::ReplyMessage ) {
-            odebug << "********* disconnect success" << oendl;
-        }
-        else if (reply.type() == QDBusMessage::ErrorMessage)
-            odebug << "********* disconnect fail: " << reply.error().name() << ": " << reply.error().message() << oendl;
-    }
-    else {
-        odebug << "no device" << oendl;
-    }
+    m_devHandler->disconnect();
 }

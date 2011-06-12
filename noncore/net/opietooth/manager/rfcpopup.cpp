@@ -7,11 +7,10 @@
 #include <qpe/qpeapplication.h>
 #include <opie2/odebug.h>
 #include <opie2/oprocess.h>
-
+#include <opie2/obluetooth.h>
+#include <opie2/obluetoothdevicehandler.h>
 using namespace Opie::Core;
-
-/* QT */
-#include <qtimer.h>
+using namespace Opie::Bluez;
 
 using namespace OpieTooth;
 
@@ -19,41 +18,28 @@ using namespace OpieTooth;
  * c'tor init the QAction
  */
 RfCommPopup::RfCommPopup(const Opie::Bluez::OBluetoothServices& service,
-  OpieTooth::BTDeviceItem* item)
+  OpieTooth::BTDeviceItem* item, Opie::Bluez::DeviceHandlerPool *devHandlerPool)
         : QPopupMenu(), m_service(service)
 {
     owarn << "RfCommPopup c'tor" << oendl;
 
     QAction* a;
-    int port = service.protocolDescriptorList().last().port();
-    QString mac = item->mac();
-    unsigned int i;
 
-    procId = -1;
     m_item = item;
 
-    for (i = 0; i < sizeof(PPPDialog::conns) / sizeof(Connection); i++) {
-      if (PPPDialog::conns[i].port == port &&
-          PPPDialog::conns[i].btAddr == mac &&
-          PPPDialog::conns[i].proc.isRunning()) {
-          /* disconnect action */
-          a = new QAction(  );
-          a->setText("Disconnect");
-          a->addTo( this );
-          connect( a, SIGNAL( activated() ) ,
-                this, SLOT( slotDisconnect() ) );
-          procId = i;
-          break;
-      }
-    }
-    if (procId == -1) {
-        /* connect action */
-        a = new QAction(  ); // so it's get deleted
-        a->setText("Connect");
-        a->addTo( this );
-        connect( a,  SIGNAL( activated() ),
-                this, SLOT( slotConnect() ) );
-    }
+    /* connect action */
+    a = new QAction(  );
+    a->setText("Connect");
+    a->addTo( this );
+    connect( a,  SIGNAL( activated() ),
+            this, SLOT( slotConnect() ) );
+
+    /* disconnect action */
+    a = new QAction(  );
+    a->setText("Disconnect");
+    a->addTo( this );
+    connect( a, SIGNAL( activated() ) ,
+        this, SLOT( slotDisconnect() ) );
 
     /* Bind action */
     a = new QAction(  );
@@ -62,35 +48,33 @@ RfCommPopup::RfCommPopup(const Opie::Bluez::OBluetoothServices& service,
     connect( a, SIGNAL( activated() ),
              this, SLOT( slotBind() ) );
 
-};
 
+    OBluetooth *bt = OBluetooth::instance();
+    OBluetoothInterface *intf = bt->defaultInterface();
+    OBluetoothDevice *dev = intf->findDevice( m_item->mac() );
+
+    if( dev ) {
+        m_devHandler = (SerialDeviceHandler *)devHandlerPool->getHandler( dev, SerialDeviceHandler::dbusInterface() );
+    }
+    else {
+        m_devHandler = NULL;
+        odebug << "no device" << oendl;
+    }
+}
 
 RfCommPopup::~RfCommPopup()
 {
-    /*  delete m_con;
-        delete m_dis;
-        delete m_bind; */
 }
-
 
 void RfCommPopup::slotConnect()
 {
-
-    owarn << "connect" << oendl;
-
-    PPPDialog pppDialog(m_item->mac(),
-      m_service.protocolDescriptorList().last().port());
-    QPEApplication::execDialog( &pppDialog );
+    m_devHandler->connect( QString::number( m_service.protocolDescriptorList().last().port() ) );
 }
-
 
 void RfCommPopup::slotDisconnect()
 {
-    owarn << "slot disconnected " << procId << oendl;
-    if (procId >= 0)
-        PPPDialog::conns[procId].proc.kill();
+    m_devHandler->disconnect();
 }
-
 
 void RfCommPopup::slotBind()
 {

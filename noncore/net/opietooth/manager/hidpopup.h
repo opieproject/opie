@@ -17,19 +17,26 @@
 #include <opie2/obluetoothservices.h>
 #include "btdeviceitem.h"
 
+namespace Opie {
+namespace Bluez {
+class DeviceHandlerPool;
+class InputDeviceHandler;
+}
+}
+
 namespace OpieTooth {
 
     class HidPopup : public QPopupMenu {
 
-	Q_OBJECT
+        Q_OBJECT
 
     public:
-        HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem*);
+        HidPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem*, Opie::Bluez::DeviceHandlerPool *devHandlerPool );
         ~HidPopup();
 
     private:
-        QAction* m_push;
         OpieTooth::BTDeviceItem *m_item;
+        Opie::Bluez::InputDeviceHandler *m_devHandler;
     private slots:
         void slotConnect();
         void slotDisconnect();

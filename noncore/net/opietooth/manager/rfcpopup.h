@@ -6,6 +6,13 @@
 #include <opie2/obluetoothservices.h>
 #include "btdeviceitem.h"
 
+namespace Opie {
+namespace Bluez {
+class DeviceHandlerPool;
+class SerialDeviceHandler;
+}
+}
+
 namespace OpieTooth {
     /**
      * A simple reference implementation for
@@ -18,16 +25,13 @@ namespace OpieTooth {
     class RfCommPopup : public QPopupMenu {
         Q_OBJECT
     public:
-        RfCommPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem*);
+        RfCommPopup(const Opie::Bluez::OBluetoothServices&, OpieTooth::BTDeviceItem*, Opie::Bluez::DeviceHandlerPool *devHandlerPool );
         ~RfCommPopup();
 
     private:
-        QAction* m_con;
-        QAction* m_dis;
-        QAction* m_bind;
         OpieTooth::BTDeviceItem *m_item;
         Opie::Bluez::OBluetoothServices m_service;
-        int procId; //Connection process number
+        Opie::Bluez::SerialDeviceHandler *m_devHandler;
     private slots:
         void slotConnect();
         void slotDisconnect();

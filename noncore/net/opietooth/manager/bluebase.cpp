@@ -32,6 +32,7 @@
 #include <qpe/config.h>
 #include <opie2/odebug.h>
 #include <opie2/obluetooth.h>
+#include <opie2/obluetoothdevicehandler.h>
 #ifdef Q_WS_QWS
 #include <qpe/qcopenvelope_qws.h>
 #endif
@@ -84,6 +85,9 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     m_loadedDevices = false;
     m_localDevice = new Manager( "hci0" );
     m_bluetooth = OBluetooth::instance();
+
+    m_devHandlerPool = new DeviceHandlerPool();
+    m_popHelper = new PopupHelper( m_devHandlerPool );
 
     OBluetoothInterface *intf = m_bluetooth->defaultInterface();
     connectInterface( intf );
@@ -399,7 +403,7 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         QPopupMenu *popup =0l;
         if ( it != list.end() ) {
             owarn << "Searching id " << it.key() << " " << it.data().latin1() << "" << oendl;
-            popup = m_popHelper.find( it.key(),
+            popup = m_popHelper->find( it.key(),
                                       service->services(),
                                       (BTDeviceItem*)service->parent() );
         }

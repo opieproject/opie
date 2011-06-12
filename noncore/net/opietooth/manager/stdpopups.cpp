@@ -10,25 +10,25 @@
 
 extern "C" {
 
-    QPopupMenu* newRfCommPopup( const Opie::Bluez::OBluetoothServices& service,  OpieTooth::BTDeviceItem* item ) {
-        return new OpieTooth::RfCommPopup(service, item);
+    QPopupMenu* newRfCommPopup( const OBluetoothServices& service,  BTDeviceItem* item, DeviceHandlerPool *devHandlerPool ) {
+        return new OpieTooth::RfCommPopup(service, item, devHandlerPool);
     }
-    QPopupMenu* newObexPushPopup( const Opie::Bluez::OBluetoothServices& service,  OpieTooth::BTDeviceItem* item) {
+    QPopupMenu* newObexPushPopup( const OBluetoothServices& service,  BTDeviceItem* item, DeviceHandlerPool * ) {
         return  new OpieTooth::ObexPopup(service, item);
     }
-    QPopupMenu* newObexFtpPopup( const Opie::Bluez::OBluetoothServices& service,  OpieTooth::BTDeviceItem* item) {
+    QPopupMenu* newObexFtpPopup( const OBluetoothServices& service,  BTDeviceItem* item, DeviceHandlerPool * ) {
         return  new OpieTooth::ObexFtpPopup(service, item);
     }
-    QPopupMenu* newPanPopup( const Opie::Bluez::OBluetoothServices&,  OpieTooth::BTDeviceItem* item ) {
+    QPopupMenu* newPanPopup( const OBluetoothServices&,  BTDeviceItem* item, DeviceHandlerPool * ) {
         return new OpieTooth::PanPopup( item );
     }
 
-    QPopupMenu* newDunPopup( const Opie::Bluez::OBluetoothServices& service,  OpieTooth::BTDeviceItem* item ) {
+    QPopupMenu* newDunPopup( const OBluetoothServices& service,  BTDeviceItem* item, DeviceHandlerPool * ) {
         return new OpieTooth::DunPopup(service, item);
     }
 
-    QPopupMenu* newHidPopup( const Opie::Bluez::OBluetoothServices& service,  OpieTooth::BTDeviceItem* item ) {
-        return new OpieTooth::HidPopup(service, item);
+    QPopupMenu* newHidPopup( const OBluetoothServices& service,  BTDeviceItem* item, DeviceHandlerPool *devHandlerPool ) {
+        return new OpieTooth::HidPopup(service, item, devHandlerPool);
     }
 }
 
