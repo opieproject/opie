@@ -36,6 +36,7 @@ namespace Bluez {
     class OBluetooth;
     class OBluetoothInterface;
     class OBluetoothDevice;
+    class DeviceHandlerPool;
 }
 }
 
@@ -73,7 +74,8 @@ namespace OpieTooth {
         void updateDeviceActive( BTDeviceItem * item );
         BTDeviceItem *findDeviceItem( const QString &bdaddr );
 
-        PopupHelper m_popHelper;
+        DeviceHandlerPool *m_devHandlerPool;
+        PopupHelper *m_popHelper;
         Manager *m_localDevice;
         OBluetooth *m_bluetooth;
         QStringList m_servicesDevices;

@@ -2,9 +2,14 @@
 #include "stdpopups.h"
 #include "popuphelper.h"
 
-using namespace OpieTooth;
+#include <opie2/obluetoothdevicehandler.h>
 
-PopupHelper::PopupHelper() {
+using namespace OpieTooth;
+using namespace Opie::Bluez;
+
+PopupHelper::PopupHelper( DeviceHandlerPool *devHandlerPool )
+{
+    m_devHandlerPool = devHandlerPool;
     init();
 }
 
@@ -21,7 +26,7 @@ QPopupMenu* PopupHelper::find( int id, const Opie::Bluez::OBluetoothServices& se
     if ( it != m_map.end() ) {
         //owarn << "found" << oendl;
         popupFactory fact = it.data();
-        return (*fact)(ser, item);
+        return (*fact)(ser, item, m_devHandlerPool);
     }
     return 0l;
 }
