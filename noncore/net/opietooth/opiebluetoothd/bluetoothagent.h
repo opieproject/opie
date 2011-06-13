@@ -39,6 +39,7 @@
 class QDBusMessage;
 class QDBusProxy;
 class PinDlg;
+class QMessageBox;
 
 class OBluetoothAgent: public QObject, public QDBusObjectBase {
         Q_OBJECT
@@ -56,7 +57,8 @@ class OBluetoothAgent: public QObject, public QDBusObjectBase {
         QDBusConnection m_connection;
         QDBusProxy *m_bluezAdapterProxy;
         PinDlg *m_pinDlg;
-        QDBusMessage *m_authMsg;
+        QDBusMessage *m_pinMsg;
+        QMessageBox *m_msgbox;
         QMap<int,QString> m_calls;
 };
 
