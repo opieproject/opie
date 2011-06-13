@@ -58,9 +58,41 @@
 #define AGENT_OBJECT_PATH        "/org/opie/bluetooth/agent"
 #define AGENT_OBJECT_PATH_SEND   "/org/opie/bluetooth/agent_send"
 
+// QMessageBox subclass that allows us to handle authorisation asynchronously
+class AuthMessageBox: public QMessageBox {
+public:
+    AuthMessageBox( const QDBusMessage &authMsg )
+        : QMessageBox( tr("Bluetooth"),
+            tr("Authorize connection: %1?").arg(authMsg[1].toString()), // FIXME display device name
+            QMessageBox::Information,
+            QMessageBox::Yes | QMessageBox::Default,
+            QMessageBox::No, 0 ),
+        m_authMsg( authMsg )
+    {
+    };
+
+    void done( int ret ) {
+        QMessageBox::done(ret);
+        QDBusConnection connection = QDBusConnection::systemBus();
+        if( ret == QMessageBox::Yes ) {
+            QDBusMessage reply = QDBusMessage::methodReply(m_authMsg);
+            connection.send(reply);
+        }
+        else {
+            QDBusError error("org.bluez.Error.Rejected", tr("User rejected authorization"));
+            QDBusMessage reply = QDBusMessage::methodError(m_authMsg, error);
+            connection.send(reply);
+        }
+    };
+private:
+    QDBusMessage m_authMsg;
+};
+
+
 OBluetoothAgent::OBluetoothAgent( const QString &adapterPath )
 {
     m_pinDlg = NULL;
+    m_msgbox = NULL;
 
     m_connection = QDBusConnection::systemBus();
     m_bluezAdapterProxy = new QDBusProxy(this);
@@ -105,7 +137,7 @@ bool OBluetoothAgent::handleMethodCall(const QDBusMessage& message)
     if (message.member() == "RequestPinCode") {
         destroyDialog();
         m_pinDlg = new PinDlg(0, "pindlg", FALSE);
-        m_authMsg = new QDBusMessage(message);
+        m_pinMsg = new QDBusMessage(message);
         connect( m_pinDlg, SIGNAL(dialogClosed(bool)), this, SLOT(pinDialogClosed(bool)) );
 
         // Get the device's name and address
@@ -134,6 +166,12 @@ bool OBluetoothAgent::handleMethodCall(const QDBusMessage& message)
         m_pinDlg->setRemoteName(name);
         m_pinDlg->setBdAddr(bdaddr);
         m_pinDlg->showMaximized();
+        return true;
+    }
+    else if (message.member() == "Authorize") {
+        odebug << "Authorize " << message[1].toObjectPath() << oendl;
+        m_msgbox = new AuthMessageBox( message );
+        m_msgbox->show();
         return true;
     }
     else if (message.member() == "Cancel") {
@@ -176,13 +214,13 @@ void OBluetoothAgent::slotAsyncReply( int callId, const QDBusMessage& reply )
 void OBluetoothAgent::pinDialogClosed( bool accepted )
 {
     if( accepted ) {
-        QDBusMessage reply = QDBusMessage::methodReply(*m_authMsg);
+        QDBusMessage reply = QDBusMessage::methodReply(*m_pinMsg);
         reply << QDBusData::fromString(m_pinDlg->pin());
         m_connection.send(reply);
     }
     else {
         QDBusError error("org.bluez.Error.Canceled", tr("User cancelled"));
-        QDBusMessage reply = QDBusMessage::methodError(*m_authMsg, error);
+        QDBusMessage reply = QDBusMessage::methodError(*m_pinMsg, error);
         m_connection.send(reply);
     }
     destroyDialog();
@@ -193,8 +231,8 @@ void OBluetoothAgent::destroyDialog()
     if( m_pinDlg ) {
         delete m_pinDlg;
         m_pinDlg = NULL;
-        delete m_authMsg;
-        m_authMsg = NULL;
+        delete m_pinMsg;
+        m_pinMsg = NULL;
     }
 }
 
