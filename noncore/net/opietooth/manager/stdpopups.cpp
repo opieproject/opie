@@ -19,8 +19,8 @@ extern "C" {
     QPopupMenu* newObexFtpPopup( const OBluetoothServices& service,  BTDeviceItem* item, DeviceHandlerPool * ) {
         return  new OpieTooth::ObexFtpPopup(service, item);
     }
-    QPopupMenu* newPanPopup( const OBluetoothServices&,  BTDeviceItem* item, DeviceHandlerPool * ) {
-        return new OpieTooth::PanPopup( item );
+    QPopupMenu* newPanPopup( const OBluetoothServices& service,  BTDeviceItem* item, DeviceHandlerPool *devHandlerPool ) {
+        return new OpieTooth::PanPopup(service, item, devHandlerPool);
     }
 
     QPopupMenu* newDunPopup( const OBluetoothServices& service,  BTDeviceItem* item, DeviceHandlerPool * ) {
