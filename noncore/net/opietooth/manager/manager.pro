@@ -4,7 +4,7 @@ HEADERS         = btconnectionitem.h btdeviceitem.h \
 		  popuphelper.h bluebase.h \ 
 		  scandialog.h btlistitem.h filelistitem.h \
 		  bticonloader.h \
-		  pppdialog.h dundialog.h pandialog.h \
+		  pppdialog.h dundialog.h \
 		  obexdialog.h obexftpdialog.h \
 		  rfcommassigndialogimpl.h rfcommassigndialogitem.h \
 		  rfcpopup.h obexpopup.h obexftpopup.h \
@@ -16,7 +16,7 @@ SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \
 		  popuphelper.cpp main.cpp \
 		  bluebase.cpp scandialog.cpp \ 
 		  btlistitem.cpp \
-		  bticonloader.cpp pppdialog.cpp dundialog.cpp pandialog.cpp \
+		  bticonloader.cpp pppdialog.cpp dundialog.cpp \
 		  rfcommassigndialogimpl.cpp rfcommassigndialogitem.cpp \
 		  obexdialog.cpp \
 		  rfcpopup.cpp obexpopup.cpp obexftpopup.cpp obexftpdialog.cpp \

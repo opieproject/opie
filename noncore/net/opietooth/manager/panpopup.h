@@ -14,25 +14,29 @@
 #include <qpopupmenu.h>
 #include <qaction.h>
 
-#include <startpanconnection.h>
+#include <opie2/obluetoothservices.h>
 
 #include "btdeviceitem.h"
 
+namespace Opie {
+namespace Bluez {
+class DeviceHandlerPool;
+class NetworkDeviceHandler;
+}
+}
 
 namespace OpieTooth {
 
     class PanPopup : public QPopupMenu {
-
-	Q_OBJECT
-
+        Q_OBJECT
     public:
-        PanPopup( OpieTooth::BTDeviceItem* );
+        PanPopup( const Opie::Bluez::OBluetoothServices& service, OpieTooth::BTDeviceItem*, 
+                  Opie::Bluez::DeviceHandlerPool *devHandlerPool );
         ~PanPopup();
-
     private:
-        QAction* m_push;
-	OpieTooth::StartPanConnection* m_panconnection;
-	OpieTooth::BTDeviceItem *m_item;
+        OpieTooth::BTDeviceItem *m_item;
+        Opie::Bluez::OBluetoothServices m_service;
+        Opie::Bluez::NetworkDeviceHandler *m_devHandler;
     private slots:
         void slotConnect();
         void slotDisconnect();
