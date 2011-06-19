@@ -38,6 +38,7 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/oresource.h>
+#include <opie2/onotifypopup.h>
 #include <qtopia/config.h>
 #include <qtopia/qpeapplication.h>
 #ifdef QWS
@@ -45,9 +46,9 @@
 #endif
 #include <qtopia/global.h>
 using namespace Opie::Core;
+using namespace Opie::Ui;
 
 /* QT */
-#include <qlabel.h>
 #include <qlayout.h>
 #include <qtimer.h>
 #ifdef QWS
@@ -197,7 +198,6 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
 
     stack = new QWidgetStack( this );
     stack->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum ) );
-    label = new QLabel(stack);
 
     runningAppBar = new RunningAppBar(stack);
     stack->raiseWidget(runningAppBar);
@@ -205,6 +205,7 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
     waitIcon = new Wait( this );
     (void) new AppIcons( this );
 
+    m_notifyPopup = NULL;
     sysTray = new SysTray( this );
 
     /* ### FIXME plugin loader and safe mode */
@@ -240,11 +241,13 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
 void TaskBar::setStatusMessage( const QString &text )
 {
     if ( !text.isEmpty() ) {
-        label->setText( text );
-        stack->raiseWidget( label );
-        if ( sysTray && ( label->fontMetrics().width( text ) > label->width() ) )
-            sysTray->hide();
-        clearer->start( 3000, TRUE );
+        delete m_notifyPopup;
+        m_notifyPopup = new ONotifyPopup();
+        m_notifyPopup->setText( text );
+        connect( m_notifyPopup, SIGNAL( clicked() ), m_notifyPopup, SLOT( hide() ) );
+        m_notifyPopup->setPointTo( height() / 2, y() + (height() / 2) );
+        m_notifyPopup->show();
+        clearer->start( 2000 + (text.length() * 50), TRUE );
     }
     else {
         clearStatusBar();
@@ -253,11 +256,8 @@ void TaskBar::setStatusMessage( const QString &text )
 
 void TaskBar::clearStatusBar()
 {
-    label->clear();
-    stack->raiseWidget(runningAppBar);
-    if ( sysTray )
-        sysTray->show();
-    //     stack->raiseWidget( mru );
+    delete m_notifyPopup;
+    m_notifyPopup = NULL;
 }
 
 void TaskBar::startWait()
