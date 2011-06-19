@@ -57,12 +57,10 @@ Wait::~Wait()
     delete m_centralWait;
 }
 
-
 Wait *Wait::getWaitObject()
 {
     return lastWaitObject;
 }
-
 
 void Wait::setWaiting( bool w )
 {
@@ -76,17 +74,15 @@ void Wait::setWaiting( bool w )
             m_centralWait->show();
         else
             show();
-    }else{
+    }
+    else {
         m_centralWait->hide();
-	hide();
+        hide();
     }
 }
-
 
 void Wait::paintEvent( QPaintEvent * )
 {
     QPainter p( this );
     p.drawPixmap( 0, 0, pm );
 }
-
-

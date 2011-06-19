@@ -77,10 +77,10 @@ class SafeMode : public QWidget
 public:
     SafeMode( QWidget *parent ) : QWidget( parent ), menu(0)
     {
-	message = tr("Safe Mode");
-	QFont f( font() );
-	f.setWeight( QFont::Bold );
-	setFont( f );
+        message = tr("Safe Mode");
+        QFont f( font() );
+        f.setWeight( QFont::Bold );
+        setFont( f );
     }
 
     void mousePressEvent( QMouseEvent *);
@@ -98,11 +98,11 @@ private:
 void SafeMode::mousePressEvent( QMouseEvent *)
 {
     if ( !menu ) {
-	menu = new QPopupMenu(this);
-	menu->insertItem( tr("Plugin Manager..."), 0 );
-	menu->insertItem( tr("Restart Qtopia"), 1 );
-	menu->insertItem( tr("Help..."), 2 );
-	connect(menu, SIGNAL(activated(int)), this, SLOT(action(int)));
+        menu = new QPopupMenu(this);
+        menu->insertItem( tr("Plugin Manager..."), 0 );
+        menu->insertItem( tr("Restart Qtopia"), 1 );
+        menu->insertItem( tr("Help..."), 2 );
+        connect(menu, SIGNAL(activated(int)), this, SLOT(action(int)));
     }
     QPoint curPos = mapToGlobal( QPoint(0,0) );
     QSize sh = menu->sizeHint();
@@ -112,15 +112,15 @@ void SafeMode::mousePressEvent( QMouseEvent *)
 void SafeMode::action(int i)
 {
     switch (i) {
-	case 0:
-	    Global::execute( "pluginmanager" );
-	    break;
-	case 1:
-	    Global::restart();
-	    break;
-	case 2:
-	    Global::execute( "helpbrowser", "safemode.html" );
-	    break;
+        case 0:
+            Global::execute( "pluginmanager" );
+            break;
+        case 1:
+            Global::restart();
+            break;
+        case 2:
+            Global::execute( "helpbrowser", "safemode.html" );
+            break;
     }
 }
 
@@ -143,32 +143,32 @@ class LockKeyState : public QWidget
 {
 public:
     LockKeyState( QWidget *parent ) :
-	QWidget(parent),
-	nl(initNumLock()), cl(FALSE)
+        QWidget(parent),
+        nl(initNumLock()), cl(FALSE)
     {
         nl_pm = OResource::loadPixmap("numlock", OResource::NoScale);
         cl_pm = OResource::loadPixmap("capslock", OResource::NoScale);
     }
     QSize sizeHint() const
     {
-	return QSize(nl_pm.width()+2,nl_pm.width()+nl_pm.height()+1);
+        return QSize(nl_pm.width()+2,nl_pm.width()+nl_pm.height()+1);
     }
     void toggleNumLockState()
     {
-	nl = !nl; repaint();
+        nl = !nl; repaint();
     }
     void toggleCapsLockState()
     {
-	cl = !cl; repaint();
+        cl = !cl; repaint();
     }
     void paintEvent( QPaintEvent * )
     {
-	int y = (height()-sizeHint().height())/2;
-	QPainter p(this);
-	if ( nl )
-	    p.drawPixmap(1,y,nl_pm);
-	if ( cl )
-	    p.drawPixmap(1,y+nl_pm.height()+1,cl_pm);
+        int y = (height()-sizeHint().height())/2;
+        QPainter p(this);
+        if ( nl )
+            p.drawPixmap(1,y,nl_pm);
+        if ( cl )
+            p.drawPixmap(1,y+nl_pm.height()+1,cl_pm);
     }
 private:
     QPixmap nl_pm, cl_pm;
@@ -189,11 +189,11 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
 
     sm = new StartMenu( this );
     connect( sm, SIGNAL(tabSelected(const QString&)), this,
-	    SIGNAL(tabSelected(const QString&)) );
+             SIGNAL(tabSelected(const QString&)) );
 
     inputMethods = new InputMethods( this );
     connect( inputMethods, SIGNAL(inputToggled(bool)),
-	     this, SLOT(calcMaxWindowRect()) );
+             this, SLOT(calcMaxWindowRect()) );
 
     stack = new QWidgetStack( this );
     stack->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum ) );
@@ -210,7 +210,7 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
     /* ### FIXME plugin loader and safe mode */
 #if 0
     if (PluginLoader::inSafeMode())
-	(void)new SafeMode( this );
+        (void)new SafeMode( this );
 #endif
 
     // ## make customizable in some way?
@@ -224,7 +224,7 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
 #if !defined(QT_NO_COP)
     QCopChannel *channel = new QCopChannel( "QPE/TaskBar", this );
     connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
-	this, SLOT(receive(const QCString&,const QByteArray&)) );
+        this, SLOT(receive(const QCString&,const QByteArray&)) );
 #endif
 #endif
     waitTimer = new QTimer( this );
@@ -240,13 +240,14 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
 void TaskBar::setStatusMessage( const QString &text )
 {
     if ( !text.isEmpty() ) {
-	label->setText( text );
-	stack->raiseWidget( label );
-	if ( sysTray && ( label->fontMetrics().width( text ) > label->width() ) )
-	    sysTray->hide();
-	clearer->start( 3000, TRUE );
-    } else {
-	clearStatusBar();
+        label->setText( text );
+        stack->raiseWidget( label );
+        if ( sysTray && ( label->fontMetrics().width( text ) > label->width() ) )
+            sysTray->hide();
+        clearer->start( 3000, TRUE );
+    }
+    else {
+        clearStatusBar();
     }
 }
 
@@ -255,7 +256,7 @@ void TaskBar::clearStatusBar()
     label->clear();
     stack->raiseWidget(runningAppBar);
     if ( sysTray )
-	sysTray->show();
+        sysTray->show();
     //     stack->raiseWidget( mru );
 }
 
@@ -304,8 +305,7 @@ void TaskBar::styleChange( QStyle &s )
 
 void TaskBar::calcMaxWindowRect()
 {
-    if ( resizeRunningApp )
-    {
+    if ( resizeRunningApp ) {
     #if defined(Q_WS_QWS)
         QRect wr;
         int displayWidth  = qApp->desktop()->width();
@@ -331,56 +331,66 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
         QString text;
         stream >> text;
         setStatusMessage( text );
-    } else if ( msg == "hideInputMethod()" ) {
-	inputMethods->hideInputMethod();
-    } else if ( msg == "showInputMethod()" ) {
-	inputMethods->showInputMethod();
-    } else if ( msg == "showInputMethod(QString)" ) {
+    }
+    else if ( msg == "hideInputMethod()" ) {
+        inputMethods->hideInputMethod();
+    }
+    else if ( msg == "showInputMethod()" ) {
+        inputMethods->showInputMethod();
+    }
+    else if ( msg == "showInputMethod(QString)" ) {
         QString name;
         stream >> name;
-	inputMethods->showInputMethod(name);
-    } else if ( msg == "reloadInputMethods()" ) {
+        inputMethods->showInputMethod(name);
+    }
+    else if ( msg == "reloadInputMethods()" ) {
         readConfig();
         inputMethods->readConfig();
-	inputMethods->loadInputMethods();
-    } else if ( msg == "reloadApplets()" ) {
-	sysTray->clearApplets();
-	sm->createMenu();
-	sysTray->addApplets();
-    }else if ( msg == "toggleMenu()" ) {
+        inputMethods->loadInputMethods();
+    }
+    else if ( msg == "reloadApplets()" ) {
+        sysTray->clearApplets();
+        sm->createMenu();
+        sysTray->addApplets();
+    }
+    else if ( msg == "toggleMenu()" ) {
         if ( sm-> launchMenu-> isVisible() )
             sm-> launch();
         else
             QCopEnvelope e( "QPE/System", "toggleApplicationMenu()" );
-    }else if ( msg == "toggleStartMenu()" )
+    }
+    else if ( msg == "toggleStartMenu()" )
         sm->launch();
 }
 
 void TaskBar::setApplicationState( const QString &name, ServerInterface::ApplicationState state )
 {
     if ( state == ServerInterface::Launching )
-	runningAppBar->applicationLaunched( name );
+        runningAppBar->applicationLaunched( name );
     else if ( state == ServerInterface::Terminated )
-	runningAppBar->applicationTerminated( name );
+        runningAppBar->applicationTerminated( name );
 }
 
 void TaskBar::toggleNumLockState()
 {
-    if ( lockState ) lockState->toggleNumLockState();
+    if ( lockState )
+        lockState->toggleNumLockState();
 }
 
 void TaskBar::toggleCapsLockState()
 {
-    if ( lockState ) lockState->toggleCapsLockState();
+    if ( lockState )
+        lockState->toggleCapsLockState();
 }
 
 void TaskBar::toggleSymbolInput()
 {
     QString unicodeInput = qApp->translate( "InputMethods", "Unicode" );
     if ( inputMethods->currentShown() == unicodeInput ) {
-	inputMethods->hideInputMethod();
-    } else {
-	inputMethods->showInputMethod( unicodeInput );
+        inputMethods->hideInputMethod();
+    }
+    else {
+        inputMethods->showInputMethod( unicodeInput );
     }
 }
 

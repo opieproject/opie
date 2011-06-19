@@ -39,7 +39,7 @@ RunningAppBar::RunningAppBar(QWidget* parent)
 {
     QCopChannel* channel = new QCopChannel( "QPE/System", this );
     connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
-	     this, SLOT(received(const QCString&,const QByteArray&)) );
+             this, SLOT(received(const QCString&,const QByteArray&)) );
 
     spacing = AppLnk::smallIconSize()+3;
 }
@@ -53,16 +53,16 @@ void RunningAppBar::received(const QCString& msg, const QByteArray& data) {
     // channel we need to watch for the showing/hiding events and update according.
     QDataStream stream( data, IO_ReadOnly );
     if ( msg == "fastAppShowing(QString)") {
-	QString appName;
-	stream >> appName;
+        QString appName;
+        stream >> appName;
     //    odebug << "fastAppShowing " << appName.data() << "" << oendl;
-	const AppLnk* f = ServerInterface::appLnks().findExec(appName);
-	if ( f ) addTask(*f);
+        const AppLnk* f = ServerInterface::appLnks().findExec(appName);
+        if ( f ) addTask(*f);
     } else if ( msg == "fastAppHiding(QString)") {
-	QString appName;
-	stream >> appName;
-	const AppLnk* f = ServerInterface::appLnks().findExec(appName);
-	if ( f ) removeTask(*f);
+        QString appName;
+        stream >> appName;
+        const AppLnk* f = ServerInterface::appLnks().findExec(appName);
+        if ( f ) removeTask(*f);
     }
 }
 
@@ -89,38 +89,39 @@ void RunningAppBar::removeTask(const AppLnk& appLnk) {
 
 void RunningAppBar::mousePressEvent(QMouseEvent *e)
 {
-  // Find out if the user is clicking on an app icon...
-  // If so, snag the index so when we repaint we show it
-  // as highlighed.
-  selectedAppIndex = 0;
-  int x=0;
-  QListIterator<AppLnk> it( appList );
-  for ( ; it.current(); ++it,++selectedAppIndex,x+=spacing ) {
-    if ( x + spacing <= width() ) {
-      if ( e->x() >= x && e->x() < x+spacing ) {
-	if ( selectedAppIndex < (int)appList.count() ) {
-	  repaint(FALSE);
-	  return;
-	}
-      }
-    } else {
-      break;
+    // Find out if the user is clicking on an app icon...
+    // If so, snag the index so when we repaint we show it
+    // as highlighed.
+    selectedAppIndex = 0;
+    int x=0;
+    QListIterator<AppLnk> it( appList );
+    for ( ; it.current(); ++it,++selectedAppIndex,x+=spacing ) {
+        if ( x + spacing <= width() ) {
+            if ( e->x() >= x && e->x() < x+spacing ) {
+                if ( selectedAppIndex < (int)appList.count() ) {
+                    repaint(FALSE);
+                    return;
+                }
+            }
+        }
+        else {
+            break;
+        }
     }
-  }
-  selectedAppIndex = -1;
-  repaint( FALSE );
+    selectedAppIndex = -1;
+    repaint( FALSE );
 }
 
 void RunningAppBar::mouseReleaseEvent(QMouseEvent *e)
 {
     if (e->button() == QMouseEvent::RightButton)
-	return;
+        return;
     if ( selectedAppIndex >= 0 ) {
-	QString app = appList.at(selectedAppIndex)->exec();
-	QCopEnvelope envelope("QPE/System", "raise(QString)");
-	envelope << app;
-	selectedAppIndex = -1;
-	update();
+        QString app = appList.at(selectedAppIndex)->exec();
+        QCopEnvelope envelope("QPE/System", "raise(QString)");
+        envelope << app;
+        selectedAppIndex = -1;
+        update();
     }
 }
 
@@ -137,20 +138,21 @@ void RunningAppBar::paintEvent( QPaintEvent * )
     QListIterator<AppLnk> it(appList);
 
     for (; it.current(); i++, ++it ) {
-      if ( x + spacing <= width() ) {
-	curApp = it.current();
-	if (curApp) {
-          owarn << "Drawing " << curApp->name() << "" << oendl;
- 	  if ( (int)i == selectedAppIndex )
- 	    p.fillRect( x, y, spacing, curApp->pixmap().height()+1, colorGroup().highlight() );
-  	  else
-	    p.eraseRect( x, y, spacing, curApp->pixmap().height()+1 );
+        if ( x + spacing <= width() ) {
+            curApp = it.current();
+            if (curApp) {
+                owarn << "Drawing " << curApp->name() << "" << oendl;
+                if ( (int)i == selectedAppIndex )
+                    p.fillRect( x, y, spacing, curApp->pixmap().height()+1, colorGroup().highlight() );
+                else
+                    p.eraseRect( x, y, spacing, curApp->pixmap().height()+1 );
 
-	  p.drawPixmap( x, y, curApp->pixmap() );
-	  x += spacing;
-	} else
-	  owarn << "No current application found" << oendl;
-      }
+                p.drawPixmap( x, y, curApp->pixmap() );
+                x += spacing;
+            }
+            else
+                owarn << "No current application found" << oendl;
+        }
     }
 }
 
@@ -164,7 +166,7 @@ void RunningAppBar::applicationLaunched(const QString &appName)
     odebug << "desktop:: app: " << appName.data() << " launched with pid " << oendl;
     const AppLnk* newGuy = ServerInterface::appLnks().findExec(appName);
     if ( newGuy && !newGuy->isPreloaded() ) {
-	addTask( *newGuy );
+        addTask( *newGuy );
     }
 }
 
@@ -172,9 +174,6 @@ void RunningAppBar::applicationTerminated(const QString &app)
 {
     const AppLnk* gone = ServerInterface::appLnks().findExec(app);
     if ( gone ) {
-	removeTask(*gone);
+        removeTask(*gone);
     }
 }
-
-
-
