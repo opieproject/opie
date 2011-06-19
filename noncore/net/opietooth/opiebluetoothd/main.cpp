@@ -27,13 +27,15 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include <qapplication.h>
+#include <opie2/oapplication.h>
 
 #include "opiebluetoothd.h"
 
+using namespace Opie::Core;
+
 int main( int argc, char** argv )
 {
-    QApplication app( argc, argv );
+    OApplication app( argc, argv );
     OBluetoothDaemon bd;
     int ret = app.exec();
     return ret;
