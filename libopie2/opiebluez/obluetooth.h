@@ -192,11 +192,15 @@ class OBluetoothInterface : public QObject
     DeviceIterator neighbourhood();
 
     /**
-     * Find a specific device, if we know about it
+     * Find a specific device, if it's on our internal list
      */
     OBluetoothDevice *findDevice(const QString &bdaddr);
     /**
-     * Find a specific device asynchronously, adding it if we don't already know about it
+     * Find a specific device by its dbus path. Adds to internal list if it's not already listed.
+     */
+    OBluetoothDevice *findDeviceByPath(const QString &path);
+    /**
+     * Find a specific device asynchronously, creating it if BlueZ doesn't already know about it
      * Emits deviceFound when device is found
      */
     void findDeviceCreate(const QString &bdaddr);

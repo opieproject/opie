@@ -346,6 +346,18 @@ OBluetoothDevice *OBluetoothInterface::findDevice( const QString &bdaddr )
     return _devices.find(bdaddr);
 }
 
+OBluetoothDevice *OBluetoothInterface::findDeviceByPath( const QString &path )
+{
+    DeviceIterator devit( _devices );
+    for( ; devit.current() ; ++devit ) {
+        if( devit.current()->devicePath() == path )
+            return devit.current();
+    }
+    OBluetoothDevice *dev = new OBluetoothDevice( this, QDBusObjectPath( QCString( path ) ) );
+    insertDevice( dev );
+    return dev;
+}
+
 void OBluetoothInterface::findDeviceCreate( const QString &bdaddr )
 {
     OBluetoothDevice *dev = _devices.find(bdaddr);
