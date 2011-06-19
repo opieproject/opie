@@ -75,6 +75,10 @@ BluezApplet::BluezApplet( QWidget *parent, const char *name ) : QWidget( parent,
     connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
             this, SLOT(slotMessage(const QCString&,const QByteArray&) ) );
 
+    QCopChannel* chan2 = new QCopChannel("QPE/BluetoothBack", this );
+    connect(chan2, SIGNAL(received(const QCString&,const QByteArray&) ),
+            this, SLOT(slotBackMessage(const QCString&,const QByteArray&) ) );
+
     m_statusRequested = true;
     QCopEnvelope e("QPE/Bluetooth", "sendStatus()");
 }
@@ -120,6 +124,85 @@ void BluezApplet::slotMessage( const QCString& str, const QByteArray& data )
         m_powered = (( status & 2 ) == 2);
         update();
     }
+}
+
+// receiver for QCopChannel("QPE/BluetoothBack") messages.
+void BluezApplet::slotBackMessage( const QCString& message, const QByteArray& data )
+{
+    QDataStream stream ( data, IO_ReadOnly );
+    QString msgout;
+    if( message == "devicePaired(QString)" ) {
+        msgout = "Device paired";
+    }
+    else if( message == "deviceAlreadyPaired(QString)" ) {
+        msgout = "Device already paired";
+    }
+    else if( message == "error(QString,QString,QString)" ) {
+        // Adapter related error
+        QString errsrc, errname, errmsg;
+        stream >> errsrc;
+        stream >> errname;
+        stream >> errmsg;
+        msgout = errmsg;
+    }
+    else if( message == "error(QString,QString,QString,QString)" ) {
+        // Device related error
+        QString addr, errsrc, errname, errmsg;
+        stream >> addr;
+        stream >> errsrc;
+        stream >> errname;
+        stream >> errmsg;
+        msgout = errmsg;
+        if( errsrc == "CreatePairedDevice" )
+            msgout = tr("Pairing failed: %1").arg(errmsg);
+        else {
+            if( errsrc.startsWith("org.bluez") ) {
+                int pos = errsrc.findRev('.');
+                if( pos > 0 ) {
+                    QString op = errsrc.mid(pos+1).lower();
+                    errsrc = friendlyServiceName( errsrc.left(pos) );
+                    msgout = tr("%1 %2 failed: %3").arg(errsrc).arg(op).arg(errmsg);
+                }
+                else
+                    msgout = tr("%1 failed: %2").arg(errsrc).arg(msgout);
+            }
+        }
+    }
+    else if( message == "deviceConnected(QString,QString,QString)" ) {
+        QString addr, dbusintf, retval;
+        stream >> addr;
+        stream >> dbusintf;
+        stream >> retval;
+        if( retval.isEmpty() )
+            msgout = tr("%1 connected").arg(friendlyServiceName(dbusintf));
+        else
+            msgout = tr("%1 connected (%2)").arg(friendlyServiceName(dbusintf)).arg(retval);
+    }
+    else if( message == "deviceDisconnected(QString,QString)" ) {
+        QString addr, dbusintf;
+        stream >> addr;
+        stream >> dbusintf;
+        msgout = tr("%1 disconnected").arg(friendlyServiceName(dbusintf));
+    }
+
+    if( !msgout.isEmpty() ) {
+        QCopEnvelope e("QPE/TaskBar", "message(QString,QString)");
+        e << msgout;
+        e << QString("bluetoothapplet");
+    }
+}
+
+QString BluezApplet::friendlyServiceName( const QString &dbusintf )
+{
+    QString friendlyName = dbusintf;
+    if( dbusintf == "org.bluez.Input" )
+        friendlyName = tr("Input device");
+    else if( dbusintf == "org.bluez.Network" )
+        friendlyName = tr("Serial device");
+    else if( dbusintf == "org.bluez.Network" )
+        friendlyName = tr("Network");
+
+    return friendlyName;
 }
 
 void BluezApplet::mousePressEvent( QMouseEvent *)

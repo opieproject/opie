@@ -50,11 +50,11 @@ namespace OpieTooth {
         int checkBluezDiscoveryStatus();
         int setBluezDiscoveryStatus(int);
         int setObexRecieveStatus(int);
+        QString friendlyServiceName(const QString &dbusintf);
 
     private:
         QPixmap bluezOnPixmap;
         QPixmap bluezOffPixmap;
-        QPixmap bluezDiscoveryOnPixmap;
         QPixmap bluezReceiveOnPixmap;
         bool m_powered;
         bool m_receive;
@@ -63,6 +63,7 @@ namespace OpieTooth {
 
     private slots:
         void slotMessage( const QCString& , const QByteArray& );
+        void slotBackMessage( const QCString& , const QByteArray& );
     };
 }
 
