@@ -68,7 +68,7 @@ public slots:
 protected:
     void resizeEvent( QResizeEvent * );
     void styleChange( QStyle & );
-    void setStatusMessage( const QString &text );
+    void setStatusMessage( const QString &text, int xpos=0 );
 
 private slots:
     void receive( const QCString &msg, const QByteArray &data );
