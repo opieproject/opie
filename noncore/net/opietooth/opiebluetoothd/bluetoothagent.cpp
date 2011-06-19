@@ -52,6 +52,10 @@
 
 // Opie includes
 #include <opie2/odebug.h>
+#include <opie2/obluetooth.h>
+
+using namespace Opie::Core;
+using namespace Opie::Bluez;
 
 // CreatePairedDevice insists on a different agent to the one used
 // for RegisterAgent for none other than internal reasons AFAICT
@@ -61,9 +65,9 @@
 // QMessageBox subclass that allows us to handle authorisation asynchronously
 class AuthMessageBox: public QMessageBox {
 public:
-    AuthMessageBox( const QDBusMessage &authMsg )
+    AuthMessageBox( const QDBusMessage &authMsg, const QString &name )
         : QMessageBox( tr("Bluetooth"),
-            tr("Authorize connection: %1?").arg(authMsg[1].toString()), // FIXME display device name
+            tr("<p>Authorize connection to %1?</p>").arg(name),
             QMessageBox::Information,
             QMessageBox::Yes | QMessageBox::Default,
             QMessageBox::No, 0 ),
@@ -141,36 +145,18 @@ bool OBluetoothAgent::handleMethodCall(const QDBusMessage& message)
         connect( m_pinDlg, SIGNAL(dialogClosed(bool)), this, SLOT(pinDialogClosed(bool)) );
 
         // Get the device's name and address
-        QDBusProxy proxy;
-        proxy.setService("org.bluez");
-        proxy.setPath(message[0].toObjectPath());
-        proxy.setInterface("org.bluez.Device");
-        proxy.setConnection(m_connection);
-        QDBusMessage reply = proxy.sendWithReply("GetProperties", QValueList<QDBusData>());
-        QString name = tr("Unknown Bluetooth device");
-        QString bdaddr = message[0].toObjectPath();
-        if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
-            if (reply[0].type() == QDBusData::Map) {
-                if( reply[0].keyType() == QDBusData::String ) {
-                    const QDBusDataMap<QString> map = reply[0].toStringKeyMap();
-                    QDBusDataMap<QString>::ConstIterator it = map.begin();
-                    for (; it != map.end(); ++it) {
-                        if( it.key() == "Address" )
-                            bdaddr = it.data().toVariant().value.toString();
-                        else if( it.key() == "Name" )
-                            name = it.data().toVariant().value.toString();
-                    }
-                }
-            }
-        }
-        m_pinDlg->setRemoteName(name);
-        m_pinDlg->setBdAddr(bdaddr);
+        OBluetoothInterface *intf = OBluetooth::instance()->defaultInterface();
+        OBluetoothDevice *dev = intf->findDeviceByPath( message[0].toObjectPath() );
+        m_pinDlg->setRemoteName( dev->name() );
+        m_pinDlg->setBdAddr( dev->macAddress() );
         m_pinDlg->showMaximized();
         return true;
     }
     else if (message.member() == "Authorize") {
         odebug << "Authorize " << message[1].toObjectPath() << oendl;
-        m_msgbox = new AuthMessageBox( message );
+        OBluetoothInterface *intf = OBluetooth::instance()->defaultInterface();
+        OBluetoothDevice *dev = intf->findDeviceByPath( message[0].toObjectPath() );
+        m_msgbox = new AuthMessageBox( message, dev->name() );
         m_msgbox->show();
         return true;
     }
