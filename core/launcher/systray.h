@@ -50,6 +50,7 @@ public:
 
     void clearApplets();
     void addApplets();
+    TaskbarApplet *findApplet(const QString &name);
 
 private:
     void loadApplets();

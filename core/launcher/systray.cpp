@@ -30,6 +30,7 @@ using namespace Opie::Core;
 /* QT */
 #include <qlayout.h>
 #include <qdir.h>
+#include <qfileinfo.h>
 
 /* STD */
 #include <stdlib.h>
@@ -150,3 +151,16 @@ void SysTray::addApplets()
     show();
 }
 
+TaskbarApplet *SysTray::findApplet( const QString &name )
+{
+    QValueList<TaskbarApplet>::Iterator mit;
+    for ( mit = appletList.begin(); mit != appletList.end(); ++mit ) {
+        QWidget *applet = (*mit).applet;
+        QString libname = QFileInfo( (*mit).library->library() ).fileName();
+        if( libname.right(3) = ".so" )
+            libname = libname.mid(3,libname.length() - 6);
+        if( ( applet->name() == name ) || ( applet->className() == name ) || ( libname == name ) )
+            return &(*mit);
+    }
+    return NULL;
+}

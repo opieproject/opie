@@ -238,14 +238,17 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
     connect( qApp, SIGNAL(capsLockStateToggle()), this, SLOT(toggleCapsLockState()) );
 }
 
-void TaskBar::setStatusMessage( const QString &text )
+void TaskBar::setStatusMessage( const QString &text, int xpos )
 {
     if ( !text.isEmpty() ) {
         delete m_notifyPopup;
         m_notifyPopup = new ONotifyPopup();
         m_notifyPopup->setText( text );
         connect( m_notifyPopup, SIGNAL( clicked() ), m_notifyPopup, SLOT( hide() ) );
-        m_notifyPopup->setPointTo( height() / 2, y() + (height() / 2) );
+        int x = xpos;
+        if( x <= 0 )
+            x = height() / 2;
+        m_notifyPopup->setPointTo( x, y() + (height() / 3) );
         m_notifyPopup->show();
         clearer->start( 2000 + (text.length() * 50), TRUE );
     }
@@ -331,6 +334,21 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
         QString text;
         stream >> text;
         setStatusMessage( text );
+    }
+    else if ( msg == "message(QString,QString)" ) {
+        QString text, appletName;
+        stream >> text;
+        stream >> appletName;
+        int xpos = 0;
+        if( appletName == "inputmethod" ) {
+            xpos = inputMethods->x() + ( inputMethods->width() / 2 );
+        }
+        else {
+            TaskbarApplet *applet = sysTray->findApplet( appletName );
+            if( applet )
+                xpos = sysTray->x() + applet->applet->x() + ( applet->applet->width() / 2 ) - 1;
+        }
+        setStatusMessage( text, xpos );
     }
     else if ( msg == "hideInputMethod()" ) {
         inputMethods->hideInputMethod();
