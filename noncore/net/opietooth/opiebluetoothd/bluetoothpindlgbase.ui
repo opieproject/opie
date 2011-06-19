@@ -12,7 +12,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>324</width>
+            <width>320</width>
             <height>375</height>
         </rect>
     </property>
@@ -95,32 +95,16 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Incoming
-connection from
-[Bluetooth address]</string>
+                        <string>Incoming connection from [Bluetooth address]</string>
+                    </property>
+                    <property stdset="1">
+                        <name>alignment</name>
+                        <set>WordBreak|AlignVCenter|AlignLeft</set>
+                    </property>
+                    <property>
+                        <name>wordwrap</name>
                     </property>
                 </widget>
-                <spacer>
-                    <property>
-                        <name>name</name>
-                        <cstring>Spacer1</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>orientation</name>
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>sizeType</name>
-                        <enum>Expanding</enum>
-                    </property>
-                    <property>
-                        <name>sizeHint</name>
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
             </hbox>
         </widget>
         <widget>
