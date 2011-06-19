@@ -65,8 +65,8 @@ using namespace Opie::Core;
 #include <remotedevice.h>
 #include <stdlib.h>
 
-using namespace OpieTooth;
 using namespace Opie::Bluez;
+using namespace OpieTooth;
 
 //Array of possible speeds of the serial port
 struct SerSpeed {
@@ -88,6 +88,8 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 
     m_devHandlerPool = new DeviceHandlerPool();
     m_popHelper = new PopupHelper( m_devHandlerPool );
+    connect( m_devHandlerPool, SIGNAL( success(DeviceHandler *,const QString&,const QString&) ), this, SLOT( deviceHandlerSuccess(DeviceHandler *,const QString&,const QString&) ) );
+    connect( m_devHandlerPool, SIGNAL( failure(DeviceHandler *,const QString&,const QString&,const QString&) ), this, SLOT( deviceHandlerFailure(DeviceHandler *,const QString&,const QString&,const QString&) ) );
 
     OBluetoothInterface *intf = m_bluetooth->defaultInterface();
     connectInterface( intf );
@@ -806,6 +808,30 @@ void BlueBase::devicePropertyChanged( OBluetoothDevice *dev, const QString &prop
             updateDeviceActive( deviceItem );
         }
     }
+}
+
+void BlueBase::deviceHandlerSuccess( Opie::Bluez::DeviceHandler *handler, const QString &method, const QString &retval )
+{
+    if( method == "Connect" ) {
+        QCopEnvelope e("QPE/BluetoothBack", "deviceConnected(QString,QString,QString)");
+        e << handler->device()->macAddress();
+        e << handler->dbusInterface();
+        e << retval;
+    }
+    else if( method == "Disconnect" ) {
+        QCopEnvelope e("QPE/BluetoothBack", "deviceDisconnected(QString,QString)");
+        e << handler->device()->macAddress();
+        e << handler->dbusInterface();
+    }
+}
+
+void BlueBase::deviceHandlerFailure( Opie::Bluez::DeviceHandler *handler, const QString &method, const QString &error, const QString &message )
+{
+    QCopEnvelope e("QPE/BluetoothBack", "error(QString,QString,QString,QString)");
+    e << handler->device()->macAddress();
+    e << handler->dbusInterface() + "." + method;
+    e << error;
+    e << message;
 }
 
 //eof

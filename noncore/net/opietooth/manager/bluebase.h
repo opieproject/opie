@@ -113,7 +113,8 @@ namespace OpieTooth {
         void defaultInterfaceChanged( OBluetoothInterface *);
         void deviceFound( OBluetoothDevice *dev, bool newDevice );
         void servicesFound( OBluetoothDevice *dev );
-
+        void deviceHandlerSuccess(DeviceHandler*,const QString&,const QString&);
+        void deviceHandlerFailure(DeviceHandler*,const QString&,const QString&,const QString&);
     };
 
 }
