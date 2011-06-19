@@ -18,7 +18,8 @@ HEADERS     = oclickablelabel.h      \
               otabwidget.h           \
               otaskbarapplet.h       \
               otimepicker.h          \
-              owait.h
+              owait.h                \
+              onotifypopup.h
 
 SOURCES     = oclickablelabel.cpp    \
               odialog.cpp            \
@@ -36,7 +37,8 @@ SOURCES     = oclickablelabel.cpp    \
               otabwidget.cpp         \
               otaskbarapplet.cpp     \
               otimepicker.cpp        \
-              owait.cpp
+              owait.cpp              \
+              onotifypopup.cpp
 
 include( big-screen/big-screen.pro )
 include( fileselector/fileselector.pro )
