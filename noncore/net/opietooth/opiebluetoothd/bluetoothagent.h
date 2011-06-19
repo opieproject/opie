@@ -60,6 +60,7 @@ class OBluetoothAgent: public QObject, public QDBusObjectBase {
         QDBusMessage *m_pinMsg;
         QMessageBox *m_msgbox;
         QMap<int,QString> m_calls;
+        QMap<int,QString> m_callAddrs;
 };
 
 

@@ -174,18 +174,25 @@ void OBluetoothAgent::slotAsyncReply( int callId, const QDBusMessage& reply )
     QString method = m_calls[callId];
 
     if( method == "CreatePairedDevice" ) {
+        QString bdaddr = m_callAddrs[callId];
         if (reply.type() == QDBusMessage::ReplyMessage) {
             odebug << "CreatePairedDevice succeeded" << oendl;
-            QCopEnvelope e("QPE/BluetoothBack", "devicePaired()");
+            QCopEnvelope e("QPE/BluetoothBack", "devicePaired(QString)");
+            e << bdaddr;
         }
         else {
             if( reply.error().name() == "org.bluez.Error.AlreadyExists" ) {
                 odebug << "CreatePairedDevice - already paired" << oendl;
-                QCopEnvelope e("QPE/BluetoothBack", "deviceAlreadyPaired()");
+                QCopEnvelope e("QPE/BluetoothBack", "deviceAlreadyPaired(QString)");
+                e << bdaddr;
             }
             else {
                 odebug << "CreatePairedDevice failed: " << reply.error().name() << ": " << reply.error().message() << oendl;
-                QCopEnvelope e("QPE/BluetoothBack", "devicePairingFailed()");
+                QCopEnvelope e("QPE/BluetoothBack", "error(QString,QString,QString,QString)");
+                e << bdaddr;
+                e << QString("CreatePairedDevice");
+                e << reply.error().name();
+                e << reply.error().message();
             }
         }
     }
@@ -195,6 +202,7 @@ void OBluetoothAgent::slotAsyncReply( int callId, const QDBusMessage& reply )
     }
 
     m_calls.remove(callId);
+    m_callAddrs.remove(callId);
 }
 
 void OBluetoothAgent::pinDialogClosed( bool accepted )
@@ -231,4 +239,5 @@ void OBluetoothAgent::pairDevice(const QString &bdaddr)
     parameters << QDBusData::fromString("DisplayYesNo");
     int callId = m_bluezAdapterProxy->sendWithAsyncReply("CreatePairedDevice", parameters);
     m_calls[callId] = "CreatePairedDevice";
+    m_callAddrs[callId] = bdaddr;
 }

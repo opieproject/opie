@@ -186,13 +186,17 @@ void OBluetoothDaemon::startBluetooth()
             odebug << "starting bluetooth" << oendl;
             if( ! m_btinterface->setUp( true ) ) {
                 odebug << "startBluetooth: failed to power on adapter" << oendl;
-                QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
+                QCopEnvelope e( "QPE/BluetoothBack", "error(QString,QString,QString)" );
+                e << QString("startBluetooth");
+                e << QString("Failed");
                 e << tr("Failed to power on adapter");
             }
         }
         else {
             odebug << "startBluetooth: no adapter" << oendl;
-            QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
+            QCopEnvelope e( "QPE/BluetoothBack", "error(QString,QString,QString)" );
+            e << QString("startBluetooth");
+            e << QString("NoAdapter");
             e << tr("No Bluetooth adapter available");
         }
     }
@@ -209,13 +213,17 @@ void OBluetoothDaemon::stopBluetooth()
                 odebug << "stopping bluetooth" << oendl;
                 if( ! m_btinterface->setUp( false ) ) {
                     odebug << "stopBluetooth: failed to power down adapter" << oendl;
-                    QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
+                    QCopEnvelope e( "QPE/BluetoothBack", "error(QString,QString,QString)" );
+                    e << QString("stopBluetooth");
+                    e << QString("Failed");
                     e << tr("Failed to power off adapter");
                 }
             }
             else {
                 odebug << "stopBluetooth: no adapter" << oendl;
-                QCopEnvelope e( "QPE/Bluetooth", "error(QString)" );
+                QCopEnvelope e( "QPE/BluetoothBack", "error(QString,QString,QString)" );
+                e << QString("stopBluetooth");
+                e << QString("NoAdapter");
                 e << tr("No Bluetooth adapter available");
             }
         }
