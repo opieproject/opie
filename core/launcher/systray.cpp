@@ -50,7 +50,8 @@ static int compareAppletPositions(const void *a, const void *b)
     const TaskbarApplet* aa = *(const TaskbarApplet**)a;
     const TaskbarApplet* ab = *(const TaskbarApplet**)b;
     int d = ab->iface->position() - aa->iface->position();
-    if ( d ) return d;
+    if ( d )
+        return d;
     return QString::compare(ab->name,aa->name);
 }
 
@@ -76,14 +77,14 @@ void SysTray::clearApplets()
     QValueList<TaskbarApplet>::Iterator mit;
     for ( mit = appletList.begin(); mit != appletList.end(); ++mit ) {
         (*mit).iface->release();
-	(*mit).library->unload();
-	delete (*mit).library;
+        (*mit).library->unload();
+        delete (*mit).library;
     }
 
 #endif
     appletList.clear();
     if ( layout )
-	delete layout;
+        delete layout;
     layout = new QHBoxLayout( this, 0, 1 );
     layout->setAutoAdd(TRUE);
 }
@@ -108,35 +109,36 @@ void SysTray::addApplets()
     int napplets=0;
     TaskbarApplet* *applets = new TaskbarApplet*[list.count()];
     for ( it = list.begin(); it != list.end(); ++it ) {
-	if ( exclude.find( *it ) != exclude.end() )
-	    continue;
-    owarn << "Found Applet: " << (*it) << "" << oendl;
-	TaskbarAppletInterface *iface = 0;
-	QLibrary *lib = new QLibrary( path + "/" + *it );
-	if (( lib->queryInterface( IID_TaskbarApplet, (QUnknownInterface**)&iface ) == QS_OK ) && iface ) {
-	    TaskbarApplet *applet = new TaskbarApplet;
-	    applets[napplets++] = applet;
-	    applet->library = lib;
-	    applet->iface = iface;
+        if ( exclude.find( *it ) != exclude.end() )
+            continue;
+        owarn << "Found Applet: " << (*it) << "" << oendl;
+        TaskbarAppletInterface *iface = 0;
+        QLibrary *lib = new QLibrary( path + "/" + *it );
+        if (( lib->queryInterface( IID_TaskbarApplet, (QUnknownInterface**)&iface ) == QS_OK ) && iface ) {
+            TaskbarApplet *applet = new TaskbarApplet;
+            applets[napplets++] = applet;
+            applet->library = lib;
+            applet->iface = iface;
 
-	    QTranslator *trans = new QTranslator(qApp);
-	    QString type = (*it).left( (*it).find(".") );
-	    QString tfn = QPEApplication::qpeDir()+"i18n/"+lang+"/"+type+".qm";
-	    if ( trans->load( tfn ))
-		qApp->installTranslator( trans );
-	    else
-		delete trans;
-	} else {
-	    exclude += *it;
-	    delete lib;
-	}
+            QTranslator *trans = new QTranslator(qApp);
+            QString type = (*it).left( (*it).find(".") );
+            QString tfn = QPEApplication::qpeDir()+"i18n/"+lang+"/"+type+".qm";
+            if ( trans->load( tfn ))
+                qApp->installTranslator( trans );
+            else
+                delete trans;
+        }
+        else {
+            exclude += *it;
+            delete lib;
+        }
     }
     cfg.writeEntry( "ExcludeApplets", exclude, ',' );
     qsort(applets,napplets,sizeof(applets[0]),compareAppletPositions);
     while (napplets--) {
-	TaskbarApplet *applet = applets[napplets];
-	applet->applet = applet->iface->applet( this );
-	appletList.append(*applet);
+        TaskbarApplet *applet = applets[napplets];
+        applet->applet = applet->iface->applet( this );
+        appletList.append(*applet);
     }
     delete [] applets;
 #else /* ## FIXME single app */
