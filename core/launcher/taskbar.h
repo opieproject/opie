@@ -25,7 +25,6 @@
 #include "serverinterface.h"
 #include "startmenu.h"
 
-class QLabel;
 class QTimer;
 class InputMethods;
 class Wait;
@@ -33,9 +32,14 @@ class SysTray;
 class RunningAppBar;
 class QWidgetStack;
 class QTimer;
-class QLabel;
 class LockKeyState;
 class AppLnkSet;
+
+namespace Opie {
+namespace Ui {
+class ONotifyPopup;
+}
+}
 
 class TaskBar : public QHBox {
     Q_OBJECT
@@ -80,7 +84,7 @@ private:
     RunningAppBar* runningAppBar;
     QWidgetStack *stack;
     QTimer *clearer;
-    QLabel *label;
+    Opie::Ui::ONotifyPopup *m_notifyPopup;
     LockKeyState* lockState;
     StartMenu *sm;
     bool resizeRunningApp;
