@@ -144,6 +144,11 @@ void BluezApplet::slotBackMessage( const QCString& message, const QByteArray& da
         stream >> errname;
         stream >> errmsg;
         msgout = errmsg;
+        if( errsrc = "hciattach" ) {
+            // Show a message box instead of a popup because it may be a longer message
+            QMessageBox::warning( 0, tr("Bluetooth"), "<pre>" + errmsg );
+            msgout = "";
+        }
     }
     else if( message == "error(QString,QString,QString,QString)" ) {
         // Device related error
