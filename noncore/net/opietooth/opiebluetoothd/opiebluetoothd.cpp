@@ -60,6 +60,7 @@ OBluetoothDaemon::OBluetoothDaemon()
     // Set up hciattach handling if required
     m_hciattach = new OHciAttach();
     if( ! m_hciattach->isConfigured() ) {
+        odebug << "hciattach not configured" << oendl;
         delete m_hciattach;
         m_hciattach = NULL;
     }

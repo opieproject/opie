@@ -56,12 +56,13 @@ class OHciAttach: public QObject {
         OProcess *m_process;
         QString m_port;
         QString m_protocol;
+        QString m_output;
         uint m_speed;
 
     protected slots:
         virtual void slotExited( Opie::Core::OProcess* );
-        //virtual void slotStdOut(Opie::Core::OProcess*, char*, int );
-        //virtual void slotStdErr(Opie::Core::OProcess*, char*, int );
+        virtual void slotStdOut(Opie::Core::OProcess*, char*, int );
+        virtual void slotStdErr(Opie::Core::OProcess*, char*, int );
 };
 
 #endif

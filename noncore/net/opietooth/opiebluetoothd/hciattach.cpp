@@ -35,6 +35,8 @@
 #include <opie2/odebug.h>
 #include <opie2/oprocess.h>
 
+#include <qpe/qcopenvelope_qws.h>
+
 using namespace Opie::Core;
 
 OHciAttach::OHciAttach()
@@ -88,6 +90,7 @@ bool OHciAttach::isConfigured()
 void OHciAttach::start()
 {
     if( !m_process ) {
+        m_output = "";
         m_process = new OProcess();
         *m_process << "hciattach";
         *m_process << "-n";
@@ -95,12 +98,16 @@ void OHciAttach::start()
 
         connect(m_process, SIGNAL( processExited(Opie::Core::OProcess*) ),
                 this, SLOT( slotExited(Opie::Core::OProcess* ) ) );
-        //connect(m_process, SIGNAL( receivedStdout(Opie::Core::OProcess*, char*, int) ),
-        //        this, SLOT(slotStdOut(Opie::Core::OProcess*,char*,int ) ) );
-        //connect(m_process, SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int ) ),
-        //        this, SLOT(slotStdErr(Opie::Core::OProcess*,char*,int) ) );
+        connect(m_process, SIGNAL( receivedStdout(Opie::Core::OProcess*, char*, int) ),
+                this, SLOT(slotStdOut(Opie::Core::OProcess*,char*,int ) ) );
+        connect(m_process, SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int ) ),
+                this, SLOT(slotStdErr(Opie::Core::OProcess*,char*,int) ) );
 
         if( !m_process->start( OProcess::NotifyOnExit, OProcess::AllOutput ) ) {
+            QCopEnvelope e("QPE/BluetoothBack", "error(QString,QString,QString)");
+            e << QString("hciattach");
+            e << QString("start");
+            e << QString("Unable to start hciattach");
             owarn << "Could not start hciattach" << oendl;
             delete m_process;
             m_process = NULL;
@@ -118,18 +125,30 @@ void OHciAttach::stop()
 void OHciAttach::slotExited( OProcess *proc )
 {
     if( proc == m_process ) {
-        // FIXME implement
+        QCopEnvelope e("QPE/BluetoothBack", "error(QString,QString,QString)");
+        e << QString("hciattach");
+        e << QString("exited");
+        QString msg;
+        if( proc->normalExit() )
+            msg = tr("hciattach terminated with exit code %1").arg(proc->exitStatus());
+        else
+            msg = tr("hciattach terminated abnormally");
+        e << msg + '\n' + m_output;
+        odebug << msg << oendl;
+        odebug << m_output << oendl;
         delete m_process;
         m_process = NULL;
     }
 }
 
-/*
 void OHciAttach::slotStdOut(OProcess *proc, char *chars, int len )
 {
+    QCString str(chars, len);
+    m_output += str;
 }
 
 void OHciAttach::slotStdErr( OProcess *proc, char *chars, int len )
 {
+    QCString str(chars, len);
+    m_output += str;
 }
-*/
