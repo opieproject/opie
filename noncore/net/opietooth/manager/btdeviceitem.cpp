@@ -4,7 +4,7 @@
 using namespace OpieTooth;
 
 
-BTDeviceItem::BTDeviceItem( QListView* parent,  const RemoteDevice& dev )
+BTDeviceItem::BTDeviceItem( QListView* parent,  const Opie::Bluez::DeviceRecord& dev )
     : BTListItem( parent )
 {
     setText( 0, dev.name() );
@@ -15,7 +15,7 @@ BTDeviceItem::~BTDeviceItem()
 {
 }
 
-RemoteDevice BTDeviceItem::remoteDevice() const
+Opie::Bluez::DeviceRecord BTDeviceItem::remoteDevice() const
 {
     return m_device;
 }

@@ -3,21 +3,21 @@
 #define OPIE_TOOTH_BT_DEVICE_ITEM
 
 
-#include <remotedevice.h>
+#include <opie2/obluetoothdevicerecord.h>
 #include "btlistitem.h"
 
 namespace OpieTooth {
     class BTDeviceItem : public BTListItem {
     public:
-        BTDeviceItem( QListView* parent, const RemoteDevice& dev );
+        BTDeviceItem( QListView* parent, const Opie::Bluez::DeviceRecord& dev );
         ~BTDeviceItem();
-        RemoteDevice remoteDevice() const;
+        Opie::Bluez::DeviceRecord remoteDevice() const;
         QString type() const;
         int typeId() const;
         QString mac() const;
         QString name() const;
     private:
-        RemoteDevice m_device;
+        Opie::Bluez::DeviceRecord m_device;
     };
 
 };

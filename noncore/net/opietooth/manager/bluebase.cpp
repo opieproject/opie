@@ -17,7 +17,6 @@
 
 #include "bluebase.h"
 #include "scandialog.h"
-#include "devicehandler.h"
 #include "btconnectionitem.h"
 #include "rfcommassigndialogimpl.h"
 #include "forwarder.h"
@@ -33,6 +32,8 @@
 #include <opie2/odebug.h>
 #include <opie2/obluetooth.h>
 #include <opie2/obluetoothdevicehandler.h>
+#include <opie2/obluetoothdevicerecord.h>
+#include <opie2/obluetoothdevicesettings.h>
 #ifdef Q_WS_QWS
 #include <qpe/qcopenvelope_qws.h>
 #endif
@@ -62,7 +63,6 @@ using namespace Opie::Core;
 #include <qfile.h>
 
 /* STD */
-#include <remotedevice.h>
 #include <stdlib.h>
 
 using namespace Opie::Bluez;
@@ -199,9 +199,9 @@ void BlueBase::writeConfig()
  */
 void BlueBase::readSavedDevices()
 {
-    QValueList<RemoteDevice> loadedDevices;
-    DeviceHandler handler;
-    loadedDevices = handler.load();
+    QValueList<DeviceRecord> loadedDevices;
+    DeviceSettings settings;
+    loadedDevices = settings.load();
 
     addSearchedDevices( loadedDevices );
     m_loadedDevices = true;
@@ -216,7 +216,7 @@ void BlueBase::writeSavedDevices()
     QListViewItemIterator it( devicesView );
     BTListItem* item;
     BTDeviceItem* device;
-    RemoteDevice::ValueList list;
+    DeviceRecord::ValueList list;
     for ( ; it.current(); ++it )
     {
         item = (BTListItem*)it.current();
@@ -228,12 +228,12 @@ void BlueBase::writeSavedDevices()
     }
     /*
      * if not empty, or we loaded the device list already, then
-     * save the List through DeviceHandler
+     * save the List through DeviceSettings
      */
     if ( list.isEmpty() && !m_loadedDevices )
         return;
-    DeviceHandler handler;
-    handler.save( list );
+    DeviceSettings settings;
+    settings.save( list );
 }
 
 
@@ -321,10 +321,10 @@ void BlueBase::rfcommDialog()
  * Add fresh found devices from scan dialog to the listing
  *
  */
-void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices )
+void BlueBase::addSearchedDevices( const QValueList<DeviceRecord> &newDevices )
 {
     BTDeviceItem * deviceItem;
-    QValueList<RemoteDevice>::ConstIterator it;
+    QValueList<DeviceRecord>::ConstIterator it;
 
     for( it = newDevices.begin(); it != newDevices.end() ; ++it ) {
 
@@ -659,8 +659,8 @@ void BlueBase::startScan()
 {
     ScanDialog *scan = new ScanDialog( this, "ScanDialog",
                                        true, WDestructiveClose );
-    QObject::connect( scan, SIGNAL( selectedDevices(const QValueList<RemoteDevice>&) ),
-                      this, SLOT( addSearchedDevices(const QValueList<RemoteDevice>&) ) );
+    QObject::connect( scan, SIGNAL( selectedDevices(const QValueList<DeviceRecord>&) ),
+                      this, SLOT( addSearchedDevices(const QValueList<DeviceRecord>&) ) );
 
     QPEApplication::showDialog( scan );
 }
@@ -688,12 +688,12 @@ BlueBase::~BlueBase()
 
 
 /**
- * find searches the ListView for a BTDeviceItem containig
+ * find searches the ListView for a BTDeviceItem containing
  * the same Device if found return true else false
- * @param dev RemoteDevice to find
+ * @param dev DeviceRecord to find
  * @return returns true if found
  */
-bool BlueBase::find( const RemoteDevice& rem )
+bool BlueBase::find( const DeviceRecord& rem )
 {
     QListViewItemIterator it( devicesView );
     BTListItem* item;
@@ -704,7 +704,7 @@ bool BlueBase::find( const RemoteDevice& rem )
             continue;
 
         device = (BTDeviceItem*)item;
-        if ( rem.equals( device->remoteDevice() ) )
+        if ( rem == device->remoteDevice() )
             return true;
     }
     return false; // not found

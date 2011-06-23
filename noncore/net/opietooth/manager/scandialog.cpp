@@ -29,11 +29,10 @@
 #include <qlist.h>
 
 #include <opie2/obluetooth.h>
+#include <opie2/obluetoothdevicerecord.h>
 #include <opie2/odebug.h>
 using namespace Opie::Core;
 using namespace Opie::Bluez;
-
-#include <remotedevice.h>
 
 namespace OpieTooth {
 
@@ -196,12 +195,12 @@ void ScanDialog::emitToManager()
         return;
     }
 
-    QValueList<RemoteDevice> deviceList;
+    QValueList<DeviceRecord> deviceList;
 
     QListViewItemIterator it( serviceView );
     for ( ; it.current(); ++it ) {
         if ( ( (QCheckListItem*)it.current() )->isOn() ) {
-            RemoteDevice device(  it.current()->text(1), it.current()->text(0) );
+            DeviceRecord device(  it.current()->text(1), it.current()->text(0) );
             deviceList.append( device );
         }
     }

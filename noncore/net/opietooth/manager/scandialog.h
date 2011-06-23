@@ -34,14 +34,13 @@ namespace Bluez {
     class OBluetooth;
     class OBluetoothInterface;
     class OBluetoothDevice;
+    class DeviceRecord;
 }
 }
 
 using namespace Opie::Bluez;
 
 namespace OpieTooth {
-
-class RemoteDevice;
 
     class ScanDialog : public QDialog {
         Q_OBJECT
@@ -82,7 +81,7 @@ class RemoteDevice;
         void searchStopped();
 
     signals:
-        void selectedDevices( const QValueList<RemoteDevice>& );
+        void selectedDevices( const QValueList<DeviceRecord>& );
     };
 
 

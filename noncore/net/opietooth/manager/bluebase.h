@@ -19,7 +19,7 @@
 #include "bticonloader.h"
 #include "forwarder.h"
 
-#include <remotedevice.h>
+#include <opie2/obluetoothdevicerecord.h>
 #include <manager.h>
 
 class QVBox;
@@ -37,6 +37,7 @@ namespace Bluez {
     class OBluetoothInterface;
     class OBluetoothDevice;
     class DeviceHandlerPool;
+    class DeviceRecord;
 }
 }
 
@@ -61,7 +62,7 @@ namespace OpieTooth {
 
 
     private:
-        bool find( const RemoteDevice& device );
+        bool find( const DeviceRecord& device );
         void readConfig();
         void writeConfig();
         void readSavedDevices();
@@ -92,7 +93,7 @@ namespace OpieTooth {
         bool m_loadedDevices;
 
     private slots:
-        void addSearchedDevices( const QValueList<RemoteDevice> &newDevices );
+        void addSearchedDevices( const QValueList<DeviceRecord> &newDevices );
         void addServicesToDevices();
         void addServicesToDevice( BTDeviceItem *item );
         void addConnectedDevices();
