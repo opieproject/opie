@@ -16,9 +16,8 @@ target.path = $$prefix/plugins/applets
 #FIXME: These parameters are used if bluetooth is used
 CONFTEST = $$system( echo $CONFIG_LIBOPIETOOTH )
 contains( CONFTEST, y ){
-HEADERS     += btobex.h
-SOURCES     += btobex.cpp
-INCLUDEPATH += $(OPIEDIR)/noncore/net/opietooth/lib
-LIBS        += -lopietooth1 -lbluetooth
+HEADERS     += btobex.h btobexpush.h
+SOURCES     += btobex.cpp btobexpush.cpp
+LIBS        += -lopiebluez2
 DEFINES     += BLUETOOTH
 }

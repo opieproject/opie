@@ -30,14 +30,13 @@
  */
 
 #include "btobex.h"
-#include <manager.h>
-#include <services.h>
 #include <openobex/obex_const.h>
 
 
 /* OPIE */
 #include <opie2/oprocess.h>
 #include <opie2/odebug.h>
+#include <opie2/obluetooth.h>
 
 /* QT */
 #include <qfileinfo.h>
@@ -48,6 +47,7 @@
 using namespace  OpieObex;
 
 using namespace Opie::Core;
+using namespace Opie::Bluez;
 /* TRANSLATOR OpieObex::Obex */
 using namespace OpieTooth;
 
@@ -56,11 +56,9 @@ BtObex::BtObex( QObject *parent, const char* name )
 {
     m_rec = 0;
     m_send = 0;
-    btManager = NULL;
-};
+}
 
 BtObex::~BtObex() {
-    delete btManager;
     delete m_rec;
     delete m_send;
 }
@@ -110,52 +108,63 @@ void BtObex::send( const QString& fileName, const QString& bdaddr)
             return;
         }
     }
-    //Now we need to find out if the OBEX push is supported for this device
-    //And get the port number
-    if (!btManager) {
-        btManager = new Manager("hci0");
-        connect(btManager,
-            SIGNAL(foundServices(const QString&, Services::ValueList)),
-            this, SLOT(slotFoundServices(const QString&, Services::ValueList)));
+    // Now we need to find out if the OBEX push is supported for this device
+    // And get the port number
+    OBluetoothInterface *intf = OBluetooth::instance()->defaultInterface();
+    if( intf ) {
+        // Just laziness in case the interface is the same one as last time (which it probably will be)
+        disconnect( intf, SIGNAL( deviceFound( OBluetoothDevice *, bool ) ), this, SLOT( slotFoundDevice( OBluetoothDevice *, bool ) ) );
+        connect( intf, SIGNAL( deviceFound( OBluetoothDevice *, bool ) ), this, SLOT( slotFoundDevice( OBluetoothDevice *, bool ) ) );
+        disconnect( intf, SIGNAL( deviceServicesFound( OBluetoothDevice * ) ), this, SLOT( slotFoundServices( OBluetoothDevice * ) ) );
+        connect( intf, SIGNAL( deviceServicesFound( OBluetoothDevice * ) ), this, SLOT( slotFoundServices( OBluetoothDevice * ) ) );
+        intf->findDeviceCreate( bdaddr );
     }
-    btManager->searchServices(bdaddr);
 }
 
 /**
  * This function reacts on the service discovery finish
  */
-void BtObex::slotFoundServices(const QString&, Services::ValueList svcList)
+void BtObex::slotFoundDevice( OBluetoothDevice *dev, bool )
 {
-    QValueList<OpieTooth::Services>::Iterator it;
-    QMap<int, QString> classList; //The classes list
-    QMap<int, QString>::Iterator classIt; //Iterator in the class list
-    int portNum = -1; //The desired port number
+    dev->discoverServices();
+}
+
+/**
+ * This function reacts on the service discovery finish
+ */
+void BtObex::slotFoundServices( OBluetoothDevice *dev )
+{
     odebug << "BtObex slotFoundServices" << oendl;
-    if (svcList.isEmpty()) {
-        QMessageBox::critical(NULL, tr("Object send"), tr("No services found"));
-        emit error(-1);
-        return;
-    }
-    for (it = svcList.begin(); it != svcList.end(); it++) {
-        classList = (*it).classIdList();
-        classIt = classList.begin();
-        if (classIt == classList.end())
-            continue;
-////We really need symbolic names for service IDs
-        //Ok, we have found the object push service
-        if (classIt.key() == 4357) {
-            portNum = (*it).protocolDescriptorList().last().port();
-            break;
+    OBluetoothServices::ValueList servicesList = dev->services();
+    if (!servicesList.isEmpty() ) {
+        int portNum = -1; //The desired port number
+        QMap<int, QString> list;
+        QMap<int, QString>::Iterator classIt;
+        OBluetoothServices::ValueList::Iterator it2;
+        for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 ) {
+            list = (*it2).classIdList();
+            classIt = list.begin();
+            if ( classIt != list.end() ) {
+                if (classIt.key() == 4357) { // FIXME constant
+                    portNum = (*it2).protocolDescriptorList().last().port();
+                    break;
+                }
+            }
+        }
+        if( portNum == -1 ) {
+            QMessageBox::critical(NULL, tr("Object send"),
+                tr("Unable to send - no OBEX Push service on remote device"));
+            emit error(-1);
+        }
+        else {
+            m_port = portNum;
+            sendNow();
         }
     }
-    if (portNum == -1) {
-        QMessageBox::critical(NULL, tr("Object send"),
-            tr("No OBEX Push service"));
+    else {
+        QMessageBox::critical(NULL, tr("Object send"), tr("Unable to send - no Bluetooth services found on remote device"));
         emit error(-1);
-        return;
     }
-    m_port = portNum;
-    sendNow();
 }
 
 void BtObex::sendNow()

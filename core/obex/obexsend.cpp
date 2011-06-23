@@ -9,9 +9,6 @@
 #endif
 #include "obexsend.h"
 using namespace OpieObex;
-#ifdef BLUETOOTH
-using namespace OpieTooth;
-#endif
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -19,9 +16,10 @@ using namespace OpieTooth;
 #include <opie2/oresource.h>
 #include <qpe/version.h>
 #ifdef BLUETOOTH
-#include <devicehandler.h>
-#include "remotedevice.h"
+#include <opie2/obluetoothdevicerecord.h>
+#include <opie2/obluetoothdevicesettings.h>
 #include "openobex/obex_const.h"
+using namespace Opie::Bluez;
 #endif
 
 using namespace Opie::Core;
@@ -292,9 +290,9 @@ void SendWidget::send_to_receivers()
  */
 void SendWidget::read_receivers()
 {
-    QValueList<RemoteDevice> devices;
-    DeviceHandler handler;
-    QValueList<RemoteDevice>::ConstIterator it;
+    QValueList<DeviceRecord> devices;
+    DeviceSettings handler;
+    QValueList<DeviceRecord>::ConstIterator it;
 
     receiverList->clear();
     receivers.clear();

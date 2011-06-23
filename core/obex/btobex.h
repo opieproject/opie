@@ -36,12 +36,19 @@
 
 #include "obexbase.h"
 #include <qobject.h>
-#include <services.h>
-#include <manager.h>
-#include <obexpush.h>
+#include <btobexpush.h>
 #include "obexserver.h"
 
-namespace Opie {namespace Core {class OProcess;}}
+namespace Opie {
+namespace Core {
+    class OProcess;
+}
+namespace Bluez {
+    class OBluetoothDevice;
+}
+}
+
+using Opie::Bluez::OBluetoothDevice;
 class QCopChannel;
 using namespace OpieTooth;
 
@@ -92,7 +99,6 @@ namespace OpieObex {
         int m_port;
         ObexPush* m_send;
         bool m_receive : 1;
-        OpieTooth::Manager* btManager;
         void shutDownReceive();
         ObexServer* m_rec;
 
@@ -107,7 +113,8 @@ namespace OpieObex {
         void slotExited(Opie::Core::OProcess*) ;
         void slotStdOut(Opie::Core::OProcess*, char*, int);
         void slotError();
-        void slotFoundServices(const QString&, Services::ValueList);
+        void slotFoundDevice( OBluetoothDevice *, bool );
+        void slotFoundServices( OBluetoothDevice * );
 
     private:
         void sendNow();
