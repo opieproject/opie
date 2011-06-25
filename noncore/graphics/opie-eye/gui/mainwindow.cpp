@@ -6,7 +6,6 @@
 #include "imageview.h"
 
 #include "iconview.h"
-#include "filesystem.h"
 #include "imageinfoui.h"
 #include "viewmodebutton.h"
 #include "basesetup.h"
@@ -22,6 +21,7 @@
 #include <opie2/owait.h>
 #include <opie2/oapplication.h>
 #include <opie2/oresource.h>
+#include <opie2/ofilesystembutton.h>
 
 #include <qpe/config.h>
 #include <qpe/ir.h>
@@ -722,7 +722,7 @@ void PMainWindow::setupToolbar()
     setToolBarsMovable( false );
     m_aDirUp->addTo( toolBar );
 
-    fsButton = new PFileSystem( toolBar );
+    fsButton = new Opie::Ui::OFileSystemButton( toolBar, TRUE );
     connect( fsButton, SIGNAL( changeDir( const QString& ) ),
              m_view, SLOT(slotChangeDir( const QString& ) ) );
     connect( this, SIGNAL( changeDir( const QString& ) ),
