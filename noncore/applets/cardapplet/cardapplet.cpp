@@ -43,6 +43,7 @@
 #include <qpe/global.h>
 #include <qpe/resource.h>
 #include <qpe/storage.h>
+#include <qpe/qcopenvelope_qws.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
 
@@ -55,7 +56,6 @@ using namespace Opie::Ui;
 #include <qtextstream.h>
 #include <qmessagebox.h>
 #include <qsound.h>
-#include <qtimer.h>
 #include <qlayout.h>
 #include <qcheckbox.h>
 #include <qdialog.h>
@@ -140,32 +140,9 @@ void CardApplet::handleSystemChannel( const QCString&msg, const QByteArray& )
 
 void CardApplet::popUp( QString message, QString icon )
 {
-    if ( !popupMenu)
-    {
-        popupMenu = new QPopupMenu( this );
-        popupMenu->setFocusPolicy( QWidget::NoFocus );
-    }
-    popupMenu->clear();
-
-    if ( icon.isEmpty() ) {
-        popupMenu->insertItem( message, 0 );
-    } else {
-        popupMenu->insertItem( QIconSet( Opie::Core::OResource::loadPixmap( icon, Opie::Core::OResource::SmallIcon ) ),
-                               message, 0 );
-    }
-
-    QPoint p = mapToGlobal( QPoint( 0, 0 ) );
-    QSize s = popupMenu->sizeHint();
-    popupMenu->popup( QPoint( p.x() + ( width() / 2 ) - ( s.width() / 2 ),
-                              p.y() - s.height() ), 0 );
-
-    QTimer::singleShot( 2500, this, SLOT( popupTimeout() ) );
-}
-
-
-void CardApplet::popupTimeout()
-{
-    popupMenu->hide();
+    QCopEnvelope e("QPE/TaskBar", "message(QString,QString)");
+    e << message;
+    e << QString("cardapplet");
 }
 
 enum { EJECT, INSERT, SUSPEND, RESUME, RESET, CONFIGURE, ACTIVATE };

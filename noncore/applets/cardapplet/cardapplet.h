@@ -54,7 +54,6 @@ class CardApplet : public QWidget
     void cardMessage( const QCString&, const QByteArray& );
     void mainMenuAction( int action );
     void userCardAction( int action );
-    void popupTimeout();
     void slotExited( Opie::Core::OProcess* proc );
     void slotStdout( Opie::Core::OProcess* proc, char* buf, int len );
     void slotStderr( Opie::Core::OProcess* proc, char* buf, int len );
