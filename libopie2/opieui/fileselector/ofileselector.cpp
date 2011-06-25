@@ -36,11 +36,11 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/ofileselector.h>
+#include <opie2/ofilesystembutton.h>
 #include <opie2/oresource.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/mimetype.h>
-#include <qpe/storage.h>
 
 /* QT */
 #include <qcombobox.h>
@@ -375,29 +375,9 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
     connect(m_btnClose, SIGNAL(clicked() ),
             selector(), SIGNAL(closeMe() ) );
 
-    btn = new QToolButton( box );
+    btn = new OFileSystemButton( box );
     btn->setUsesBigPixmap(bigicons);
-    btn->setPixmap( Opie::Core::OResource::loadPixmap( "pcmcia", Opie::Core::OResource::SmallIcon ) );
-
-    m_fsButton = btn;
-    /* let's fill device parts */
-    QPopupMenu* pop = new QPopupMenu(this);
-    connect(pop, SIGNAL( activated(int) ),
-            this, SLOT(slotFSActivated(int) ) );
-
-    StorageInfo storage;
-    const QList<FileSystem> &fs = storage.fileSystems();
-    QListIterator<FileSystem> it(fs);
-    for ( ; it.current(); ++it )
-    {
-        const QString disk = (*it)->name();
-        const QString path = (*it)->path();
-        m_dev.insert( disk, path );
-        pop->insertItem( disk );
-    }
-    m_fsPop = pop;
-
-    connect(btn,SIGNAL(pressed()),this,SLOT(slotFSpressed()));
+    connect(btn,SIGNAL(changeDir(const QString&)),this,SLOT(changeDir(const QString&)));
 
     lay->addWidget( box );
 
@@ -419,12 +399,6 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
 
     lay->addWidget( m_view, 1000 );
     connectSlots();
-}
-
-void OFileViewFileListView::slotFSpressed()
-{
-    m_fsPop->exec( m_fsButton->mapToGlobal( m_fsButton->frameGeometry().bottomRight() ));
-    m_fsButton->setDown(false);
 }
 
 OFileViewFileListView::~OFileViewFileListView()
@@ -723,11 +697,6 @@ void OFileViewFileListView::changeDir( const QString& dir )
     m_currentDir = dir;
     emit selector()->dirSelected( m_currentDir );
     reread( m_all );
-}
-
-void OFileViewFileListView::slotFSActivated( int id )
-{
-    changeDir ( m_dev[m_fsPop->text(id)]  );
 }
 
 /*  check if the mimetype in mime

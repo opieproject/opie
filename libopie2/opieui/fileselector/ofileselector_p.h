@@ -163,22 +163,17 @@ private slots:
     void changeDir( const QString& );
     void slotCurrentChanged( QListViewItem* );
     void slotClicked(int, QListViewItem*, const QPoint&, int );
-    void slotFSActivated(int);
-    void slotFSpressed();
 
 protected:
     OFileSelector* selector();
 
 private:
-    QMap<QString, QString> m_dev;
     bool m_all : 1;
     OFileSelector* m_sel;
-    QPopupMenu* m_fsPop;
     bool compliesMime( const QString& );
     QStringList m_mimes; // used in compy mime
     QString m_currentDir;
     QToolButton *m_btnNew, *m_btnClose;
-    QToolButton *m_fsButton;
     void connectSlots();
     void addFile( QFileInfo* info, bool symlink = FALSE );
     void addDir ( QFileInfo* info, bool symlink = FALSE );
