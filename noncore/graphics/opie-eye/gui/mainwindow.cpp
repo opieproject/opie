@@ -66,6 +66,8 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
 
     connect(m_view, SIGNAL(sig_display(const QString&)),
             this, SLOT(slotDisplay(const QString&)));
+    connect(m_view, SIGNAL(sig_updateDisplay(const QString&)),
+            this, SLOT(slotUpdateDisplay(const QString&)));
     connect(m_view, SIGNAL(sig_showInfo(const QString&)),
             this, SLOT(slotShowInfo(const QString&)) );
     connect(this,SIGNAL(changeListMode(int)),m_view,SLOT(slotChangeMode(int)));
@@ -373,6 +375,19 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
     m_aViewfile->setEnabled(true);
     m_aStartSlide->setEnabled(false);
     m_stack->raiseWidget( ImageInfo );
+}
+
+void PMainWindow::slotUpdateDisplay( const QString& inf ) {
+    // Only display an image if the image view is already showing
+    // (Usually called after deleting an image)
+    if( m_disp && m_disp->isVisible() ) {
+        if( inf.isEmpty() )
+            raiseIconView();
+        else
+            slotDisplay(inf);
+    }
+    else if ( m_info && m_info->isVisible() )
+        raiseIconView();
 }
 
 void PMainWindow::slotDisplay( const QString& inf ) {

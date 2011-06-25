@@ -48,6 +48,7 @@ signals:
 public slots:
     void slotShowInfo( const QString& inf );
     void slotDisplay( const QString& inf );
+    void slotUpdateDisplay( const QString& inf );
     void slotReturn();
     void slotRotateToggled(bool);
     void slotScaleToggled(bool);

@@ -44,6 +44,7 @@ public:
 signals:
     void sig_showInfo( const QString& );
     void sig_display(const QString&);
+    void sig_updateDisplay(const QString&);
     void sig_startslide(int timeout);
 
 public slots:
@@ -61,6 +62,7 @@ private:
     QString currentFileName(bool &isDir)const;
     QString nextFileName(bool &isDir)const;
     QString prevFileName(bool &isDir)const;
+    void updateImage( const QString& name);
     void loadViews();
     void calculateGrid(QResizeEvent*e = 0);
     bool m_setDocCalled:1;

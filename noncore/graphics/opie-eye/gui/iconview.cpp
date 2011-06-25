@@ -373,9 +373,46 @@ void PIconView::slotTrash() {
                                      pa, tr("Delete Image" )))
         return;
 
+    QIconViewItem *item = m_view->currentItem();
+    bool found = false;
+    // Try to jump to another image
+    // First try going to the next image
+    isDir = false;
+    QString name = nextFileName(isDir);
+    while (isDir==true) {
+        m_view->setCurrentItem(m_view->currentItem()->nextItem());
+        name = nextFileName(isDir);
+    }
+    if (name.isEmpty() || isDir) {
+        // No next image, try previous
+        isDir = false;
+        name = prevFileName(isDir);
+        while (isDir==true) {
+            m_view->setCurrentItem(m_view->currentItem()->prevItem());
+            name = prevFileName(isDir);
+        }
+        if ( ! (isDir || name.isEmpty()) ) {
+            /* if we got a name we have a prev item */
+            m_view->setCurrentItem(m_view->currentItem()->prevItem());
+            updateImage(name);
+            found = true;
+        }
+    }
+    else {
+        /* if we got a name we have a next item */
+        m_view->setCurrentItem(m_view->currentItem()->nextItem());
+        updateImage(name);
+        found = true;
+    }
+
+    if( !found ) {
+        // Ensure we go back to the icon view
+        updateImage("");
+    }
 
     currentView()->dirLister()->deleteImage( pa );
-    delete m_view->currentItem();
+    delete item;
+    m_view->arrangeItemsInGrid(true);
 }
 
 /*
@@ -777,10 +814,21 @@ void PIconView::slotShowImage()
     if (isDir) return;
     slotShowImage( name );
 }
+
 void PIconView::slotShowImage( const QString& name) {
     PDirLister *lister = currentView()->dirLister();
     QString r_name = lister->nameToFname(name);
     emit sig_display(r_name);
+}
+
+void PIconView::updateImage( const QString& name) {
+    if( !name.isEmpty() ) {
+        PDirLister *lister = currentView()->dirLister();
+        QString r_name = lister->nameToFname(name);
+        emit sig_updateDisplay(r_name);
+    }
+    else
+        emit sig_updateDisplay("");
 }
 
 void PIconView::slotStartSlide() {
