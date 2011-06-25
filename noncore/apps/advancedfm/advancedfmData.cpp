@@ -14,6 +14,7 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/oresource.h>
+#include <opie2/ofilesystembutton.h>
 #include <qpe/applnk.h>
 #include <qpe/storage.h>
 #include <qpe/qpeapplication.h>
@@ -72,17 +73,10 @@ void AdvancedFm::init() {
     qpeDirButton->setAutoRaise( true );
     menuBar->insertItem( qpeDirButton );
 
-    cfButton = new QToolButton( 0, "CFButton");
-    cfButton->setUsesBigPixmap( useBigIcon );
-    cfButton->setPixmap( Opie::Core::OResource::loadPixmap( "pcmcia", Opie::Core::OResource::SmallIcon ) );
-    cfButton->setAutoRaise( true );
-    menuBar->insertItem( cfButton );
-
-    sdButton = new QToolButton( 0, "SDButton");
-    sdButton->setUsesBigPixmap( useBigIcon );
-    sdButton->setPixmap( Opie::Core::OResource::loadPixmap( "advancedfm/sdcard", Opie::Core::OResource::SmallIcon ) );
-    sdButton->setAutoRaise( true );
-    menuBar->insertItem( sdButton );
+    fsButton = new OFileSystemButton( 0 );
+    fsButton->setUsesBigPixmap( useBigIcon );
+    fsButton->setAutoRaise( true );
+    menuBar->insertItem( fsButton );
 
     docButton = new QToolButton( 0,"docsButton");
     docButton->setUsesBigPixmap( useBigIcon );
@@ -230,12 +224,6 @@ void AdvancedFm::init() {
 
     ///////////////
 
-    if( !StorageInfo::hasSd() || !StorageInfo::hasMmc()) {
-        sdButton->hide();
-    }
-    if( !StorageInfo::hasCf() ) {
-        cfButton->hide();
-    }
     currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     currentDir.setPath( QDir::currentDirPath());
 
@@ -251,8 +239,7 @@ void AdvancedFm::initConnections()
 {
     connect(qApp,SIGNAL(aboutToQuit()),this,SLOT(cleanUp()));
     connect(qpeDirButton,SIGNAL(released()),this,SLOT(QPEButtonPushed()));
-    connect(cfButton,SIGNAL(released()),this,SLOT(CFButtonPushed()));
-    connect(sdButton,SIGNAL(released()),this,SLOT(SDButtonPushed()));
+    connect(fsButton,SIGNAL(changeDir(const QString&)),this,SLOT(changeTo(const QString&)));
     connect(cdUpButton,SIGNAL(released()),this,SLOT(upDir()));
     connect(docButton,SIGNAL(released()),this,SLOT(docButtonPushed()));
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()));

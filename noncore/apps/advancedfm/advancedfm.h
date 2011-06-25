@@ -70,8 +70,7 @@ protected:
     QToolButton  *homeButton;
     QToolButton *docButton;
     QToolButton *cdUpButton;
-    QToolButton *sdButton;
-    QToolButton *cfButton;
+    QToolButton *fsButton;
     QToolButton *qpeDirButton;
     QDir currentDir, currentRemoteDir;
     QComboBox *currentPathCombo;
@@ -135,8 +134,6 @@ protected slots:
     void showFileMenu();
     void homeButtonPushed();
     void docButtonPushed();
-    void SDButtonPushed();
-    void CFButtonPushed();
     void QPEButtonPushed();
     void upDir();
     void currentPathComboChanged();

@@ -14,7 +14,6 @@
 
 #include <opie2/odebug.h>
 #include <opie2/oresource.h>
-#include <opie2/ostorageinfo.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
@@ -362,21 +361,6 @@ void AdvancedFm::homeButtonPushed() {
 
 void AdvancedFm::docButtonPushed() {
     changeTo(QPEApplication::documentDir());
-}
-
-void AdvancedFm::SDButtonPushed() {
-    Opie::Core::OStorageInfo info;
-    if(StorageInfo::hasSd() ) {
-        changeTo(info.sdPath());
-    }
-    else if(StorageInfo::hasMmc()) {
-        changeTo(info.mmcPath());
-    }
-}
-
-void AdvancedFm::CFButtonPushed() {
-    Opie::Core::OStorageInfo info;
-    changeTo(info.cfPath());
 }
 
 void AdvancedFm::QPEButtonPushed() {
