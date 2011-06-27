@@ -1,0 +1,3 @@
+  config LIBDBUSQT2
+    boolean "DBus bindings for Qt/Embedded 2.x"
+    default "y"
