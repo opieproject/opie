@@ -1,0 +1,9 @@
+config CONNMAN
+  bool "ConnMan support"
+  depends (LIBQPE || LIBQPE-X11) && LIBOPIE2CORE && LIBDBUSQT2
+  comment "ConnMan support needs a libqpe, libopie2core and Qt2 DBus bindings"
+  depends !((LIBQPE || LIBQPE-X11) && LIBOPIE2CORE && LIBDBUSQT2)
+
+if CONNMAN
+@sources@
+endif
