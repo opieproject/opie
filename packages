@@ -25,6 +25,8 @@ CONFIG_CLIPBOARDAPPLET	core/applets/clipboardapplet	clipboardapplet.pro
 CONFIG_CLOCKAPPLET	core/applets/clockapplet	clockapplet.pro
 CONFIG_CLOCK	noncore/tools/clock	clock.pro
 CONFIG_CONFEDIT	noncore/apps/confedit	confedit.pro
+CONFIG_CONNMAN-APPLET	noncore/net/connman/applet	connmanapplet.pro
+CONFIG_CONNMAN-SETTINGS	noncore/net/connman/settings	connmansettings.pro
 CONFIG_DAGGER noncore/apps/dagger dagger.pro
 CONFIG_DASHER	noncore/unsupported/dasher	dasher.pro
 CONFIG_DATEBOOK	core/pim/datebook	datebook.pro
