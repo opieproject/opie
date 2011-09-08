@@ -80,14 +80,10 @@ DEPENDPATH	+= $(OPIEDIR)/rsync
 INCLUDEPATH += $(OPIEDIR)/noncore/settings/mediummount
 DEPENDPATH  += $(OPIEDIR)/noncore/settings/mediummount
 
-LIBS        += -lqpe -lopiecore2 -lopieui2 -lopiesecurity2 -lqrsync -lsysfs
+LIBS        += -lqpe -lopiecore2 -lopieui2 -lopiesecurity2 -lqrsync -lsysfs -lcrypt -lm
 TARGET       = qpe
 
 ## not ready for use yet
 # DEFINES += QPE_HAVE_DIRECT_ACCESS
-
-contains( $(CONFIG_TARGET_MACOSX), y ) {
-  LIBS += -lcrypt
-}
 
 include( $(OPIEDIR)/include.pro )
