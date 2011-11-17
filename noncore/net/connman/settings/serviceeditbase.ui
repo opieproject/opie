@@ -77,10 +77,10 @@
                         </property>
                     </widget>
                     <widget row="0"  column="1" >
-                        <class>QLabel</class>
+                        <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>lblName</cstring>
+                            <cstring>leName</cstring>
                         </property>
                         <property stdset="1">
                             <name>sizePolicy</name>
@@ -90,54 +90,30 @@
                             </sizepolicy>
                         </property>
                         <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>Panel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Sunken</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string></string>
+                            <name>focusPolicy</name>
+                            <enum>ClickFocus</enum>
                         </property>
                     </widget>
                     <widget row="1"  column="1" >
-                        <class>QLabel</class>
+                        <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>lblState</cstring>
+                            <cstring>leState</cstring>
                         </property>
                         <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>Panel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Sunken</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string></string>
+                            <name>focusPolicy</name>
+                            <enum>ClickFocus</enum>
                         </property>
                     </widget>
                     <widget row="2"  column="1" >
-                        <class>QLabel</class>
+                        <class>QProgressBar</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>lblStrength</cstring>
+                            <cstring>pbStrength</cstring>
                         </property>
                         <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>Panel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Sunken</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string></string>
+                            <name>progress</name>
+                            <number>0</number>
                         </property>
                     </widget>
                     <widget row="1"  column="0" >
@@ -163,18 +139,14 @@
                         </property>
                     </widget>
                     <widget row="4"  column="1" >
-                        <class>QLabel</class>
+                        <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>lblV6Address</cstring>
+                            <cstring>leV6AddressInfo</cstring>
                         </property>
                         <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>Panel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Sunken</enum>
+                            <name>focusPolicy</name>
+                            <enum>ClickFocus</enum>
                         </property>
                         <property stdset="1">
                             <name>text</name>
@@ -193,41 +165,25 @@
                         </property>
                     </widget>
                     <widget row="3"  column="1" >
-                        <class>QLabel</class>
+                        <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>lblV4Address</cstring>
+                            <cstring>leV4AddressInfo</cstring>
                         </property>
                         <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>Panel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Sunken</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string></string>
+                            <name>focusPolicy</name>
+                            <enum>ClickFocus</enum>
                         </property>
                     </widget>
                     <widget row="6"  column="1" >
-                        <class>QLabel</class>
+                        <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>lblMacAddress</cstring>
+                            <cstring>leMacAddress</cstring>
                         </property>
                         <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>Panel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Sunken</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string></string>
+                            <name>focusPolicy</name>
+                            <enum>ClickFocus</enum>
                         </property>
                     </widget>
                     <widget row="3"  column="0" >
@@ -242,22 +198,14 @@
                         </property>
                     </widget>
                     <widget row="5"  column="1" >
-                        <class>QLabel</class>
+                        <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>lblAdapter</cstring>
+                            <cstring>leAdapter</cstring>
                         </property>
                         <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>Panel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Sunken</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string></string>
+                            <name>focusPolicy</name>
+                            <enum>ClickFocus</enum>
                         </property>
                     </widget>
                     <widget row="5"  column="0" >

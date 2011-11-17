@@ -48,6 +48,7 @@
 #include <qspinbox.h>
 #include <qcheckbox.h>
 #include <qgroupbox.h>
+#include <qprogressbar.h>
 
 static int findComboItem( QComboBox *combo, const QString &str )
 {
@@ -67,30 +68,47 @@ ConnManServiceEditor::ConnManServiceEditor( QDBusProxy *proxy, QWidget* parent, 
     setCaption(tr("Configure Service"));
     m_proxy = proxy;
 
+    QPalette p = palette();
+    QColor color = p.color(QPalette::Disabled, QColorGroup::Background);
+    p.setColor(QColorGroup::Base, color);
+    p.setColor(QColorGroup::Background, color);
+    leName->setPalette(p);
+    leName->setReadOnly(true);
+    leState->setPalette(p);
+    leState->setReadOnly(true);
+    leV4AddressInfo->setPalette(p);
+    leV4AddressInfo->setReadOnly(true);
+    leV6AddressInfo->setPalette(p);
+    leV6AddressInfo->setReadOnly(true);
+    leAdapter->setPalette(p);
+    leAdapter->setReadOnly(true);
+    leMacAddress->setPalette(p);
+    leMacAddress->setReadOnly(true);
+
     m_immutable = true;
     QDBusMessage reply = proxy->sendWithReply("GetProperties", QValueList<QDBusData>());
     if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
         QMap<QString,QDBusData> map = reply[0].toStringKeyMap().toQMap();
         // *** Info tab ***
-        lblName->setText( map["Name"].toVariant().value.toString() );
+        leName->setText( map["Name"].toVariant().value.toString() );
         QString state = map["State"].toVariant().value.toString();
         if( state == "failure" )
             state += QString(" (%1)").arg( map["Error"].toVariant().value.toString() );
-        lblState->setText( state );
+        leState->setText( state );
         QString type = map["Type"].toVariant().value.toString();
         if( type == "wifi" )
-            lblStrength->setText( QString::number( map["Strength"].toVariant().value.toByte() ) );
+            pbStrength->setProgress( map["Strength"].toVariant().value.toByte() );
         else {
-            lblStrength->hide();
+            pbStrength->hide();
             lblStrengthLabel->hide();
         }
         m_ipv4map = map["IPv4"].toVariant().value.toStringKeyMap().toQMap();
         m_ipv6map = map["IPv6"].toVariant().value.toStringKeyMap().toQMap();
-        lblV4Address->setText( m_ipv4map["Address"].toVariant().value.toString() );
-        lblV6Address->setText( m_ipv6map["Address"].toVariant().value.toString() );
+        leV4AddressInfo->setText( m_ipv4map["Address"].toVariant().value.toString() );
+        leV6AddressInfo->setText( m_ipv6map["Address"].toVariant().value.toString() );
         QMap<QString,QDBusData> ethernetMap = map["Ethernet"].toVariant().value.toStringKeyMap().toQMap();
-        lblAdapter->setText( ethernetMap["Interface"].toVariant().value.toString() );
-        lblMacAddress->setText( ethernetMap["Address"].toVariant().value.toString() );
+        leAdapter->setText( ethernetMap["Interface"].toVariant().value.toString() );
+        leMacAddress->setText( ethernetMap["Address"].toVariant().value.toString() );
 
         m_immutable = map["Immutable"].toVariant().value.toBool();
         
