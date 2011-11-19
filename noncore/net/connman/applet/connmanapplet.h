@@ -37,8 +37,30 @@ class QDBusProxy;
 #include <qpixmap.h>
 #include <dbus/qdbusconnection.h>
 #include <dbus/qdbusvariant.h>
+#include <dbus/qdbusobjectpath.h>
 #include <qmap.h>
+#include <qdict.h>
 #include <qstring.h>
+#include <qvaluelist.h>
+
+class ServiceListener: public QObject {
+    Q_OBJECT
+public:
+    ServiceListener( const QDBusObjectPath &path );
+    ~ServiceListener();
+
+signals:
+    void serviceStateChanged( const QString &name, const QString &oldstate, const QString &newstate );
+
+protected slots:
+    void slotAsyncReply( int callId, const QDBusMessage& reply );
+    void slotDBusSignal( const QDBusMessage& message );
+
+private:
+    QDBusProxy *m_proxy;
+    QString m_serviceName;
+    QString m_state;
+};
 
 class ConnManApplet: public QWidget {
     Q_OBJECT
@@ -50,6 +72,8 @@ public:
 protected slots:
     void slotAsyncReply( int callId, const QDBusMessage& reply );
     void slotDBusSignal( const QDBusMessage& message );
+    void updateServices();
+    void serviceStateChanged( const QString &name, const QString &oldstate, const QString &newstate );
 
 private:
     void mousePressEvent( QMouseEvent * );
@@ -67,7 +91,8 @@ private:
     QMap<int,QString> m_calls;
     QString m_state;
     QMap<QString,bool> m_techs;
-
+    QValueList<QDBusObjectPath> m_servicePaths;
+    QDict<ServiceListener> m_services;
 };
 
 #endif

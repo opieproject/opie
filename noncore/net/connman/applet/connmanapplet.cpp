@@ -62,6 +62,63 @@ using namespace Opie::Core;
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
 #include <qtextstream.h>
+#include <qtimer.h>
+
+
+ServiceListener::ServiceListener( const QDBusObjectPath &path ): QObject( 0, 0 )
+{
+    QDBusConnection connection = QDBusConnection::systemBus();
+    m_proxy = new QDBusProxy(this);
+    m_proxy->setService("net.connman");
+    m_proxy->setPath(path);
+    m_proxy->setInterface("net.connman.Service");
+    m_proxy->setConnection(connection);
+
+    QObject::connect(m_proxy, SIGNAL(asyncReply(int, const QDBusMessage&)),
+                    this, SLOT(slotAsyncReply(int, const QDBusMessage&)));
+    QObject::connect(m_proxy, SIGNAL(dbusSignal(const QDBusMessage&)),
+                    this, SLOT(slotDBusSignal(const QDBusMessage&)));
+
+    m_proxy->sendWithAsyncReply("GetProperties", QValueList<QDBusData>());
+}
+
+ServiceListener::~ServiceListener()
+{
+}
+
+void ServiceListener::slotAsyncReply( int callId, const QDBusMessage& reply )
+{
+    if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
+        const QDBusDataMap<QString> map = reply[0].toStringKeyMap();
+        QDBusDataMap<QString>::ConstIterator it = map.begin();
+        for (; it != map.end(); ++it) {
+            if( it.key() == "Name" ) {
+                m_serviceName = it.data().toVariant().value.toString();
+            }
+            else if( it.key() == "State" ) {
+                m_state = it.data().toVariant().value.toString();
+            }
+        }
+    }
+}
+
+void ServiceListener::slotDBusSignal( const QDBusMessage& message )
+{
+    odebug << "ConnMan: " << message.member() << oendl;
+    if( message.member() == "PropertyChanged" ) {
+        QString prop = message[0].toString();
+        if( prop == "State" ) {
+            QString oldState = m_state;
+            QString newState = message[1].toVariant().value.toString();
+            if( oldState != newState ) {
+                emit serviceStateChanged( m_serviceName, oldState, newState );
+                m_state = newState;
+            }
+        }
+    }
+}
+
+
 
 ConnManApplet::ConnManApplet( QWidget *parent, const char *name ) : QWidget( parent, name )
 {
@@ -71,6 +128,8 @@ ConnManApplet::ConnManApplet( QWidget *parent, const char *name ) : QWidget( par
     m_brokenPix = OResource::loadImage( "connmanapplet/off", OResource::SmallIcon );
     m_offlinePix = OResource::loadImage( "connmanapplet/disconnected", OResource::SmallIcon );
     m_onlinePix = OResource::loadImage( "connmanapplet/connected", OResource::SmallIcon );
+
+    m_services.setAutoDelete(TRUE);
 
     m_connection = QDBusConnection::systemBus();
     m_managerProxy = new QDBusProxy(this);
@@ -223,6 +282,37 @@ void ConnManApplet::managerPropertySet( const QString &prop, const QDBusVariant 
         for( QStringList::Iterator it = enabledTechs.begin(); it != enabledTechs.end(); ++it ) {
             m_techs[*it] = true;
         }
+    }
+    else if( prop == "Services" ) {
+        m_servicePaths = propval.value.toList().toObjectPathList();
+        QTimer::singleShot( 0, this, SLOT( updateServices()) );
+    }
+}
+
+void ConnManApplet::updateServices()
+{
+    m_services.clear();
+    QValueList<QDBusObjectPath>::ConstIterator it2 = m_servicePaths.begin();
+    for (; it2 != m_servicePaths.end(); ++it2) {
+        ServiceListener *listener = new ServiceListener((*it2));
+        QObject::connect(listener, SIGNAL(serviceStateChanged(const QString&, const QString&, const QString&)),
+                        this, SLOT(serviceStateChanged(const QString&, const QString&, const QString&)));
+        m_services.insert( (*it2), listener );
+    }
+}
+
+void ConnManApplet::serviceStateChanged( const QString &name, const QString &oldstate, const QString &newstate )
+{
+    QString msg = "";
+    odebug << "serviceStateChanged( " << name << ", " << oldstate << ", " << newstate << " )" << oendl;
+    if( newstate == "ready" || ( newstate == "online" && oldstate != "ready" ) ) {
+        msg = tr("Connected to %1").arg(name);
+    }
+
+    if( !msg.isEmpty() ) {
+        QCopEnvelope e("QPE/TaskBar", "message(QString,QString)");
+        e << msg;
+        e << QString("connmanapplet");
     }
 }
 
