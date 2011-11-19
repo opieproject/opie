@@ -1,8 +1,8 @@
 [Desktop Entry]
 Exec=connmansettings
-Icon=networksettings2/NS2
+Icon=connmansettings/connmansettings
 Type=Application
-Name=ConnMan
+Name=Network
 Comment=Configure The Network settings using this tool.
 Name[da]=Netværk
 Name[de]=Netzwerk
