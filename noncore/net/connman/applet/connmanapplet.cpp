@@ -196,7 +196,7 @@ void ConnManApplet::mousePressEvent( QMouseEvent *)
     }
 
     menu->insertSeparator();
-    menu->insertItem( tr("Launch manager"), 0 );
+    menu->insertItem( tr("Settings..."), 0 );
 
     QPoint p = mapToGlobal( QPoint(1, -menu->sizeHint().height()-1) );
     int ret = menu->exec(p, 0);
