@@ -219,9 +219,10 @@ void MainWindowImpl::updateList()
         }
     }
 
-    if( lastItem )
+    if( lastItem ) {
         serviceList->ensureItemVisible(lastItem);
         serviceList->setCurrentItem(lastItem);
+    }
 }
 
 void MainWindowImpl::slotConnectService()
