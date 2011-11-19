@@ -65,8 +65,11 @@ using namespace Opie::Core;
 #include <qtimer.h>
 
 
-ServiceListener::ServiceListener( const QDBusObjectPath &path ): QObject( 0, 0 )
+ServiceListener::ServiceListener( const QDBusObjectPath &path, int seq ): QObject( 0, 0 )
 {
+    m_seq = seq;
+    m_strength = -1;
+
     QDBusConnection connection = QDBusConnection::systemBus();
     m_proxy = new QDBusProxy(this);
     m_proxy->setService("net.connman");
@@ -98,7 +101,12 @@ void ServiceListener::slotAsyncReply( int callId, const QDBusMessage& reply )
             else if( it.key() == "State" ) {
                 m_state = it.data().toVariant().value.toString();
             }
+            else if( it.key() == "Strength" ) {
+                m_strength = it.data().toVariant().value.toByte();
+            }
         }
+        if( ( m_state == "ready" || m_state == "online" ) && m_seq == 0 )
+            emit signalStrength( m_strength );
     }
 }
 
@@ -115,6 +123,11 @@ void ServiceListener::slotDBusSignal( const QDBusMessage& message )
                 m_state = newState;
             }
         }
+        else if( prop == "Strength" ) {
+            m_strength = message[1].toVariant().value.toByte();
+            if( ( m_state == "ready" || m_state == "online" ) && m_seq == 0 )
+                emit signalStrength( m_strength );
+        }
     }
 }
 
@@ -128,6 +141,11 @@ ConnManApplet::ConnManApplet( QWidget *parent, const char *name ) : QWidget( par
     m_brokenPix = OResource::loadImage( "connmanapplet/off", OResource::SmallIcon );
     m_offlinePix = OResource::loadImage( "connmanapplet/disconnected", OResource::SmallIcon );
     m_onlinePix = OResource::loadImage( "connmanapplet/connected", OResource::SmallIcon );
+    m_strengthPix[0] = OResource::loadImage( "connmanapplet/signal_00", OResource::SmallIcon );
+    m_strengthPix[25] = OResource::loadImage( "connmanapplet/signal_25", OResource::SmallIcon );
+    m_strengthPix[50] = OResource::loadImage( "connmanapplet/signal_50", OResource::SmallIcon );
+    m_strengthPix[75] = OResource::loadImage( "connmanapplet/signal_75", OResource::SmallIcon );
+    m_strengthPix[100] = OResource::loadImage( "connmanapplet/signal_100", OResource::SmallIcon );
 
     m_services.setAutoDelete(TRUE);
 
@@ -229,7 +247,10 @@ void ConnManApplet::paintEvent( QPaintEvent* )
     if( m_state == "offline" )
         p.drawPixmap( 0, 0, m_offlinePix );
     else if( m_state == "online" || m_state == "connected" )
-        p.drawPixmap( 0, 0, m_onlinePix );
+        if( m_strength > -1 )
+            p.drawPixmap( 0, 0, m_strengthPix[m_strength] );
+        else
+            p.drawPixmap( 0, 0, m_onlinePix );
     else
         p.drawPixmap( 0, 0, m_brokenPix );
 }
@@ -248,7 +269,7 @@ void ConnManApplet::slotAsyncReply( int callId, const QDBusMessage& reply )
 
 void ConnManApplet::slotDBusSignal(const QDBusMessage& message)
 {
-    odebug << "ConnMan: " << message.member() << oendl;
+    odebug << "ConnMan: " << message.member() << ": " << message[0].toString() << oendl;
     if( message.member() == "PropertyChanged" ) {
         managerPropertySet( message[0].toString(), message[1].toVariant() );
     }
@@ -293,11 +314,15 @@ void ConnManApplet::updateServices()
 {
     m_services.clear();
     QValueList<QDBusObjectPath>::ConstIterator it2 = m_servicePaths.begin();
+    int seq=0;
     for (; it2 != m_servicePaths.end(); ++it2) {
-        ServiceListener *listener = new ServiceListener((*it2));
+        ServiceListener *listener = new ServiceListener((*it2), seq);
         QObject::connect(listener, SIGNAL(serviceStateChanged(const QString&, const QString&, const QString&)),
                         this, SLOT(serviceStateChanged(const QString&, const QString&, const QString&)));
+        QObject::connect(listener, SIGNAL(signalStrength(int)),
+                        this, SLOT(signalStrength(int)));
         m_services.insert( (*it2), listener );
+        seq++;
     }
 }
 
@@ -313,6 +338,28 @@ void ConnManApplet::serviceStateChanged( const QString &name, const QString &old
         QCopEnvelope e("QPE/TaskBar", "message(QString,QString)");
         e << msg;
         e << QString("connmanapplet");
+    }
+}
+
+void ConnManApplet::signalStrength( int strength )
+{
+    odebug << "signalStrength( " << strength << " )" << oendl;
+    int normStrength = 0;
+    // These values shamelessly borrowed from nm-applet code
+    if( strength > 80 )
+        normStrength = 100;
+    else if( strength > 55 )
+        normStrength = 75;
+    else if( strength > 30 )
+        normStrength = 50;
+    else if( strength > 5 )
+        normStrength = 25;
+    else if( strength == -1 )
+        normStrength = -1;
+
+    if( normStrength != m_strength ) {
+        m_strength = normStrength;
+        update();
     }
 }
 

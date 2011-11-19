@@ -46,11 +46,12 @@ class QDBusProxy;
 class ServiceListener: public QObject {
     Q_OBJECT
 public:
-    ServiceListener( const QDBusObjectPath &path );
+    ServiceListener( const QDBusObjectPath &path, int seq );
     ~ServiceListener();
 
 signals:
     void serviceStateChanged( const QString &name, const QString &oldstate, const QString &newstate );
+    void signalStrength( int strength );
 
 protected slots:
     void slotAsyncReply( int callId, const QDBusMessage& reply );
@@ -60,6 +61,8 @@ private:
     QDBusProxy *m_proxy;
     QString m_serviceName;
     QString m_state;
+    int m_strength;
+    int m_seq;
 };
 
 class ConnManApplet: public QWidget {
@@ -74,6 +77,7 @@ protected slots:
     void slotDBusSignal( const QDBusMessage& message );
     void updateServices();
     void serviceStateChanged( const QString &name, const QString &oldstate, const QString &newstate );
+    void signalStrength( int strength );
 
 private:
     void mousePressEvent( QMouseEvent * );
@@ -86,10 +90,12 @@ private:
     QPixmap m_brokenPix;
     QPixmap m_offlinePix;
     QPixmap m_onlinePix;
+    QMap<int,QPixmap> m_strengthPix;
     QDBusConnection m_connection;
     QDBusProxy *m_managerProxy;
     QMap<int,QString> m_calls;
     QString m_state;
+    int m_strength;
     QMap<QString,bool> m_techs;
     QValueList<QDBusObjectPath> m_servicePaths;
     QDict<ServiceListener> m_services;
