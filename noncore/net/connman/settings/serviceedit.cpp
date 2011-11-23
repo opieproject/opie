@@ -288,11 +288,11 @@ void ConnManServiceEditor::accept()
             leV4Netmask->text() != m_ipv4map["Netmask"].toVariant().value.toString() ||
             leV4Gateway->text() != m_ipv4map["Gateway"].toVariant().value.toString() ))
         ) {
-            m_ipv4map["Method"] == QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(method)));
+            m_ipv4map["Method"] = QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(method)));
             if( method == "manual" ) {
-                m_ipv4map["Address"] == QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(leV4Address->text())));
-                m_ipv4map["Netmask"] == QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(leV4Netmask->text())));
-                m_ipv4map["Gateway"] == QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(leV4Gateway->text())));
+                m_ipv4map["Address"] = QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(leV4Address->text())));
+                m_ipv4map["Netmask"] = QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(leV4Netmask->text())));
+                m_ipv4map["Gateway"] = QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(leV4Gateway->text())));
             }
             odebug << "setting ipv4 config" << oendl;
             QValueList<QDBusData> params;
