@@ -63,6 +63,13 @@ using namespace Opie::Core;
 #include <qmessagebox.h>
 #include <qtextstream.h>
 #include <qtimer.h>
+#include <qlabel.h>
+#include <qlineedit.h>
+#include <qradiobutton.h>
+#include <qbuttongroup.h>
+
+
+#define AGENT_OBJECT_PATH        "/org/opie/connman/agent"
 
 
 ServiceListener::ServiceListener( const QDBusObjectPath &path, int seq ): QObject( 0, 0 )
@@ -131,10 +138,103 @@ void ServiceListener::slotDBusSignal( const QDBusMessage& message )
     }
 }
 
+// QDialog subclass that allows us to handle authentication asynchronously
+class AuthDialog: public QDialog {
+public:
+    AuthDialog( const QDBusMessage &authMsg, const QDBusDataMap<QString> &fields, 
+                QWidget *parent=0, const char *name=0, bool modal=FALSE, WFlags f=0 )
+        : QDialog( parent, name, modal, f ),
+        m_authMsg( authMsg )
+    {
+        setCaption( tr( "Network Authentication" ) );
+
+        QVBoxLayout *mainLayout = new QVBoxLayout( this ); 
+        mainLayout->setSpacing( 0 );
+        mainLayout->setMargin( 0 );
+
+        QGridLayout *layout = new QGridLayout();
+        layout->setSpacing( 6 );
+        layout->setMargin( 4 );
+
+        int i=0;
+        QDict<QButtonGroup> groups;
+        QDBusDataMap<QString>::ConstIterator it = fields.begin();
+        for (; it != fields.end(); ++it) {
+            QMap<QString,QDBusData> params = it.data().toVariant().value.toStringKeyMap().toQMap();
+            if( params.contains("Alternates") ) {
+                QButtonGroup *grp = new QButtonGroup(this);
+                grp->hide();
+                groups.insert( it.key(), grp );
+                QStringList alternates = params["Alternates"].toVariant().value.toList().toStringList();
+                for ( QStringList::Iterator it = alternates.begin(); it != alternates.end(); ++it )
+                    groups.insert( (*it), grp );
+            }
+
+            QLineEdit *edit = new QLineEdit(this);
+            m_controls.insert( it.key(), edit );
+            QButtonGroup *grp = groups[it.key()];
+            if( grp ) {
+                QRadioButton *radio = new QRadioButton(this);
+                radio->setText( it.key() );
+                int id = grp->insert(radio);
+                if( id == 0 )
+                    grp->setButton(0);
+                else
+                    edit->setEnabled(false);
+                layout->addWidget( radio, i, 0 );
+                QObject::connect(radio, SIGNAL(toggled(bool)), edit, SLOT(setEnabled(bool)));
+                QObject::connect(radio, SIGNAL(clicked()), edit, SLOT(setFocus()));
+            }
+            else {
+                QLabel *label = new QLabel(this);
+                label->setText( it.key() );
+                layout->addWidget( label, i, 0 );
+            }
+            layout->addWidget( edit, i, 1 );
+            i++;
+        }
+
+        mainLayout->addLayout(layout);
+
+        adjustSize();
+        QWidget *desk = QApplication::desktop();
+        move( desk->width()/2 - width()/2 ,
+              desk->width()/2 - height()/2 );
+    };
+
+    void done( int ret ) {
+        QDialog::done(ret);
+        QDBusConnection connection = QDBusConnection::systemBus();
+        if( ret == QDialog::Accepted ) {
+            QDBusMessage reply = QDBusMessage::methodReply(m_authMsg);
+            QMap<QString,QDBusData> map;
+            for( QDictIterator<QLineEdit> it(m_controls); it.current(); ++it ) {
+                if( it.current()->isEnabled() ) {
+                    map.insert(it.currentKey(), QDBusData::fromVariant(QDBusVariant(QDBusData::fromString(it.current()->text()))));
+                }
+            }
+            reply << QDBusData::fromStringKeyMap(map);
+            connection.send(reply);
+        }
+        else {
+            QDBusError error("net.connman.Agent.Error.Canceled", tr("User canceled authentication"));
+            QDBusMessage reply = QDBusMessage::methodError(m_authMsg, error);
+            connection.send(reply);
+        }
+    };
+private:
+    QDBusMessage m_authMsg;
+    QDict<QLineEdit> m_controls;
+};
+
+
+
 
 
 ConnManApplet::ConnManApplet( QWidget *parent, const char *name ) : QWidget( parent, name )
 {
+    m_agentDlg = NULL;
+
     setFixedHeight( AppLnk::smallIconSize() );
     setFixedWidth( AppLnk::smallIconSize() );
 
@@ -163,10 +263,23 @@ ConnManApplet::ConnManApplet( QWidget *parent, const char *name ) : QWidget( par
 
     int callId = m_managerProxy->sendWithAsyncReply("GetProperties", QValueList<QDBusData>());
     m_calls[callId] = "GetProperties";
+
+
+    // Register agent
+    m_connection.registerObject(AGENT_OBJECT_PATH, this);
+    odebug << "Object registered for path " << AGENT_OBJECT_PATH << " on unique name " <<
+           m_connection.uniqueName().local8Bit().data() << oendl;
+    QValueList<QDBusData> parameters;
+    parameters << QDBusData::fromObjectPath(QDBusObjectPath(AGENT_OBJECT_PATH));
+    callId = m_managerProxy->sendWithAsyncReply("RegisterAgent", parameters);
+    m_calls[callId] = "RegisterAgent";
 }
 
 ConnManApplet::~ConnManApplet()
 {
+    m_connection.unregisterObject(AGENT_OBJECT_PATH);
+    delete m_managerProxy;
+    delete m_agentDlg;
 }
 
 int ConnManApplet::position()
@@ -362,6 +475,47 @@ void ConnManApplet::signalStrength( int strength )
         update();
     }
 }
+
+bool ConnManApplet::handleMethodCall(const QDBusMessage& message)
+{
+    odebug << "OBluetoothAgent::handleMethodCall: interface='" << message.interface().latin1() << "', member='" << message.member().latin1() << "'" << oendl;
+
+    if (message.interface() != "net.connman.Agent")
+        return false;
+
+    if (message.member() == "ReportError") {
+        destroyDialog();
+        QMessageBox::warning(this, tr("Network Error"), message[1].toString());
+        return true;
+    }
+    else if (message.member() == "RequestInput") {
+        showDialog( message, message[1].toStringKeyMap() );
+        return true;
+    }
+    else if (message.member() == "Cancel") {
+        destroyDialog();
+        QMessageBox::message(tr("Network"),tr("Authentication was cancelled"));
+        return true;
+    }
+
+    return false;
+}
+
+void ConnManApplet::showDialog( const QDBusMessage& message, const QDBusDataMap<QString> &fields )
+{
+    destroyDialog();
+    m_agentDlg = new AuthDialog(message, fields, this);
+    m_agentDlg->show();
+}
+
+void ConnManApplet::destroyDialog()
+{
+    if( m_agentDlg ) {
+        delete m_agentDlg;
+        m_agentDlg = NULL;
+    }
+}
+
 
 EXPORT_OPIE_APPLET_v1( ConnManApplet )
 

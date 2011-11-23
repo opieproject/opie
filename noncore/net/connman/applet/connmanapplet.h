@@ -32,11 +32,13 @@
 #define CONNMANAPPLET_H
 
 class QDBusProxy;
+class QDialog;
 
 #include <qwidget.h>
 #include <qpixmap.h>
 #include <dbus/qdbusconnection.h>
 #include <dbus/qdbusvariant.h>
+#include <dbus/qdbusobject.h>
 #include <dbus/qdbusobjectpath.h>
 #include <qmap.h>
 #include <qdict.h>
@@ -65,12 +67,15 @@ private:
     int m_seq;
 };
 
-class ConnManApplet: public QWidget {
+class ConnManApplet: public QWidget, public QDBusObjectBase {
     Q_OBJECT
 public:
     ConnManApplet( QWidget *parent = 0, const char *name=0 );
     ~ConnManApplet();
     static int position();
+
+protected:
+    virtual bool handleMethodCall(const QDBusMessage& message);
 
 protected slots:
     void slotAsyncReply( int callId, const QDBusMessage& reply );
@@ -85,6 +90,8 @@ private:
     void launchSettings();
     void managerPropertySet( const QString &prop, const QDBusVariant &propval );
     void enableTechnology( const QString &tech, bool enable );
+    void showDialog( const QDBusMessage& message, const QDBusDataMap<QString> &fields );
+    void destroyDialog();
 
 private:
     QPixmap m_brokenPix;
@@ -99,6 +106,7 @@ private:
     QMap<QString,bool> m_techs;
     QValueList<QDBusObjectPath> m_servicePaths;
     QDict<ServiceListener> m_services;
+    QDialog *m_agentDlg;
 };
 
 #endif
