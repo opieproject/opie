@@ -178,7 +178,8 @@ ConnManServiceEditor::ConnManServiceEditor( QDBusProxy *proxy, QWidget* parent, 
         QStringList domains = map["Domains"].toVariant().value.toList().toStringList();
         m_domains = domains.join(" ");
         leDnsDomains->setText( m_domains );
-        if( map.contains("Passphrase") ) {
+        if( map.contains("Passphrase") ||
+                (map.contains("PassphraseRequired") && map["PassphraseRequired"].toVariant().value.toBool()) ) {
             m_password = map["Passphrase"].toVariant().value.toString();
             lePassword->setText( m_password );
         }
