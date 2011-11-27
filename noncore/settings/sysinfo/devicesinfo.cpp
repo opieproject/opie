@@ -77,15 +77,14 @@ DevicesView::~DevicesView()
 void DevicesView::selectionChanged( QListViewItem* item )
 {
     odebug << "DevicesView::selectionChanged to '" << item->text( 0 ) << "'" << oendl;
-    if ( item->parent() )
-    {
-        QWidget* details = ( static_cast<Device*>( item ) )->detailsWidget();
-        ( static_cast<DevicesInfo*>( parent() ) )->setDetailsWidget( details );
+    QWidget* details = NULL;
+    if ( item->parent() ) {
+        details = ( static_cast<Device*>( item ) )->detailsWidget();
     }
-    else
-    {
+    else {
         odebug << "DevicesView::not a device node." << oendl;
     }
+    ( static_cast<DevicesInfo*>( parent() ) )->setDetailsWidget( details );
 }
 
 
@@ -110,14 +109,15 @@ DevicesInfo::~DevicesInfo()
 
 void DevicesInfo::setDetailsWidget( QWidget* w )
 {
-    if ( details )
-    {
-        qDebug( "hiding widget '%s' ('%s')", details->name(), details->className() );
-        stack->removeWidget( w );
+    if ( details ) {
+        stack->removeWidget( details );
+        details->hide();
     }
 
-    stack->addWidget( details = w, 40 );
-    stack->raiseWidget( details );
+    if(w) {
+        stack->addWidget( details = w, 40 );
+        stack->raiseWidget( details );
+    }
 }
 
 
