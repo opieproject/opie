@@ -88,7 +88,7 @@ QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
 
     Config cfg("OpieRec");
     cfg.setGroup("Settings");
-    m_dirPath = cfg.readEntry("directory", QDir::homeDirPath()) + "/";
+    m_dirPath = cfg.readEntry("directory", QPEApplication::documentDir()) + "/";
 
     mode = MODE_IDLE;
 
@@ -350,11 +350,14 @@ void QtRec::init() {
     waveform->setBackgroundColor ( black );
 
     QCopChannel *chan = new QCopChannel( "QPE/Recorder", this );
-
     connect( chan, SIGNAL(received(const QCString&,const QByteArray&)),
             this, SLOT(receive(const QCString&,const QByteArray&)) );
     connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
              this, SLOT( receive(const QCString&,const QByteArray&) ) );
+
+    QCopChannel *chan2 = new QCopChannel("QPE/System", this);
+    connect(chan2, SIGNAL(received(const QCString&,const QByteArray&)),
+        this, SLOT(systemMsg(const QCString&,const QByteArray&)) );
 }
 
 void QtRec::initIconView() {
@@ -680,7 +683,7 @@ void QtRec::setupFileName() {
     Config cfg("OpieRec");
     cfg.setGroup("Settings");
 
-    QString fileName = cfg.readEntry("directory", QDir::homeDirPath());
+    QString fileName = m_dirPath;
 
     QDateTime dt = QDateTime::currentDateTime();
     QString date = dt.toString();
@@ -1127,6 +1130,22 @@ void QtRec::receive( const QCString &msg, const QByteArray &data )
     }
 }
 
+void QtRec::systemMsg( const QCString &msg, const QByteArray &data )
+{
+    QDataStream stream( data, IO_ReadOnly );
+
+    // Refresh the view e.g. if vmemo writes a new wave file
+    if( msg == "linkChanged(QString)" )  {
+        QString fileName;
+        stream >> fileName;
+        odebug << "QtRec linkChanged - " << fileName << oendl;
+        if( fileName.find("audio/x-wav") > -1)
+            if( m_dirPath.startsWith( QPEApplication::documentDir() ) )
+                initIconView();
+    }
+}
+
+
 ///////////////////////////// timerEvent
 void QtRec::timerEvent( QTimerEvent * ) {
     if( mode == MODE_RECORDING ) {
@@ -1269,7 +1288,7 @@ void QtRec::fillDirectoryCombo() {
     int index = 0;
     Config cfg("OpieRec");
     cfg.setGroup("Settings");
-    QString dir = cfg.readEntry("directory", "/");
+    QString dir = cfg.readEntry("directory", QPEApplication::documentDir());
     StorageInfo storageInfo;
     const QList<FileSystem> &fs = storageInfo.fileSystems();
     QListIterator<FileSystem> it ( fs );

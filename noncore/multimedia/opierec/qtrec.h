@@ -131,6 +131,7 @@ private slots:
 /*     void changedOutVolume(int); */
 /*    void changedInVolume(int); */
     void receive( const QCString &msg, const QByteArray &data );
+    void systemMsg( const QCString &msg, const QByteArray &data );
 
 protected:
 
