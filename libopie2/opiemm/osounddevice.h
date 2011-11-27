@@ -49,6 +49,7 @@ public:
 
     int devRead(char *buffer);
     int devWrite(char *buffer);
+    snd_pcm_sframes_t getDelay();
 
 private:
     snd_pcm_format_t devForm;

@@ -211,3 +211,12 @@ int OSoundDevice::devRead(char *buffer) {
     }
     return rc;
 }
+
+snd_pcm_sframes_t OSoundDevice::getDelay() {
+    snd_pcm_sframes_t delay;
+    if(snd_pcm_delay(m_handle, &delay) < 0) {
+        owarn << "unable to get delay with snd_pcm_delay()" << oendl;
+        return 0;
+    }
+    return delay;
+}

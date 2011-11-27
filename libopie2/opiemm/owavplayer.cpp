@@ -30,6 +30,7 @@
 
 extern "C" {
 #include "ima_rw.h"
+#include "unistd.h"
 }
 
 namespace Opie {
@@ -76,8 +77,10 @@ void OWavPlayer::play( OWavPlayerCallback *callback )
                 else
                     number = ::read( fd, buffer, m_bufsize);
 
+                long delay = m_device->getDelay() * 100000 / m_fileparams.sampleRate;
                 m_device->devWrite(buffer);
                 position += number;
+                usleep(delay);
             }
             else
                 number = 0;
