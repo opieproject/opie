@@ -39,6 +39,8 @@ using namespace Opie::Ui;
 
 /* QT */
 #include <qobjectlist.h>
+#include <qmap.h>
+#include <qdir.h>
 #include <qlistview.h>
 #include <qcombobox.h>
 #include <qfile.h>
@@ -226,54 +228,66 @@ UsbCategory::~UsbCategory()
 {
 }
 
+QString UsbCategory::readValue(const QString &file)
+{
+    QFile f(file);
+    if( f.open(IO_ReadOnly) ) {
+        QString value;
+        f.readLine(value, 255);
+        value = value.stripWhiteSpace();
+        f.close();
+        return value;
+    }
+    else
+        return QString::null;
+}
+
 void UsbCategory::populate()
 {
     odebug << "UsbCategory::populate()" << oendl;
-    QFile usbinfofile( "/proc/bus/usb/devices" );
-    if ( !usbinfofile.exists() || !usbinfofile.open( IO_ReadOnly ) )
-    {
-        new UsbDevice( this, "(no USB found)" );
-        return;
+
+    QStringList devpaths;
+    QMap<QString,QString> products;
+    QDir usbBus("/sys/bus/usb/devices");
+    for ( unsigned int i=0; i<usbBus.count(); i++ ) {
+        QString devid = usbBus[i];
+        if(devid[0] == '.') continue;
+        QString product = readValue("/sys/bus/usb/devices/" + devid + "/product");
+        if( !product.isEmpty() ) {
+            QDir devdir("/sys/bus/usb/devices/" + devid);
+            QString path = devdir.canonicalPath();
+            products.insert(path, product);
+            devpaths += path;
+        }
     }
-    QTextStream usbinfo( &usbinfofile );
 
-    int _bus, _level, _parent, _port, _count, _device, _channels, _power;
-    float _speed;
-    QString _manufacturer, _product, _serial;
-
-    int usbcount = 0;
-    UsbDevice* lastDev = 0;
-    UsbDevice* dev = 0;
-    while ( !usbinfo.atEnd() )
-    {
-        QString line = usbinfo.readLine();
-        odebug << "got line '" << line << "'" << oendl;
-        if ( line.startsWith( "T:" ) )
-        {
-            sscanf(line.local8Bit().data(), "T:  Bus=%2d Lev=%2d Prnt=%2d Port=%d Cnt=%2d Dev#=%3d Spd=%3f MxCh=%2d", &_bus, &_level, &_parent, &_port, &_count, &_device, &_speed, &_channels);
-
-            if ( !_level )
-            {
-                odebug << "adding new bus" << oendl;
-                dev = new UsbDevice( this, QString( "Generic USB Hub Device" ) );
-                lastDev = dev;
-            }
-            else
-            {
-                odebug << "adding new dev" << oendl;
-                dev = new UsbDevice( lastDev, QString( "Generic USB Hub Device" ) );
-                lastDev = dev;
+    devpaths.sort();
+    QDict<UsbDevice> items;
+    for ( QStringList::Iterator it = devpaths.begin(); it != devpaths.end(); ++it ) {
+        QString path = (*it);
+        UsbDevice *parent = NULL;
+        for(QDictIterator<UsbDevice> itemit(items); itemit.current(); ++itemit) {
+            if( path.startsWith(itemit.currentKey()) ) {
+                parent = itemit.current();
+                break;
             }
         }
-        else if ( dev && line.startsWith( "S:  Product" ) )
-        {
-            int dp = line.find( '=' );
-            dev->setText( 0, dp != -1 ? line.right( line.length()-1-dp ) : "<unknown>" );
-        }
+        UsbDevice *usbdev;
+        QString product = products[path];
+        if( parent )
+            usbdev = new UsbDevice( parent, product );
         else
-        {
-            continue;
-        }
+            usbdev = new UsbDevice( this, product );
+        items.insert( path, usbdev );
+
+        // Read additional info (would use QMap but it's sorted)
+        QStringList params;
+        params += QObject::tr("Product") + "=" + product;
+        params += QObject::tr("Manufacturer") + "=" + readValue(path + "/manufacturer");
+        params += QObject::tr("Speed") + "=" + readValue(path + "/speed");
+        params += QObject::tr("Max power") + "=" + readValue(path + "/bMaxPower");
+        params += QObject::tr("Serial") + "=" + readValue(path + "/serial");
+        usbdev->setInfo(params);
     }
 }
 
@@ -416,16 +430,33 @@ InputDevice::~InputDevice()
 UsbDevice::UsbDevice( Category* parent, const QString& name )
           :Device( parent, name )
 {
-    details = new QPushButton( name, devinfo );
-    details->hide();
+    OListView* w = new OListView( devinfo );
+    details = w;
+    w->addColumn( "Info" );
+    w->addColumn( "Value" );
+    w->setSorting(-1);
+    w->hide();
 }
 
 //=================================================================================================
 UsbDevice::UsbDevice( UsbDevice* parent, const QString& name )
           :Device( parent, name )
 {
-    details = new QPushButton( name, devinfo );
-    details->hide();
+    OListView* w = new OListView( devinfo );
+    details = w;
+    w->addColumn( "Info" );
+    w->addColumn( "Value" );
+    w->setSorting(-1);
+    w->hide();
+}
+
+void UsbDevice::setInfo( const QStringList &params )
+{
+    OListViewItem *last = NULL;
+    for( QStringList::ConstIterator it = params.begin(); it != params.end(); ++it ) {
+        QStringList sp = QStringList::split('=', *it);
+        last = new OListViewItem( (OListView*) details, last, sp[0], sp[1] );
+    }
 }
 
 UsbDevice::~UsbDevice()

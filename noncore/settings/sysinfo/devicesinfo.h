@@ -36,6 +36,7 @@ _;:,     .>    :=|.         This program is free software; you can
 /* QT */
 #include <qwidget.h>
 #include <qwidgetstack.h>
+#include <qstringlist.h>
 
 namespace Opie { namespace Core { class OPcmciaSocket; class OInputDevice; }; };
 
@@ -115,6 +116,8 @@ public:
     virtual ~UsbCategory();
 
     virtual void populate();
+protected:
+    QString readValue(const QString &file);
 };
 
 //=================================================================================================
@@ -173,6 +176,7 @@ public:
     UsbDevice( Category* parent, const QString& name );
     UsbDevice( UsbDevice* parent, const QString& name );
     ~UsbDevice();
+    void setInfo( const QStringList &params );
 
 //     virtual QWidget* detailsWidget();
 };
