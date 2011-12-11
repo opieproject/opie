@@ -10,7 +10,7 @@ There's also a tutorial document at:
 
 The API reference currently is at:
 
-  http://handhelds.org/~zecke/apidocs/index.html
+  http://opie.sourceforge.net/apidocs/
 
 You will need qvfb, uic and (if you want to develop applications) designer
 compiled and linked against Qt/X11. That means you must download and 
