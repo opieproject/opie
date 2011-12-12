@@ -35,6 +35,7 @@
 #include <qlayout.h>
 #include <qcheckbox.h>
 #include <qmessagebox.h>
+#include <qbuffer.h>
 
 /* STD */
 #include <stdlib.h>
@@ -46,10 +47,12 @@
 using namespace Opie::Core;
 using namespace Opie::Ui;
 
-static const char *SCAP_hostname = "www.handhelds.org";
-static const char *SCAP_capture_path = "/scap/capture.cgi";
-static const char *SCAP_view_url = "http://www.handhelds.org/scap";
+static const char *SCAP_hostname = "scap.linuxtogo.org";
+static const char *SCAP_capture_path = "/tickle.php";
+static const char *SCAP_view_url = "http://scap.linuxtogo.org";
 static const int SCAP_port = 80;
+
+#define SEP "----------------------------092f83a3d9e9"
 
 
 ScreenshotControl::ScreenshotControl( QWidget *parent, const char *name )
@@ -239,39 +242,76 @@ void ScreenshotControl::performGrab()
 
                 if (( sock = ::socket ( AF_INET, SOCK_STREAM, 0 )) >= 0 ) {
                     if ( ::connect ( sock, (struct sockaddr *) & raddr, sizeof (struct sockaddr)) >= 0 ) {
-                        QString header;
-
-                        QPixmap pix;
+                        QString header, imgheader, footer;
 
                         QString SCAP_model = ODevice::inst()->modelString();
                         SCAP_model.replace(QRegExp(" "), "%%%");
 
-                        if( displayEnv == "QVFb:0" )  {//set this if you plan on using this app in qvfb!!
-                            pix = snapshot.xForm(QWMatrix().rotate(90));
-                        }
-                        else
-                            pix = ( snapshot.width() > snapshot.height() ) ? snapshot : snapshot.xForm( QWMatrix().rotate(90) );
+                        QImage img = snapshot.convertToImage();
+                        QBuffer buf;
+                        buf.open(IO_WriteOnly );
+                        QImageIO imageio( &buf, "PNG" );
+                        imageio.setImage( img );
+                        imageio.write();
+                        uint bufsize = buf.buffer().size();
 
-                        QImage img = pix.convertToImage().convertDepth( 16 ); // could make that also depth independent, if hh.org/scap can handle it
+                        header = "POST %1 HTTP/1.1\r\n"  // 1: path
+                                 "User-Agent: opie-screenshotapplet/1.0\r\n"
+                                 "Host: %2\r\n"                               // 2: scap host
+                                 "Accept: */*\r\n"
+                                 "Content-Length: %3\r\n"                     // 3: content length
+                                 "Content-Type: multipart/form-data; boundary=" SEP "\r\n"
+                                 "\r\n";
 
-                        header = "POST %1?%2+%3+%4 HTTP/1.1\n"  // 1: path / 2: model / 3: user / 4: resolution
-                                "Content-length: %5\n"                     // 5: content length
-                                "Content-Type: image/png\n"
-                                "Host: %6\n"                               // 6: scap host
-                                "\n";
+                        imgheader = "--" SEP "\r\n"
+                                 "Content-Disposition: form-data; name=\"file\"; filename=\"scap%1.png\"\r\n"
+                                 "Content-Type: image/png\r\n"
+                                 "\r\n";
 
-                        QString imgres = QString("%1x%2").arg( QApplication::desktop()->width() ).arg( QApplication::desktop()->height() );
+                        int id = rand() / (RAND_MAX / 65536);
+                        imgheader = imgheader.arg(id);
 
-                        header = header.arg( SCAP_capture_path ).arg( SCAP_model).arg( ::getenv( "USER" ) ).arg( imgres ).arg( img.numBytes() ).arg( SCAP_hostname );
-                        header.replace(QRegExp("%%%"), "%20");
+                        footer = "\r\n"
+                                 "--" SEP "\r\n"
+                                 "Content-Disposition: form-data; name=\"key\"\r\n"
+                                 "\r\n"
+                                 "secret\r\n"
+                                 "--" SEP "\r\n"
+                                 "Content-Disposition: form-data; name=\"model\"\r\n"
+                                 "\r\n"
+                                 "%1\r\n"
+                                 "--" SEP "\r\n"
+                                 "Content-Disposition: form-data; name=\"submit\"\r\n"
+                                 "\r\n"
+                                 "Upload\r\n"
+                                 "--" SEP "\r\n"
+                                 "Content-Disposition: form-data; name=\"text\"\r\n"
+                                 "\r\n"
+                                 "No comment\r\n"
+                                 "--" SEP "--\r\n";
+
+                        footer = footer.arg( SCAP_model );
+                        footer.replace(QRegExp("%%%"), "%20");
+
+                        // We do this last because we want to set the content length based on the rest of the message
+                        header = header.arg( SCAP_capture_path ).arg( SCAP_hostname ).arg( bufsize + imgheader.length() + footer.length() );
                         odebug << header << oendl;
+                        odebug << imgheader << oendl;
 
-                        if ( !pix.isNull() )  {
-                            const char *ascii = header.latin1( );
+                        if ( bufsize > 200 )  {
+                            // Send header
+                            const char *ascii = header.latin1();
                             uint ascii_len = ::strlen( ascii );
                             ::write ( sock, ascii, ascii_len );
-                            ::write ( sock, img.bits(), img.numBytes() );
-
+                            // Send image
+                            ascii = imgheader.latin1();
+                            ascii_len = ::strlen( ascii );
+                            ::write ( sock, ascii, ascii_len );
+                            ::write ( sock, buf.buffer().data(), bufsize );
+                            // Send the remainder of the message
+                            ascii = footer.latin1();
+                            ascii_len = ::strlen( ascii );
+                            ::write ( sock, ascii, ascii_len );
                             ok = true;
                         }
                     }
