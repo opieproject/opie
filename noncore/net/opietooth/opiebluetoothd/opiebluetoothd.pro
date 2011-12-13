@@ -5,7 +5,7 @@ SOURCES         = main.cpp opiebluetoothd.cpp bluetoothagent.cpp bluetoothpindlg
 INTERFACES      = bluetoothpindlgbase.ui
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe -lopiecore2 -lopiebluez2 -lopieui2 -ldbus-qt2 $$system(pkg-config --libs dbus-1)
+LIBS            += -lqpe -lopiecore2 -lopiebluez2 -lopieui2 -ldbus-qt2 $$system(pkg-config --libs dbus-1) -lsysfs
 
 TARGET 		= opiebluetoothd
 
