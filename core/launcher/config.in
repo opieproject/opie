@@ -5,3 +5,7 @@
     comment "Launcher needs a libqpe, libopie2core, libopiei2ui, libiopie2security and libqrsync"
     depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2SECURITY && LIBQRSYNC)
 
+  config LAUNCHER_SYNC_V2
+    boolean "  Support for PIM sync v2 protocol"
+    default "y"
+    depends LAUNCHER && LIBOPIE2PIM && LIBOPIE2DB

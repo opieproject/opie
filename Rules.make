@@ -54,6 +54,9 @@ ifeq ($(CONFIG_SQL_PIM_BACKEND),y)
 else
 	echo ENABLE_SQL_PIM_BACKEND=n >> $@
 endif
+ifeq ($(CONFIG_LAUNCHER_SYNC_V2),y)
+	echo CONFIG += LAUNCHER_SYNC_V2 >> $@
+endif
 ifeq ($(CONFIG_OPIELOGIN_USEPAM),y)
 	echo CONFIG += OPIELOGIN_USEPAM >> $@
 endif

@@ -32,9 +32,7 @@ HEADERS		+= server.h \
 		  qprocess.h \
 		  screensaver.h \
 		  $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.h \
-                  mediadlg.h \
-		  virtualfs.h \
-          syncaccessmanager.h
+                  mediadlg.h
 
 SOURCES		+= server.cpp \
 		  qrr.cpp \
@@ -66,9 +64,7 @@ SOURCES		+= server.cpp \
 		  qprocess_unix.cpp \
 		  screensaver.cpp \
 		  $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.cc \
-                  mediadlg.cpp \
-		  virtualfs.cpp \
-          syncaccessmanager.cpp
+                  mediadlg.cpp
 
 
 INCLUDEPATH += $(OPIEDIR)/core/apps/calibrate
@@ -87,3 +83,13 @@ TARGET       = qpe
 # DEFINES += QPE_HAVE_DIRECT_ACCESS
 
 include( $(OPIEDIR)/include.pro )
+
+contains( CONFIG, LAUNCHER_SYNC_V2 ){
+    DEFINES += OPIE_SYNC_V2
+    SOURCES += virtualfs.cpp \
+               syncaccessmanager.cpp
+    HEADERS += virtualfs.h \
+               syncaccessmanager.h
+    LIBS += -lopiepim2
+}
+

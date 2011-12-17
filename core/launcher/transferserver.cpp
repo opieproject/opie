@@ -59,6 +59,12 @@ TransferServer::TransferServer( Q_UINT16 port, QObject *parent,
         owarn << "Failed to bind to port " << port << "" << oendl;
     else
         ::fcntl( socket(), F_SETFD, FD_CLOEXEC );
+
+#ifdef OPIE_SYNC_V2
+    m_syncAccessManager = new SyncAccessManager();
+#else
+    m_syncAccessManager = NULL;
+#endif
 }
 
 void TransferServer::authorizeConnections()
@@ -84,14 +90,14 @@ TransferServer::~TransferServer()
 
 void TransferServer::newConnection( int socket )
 {
-    ServerPI *ptr = new ServerPI( socket, &m_syncAccessManager, this );
+    ServerPI *ptr = new ServerPI( socket, m_syncAccessManager, this );
     connect( ptr, SIGNAL(connectionClosed(ServerPI*)), this, SLOT( closed(ServerPI*)) );
     connections.append( ptr );
 }
 
 SyncAccessManager *TransferServer::syncAccessManager()
 {
-    return &m_syncAccessManager;
+    return m_syncAccessManager;
 }
 
 QString SyncAuthentication::serverId()
@@ -313,8 +319,10 @@ bool SyncAuthentication::checkPassword( const QString& password )
 
 
 ServerPI::ServerPI( int socket, SyncAccessManager *syncAccessManager, QObject *parent, const char* name )
-    : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ),
-      waitvreader( 0 ), waitvwriter( 0 ), waitsocket( 0 ), storFileSize(-1)
+    : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ), waitsocket( 0 ), storFileSize(-1)
+#ifdef OPIE_SYNC_V2
+    , waitvreader(0), waitvwriter(0)
+#endif
 {
     state = Connected;
 
@@ -324,7 +332,9 @@ ServerPI::ServerPI( int socket, SyncAccessManager *syncAccessManager, QObject *p
     peeraddress = peerAddress();
 
     QString home = getenv( "HOME" );
+#ifdef OPIE_SYNC_V2
     vfs.init( home, syncAccessManager );
+#endif
 
 #ifndef INSECURE
     if ( !SyncAuthentication::isAuthorized(peeraddress) ) {
@@ -591,7 +601,9 @@ void ServerPI::process( const QString& message )
     else if ( cmd == "RETR" ) {
         if ( !args.isEmpty() ) {
             QString filePath = absFilePath( args );
+#ifdef OPIE_SYNC_V2
             if ( !vfs.isVirtual( filePath ) ) {
+#endif
                 if ( checkReadFile( filePath )
                         || backupRestoreGzip( filePath ) ) {
                     send( "150 File status okay" ); // No tr
@@ -599,6 +611,7 @@ void ServerPI::process( const QString& message )
                 }
                 else
                     send( "550 Requested action not taken" ); // No tr
+#ifdef OPIE_SYNC_V2
             }
             else {
                 if ( vfs.canRead( filePath ) ) {
@@ -611,6 +624,7 @@ void ServerPI::process( const QString& message )
                 else
                     send( "550 Requested action not taken" ); // No tr
             }
+#endif
         }
         else
             send( "550 Requested action not taken" ); // No tr
@@ -620,13 +634,16 @@ void ServerPI::process( const QString& message )
     else if ( cmd == "STOR" ) {
         if ( !args.isEmpty() ) {
             QString filePath = absFilePath( args );
+#ifdef OPIE_SYNC_V2
             if ( !vfs.isVirtual( filePath ) ) {
+#endif
                 if ( checkWriteFile( filePath ) ) {
                     send( "150 File status okay" ); // No tr
                     retrieveFile( filePath );
                 }
                 else
                     send( "550 Requested action not taken" ); // No tr
+#ifdef OPIE_SYNC_V2
             }
             else {
                 if ( vfs.canWrite( filePath ) ) {
@@ -640,6 +657,7 @@ void ServerPI::process( const QString& message )
                 else
                     send( "550 Requested action not taken" ); // No tr
             }
+#endif
         }
         else
             send( "550 Requested action not taken" ); // No tr
@@ -673,7 +691,9 @@ void ServerPI::process( const QString& message )
             send( "500 Syntax error, command unrecognized" ); // No tr
         else {
             QString filePath = absFilePath( args );
+#ifdef OPIE_SYNC_V2
             if ( !vfs.isVirtual( filePath ) ) {
+#endif
                 QFile file( filePath );
                 if ( file.exists() ) {
                     send( "350 File exists, ready for destination name" ); // No tr
@@ -681,9 +701,11 @@ void ServerPI::process( const QString& message )
                 }
                 else
                     send( "550 Requested action not taken" ); // No tr
+#ifdef OPIE_SYNC_V2
             }
             else
                 send( "550 Requested action not taken" ); // No tr
+#endif
         }
     }
 
@@ -695,15 +717,19 @@ void ServerPI::process( const QString& message )
             send( "500 Syntax error, command unrecognized" ); // No tr
         else {
             QString filePath = absFilePath( args );
+#ifdef OPIE_SYNC_V2
             if ( !vfs.isVirtual( filePath ) ) {
+#endif
                 QDir dir( filePath );
                 if ( dir.rename( renameFrom, filePath, TRUE ) )
                     send( "250 Requested file action okay, completed." ); // No tr
                 else
                     send( "550 Requested action not taken" ); // No tr
+#ifdef OPIE_SYNC_V2
             }
             else
                 send( "550 requested action not taken" ); // no tr
+#endif
         }
     }
 
@@ -722,7 +748,9 @@ void ServerPI::process( const QString& message )
             send( "500 Syntax error, command unrecognized" ); // No tr
         else {
             QString filePath = absFilePath( args );
+#ifdef OPIE_SYNC_V2
             if ( !vfs.isVirtual( filePath ) ) {
+#endif
                 QFile file( filePath ) ;
                 if ( file.remove() ) {
                     send( "250 Requested file action okay, completed" ); // No tr
@@ -731,6 +759,7 @@ void ServerPI::process( const QString& message )
                 }
                 else
                     send( "550 Requested action not taken" ); // No tr
+#ifdef OPIE_SYNC_V2
             }
             else {
                 if ( vfs.deleteFile( filePath ) )
@@ -738,6 +767,7 @@ void ServerPI::process( const QString& message )
                 else
                     send( "550 Requested action not taken" ); // No tr
             }
+#endif
         }
     }
 
@@ -788,7 +818,9 @@ void ServerPI::process( const QString& message )
     // size (SIZE)
     else if ( cmd == "SIZE" ) {
         QString filePath = absFilePath( args );
+#ifdef OPIE_SYNC_V2
         if ( !vfs.isVirtual( filePath ) ) {
+#endif
             QFileInfo fi( filePath );
             bool gzipfile = backupRestoreGzip( filePath );
             if ( !fi.exists() && !gzipfile )
@@ -814,6 +846,7 @@ void ServerPI::process( const QString& message )
                     }
                 }
             }
+#ifdef OPIE_SYNC_V2
         }
         else {
             // virtual
@@ -826,6 +859,7 @@ void ServerPI::process( const QString& message )
             else
                 send( "500 Invalid file" ); // No tr
         }
+#endif
     }
     // name list (NLST)
     else if ( cmd == "NLST" ) {
@@ -899,19 +933,6 @@ void ServerPI::sendFile( const QString& file )
     }
 }
 
-void ServerPI::sendVirtual( VirtualReader *reader )
-{
-    if ( passiv ) {
-        wait[SendVirtual] = TRUE;
-        waitvreader = reader;
-        if ( waitsocket )
-            newConnection( waitsocket );
-    }
-    else {
-        dtp->sendVirtual( reader, peeraddress, peerport );
-    }
-}
-
 void ServerPI::retrieveFile( const QString& file )
 {
     if ( passiv ) {
@@ -929,6 +950,20 @@ void ServerPI::retrieveFile( const QString& file )
     }
 }
 
+#ifdef OPIE_SYNC_V2
+void ServerPI::sendVirtual( VirtualReader *reader )
+{
+    if ( passiv ) {
+        wait[SendVirtual] = TRUE;
+        waitvreader = reader;
+        if ( waitsocket )
+            newConnection( waitsocket );
+    }
+    else {
+        dtp->sendVirtual( reader, peeraddress, peerport );
+    }
+}
+
 void ServerPI::retrieveVirtual( VirtualWriter *writer )
 {
     if ( passiv ) {
@@ -941,6 +976,7 @@ void ServerPI::retrieveVirtual( VirtualWriter *writer )
         dtp->retrieveVirtual( writer, peeraddress, peerport );
     }
 }
+#endif // OPIE_SYNC_V2
 
 bool ServerPI::parsePort( const QString& pp )
 {
@@ -1030,18 +1066,22 @@ bool ServerPI::sendList( const QString& arg )
                 ++it;
                 continue;
             }
+#ifdef OPIE_SYNC_V2
             else if( vfs.isVirtual( info->absFilePath() ) ) {
                 // in case of virtual files that also exist physically,
                 // the file will be listed below instead
                 ++it;
                 continue;
             }
+#endif
             ts << fileListing( info ) << endl;
             ++it;
         }
 
+#ifdef OPIE_SYNC_V2
         // List virtual files, if any
         vfs.fileListing( fi.absFilePath(), ts );
+#endif
     }
 
     if ( passiv ) {
@@ -1174,6 +1214,7 @@ void ServerPI::newConnection( int socket )
         dtp->retrieveByteArray();
         dtp->setSocket( socket );
     }
+#ifdef OPIE_SYNC_V2
     else if ( wait[SendVirtual] ) {
         dtp->sendVirtual( waitvreader );
         dtp->setSocket( socket );
@@ -1182,6 +1223,7 @@ void ServerPI::newConnection( int socket )
         dtp->retrieveVirtual( waitvwriter );
         dtp->setSocket( socket );
     }
+#endif
     else
         waitsocket = socket;
 
@@ -1210,7 +1252,10 @@ void ServerPI::timerEvent( QTimerEvent * )
 
 ServerDTP::ServerDTP( QObject *parent, const char* name)
   : QSocket( parent, name ), mode( Idle ), createTargzProc( 0 ),
-    retrieveTargzProc( 0 ), vreader( 0 ), vwriter( 0 )
+    retrieveTargzProc( 0 )
+#ifdef OPIE_SYNC_V2
+    , vreader( 0 ), vwriter( 0 )
+#endif
 {
     connect( this, SIGNAL( connected() ), SLOT( connected() ) );
     connect( this, SIGNAL( connectionClosed() ), SLOT( connectionClosed() ) );
@@ -1313,12 +1358,14 @@ void ServerDTP::connected()
         break;
     case SendVirtual:
         {
+#ifdef OPIE_SYNC_V2
             bytes_written = 0;
             QTextStream os( this );
             if( vreader->read( os ) )
                 emit completed();
             else
                 emit failed();
+#endif
         }
         break;
     case RetrieveFile:
@@ -1350,11 +1397,13 @@ void ServerDTP::connected()
         break;
     case RetrieveVirtual:
         {
+#ifdef OPIE_SYNC_V2
             OPimXmlSocketReader reader( this );
             if( vwriter->write( reader ) )
                 emit completed();
             else
                 emit failed();
+#endif
         }
         break;
     case Idle:
@@ -1386,10 +1435,12 @@ void ServerDTP::connectionClosed()
             emit failed();
     }
 
+#ifdef OPIE_SYNC_V2
     // send virtual mode
     else if ( SendVirtual == mode ) {
         emit completed();
     }
+#endif
 
     // retrieve file mode
     else if ( RetrieveFile == mode ) {
@@ -1415,10 +1466,12 @@ void ServerDTP::connectionClosed()
         emit completed();
     }
 
+#ifdef OPIE_SYNC_V2
     // retrieve virtual mode
     else if ( RetrieveVirtual == mode ) {
         // Nothing to do here
     }
+#endif
 
     mode = Idle;
 }
@@ -1479,9 +1532,11 @@ void ServerDTP::readyRead()
         readBlock( s.data(), bytesAvailable() );
         buf.writeBlock( s.data(), s.size() );
     }
+#ifdef OPIE_SYNC_V2
     else if ( RetrieveVirtual == mode ) {
         // Nothing to do here (handled by socket reader)
     }
+#endif
 }
 
 void ServerDTP::writeTargzBlock()
@@ -1594,6 +1649,7 @@ void ServerDTP::retrieveByteArray()
     mode = RetrieveBuffer;
 }
 
+#ifdef OPIE_SYNC_V2
 void ServerDTP::sendVirtual( VirtualReader *reader )
 {
     vreader = reader;
@@ -1619,6 +1675,7 @@ void ServerDTP::retrieveVirtual( VirtualWriter *writer, const QHostAddress& host
     mode = RetrieveVirtual;
     connectToHost( host.toString(), port );
 }
+#endif // OPIE_SYNC_V2
 
 void ServerDTP::setSocket( int socket )
 {

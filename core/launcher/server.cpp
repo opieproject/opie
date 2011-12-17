@@ -501,9 +501,12 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
     else if ( msg == "stopSync()") {
         delete syncDialog;
         syncDialog = 0;
+#ifdef OPIE_SYNC_V2
         transferServer->syncAccessManager()->reset();
+#endif
         OSysEvent::sendSysEvent(SYSEVENT_POST_SYNC);
     }
+#ifdef OPIE_SYNC_V2
     else if (msg == "setSyncPeerInfo(QString,QString)") {
         QString peerId, peerName;
         stream >> peerId >> peerName;
@@ -537,6 +540,7 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         e << app;
 #endif
     }
+#endif // OPIE_SYNC_V2
     else if (msg == "restoreDone(QString)") {
         docList->restoreDone();
     }
@@ -804,7 +808,9 @@ void Server::syncConnectionClosed( const QHostAddress & )
     if( syncDialog ) {
         delete syncDialog;
         syncDialog = 0;
+#ifdef OPIE_SYNC_V2
         transferServer->syncAccessManager()->reset();
+#endif
     }
 }
 

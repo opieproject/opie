@@ -18,8 +18,14 @@
 **
 **********************************************************************/
 
+#ifdef OPIE_SYNC_V2
 #include "virtualfs.h"
 #include "syncaccessmanager.h"
+#else
+// Dummy class so we don't have to ifdef out function parameters
+class SyncAccessManager {
+};
+#endif
 
 #include <qserversocket.h>
 #include <qsocket.h>
@@ -49,7 +55,7 @@ protected slots:
 
 private:
     QList<ServerPI> connections;
-    SyncAccessManager m_syncAccessManager;
+    SyncAccessManager *m_syncAccessManager;
 };
 
 class SyncAuthentication : QObject
@@ -85,8 +91,10 @@ public:
                        const QHostAddress& host, Q_UINT16 port );
     void sendByteArray( const QByteArray& array );
     void sendByteArray( const QByteArray& array, const QHostAddress& host, Q_UINT16 port );
+#ifdef OPIE_SYNC_V2
     void sendVirtual( VirtualReader *reader );
     void sendVirtual( VirtualReader *reader, const QHostAddress& host, Q_UINT16 port );
+#endif
 
     void retrieveFile( const QString fn, int fileSize );
     void retrieveFile( const QString fn, const QHostAddress& host, Q_UINT16 port, int fileSize );
@@ -94,8 +102,10 @@ public:
     void retrieveGzipFile( const QString &fn, const QHostAddress& host, Q_UINT16 port );
     void retrieveByteArray();
     void retrieveByteArray( const QHostAddress& host, Q_UINT16 port );
+#ifdef OPIE_SYNC_V2
     void retrieveVirtual( VirtualWriter *writer );
     void retrieveVirtual( VirtualWriter *writer, const QHostAddress& host, Q_UINT16 port );
+#endif
 
     Mode dtpMode() { return mode; }
     QByteArray buffer() { return buf.buffer(); }
@@ -124,8 +134,10 @@ private:
     QBuffer buf;
     QProcess *createTargzProc;
     QProcess *retrieveTargzProc;
+#ifdef OPIE_SYNC_V2
     VirtualReader *vreader;
     VirtualWriter *vwriter;
+#endif
     int recvFileSize;
 };
 
@@ -177,9 +189,11 @@ protected:
 
     bool sendList( const QString& arg );
     void sendFile( const QString& file );
-    void sendVirtual( VirtualReader *reader );
     void retrieveFile( const QString& file );
+#ifdef OPIE_SYNC_V2
+    void sendVirtual( VirtualReader *reader );
     void retrieveVirtual( VirtualWriter *writer );
+#endif
 
     QString permissionString( QFileInfo *info );
     QString fileListing( QFileInfo *info );
@@ -196,13 +210,15 @@ private:
     ServerDTP *dtp;
     ServerSocket *serversocket;
     QString waitfile;
-    VirtualReader *waitvreader;
-    VirtualWriter *waitvwriter;
     QDir directory;
     QByteArray waitarray;
     QString renameFrom;
     QString lastCommand;
     int waitsocket;
     int storFileSize;
+#ifdef OPIE_SYNC_V2
+    VirtualReader *waitvreader;
+    VirtualWriter *waitvwriter;
     VirtualFS vfs;
+#endif
 };
