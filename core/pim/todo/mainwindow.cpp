@@ -840,9 +840,6 @@ void MainWindow::slotComplete( const OPimTodo& todo )
     }
     else
         updateTodo( to );
-
-    currentView()->updateView();
-    raiseCurrentView();
 }
 
 void MainWindow::flush()

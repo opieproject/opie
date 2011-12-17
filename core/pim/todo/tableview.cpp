@@ -347,7 +347,7 @@ void TableView::slotClicked(int row, int col, int,
                 x <= ( w - BoxSize ) / 2 + BoxSize &&
                 y >= ( h - BoxSize ) / 2 &&
                 y <= ( h - BoxSize ) / 2 + BoxSize ) {
-                TodoView::complete(sorted()[row] );
+                completeItem( row );
             }
         }
             break;
@@ -457,9 +457,15 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
             //p->setPen( QPen( cg.text() ) );
             //p->drawRect( x + marg, y, BoxSize, BoxSize );
             //p->drawRect( x + marg+1, y+1, BoxSize-2, BoxSize-2 );
-            if ( task.isCompleted() ) {
+            int uid = task.uid();
+            bool completed;
+            if( m_completed.contains( uid ) )
+                completed = m_completed[uid];
+            else
+                completed = task.isCompleted();
+
+            if ( completed )
                 p->drawPixmap( x + marg, y, m_pic_completed );
-            }
         }
         break;
 
@@ -629,7 +635,7 @@ void TableView::contentsMouseReleaseEvent( QMouseEvent *e )
     int colNew = columnAt(e->x() );
     if ( row == rowAt( e->y() ) && row != -1 &&
          colOld != colNew ) {
-        TodoView::complete( sorted()[row] );
+        completeItem( row );
         return;
     }
     QTable::contentsMouseReleaseEvent( e );
@@ -680,7 +686,7 @@ void TableView::keyPressEvent( QKeyEvent* event)
         case Qt::Key_Return:
         case Qt::Key_Space:
             if ( col == 0 ) {
-                TodoView::complete(sorted()[row]);
+                completeItem( row );
             }
             else if ( col == 1 ) {
                 QWidget* wid = beginEdit(row, col, FALSE );
@@ -699,3 +705,18 @@ void TableView::keyPressEvent( QKeyEvent* event)
     }
 }
 
+void TableView::completeItem( int row )
+{
+    // Make the item show as ticked/unticked immediately rather than having
+    // to wait for the backend to write - makes the app feel more responsive
+    const OPimTodo &todo( sorted()[row] );
+    int uid = todo.uid();
+    if( !m_completed.contains( uid ) )
+        m_completed[uid] = todo.isCompleted();
+    m_completed[uid] = !m_completed[uid];
+    updateCell(row, 0);
+    qApp->processEvents();
+    m_completed.remove(uid);
+
+    TodoView::complete(todo);
+}

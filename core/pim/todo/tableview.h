@@ -70,6 +70,7 @@ namespace Todo {
         void newDay();
         QWidget* widget();
         void sortColumn(int, bool, bool );
+        void completeItem( int row );
 
         /*
          * we do our drawing ourselves
@@ -87,6 +88,7 @@ namespace Todo {
 
         QPixmap m_pic_completed;
         QValueList<QPixmap> m_pic_priority;
+        QMap<int,bool> m_completed;
 
     protected:
         void keyPressEvent( QKeyEvent* );
