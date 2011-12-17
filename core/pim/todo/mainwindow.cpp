@@ -38,6 +38,7 @@
 #include <opie2/opimalarmdlg.h>
 #include <opie2/oresource.h>
 #include <opie2/opimautoconvert.h>
+#include <opie2/opimstate.h>
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
@@ -756,8 +757,17 @@ void MainWindow::slotComplete( int uid )
 void MainWindow::slotComplete( const OPimTodo& todo )
 {
     OPimTodo to = todo;
-    to.setCompleted( !to.isCompleted() );
-    to.setCompletedDate( QDate::currentDate() );
+    bool complete = !to.isCompleted();
+    to.setCompleted( complete );
+    if( complete ) {
+        to.setCompletedDate( QDate::currentDate() );
+        to.setState( OPimState::Finished );
+        to.setProgress( 100 );
+    }
+    else {
+        to.setState( OPimState::NotStarted );
+        to.setProgress( 0 );
+    }
 
     /*
      * if the item does recur

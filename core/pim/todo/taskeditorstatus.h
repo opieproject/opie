@@ -89,6 +89,9 @@ private:
     DateBookMonth *m_startBook;
     DateBookMonth *m_compBook;
     DateBookMonth *m_dueBook;
+    int            m_lastState;
+    int            m_lastProgress;
+    void setLastValues();
 
 private slots:
     void slotStartChecked();

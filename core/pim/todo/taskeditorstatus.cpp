@@ -49,6 +49,8 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
 {
     QDate curDate = QDate::currentDate();
     m_start = m_comp = m_due = curDate;
+    m_lastState = OPimState::NotStarted;
+    m_lastProgress = 0;
     QString curDateStr = TimeString::longDateString( curDate );
 
     QVBoxLayout *vb = new QVBoxLayout( this );
@@ -198,6 +200,8 @@ void TaskEditorStatus::load( const OPimTodo &todo )
     else
         btnStart->setText( str );
 
+    setLastValues();
+
     // Due date
     ckbDue->setChecked( todo.hasDueDate() );
     btnDue->setText( TimeString::longDateString( todo.dueDate() ) );
@@ -270,6 +274,21 @@ void TaskEditorStatus::save( OPimTodo &todo )
 #endif
 }
 
+void TaskEditorStatus::setLastValues()
+{
+    int state = cmbStatus->currentItem();
+    if( state != OPimState::Finished )
+        m_lastState = state;
+    else
+        m_lastState = OPimState::NotStarted;
+
+    int progress = cmbProgress->currentItem();
+    if( progress < 5 )
+        m_lastProgress = progress;
+    else
+        m_lastProgress = 0;
+}
+
 void TaskEditorStatus::slotStartChecked()
 {
     btnStart->setEnabled( ckbStart->isChecked() );
@@ -278,6 +297,15 @@ void TaskEditorStatus::slotStartChecked()
 void TaskEditorStatus::slotCompChecked()
 {
     btnComp->setEnabled( ckbComp->isChecked() );
+    if( ckbComp->isChecked() ) {
+        setLastValues();
+        cmbStatus->setCurrentItem( OPimState::Finished );
+        cmbProgress->setCurrentItem( 5 ); // 100%
+    }
+    else {
+        cmbStatus->setCurrentItem( m_lastState );
+        cmbProgress->setCurrentItem( m_lastProgress );
+    }
 }
 
 void TaskEditorStatus::slotDueChecked()
