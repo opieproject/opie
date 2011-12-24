@@ -29,8 +29,6 @@
 
 #include "converter.h"
 
-#include <stdlib.h> // For "system()" command
-
 /* OPIE */
 #include <opie2/oapplicationfactory.h>
 #include <opie2/odebug.h>
@@ -371,70 +369,4 @@ void Converter::closeEvent( QCloseEvent *e )
         return;
     }
     e->accept();
-}
-
-bool Converter::sqliteMoveAndConvert( const QString& name, const QString& src,
-                                      const QString &dest )
-{
-    QMessageBox::information(
-                    this, tr( "Pim-Converter" ),
-                    tr( "<qt>Starting convert of database %1</qt>" ).arg( name )
-                            );
-
-    bool error = false;
-    QString cmd;
-    if (!QFile::exists( src ) ) {
-        cmd = tr( "No SQLite2 database could be found!" );
-        error = true;
-    }
-
-    if( QFile::exists( dest ) ) {
-        cmd = tr( "The database is already converted!" );
-        error = true;
-    }
-
-    if ( error ) {
-        QMessageBox::critical( this, tr("Pim-Converter"),
-                               tr("<qt>Conversion not possible: <br>"
-                                  "Problem: %1</qt>").arg(cmd) );
-        return error;
-    }
-
-    /*
-     * Move it over
-     */
-    cmd = "mv " + Global::shellQuote(src) + " " + Global::shellQuote(dest);
-    if( ::system( cmd ) != 0 ) {
-        error = true;
-    }
-
-    /*
-     * Convert it
-     */
-    if ( !error ) {
-        cmd = "sqlite " + Global::shellQuote(dest) + " .dump | sqlite3 "
-              + Global::shellQuote(src);
-        if ( ::system( cmd ) != 0 )
-            error = true;
-    }
-
-    /*
-     * Check whether conversion really worked. If not, move old database back to
-     * recover it
-     */
-    if ( !QFile::exists( src ) ) {
-        cmd = "mv " + Global::shellQuote(dest) + " " + Global::shellQuote(src);
-        if ( ::system( cmd ) != 0 ) {
-            error = true;
-            cmd = "Database-Format is not V2!?";
-        }
-    }
-
-    if ( error ) {
-        QMessageBox::critical( this, tr("Pim-Converter"),
-                               tr("<qt>An internal error occurred: <br>"
-                                  "Converting the database was impossible! <br>"
-                                  "Command/Reason: '%1' </qt>").arg(cmd) );
-    }
-    return error;
 }
