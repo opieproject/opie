@@ -561,7 +561,7 @@ UIDArray OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
         QDate date = QDate::currentDate();
         QString due;
         QString base;
-        base = QString("DueDate != '0000-00-00' AND DueDate <= '%1-%2-%3' AND completed = 0")
+        base = QString("DueDate != '0000-00-00' AND DueDate < '%1-%2-%3' AND completed = 0")
         .arg( QString::number( date.year() ).rightJustify( 4, '0' ) )
         .arg( QString::number( date.month() ).rightJustify( 2, '0' ) )
         .arg( QString::number( date.day() ).rightJustify( 2, '0' ) );
