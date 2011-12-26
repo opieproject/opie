@@ -63,33 +63,30 @@
 namespace Opie {
 
 OPimContactAccess::OPimContactAccess ( const QString appname, const QString ,
-				       OPimContactAccessBackend* end, bool autosync ):
-	OPimAccessTemplate<OPimContact>( end )
+                                       OPimContactAccessBackend* end, bool autosync )
+    : OPimAccessTemplate<OPimContact>( end )
 {
-        /* take care of the backend. If there is no one defined, we
-	 * will use the XML-Backend as default (until we have a cute SQL-Backend..).
-	 */
-        if( end == 0 ) {
-		end = OBackendFactory<OPimContactAccessBackend>::defaultBackend( OPimGlobal::CONTACTLIST, appname );
-        }
-	// Set backend locally and in template
-        m_backEnd = end;
-	OPimAccessTemplate<OPimContact>::setBackEnd (end);
+    /* take care of the backend. If there is no one defined, we
+     * will use the XML-Backend as default (until we have a cute SQL-Backend..).
+     */
+    if( end == 0 )
+        end = OBackendFactory<OPimContactAccessBackend>::defaultBackend( OPimGlobal::CONTACTLIST, appname );
+    // Set backend locally and in template
+    m_backEnd = end;
+    OPimAccessTemplate<OPimContact>::setBackEnd (end);
 
-
-	/* Connect signal of external db change to function */
-	QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
-	connect( dbchannel, SIGNAL(received(const QCString&,const QByteArray&)),
-		 this, SLOT(copMessage(const QCString&,const QByteArray&)) );
-	if ( autosync ){
-		QCopChannel *syncchannel = new QCopChannel( "QPE/Sync", this );
-		connect( syncchannel, SIGNAL(received(const QCString&,const QByteArray&)),
-			 this, SLOT(copMessage(const QCString&,const QByteArray&)) );
-	}
-
-
+    /* Connect signal of external db change to function */
+    QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
+    connect( dbchannel, SIGNAL(received(const QCString&,const QByteArray&)),
+             this, SLOT(copMessage(const QCString&,const QByteArray&)) );
+    if ( autosync ){
+        QCopChannel *syncchannel = new QCopChannel( "QPE/Sync", this );
+        connect( syncchannel, SIGNAL(received(const QCString&,const QByteArray&)),
+                 this, SLOT(copMessage(const QCString&,const QByteArray&)) );
+    }
 }
-OPimContactAccess::~OPimContactAccess ()
+
+OPimContactAccess::~OPimContactAccess()
 {
     /* The user may forget to save the changed database, therefore try to
      * do it for him..
@@ -98,8 +95,7 @@ OPimContactAccess::~OPimContactAccess ()
     // delete m_backEnd; is done by template..
 }
 
-
-bool OPimContactAccess::save ()
+bool OPimContactAccess::save()
 {
     /* If the database was changed externally, we could not save the
      * Data. This will remove added items which is unacceptable !
@@ -109,7 +105,8 @@ bool OPimContactAccess::save ()
         reload();
 
     bool status = OPimAccessTemplate<OPimContact>::save();
-    if ( !status ) return false;
+    if ( !status )
+        return false;
 
     /* Now tell everyone that new data is available.
      */
@@ -117,7 +114,6 @@ bool OPimContactAccess::save ()
 
     return true;
 }
-
 
 OPimChangeLog *OPimContactAccess::changeLog() const
 {
@@ -134,20 +130,21 @@ OPimRecordList<OPimContact> OPimContactAccess::sorted( bool ascending, int sortO
 #endif
 
 
-bool OPimContactAccess::wasChangedExternally()const
+bool OPimContactAccess::wasChangedExternally() const
 {
     return ( m_backEnd->wasChangedExternally() );
 }
 
-
 void OPimContactAccess::copMessage( const QCString &msg, const QByteArray & )
 {
     if ( msg == "addressbookUpdated()" ){
-        emit signalChanged ( this );
-    } else if ( msg == "flush()" ) {
-        save ();
-    } else if ( msg == "reload()" ) {
-        reload ();
+        emit signalChanged( this );
+    }
+    else if ( msg == "flush()" ) {
+        save();
+    }
+    else if ( msg == "reload()" ) {
+        reload();
         emit signalChanged ( this );
     }
 }
