@@ -583,25 +583,29 @@ UIDArray OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
      * quite straight forward
      */
     query += "ORDER BY ";
+    QString orderfields;
     switch( sortOrder ) {
         /* completed */
     case OPimTodoAccess::Completed:
-        query += "completed, priority";
+        orderfields = "completed, priority, duedate";
         break;
     case OPimTodoAccess::Priority:
-        query += "priority";
+        orderfields = "priority, completed, duedate";
         break;
     case OPimTodoAccess::Deadline:
-        query += "DueDate";
+        orderfields = "duedate";
         break;
     case OPimTodoAccess::SortSummary:
     default:
-        query += "summary";
+        orderfields = "summary";
         break;
     }
 
-    if ( !asc )
-        query += " DESC";
+    if ( asc )
+        query += orderfields;
+    else
+        query += orderfields.replace(QRegExp(","), " DESC,") + " DESC";
+
 
     odebug << query << oendl;
     OSQLRawQuery raw(query );
