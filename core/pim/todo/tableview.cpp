@@ -96,12 +96,18 @@ void TableView::initConfig()
         int width = config.readNumEntry("Width"+QString::number(i), -1 );
         setColumnWidth(i, width == -1 ? columnWidth(i) : width );
     }
+    // We need to use columnClicked so that the QTable knows we're sorting by the specified column
+    // This will call sortColumn() hence we need to have m_initialising set during init or we will get a segfault
+    int sortColumn = config.readNumEntry( "SortColumn", 0 );
+    columnClicked(sortColumn);
+    setAscending( config.readBoolEntry( "SortAscending", true ) );
 }
 
 TableView::TableView( MainWindow* window, QWidget* wid, const QValueList<QPixmap> &pic_priority )
     : QTable(  wid ), TodoView( window ), m_pic_priority( pic_priority )
 {
     setName("TableView");
+    m_initialising = true;
 
     // Load icons
     m_pic_completed = Opie::Core::OResource::loadPixmap( "todo/completed" );
@@ -141,9 +147,8 @@ TableView::TableView( MainWindow* window, QWidget* wid, const QValueList<QPixmap
     setUpdatesEnabled( true );
     viewport()->setUpdatesEnabled( true );
     viewport()->update();
-    setSortOrder( Opie::OPimTodoAccess::Completed );
-    setAscending( TRUE );
     m_first = true;
+    m_initialising = false;
 }
 
 /* a new day has started
@@ -161,6 +166,8 @@ TableView::~TableView()
     config.setGroup( "Options" );
     for (int i = 0; i < numCols(); i++ )
         config.writeEntry("Width"+QString::number(i), columnWidth(i) );
+    config.writeEntry( "SortColumn", sortOrder() );
+    config.writeEntry( "SortAscending", ascending() );
 }
 
 QString TableView::type() const
@@ -402,7 +409,8 @@ void TableView::sortColumn( int col, bool asc, bool )
 
     setSortOrder( col );
     setAscending( asc );
-    updateView();
+    if( !m_initialising )
+        updateView();
 }
 
 void TableView::viewportPaintEvent( QPaintEvent* e )

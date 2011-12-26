@@ -93,6 +93,16 @@ void TodoView::setAscending( bool b )
     m_asc = b;
 }
 
+int TodoView::sortOrder()
+{
+    return m_sortOrder;
+}
+
+bool TodoView::ascending()
+{
+    return m_asc;
+}
+
 void TodoView::update(int, const SmallTodo&  )
 {
     //m_main->slotUpate1( uid, to );

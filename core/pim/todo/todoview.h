@@ -115,6 +115,8 @@ namespace Todo {
         void sort(int sort );
         void setSortOrder( int order );
         void setAscending( bool );
+        int sortOrder();
+        bool ascending();
 
         /*
          * These things needs to be implemented

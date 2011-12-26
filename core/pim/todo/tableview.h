@@ -123,6 +123,7 @@ namespace Todo {
         int m_completeStrokeWidth;
         bool m_row : 1;
         QPoint m_prevP;
+        bool m_initialising;
     };
 };
 
