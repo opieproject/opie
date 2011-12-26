@@ -136,16 +136,11 @@ void Today::setRefreshTimer( int interval ) {
  * Initialises the owner field with the default value, the username
  */
 void Today::setOwnerField() {
-    QString vfilename = Global::applicationFileName("addressbook", "businesscard.vcf");
-    Opie::OPimContactAccess acc( "today", vfilename,
-                                 new Opie::OPimContactAccessBackend_VCard("today", vfilename ) );
-    if ( acc.load() ) {
-        Opie::OPimContact cont = acc.allRecords()[0];
-        QString returnString = cont.fullName();
-        OwnerField->setText( "<b>" + tr ( "Owned by " ) + returnString + "</b>" );
-    } else {
+    Opie::OPimContact cont = Opie::OPimContactAccess::businessCard();
+    if( !cont.isEmpty() )
+        OwnerField->setText( "<b>" + tr ( "Owned by " ) + cont.fullName() + "</b>" );
+    else
         OwnerField->setText( "<b>" + tr ( "Please fill out the business card" ) + " </b>" );
-    }
 }
 
 /**

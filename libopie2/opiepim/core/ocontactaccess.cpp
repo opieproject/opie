@@ -86,6 +86,18 @@ OPimContactAccess::OPimContactAccess ( const QString appname, const QString ,
     }
 }
 
+OPimContact OPimContactAccess::businessCard()
+{
+    QString vfilename = Global::applicationFileName("addressbook", "businesscard.vcf");
+    OPimContactAccess acc( 0l, vfilename, new OPimContactAccessBackend_VCard( 0l, vfilename ) );
+    if ( acc.load() ) {
+        OPimContact cont = acc.allRecords()[0];
+        return cont;
+    }
+    else
+        return OPimContact();
+}
+
 OPimContactAccess::~OPimContactAccess()
 {
     /* The user may forget to save the changed database, therefore try to

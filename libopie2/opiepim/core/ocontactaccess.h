@@ -117,6 +117,11 @@ public:
                        OPimContactAccessBackend* backend = 0l, bool handlesync = true );
     ~OPimContactAccess();
 
+    /**
+     * Get the business card (owner) contact
+     */
+    static OPimContact businessCard();
+
 
     /**
      * if the resource was changed externally.

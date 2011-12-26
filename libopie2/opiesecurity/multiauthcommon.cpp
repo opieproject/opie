@@ -323,13 +323,8 @@ void showOwnerInfo()
     SecOwnerDlg ownerInfoDialog(0, "Owner info dialog", TRUE, TRUE);
 
     QLabel ownerLabel(&ownerInfoDialog);
-    QString vfilename = Global::applicationFileName("addressbook", "businesscard.vcf");
-    Opie::OPimContactAccess acc( "today", vfilename,
-                                 new Opie::OPimContactAccessBackend_VCard("today", vfilename ) );
-
-    if ( acc.load() ) {
-        Opie::OPimContact cont = acc.allRecords()[0];
-
+    Opie::OPimContact cont = Opie::OPimContactAccess::businessCard();
+    if( !cont.isEmpty() ) {
         Config config("Security");
         config.setGroup("OwnerInfo");
 
