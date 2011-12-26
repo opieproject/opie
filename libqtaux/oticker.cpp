@@ -46,7 +46,7 @@ OTicker::OTicker( QWidget* parent )
     Config cfg( "qpe" );
     cfg.setGroup( "Appearance" );
     backgroundcolor = QColor( cfg.readEntry( "Background", "#E5E1D5" ) );
-    foregroundcolor = QColor( cfg.readEntry( "Text", "#FFFFFF" ) );
+    foregroundcolor = QColor( cfg.readEntry( "Text", "#000000" ) );
     updateTimerTime = 50;
     scrollLength = 1;
 }
