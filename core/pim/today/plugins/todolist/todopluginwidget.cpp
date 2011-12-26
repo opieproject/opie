@@ -84,13 +84,19 @@ void TodolistPluginWidget::getTodo() {
             if( desc.isEmpty() ) {
                 desc = (*m_it).description();
             }
-            tmpout += "<font color=#e00000><b>[" +  QString("%1").arg((*m_it).priority() )  + "]" + desc.mid( 0, m_maxCharClip ) + "</b></font><br>";
+            int days = (*m_it).dueDate().daysTo( QDate::currentDate() );
+            tmpout += "<font color=#e00000><b>["
+                    +  QString("%1").arg((*m_it).priority() )
+                    + "] " + desc.mid( 0, m_maxCharClip )
+                    + QObject::tr(" (%1 days ago)").arg( days )
+                    + "</b></font><br>";
+
             ammount++ ;
         }
     }
 
     // get total number of still open todos
-    m_list = todo->sorted( true, 1, OPimTodoAccess::DoNotShowCompleted, 1);
+    m_list = todo->sorted( true, OPimTodoAccess::Priority, OPimTodoAccess::DoNotShowCompleted, 1);
 
     for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
         count +=1;
@@ -101,7 +107,21 @@ void TodolistPluginWidget::getTodo() {
             if( desc.isEmpty() ) {
                 desc = (*m_it).description();
             }
-            tmpout += "<b> [" +  QString("%1").arg((*m_it).priority() )  + "] </b>" + desc.mid( 0, m_maxCharClip ) + "<br>";
+            tmpout += "<b> ["
+                    +  QString("%1").arg((*m_it).priority() )
+                    + "] </b>" + desc.mid( 0, m_maxCharClip );
+            if( (*m_it).hasDueDate() ) {
+                QString text;
+                int off = QDate::currentDate().daysTo( (*m_it).dueDate() );
+                if( off == 0 )
+                    text = tr("today");
+                else if( off == 1 )
+                    text = tr("1 day"); // "tomorrow" wouldn't fit
+                else
+                    text = tr("%1 days").arg(QString::number(off));
+                tmpout += " (" + text + ")";
+            }
+            tmpout += "<br>";
             ammount++;
         }
     }
