@@ -42,6 +42,8 @@ protected slots:
     void  startAddressBook();
 
 private:
+    QString itemText( const QDate &date, const QString &desc );
+
     Opie::Ui::OClickableLabel* addressLabel;
     QVBoxLayout* layoutTodo;
     Opie::OPimContactAccess * m_contactdb;

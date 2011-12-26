@@ -123,35 +123,8 @@ void AddressBookPluginWidget::getAddress()
                                               Opie::OPimContactAccess::FilterOff, 0 );
 
                 for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
-                    if ( ammount++ < m_maxLinesTask ){
-                        // Now we want to calculate how many days
-                        //until birthday. We have to set
-                        // the correct year to calculate the day diff...
-                        QDate destdate = (*m_it).birthday();
-                        destdate.setYMD( QDate::currentDate().year(),
-                                 destdate.month(), destdate.day() );
-                        if ( QDate::currentDate().daysTo(destdate) < 0 )
-                            destdate.setYMD( QDate::currentDate().year()+1,
-                                     destdate.month(), destdate.day() );
-
-                        int daysleft = QDate::currentDate().daysTo(destdate);
-
-                        QString color = m_entryColor;
-                        if ( daysleft < m_urgentDays )
-                            color = m_urgentColor;
-
-                        output += "<font color=" + color + "><b>- "
-                            + (*m_it).fullName()
-                            + " (";
-
-                        if( daysleft == 0 )
-                            output += QObject::tr("today");
-                        else if( daysleft == 1 )
-                            output += QObject::tr("tomorrow");
-                        else
-                            output += QObject::tr("%1 days").arg(daysleft);
-
-                        output += ") </b></font><br>";
+                    if ( ammount++ < m_maxLinesTask ) {
+                        output += itemText( (*m_it).birthday(), (*m_it).fullName() );
                     }
                 }
             }
@@ -184,33 +157,7 @@ void AddressBookPluginWidget::getAddress()
 
             for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
                 if ( ammount++ < m_maxLinesTask ){
-                    // Now we want to calculate how many days until anniversary.
-                    // We have to set the correct year to calculate the day diff...
-                    QDate destdate = (*m_it).anniversary();
-                    destdate.setYMD( QDate::currentDate().year(), destdate.month(),
-                             destdate.day() );
-                    if ( QDate::currentDate().daysTo(destdate) < 0 )
-                        destdate.setYMD( QDate::currentDate().year()+1,
-                                 destdate.month(), destdate.day() );
-
-                    int daysleft = QDate::currentDate().daysTo(destdate);
-
-                    QString color = m_entryColor;
-                    if ( daysleft < m_urgentDays )
-                        color = m_urgentColor;
-
-                    output += "<font color=" + color + "><b>- "
-                        + (*m_it).fullName()
-                        + " (";
-
-                    if( daysleft == 0 )
-                        output += QObject::tr("today");
-                    else if( daysleft == 1 )
-                        output += QObject::tr("tomorrow");
-                    else
-                        output += QObject::tr("%1 days").arg(daysleft);
-
-                    output += ") </b></font><br>";
+                    output += itemText( (*m_it).anniversary(), (*m_it).fullName() );
                 }
             }
         }
@@ -223,6 +170,37 @@ void AddressBookPluginWidget::getAddress()
     }
 
     addressLabel->setText( output );
+}
+
+QString AddressBookPluginWidget::itemText( const QDate &date, const QString &desc )
+{
+    // Calculate how many days until the birthday/anniversary
+    // We have to set the correct year to calculate the day diff...
+    QDate destdate;
+    destdate.setYMD( QDate::currentDate().year(), date.month(),
+                date.day() );
+    if ( QDate::currentDate().daysTo(destdate) < 0 )
+        destdate.setYMD( QDate::currentDate().year()+1,
+                    destdate.month(), destdate.day() );
+
+    int daysleft = QDate::currentDate().daysTo(destdate);
+
+    QString color = m_entryColor;
+    if ( daysleft < m_urgentDays )
+        color = m_urgentColor;
+
+    QString output = "<font color=" + color + "><b>- " + desc + " (";
+
+    if( daysleft == 0 )
+        output += QObject::tr("today");
+    else if( daysleft == 1 )
+        output += QObject::tr("tomorrow");
+    else
+        output += QObject::tr("%1 days").arg(daysleft);
+
+    output += ") </b></font><br>";
+
+    return output;
 }
 
 /**
