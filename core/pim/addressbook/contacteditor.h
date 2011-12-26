@@ -80,6 +80,7 @@ class ContactEditor : public QDialog {
         void updateDatePicker();
         QString parseName( QString fullName, int type );
         void chooserError( int index );
+        void setFullName();
     private slots:
         void slotChooser1Change( const QString &textChanged );
         void slotChooser2Change( const QString &textChanged );
@@ -187,6 +188,7 @@ class ContactEditor : public QDialog {
         QToolButton* anniversaryButton;
 
         bool initializing;
+        QString m_oldOrganization;
 };
 
 #endif

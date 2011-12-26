@@ -1051,9 +1051,17 @@ void ContactEditor::slotFullNameChange( const QString &textChanged ) {
     if ( ! txtSuffix->text().isEmpty() )
         cmbFileAs->insertItem( parseName( textChanged, NAME_FML ) + " " + txtSuffix->text() );
 
+    bool org = false;
+    if( txtFullName->text() == txtOrganization->text() ) {
+        cmbFileAs->insertItem( txtOrganization->text() );
+        org = true;
+    }
+    if( index <= 0 ) {
+        if( org )
+            index = cmbFileAs->count() - 1;
+    }
+
     cmbFileAs->setCurrentItem( index );
-
-
 }
 
 void ContactEditor::slotSuffixChange( const QString& ) {
@@ -1066,9 +1074,9 @@ void ContactEditor::slotOrganizationChange( const QString &textChanged ) {
     // Special handling for storing Companies:
     // If no Fullname is given, we store the Company-Name as lastname
     // to handle it like a person..
-    if ( txtFullName->text() == txtOrganization->text().left( txtFullName->text().length() ) )
+    if ( txtFullName->text() == m_oldOrganization )
         txtFullName->setText( textChanged );
-
+    m_oldOrganization = textChanged;
 }
 
 void ContactEditor::accept() {
@@ -1094,7 +1102,7 @@ void ContactEditor::slotNote() {
 
 void ContactEditor::slotName() {
 
-    QString tmpName, suffix;
+    QString suffix;
 
     txtFirstName->setText( parseName(txtFullName->text(), NAME_F) );
     txtMiddleName->setText( parseName(txtFullName->text(), NAME_M) );
@@ -1104,15 +1112,8 @@ void ContactEditor::slotName() {
     // Preserve suffix, since we don't use it in the full name box at the moment
     suffix = txtSuffix->text();
 
-    if ( QPEApplication::execDialog( dlgName ) ) {
-         if ( txtLastName->text().contains( ' ', true ) )
-             tmpName =  txtLastName->text() + ", " + txtFirstName->text() + " " + txtMiddleName->text();
-         else
-             tmpName = txtFirstName->text() + " " + txtMiddleName->text() + " " + txtLastName->text();
-
-        txtFullName->setText( tmpName.simplifyWhiteSpace() );
-        slotFullNameChange( txtFullName->text() );
-    }
+    if ( QPEApplication::execDialog( dlgName ) )
+        setFullName();
     else
         txtSuffix->setText( suffix );
 
@@ -1122,6 +1123,17 @@ void ContactEditor::setNameFocus() {
 
     txtFullName->setFocus();
 
+}
+
+void ContactEditor::setFullName() {
+    QString fullName;
+    if ( txtLastName->text().contains( ' ', true ) && !txtFirstName->text().isEmpty() )
+        fullName = txtLastName->text() + ", " + txtFirstName->text() + " " + txtMiddleName->text();
+    else
+        fullName = txtFirstName->text() + " " + txtMiddleName->text() + " " + txtLastName->text();
+
+    txtFullName->setText( fullName.simplifyWhiteSpace() );
+    slotFullNameChange( txtFullName->text() );
 }
 
 bool ContactEditor::isEmpty() {
@@ -1152,51 +1164,59 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 
     odebug << "Fullname: " << simplifiedName << oendl;
 
-    commapos = simplifiedName.find( ',', 0, true);
-    if ( commapos >= 0 ) {
-        odebug << " Commapos: " << commapos << oendl;
-
-        // A comma (",") separates the lastname from one or
-        // many first names. Thus, remove the lastname from the
-        // String and parse the firstnames.
-
-        strLastName = simplifiedName.left( commapos );
-        simplifiedName= simplifiedName.mid( commapos + 1 );
-        haveLastName = true;
-        odebug << "Fullname without ',': " << simplifiedName << oendl;
-
-        // If we have any lastname, we should now split all first names.
-        // The first one will be the used as first, the rest as "middle names"
-
-        QStringList allFirstNames = QStringList::split(" ", simplifiedName);
-        QStringList::Iterator it = allFirstNames.begin();
-        strFirstName = *it++;
-        QStringList allSecondNames;
-        for ( ; it != allFirstNames.end(); ++it )
-            allSecondNames.append( *it );
-
-        strMiddleName = allSecondNames.join(" ");
-
+    if( fullName == txtOrganization->text() ) {
+        strFirstName = "";
+        strMiddleName = "";
+        strLastName = fullName;
+        strTitle = "";
     }
     else {
+        commapos = simplifiedName.find( ',', 0, true);
+        if ( commapos >= 0 ) {
+            odebug << " Commapos: " << commapos << oendl;
 
-        // No comma separator used: We use the first word as firstname, the
-        // last as second/lastname and everything in the middle as middlename
+            // A comma (",") separates the lastname from one or
+            // many first names. Thus, remove the lastname from the
+            // String and parse the firstnames.
 
-        QStringList allNames = QStringList::split(" ", simplifiedName);
-        QStringList::Iterator it = allNames.begin();
-        strFirstName = *it++;
-        QStringList allSecondNames;
-        for ( ; it != --allNames.end(); ++it )
-            allSecondNames.append( *it );
+            strLastName = simplifiedName.left( commapos );
+            simplifiedName= simplifiedName.mid( commapos + 1 );
+            haveLastName = true;
+            odebug << "Fullname without ',': " << simplifiedName << oendl;
 
-        strMiddleName = allSecondNames.join(" ");
-        strLastName = *(--allNames.end());
+            // If we have any lastname, we should now split all first names.
+            // The first one will be the used as first, the rest as "middle names"
 
+            QStringList allFirstNames = QStringList::split(" ", simplifiedName);
+            QStringList::Iterator it = allFirstNames.begin();
+            strFirstName = *it++;
+            QStringList allSecondNames;
+            for ( ; it != allFirstNames.end(); ++it )
+                allSecondNames.append( *it );
+
+            strMiddleName = allSecondNames.join(" ");
+
+        }
+        else {
+
+            // No comma separator used: We use the first word as firstname, the
+            // last as second/lastname and everything in the middle as middlename
+
+            QStringList allNames = QStringList::split(" ", simplifiedName);
+            QStringList::Iterator it = allNames.begin();
+            strFirstName = *it++;
+            QStringList allSecondNames;
+            for ( ; it != --allNames.end(); ++it )
+                allSecondNames.append( *it );
+
+            strMiddleName = allSecondNames.join(" ");
+            strLastName = *(--allNames.end());
+
+        }
+
+        if ( strFirstName == strLastName )
+            strFirstName = "";
     }
-
-    if ( strFirstName == strLastName )
-        strFirstName = "";
 
     odebug << "strFirstName: " << strFirstName << oendl;
     odebug << "strMiddletName: " << strMiddleName << oendl;
@@ -1297,22 +1317,16 @@ void ContactEditor::setEntry( const Opie::OPimContact &entry ) {
 //         + " " + ent.lastName() + " " + ent.suffix();
 //    txtFullName->setText( tmpString->simplifyWhiteSpace() );
 
-    if ( !ent.isEmpty() ) {
-        // Lastnames with multiple words need to be protected by a comma !
-        if ( ent.lastName().contains( ' ', true ) )
-            txtFullName->setText( ent.lastName() + ", " + ent.firstName() + " " + ent.middleName() );
-        else
-            txtFullName->setText( ent.firstName() + " " + ent.middleName() + " " + ent.lastName() );
-    }
+    // Set this first so that fileAs logic for company name only works
+    txtOrganization->setText( ent.company() );
+    txtDepartment->setText( ent.department() );
+
+    setFullName();
 
     cmbFileAs->setEditText( ent.fileAs() );
 
     //    if (hasTitle)
     txtJobTitle->setText( ent.jobTitle() );
-
-    //    if (hasCompany)
-    txtOrganization->setText( ent.company() );
-    txtDepartment->setText( ent.department() );
 
     //    if (hasNotes)
     txtNote->setText( ent.notes() );
