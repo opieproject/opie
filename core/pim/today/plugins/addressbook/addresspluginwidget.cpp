@@ -99,9 +99,26 @@ void AddressBookPluginWidget::getAddress()
         return;
     }
 
+    // Get owner contact, in case that has an anniversary/birthday defined
+    QDate ownerBirthday;
+    QDate ownerAnniversary;
+    Opie::OPimContact ownerContact = Opie::OPimContactAccess::businessCard();
+    if( !ownerContact.isEmpty() ) {
+        ownerBirthday = ownerContact.birthday();
+        if( daysToNext( ownerBirthday ) > m_daysLookAhead )
+            ownerBirthday = QDate();
+        ownerAnniversary = ownerContact.anniversary();
+        if( daysToNext( ownerAnniversary ) > m_daysLookAhead )
+            ownerAnniversary = QDate();
+    }
+
     // Define the query for birthdays and start search..
     QDate lookAheadDate = QDate::currentDate().addDays( m_daysLookAhead );
     int lines = 0;
+    Opie::OPimContactAccess::List list;
+    Opie::OPimContactAccess::List::Iterator it;
+    QValueList<Opie::OPimContact>::Iterator it2;
+
     if ( m_showBirthdays ) {
         owarn << "Searching from now (" << QDate::currentDate().toString() << ") until "
                 << lookAheadDate.toString() << " ! " << oendl;
@@ -110,21 +127,35 @@ void AddressBookPluginWidget::getAddress()
             Opie::OPimContact querybirthdays;
             querybirthdays.setBirthday( lookAheadDate );
 
-            m_list = m_contactdb->queryByExample( querybirthdays,
+            list = m_contactdb->queryByExample( querybirthdays,
                                                   Opie::OPimContactAccess::DateDiff );
-            if ( m_list.count() > 0 ){
+
+            if ( list.count() > 0 || !ownerBirthday.isNull() ) {
                 output = "<font color=" + m_headlineColor + ">"
                     + QObject::tr( "Birthdays in next %1 days:" )
                     .arg( m_daysLookAhead )
                     + "</font> <br>";
 
                 // Sort filtered results
-                m_list = m_contactdb->sorted( m_list, true, Opie::OPimContactAccess::SortBirthdayWithoutYear,
+                list = m_contactdb->sorted( list, true, Opie::OPimContactAccess::SortBirthdayWithoutYear,
                                               Opie::OPimContactAccess::FilterOff, 0 );
 
-                for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
+                // Construct a new list containing the owner's birthday if any
+                QValueList<Opie::OPimContact> list2;
+                for ( it = list.begin(); it != list.end(); ++it ) {
+                    if( (! ownerBirthday.isNull()) && (*it).birthday() > ownerBirthday ) {
+                        list2.append( ownerContact );
+                        ownerBirthday = QDate();
+                    }
+                    list2.append(*it);
+                }
+                if( ! ownerBirthday.isNull() )
+                    list2.append( ownerContact );
+
+                // List the birthdays
+                for ( it2 = list2.begin(); it2 != list2.end(); ++it2 ) {
                     if ( lines++ < m_maxLinesTask ) {
-                        output += itemText( (*m_it).birthday(), (*m_it).fullName() );
+                        output += itemText( (*it2).birthday(), (*it2).fullName() );
                     }
                 }
             }
@@ -142,22 +173,35 @@ void AddressBookPluginWidget::getAddress()
         Opie::OPimContact queryanniversaries;
         queryanniversaries.setAnniversary( lookAheadDate );
 
-        m_list = m_contactdb->queryByExample( queryanniversaries, Opie::OPimContactAccess::DateDiff );
+        list = m_contactdb->queryByExample( queryanniversaries, Opie::OPimContactAccess::DateDiff );
 
         lines = 0;
-        if ( m_list.count() > 0 ) {
+        if ( list.count() > 0 || !ownerAnniversary.isNull()  ) {
             output += "<font color=" + m_headlineColor + ">"
                 + QObject::tr( "Anniversaries in next %1 days:" )
                 .arg( m_daysLookAhead )
                 + "</font> <br>";
 
             // Sort filtered results
-            m_list = m_contactdb->sorted( m_list, true, Opie::OPimContactAccess::SortAnniversaryWithoutYear,
+            list = m_contactdb->sorted( list, true, Opie::OPimContactAccess::SortAnniversaryWithoutYear,
                               Opie::OPimContactAccess::FilterOff, 0 );
 
-            for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
-                if ( lines++ < m_maxLinesTask ){
-                    output += itemText( (*m_it).anniversary(), (*m_it).fullName() );
+            // Construct a new list containing the owner's anniversary if any
+            QValueList<Opie::OPimContact> list2;
+            for ( it = list.begin(); it != list.end(); ++it ) {
+                if( (! ownerAnniversary.isNull()) && (*it).anniversary() > ownerAnniversary ) {
+                    list2.append( ownerContact );
+                    ownerAnniversary = QDate();
+                }
+                list2.append(*it);
+            }
+            if( ! ownerAnniversary.isNull() )
+                list2.append( ownerContact );
+
+            // List the anniversaries
+            for ( it2 = list2.begin(); it2 != list2.end(); ++it2 ) {
+                if ( lines++ < m_maxLinesTask ) {
+                    output += itemText( (*it2).anniversary(), (*it2).fullName() );
                 }
             }
         }
@@ -172,7 +216,7 @@ void AddressBookPluginWidget::getAddress()
     addressLabel->setText( output );
 }
 
-QString AddressBookPluginWidget::itemText( const QDate &date, const QString &desc )
+int AddressBookPluginWidget::daysToNext( const QDate &date )
 {
     // Calculate how many days until the birthday/anniversary
     // We have to set the correct year to calculate the day diff...
@@ -183,7 +227,12 @@ QString AddressBookPluginWidget::itemText( const QDate &date, const QString &des
         destdate.setYMD( QDate::currentDate().year()+1,
                     destdate.month(), destdate.day() );
 
-    int daysleft = QDate::currentDate().daysTo(destdate);
+    return QDate::currentDate().daysTo(destdate);
+}
+
+QString AddressBookPluginWidget::itemText( const QDate &date, const QString &desc )
+{
+    int daysleft = daysToNext( date );
 
     QString color = m_entryColor;
     if ( daysleft < m_urgentDays )

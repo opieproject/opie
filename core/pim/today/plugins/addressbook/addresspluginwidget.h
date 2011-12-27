@@ -43,13 +43,11 @@ protected slots:
 
 private:
     QString itemText( const QDate &date, const QString &desc );
+    int daysToNext( const QDate &date );
 
     Opie::Ui::OClickableLabel* addressLabel;
     QVBoxLayout* layoutTodo;
     Opie::OPimContactAccess * m_contactdb;
-
-    Opie::OPimContactAccess::List m_list;
-    Opie::OPimContactAccess::List::Iterator m_it;
 
     void readConfig();
     void getAddress();
