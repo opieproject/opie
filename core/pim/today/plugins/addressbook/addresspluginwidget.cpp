@@ -101,7 +101,7 @@ void AddressBookPluginWidget::getAddress()
 
     // Define the query for birthdays and start search..
     QDate lookAheadDate = QDate::currentDate().addDays( m_daysLookAhead );
-    int ammount = 0;
+    int lines = 0;
     if ( m_showBirthdays ) {
         owarn << "Searching from now (" << QDate::currentDate().toString() << ") until "
                 << lookAheadDate.toString() << " ! " << oendl;
@@ -123,7 +123,7 @@ void AddressBookPluginWidget::getAddress()
                                               Opie::OPimContactAccess::FilterOff, 0 );
 
                 for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
-                    if ( ammount++ < m_maxLinesTask ) {
+                    if ( lines++ < m_maxLinesTask ) {
                         output += itemText( (*m_it).birthday(), (*m_it).fullName() );
                     }
                 }
@@ -144,7 +144,7 @@ void AddressBookPluginWidget::getAddress()
 
         m_list = m_contactdb->queryByExample( queryanniversaries, Opie::OPimContactAccess::DateDiff );
 
-        ammount = 0;
+        lines = 0;
         if ( m_list.count() > 0 ) {
             output += "<font color=" + m_headlineColor + ">"
                 + QObject::tr( "Anniversaries in next %1 days:" )
@@ -156,7 +156,7 @@ void AddressBookPluginWidget::getAddress()
                               Opie::OPimContactAccess::FilterOff, 0 );
 
             for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
-                if ( ammount++ < m_maxLinesTask ){
+                if ( lines++ < m_maxLinesTask ){
                     output += itemText( (*m_it).anniversary(), (*m_it).fullName() );
                 }
             }

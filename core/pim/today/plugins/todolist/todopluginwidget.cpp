@@ -73,13 +73,13 @@ void TodolistPluginWidget::getTodo() {
     QString output;
     QString tmpout;
     int count = 0;
-    int ammount = 0;
+    int lines = 0;
 
     // get overdue todos first
     m_list = todo->sorted( true, OPimTodoAccess::Deadline, OPimTodoAccess::OnlyOverDue, 1);
 
     for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
-        if (!(*m_it).isCompleted() && ( ammount < m_maxLinesTask ) ) {
+        if (!(*m_it).isCompleted() && ( lines < m_maxLinesTask ) ) {
             QString desc = (*m_it).summary();
             if( desc.isEmpty() ) {
                 desc = (*m_it).description();
@@ -91,7 +91,7 @@ void TodolistPluginWidget::getTodo() {
                     + QObject::tr(" (%1 days ago)").arg( days )
                     + "</b></font><br>";
 
-            ammount++ ;
+            lines++ ;
         }
     }
 
@@ -102,7 +102,7 @@ void TodolistPluginWidget::getTodo() {
         count +=1;
         // not the overdues, we allready got them, and not if we are
         // over the maxlines
-        if ( !(*m_it).isOverdue() && ( ammount < m_maxLinesTask ) ) {
+        if ( !(*m_it).isOverdue() && ( lines < m_maxLinesTask ) ) {
             QString desc = (*m_it).summary();
             if( desc.isEmpty() ) {
                 desc = (*m_it).description();
@@ -122,7 +122,7 @@ void TodolistPluginWidget::getTodo() {
                 tmpout += " (" + text + ")";
             }
             tmpout += "<br>";
-            ammount++;
+            lines++;
         }
     }
 
