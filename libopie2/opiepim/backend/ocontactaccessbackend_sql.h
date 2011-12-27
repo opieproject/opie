@@ -58,60 +58,60 @@ namespace Opie {
  * @see OPimAccessBackend for more information of available methods
  */
 class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
- public:
-	OPimContactAccessBackend_SQL ( const QString& appname, const QString& filename = QString::null );
+public:
+    OPimContactAccessBackend_SQL( const QString& appname, const QString& filename = QString::null );
 
-	~OPimContactAccessBackend_SQL ();
+    ~OPimContactAccessBackend_SQL();
 
-	bool save();
+    bool save();
 
-	bool load ();
+    bool load();
 
-	void clear ();
+    void clear();
 
-	bool wasChangedExternally();
+    bool wasChangedExternally();
     bool dataSourceExists() const;
 
-	UIDArray allRecords() const;
+    UIDArray allRecords() const;
 
-	OPimContact find( int uid ) const;
-	OPimContact find( int uid, const UIDArray& items, uint cur, Frontend::CacheDirection ) const;
+    OPimContact find( int uid ) const;
+    OPimContact find( int uid, const UIDArray& items, uint cur, Frontend::CacheDirection ) const;
 
-	UIDArray queryByExample ( const UIDArray& uidlist, const OPimContact &query, int settings,
-				     const QDateTime& d ) const;
+    UIDArray queryByExample( const UIDArray& uidlist, const OPimContact &query, int settings,
+                             const QDateTime& d ) const;
 
-	UIDArray matchRegexp(  const QRegExp &r ) const;
+    UIDArray matchRegexp(  const QRegExp &r ) const;
 
-	uint querySettings() const;
+    uint querySettings() const;
 
-	bool hasQuerySettings (uint querySettings) const;
+    bool hasQuerySettings (uint querySettings) const;
 
-	UIDArray sorted( const UIDArray& ar, bool asc, int sortOrder,
-			 int filter, const QArray<int>& categories)const;
+    UIDArray sorted( const UIDArray& ar, bool asc, int sortOrder,
+                     int filter, const QArray<int>& categories)const;
 
- 	bool add ( const OPimContact &newcontact );
+    bool add( const OPimContact &newcontact );
 
-	bool replace ( const OPimContact &contact );
+    bool replace( const OPimContact &contact );
 
-	bool remove ( int uid );
-	bool reload();
+    bool remove( int uid );
+    bool reload();
 
     OPimChangeLog *changeLog() const;
-    
- private:
-	UIDArray extractUids( Opie::DB::OSQLResult& res ) const;
-	QMap<int, QString>  requestNonCustom( int uid ) const;
-	QMap<QString, QString>  requestCustom( int uid ) const;
-	QMap<int, QString> fillNonCustomMap( const Opie::DB::OSQLResultItem& resultItem ) const;
-	OPimContact requestContactsAndCache( int uid, const QArray<int>& cachelist ) const;
-	void update();
 
- protected:
-	bool m_changed;
-	QString m_fileName;
-	UIDArray m_uids;
+private:
+    UIDArray extractUids( Opie::DB::OSQLResult& res ) const;
+    QMap<int, QString>  requestNonCustom( int uid ) const;
+    QMap<QString, QString>  requestCustom( int uid ) const;
+    QMap<int, QString> fillNonCustomMap( const Opie::DB::OSQLResultItem& resultItem ) const;
+    OPimContact requestContactsAndCache( int uid, const QArray<int>& cachelist ) const;
+    void update();
 
-	Opie::DB::OSQLDriver* m_driver;
+protected:
+    bool m_changed;
+    QString m_fileName;
+    UIDArray m_uids;
+
+    Opie::DB::OSQLDriver* m_driver;
     OPimChangeLog_SQL *m_changeLog;
 };
 
