@@ -554,15 +554,28 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
                     // This table is just visible for this process and will be removed
                     // automatically after using.
                     datediff_query = "SELECT uid,substr(\"Birthday\", 6, 10) as \"BirthdayMD\", substr(\"Anniversary\", 6, 10) as \"AnniversaryMD\" FROM addressbook WHERE ( \"Birthday\" != '' OR \"Anniversary\" != '' ) AND ";
-                    datediff_query += QString( " (\"%1MD\" <= '%2-%3\' AND \"%4MD\" >= '%5-%6')" )
-                        .arg( *it )
-                        //.arg( QString::number( endDate->year() ).rightJustify( 4, '0' ) )
-                        .arg( QString::number( endDate->month() ).rightJustify( 2, '0' ) )
-                        .arg( QString::number( endDate->day() ).rightJustify( 2, '0' ) )
-                        .arg( *it )
-                        //.arg( QString::number( startDate.year() ).rightJustify( 4, '0' ) )
-                        .arg( QString::number( startDate.month() ).rightJustify( 2, '0' ) )
-                        .arg( QString::number( startDate.day() ).rightJustify( 2, '0' ) ) ;
+
+                    if( endDate->month() > startDate.month() ) {
+                        datediff_query += QString( " (\"%1MD\" <= '%2-%3\' AND \"%4MD\" >= '%5-%6')" )
+                            .arg( *it )
+                            .arg( QString::number( endDate->month() ).rightJustify( 2, '0' ) )
+                            .arg( QString::number( endDate->day() ).rightJustify( 2, '0' ) )
+                            .arg( *it )
+                            .arg( QString::number( startDate.month() ).rightJustify( 2, '0' ) )
+                            .arg( QString::number( startDate.day() ).rightJustify( 2, '0' ) ) ;
+                    }
+                    else {
+                        // We're crossing a year boundary, need to handle this a little differently
+                        datediff_query += QString( " ((\"%1MD\" <= '%2-%3\' AND \"%4MD\" >= '01-01') OR (\"%5MD\" <= '12-31\' AND \"%6MD\" >= '%7-%8'))" )
+                            .arg( *it )
+                            .arg( QString::number( endDate->month() ).rightJustify( 2, '0' ) )
+                            .arg( QString::number( endDate->day() ).rightJustify( 2, '0' ) )
+                            .arg( *it )
+                            .arg( *it )
+                            .arg( *it )
+                            .arg( QString::number( startDate.month() ).rightJustify( 2, '0' ) )
+                            .arg( QString::number( startDate.day() ).rightJustify( 2, '0' ) ) ;
+                    }
                 }
 
                 if ( settings & OPimContactAccess::DateYear ) {
