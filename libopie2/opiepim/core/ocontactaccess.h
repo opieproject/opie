@@ -154,7 +154,6 @@ signals:
 
 private:
     OPimContactAccessBackend *m_backEnd;
-    bool m_loading:1;
 
 private slots:
     void copMessage( const QCString &msg, const QByteArray &data );
