@@ -21,9 +21,9 @@ public:
     virtual QMap<QDate,QStringList> entries(const QDate&,const QDate&);
 protected:
     Opie::OPimContactAccess * m_contactdb;
-    Opie::OPimContactAccess::List m_list;
-    Opie::OPimContactAccess::List::Iterator m_it;
+    Opie::OPimContact owner;
     virtual QMap<QDate,QString> _entries(const QDate&,const QDate&,bool anniversary);
+    void addMapEntry( QMap<QDate, QString> &map, const QDate &date, const QDate &start, const QDate &end, const QString &prefix, const QString &name );
 };
 
 #endif

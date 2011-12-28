@@ -13,6 +13,8 @@ Birthday::Birthday()
     connect( m_contactdb, SIGNAL( signalChanged(const Opie::OPimContactAccess*) ),
          this, SLOT( refresh(const Opie::OPimContactAccess*) ) );
 */
+    // Get owner contact in case that has an anniversary/birthday
+    owner = Opie::OPimContactAccess::businessCard();
 }
 
 QString Birthday::description()
@@ -23,37 +25,34 @@ QString Birthday::description()
 QStringList Birthday::entries(const QDate&aDate)
 {
     QStringList ret;
+    QStringList items;
+    Opie::OPimContactAccess::List list;
+    Opie::OPimContactAccess::List::Iterator it;
+
     if ( m_contactdb->hasQuerySettings( Opie::OPimContactAccess::DateDay ) ){
         Opie::OPimContact querybirthdays,queryanniversary;
         QString pre;
         querybirthdays.setBirthday(aDate);
         queryanniversary.setAnniversary(aDate);
-        m_list = m_contactdb->queryByExample( querybirthdays,Opie::OPimContactAccess::DateDay| Opie::OPimContactAccess::DateMonth);
-        if ( m_list.count() > 0 ){
-            pre = QObject::tr("Birthday","holidays")+" ";
-            int z = 0;
-            for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
-                if (z) {
-                    pre+=", ";
-                }
-                pre+=((*m_it).fullName());
-                ++z;
-            }
-            ret.append(pre);
-        }
-        m_list = m_contactdb->queryByExample( queryanniversary,Opie::OPimContactAccess::DateDay| Opie::OPimContactAccess::DateMonth);
-        if ( m_list.count() > 0 ){
-            pre = QObject::tr("Anniversary","holidays")+" ";
-            int z = 0;
-            for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
-                if (z) {
-                    pre+=", ";
-                }
-                pre+=((*m_it).fullName());
-                ++z;
-            }
-            ret.append(pre);
-        }
+
+        // Birthdays
+        list = m_contactdb->queryByExample( querybirthdays,Opie::OPimContactAccess::DateDay | Opie::OPimContactAccess::DateMonth );
+        for( it = list.begin(); it != list.end(); ++it )
+            items += (*it).fullName();
+        if( !owner.birthday().isNull() && owner.birthday().dayOfYear() == aDate.dayOfYear() )
+            items += owner.fullName();
+        if( items.count() > 0 )
+            ret.append( QObject::tr("Birthday","holidays") + ": " + items.join(", ") );
+
+        // Anniversaries
+        items.clear();
+        list = m_contactdb->queryByExample( queryanniversary, Opie::OPimContactAccess::DateDay | Opie::OPimContactAccess::DateMonth );
+        for( it = list.begin(); it != list.end(); ++it )
+            items += (*it).fullName();
+        if( !owner.anniversary().isNull() && owner.anniversary().dayOfYear() == aDate.dayOfYear() )
+            items += owner.fullName();
+        if( items.count() > 0 )
+            ret.append( QObject::tr("Anniversary","holidays") + ": " + items.join(", ") );
     }
     return ret;
 }
@@ -63,46 +62,64 @@ QStringList Birthday::entries(unsigned year, unsigned month, unsigned day)
     return entries(QDate(year,month,day));
 }
 
+void Birthday::addMapEntry( QMap<QDate, QString> &map, const QDate &date, const QDate &start, const QDate &end, const QString &prefix, const QString &name )
+{
+    int year;
+    if( start.month() > end.month() ) {
+        // Crossing a year boundary (Dec -> Jan)
+        if( date.month() == end.month() )
+            year = end.year();
+        else
+            year = start.year();
+    }
+    else
+        year = end.year();
+    QDate t(year, date.month(), date.day());
+
+    if( map[t].isEmpty() )
+        map[t] = prefix + name;
+    else
+        map[t] += ", " + name;
+}
+
 QMap<QDate,QString> Birthday::_entries(const QDate&start,const QDate&end,bool anniversary)
 {
     QMap<QDate,QString> ret;
     QDate s = (start<end?start:end);
     QDate e = (start<end?end:start);
+    Opie::OPimContactAccess::List list;
+    Opie::OPimContactAccess::List::Iterator it;
 
-    int daysto = start.daysTo(end);
-    if (daysto < 0) {
-        daysto = end.daysTo(start);
-    }
     if ( m_contactdb->hasQuerySettings(Opie::OPimContactAccess::DateDiff ) ){
         Opie::OPimContact querybirthdays;
-        QString pre;
-        if (anniversary) {
+        if( anniversary )
             querybirthdays.setAnniversary(e);
-        } else {
+        else
             querybirthdays.setBirthday(e);
-        }
-        QMap<QDate,QString> collector;
-        QMap<QDate,QString>::ConstIterator sit;
-        m_list = m_contactdb->queryByExample( querybirthdays,Opie::OPimContactAccess::DateDiff,s);
+
+        QString pre;
+        if (anniversary)
+            pre = QObject::tr("Anniversary","holidays") + ": ";
+        else
+            pre = QObject::tr("Birthday","holidays") + ": ";
+
         QDate t;
-        if ( m_list.count() > 0 ){
-            if (anniversary) {
-                pre = QObject::tr("Anniversary","holidays");
-            } else {
-                pre = QObject::tr("Birthday","holidays");
-            }
-            for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
-                if (!anniversary) {
-                    t.setYMD(e.year(),(*m_it).birthday().month(),(*m_it).birthday().day());
-                } else {
-                    t.setYMD(e.year(),(*m_it).anniversary().month(),(*m_it).anniversary().day());
-                }
-                if (ret[t].isEmpty()) {
-                    ret[t]=pre;
-                }
-                ret[t]+=" "+(*m_it).fullName();
-            }
+        list = m_contactdb->queryByExample( querybirthdays, Opie::OPimContactAccess::DateDiff, s );
+        for ( it = list.begin(); it != list.end(); ++it ) {
+            if( anniversary )
+                t = (*it).anniversary();
+            else
+                t = (*it).birthday();
+            addMapEntry( ret, t, s, e, pre, (*it).fullName() );
         }
+
+        // Check owner contact
+        if( anniversary )
+            t = owner.anniversary();
+        else
+            t = owner.birthday();
+        if( !t.isNull() && t.dayOfYear() >= s.dayOfYear() && t.dayOfYear() <= e.dayOfYear() )
+            addMapEntry( ret, t, s, e, pre, owner.fullName() );
     }
     return ret;
 }
