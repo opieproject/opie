@@ -271,7 +271,7 @@ void TimeZoneSelector::slotTzActive( int )
 void TimeZoneSelector::slotExecute( void )
 {
   // execute the world time application...
-    if (QFile::exists(QPEApplication::qpeDir()+"bin/citytime"))
+    if (QFile::exists(OPIE_BINDIR "/citytime"))
         Global::execute( "citytime" );
     else
         QMessageBox::warning(this,tr("citytime executable not found"),

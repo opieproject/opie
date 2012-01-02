@@ -400,7 +400,7 @@ int resume ( int resuspend )
 				remove_pidfile ( );
 
 				// no need for system() since this process is no longer useful anyway
-				execv ( "/opt/QtPalmtop/bin/qcop", argv );
+				execv ( OPIE_BINDIR "/qcop", argv );
 
 				perror ( "exec for qcop failed" );
 				return 5;

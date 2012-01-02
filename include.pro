@@ -3,6 +3,7 @@ include( $(OPIEDIR)/gen.pro )
 # base opie install path
 # prefix = /opt/QtPalmtop ??? Why here (eilers) ???
 prefix = $(OPIEDIR)
+DEFINES += OPIE_BINDIR='QPEApplication::qpeDir() + "bin" + '
 
 contains( CONFIG, quick-app-lib ) {
     TEMPLATE = lib

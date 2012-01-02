@@ -1049,7 +1049,7 @@ void Server::finishedQueuedRequests()
 void Server::startBluetoothServer()
 {
     Opie::Core::OProcess *btprocess = new Opie::Core::OProcess( this );
-    *btprocess << QPEApplication::qpeDir() + "bin/opiebluetoothd";
+    *btprocess << OPIE_BINDIR "/opiebluetoothd";
     if (!btprocess->start())
         owarn << "opiebluetoothd process did not start" << oendl;
 }
@@ -1063,7 +1063,7 @@ void Server::startSoundServer()
     }
 
     process->clearArguments();
-    *process << QPEApplication::qpeDir() + "bin/qss";
+    *process << OPIE_BINDIR "/qss";
     if (!process->start())
         owarn << "Sound server process did not start" << oendl;
 }

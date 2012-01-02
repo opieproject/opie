@@ -124,7 +124,7 @@ FirstUse::FirstUse(QWidget* parent, const char * name, WFlags wf) :
 #endif
 
     for ( int i = 0; settingsTable[i].app; i++ ) {
-	QString file = QPEApplication::qpeDir() + "bin/";
+	QString file = OPIE_BINDIR + QString("/");
 	file += settingsTable[i].app;
 	file += exeSuffix;
 	if ( QFile::exists(file) )

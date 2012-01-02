@@ -905,7 +905,7 @@ void ServerApplication::restart()
         prepareForTermination( true );
         for ( int fd = 3; fd < 100; fd++ )
             close( fd );
-        execl( ( qpeDir() + "/bin/qpe" ).local8Bit(), "qpe", NULL );
+        execl( QString( OPIE_BINDIR "/qpe" ).local8Bit(), "qpe", NULL );
         exit( 1 );
 #endif
     }
