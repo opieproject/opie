@@ -37,6 +37,7 @@
 #include <qpe/datebookmonth.h>
 #include <qpe/global.h>
 #include <qpe/tzselect.h>
+#include <qpe/qpeapplication.h>
 
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
@@ -333,7 +334,10 @@ void TimeTabWidget::slotTZChanged( const QString &newtz )
 
 void TimeTabWidget::showNetworkSettings()
 {
-	QCopEnvelope e("QPE/Application/networksettings", "raise()" );
+	if( QFile::exists( OPIE_BINDIR "/connmansettings" ) )
+		QCopEnvelope e("QPE/Application/connmansettings", "raise()" );
+	else
+		QCopEnvelope e("QPE/Application/networksettings", "raise()" );
 }
 
 void TimeTabWidget::showHideAmPm()
