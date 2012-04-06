@@ -21,7 +21,7 @@
 #include "calcdisplay.h"
 
 /* XPM */
-static char *swap_xpm[] = {
+static const char *swap_xpm[] = {
 /* width height num_colors chars_per_pixel */
 "    13    18        2            1",
 /* colors */
