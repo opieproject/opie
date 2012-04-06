@@ -23,10 +23,10 @@
 struct Layout : QVBox{
     static QString appName() { return QString::fromLatin1("currconv"); }
     Layout(QWidget *p, const char* n, WFlags)
-	:QVBox(0,"fond" )
+        :QVBox(0,"fond" )
     {
         LCDDisplay *lcd = new LCDDisplay(this, "lcd");
-	(void)new KeyPad(lcd, this, "keypad");
+        (void)new KeyPad(lcd, this, "keypad");
 
         setCaption( QObject::tr("Currconv") );
     };
