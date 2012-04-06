@@ -28,16 +28,81 @@
 */
 
 #include "currency.h"
+#include "json.h"
+
+#include <qfile.h>
+#include <qtextstream.h>
+#include <opie2/odebug.h>
 
 CurrencyConverter::CurrencyConverter()
 {
 }
 
-void CurrencyConverter::loadRates()
+void CurrencyConverter::loadRates( const QString &filename )
 {
-    m_rates.insert("USD", 1.0);
-    m_rates.insert("GBP", 0.629891);
-    m_rates.insert("EUR", 0.765132);
+    m_timestamp = QDateTime::currentDateTime();
+    m_rates.clear();
+    QFile f( filename );
+    if ( f.open(IO_ReadOnly) ) {
+        QTextStream t( &f );
+        QString s = t.read();
+        json_value *data = json_parse(s.latin1());
+        if( data->type == json_object ) {
+            for (uint i = 0; i < data->u.object.length; i++) {
+                QString name(data->u.object.values[i].name);
+                if( name == "rates" ) {
+                    json_value *ratedata = data->u.object.values[i].value;
+                    if( ratedata->type == json_object ) {
+                        for (uint k = 0; k < ratedata->u.object.length; k++) {
+                            QString currname(ratedata->u.object.values[k].name);
+                            json_value *ratevalue = ratedata->u.object.values[k].value;
+                            if( ratevalue->type == json_double) {
+                                m_rates.insert(currname, ratevalue->u.dbl);
+                            }
+                        }
+                    }
+                }
+                else if( name == "timestamp" ) {
+                    json_value *valuedata = data->u.object.values[i].value;
+                    if( valuedata->type == json_integer ) {
+                        m_timestamp.setTime_t( valuedata->u.integer );
+                    }
+                }
+                else if( name == "base" ) {
+                    json_value *valuedata = data->u.object.values[i].value;
+                    if( valuedata->type == json_string)
+                        m_rates[QString::fromUtf8(valuedata->u.string.ptr)] = 1.0;
+                }
+                else {
+                    json_value *valuedata = data->u.object.values[i].value;
+                    if( valuedata->type == json_string)
+                        m_extra[name] = QString::fromUtf8(valuedata->u.string.ptr);
+                }
+            }
+        }
+        json_value_free( data );
+    }
+}
+
+void CurrencyConverter::loadCurrencies( const QString &filename )
+{
+    m_currencies.clear();
+    QFile f( filename );
+    if ( f.open(IO_ReadOnly) ) {
+        QTextStream t( &f );
+        QString s = t.read();
+        json_value *data = json_parse(s.latin1());
+        if( data->type == json_object ) {
+            for (uint i = 0; i < data->u.object.length; i++) {
+                QString name(data->u.object.values[i].name);
+                json_value *valuedata = data->u.object.values[i].value;
+                if( valuedata->type == json_string) {
+                    m_currencies.insert(name, QString::fromUtf8(valuedata->u.string.ptr));
+                }
+            }
+        }
+        json_value_free( data );
+    }
 }
 
 double CurrencyConverter::convertRate(const QString &rateFrom, const QString &rateTo, double value)
@@ -53,4 +118,24 @@ QStringList CurrencyConverter::rateCodes()
     for( it = m_rates.begin(); it != m_rates.end(); ++it )
         codes += it.key();
     return codes;
+}
+
+QString CurrencyConverter::currencyName( const QString &code )
+{
+    return m_currencies[code];
+}
+
+QDateTime CurrencyConverter::timestamp()
+{
+    return m_timestamp;
+}
+
+bool CurrencyConverter::dataLoaded()
+{
+    return m_rates.count() > 0;
+}
+
+QMap<QString,QString> CurrencyConverter::extraInfo()
+{
+    return m_extra;
 }

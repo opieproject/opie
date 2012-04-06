@@ -21,20 +21,29 @@
 #include <qpushbutton.h>
 #include <qcombobox.h>
 
+namespace Opie {
+    namespace Core {
+        class OProcess;
+    }
+}
 
 class LCDDisplay : public QHBox{
 
 Q_OBJECT
 public:
     LCDDisplay( QWidget *parent=0, const char *name=0 );
+    virtual ~LCDDisplay();
 
 public slots:
     void setValue(double);
     void swapLCD(void);
     void cbbxChange(void);
+    void dataRetrieved(Opie::Core::OProcess*);
+    void slotUpdate();
+    void slotSettings();
+    void slotCheckData();
+    void slotDataInfo();
 
-//signals:
-//    void valueChanged( int );
 private:
     int         grpbxStyle;
 
@@ -51,9 +60,17 @@ private:
     int iCurrentLCD; // 0=top, 1=bottom
 
     CurrencyConverter m_curr;
+    int m_updateMode;
+    QString m_dataDir;
+    QString m_lastRate1, m_lastRate2;
+    QStringList m_visibleRates;
 
+    void readConfig();
+    void saveConfig();
+    void reloadRateData();
     void refreshRates();
-    void updateRateCombo( QComboBox *combo, const QStringList &lst );
+    void updateRateCombo( QComboBox *combo, const QStringList &lst, const QString &dfl );
+    void startDownload(const QString remoteFile, const QString localFile, int updateMode);
 };
 
 #endif // CALCDISPLAY_H

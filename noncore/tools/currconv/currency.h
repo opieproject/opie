@@ -32,6 +32,7 @@
 
 #include <qmap.h>
 #include <qstringlist.h>
+#include <qdatetime.h>
 
 class CurrencyConverter {
 public:
@@ -39,10 +40,18 @@ public:
 
     QStringList rateCodes();
     double convertRate(const QString &rateFrom, const QString &rateTo, double value);
-    void loadRates();
+    void loadCurrencies( const QString &filename );
+    void loadRates( const QString &filename );
+    QString currencyName( const QString &code );
+    QDateTime timestamp();
+    bool dataLoaded();
+    QMap<QString,QString> extraInfo();
 
 protected:
     QMap<QString,double> m_rates;
+    QMap<QString,QString> m_currencies;
+    QMap<QString,QString> m_extra;
+    QDateTime m_timestamp;
 };
 
 #endif
