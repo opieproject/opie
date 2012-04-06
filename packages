@@ -41,7 +41,7 @@ CONFIG_DOCTAB  noncore/settings/doctab doctab.pro
 CONFIG_DRAWPAD	noncore/graphics/drawpad	drawpad.pro
 CONFIG_DVORAK	inputmethods/dvorak	dvorak.pro
 CONFIG_EMBEDDEDKONSOLE	core/apps/embeddedkonsole	embeddedkonsole.pro
-CONFIG_EUROCONV		noncore/tools/euroconv/ euroconv.pro
+CONFIG_CURRCONV		noncore/tools/currconv/ currconv.pro
 CONFIG_EXAMPLE_APPLET	examples/applet	applet.pro
 CONFIG_EXAMPLE_BOARD    examples/inputmethod    inputmethod.pro
 CONFIG_EXAMPLE_LIBOPIE2BLUEZ	examples/opiebluez	opiebluez.pro

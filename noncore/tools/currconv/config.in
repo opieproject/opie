@@ -1,0 +1,4 @@
+  config CURRCONV
+    boolean "opie-currconv (Converts between different currencies)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 )

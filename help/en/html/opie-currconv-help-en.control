@@ -1,10 +1,10 @@
-Package: opie-euroconv-help-en
-Files: help/en/html/euroconv.html help/en/html/euroconv
+Package: opie-currconv-help-en
+Files: help/en/html/currconv.html help/en/html/currconv
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie-users@lists.sourceforge.net>
 Architecture: all
-Depends: opie-euroconv
+Depends: opie-currconv
 License: GPL
-Description: Euroconv help files (English)
+Description: Currconv help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

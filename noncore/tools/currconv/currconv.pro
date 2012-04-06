@@ -8,6 +8,6 @@ INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe -lopiecore2
 INTERFACES	= 
-TARGET          = euroconv
+TARGET          = currconv
 
 include( $(OPIEDIR)/include.pro )

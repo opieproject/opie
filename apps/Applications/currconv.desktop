@@ -1,9 +1,9 @@
 [Desktop Entry]
-Exec=euroconv
-Icon=euroconv/euroconv
+Exec=currconv
+Icon=currconv/currconv
 Type=Application
-Name=Euroconv
-Comment=An Euro converter
+Name=Currconv
+Comment=A currency converter
 Name[de]=Euroconv
 Comment[de]=Ein Euro Konverter
 Name[fr]=Euroconv
