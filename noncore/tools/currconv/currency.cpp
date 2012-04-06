@@ -27,22 +27,30 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef CURRENCY_H
-#define CURRENCY_H
+#include "currency.h"
 
-#include <qmap.h>
-#include <qstringlist.h>
+CurrencyConverter::CurrencyConverter()
+{
+}
 
-class CurrencyConverter {
-public:
-    CurrencyConverter();
+void CurrencyConverter::loadRates()
+{
+    m_rates.insert("USD", 1.0);
+    m_rates.insert("GBP", 0.629891);
+    m_rates.insert("EUR", 0.765132);
+}
 
-    QStringList rateCodes();
-    double convertRate(const QString &rateFrom, const QString &rateTo, double value);
-    void loadRates();
+double CurrencyConverter::convertRate(const QString &rateFrom, const QString &rateTo, double value)
+{
+    double baseValue = value / m_rates[rateFrom];
+    return baseValue * m_rates[rateTo];
+}
 
-protected:
-    QMap<QString,double> m_rates;
-};
-
-#endif
+QStringList CurrencyConverter::rateCodes()
+{
+    QStringList codes;
+    QMap<QString,double>::Iterator it;
+    for( it = m_rates.begin(); it != m_rates.end(); ++it )
+        codes += it.key();
+    return codes;
+}

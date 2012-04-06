@@ -3,6 +3,7 @@ HEADERS		= calcdisplay.h    \
                 calckeypad.h
 SOURCES		= calcdisplay.cpp  \
                 calckeypad.cpp \
+                currency.cpp \
                 main.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include

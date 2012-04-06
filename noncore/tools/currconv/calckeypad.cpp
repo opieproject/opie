@@ -210,13 +210,15 @@ void KeyPad::gotoDec(void)
  **********************************************************************/
 void KeyPad::aboutDialog(void)
 {
-    QMessageBox::about( this, "About Euroconv",
-                            "Euroconv is an Euro converter\n\n"
-                            "Copyright 2003 TALC Informatique.\n"
-                            "Under GPL license\n\n"
-                            "Written by Eric Santonacci for Opie\n"
+    QMessageBox::about( this, "About Currconv",
+                            "Currconv is a currency converter\n\n"
+                            "Copyright 2003 TALC Informatique,\n"
+                            "Copyright 2012 Paul Eggleton.\n"
+                            "Licensed under the GPL.\n\n"
+                            "Original Euroconv by Eric Santonacci\n"
+                            "Developed for the Opie project\n"
                             "http://opie.sourceforge.net\n\n"
-                            "Version 0.5\n\n"
-                            "Any comment or feedback to:\n"
-                            "Eric.Santonacci@talc.fr\n");
+                            "Version 0.6\n\n"
+                            "Any comments or feedback to:\n"
+                            "opie-users@lists.sourceforge.net\n");
 }

@@ -28,7 +28,7 @@ struct Layout : QVBox{
         LCDDisplay *lcd = new LCDDisplay(this, "lcd");
         (void)new KeyPad(lcd, this, "keypad");
 
-        setCaption( QObject::tr("Currconv") );
+        setCaption( QObject::tr("Currency Converter") );
     };
 
 };

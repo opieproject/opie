@@ -6,18 +6,15 @@
  *
  *
  * Authors:     Eric Santonacci <Eric.Santonacci@talc.fr>
+ *              Paul Eggleton <bluelightning@bluelightning.org>
  *
  * Requirements:    Qt
  *
- * $Id: calcdisplay.cpp,v 1.5 2004-09-10 11:18:05 zecke Exp $
- *
  ***************************************************************************/
 
-#include <stdio.h>
 #include <qvbox.h>
 #include <qpixmap.h>
 
-#include "currency.h"
 #include "calcdisplay.h"
 
 /* XPM */
@@ -65,7 +62,6 @@ LCDDisplay::LCDDisplay( QWidget *parent, const char *name )
 
     cbbxTop     = new QComboBox(grpbxTop, "cbbxTop");
     cbbxTop->setMaximumWidth(50);
-    cbbxTop->insertStrList(aCurrency);
 
     lcdTop      = new QLCDNumber(10, grpbxTop, "lcdTop");
     lcdTop->setMode( QLCDNumber::DEC );
@@ -80,7 +76,6 @@ LCDDisplay::LCDDisplay( QWidget *parent, const char *name )
 
     cbbxBottom  = new QComboBox(grpbxBottom, "cbbxBottom");
     cbbxBottom->setMaximumWidth(50);
-    cbbxBottom->insertStrList(aCurrency);
 
     lcdBottom   = new QLCDNumber(10, grpbxBottom, "lcdBottom");
     lcdBottom->setMode( QLCDNumber::DEC );
@@ -100,6 +95,9 @@ LCDDisplay::LCDDisplay( QWidget *parent, const char *name )
 
     // set default LCD to top
     iCurrentLCD = 0;
+
+    m_curr.loadRates();
+    refreshRates();
 }
 
 /***********************************************************************
@@ -110,34 +108,25 @@ void LCDDisplay::setValue(double dSrcValue)
 
     double  dDstValue=0;
 
-    int     iSrcIndex;
-    int     iDstIndex;
+    QString rateFrom;
+    QString rateTo;
 
 
     // get item index of the focused
     if(!iCurrentLCD) {
-        iSrcIndex = cbbxTop->currentItem();
-        iDstIndex = cbbxBottom->currentItem();
+        rateFrom = cbbxTop->currentText();
+        rateTo = cbbxBottom->currentText();
     }
     else {
-        iSrcIndex = cbbxBottom->currentItem();
-        iDstIndex = cbbxTop->currentItem();
+        rateFrom = cbbxBottom->currentText();
+        rateTo = cbbxTop->currentText();
     }
 
-    if(iSrcIndex == iDstIndex) {
+    if(rateFrom == rateTo) {
         dDstValue = dSrcValue;
     }
     else {
-        if(iSrcIndex) {
-            // we are NOT in Euro as iDstIndex <> 0
-            // Convert to Euro
-            dDstValue = x2Euro(iSrcIndex, dSrcValue);
-            dDstValue = Euro2x(iDstIndex, dDstValue);
-        }
-        else {
-            // We are in Euro
-            dDstValue = Euro2x(iDstIndex, dSrcValue);
-        }
+        dDstValue = m_curr.convertRate( rateFrom, rateTo, dSrcValue );
     }
 
 
@@ -196,86 +185,20 @@ void LCDDisplay::cbbxChange(void)
     setValue(dCurrentValue);
 }
 
-
-/***********************************************************************
- * Euro2x converts dValue from Euro to the currency which combo box
- * index is provided in iIndex.
- **********************************************************************/
-double LCDDisplay::Euro2x(int iIndex, double dValue)
+void LCDDisplay::refreshRates()
 {
-    switch (iIndex) {
-        case 0: // Euro
-            return(dValue);
-            break;
+    QStringList codes = m_curr.rateCodes();
+    updateRateCombo(cbbxTop, codes);
+    updateRateCombo(cbbxBottom, codes);
+}
 
-        case 1: // FF: French Francs
-            return(dValue*FRF);
-            break;
-
-        case 2: // DM: Deutch Mark
-            return(dValue*DEM);
-            break;
-
-        case 3: // BEL Belgium Francs
-            return(dValue*BEF);
-            break;
-
-        case 4: // ITL Itialian Lire
-            return(dValue*ITL);
-            break;
-
-        case 5: // LUF Luxemburg
-            return(dValue*LUF);
-            break;
-
-        case 6: // IEP Irish Pound
-            return(dValue*IEP);
-            break;
-
-        default:
-            return 0;
-    }//switch (iIndex)
-}// fct Eur2x
-
-
-
-/***********************************************************************
- * x2Euro converts dValue to Euro from the currency which combo box
- * index is provided in iIndex.
- **********************************************************************/
-double LCDDisplay::x2Euro(int iIndex, double dValue)
+void LCDDisplay::updateRateCombo( QComboBox *combo, const QStringList &lst )
 {
-    switch (iIndex) {
-        case 0: // Euro
-            return(dValue);
-            break;
-
-        case 1: // FF: French Francs
-            return(dValue/FRF);
-            break;
-
-        case 2: // DM: Deutch Mark
-            return(dValue/DEM);
-            break;
-
-        case 3: // BEL Belgium Francs
-            return(dValue/BEF);
-            break;
-
-        case 4: // ITL Itialian Lire
-            return(dValue/ITL);
-            break;
-
-        case 5: // LUF Luxemburg
-            return(dValue/LUF);
-            break;
-
-        case 6: // IEP Irish Pound
-            return(dValue/IEP);
-            break;
-    }//switch (iIndex)
-
-    // we shouldn't come here
-    return 0;
-
-}// fct x2Euro
+    QString prev = combo->currentText();
+    combo->clear();
+    for( QStringList::ConstIterator it = lst.begin(); it != lst.end(); ++it ) {
+        combo->insertItem(*it, -1);
+        if( *it == prev )
+            combo->setCurrentItem( combo->count() - 1 );
+    }
+}

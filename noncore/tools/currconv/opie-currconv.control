@@ -2,7 +2,7 @@ Package: opie-currconv
 Files: plugins/application/libcurrconv.so* bin/currconv pics/currconv/* apps/Applications/currconv.desktop
 Priority: optional
 Section: opie/applications
-Maintainer: Eric Santonacci <Eric.Santonacci@talc.fr>
+Maintainer: Team Opie <opie-devel@lists.openembedded.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Currconv

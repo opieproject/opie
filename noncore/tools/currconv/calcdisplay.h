@@ -9,19 +9,17 @@
  *
  * Requirements:    Qt
  *
- * $Id: calcdisplay.h,v 1.3 2004-09-10 11:18:05 zecke Exp $
- *
- *
  ***************************************************************************/
 #ifndef CALCDISPLAY_H
 #define CALCDISPLAY_H
+
+#include "currency.h"
 
 #include <qhbox.h>
 #include <qlcdnumber.h>
 #include <qhgroupbox.h>
 #include <qpushbutton.h>
 #include <qcombobox.h>
-
 
 
 class LCDDisplay : public QHBox{
@@ -52,10 +50,10 @@ private:
 
     int iCurrentLCD; // 0=top, 1=bottom
 
-    double  Euro2x(int iIndex, double dValue);
-    double  x2Euro(int iIndex, double dValue);
+    CurrencyConverter m_curr;
 
-
+    void refreshRates();
+    void updateRateCombo( QComboBox *combo, const QStringList &lst );
 };
 
 #endif // CALCDISPLAY_H
