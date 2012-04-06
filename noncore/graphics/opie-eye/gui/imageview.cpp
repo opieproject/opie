@@ -11,12 +11,17 @@
 #include <qpopupmenu.h>
 #include <qtimer.h>
 #include <qaction.h>
+#include <qtoolbutton.h>
 
 using namespace Opie::Core;
 
 ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name, WFlags fl )
     : Opie::MM::OImageScrollView(parent,name,fl)
 {
+    m_fullScreenButton = new QToolButton(QToolButton::DownArrow, this);
+    m_fullScreenButton->setFixedSize(16,16);
+    m_fullScreenButtonTimer = new QTimer(this);
+    m_popupMenu = 0;
     m_viewManager = 0;
     focus_in_count = 0;
     m_cfg = cfg;
@@ -48,6 +53,9 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     connect( m_sysChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
         this, SLOT( systemMessage(const QCString&,const QByteArray&) ) );
     setKeyCompression(true);
+
+    connect(m_fullScreenButton, SIGNAL(clicked()), this, SLOT(slotFullScreenButton()));
+    connect(m_fullScreenButtonTimer, SIGNAL(timeout()), this, SLOT(slotHideFullScreenButton()));
 }
 
 void ImageView::slotIncBrightness()
@@ -230,42 +238,55 @@ void ImageView::slotShowImageInfo()
 void ImageView::contentsMousePressEvent ( QMouseEvent * e)
 {
     if (e->button()==1) {
+        if (m_isFullScreen) {
+            m_fullScreenButton->show();
+            m_fullScreenButtonTimer->start(2000);
+        }
         return OImageScrollView::contentsMousePressEvent(e);
     }
-    QPopupMenu *m = new QPopupMenu(this);
-    if (!m) return;
+    showPopupMenu( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
+}
+
+void ImageView::showPopupMenu( QPoint p )
+{
+    if (m_popupMenu)
+        return;
+
+    m_popupMenu = new QPopupMenu(this);
     if (m_hGroup) {
-        m_hGroup->addTo(m);
+        m_hGroup->addTo(m_popupMenu);
     }
     if (fullScreen()) {
         if (m_gPrevNext) {
-            m->insertSeparator();
-            m_gPrevNext->addTo(m);
+            m_popupMenu->insertSeparator();
+            m_gPrevNext->addTo(m_popupMenu);
         }
         if (m_gDisplayType) {
-            m->insertSeparator();
-            m_gDisplayType->addTo(m);
+            m_popupMenu->insertSeparator();
+            m_gDisplayType->addTo(m_popupMenu);
         }
         if (m_gBright) {
-            m->insertSeparator();
-            m_gBright->addTo(m);
+            m_popupMenu->insertSeparator();
+            m_gBright->addTo(m_popupMenu);
         }
     }
-    m->setFocus();
-    m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
+    m_popupMenu->setFocus();
+    m_popupMenu->exec(p);
     if (m_hGroup) {
-        m_hGroup->removeFrom(m);
+        m_hGroup->removeFrom(m_popupMenu);
     }
     if (m_gPrevNext) {
-        m_gPrevNext->removeFrom(m);
+        m_gPrevNext->removeFrom(m_popupMenu);
     }
     if (m_gDisplayType) {
-        m_gDisplayType->removeFrom(m);
+        m_gDisplayType->removeFrom(m_popupMenu);
     }
     if (m_gBright) {
-        m_gBright->removeFrom(m);
+        m_gBright->removeFrom(m_popupMenu);
     }
-    delete m;
+    delete m_popupMenu;
+    m_popupMenu = 0;
+    m_fullScreenButton->hide();
 }
 
 void ImageView::setFullScreen(bool how,bool force)
@@ -278,7 +299,19 @@ void ImageView::setFullScreen(bool how,bool force)
         if (force) showFullScreen();
     } else {
 //        setMinimumSize(10,10);
+        m_fullScreenButton->hide();
     }
+}
+
+void ImageView::slotFullScreenButton()
+{
+    showPopupMenu(m_fullScreenButton->mapToParent(m_fullScreenButton->rect().bottomRight()));
+}
+
+void ImageView::slotHideFullScreenButton()
+{
+    if( !m_popupMenu )
+        m_fullScreenButton->hide();
 }
 
 void ImageView::focusInEvent(QFocusEvent *)
@@ -287,6 +320,12 @@ void ImageView::focusInEvent(QFocusEvent *)
     //if (fullScreen()) parentWidget()->showNormal();
     if (m_ignore_next_in){m_ignore_next_in=false;return;}
     if (fullScreen()) enableFullscreen();
+}
+
+void ImageView::resizeEvent( QResizeEvent *e )
+{
+    m_fullScreenButton->move(width()-m_fullScreenButton->width(), 0);
+    Opie::MM::OImageScrollView::resizeEvent(e);
 }
 
 void ImageView::hide()

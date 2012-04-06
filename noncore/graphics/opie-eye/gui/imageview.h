@@ -8,6 +8,8 @@
 class QTimer;
 class QActionGroup;
 class QAction;
+class QToolButton;
+class QPopupMenu;
 
 class QCopChannel;
 
@@ -44,6 +46,7 @@ public:
     void stopSlide();
     void setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, QActionGroup*disptypeGroup,QActionGroup*brightGroup);
     void setCloseIfHide(bool);
+    void showPopupMenu( QPoint p );
 
 signals:
     void dispImageInfo(const QString&);
@@ -73,6 +76,11 @@ protected:
     bool closeIfHide:1;
     QCopChannel* m_sysChannel;
     int m_rotation;
+    QToolButton *m_fullScreenButton;
+    QPopupMenu *m_popupMenu;
+    QTimer *m_fullScreenButtonTimer;
+
+    virtual void resizeEvent( QResizeEvent *e );
 
 public slots:
     virtual void hide();
@@ -86,6 +94,8 @@ protected slots:
     virtual void slotShowImageInfo();
     virtual void keyReleaseEvent(QKeyEvent * e);
     virtual void contentsMousePressEvent ( QMouseEvent * e);
+    virtual void slotHideFullScreenButton();
+    virtual void slotFullScreenButton();
 };
 
 #endif
