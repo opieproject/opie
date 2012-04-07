@@ -289,6 +289,13 @@ int ConnManApplet::position()
 
 void ConnManApplet::mousePressEvent( QMouseEvent *)
 {
+    if( m_state == "" ) {
+        QCopEnvelope e("QPE/TaskBar", "message(QString,QString)");
+        e << tr("Connection manager unavailable");
+        e << QString("connmanapplet");
+        return;
+    }
+
     QPopupMenu *menu = new QPopupMenu();
 
     QStringList techs;
