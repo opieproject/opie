@@ -19,6 +19,7 @@
 #include <qpushbutton.h>
 #include <qgrid.h>
 #include <qbuttongroup.h>
+#include <qintdict.h>
 
 #include "calcdisplay.h"
 
@@ -32,8 +33,11 @@ public slots:
     void enterDigits(int);
     void operatorPressed(int);
     void clearLCD(void);
+    void backspace(void);
     void aboutDialog(void);
     void gotoDec(void);
+    void slotKeyPressed(int);
+    void slotKeyReleased(int);
 
 private:
     LCDDisplay  *display;
@@ -66,10 +70,12 @@ private:
     QPushButton *btnDivide;
     QPushButton *btnEqual;
     QPushButton *btnPercent;
-    QPushButton *btnF1;
+    QPushButton *btnBackspace;
     QPushButton *btnAbout;
 
     QButtonGroup *grpbtnOperators;
+
+    QIntDict<QPushButton> m_buttonKeys;
 
     void setAppearance(void);
 

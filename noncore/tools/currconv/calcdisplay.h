@@ -44,6 +44,13 @@ public slots:
     void slotCheckData();
     void slotDataInfo();
 
+signals:
+    void keyPressed(int key);
+    void keyReleased(int key);
+
+protected:
+    bool eventFilter( QObject *obj, QEvent *ev );
+
 private:
     int         grpbxStyle;
 

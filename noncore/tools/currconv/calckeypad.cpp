@@ -14,6 +14,7 @@
  ***************************************************************************/
 
 #include <qmessagebox.h>
+#include <opie2/odebug.h>
 
 #include "calckeypad.h"
 
@@ -41,13 +42,13 @@ KeyPad::KeyPad(LCDDisplay *lcd, QWidget *parent, const char *name )
     btn9        = new QPushButton("9", this, "9");
     btnPlus     = new QPushButton("+", this, "+");
     // 2nd line
-    btnPercent  = new QPushButton("%", this, "percent");
+    btnBackspace = new QPushButton("<-",this, "Backspace");
     btn4        = new QPushButton("4", this, "4");
     btn5        = new QPushButton("5", this, "5");
     btn6        = new QPushButton("6", this, "6");
     btnMinus    = new QPushButton("-", this, "-");
     // 3rd line
-    btnF1       = new QPushButton("",this, "F1");
+    btnPercent  = new QPushButton("%", this, "percent");
     btn1        = new QPushButton("1", this, "1");
     btn2        = new QPushButton("2", this, "2");
     btn3        = new QPushButton("3", this, "3");
@@ -94,16 +95,37 @@ KeyPad::KeyPad(LCDDisplay *lcd, QWidget *parent, const char *name )
     btnClear->setPalette(QPalette( QColor(255, 99, 71) ) );
     btnDot->setFixedSize(30,30);
     btnPercent->setFixedSize(30,30);
-    btnF1->setFixedSize(30,30);
+    btnBackspace->setFixedSize(30,30);
     btnAbout->setFixedSize(30,30);
 
+    m_buttonKeys.insert(Key_0, btn0);
+    m_buttonKeys.insert(Key_1, btn1);
+    m_buttonKeys.insert(Key_2, btn2);
+    m_buttonKeys.insert(Key_3, btn3);
+    m_buttonKeys.insert(Key_4, btn4);
+    m_buttonKeys.insert(Key_5, btn5);
+    m_buttonKeys.insert(Key_6, btn6);
+    m_buttonKeys.insert(Key_7, btn7);
+    m_buttonKeys.insert(Key_8, btn8);
+    m_buttonKeys.insert(Key_9, btn9);
+    m_buttonKeys.insert(Key_Period, btnDot);
+    m_buttonKeys.insert(Key_Plus, btnPlus);
+    m_buttonKeys.insert(Key_Minus, btnMinus);
+    m_buttonKeys.insert(Key_Equal, btnEqual);
+    m_buttonKeys.insert(Key_Asterisk, btnMultiply);
+    m_buttonKeys.insert(Key_Slash, btnDivide);
+    m_buttonKeys.insert(Key_Percent, btnPercent);
+    m_buttonKeys.insert(Key_Backspace, btnBackspace);
 
     // SIGNALS AND SLOTS
     connect(grpbtnDigits, SIGNAL(clicked(int) ), this, SLOT(enterDigits(int)));
     connect(grpbtnOperators, SIGNAL(clicked(int)), this, SLOT(operatorPressed(int)));
     connect(btnClear, SIGNAL(clicked()), this, SLOT(clearLCD()));
+    connect(btnBackspace, SIGNAL(clicked()), this, SLOT(backspace()));
     connect(btnAbout, SIGNAL(clicked()), this, SLOT(aboutDialog()));
     connect(btnDot, SIGNAL(clicked()), this, SLOT(gotoDec()));
+    connect(display, SIGNAL(keyPressed(int)), SLOT(slotKeyPressed(int)));
+    connect(display, SIGNAL(keyReleased(int)), SLOT(slotKeyReleased(int)));
 }
 
 
@@ -196,6 +218,35 @@ void KeyPad::clearLCD(void)
 }
 
 /***********************************************************************
+ * SLOT: backspace  <- has been pressed
+ **********************************************************************/
+void KeyPad::backspace(void)
+{
+    if(!dCurrent)
+        return;
+
+    if(!bIsDec) {
+        dCurrent -= (int)dCurrent % 10;
+        dCurrent /= 10;
+        iLenCurrent--;
+    }
+    else {
+        dDecCurrent *= 10;
+        if( dDecCurrent == 1 ) {
+            bIsDec = false;
+            dDecCurrent = 0;
+        }
+        else if( dDecCurrent == 0.1 )
+            dCurrent = (int)dCurrent;
+        else
+            dCurrent = ((int)(dCurrent / (dDecCurrent * 10))) * (dDecCurrent * 10);
+    }
+
+    display->setValue(dCurrent);
+}
+
+
+/***********************************************************************
  * SLOT: gotoDec Dot has been pressed
  **********************************************************************/
 void KeyPad::gotoDec(void)
@@ -221,4 +272,21 @@ void KeyPad::aboutDialog(void)
                             "Version 0.6\n\n"
                             "Any comments or feedback to:\n"
                             "opie-users@lists.sourceforge.net\n");
+}
+
+/***********************************************************************
+ * SLOT: Key pressed (from LCD)
+ **********************************************************************/
+void KeyPad::slotKeyPressed( int key )
+{
+    QPushButton *btn = m_buttonKeys[key];
+    if( btn )
+        btn->animateClick();
+}
+
+/***********************************************************************
+ * SLOT: Key released (from LCD)
+ **********************************************************************/
+void KeyPad::slotKeyReleased( int key )
+{
 }

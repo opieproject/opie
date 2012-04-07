@@ -86,6 +86,7 @@ LCDDisplay::LCDDisplay( QWidget *parent, const char *name )
 
     cbbxTop     = new QComboBox(grpbxTop, "cbbxTop");
     cbbxTop->setMaximumWidth(50);
+    cbbxTop->installEventFilter( this );
 
     lcdTop      = new QLCDNumber(10, grpbxTop, "lcdTop");
     lcdTop->setMode( QLCDNumber::DEC );
@@ -100,6 +101,7 @@ LCDDisplay::LCDDisplay( QWidget *parent, const char *name )
 
     cbbxBottom  = new QComboBox(grpbxBottom, "cbbxBottom");
     cbbxBottom->setMaximumWidth(50);
+    cbbxBottom->installEventFilter( this );
 
     lcdBottom   = new QLCDNumber(10, grpbxBottom, "lcdBottom");
     lcdBottom->setMode( QLCDNumber::DEC );
@@ -413,4 +415,18 @@ void LCDDisplay::slotDataInfo()
     else
         msg += "<p>" + tr("No data loaded, select Currencies -> Update to download latest data") + "</p>";
     QMessageBox::information(this, tr("Currency Converter"), msg );
+}
+
+bool LCDDisplay::eventFilter( QObject *obj, QEvent *ev )
+{
+    if( ev->type() == QEvent::KeyPress ) {
+        QKeyEvent *ke = static_cast<QKeyEvent*>( ev );
+        emit keyPressed( ke->key() );
+    }
+    else if( ev->type() == QEvent::KeyRelease ) {
+        QKeyEvent *ke = static_cast<QKeyEvent*>( ev );
+        emit keyReleased( ke->key() );
+    }
+
+    return QHBox::eventFilter( obj, ev );
 }
