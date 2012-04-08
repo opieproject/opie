@@ -44,28 +44,10 @@ class QDialog;
 #include <qdict.h>
 #include <qstring.h>
 #include <qvaluelist.h>
+#include <qlist.h>
 
-class ServiceListener: public QObject {
-    Q_OBJECT
-public:
-    ServiceListener( const QDBusObjectPath &path, int seq );
-    ~ServiceListener();
-
-signals:
-    void serviceStateChanged( const QString &name, const QString &oldstate, const QString &newstate );
-    void signalStrength( int strength );
-
-protected slots:
-    void slotAsyncReply( int callId, const QDBusMessage& reply );
-    void slotDBusSignal( const QDBusMessage& message );
-
-private:
-    QDBusProxy *m_proxy;
-    QString m_serviceName;
-    QString m_state;
-    int m_strength;
-    int m_seq;
-};
+#include "../settings/technology.h"
+#include "../settings/service.h"
 
 class ConnManApplet: public QWidget, public QDBusObjectBase {
     Q_OBJECT
@@ -80,8 +62,7 @@ protected:
 protected slots:
     void slotAsyncReply( int callId, const QDBusMessage& reply );
     void slotDBusSignal( const QDBusMessage& message );
-    void updateServices();
-    void serviceStateChanged( const QString &name, const QString &oldstate, const QString &newstate );
+    void serviceStateChanged( const QDBusObjectPath &path, const QString &oldstate, const QString &newstate );
     void signalStrength( int strength );
 
 private:
@@ -89,7 +70,8 @@ private:
     void paintEvent( QPaintEvent* );
     void launchSettings();
     void managerPropertySet( const QString &prop, const QDBusVariant &propval );
-    void enableTechnology( const QString &tech, bool enable );
+    void addServices( const QValueList<QDBusData> &services );
+    void removeServices( const QValueList<QDBusObjectPath> &services );
     void showDialog( const QDBusMessage& message, const QDBusDataMap<QString> &fields );
     void destroyDialog();
 
@@ -103,7 +85,7 @@ private:
     QMap<int,QString> m_calls;
     QString m_state;
     int m_strength;
-    QMap<QString,bool> m_techs;
+    QDict<TechnologyListener> m_techs;
     QValueList<QDBusObjectPath> m_servicePaths;
     QDict<ServiceListener> m_services;
     QDialog *m_agentDlg;

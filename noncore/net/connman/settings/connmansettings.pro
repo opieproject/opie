@@ -1,6 +1,6 @@
 CONFIG        += qt warn_on quick-app
-HEADERS        = serviceedit.h mainwindowimpl.h
-SOURCES        = serviceedit.cpp mainwindowimpl.cpp main.cpp
+HEADERS        = serviceedit.h mainwindowimpl.h service.h technology.h
+SOURCES        = serviceedit.cpp mainwindowimpl.cpp main.cpp service.cpp technology.cpp
 INTERFACES     = serviceeditbase.ui mainwindow.ui
 INCLUDEPATH   += $(OPIEDIR)/include
 DEPENDPATH    += $(OPIEDIR)/include

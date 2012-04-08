@@ -1,7 +1,7 @@
 TEMPLATE      =  lib
 CONFIG        += qt plugin warn_on 
-HEADERS       =  connmanapplet.h
-SOURCES       =  connmanapplet.cpp
+HEADERS       =  connmanapplet.h ../settings/technology.h ../settings/service.h
+SOURCES       =  connmanapplet.cpp ../settings/technology.cpp ../settings/service.cpp
 TARGET        =  connmanapplet
 DESTDIR       =  $(OPIEDIR)/plugins/applets
 INCLUDEPATH   += $(OPIEDIR)/include

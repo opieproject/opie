@@ -72,72 +72,6 @@ using namespace Opie::Core;
 #define AGENT_OBJECT_PATH        "/org/opie/connman/agent"
 
 
-ServiceListener::ServiceListener( const QDBusObjectPath &path, int seq ): QObject( 0, 0 )
-{
-    m_seq = seq;
-    m_strength = -1;
-
-    QDBusConnection connection = QDBusConnection::systemBus();
-    m_proxy = new QDBusProxy(this);
-    m_proxy->setService("net.connman");
-    m_proxy->setPath(path);
-    m_proxy->setInterface("net.connman.Service");
-    m_proxy->setConnection(connection);
-
-    QObject::connect(m_proxy, SIGNAL(asyncReply(int, const QDBusMessage&)),
-                    this, SLOT(slotAsyncReply(int, const QDBusMessage&)));
-    QObject::connect(m_proxy, SIGNAL(dbusSignal(const QDBusMessage&)),
-                    this, SLOT(slotDBusSignal(const QDBusMessage&)));
-
-    m_proxy->sendWithAsyncReply("GetProperties", QValueList<QDBusData>());
-}
-
-ServiceListener::~ServiceListener()
-{
-}
-
-void ServiceListener::slotAsyncReply( int callId, const QDBusMessage& reply )
-{
-    if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
-        const QDBusDataMap<QString> map = reply[0].toStringKeyMap();
-        QDBusDataMap<QString>::ConstIterator it = map.begin();
-        for (; it != map.end(); ++it) {
-            if( it.key() == "Name" ) {
-                m_serviceName = it.data().toVariant().value.toString();
-            }
-            else if( it.key() == "State" ) {
-                m_state = it.data().toVariant().value.toString();
-            }
-            else if( it.key() == "Strength" ) {
-                m_strength = it.data().toVariant().value.toByte();
-            }
-        }
-        if( ( m_state == "ready" || m_state == "online" ) && m_seq == 0 )
-            emit signalStrength( m_strength );
-    }
-}
-
-void ServiceListener::slotDBusSignal( const QDBusMessage& message )
-{
-    odebug << "ConnMan: " << message.member() << oendl;
-    if( message.member() == "PropertyChanged" ) {
-        QString prop = message[0].toString();
-        if( prop == "State" ) {
-            QString oldState = m_state;
-            QString newState = message[1].toVariant().value.toString();
-            if( oldState != newState ) {
-                emit serviceStateChanged( m_serviceName, oldState, newState );
-                m_state = newState;
-            }
-        }
-        else if( prop == "Strength" ) {
-            m_strength = message[1].toVariant().value.toByte();
-            if( ( m_state == "ready" || m_state == "online" ) && m_seq == 0 )
-                emit signalStrength( m_strength );
-        }
-    }
-}
-
 // QDialog subclass that allows us to handle authentication asynchronously
 class AuthDialog: public QDialog {
 public:
@@ -230,8 +164,6 @@ private:
 
 
 
-
-
 ConnManApplet::ConnManApplet( QWidget *parent, const char *name ) : QWidget( parent, name )
 {
     m_agentDlg = NULL;
@@ -249,6 +181,7 @@ ConnManApplet::ConnManApplet( QWidget *parent, const char *name ) : QWidget( par
     m_strengthPix[100] = OResource::loadImage( "connmanapplet/signal_100", OResource::SmallIcon );
 
     m_services.setAutoDelete(TRUE);
+    m_techs.setAutoDelete(TRUE);
 
     m_connection = QDBusConnection::systemBus();
     m_managerProxy = new QDBusProxy(this);
@@ -264,6 +197,10 @@ ConnManApplet::ConnManApplet( QWidget *parent, const char *name ) : QWidget( par
 
     int callId = m_managerProxy->sendWithAsyncReply("GetProperties", QValueList<QDBusData>());
     m_calls[callId] = "GetProperties";
+    callId = m_managerProxy->sendWithAsyncReply("GetTechnologies", QValueList<QDBusData>());
+    m_calls[callId] = "GetTechnologies";
+    callId = m_managerProxy->sendWithAsyncReply("GetServices", QValueList<QDBusData>());
+    m_calls[callId] = "GetServices";
 
 
     // Register agent
@@ -299,21 +236,21 @@ void ConnManApplet::mousePressEvent( QMouseEvent *)
 
     QPopupMenu *menu = new QPopupMenu();
 
-    QStringList techs;
     int i=1;
-    for( QMap<QString,bool>::Iterator it = m_techs.begin(); it != m_techs.end(); ++it ) {
-        QString tech = it.key();
+    QStringList techs;
+    for( QDictIterator<TechnologyListener> it(m_techs); it.current(); ++it ) {
+        QString tech = it.current()->techName();
         // Bluetooth seems not to be enable-able and you shouldn't need to
         // control ethernet in this way (just unplug it!)
-        if( tech == "bluetooth" || tech == "ethernet" )
+        if( it.current()->techType() == "bluetooth" || it.current()->techType() == "ethernet" )
             continue;
 
-        if( it.data() )
+        if( it.current()->isPowered() )
             menu->insertItem( tr("Disable %1").arg( tech ), i );
         else
             menu->insertItem( tr("Enable %1").arg( tech ), i );
-        techs += tech;
         i++;
+        techs.append( it.currentKey() );
     }
 
     menu->insertSeparator();
@@ -327,7 +264,9 @@ void ConnManApplet::mousePressEvent( QMouseEvent *)
         launchSettings();
     }
     else if( ret>0 ) {
-        enableTechnology( techs[ret-1], !m_techs[techs[ret-1]] );
+        TechnologyListener *tech = m_techs[techs[ret-1]];
+        if( tech )
+            tech->setPowered(!tech->isPowered());
     }
 
     delete menu;
@@ -341,20 +280,6 @@ void ConnManApplet::launchSettings()
 {
     QCopEnvelope e("QPE/System", "execute(QString)");
     e << QString("connmansettings");
-}
-
-
-void ConnManApplet::enableTechnology( const QString &tech, bool enable )
-{
-    QValueList<QDBusData> params;
-    params << QDBusData::fromString( tech );
-    QString call;
-    if( enable )
-        call = "EnableTechnology";
-    else
-        call = "DisableTechnology";
-    int callId = m_managerProxy->sendWithAsyncReply(call, params);
-    m_calls[callId] = call;
 }
 
 
@@ -380,19 +305,50 @@ void ConnManApplet::slotAsyncReply( int callId, const QDBusMessage& reply )
 {
     QString method = m_calls[callId];
     if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
-        const QDBusDataMap<QString> map = reply[0].toStringKeyMap();
-        QDBusDataMap<QString>::ConstIterator it = map.begin();
-        for (; it != map.end(); ++it) {
-            managerPropertySet( it.key(), it.data().toVariant() );
+        if (method == "GetProperties") {
+            const QDBusDataMap<QString> map = reply[0].toStringKeyMap();
+            QDBusDataMap<QString>::ConstIterator it = map.begin();
+            for (; it != map.end(); ++it) {
+                managerPropertySet( it.key(), it.data().toVariant() );
+            }
+        }
+        else if (method == "GetTechnologies") {
+            m_techs.clear();
+            QValueList<QDBusData> techs = reply[0].toList().toQValueList();
+            for( QValueList<QDBusData>::Iterator it = techs.begin(); it != techs.end(); ++it ) {
+                QValueList<QDBusData> memberList;
+                memberList = (*it).toStruct();
+                TechnologyListener *tech = new TechnologyListener( memberList[0].toObjectPath(), 
+                                                                   memberList[1].toStringKeyMap() );
+                m_techs.insert( memberList[0].toObjectPath(), tech );
+            }
+        }
+        else if (method == "GetServices") {
+            m_services.clear();
+            QValueList<QDBusData> services = reply[0].toList().toQValueList();
+            addServices( services );
         }
     }
 }
 
 void ConnManApplet::slotDBusSignal(const QDBusMessage& message)
 {
-    odebug << "ConnMan: " << message.member() << ": " << message[0].toString() << oendl;
     if( message.member() == "PropertyChanged" ) {
         managerPropertySet( message[0].toString(), message[1].toVariant() );
+    }
+    else if( message.member() == "ServicesAdded" ) {
+        addServices( message[0].toList().toQValueList() );
+    }
+    else if( message.member() == "ServicesRemoved" ) {
+        removeServices( message[0].toList().toObjectPathList() );
+    }
+    else if( message.member() == "TechnologyAdded" ) {
+        TechnologyListener *tech = new TechnologyListener( message[0].toObjectPath(),
+                                                           message[1].toStringKeyMap() );
+        m_techs.insert( message[0].toObjectPath(), tech );
+    }
+    else if( message.member() == "TechnologyRemoved" ) {
+        m_techs.remove( message[0].toObjectPath() );
     }
 }
 
@@ -405,52 +361,12 @@ void ConnManApplet::managerPropertySet( const QString &prop, const QDBusVariant 
             update();
         }
     }
-    else if( prop == "AvailableTechnologies" ) {
-        QMap<QString,bool> techs;
-        QStringList availTechs = propval.value.toList().toQStringList();
-        for( QStringList::Iterator it = availTechs.begin(); it != availTechs.end(); ++it ) {
-            if( m_techs.contains(*it) )
-                techs[*it] = m_techs[*it];
-            else
-                techs[*it] = false;
-        }
-        m_techs = techs;
-    }
-    else if( prop == "EnabledTechnologies" ) {
-        for( QMap<QString,bool>::Iterator it = m_techs.begin(); it != m_techs.end(); ++it )
-            m_techs[it.key()] = false;
-
-        QStringList enabledTechs = propval.value.toList().toQStringList();
-        for( QStringList::Iterator it = enabledTechs.begin(); it != enabledTechs.end(); ++it ) {
-            m_techs[*it] = true;
-        }
-    }
-    else if( prop == "Services" ) {
-        m_servicePaths = propval.value.toList().toObjectPathList();
-        QTimer::singleShot( 0, this, SLOT( updateServices()) );
-    }
 }
 
-void ConnManApplet::updateServices()
-{
-    m_services.clear();
-    QValueList<QDBusObjectPath>::ConstIterator it2 = m_servicePaths.begin();
-    int seq=0;
-    for (; it2 != m_servicePaths.end(); ++it2) {
-        ServiceListener *listener = new ServiceListener((*it2), seq);
-        QObject::connect(listener, SIGNAL(serviceStateChanged(const QString&, const QString&, const QString&)),
-                        this, SLOT(serviceStateChanged(const QString&, const QString&, const QString&)));
-        QObject::connect(listener, SIGNAL(signalStrength(int)),
-                        this, SLOT(signalStrength(int)));
-        m_services.insert( (*it2), listener );
-        seq++;
-    }
-}
-
-void ConnManApplet::serviceStateChanged( const QString &name, const QString &oldstate, const QString &newstate )
+void ConnManApplet::serviceStateChanged( const QDBusObjectPath &path, const QString &oldstate, const QString &newstate )
 {
     QString msg = "";
-    odebug << "serviceStateChanged( " << name << ", " << oldstate << ", " << newstate << " )" << oendl;
+    QString name = m_services[path]->serviceName();
     if( newstate == "ready" || ( newstate == "online" && oldstate != "ready" ) ) {
         msg = tr("Connected to %1").arg(name);
     }
@@ -459,6 +375,28 @@ void ConnManApplet::serviceStateChanged( const QString &name, const QString &old
         QCopEnvelope e("QPE/TaskBar", "message(QString,QString)");
         e << msg;
         e << QString("connmanapplet");
+    }
+}
+
+void ConnManApplet::addServices( const QValueList<QDBusData> &services )
+{
+    for( QValueList<QDBusData>::ConstIterator it = services.begin(); it != services.end(); ++it ) {
+        QValueList<QDBusData> memberList;
+        memberList = (*it).toStruct();
+        ServiceListener *listener = new ServiceListener( memberList[0].toObjectPath(), 
+                                                            memberList[1].toStringKeyMap() );
+        QObject::connect(listener, SIGNAL(serviceStateChanged(const QDBusObjectPath&, const QString&, const QString&)),
+                        this, SLOT(serviceStateChanged(const QDBusObjectPath&, const QString&, const QString&)));
+        QObject::connect(listener, SIGNAL(signalStrength(int)),
+                        this, SLOT(signalStrength(int)));
+        m_services.insert(memberList[0].toObjectPath(), listener);
+    }
+}
+
+void ConnManApplet::removeServices( const QValueList<QDBusObjectPath> &services )
+{
+    for( QValueList<QDBusObjectPath>::ConstIterator it = services.begin(); it != services.end(); ++it ) {
+        m_services.remove( QString(*it) );
     }
 }
 
@@ -486,7 +424,7 @@ void ConnManApplet::signalStrength( int strength )
 
 bool ConnManApplet::handleMethodCall(const QDBusMessage& message)
 {
-    odebug << "OBluetoothAgent::handleMethodCall: interface='" << message.interface().latin1() << "', member='" << message.member().latin1() << "'" << oendl;
+    odebug << "ConnManApplet::handleMethodCall: interface='" << message.interface().latin1() << "', member='" << message.member().latin1() << "'" << oendl;
 
     if (message.interface() != "net.connman.Agent")
         return false;

@@ -27,63 +27,43 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef MAINWINDOWIMPL_H
-#define MAINWINDOWIMPL_H
+#ifndef TECHNOLOGY_H
+#define TECHNOLOGY_H
 
-#include <qstring.h>
+#include <qobject.h>
 #include <qmap.h>
 #include <qdict.h>
+#include <qstring.h>
+#include <qvaluelist.h>
 
-#include <dbus/qdbusconnection.h>
+#include <dbus/qdbusdata.h>
+#include <dbus/qdbusobject.h>
 #include <dbus/qdbusobjectpath.h>
-#include <dbus/qdbusproxy.h>
+#include <dbus/qdbusdatamap.h>
 
-#include <opie2/oprocess.h>
+class QDBusProxy;
 
-#include "mainwindow.h"
-#include "service.h"
-#include "technology.h"
-
-
-class MainWindowImpl : public MainWindow
-{
+class TechnologyListener: public QObject {
     Q_OBJECT
-
 public:
-    MainWindowImpl( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~MainWindowImpl();
+    TechnologyListener( const QDBusObjectPath &path, const QDBusDataMap<QString> &props );
+    ~TechnologyListener();
 
-    static QString appName() { return QString::fromLatin1("connmansettings"); }
+    QDBusProxy *proxy();
+    bool isPowered();
+    void setPowered( bool powered );
+    QString techType();
+    QString techName();
 
 protected slots:
-    void slotConnectService();
-    void slotDisconnectService();
-    void slotConfigureService();
-    void slotRemoveService();
-    void slotScan();
     void slotAsyncReply( int callId, const QDBusMessage& reply );
-    void slotServiceAsyncReply( int callId, const QDBusMessage& reply );
     void slotDBusSignal( const QDBusMessage& message );
-    void setHostname();
-    void slotHostname(Opie::Core::OProcess *proc, char *buffer, int buflen);
-    void updateList();
-    void serviceStateChanged( const QDBusObjectPath &path, const QString &oldstate, const QString &newstate );
 
-protected:
-    void initHostname();
-    ServiceListener *selectedService();
-    void updateListItem( QListViewItem *item, ServiceListener *service );
-
-protected:
-    QDBusConnection m_connection;
-    QDBusProxy *m_managerProxy;
-    QMap<int,QString> m_calls;
-    QDict<ServiceListener> m_services;
-    QDict<TechnologyListener> m_techs;
-    QString m_procTemp;
-    QValueList<QDBusObjectPath> m_servicePaths;
-    QMap<QString,QPixmap> m_stateIcons;
-    QMap<QString,QPixmap> m_typeIcons;
+private:
+    QDBusProxy *m_proxy;
+    QString m_name;
+    QString m_type;
+    bool m_powered;
 };
 
-#endif // MAINWINDOWIMPL_H
+#endif

@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
 
-              =.             Copyright (C) 2011 Paul Eggleton <bluelightning@bluelightning.org>
+              =.             Copyright (C) 2012 Paul Eggleton <bluelightning@bluelightning.org>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -27,63 +27,49 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef MAINWINDOWIMPL_H
-#define MAINWINDOWIMPL_H
 
-#include <qstring.h>
+#ifndef SERVICE_H
+#define SERVICE_H
+
+#include <qobject.h>
 #include <qmap.h>
 #include <qdict.h>
+#include <qstring.h>
+#include <qvaluelist.h>
 
-#include <dbus/qdbusconnection.h>
+#include <dbus/qdbusdata.h>
+#include <dbus/qdbusobject.h>
 #include <dbus/qdbusobjectpath.h>
-#include <dbus/qdbusproxy.h>
+#include <dbus/qdbusdatamap.h>
 
-#include <opie2/oprocess.h>
+class QDBusProxy;
 
-#include "mainwindow.h"
-#include "service.h"
-#include "technology.h"
-
-
-class MainWindowImpl : public MainWindow
-{
+class ServiceListener: public QObject {
     Q_OBJECT
-
 public:
-    MainWindowImpl( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~MainWindowImpl();
+    ServiceListener( const QDBusObjectPath &path, const QDBusDataMap<QString> &props );
+    ~ServiceListener();
 
-    static QString appName() { return QString::fromLatin1("connmansettings"); }
+    QDBusProxy *proxy();
+    QString serviceName();
+    QString serviceType();
+    QString state();
+
+signals:
+    void serviceStateChanged( const QDBusObjectPath &path, const QString &oldstate, const QString &newstate );
+    void signalStrength( int strength );
 
 protected slots:
-    void slotConnectService();
-    void slotDisconnectService();
-    void slotConfigureService();
-    void slotRemoveService();
-    void slotScan();
     void slotAsyncReply( int callId, const QDBusMessage& reply );
-    void slotServiceAsyncReply( int callId, const QDBusMessage& reply );
     void slotDBusSignal( const QDBusMessage& message );
-    void setHostname();
-    void slotHostname(Opie::Core::OProcess *proc, char *buffer, int buflen);
-    void updateList();
-    void serviceStateChanged( const QDBusObjectPath &path, const QString &oldstate, const QString &newstate );
+    void sendSignalStrength();
 
-protected:
-    void initHostname();
-    ServiceListener *selectedService();
-    void updateListItem( QListViewItem *item, ServiceListener *service );
-
-protected:
-    QDBusConnection m_connection;
-    QDBusProxy *m_managerProxy;
-    QMap<int,QString> m_calls;
-    QDict<ServiceListener> m_services;
-    QDict<TechnologyListener> m_techs;
-    QString m_procTemp;
-    QValueList<QDBusObjectPath> m_servicePaths;
-    QMap<QString,QPixmap> m_stateIcons;
-    QMap<QString,QPixmap> m_typeIcons;
+private:
+    QDBusProxy *m_proxy;
+    QString m_serviceName;
+    QString m_type;
+    QString m_state;
+    int m_strength;
 };
 
-#endif // MAINWINDOWIMPL_H
+#endif

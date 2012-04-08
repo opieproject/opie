@@ -30,6 +30,7 @@
 
 #include "mainwindowimpl.h"
 #include "serviceedit.h"
+#include "service.h"
 
 /* Opie */
 #include <opie2/odebug.h>
@@ -72,6 +73,7 @@ using namespace Opie::Core;
 #define _HOSTFILE "/etc/hostname"
 #define _IRDANAME "/proc/sys/net/irda/devname"
 
+
 MainWindowImpl::MainWindowImpl( QWidget* parent, const char* name, WFlags fl )
         : MainWindow( parent, name, Qt::WStyle_ContextHelp )
 {
@@ -89,8 +91,19 @@ MainWindowImpl::MainWindowImpl( QWidget* parent, const char* name, WFlags fl )
 
     m_services.setAutoDelete(TRUE);
 
-    int callId = m_managerProxy->sendWithAsyncReply("GetProperties", QValueList<QDBusData>());
-    m_calls[callId] = "GetProperties";
+    m_typeIcons["ethernet"] = OResource::loadPixmap( "connmansettings/wired", OResource::SmallIcon );
+    m_typeIcons["wifi"] = OResource::loadPixmap( "connmansettings/wireless", OResource::SmallIcon );
+    m_stateIcons["online"] = OResource::loadPixmap( "up", OResource::SmallIcon );
+    m_stateIcons["ready"] = m_stateIcons["online"];
+    m_stateIcons["idle"] = OResource::loadPixmap( "down", OResource::SmallIcon );
+    m_stateIcons["association"] = OResource::loadPixmap( "forward", OResource::SmallIcon );
+    m_stateIcons["configuration"] = OResource::loadPixmap( "fastforward", OResource::SmallIcon );
+    m_stateIcons["failure"] = OResource::loadPixmap( "reset", OResource::SmallIcon );
+
+    int callId = m_managerProxy->sendWithAsyncReply("GetServices", QValueList<QDBusData>());
+    m_calls[callId] = "GetServices";
+    callId = m_managerProxy->sendWithAsyncReply("GetTechnologies", QValueList<QDBusData>());
+    m_calls[callId] = "GetTechnologies";
 
     serviceList->header()->hide();
 
@@ -110,24 +123,33 @@ MainWindowImpl::~MainWindowImpl()
 void MainWindowImpl::slotAsyncReply( int callId, const QDBusMessage& reply )
 {
     QString method = m_calls[callId];
-    if( method == "GetProperties" ) {
-        if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
-            const QDBusDataMap<QString> map = reply[0].toStringKeyMap();
-            QDBusDataMap<QString>::ConstIterator it = map.begin();
-            for (; it != map.end(); ++it) {
-                if( it.key() == "Services" ) {
-                    m_servicePaths = it.data().toVariant().value.toList().toObjectPathList();
-                    QTimer::singleShot( 0, this, SLOT( updateList()) );
-                }
+    if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
+        if (method == "GetServices") {
+            m_services.clear();
+            QValueList<QDBusData> services = reply[0].toList().toQValueList();
+            for( QValueList<QDBusData>::ConstIterator it = services.begin(); it != services.end(); ++it ) {
+                QValueList<QDBusData> memberList;
+                memberList = (*it).toStruct();
+                ServiceListener *listener = new ServiceListener( memberList[0].toObjectPath(), 
+                                                                    memberList[1].toStringKeyMap() );
+                QObject::connect(listener, SIGNAL(serviceStateChanged(const QDBusObjectPath&, const QString&, const QString&)),
+                                this, SLOT(serviceStateChanged(const QDBusObjectPath&, const QString&, const QString&)));
+                //QObject::connect(listener, SIGNAL(signalStrength(int)),
+                //                this, SLOT(signalStrength(int)));
+                m_services.insert(memberList[0].toObjectPath(), listener);
             }
+            updateList();
         }
-    }
-    else {
-        if (reply.type() == QDBusMessage::ReplyMessage) {
-            odebug << method << " success?" << oendl;
-        }
-        else {
-            odebug << method << " failed: " << reply.error().name() << ": " << reply.error().message() << oendl;
+        else if (method == "GetTechnologies") {
+            m_techs.clear();
+            QValueList<QDBusData> techs = reply[0].toList().toQValueList();
+            for( QValueList<QDBusData>::Iterator it = techs.begin(); it != techs.end(); ++it ) {
+                QValueList<QDBusData> memberList;
+                memberList = (*it).toStruct();
+                TechnologyListener *tech = new TechnologyListener( memberList[0].toObjectPath(), 
+                                                                   memberList[1].toStringKeyMap() );
+                m_techs.insert( memberList[0].toObjectPath(), tech );
+            }
         }
     }
 }
@@ -138,11 +160,33 @@ void MainWindowImpl::slotServiceAsyncReply( int callId, const QDBusMessage& repl
 
 void MainWindowImpl::slotDBusSignal(const QDBusMessage& message)
 {
-    if( message.member() == "PropertyChanged" ) {
-        QString prop = message[0].toString();
-        if( prop == "Services" ) {
-            m_servicePaths = message[1].toVariant().value.toList().toObjectPathList();
-            QTimer::singleShot( 0, this, SLOT( updateList()) );
+    if( message.member() == "ServicesAdded" ) {
+        int callId = m_managerProxy->sendWithAsyncReply("GetServices", QValueList<QDBusData>());
+        m_calls[callId] = "GetServices";
+    }
+    else if( message.member() == "ServicesRemoved" ) {
+        int callId = m_managerProxy->sendWithAsyncReply("GetServices", QValueList<QDBusData>());
+        m_calls[callId] = "GetServices";
+    }
+    else if( message.member() == "TechnologyAdded" ) {
+        TechnologyListener *tech = new TechnologyListener( message[0].toObjectPath(),
+                                                           message[1].toStringKeyMap() );
+        m_techs.insert( message[0].toObjectPath(), tech );
+    }
+    else if( message.member() == "TechnologyRemoved" ) {
+        m_techs.remove( message[0].toObjectPath() );
+    }
+}
+
+void MainWindowImpl::serviceStateChanged( const QDBusObjectPath &path, const QString &oldstate, const QString &newstate )
+{
+    ServiceListener *service = m_services[path];
+    if( service ) {
+        for( QListViewItem *item = serviceList->firstChild(); item; item = item->nextSibling() ) {
+            if( item->text(3) == QString(path) ) {
+                updateListItem( item, service );
+                break;
+            }
         }
     }
 }
@@ -153,70 +197,21 @@ void MainWindowImpl::updateList()
     QString lastItemId;
     if( item )
         lastItemId = item->text(3);
-    
-    QPixmap wiredPix = OResource::loadPixmap( "connmansettings/wired", OResource::SmallIcon );
-    QPixmap wirelessPix = OResource::loadPixmap( "connmansettings/wireless", OResource::SmallIcon );
-    QMap<QString,QPixmap> stateIcons;
-    stateIcons["online"] = OResource::loadPixmap( "up", OResource::SmallIcon );
-    stateIcons["ready"] = stateIcons["online"];
-    stateIcons["idle"] = OResource::loadPixmap( "down", OResource::SmallIcon );
-    stateIcons["association"] = OResource::loadPixmap( "forward", OResource::SmallIcon );
-    stateIcons["configuration"] = OResource::loadPixmap( "fastforward", OResource::SmallIcon );
-    stateIcons["failure"] = OResource::loadPixmap( "reset", OResource::SmallIcon );
 
-    m_services.clear();
     serviceList->clear();
 
     QListViewItem *lastItem = NULL;
     item = NULL;
-    QValueList<QDBusObjectPath>::ConstIterator it2 = m_servicePaths.begin();
-    for (; it2 != m_servicePaths.end(); ++it2) {
-        QDBusProxy *proxy = new QDBusProxy(this);
-        proxy->setService("net.connman");
-        proxy->setPath((*it2));
-        proxy->setInterface("net.connman.Service");
-        proxy->setConnection(m_connection);
-        
-        QString name, type, state;
-        QDBusMessage reply = proxy->sendWithReply("GetProperties", QValueList<QDBusData>());
-        if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
-            const QDBusDataMap<QString> map = reply[0].toStringKeyMap();
-            QDBusDataMap<QString>::ConstIterator it = map.begin();
-            for (; it != map.end(); ++it) {
-                if( it.key() == "Name" ) {
-                    name = it.data().toVariant().value.toString();
-                }
-                else if( it.key() == "Type" ) {
-                    type = it.data().toVariant().value.toString();
-                }
-                else if( it.key() == "State" ) {
-                    state = it.data().toVariant().value.toString();
-                }
-            }
-        }
+    for( QDictIterator<ServiceListener> it(m_services); it.current(); ++it ) {
+        item = new QListViewItem(serviceList, item);
 
-        if( !name.isEmpty() ) {
-            item = new QListViewItem(serviceList, item);
-            item->setPixmap( 0, stateIcons[state] );
+        updateListItem( item, it.current() );
 
-            QPixmap pix;
-            if( type == "ethernet" )
-                pix = wiredPix;
-            else if( type == "wifi" )
-                pix = wirelessPix;
+        QObject::connect(it.current()->proxy(), SIGNAL(asyncReply(int, const QDBusMessage&)),
+                        this, SLOT(slotServiceAsyncReply(int, const QDBusMessage&)));
 
-            item->setPixmap( 1, pix );
-            item->setText(2, name);
-            QString id = (*it2);
-            item->setText(3, id);
-
-            m_services.insert( id, proxy );
-            QObject::connect(proxy, SIGNAL(asyncReply(int, const QDBusMessage&)),
-                            this, SLOT(slotServiceAsyncReply(int, const QDBusMessage&)));
-
-            if( !lastItemId.isEmpty() && lastItem == NULL && lastItemId == id )
-                lastItem = item;
-        }
+        if( !lastItemId.isEmpty() && lastItem == NULL && lastItemId == it.currentKey() )
+            lastItem = item;
     }
 
     if( lastItem ) {
@@ -225,66 +220,78 @@ void MainWindowImpl::updateList()
     }
 }
 
-void MainWindowImpl::slotConnectService()
+void MainWindowImpl::updateListItem( QListViewItem *item, ServiceListener *service )
+{
+    item->setPixmap( 0, m_stateIcons[service->state()] );
+
+    QString type = service->serviceType();
+    QPixmap pix = m_typeIcons[type];
+
+    item->setPixmap( 1, pix );
+    item->setText(2, service->serviceName());;
+    item->setText(3, service->proxy()->path());
+}
+
+ServiceListener *MainWindowImpl::selectedService()
 {
     QListViewItem *item = serviceList->currentItem();
     if(item) {
-        QDBusProxy *proxy = m_services[item->text(3)];
-        if( proxy ) {
-            int callId = proxy->sendWithAsyncReply("Connect", QValueList<QDBusData>());
-        }
+        ServiceListener *service = m_services[item->text(3)];
+        if( service )
+            return service;
+    }
+    return NULL;
+}
+
+void MainWindowImpl::slotConnectService()
+{
+    ServiceListener *service = selectedService();
+    if( service ) {
+        int callId = service->proxy()->sendWithAsyncReply("Connect", QValueList<QDBusData>());
     }
 }
 
 void MainWindowImpl::slotDisconnectService()
 {
-    QListViewItem *item = serviceList->currentItem();
-    if(item) {
-        QDBusProxy *proxy = m_services[item->text(3)];
-        if( proxy ) {
-            int callId = proxy->sendWithAsyncReply("Disconnect", QValueList<QDBusData>());
-        }
+    ServiceListener *service = selectedService();
+    if( service ) {
+        int callId = service->proxy()->sendWithAsyncReply("Disconnect", QValueList<QDBusData>());
     }
 }
 
 void MainWindowImpl::slotConfigureService()
 {
-    QListViewItem *item = serviceList->currentItem();
-    if(item) {
-        QDBusProxy *proxy = m_services[item->text(3)];
-        if( proxy ) {
-            ConnManServiceEditor *pe = new ConnManServiceEditor( proxy, this, "blar", WType_Modal | WStyle_NormalBorder );
-            pe->showMaximized();
-            pe->exec();
-            if(pe->result()) {
-                //lbServices->changeItem(pe->getServiceName(), lbServices->currentItem());
-            }
-            delete pe;
+    ServiceListener *service = selectedService();
+    if( service ) {
+        ConnManServiceEditor *pe = new ConnManServiceEditor( service->proxy(), this, "blar", WType_Modal | WStyle_NormalBorder );
+        pe->showMaximized();
+        pe->exec();
+        if(pe->result()) {
+            //lbServices->changeItem(pe->getServiceName(), lbServices->currentItem());
         }
+        delete pe;
     }
 }
 
 void MainWindowImpl::slotRemoveService()
 {
-    QListViewItem *item = serviceList->currentItem();
-    if(item) {
-        QDBusProxy *proxy = m_services[item->text(3)];
-        if( proxy ) {
-            if( QMessageBox::warning(this, tr("Remove"),
-                    "<p>" + tr("Are you sure you want to remove all settings for the service '%1'?").arg(item->text(2)) + "</p>",
-                    tr("Remove"),tr("Cancel"),0,1,0) == 0 ) {
-                int callId = proxy->sendWithAsyncReply("Remove", QValueList<QDBusData>());
-            }
+    ServiceListener *service = selectedService();
+    if( service ) {
+        if( QMessageBox::warning(this, tr("Remove"),
+                "<p>" + tr("Are you sure you want to remove all settings for the service '%1'?").arg(service->serviceName()) + "</p>",
+                tr("Remove"),tr("Cancel"),0,1,0) == 0 ) {
+            int callId = service->proxy()->sendWithAsyncReply("Remove", QValueList<QDBusData>());
         }
     }
 }
 
 void MainWindowImpl::slotScan()
 {
-    QValueList<QDBusData> parameters;
-    parameters << QDBusData::fromString("");
-    int callId = m_managerProxy->sendWithAsyncReply("RequestScan", parameters);
-    m_calls[callId] = "RequestScan";
+    for( QDictIterator<TechnologyListener> it(m_techs); it.current(); ++it ) {
+        if( it.current()->isPowered() ) {
+            it.current()->proxy()->sendWithAsyncReply("Scan", QValueList<QDBusData>());
+        }
+    }
 }
 
 void MainWindowImpl::setHostname()
