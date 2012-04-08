@@ -270,7 +270,11 @@ void MainWindowImpl::slotRemoveService()
     if(item) {
         QDBusProxy *proxy = m_services[item->text(3)];
         if( proxy ) {
-            int callId = proxy->sendWithAsyncReply("Remove", QValueList<QDBusData>());
+            if( QMessageBox::warning(this, tr("Remove"),
+                    "<p>" + tr("Are you sure you want to remove all settings for the service '%1'?").arg(item->text(2)) + "</p>",
+                    tr("Remove"),tr("Cancel"),0,1,0) == 0 ) {
+                int callId = proxy->sendWithAsyncReply("Remove", QValueList<QDBusData>());
+            }
         }
     }
 }
