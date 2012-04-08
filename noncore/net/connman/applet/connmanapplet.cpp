@@ -190,6 +190,7 @@ public:
                 label->setText( it.key() );
                 layout->addWidget( label, i, 0 );
             }
+            QObject::connect(edit, SIGNAL(returnPressed()), this, SLOT(accept()));
             layout->addWidget( edit, i, 1 );
             i++;
         }
