@@ -33,6 +33,7 @@
 #include <qstring.h>
 #include <qmap.h>
 #include <qdict.h>
+#include <qpixmap.h>
 
 #include <dbus/qdbusconnection.h>
 #include <dbus/qdbusobjectpath.h>
@@ -84,6 +85,8 @@ protected:
     QValueList<QDBusObjectPath> m_servicePaths;
     QMap<QString,QPixmap> m_stateIcons;
     QMap<QString,QPixmap> m_typeIcons;
+    QPixmap m_securedIcon;
+    QPixmap m_unsecuredIcon;
 };
 
 #endif // MAINWINDOWIMPL_H

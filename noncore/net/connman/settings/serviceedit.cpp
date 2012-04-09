@@ -76,6 +76,8 @@ ConnManServiceEditor::ConnManServiceEditor( QDBusProxy *proxy, QWidget* parent, 
     leName->setReadOnly(true);
     leState->setPalette(p);
     leState->setReadOnly(true);
+    leSecurity->setPalette(p);
+    leSecurity->setReadOnly(true);
     leV4AddressInfo->setPalette(p);
     leV4AddressInfo->setReadOnly(true);
     leV6AddressInfo->setPalette(p);
@@ -96,7 +98,13 @@ ConnManServiceEditor::ConnManServiceEditor( QDBusProxy *proxy, QWidget* parent, 
             state += QString(" (%1)").arg( map["Error"].toVariant().value.toString() );
         leState->setText( state );
         QString type = map["Type"].toVariant().value.toString();
-        if( type == "wifi" )
+        if( map.contains("Security") )
+            leSecurity->setText( QStringList(map["Security"].toVariant().value.toList().toStringList()).join(", ") );
+        else {
+            leSecurity->hide();
+            lblSecurityLabel->hide();
+        }
+        if( map.contains("Strength") )
             pbStrength->setProgress( map["Strength"].toVariant().value.toByte() );
         else {
             pbStrength->hide();

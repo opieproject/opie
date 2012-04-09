@@ -99,6 +99,8 @@ MainWindowImpl::MainWindowImpl( QWidget* parent, const char* name, WFlags fl )
     m_stateIcons["association"] = OResource::loadPixmap( "forward", OResource::SmallIcon );
     m_stateIcons["configuration"] = OResource::loadPixmap( "fastforward", OResource::SmallIcon );
     m_stateIcons["failure"] = OResource::loadPixmap( "reset", OResource::SmallIcon );
+    m_securedIcon = OResource::loadPixmap( "connmansettings/encrypted", OResource::SmallIcon );
+    m_unsecuredIcon = OResource::loadPixmap( "connmansettings/open", OResource::SmallIcon );
 
     int callId = m_managerProxy->sendWithAsyncReply("GetServices", QValueList<QDBusData>());
     m_calls[callId] = "GetServices";
@@ -186,7 +188,7 @@ void MainWindowImpl::serviceStateChanged( const QDBusObjectPath &path, const QSt
     ServiceListener *service = m_services[path];
     if( service ) {
         for( QListViewItem *item = serviceList->firstChild(); item; item = item->nextSibling() ) {
-            if( item->text(3) == QString(path) ) {
+            if( item->text(4) == QString(path) ) {
                 updateListItem( item, service );
                 break;
             }
@@ -199,7 +201,7 @@ void MainWindowImpl::updateList()
     QListViewItem *item = serviceList->currentItem();
     QString lastItemId;
     if( item )
-        lastItemId = item->text(3);
+        lastItemId = item->text(4);
 
     serviceList->clear();
 
@@ -229,17 +231,21 @@ void MainWindowImpl::updateListItem( QListViewItem *item, ServiceListener *servi
 
     QString type = service->serviceType();
     QPixmap pix = m_typeIcons[type];
-
     item->setPixmap( 1, pix );
-    item->setText(2, service->serviceName());;
-    item->setText(3, service->proxy()->path());
+    if( service->isSecured() )
+        pix = m_securedIcon;
+    else
+        pix = m_unsecuredIcon;
+    item->setPixmap( 2, pix );
+    item->setText(3, service->serviceName());;
+    item->setText(4, service->proxy()->path());
 }
 
 ServiceListener *MainWindowImpl::selectedService()
 {
     QListViewItem *item = serviceList->currentItem();
     if(item) {
-        ServiceListener *service = m_services[item->text(3)];
+        ServiceListener *service = m_services[item->text(4)];
         if( service )
             return service;
     }

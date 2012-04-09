@@ -54,6 +54,7 @@ public:
     QString serviceName();
     QString serviceType();
     QString state();
+    bool isSecured();
 
 signals:
     void serviceStateChanged( const QDBusObjectPath &path, const QString &oldstate, const QString &newstate );
@@ -69,6 +70,7 @@ private:
     QString m_serviceName;
     QString m_type;
     QString m_state;
+    bool m_secured;
     int m_strength;
 };
 

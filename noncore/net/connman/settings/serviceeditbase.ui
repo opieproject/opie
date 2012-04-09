@@ -105,7 +105,7 @@
                             <enum>ClickFocus</enum>
                         </property>
                     </widget>
-                    <widget row="2"  column="1" >
+                    <widget row="3"  column="1" >
                         <class>QProgressBar</class>
                         <property stdset="1">
                             <name>name</name>
@@ -114,6 +114,17 @@
                         <property stdset="1">
                             <name>progress</name>
                             <number>0</number>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="1" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>leSecurity</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>focusPolicy</name>
+                            <enum>ClickFocus</enum>
                         </property>
                     </widget>
                     <widget row="1"  column="0" >
@@ -127,7 +138,7 @@
                             <string>State</string>
                         </property>
                     </widget>
-                    <widget row="2"  column="0" >
+                    <widget row="3"  column="0" >
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
@@ -138,7 +149,18 @@
                             <string>Signal strength</string>
                         </property>
                     </widget>
-                    <widget row="4"  column="1" >
+                    <widget row="2"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>lblSecurityLabel</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Security</string>
+                        </property>
+                    </widget>
+                    <widget row="5"  column="1" >
                         <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
@@ -153,7 +175,7 @@
                             <string></string>
                         </property>
                     </widget>
-                    <widget row="4"  column="0" >
+                    <widget row="5"  column="0" >
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
@@ -164,7 +186,7 @@
                             <string>IPv6 Address</string>
                         </property>
                     </widget>
-                    <widget row="3"  column="1" >
+                    <widget row="4"  column="1" >
                         <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
@@ -175,7 +197,7 @@
                             <enum>ClickFocus</enum>
                         </property>
                     </widget>
-                    <widget row="6"  column="1" >
+                    <widget row="7"  column="1" >
                         <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
@@ -186,7 +208,7 @@
                             <enum>ClickFocus</enum>
                         </property>
                     </widget>
-                    <widget row="3"  column="0" >
+                    <widget row="4"  column="0" >
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
@@ -197,7 +219,7 @@
                             <string>IPv4 Address</string>
                         </property>
                     </widget>
-                    <widget row="5"  column="1" >
+                    <widget row="6"  column="1" >
                         <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
@@ -208,7 +230,7 @@
                             <enum>ClickFocus</enum>
                         </property>
                     </widget>
-                    <widget row="5"  column="0" >
+                    <widget row="6"  column="0" >
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
@@ -219,7 +241,7 @@
                             <string>Adapter</string>
                         </property>
                     </widget>
-                    <widget row="6"  column="0" >
+                    <widget row="7"  column="0" >
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
@@ -230,7 +252,7 @@
                             <string>MAC Address</string>
                         </property>
                     </widget>
-                    <spacer row="7"  column="1" >
+                    <spacer row="8"  column="1" >
                         <property>
                             <name>name</name>
                             <cstring>Spacer2</cstring>

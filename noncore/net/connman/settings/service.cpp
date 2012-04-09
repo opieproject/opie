@@ -44,6 +44,7 @@ ServiceListener::ServiceListener( const QDBusObjectPath &path, const QDBusDataMa
     : QObject( 0, 0 )
 {
     m_strength = -1;
+    m_secured = false;
 
     QDBusDataMap<QString>::ConstIterator it = props.begin();
     for (; it != props.end(); ++it) {
@@ -55,6 +56,11 @@ ServiceListener::ServiceListener( const QDBusObjectPath &path, const QDBusDataMa
         }
         else if( it.key() == "Type" ) {
             m_type = it.data().toVariant().value.toString();
+        }
+        else if( it.key() == "Security" ) {
+            QString security = QStringList(it.data().toVariant().value.toList().toStringList()).join(", ");
+            if( security != "" && security != "none" )
+                m_secured = true;
         }
         else if( it.key() == "Strength" ) {
             m_strength = it.data().toVariant().value.toByte();
@@ -129,4 +135,9 @@ QString ServiceListener::serviceType()
 QString ServiceListener::state()
 {
     return m_state;
+}
+
+bool ServiceListener::isSecured()
+{
+    return m_secured;
 }
