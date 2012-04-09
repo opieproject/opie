@@ -107,6 +107,9 @@ MainWindowImpl::MainWindowImpl( QWidget* parent, const char* name, WFlags fl )
 
     serviceList->header()->hide();
 
+    // Not yet implemented
+    addServiceButton->setEnabled(false);
+
     QObject::connect(connectServiceButton, SIGNAL(clicked()), this, SLOT(slotConnectService()));
     QObject::connect(disconnectServiceButton, SIGNAL(clicked()), this, SLOT(slotDisconnectService()));
     QObject::connect(configureServiceButton, SIGNAL(clicked()), this, SLOT(slotConfigureService()));
