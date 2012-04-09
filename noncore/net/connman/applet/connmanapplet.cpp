@@ -167,11 +167,13 @@ private:
 ConnManApplet::ConnManApplet( QWidget *parent, const char *name ) : QWidget( parent, name )
 {
     m_agentDlg = NULL;
+    m_flight = false;
 
     setFixedHeight( AppLnk::smallIconSize() );
     setFixedWidth( AppLnk::smallIconSize() );
 
     m_brokenPix = OResource::loadImage( "connmanapplet/off", OResource::SmallIcon );
+    m_flightPix = OResource::loadImage( "connmanapplet/flightmode", OResource::SmallIcon );
     m_offlinePix = OResource::loadImage( "connmanapplet/disconnected", OResource::SmallIcon );
     m_onlinePix = OResource::loadImage( "connmanapplet/connected", OResource::SmallIcon );
     m_strengthPix[0] = OResource::loadImage( "connmanapplet/signal_00", OResource::SmallIcon );
@@ -236,7 +238,7 @@ void ConnManApplet::mousePressEvent( QMouseEvent *)
 
     QPopupMenu *menu = new QPopupMenu();
 
-    int i=1;
+    int i=2;
     QStringList techs;
     for( QDictIterator<TechnologyListener> it(m_techs); it.current(); ++it ) {
         QString tech = it.current()->techName();
@@ -254,6 +256,11 @@ void ConnManApplet::mousePressEvent( QMouseEvent *)
     }
 
     menu->insertSeparator();
+    if( m_flight )
+        menu->insertItem( tr("Normal mode"), 1 );
+    else
+        menu->insertItem( tr("Flight mode"), 1 );
+    menu->insertSeparator();
     menu->insertItem( tr("Settings..."), 0 );
 
     QPoint p = mapToGlobal( QPoint(1, -menu->sizeHint().height()-1) );
@@ -263,8 +270,11 @@ void ConnManApplet::mousePressEvent( QMouseEvent *)
     if( ret == 0 ) {
         launchSettings();
     }
-    else if( ret>0 ) {
-        TechnologyListener *tech = m_techs[techs[ret-1]];
+    else if( ret == 1 ) {
+        toggleFlightMode();
+    }
+    else if( ret>1 ) {
+        TechnologyListener *tech = m_techs[techs[ret-2]];
         if( tech )
             tech->setPowered(!tech->isPowered());
     }
@@ -272,6 +282,16 @@ void ConnManApplet::mousePressEvent( QMouseEvent *)
     delete menu;
 }
 
+/**
+ * Toggles offline (flight) mode
+ */
+void ConnManApplet::toggleFlightMode()
+{
+    QValueList<QDBusData> params;
+    params << QDBusData::fromString("OfflineMode");
+    params << QDBusData::fromVariant(QDBusVariant(QDBusData::fromBool(!m_flight)));
+    m_managerProxy->sendWithAsyncReply("SetProperty", params);
+}
 
 /**
  * Launches the ConnMan manager
@@ -290,13 +310,16 @@ void ConnManApplet::launchSettings()
 void ConnManApplet::paintEvent( QPaintEvent* )
 {
     QPainter p(this);
-    if( m_state == "offline" )
+    if( m_flight )
+        p.drawPixmap( 0, 0, m_flightPix );
+    else if( m_state == "offline" )
         p.drawPixmap( 0, 0, m_offlinePix );
-    else if( m_state == "online" || m_state == "connected" )
+    else if( m_state == "online" || m_state == "connected" ) {
         if( m_strength > -1 )
             p.drawPixmap( 0, 0, m_strengthPix[m_strength] );
         else
             p.drawPixmap( 0, 0, m_onlinePix );
+    }
     else
         p.drawPixmap( 0, 0, m_brokenPix );
 }
@@ -358,6 +381,13 @@ void ConnManApplet::managerPropertySet( const QString &prop, const QDBusVariant 
         QString state = propval.value.toString();
         if( m_state != state ) {
             m_state = state;
+            update();
+        }
+    }
+    else if( prop == "OfflineMode" ) {
+        bool flight = propval.value.toBool();
+        if( m_flight != flight ) {
+            m_flight = flight;
             update();
         }
     }

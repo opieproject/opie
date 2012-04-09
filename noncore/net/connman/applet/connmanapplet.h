@@ -74,9 +74,11 @@ private:
     void removeServices( const QValueList<QDBusObjectPath> &services );
     void showDialog( const QDBusMessage& message, const QDBusDataMap<QString> &fields );
     void destroyDialog();
+    void toggleFlightMode();
 
 private:
     QPixmap m_brokenPix;
+    QPixmap m_flightPix;
     QPixmap m_offlinePix;
     QPixmap m_onlinePix;
     QMap<int,QPixmap> m_strengthPix;
@@ -85,6 +87,7 @@ private:
     QMap<int,QString> m_calls;
     QString m_state;
     int m_strength;
+    bool m_flight;
     QDict<TechnologyListener> m_techs;
     QValueList<QDBusObjectPath> m_servicePaths;
     QDict<ServiceListener> m_services;
