@@ -168,6 +168,7 @@ ConnManApplet::ConnManApplet( QWidget *parent, const char *name ) : QWidget( par
 {
     m_agentDlg = NULL;
     m_flight = false;
+    m_strength = -1;
 
     setFixedHeight( AppLnk::smallIconSize() );
     setFixedWidth( AppLnk::smallIconSize() );

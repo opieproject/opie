@@ -88,7 +88,7 @@ ServiceListener::~ServiceListener()
 
 void ServiceListener::sendSignalStrength()
 {
-    if( ( m_state == "ready" || m_state == "online" ) && m_strength != -1 )
+    if( ( m_state == "ready" || m_state == "online" ) )
         emit signalStrength( m_strength );
 }
 
