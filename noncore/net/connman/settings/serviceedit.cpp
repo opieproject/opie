@@ -98,7 +98,7 @@ ConnManServiceEditor::ConnManServiceEditor( QDBusProxy *proxy, QWidget* parent, 
             state += QString(" (%1)").arg( map["Error"].toVariant().value.toString() );
         leState->setText( state );
         QString type = map["Type"].toVariant().value.toString();
-        if( map.contains("Security") )
+        if( type == "wifi" )
             leSecurity->setText( QStringList(map["Security"].toVariant().value.toList().toStringList()).join(", ") );
         else {
             leSecurity->hide();

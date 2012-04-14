@@ -232,11 +232,13 @@ void MainWindowImpl::updateListItem( QListViewItem *item, ServiceListener *servi
     QString type = service->serviceType();
     QPixmap pix = m_typeIcons[type];
     item->setPixmap( 1, pix );
-    if( service->isSecured() )
-        pix = m_securedIcon;
-    else
-        pix = m_unsecuredIcon;
-    item->setPixmap( 2, pix );
+    if( service->serviceType() == "wifi" ) {
+        if( service->isSecured() )
+            pix = m_securedIcon;
+        else
+            pix = m_unsecuredIcon;
+        item->setPixmap( 2, pix );
+    }
     item->setText(3, service->serviceName());;
     item->setText(4, service->proxy()->path());
 }
