@@ -96,6 +96,7 @@ MainWindowImpl::MainWindowImpl( QWidget* parent, const char* name, WFlags fl )
     m_stateIcons["online"] = OResource::loadPixmap( "up", OResource::SmallIcon );
     m_stateIcons["ready"] = m_stateIcons["online"];
     m_stateIcons["idle"] = OResource::loadPixmap( "down", OResource::SmallIcon );
+    m_stateIcons["disconnect"] = m_stateIcons["idle"];
     m_stateIcons["association"] = OResource::loadPixmap( "forward", OResource::SmallIcon );
     m_stateIcons["configuration"] = OResource::loadPixmap( "fastforward", OResource::SmallIcon );
     m_stateIcons["failure"] = OResource::loadPixmap( "reset", OResource::SmallIcon );
