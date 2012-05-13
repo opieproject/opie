@@ -74,7 +74,6 @@ class HTC : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
   protected:
     virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
 
-    bool m_embedix;
     QFile m_hinge;
 };
 

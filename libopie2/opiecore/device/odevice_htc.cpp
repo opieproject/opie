@@ -340,8 +340,6 @@ OHingeStatus HTC::readHingeSensor() const
 
 void HTC::initHingeSensor()
 {
-    if ( m_embedix ) return;
-
     m_hinge.setName( "/dev/input/event1" );
     if ( !m_hinge.open( IO_ReadOnly ) )
     {
