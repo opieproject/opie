@@ -246,6 +246,9 @@ void Palm::init(const QString& cpu_info)
             d->m_direction = CCW;
             d->m_qteDriver = "Transformed";
             break;
+        default:
+            // do nothing (having this here avoids a warning)
+            break;
     }
 }
 

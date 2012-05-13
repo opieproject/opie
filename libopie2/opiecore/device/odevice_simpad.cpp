@@ -63,12 +63,12 @@ namespace {
 struct s_button {
     uint model;
     Qt::Key code;
-    char *utext;
-    char *pix;
-    char *fpressedservice;
-    char *fpressedaction;
-    char *fheldservice;
-    char *fheldaction;
+    const char *utext;
+    const char *pix;
+    const char *fpressedservice;
+    const char *fpressedaction;
+    const char *fheldservice;
+    const char *fheldaction;
 };
 //FIXME: buttons have changed to use evdev now
 static struct s_button simpad_buttons [] = {

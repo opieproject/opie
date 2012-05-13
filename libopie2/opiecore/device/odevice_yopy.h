@@ -52,12 +52,12 @@ class Yopy : public OAbstractMobileDevice
 struct yopy_button
 {
     Qt::Key code;
-    char *utext;
-    char *pix;
-    char *fpressedservice;
-    char *fpressedaction;
-    char *fheldservice;
-    char *fheldaction;
+    const char *utext;
+    const char *pix;
+    const char *fpressedservice;
+    const char *fpressedaction;
+    const char *fheldservice;
+    const char *fheldaction;
 };
 
 }

@@ -210,8 +210,8 @@ enum OSystem {
 
 typedef struct {
     OSystem system;
-    char* sysstr;
-    char* sysvfile;
+    const char* sysstr;
+    const char* sysvfile;
 } ODistribution;
 
 extern ODistribution distributions[];
@@ -260,12 +260,12 @@ enum OHingeStatus {
  */
 struct default_button {
     Qt::Key code;
-    char *utext;
-    char *pix;
-    char *fpressedservice;
-    char *fpressedaction;
-    char *fheldservice;
-    char *fheldaction;
+    const char *utext;
+    const char *pix;
+    const char *fpressedservice;
+    const char *fpressedaction;
+    const char *fheldservice;
+    const char *fheldaction;
 };
 
 struct ODeviceButtonComboStruct {
