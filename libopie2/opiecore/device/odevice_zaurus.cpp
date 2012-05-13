@@ -214,31 +214,6 @@ void Zaurus::init(const QString& cpu_info)
     // No need to wait after apm --suspend
     setAPMTimeOut( 0 );
 
-    // generic distribution code already scanned /etc/issue at that point -
-    // embedix releases contain "Embedix <version> | Linux for Embedded Devices"
-    if ( d->m_sysverstr.contains( "embedix", false ) )
-    {
-        d->m_vendorstr = "Sharp";
-        d->m_vendor = Vendor_Sharp;
-        d->m_systemstr = "Zaurus";
-        d->m_system = System_Zaurus;
-        m_embedix = true;
-    }
-    else
-    {
-        // OpenZaurus sometimes uses the 2.4 (embedix) kernel, check if this is one
-        FILE *uname = popen("uname -r", "r");
-        QFile f;
-        QString line;
-        if ( f.open(IO_ReadOnly, uname) ) {
-            QTextStream ts ( &f );
-            line = ts.readLine();
-            m_embedix = line.startsWith( "2.4." );
-            f.close();
-        }
-        pclose(uname);
-    }
-
     // check the Zaurus model
     QString model;
     int loc = cpu_info.find( ":" );
@@ -320,10 +295,7 @@ void Zaurus::init(const QString& cpu_info)
             d->m_qteDriver = "Transformed";
 //    }
 
-    if ( m_embedix )
-        qDebug( "Zaurus::init() - Using the 2.4 Embedix HAL on a %s", (const char*) d->m_modelstr );
-    else
-        qDebug( "Zaurus::init() - Using the 2.6 OpenZaurus HAL on a %s", (const char*) d->m_modelstr );
+    qDebug( "Zaurus::init() - Using the 2.6 OpenZaurus HAL on a %s", (const char*) d->m_modelstr );
 }
 
 void Zaurus::initButtons()
@@ -483,18 +455,9 @@ Transformation Zaurus::rotation() const
             OHingeStatus hs = readHingeSensor();
             qDebug( "Zaurus::rotation() - hinge sensor = %d", (int) hs );
 
-            if ( m_embedix )
-            {
-                if ( hs == CASE_PORTRAIT ) rot = Rot0;
-                else if ( hs == CASE_UNKNOWN ) rot = Rot270;
-                else rot = Rot270;
-            }
-            else
-            {
-                if ( hs == CASE_PORTRAIT ) rot = Rot90;
-                else if ( hs == CASE_UNKNOWN ) rot = Rot0;
-                else rot = Rot0;
-            }
+            if ( hs == CASE_PORTRAIT ) rot = Rot90;
+            else if ( hs == CASE_UNKNOWN ) rot = Rot0;
+            else rot = Rot0;
         }
         break;
         case Model_Zaurus_SL6000:
@@ -547,68 +510,39 @@ bool Zaurus::hasHingeSensor() const
 
 OHingeStatus Zaurus::readHingeSensor() const
 {
-    if (m_embedix)
+    /*
+        * The corgi keyboard is event source 0 in OZ kernel 2.6.
+        * Hinge status is reported via Input System Switchs 0 and 1 like that:
+        *
+        * -------------------------
+        * | SW0 | SW1 |    CASE   |
+        * |-----|-----|-----------|
+        * |  0     0    Landscape |
+        * |  0     1    Portrait  |
+        * |  1     0    Unknown   |
+        * |  1     1    Closed    |
+        * -------------------------
+        */
+    OInputDevice* keyboard = OInputSystem::instance()->device( "event0" );
+    bool switch0 = true;
+    bool switch1 = false;
+    if ( keyboard )
     {
-        int handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
-        if (handle == -1)
-        {
-            qWarning("Zaurus::readHingeSensor() - failed (%s)", "unknown reason" ); //FIXME: use strerror
-            return CASE_UNKNOWN;
-        }
-        else
-        {
-            int retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
-            ::close (handle);
-            if ( retval == CASE_CLOSED || retval == CASE_PORTRAIT || retval == CASE_LANDSCAPE )
-            {
-                qDebug( "Zaurus::readHingeSensor() - result = %d", retval );
-                return static_cast<OHingeStatus>( retval );
-            }
-            else
-            {
-                qWarning("Zaurus::readHingeSensor() - couldn't compute hinge status!" );
-                return CASE_UNKNOWN;
-            }
-        }
+        switch0 = keyboard->isHeld( OInputDevice::Switch0 );
+        switch1 = keyboard->isHeld( OInputDevice::Switch1 );
+    }
+    if ( switch0 )
+    {
+        return switch1 ? CASE_CLOSED : CASE_UNKNOWN;
     }
     else
     {
-        /*
-         * The corgi keyboard is event source 0 in OZ kernel 2.6.
-         * Hinge status is reported via Input System Switchs 0 and 1 like that:
-         *
-         * -------------------------
-         * | SW0 | SW1 |    CASE   |
-         * |-----|-----|-----------|
-         * |  0     0    Landscape |
-         * |  0     1    Portrait  |
-         * |  1     0    Unknown   |
-         * |  1     1    Closed    |
-         * -------------------------
-         */
-        OInputDevice* keyboard = OInputSystem::instance()->device( "event0" );
-        bool switch0 = true;
-        bool switch1 = false;
-        if ( keyboard )
-        {
-            switch0 = keyboard->isHeld( OInputDevice::Switch0 );
-            switch1 = keyboard->isHeld( OInputDevice::Switch1 );
-        }
-        if ( switch0 )
-        {
-            return switch1 ? CASE_CLOSED : CASE_UNKNOWN;
-        }
-        else
-        {
-            return switch1 ? CASE_PORTRAIT : CASE_LANDSCAPE;
-        }
+        return switch1 ? CASE_PORTRAIT : CASE_LANDSCAPE;
     }
 }
 
 void Zaurus::initHingeSensor()
 {
-    if ( m_embedix ) return;
-
     m_hinge.setName( "/dev/input/event0" );
     if ( !m_hinge.open( IO_ReadOnly ) )
     {

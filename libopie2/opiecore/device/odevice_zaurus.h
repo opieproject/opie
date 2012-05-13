@@ -63,25 +63,6 @@
 #define SHARP_BUZZER_SETMUTE     (SHARP_BUZZER_IOCTL_START+4)
 #define SHARP_BUZZER_STOPSOUND   (SHARP_BUZZER_IOCTL_START+5)
 
-// Rotation and Power Management
-#define SHARP_IOCTL_GET_ROTATION 0x413c
-
-#define APM_IOCGEVTSRC          OD_IOR( 'A', 203, int )
-#define APM_IOCSEVTSRC          OD_IORW( 'A', 204, int )
-#define APM_EVT_POWER_BUTTON    (1 << 0)
-
-// Brightness Embedix
-#define SHARP_FL_IOCTL_DEVICE   "/dev/sharp_fl"
-#define SHARP_FL_IOCTL_ON                  1
-#define SHARP_FL_IOCTL_OFF                 2
-#define SHARP_FL_IOCTL_STEP_CONTRAST     100
-#define SHARP_FL_IOCTL_GET_STEP_CONTRAST 101
-#define SHARP_FL_IOCTL_GET_STEP          102
-
-// Vesa Standard
-#define FB_BLANK_UNBLANK            0
-#define FB_BLANK_POWERDOWN          4
-
 namespace Opie {
 namespace Core {
 namespace Internal {
@@ -116,7 +97,6 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual void buzzer( int snd );
     virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
 
-    bool m_embedix;
     QFile m_hinge;
 };
 
