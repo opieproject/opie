@@ -63,15 +63,6 @@
 #define SHARP_BUZZER_SETMUTE     (SHARP_BUZZER_IOCTL_START+4)
 #define SHARP_BUZZER_STOPSOUND   (SHARP_BUZZER_IOCTL_START+5)
 
-// LED
-#define SHARP_LED_IOCTL_START (SHARP_DEV_IOCTL_COMMAND_START)
-#define SHARP_LED_SETSTATUS   (SHARP_LED_IOCTL_START+1)
-#define SHARP_LED_MAIL_EXISTS  9     /* mail status (exists or not) */
-
-#define LED_MAIL_NO_UNREAD_MAIL  0   /* for SHARP_LED_MAIL_EXISTS */
-#define LED_MAIL_NEWMAIL_EXISTS  1   /* for SHARP_LED_MAIL_EXISTS */
-#define LED_MAIL_UNREAD_MAIL_EX  2   /* for SHARP_LED_MAIL_EXISTS */
-
 // Rotation and Power Management
 #define SHARP_IOCTL_GET_ROTATION 0x413c
 
@@ -115,11 +106,6 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual void playKeySound();
     virtual void playTouchSound();
 
-    virtual QValueList <OLed> ledList() const;
-    virtual QValueList <OLedState> ledStateList ( OLed led ) const;
-    virtual OLedState ledState( OLed led ) const;
-    virtual bool setLedState( OLed led, OLedState st );
-
     virtual bool hasHingeSensor() const;
     virtual OHingeStatus readHingeSensor() const;
 
@@ -130,7 +116,6 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual void buzzer( int snd );
     virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
 
-    OLedState m_leds[1];
     bool m_embedix;
     QFile m_hinge;
 };

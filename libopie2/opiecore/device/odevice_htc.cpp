@@ -193,8 +193,6 @@ void HTC::init(const QString& cpu_info)
             d->m_qteDriver = "Transformed";
     }
 
-    m_leds[0] = Led_Off;
-
     qDebug( "HTC::init() - Using the 2.6 Xanadux on a %s", (const char*) d->m_modelstr );
 }
 
@@ -237,43 +235,6 @@ void HTC::initButtons()
     }
 
     reloadButtonMapping();
-}
-
-
-
-typedef struct sharp_led_status {
-    int which;   /* select which LED status is wanted. */
-    int status;  /* set new led status if you call SHARP_LED_SETSTATUS */
-} sharp_led_status;
-
-QValueList <OLed> HTC::ledList() const
-{
-    QValueList <OLed> vl;
-    vl << Led_Mail;
-    return vl;
-}
-
-QValueList <OLedState> HTC::ledStateList( OLed l ) const
-{
-    QValueList <OLedState> vl;
-
-    if ( l == Led_Mail )
-        vl << Led_Off << Led_On << Led_BlinkSlow;
-    return vl;
-}
-
-OLedState HTC::ledState( OLed which ) const
-{
-    if ( which == Led_Mail )
-        return m_leds [0];
-    else
-        return Led_Off;
-}
-
-bool HTC::setLedState( OLed, OLedState )
-{
-    qDebug( "HTC::setLedState: ODevice handling not yet implemented" );
-    return false;
 }
 
 bool HTC::setDisplayStatus( bool on )

@@ -6,7 +6,6 @@
 #include <qpe/config.h>
 #include <qpe/applnk.h>
 #include <opie2/odebug.h>
-#include <opie2/odevice.h>
 #include <qpe/sound.h>
 
 #include <libmailwrapper/settings.h>
@@ -93,11 +92,7 @@ void MailApplet::startup()
 
 void MailApplet::ledOnOff(bool how)
 {
-    ODevice *device = ODevice::inst();
-    if ( !device->ledList().isEmpty() ) {
-        OLed led = ( device->ledList().contains( Led_Mail ) ) ? Led_Mail : device->ledList()[0];
-        device->setLedState( led,  (how?(device->ledStateList( led ).contains( Led_BlinkSlow )?Led_BlinkSlow:Led_On):Led_Off) );
-    }
+    QCopEnvelope( "QPE/TaskBar", "setLed(int,bool)" ) << 0 << how;
 }
 
 void MailApplet::slotCheck() {
@@ -144,7 +139,6 @@ void MailApplet::slotCheck() {
             setText(QString::number( m_newMails ));
         }
     } else {
-        ODevice *device = ODevice::inst();
         if ( !isHidden() )
             hide();
         if ( newMailsOld != m_newMails ) {

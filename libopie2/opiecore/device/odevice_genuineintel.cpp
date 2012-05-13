@@ -121,29 +121,6 @@ void GenuineIntel::initButtons()
     reloadButtonMapping();
 }
 
-QValueList <OLed> GenuineIntel::ledList() const
-{
-    QValueList <OLed> vl;
-    return vl; //none
-}
-
-QValueList <OLedState> GenuineIntel::ledStateList ( OLed ) const
-{
-    QValueList <OLedState> vl;
-    return vl; //  none
-}
-
-OLedState GenuineIntel::ledState ( OLed ) const
-{
-    return Led_Off;
-}
-
-bool GenuineIntel::setLedState ( OLed , OLedState )
-{
-    return false;
-}
-
-
 bool GenuineIntel::filter ( int /*unicode*/, int , int , bool , bool )
 {
     return false;

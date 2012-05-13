@@ -64,11 +64,6 @@ class HTC : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
   public:
     virtual bool setDisplayStatus( bool on );
 
-    virtual QValueList <OLed> ledList() const;
-    virtual QValueList <OLedState> ledStateList ( OLed led ) const;
-    virtual OLedState ledState( OLed led ) const;
-    virtual bool setLedState( OLed led, OLedState st );
-
     virtual bool hasHingeSensor() const;
     virtual OHingeStatus readHingeSensor() const;
 
@@ -79,7 +74,6 @@ class HTC : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
   protected:
     virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
 
-    OLedState m_leds[1];
     bool m_embedix;
     QFile m_hinge;
 };

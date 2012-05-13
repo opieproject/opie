@@ -320,8 +320,6 @@ void Zaurus::init(const QString& cpu_info)
             d->m_qteDriver = "Transformed";
 //    }
 
-    m_leds[0] = Led_Off;
-
     if ( m_embedix )
         qDebug( "Zaurus::init() - Using the 2.4 Embedix HAL on a %s", (const char*) d->m_modelstr );
     else
@@ -388,11 +386,6 @@ void Zaurus::initButtonCombos()
     loadButtonCombos( z_combos, sizeof( z_combos ) / sizeof( ODeviceButtonComboStruct ) );
 }
 
-
-typedef struct sharp_led_status {
-    int which;   /* select which LED status is wanted. */
-    int status;  /* set new led status if you call SHARP_LED_SETSTATUS */
-} sharp_led_status;
 
 void Zaurus::buzzer( int sound )
 {
@@ -464,64 +457,6 @@ void Zaurus::playKeySound()
     buzzer( SHARP_BUZ_KEYSOUND );
 }
 
-
-QValueList <OLed> Zaurus::ledList() const
-{
-    QValueList <OLed> vl;
-    vl << Led_Mail;
-    return vl;
-}
-
-QValueList <OLedState> Zaurus::ledStateList( OLed l ) const
-{
-    QValueList <OLedState> vl;
-
-    if ( l == Led_Mail )
-        vl << Led_Off << Led_On << Led_BlinkSlow;
-    return vl;
-}
-
-OLedState Zaurus::ledState( OLed which ) const
-{
-    if ( which == Led_Mail )
-        return m_leds [0];
-    else
-        return Led_Off;
-}
-
-bool Zaurus::setLedState( OLed which, OLedState st )
-{
-     // Currently not supported on non_embedix kernels
-    if (!m_embedix)
-    {
-        qDebug( "Zaurus::setLedState: ODevice handling for non-embedix kernels not yet implemented" );
-        return false;
-    }
-
-    static int fd = ::open ( "/dev/sharp_led", O_RDWR|O_NONBLOCK );
-
-    if ( which == Led_Mail ) {
-        if ( fd >= 0 ) {
-            struct sharp_led_status leds;
-            ::memset ( &leds, 0, sizeof( leds ));
-            leds. which = SHARP_LED_MAIL_EXISTS;
-            bool ok = true;
-
-            switch ( st ) {
-                case Led_Off      : leds. status = LED_MAIL_NO_UNREAD_MAIL; break;
-                case Led_On       : leds. status = LED_MAIL_NEWMAIL_EXISTS; break;
-                case Led_BlinkSlow: leds. status = LED_MAIL_UNREAD_MAIL_EX; break;
-                default            : ok = false;
-            }
-
-            if ( ok && ( ::ioctl ( fd, SHARP_LED_SETSTATUS, &leds ) >= 0 )) {
-                m_leds [0] = st;
-                return true;
-            }
-        }
-    }
-    return false;
-}
 
 Transformation Zaurus::rotation() const
 {

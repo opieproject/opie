@@ -92,6 +92,8 @@ private:
     void postDirectAccess();
     QString cardInfoString();
     QString installLocationsString();
+    void setLed(int led, int state);
+    QString getNotifyLed();
 
     QCopBridge *qcopBridge;
     TransferServer *transferServer;

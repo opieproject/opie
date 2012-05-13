@@ -40,7 +40,6 @@
 #endif
 
 // Audio
-// LED
 // Power Management
 #define APM_IOCGEVTSRC          OD_IOR( 'A', 203, int )
 #define APM_IOCSEVTSRC          OD_IORW( 'A', 204, int )
@@ -70,13 +69,7 @@ class Motorola_EZX : public OAbstractMobileDevice
   public:
     virtual bool setDisplayStatus( bool on );
 
-    virtual QValueList <OLed> ledList() const;
-    virtual QValueList <OLedState> ledStateList ( OLed led ) const;
-    virtual OLedState ledState( OLed led ) const;
-    virtual bool setLedState( OLed led, OLedState st );
-
   protected:
-    OLedState m_leds[1];
     QFile m_hinge;
 };
 

@@ -231,6 +231,18 @@ ODevice::ODevice()
     sysClass.setFilter(QDir::Dirs);
     if ( sysClass.exists() && sysClass.count() > 2 )
         d->m_backlightDev = sysClass.absFilePath( sysClass[2] );
+
+    sysClass.setPath( "/sys/class/leds/" );
+    if( sysClass.exists() ) {
+        sysClass.setFilter(QDir::Dirs);
+        QStringList dirs = sysClass.entryList( QDir::Dirs );
+        for ( QStringList::Iterator it = dirs.begin(); it != dirs.end(); ++it ) {
+            if( ! (*it).startsWith("."))
+                d->m_ledState.insert( (*it), Led_Off );
+        }
+    }
+
+    d->m_ledTimers.setAutoDelete(true);
 }
 
 void ODevice::systemMessage( const QCString &msg, const QByteArray & )
@@ -553,38 +565,108 @@ void ODevice::playTouchSound()
 * available on this device
 * @return a list of LEDs.
 */
-QValueList <OLed> ODevice::ledList() const
+QStringList ODevice::ledList() const
 {
-    return QValueList <OLed>();
+    QDir sysClass( "/sys/class/leds/" );
+    QStringList leds;
+    if( sysClass.exists() ) {
+        sysClass.setFilter(QDir::Dirs);
+        QStringList dirs = sysClass.entryList( QDir::Dirs );
+        for ( QStringList::Iterator it = dirs.begin(); it != dirs.end(); ++it ) {
+            if( ! (*it).startsWith("."))
+                leds += (*it);
+        }
+    }
+    return leds;
 }
 
 /**
-* This does return the state of the LEDs
+* @return the state for a given LED
 */
-QValueList <OLedState> ODevice::ledStateList ( OLed /*which*/ ) const
+OLedState ODevice::ledState ( const QString &led ) const
 {
-    return QValueList <OLedState>();
-}
-
-/**
-* @return the state for a given OLed
-*/
-OLedState ODevice::ledState ( OLed /*which*/ ) const
-{
-    return Led_Off;
+    return d->m_ledState[led];
 }
 
 /**
 * Set the state for a LED
-* @param which Which OLed to use
+* @param which Which LED to use
 * @param st The state to set
 * @return success or failure
 */
-bool ODevice::setLedState ( OLed which, OLedState st )
+bool ODevice::setLedState ( const QString &led, OLedState st )
 {
-        Q_UNUSED( which )
-        Q_UNUSED( st    )
-    return false;
+    bool res = setLedInternal( led, (st != Led_Off) );
+
+    if( res && ( st == Led_BlinkSlow || st == Led_BlinkFast || st == Led_BlinkSuperSlow || st == Led_BlinkSuperFast )) {
+        OLedTimer *timer = d->m_ledTimers.find(led);
+        if( !timer ) {
+            timer = new OLedTimer( led, this );
+            d->m_ledTimers.insert( led, timer );
+        }
+        else
+            timer->stop();
+
+        if (st == Led_BlinkSlow)
+            timer->start( 1000 );
+        else if (st == Led_BlinkFast)
+            timer->start( 250 );
+        else if (st == Led_BlinkSuperSlow)
+            timer->start( 2000 );
+        else if (st == Led_BlinkSuperFast)
+            timer->start( 100 );
+    }
+    else
+        d->m_ledTimers.remove( led );
+
+    return res;
+}
+
+bool ODevice::setLedInternal ( const QString &led, bool on )
+{
+    int bright = 0;
+    int fd;
+    bool res = true;
+
+    if( on ) {
+        res = false;
+        bright = 255;
+        fd = ::open( d->m_backlightDev + "/max_brightness", O_RDONLY|O_NONBLOCK );
+        if ( fd >= 0 ) {
+            char buf[100];
+            if ( ::read( fd, &buf[0], 10 ) )
+                res = (::sscanf( &buf[0], "%d", &bright ) != 0);
+            ::close( fd );
+        }
+    }
+
+    if( res ) {
+        fd = ::open( "/sys/class/leds/" + led + "/brightness", O_WRONLY|O_NONBLOCK );
+        if ( fd >= 0 ) {
+            char buf[10];
+            int len = ::snprintf(buf, 10, "%d", bright);
+            res = ( ::write( fd, &buf[0], len ) != 0 );
+            ::close( fd );
+        }
+    }
+
+    return res;
+}
+
+OLedTimer::OLedTimer ( const QString &led, ODevice *odev, const char * name )
+    : QTimer( odev, name )
+{
+    this->on = true; // we start on
+    this->led = led;
+    this->odev = odev;
+
+    connect( this, SIGNAL(timeout()), this, SLOT(fire()) );
+}
+
+void OLedTimer::fire()
+{
+    this->on = ! this->on;
+    odev->setLedInternal( this->led, this->on );
 }
 
 /**

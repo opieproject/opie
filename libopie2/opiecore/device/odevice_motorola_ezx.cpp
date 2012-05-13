@@ -111,9 +111,8 @@ void Motorola_EZX::init(const QString& cpu_info)
     d->m_rotation = Rot0;
     //initHingeSensor();
 
-    // set default qte driver and led state
+    // set default qte driver
     d->m_qteDriver = "Transformed";
-    m_leds[0] = Led_Off;
 
     qDebug( "Motorola_EZX::init() - Using the 2.6 OpenEZX HAL on a %s", (const char*) d->m_modelstr );
 }
@@ -126,37 +125,6 @@ void Motorola_EZX::initButtons()
 
     d->m_buttons = new QValueList <ODeviceButton>;
     reloadButtonMapping();
-}
-
-QValueList <OLed> Motorola_EZX::ledList() const
-{
-    QValueList <OLed> vl;
-    vl << Led_Mail;
-    return vl;
-}
-
-QValueList <OLedState> Motorola_EZX::ledStateList( OLed l ) const
-{
-    QValueList <OLedState> vl;
-
-    if ( l == Led_Mail )
-        vl << Led_Off << Led_On << Led_BlinkSlow;
-    return vl;
-}
-
-OLedState Motorola_EZX::ledState( OLed which ) const
-{
-    if ( which == Led_Mail )
-        return m_leds [0];
-    else
-        return Led_Off;
-}
-
-bool Motorola_EZX::setLedState( OLed, OLedState )
-{
-     // Currently not supported
-    qDebug( "Motorola_EZX::setLedState: ODevice handling not yet implemented" );
-    return false;
 }
 
 bool Motorola_EZX::setDisplayStatus( bool on )

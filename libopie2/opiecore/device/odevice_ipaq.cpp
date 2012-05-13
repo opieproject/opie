@@ -70,19 +70,11 @@ using namespace Opie::Core::Internal;
 #define OD_IORW(type,number,size)       OD_IOC(3,type,number,sizeof(size))
 
 typedef struct {
-  unsigned char OffOnBlink;       /* 0=off 1=on 2=Blink */
-  unsigned char TotalTime;        /* Units of 5 seconds */
-  unsigned char OnTime;           /* units of 100m/s */
-  unsigned char OffTime;          /* units of 100m/s */
-} LED_IN;
-
-typedef struct {
         unsigned char mode;
         unsigned char pwr;
         unsigned char brightness;
 } FLITE_IN;
 
-#define LED_ON    OD_IOW( 'f', 5, LED_IN )
 #define FLITE_ON  OD_IOW( 'f', 7, FLITE_IN )
 
 #define Model_Keyboardless_2_6 (Model_iPAQ_H191x | Model_iPAQ_H22xx | Model_iPAQ_HX4700 | Model_iPAQ_H4xxx | Model_iPAQ_RX3xxx)
@@ -258,8 +250,6 @@ void iPAQ::init(const QString& model)
 
         }
 
-    m_leds [0] = m_leds [1] = Led_Off;
-
     m_power_timer = 0;
 
 }
@@ -300,70 +290,6 @@ void iPAQ::initButtonCombos()
     d->m_buttonCombos = new QValueList<ODeviceButtonCombo>;
     loadButtonCombos( ipaq_combos, sizeof( ipaq_combos ) / sizeof( ODeviceButtonComboStruct ) );
 }
-
-QValueList <OLed> iPAQ::ledList() const
-{
-    QValueList <OLed> vl;
-    vl << Led_Power;
-
-    if ( d->m_model == Model_iPAQ_H38xx )
-        vl << Led_BlueTooth;
-    return vl;
-}
-
-QValueList <OLedState> iPAQ::ledStateList ( OLed l ) const
-{
-    QValueList <OLedState> vl;
-
-    if ( l == Led_Power )
-        vl << Led_Off << Led_On << Led_BlinkSlow << Led_BlinkFast;
-    else if ( l == Led_BlueTooth && d->m_model == Model_iPAQ_H38xx )
-        vl << Led_Off; // << Led_On << ???
-
-    return vl;
-}
-
-OLedState iPAQ::ledState ( OLed l ) const
-{
-    switch ( l ) {
-        case Led_Power:
-            return m_leds [0];
-        case Led_BlueTooth:
-            return m_leds [1];
-        default:
-            return Led_Off;
-    }
-}
-
-bool iPAQ::setLedState ( OLed l, OLedState st )
-{
-    static int fd = ::open ( "/dev/touchscreen/0", O_RDWR | O_NONBLOCK );
-
-    if ( l == Led_Power ) {
-        if ( fd >= 0 ) {
-            LED_IN leds;
-            ::memset ( &leds, 0, sizeof( leds ));
-            leds. TotalTime  = 0;
-            leds. OnTime     = 0;
-            leds. OffTime    = 1;
-            leds. OffOnBlink = 2;
-
-            switch ( st ) {
-                case Led_Off      : leds. OffOnBlink = 0; break;
-                case Led_On       : leds. OffOnBlink = 1; break;
-                case Led_BlinkSlow: leds. OnTime = 10; leds. OffTime = 10; break;
-                case Led_BlinkFast: leds. OnTime =  5; leds. OffTime =  5; break;
-            }
-
-            if ( ::ioctl ( fd, LED_ON, &leds ) >= 0 ) {
-                m_leds [0] = st;
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 
 bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat )
 {

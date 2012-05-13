@@ -714,9 +714,9 @@ void Wellenreiter::doAction( const QString& action, const QString& protocol, OPa
     else if ( action == "KeySound" )
         ODevice::inst()->playKeySound();
     else if ( action == "LedOn" )
-        ODevice::inst()->setLedState( Led_Mail, Led_On );
+        QCopEnvelope( "QPE/TaskBar", "setLed(int,bool)" ) << 0 << true;
     else if ( action == "LedOff" )
-        ODevice::inst()->setLedState( Led_Mail, Led_Off );
+        QCopEnvelope( "QPE/TaskBar", "setLed(int,bool)" ) << 0 << false;
     else if ( action == "LogMessage" )
         logwindow->log( QString(tr("Got packet with protocol '%1'","Protocol Name" ) ).arg( protocol ) );
     else if ( action == "MessageBox" )

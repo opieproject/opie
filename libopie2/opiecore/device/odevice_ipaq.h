@@ -52,11 +52,6 @@ class iPAQ : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual bool setDisplayBrightness( int b );
     virtual int displayBrightnessResolution() const;
 
-    virtual QValueList <OLed> ledList() const;
-    virtual QValueList <OLedState> ledStateList( OLed led ) const;
-    virtual OLedState ledState( OLed led ) const;
-    virtual bool setLedState( OLed led, OLedState st );
-
     virtual bool hasLightSensor() const;
     virtual int readLightSensor();
     virtual int lightSensorResolution() const;
@@ -66,8 +61,6 @@ class iPAQ : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual void timerEvent( QTimerEvent *te );
 
     int m_power_timer;
-
-    OLedState m_leds [2];
 };
 
 struct i_button {

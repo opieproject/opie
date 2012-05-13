@@ -709,17 +709,44 @@ void Server::receiveTaskBar(const QCString &msg, const QByteArray &data)
         ServerApplication::setUseAlarmVolume( useAlarmVol );
     }
     else if ( msg == "setLed(int,bool)" ) {
-        int led, status;
-        stream >> led >> status;
-
-        QValueList <OLed> ll = ODevice::inst ( )-> ledList ( );
-        if ( ll. count ( )) {
-            OLed l = ll. contains ( Led_Mail ) ? Led_Mail : ll [0];
-            bool canblink = ODevice::inst ( )-> ledStateList ( l ). contains ( Led_BlinkSlow );
-
-            ODevice::inst ( )-> setLedState ( l, status ? ( canblink ? Led_BlinkSlow : Led_On ) : Led_Off );
-        }
+        int led, onoff;
+        stream >> led >> onoff;
+        setLed( led, onoff ? Led_BlinkSlow : Led_Off );
     }
+    else if ( msg == "setLed(int,int)" ) {
+        int led, state;
+        stream >> led >> state;
+        setLed( led, state );
+    }
+}
+
+void Server::setLed(int led, int state)
+{
+    QString ledname;
+    if( led == 0 ) {
+        ledname = getNotifyLed();
+    }
+    else {
+        QStringList leds = ODevice::inst()->ledList();
+        if ( led <= (int)leds.count() )
+            ledname = leds[led-1];
+    }
+    if( ! ledname.isNull() )
+        ODevice::inst()-> setLedState( ledname, (OLedState)state );
+}
+
+QString Server::getNotifyLed()
+{
+    Config cfg( "qpe" );
+    cfg.setGroup("Notifications");
+    QString led = cfg.readEntry("NotifyLed");
+    if( led.isNull() ) {
+        QStringList leds = ODevice::inst()->ledList();
+        QStringList res = leds.grep("mail");
+        if( !res.isEmpty() )
+            led = res[0];
+    }
+    return led;
 }
 
 void Server::cancelSync()

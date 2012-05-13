@@ -38,6 +38,8 @@
 #include <qnamespace.h>
 #include <qobject.h>
 #include <qstring.h>
+#include <qmap.h>
+#include <qdict.h>
 #include <qtimer.h>
 
 
@@ -218,14 +220,10 @@ extern ODistribution distributions[];
 enum OLedState {
     Led_Off,
     Led_On,
+    Led_BlinkSuperSlow,
     Led_BlinkSlow,
-    Led_BlinkFast
-};
-
-enum OLed {
-    Led_Mail,
-    Led_Power,
-    Led_BlueTooth
+    Led_BlinkFast,
+    Led_BlinkSuperFast
 };
 
 enum OHardKey {
@@ -283,6 +281,8 @@ struct ODeviceButtonComboStruct {
     bool lockedonly;
 };
 
+class OLedTimer;
+
 /**
  * A singleton which gives informations about device specefic option
  * like the Hardware used, LEDs, the Base Distribution and
@@ -297,6 +297,8 @@ class ODevice : public QObject
 {
     Q_OBJECT
 
+    friend class OLedTimer;
+
 private:
     /* disable copy */
     ODevice ( const ODevice & );
@@ -309,6 +311,7 @@ protected:
     static void sendSuspendmsg();
     void loadButtonCombos( const ODeviceButtonComboStruct combos[], uint length );
     bool apmSuspend( int timeout );
+    bool setLedInternal ( const QString &led, bool on );
 
     ODeviceData *d;
 
@@ -355,10 +358,9 @@ public:
     virtual void playKeySound();
     virtual void playTouchSound();
 
-    virtual QValueList <OLed> ledList() const;
-    virtual QValueList <OLedState> ledStateList ( OLed led ) const;
-    virtual OLedState ledState ( OLed led ) const;
-    virtual bool setLedState ( OLed led, OLedState st );
+    virtual QStringList ledList() const;
+    virtual OLedState ledState ( const QString &led ) const;
+    virtual bool setLedState ( const QString &led, OLedState st );
 
     virtual bool hasLightSensor() const;
     virtual int readLightSensor();
@@ -435,6 +437,20 @@ protected:
     virtual void virtual_hook( int id, void* data );
 };
 
+class OLedTimer : public QTimer {
+    Q_OBJECT
+public:
+    OLedTimer ( const QString &led, ODevice *odev, const char * name=0 );
+
+private slots:
+    void fire();
+private:
+    QString led;
+    ODevice *odev;
+    bool on;
+};
+
+
 class ODeviceData {
 
   public:
@@ -464,6 +480,9 @@ class ODeviceData {
 
     int m_brightnessRes;
     QString m_backlightDev;
+
+    QMap<QString,OLedState> m_ledState;
+    QDict<OLedTimer> m_ledTimers;
 };
 
 extern bool isQWS();

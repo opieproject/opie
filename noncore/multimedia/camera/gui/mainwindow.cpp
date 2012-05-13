@@ -500,7 +500,7 @@ void CameraMainWindow::performCapture( const QString& format )
 void CameraMainWindow::startVideoCapture()
 {
     ODevice::inst()->playTouchSound();
-    ODevice::inst()->setLedState( Led_Mail, Led_BlinkSlow );
+    QCopEnvelope( "QPE/TaskBar", "setLed(int,bool)" ) << 0 << true;
 
     _capturefd = ::open( CAPTUREFILE, O_WRONLY | O_CREAT | O_TRUNC );
     if ( _capturefd == -1 )
@@ -542,7 +542,7 @@ void CameraMainWindow::stopVideoCapture()
 {
     killTimers();
     ODevice::inst()->playTouchSound();
-    ODevice::inst()->setLedState( Led_Mail, Led_Off );
+    QCopEnvelope( "QPE/TaskBar", "setLed(int,bool)" ) << 0 << false;
     _capturing = false;
     updateCaption();
     ::close( _capturefd );
