@@ -108,8 +108,6 @@ void Motorola_EZX::init(const QString& cpu_info)
         d->m_modelstr = "Motorola_EZX";
     } else assert( 0 );
 
-    // set path to backlight device in kernel 2.6
-    m_backlightdev = "/sys/class/backlight/pwm-backlight.0/";
     d->m_rotation = Rot0;
     //initHingeSensor();
 
@@ -161,46 +159,18 @@ bool Motorola_EZX::setLedState( OLed, OLedState )
     return false;
 }
 
-int Motorola_EZX::displayBrightnessResolution() const
-{
-    int res = 1;
-    int fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
-    if ( fd >= 0)
-    {
-        char buf[100];
-        if ( ::read( fd, &buf[0], sizeof buf ) ) ::sscanf( &buf[0], "%d", &res );
-        ::close( fd );
-    }
-    return res;
-}
-
-bool Motorola_EZX::setDisplayBrightness( int bright )
-{
-    bool res = false;
-    int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
-    if ( fd >= 0 )
-    {
-        char buf[10];
-        int val = bright * displayBrightnessResolution() / 255;
-        int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-        if (len > 0)
-            res = ( ::write( fd, &buf[0], len ) == 0 );
-        ::close( fd );
-    }
-    return res;
-}
-
 bool Motorola_EZX::setDisplayStatus( bool on )
 {
     bool res = false;
-    int fd = ::open( m_backlightdev + "bl_power", O_WRONLY|O_NONBLOCK );
-    if ( fd >= 0 )
-    {
-        char buf[10];
-        buf[0] = on ? FB_BLANK_UNBLANK : FB_BLANK_POWERDOWN;
-        buf[1] = '\0';
-        res = ( ::write( fd, &buf[0], 2 ) == 0 );
-        ::close( fd );
+    if( d->m_backlightDev != "" ) {
+        int fd = ::open( d->m_backlightDev + "/bl_power", O_WRONLY|O_NONBLOCK );
+        if ( fd >= 0 ) {
+            char buf[10];
+            buf[0] = on ? FB_BLANK_UNBLANK : FB_BLANK_POWERDOWN;
+            buf[1] = '\0';
+            res = ( ::write( fd, &buf[0], 2 ) == 0 );
+            ::close( fd );
+        }
     }
     return res;
 }

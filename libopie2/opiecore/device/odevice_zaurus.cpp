@@ -288,20 +288,6 @@ void Zaurus::init(const QString& cpu_info)
         d->m_vendor = Vendor_Sharp;
     }
 
-    // set path to backlight device in kernel 2.6
-    switch ( d->m_model )
-    {
-        case Model_Zaurus_SLB600: // fallthrough
-        case Model_Zaurus_SL5500:
-            m_backlightdev = "/sys/class/backlight/locomo-bl/";
-            break;
-	case Model_Zaurus_SL6000:
-            m_backlightdev = "/sys/class/backlight/tosa-bl/";
-            break;
-        default:
-            m_backlightdev = "/sys/class/backlight/corgi-bl/";
-    }
-
     // set initial rotation
     switch( d->m_model )
     {
@@ -535,95 +521,6 @@ bool Zaurus::setLedState( OLed which, OLedState st )
         }
     }
     return false;
-}
-
-int Zaurus::displayBrightnessResolution() const
-{
-    int res = 1;
-    if (m_embedix)
-    {
-        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_RDWR|O_NONBLOCK );
-        if ( fd >= 0 )
-        {
-            int value = ::ioctl( fd, SHARP_FL_IOCTL_GET_STEP, 0 );
-            ::close( fd );
-            return value ? value : res;
-        }
-    }
-    else
-    {
-        int fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
-        if ( fd >= 0 )
-        {
-            char buf[100];
-            if ( ::read( fd, &buf[0], sizeof buf ) ) ::sscanf( &buf[0], "%d", &res );
-            ::close( fd );
-        }
-    }
-    return res;
-}
-
-bool Zaurus::setDisplayBrightness( int bright )
-{
-    //qDebug( "Zaurus::setDisplayBrightness( %d )", bright );
-    bool res = false;
-
-    if ( bright > 255 ) bright = 255;
-    if ( bright < 0 ) bright = 0;
-
-    int numberOfSteps = displayBrightnessResolution();
-    int val = ( bright == 1 ) ? 1 : ( bright * numberOfSteps ) / 255;
-
-    if ( m_embedix )
-    {
-        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );
-        if ( fd >= 0 )
-        {
-            res = ( ::ioctl( fd, SHARP_FL_IOCTL_STEP_CONTRAST, val ) == 0 );
-            ::close( fd );
-        }
-    }
-    else
-    {
-        int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
-        if ( fd >= 0 )
-        {
-            char buf[100];
-            int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-            if (len > 0)
-                res = ( ::write( fd, &buf[0], len ) == 0 );
-            ::close( fd );
-        }
-    }
-    return res;
-}
-
-bool Zaurus::setDisplayStatus( bool on )
-{
-    bool res = false;
-    if ( m_embedix )
-    {
-        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );
-        if ( fd >= 0 )
-        {
-            int ioctlnum = on ? SHARP_FL_IOCTL_ON : SHARP_FL_IOCTL_OFF;
-            res = ( ::ioctl ( fd, ioctlnum, 0 ) == 0 );
-            ::close ( fd );
-        }
-    }
-    else
-    {
-        int fd = ::open( m_backlightdev + "power", O_WRONLY|O_NONBLOCK );
-        if ( fd >= 0 )
-        {
-            char buf[10];
-            buf[0] = on ? FB_BLANK_UNBLANK : FB_BLANK_POWERDOWN;
-            buf[1] = '\0';
-            res = ( ::write( fd, &buf[0], 2 ) == 0 );
-            ::close( fd );
-        }
-    }
-    return res;
 }
 
 Transformation Zaurus::rotation() const

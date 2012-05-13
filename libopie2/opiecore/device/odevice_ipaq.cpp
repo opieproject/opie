@@ -437,27 +437,15 @@ void iPAQ::timerEvent ( QTimerEvent * )
 bool iPAQ::setDisplayBrightness ( int bright )
 {
     bool res = false;
-    int fd;
 
     if ( bright > 255 )
         bright = 255;
     if ( bright < 0 )
         bright = 0;
 
-    QDir sysClass( "/sys/class/backlight/" );
-    sysClass.setFilter(QDir::Dirs);
-    if ( sysClass.exists() && sysClass.count() > 2 ) {
-        QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/brightness" );
-        int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
-        if ( fd >= 0 ) {
-            char buf[100];
-            int val = bright * displayBrightnessResolution() / 255;
-            int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-            if (len > 0)
-                res = ( ::write( fd, &buf[0], len ) == 0 );
-            ::close( fd );
-        }
-    } else {
+    res = ODevice::setDisplayBrightness( bright );
+    if ( ! res ) {
+        int fd;
         if (( fd = ::open ( "/dev/touchscreen/0", O_WRONLY )) >= 0 ) {
             FLITE_IN bl;
             bl. mode = 1;
@@ -473,21 +461,9 @@ bool iPAQ::setDisplayBrightness ( int bright )
 
 int iPAQ::displayBrightnessResolution() const
 {
-    int res = 16;
-
-    QDir sysClass( "/sys/class/backlight/" );
-    sysClass.setFilter(QDir::Dirs);
-    if ( sysClass.exists() && sysClass.count() > 2 ) {
-        QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/max_brightness" );
-        int fd = ::open( sysClassPath, O_RDONLY|O_NONBLOCK );
-        if ( fd >= 0 ) {
-            char buf[100];
-            if ( ::read( fd, &buf[0], sizeof buf ) )
-                ::sscanf( &buf[0], "%d", &res );
-            ::close( fd );
-        }
+    int res = ODevice::displayBrightnessResolution();
+    if( res != 16 )
         return res;
-    }
 
     switch ( model()) {
         case Model_iPAQ_H31xx:

@@ -43,13 +43,8 @@ class Palm : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual void initButtons();
     virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
 
-    QString m_backlightdev;
-
   public:
     virtual bool suspend();
-
-    virtual bool setDisplayBrightness ( int b );
-    virtual int displayBrightnessResolution() const;
 
 };
 

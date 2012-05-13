@@ -461,6 +461,9 @@ class ODeviceData {
     bool    m_initializedButtonQcop : 1;
     ODeviceButtonCombo         *m_heldCombo;
     QTimer                      *m_heldComboTimer;
+
+    int m_brightnessRes;
+    QString m_backlightDev;
 };
 
 extern bool isQWS();

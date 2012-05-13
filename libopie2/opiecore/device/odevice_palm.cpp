@@ -247,17 +247,6 @@ void Palm::init(const QString& cpu_info)
             d->m_qteDriver = "Transformed";
             break;
     }
-
-    m_backlightdev = "/sys/class/backlight/";
-    QDir test(m_backlightdev);
-    int list_len=0;
-    if(test.exists() && ((list_len=test.count())>2)) {
-        m_backlightdev += test[list_len-1];
-        m_backlightdev += "/";
-    }
-    else {
-       m_backlightdev = "";
-    }
 }
 
 
@@ -359,47 +348,5 @@ bool Palm::suspend()
             break;
     }
 
-    return res;
-}
-
-
-int Palm::displayBrightnessResolution() const
-{
-    int res = 1;
-    int fd = -1;
-
-    fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
-    if ( fd != -1) {
-        char buf[100];
-        if ( ::read( fd, &buf[0], sizeof buf ) > 0 )
-            ::sscanf( &buf[0], "%d", &res );
-        ::close( fd );
-    }
-
-    return res;
-}
-
-
-bool Palm::setDisplayBrightness( int bright )
-{
-    bool res = false;
-
-    if ( bright > 255 ) bright = 255;
-    if ( bright < 0 ) bright = 0;
-
-    int numberOfSteps = displayBrightnessResolution();
-    int val = ( bright == 1 ) ? 1 : ( bright * numberOfSteps ) / 255;
-    int fd = -1;
-
-    fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
-    if ( fd  != -1 )
-    {
-        char buf[100];
-        int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-        if (len > 0)
-            res = ( ::write( fd, &buf[0], len ) == 0 );
-        ::close( fd );
-        res = true;
-    }
     return res;
 }

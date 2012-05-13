@@ -110,10 +110,6 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     void systemMessage( const QCString &msg, const QByteArray & );
 
   public:
-    virtual bool setDisplayBrightness( int b );
-    virtual bool setDisplayStatus( bool on );
-    virtual int displayBrightnessResolution() const;
-
     virtual bool hasWaveSpeaker() const;
     virtual void playAlarmSound();
     virtual void playKeySound();
@@ -134,7 +130,6 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual void buzzer( int snd );
     virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
 
-    QString m_backlightdev;
     OLedState m_leds[1];
     bool m_embedix;
     QFile m_hinge;

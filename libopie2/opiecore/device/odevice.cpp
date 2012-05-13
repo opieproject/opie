@@ -46,6 +46,7 @@
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qwindowsystem_qws.h>
+#include <qdir.h>
 
 /* OPIE */
 #include <qpe/config.h>
@@ -196,7 +197,7 @@ ODevice::ODevice()
     d->m_buttons = 0;
     d->m_buttonCombos = 0;
     d->m_cpu_frequencies = new QStrList;
-
+    d->m_brightnessRes = 0;
 
     /* System QCopChannel created */
     d->m_initializedButtonQcop = false;
@@ -225,6 +226,11 @@ ODevice::ODevice()
     d->m_heldCombo = 0;
     d->m_heldComboTimer = new QTimer( this );
     connect( d->m_heldComboTimer, SIGNAL(timeout()), this, SLOT(holdCheckCombo()) );
+
+    QDir sysClass( "/sys/class/backlight/" );
+    sysClass.setFilter(QDir::Dirs);
+    if ( sysClass.exists() && sysClass.count() > 2 )
+        d->m_backlightDev = sysClass.absFilePath( sysClass[2] );
 }
 
 void ODevice::systemMessage( const QCString &msg, const QByteArray & )
@@ -321,8 +327,23 @@ bool ODevice::suspend()
 */
 bool ODevice::setDisplayStatus( bool on )
 {
-    qDebug( "ODevice::setDisplayStatus( %d ) - please override me.", on );
-    return false; // don't do anything for unknown models
+    QDir sysClass( "/sys/class/lcd/" );
+    sysClass.setFilter(QDir::Dirs);
+    if ( sysClass.exists() && sysClass.count() > 2 ) {
+        QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/power" );
+        int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
+        if ( fd >= 0 ) {
+            char buf[10];
+            bool res;
+            buf[0] = on ? 0 : 4;
+            buf[1] = '\0';
+            res = ( ::write( fd, &buf[0], 2 ) == 0 );
+            ::close( fd );
+            return res;
+        }
+    }
+
+    return false; // don't do anything
 }
 
 /**
@@ -331,10 +352,28 @@ bool ODevice::setDisplayStatus( bool on )
 * @param b The brightness to be set on a scale from 0 to 255
 * @return success or failure
 */
-bool ODevice::setDisplayBrightness( int b )
+bool ODevice::setDisplayBrightness( int bright )
 {
-    qDebug( "ODevice::setDisplayBrightness( %d ) - please override me.", b );
-    return false;
+    bool res = false;
+
+    if ( bright > 255 )
+        bright = 255;
+    if ( bright < 0 )
+        bright = 0;
+
+    if ( d->m_backlightDev != "" ) {
+        int fd = ::open( d->m_backlightDev + "/brightness", O_WRONLY|O_NONBLOCK );
+        if ( fd >= 0 ) {
+            char buf[100];
+            int val = bright * displayBrightnessResolution() / 255;
+            int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
+            if (len > 0)
+                res = ( ::write( fd, &buf[0], len ) == 0 );
+            ::close( fd );
+        }
+    }
+
+    return res;
 }
 
 /**
@@ -348,7 +387,23 @@ bool ODevice::setDisplayBrightness( int b )
  */
 int ODevice::displayBrightnessResolution() const
 {
-    qDebug( "ODevice::displayBrightnessResolution() - please override me." );
+    if( d->m_brightnessRes > 0 )
+        return d->m_brightnessRes;
+
+    int res = 16;
+    if ( d->m_backlightDev != "" ) {
+        int fd = ::open( d->m_backlightDev + "/max_brightness", O_RDONLY|O_NONBLOCK );
+        if ( fd >= 0 ) {
+            char buf[100];
+            if ( ::read( fd, &buf[0], sizeof buf ) )
+                ::sscanf( &buf[0], "%d", &res );
+            ::close( fd );
+        }
+        d->m_brightnessRes = res;
+        return res;
+    }
+
+    qDebug( "ODevice::displayBrightnessResolution() - no backlight device" );
     return 16;
 }
 
@@ -369,7 +424,7 @@ bool ODevice::setDisplayContrast( int p )
 */
 int ODevice::displayContrastResolution() const
 {
-    qDebug( "ODevice::displayBrightnessResolution() - please override me." );
+    qDebug( "ODevice::displayContrastResolution() - please override me." );
     return 0;
 }
 
@@ -409,7 +464,7 @@ OModel ODevice::model() const
 }
 
 /**
-* This does return the systen name
+* This does return the system name
 */
 QString ODevice::systemString() const
 {

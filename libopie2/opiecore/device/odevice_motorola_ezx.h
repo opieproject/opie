@@ -68,9 +68,7 @@ class Motorola_EZX : public OAbstractMobileDevice
     void systemMessage( const QCString &msg, const QByteArray & );
 
   public:
-    virtual bool setDisplayBrightness( int b );
     virtual bool setDisplayStatus( bool on );
-    virtual int displayBrightnessResolution() const;
 
     virtual QValueList <OLed> ledList() const;
     virtual QValueList <OLedState> ledStateList ( OLed led ) const;
@@ -78,7 +76,6 @@ class Motorola_EZX : public OAbstractMobileDevice
     virtual bool setLedState( OLed led, OLedState st );
 
   protected:
-    QString m_backlightdev;
     OLedState m_leds[1];
     QFile m_hinge;
 };
