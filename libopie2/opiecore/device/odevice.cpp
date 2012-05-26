@@ -32,7 +32,6 @@
 #include "odevice_ipaq.h"
 #include "odevice_mypal.h"
 #include "odevice_jornada.h"
-#include "odevice_ramses.h"
 #include "odevice_simpad.h"
 #include "odevice_yopy.h"
 #include "odevice_zaurus.h"
@@ -150,7 +149,6 @@ ODevice *ODevice::inst()
                     else if ( line.contains( "mypal", false ) ) dev = new Internal::MyPal();
                     else if ( line.contains( "simpad", false ) ) dev = new Internal::SIMpad();
                     else if ( line.contains( "jornada", false ) ) dev = new Internal::Jornada();
-                    else if ( line.contains( "ramses", false ) ) dev = new Internal::Ramses();
                     else if ( line.contains( "Tradesquare.NL", false ) ) dev = new Internal::Beagle();
                     else if ( line.contains( "HTC", false ) ) dev = new Internal::HTC();
                     else if ( line.contains( "Motorola", false ) ) dev = new Internal::Motorola_EZX();

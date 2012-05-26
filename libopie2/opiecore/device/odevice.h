@@ -105,12 +105,6 @@ enum OModel {
     Model_SIMpad_SLC    = ( Model_SIMpad | 0x00004 ),
     Model_SIMpad_TSinus = ( Model_SIMpad | 0x00008 ),
 
-    Model_Ramses        = ( 5 << 20 ),
-
-    Model_Ramses_All    = ( Model_Ramses | 0xfffff ),
-    Model_Ramses_MNCI   = ( Model_Ramses | 0x00001 ),
-    Model_Ramses_MNCIRX = ( Model_Ramses | 0x00002 ),
-
     Model_Yopy          = ( 6 << 20 ),
 
     Model_Yopy_All      = ( Model_Yopy | 0xfffff ),
