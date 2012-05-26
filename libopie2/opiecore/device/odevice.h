@@ -252,16 +252,6 @@ enum OHingeStatus {
  * hint: manage a user defined button for qvfb?
  * alwin
  */
-struct default_button {
-    Qt::Key code;
-    const char *utext;
-    const char *pix;
-    const char *fpressedservice;
-    const char *fpressedaction;
-    const char *fheldservice;
-    const char *fheldaction;
-};
-
 struct ODeviceButtonComboStruct {
     uint model;
     Qt::Key keycode1;

@@ -59,7 +59,6 @@ class Motorola_EZX : public OAbstractMobileDevice
 
   protected:
     virtual void init(const QString&);
-    virtual void initButtons();
     //void initHingeSensor();
 
   protected slots:
@@ -73,15 +72,6 @@ class Motorola_EZX : public OAbstractMobileDevice
     QFile m_hinge;
 };
 
-struct ezx_button {
-    Qt::Key code;
-    const char *utext;
-    const char *pix;
-    const char *fpressedservice;
-    const char *fpressedaction;
-    const char *fheldservice;
-    const char *fheldaction;
-};
 }
 }
 }

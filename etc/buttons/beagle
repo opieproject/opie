@@ -1,0 +1,45 @@
+[Button0]
+Keycode = F8
+UserText = Record Button
+Icon = devicebuttons/beagle_record
+PressedActionChannel = QPE/VMemo
+PressedActionMessage = toggleRecord()
+HeldActionChannel = sound
+HeldActionMessage = raise()
+
+[Button1]
+Keycode = F9
+UserText = Calendar Button
+Icon = devicebuttons/beagle_calendar
+PressedActionChannel = datebook
+PressedActionMessage = nextView()
+HeldActionChannel = today
+HeldActionMessage = raise()
+
+[Button2]
+Keycode = F10
+UserText = Contacts Button
+Icon = devicebuttons/beagle_contact
+PressedActionChannel = addressbook
+PressedActionMessage = raise()
+HeldActionChannel = addressbook
+HeldActionMessage = beamBusinessCard()
+
+[Button3]
+Keycode = F11
+UserText = Todo Button
+Icon = devicebuttons/beagle_todo
+PressedActionChannel = todolist
+PressedActionMessage = raise()
+HeldActionChannel = QPE/TaskBar
+HeldActionMessage = toggleMenu()
+
+[Button4]
+Keycode = F12
+UserText = Home Button
+Icon = devicebuttons/beagle_home
+PressedActionChannel = QPE/Launcher
+PressedActionMessage = home()
+HeldActionChannel = buttonsettings
+HeldActionMessage = raise()
+

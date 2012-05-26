@@ -100,15 +100,6 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     QFile m_hinge;
 };
 
-struct z_button {
-    Qt::Key code;
-    const char *utext;
-    const char *pix;
-    const char *fpressedservice;
-    const char *fpressedaction;
-    const char *fheldservice;
-    const char *fheldaction;
-};
 }
 }
 }

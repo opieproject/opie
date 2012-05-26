@@ -40,23 +40,11 @@ class Jornada : public OAbstractMobileDevice
 
   protected:
     virtual void init(const QString&);
-    virtual void initButtons();
 
   public:
     virtual bool setDisplayBrightness ( int b );
     virtual bool setDisplayStatus ( bool on);
     virtual int displayBrightnessResolution() const;
-};
-
-struct j_button {
-    uint model;
-    Qt::Key code;
-    const char *utext;
-    const char *pix;
-    const char *fpressedservice;
-    const char *fpressedaction;
-    const char *fheldservice;
-    const char *fheldaction;
 };
 
 }

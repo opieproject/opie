@@ -79,95 +79,6 @@ typedef struct {
 
 #define Model_Keyboardless_2_6 (Model_iPAQ_H191x | Model_iPAQ_H22xx | Model_iPAQ_HX4700 | Model_iPAQ_H4xxx | Model_iPAQ_RX3xxx)
 
-struct i_button ipaq_buttons [] = {
-
-    // Common button map for all keyboardless devices with 2.6 kernel
-    { Model_Keyboardless_2_6,
-    Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/ipaq_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Model_Keyboardless_2_6,
-    Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/ipaq_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Model_Keyboardless_2_6,
-    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/ipaq_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-    { Model_Keyboardless_2_6,
-    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/ipaq_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Model_iPAQ_H191x | Model_iPAQ_HX4700 | Model_iPAQ_H4xxx,
-    Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
-    "devicebuttons/ipaq_record",
-    "QPE/VMemo", "toggleRecord()",
-    "sound", "raise()" },
-
-    { Model_iPAQ_RX1950,
-    Qt::Key_F1, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/ipaq_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Model_iPAQ_RX1950,
-    Qt::Key_F2, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/ipaq_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Model_iPAQ_RX1950,
-    Qt::Key_F3, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/ipaq_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-    { Model_iPAQ_RX1950,
-    Qt::Key_F4, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/ipaq_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Model_iPAQ_RX1950,
-    Qt::Key_F5, QT_TRANSLATE_NOOP("Button", "Record Button"),
-    "devicebuttons/ipaq_record",
-    "QPE/VMemo", "toggleRecord()",
-    "sound", "raise()" },
-
-    // Devices with 2.4 kernel
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
-    Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/ipaq_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
-    Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/ipaq_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx,
-    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/ipaq_menu",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-    { Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
-    Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/ipaq_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
-    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/ipaq_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
-    Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
-    "devicebuttons/ipaq_record",
-    "QPE/VMemo", "toggleRecord()",
-    "sound", "raise()" },
-
-};
-
 struct ODeviceButtonComboStruct ipaq_combos[] = {
     // Centre of joypad + Calendar -> recalibrate
     { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_Keyboardless_2_6, 
@@ -263,23 +174,7 @@ void iPAQ::initButtons()
         addPreHandler(this);
     }
 
-    d->m_buttons = new QValueList <ODeviceButton>;
-
-    for ( uint i = 0; i < ( sizeof( ipaq_buttons ) / sizeof( i_button )); i++ ) {
-        i_button *ib = ipaq_buttons + i;
-        ODeviceButton b;
-
-        if (( ib->model & d->m_model ) == d->m_model ) {
-            b. setKeycode ( ib->code );
-            b. setUserText ( QObject::tr ( "Button", ib->utext ));
-            b. setPixmap ( OResource::loadPixmap ( ib->pix ));
-            b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib->fpressedservice ), ib->fpressedaction ));
-            b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib->fheldservice ), ib->fheldaction ));
-
-            d->m_buttons->append ( b );
-        }
-    }
-    reloadButtonMapping();
+    ODevice::initButtons();
 }
 
 void iPAQ::initButtonCombos()

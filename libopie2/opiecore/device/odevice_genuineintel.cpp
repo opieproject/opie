@@ -51,39 +51,6 @@
 using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
-struct gi_button genuineintel_buttons [] = {
-    {
-    Qt::Key_F1, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/ipaq_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    {
-    Qt::Key_F2, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/ipaq_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    {
-    Qt::Key_F3, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/ipaq_menu",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-    {
-    Qt::Key_F4, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/ipaq_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-    {
-    Qt::Key_F5, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/ipaq_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    {
-    Qt::Key_F6, QT_TRANSLATE_NOOP("Button", "Record Button"),
-    "devicebuttons/ipaq_record",
-    "QPE/VMemo", "toggleRecord()",
-    "sound", "raise()" },
-};
-
 void GenuineIntel::init(const QString& model)
 {
     d->m_vendorstr = "Intel";
@@ -104,21 +71,7 @@ void GenuineIntel::initButtons()
         addPreHandler(this);
     }
 
-    d->m_buttons = new QValueList <ODeviceButton>;
-
-    for ( uint i = 0; i < ( sizeof( genuineintel_buttons ) / sizeof( gi_button )); i++ ) {
-        gi_button *ib = genuineintel_buttons + i;
-        ODeviceButton b;
-
-        b. setKeycode ( ib->code );
-        b. setUserText ( QObject::tr ( "Button", ib->utext ));
-        b. setPixmap ( OResource::loadPixmap ( ib->pix ));
-        b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib->fpressedservice ), ib->fpressedaction ));
-        b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib->fheldservice ), ib->fheldaction ));
-
-        d->m_buttons->append ( b );
-    }
-    reloadButtonMapping();
+    ODevice::initButtons();
 }
 
 bool GenuineIntel::filter ( int /*unicode*/, int , int , bool , bool )

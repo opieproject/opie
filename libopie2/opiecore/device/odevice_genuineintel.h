@@ -58,16 +58,6 @@ class GenuineIntel : public ODevice, public QWSServer::KeyboardFilter
 
 };
 
-struct gi_button {
-    Qt::Key code;
-    const char *utext;
-    const char *pix;
-    const char *fpressedservice;
-    const char *fpressedaction;
-    const char *fheldservice;
-    const char *fheldaction;
-};
-
 }
 }
 }

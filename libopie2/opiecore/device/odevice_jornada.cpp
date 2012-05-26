@@ -82,34 +82,6 @@ typedef struct {
 using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
-struct j_button jornada56x_buttons [] = {
-    { Model_Jornada_56x,
-    Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/jornada56x_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Model_Jornada_56x,
-    Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/jornada56x_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Model_Jornada_56x,
-    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Todo Button"),
-    "devicebuttons/jornada56x_todo",
-    "todolist", "raise()",
-    "todolist", "create()" },
-    { Model_Jornada_56x,
-    Qt::Key_F8, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/jornada56x_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Model_Jornada_56x,
-    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Record Button"),
-    "devicebuttons/jornada56x_record",
-    "QPE/VMemo", "toggleRecord()",
-    "sound", "raise()" },
-};
-
 void Jornada::init(const QString& cpu_info)
 {
     d->m_vendorstr = "HP";
@@ -132,30 +104,6 @@ void Jornada::init(const QString& cpu_info)
 
     d->m_rotation = Rot0; //all Jornadas need this rotation
     //Distribution detecting code is now in base class
-}
-
-void Jornada::initButtons()
-{
-    if ( d->m_buttons )
-        return;
-
-    d->m_buttons = new QValueList <ODeviceButton>;
-
-    for ( uint i = 0; i < ( sizeof( jornada56x_buttons ) / sizeof( j_button )); i++ ) {
-        j_button *ib = jornada56x_buttons + i;
-        ODeviceButton b;
-
-        if (( ib->model & d->m_model ) == d->m_model ) {
-            b. setKeycode ( ib->code );
-            b. setUserText ( QObject::tr ( "Button", ib->utext ));
-            b. setPixmap ( OResource::loadPixmap ( ib->pix ));
-            b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib->fpressedservice ), ib->fpressedaction ));
-            b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib->fheldservice ), ib->fheldaction ));
-
-            d->m_buttons->append ( b );
-        }
-    }
-    reloadButtonMapping();
 }
 
 int Jornada::displayBrightnessResolution() const

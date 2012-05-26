@@ -58,21 +58,6 @@
 using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
-struct yopy_button yopy_buttons [] = {
-    { Qt::Key_F10, QT_TRANSLATE_NOOP( "Button", "Action Button" ),
-        "devicebuttons/yopy_action",
-        "datebook", "nextView()",
-        "today", "raise()" },
-    { Qt::Key_F11, QT_TRANSLATE_NOOP( "Button", "OK Button" ),
-        "devicebuttons/yopy_ok",
-        "addressbook", "raise()",
-        "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F12, QT_TRANSLATE_NOOP( "Button", "End Button" ),
-        "devicebuttons/yopy_end",
-        "QPE/Launcher", "home()",
-        "buttonsettings", "raise()" },
-};
-
 void Yopy::init(const QString&)
 {
     d->m_vendorstr = "G.Mate";
@@ -83,34 +68,6 @@ void Yopy::init(const QString&)
     d->m_systemstr = "Linupy";
     d->m_system = System_Linupy;
     // Distribution detection code now in the base class
-}
-
-
-void Yopy::initButtons()
-{
-    if ( d->m_buttons )
-        return ;
-
-    d->m_buttons = new QValueList <ODeviceButton>;
-
-    for ( uint i = 0; i < ( sizeof( yopy_buttons ) / sizeof( yopy_button ) ); i++ )
-    {
-
-        yopy_button *ib = yopy_buttons + i;
-
-        ODeviceButton b;
-
-        b. setKeycode ( ib->code );
-        b. setUserText ( QObject::tr ( "Button", ib->utext ) );
-        b. setPixmap ( OResource::loadPixmap ( ib->pix ) );
-        b. setFactoryPresetPressedAction
-        ( OQCopMessage( makeChannel( ib->fpressedservice ), ib->fpressedaction ) );
-        b. setFactoryPresetHeldAction
-        ( OQCopMessage( makeChannel( ib->fheldservice ), ib->fheldaction ) );
-
-        d->m_buttons->append ( b );
-    }
-    reloadButtonMapping();
 }
 
 

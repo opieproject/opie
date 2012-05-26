@@ -1,0 +1,26 @@
+[Button0]
+Keycode = F10
+UserText = Action Button
+Icon = devicebuttons/yopy_action
+PressedActionChannel = datebook
+PressedActionMessage = nextView()
+HeldActionChannel = today
+HeldActionMessage = raise()
+
+[Button1]
+Keycode = F11
+UserText = OK Button
+Icon = devicebuttons/yopy_ok
+PressedActionChannel = addressbook
+PressedActionMessage = raise()
+HeldActionChannel = addressbook
+HeldActionMessage = beamBusinessCard()
+
+[Button2]
+Keycode = F12
+UserText = End Button
+Icon = devicebuttons/yopy_end
+PressedActionChannel = QPE/Launcher
+PressedActionMessage = home()
+HeldActionChannel = buttonsettings
+HeldActionMessage = raise()

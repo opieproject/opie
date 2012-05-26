@@ -46,6 +46,7 @@
 #include <qtextstream.h>
 #include <qwindowsystem_qws.h>
 #include <qdir.h>
+#include <qaccel.h>
 
 /* OPIE */
 #include <qpe/config.h>
@@ -101,29 +102,6 @@ static const char* PATH_PROC_CPUINFO = "/proc/cpuinfo";
 
 
 /* Now the default implementation of ODevice */
-
-struct default_button default_buttons [] =  {
-    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/z_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/z_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/z_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/z_menu",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/z_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-};
 
 ODevice *ODevice::inst()
 {
@@ -264,14 +242,49 @@ void ODevice::initButtons()
 
     qDebug ( "init Buttons" );
     d->m_buttons = new QValueList <ODeviceButton>;
-    for ( uint i = 0; i < ( sizeof( default_buttons ) / sizeof( default_button )); i++ ) {
-        default_button *db = default_buttons + i;
+
+    Config cfg( QPEApplication::qpeDir() + "etc/opie_buttons.conf", Config::File );
+
+    QStringList grps = cfg.allGroups();
+    for( uint i=0; i < grps.count() ; i++ ) {
+        cfg.setGroup( grps[i] );
+
+        QString keyc = cfg.readEntry( "Keycode" );
+        if( keyc.isEmpty() )
+            break;
+        int keycode = 0;
+        if( keyc.startsWith( "0x" ) ) {
+            bool ok = false;
+            keycode = keyc.mid(2).toInt( &ok, 16 );
+            if( !ok ) {
+                owarn << "Invalid hex keycode " << keyc << oendl;
+                break;
+            }
+        }
+        else {
+            keycode = QAccel::stringToKey( keyc );
+        }
+
+        if( keycode == 0 ) {
+            owarn << "Invalid keycode " << keyc << oendl;
+            break;
+        }
         ODeviceButton b;
-        b.setKeycode( db->code );
-        b.setUserText( QObject::tr ( "Button", db->utext ));
-        b.setPixmap( OResource::loadPixmap ( db->pix ));
-        b.setFactoryPresetPressedAction( OQCopMessage ( makeChannel ( db->fpressedservice ), db->fpressedaction ));
-        b.setFactoryPresetHeldAction( OQCopMessage ( makeChannel ( db->fheldservice ), db->fheldaction ));
+        b.setKeycode( keycode );
+        QString pixname = cfg.readEntry( "Icon" );
+        if( ! pixname.isEmpty() )
+            b.setPixmap( OResource::loadPixmap( pixname ) );
+        QString channel = cfg.readEntry( "PressedActionChannel" );
+        QString message = cfg.readEntry( "PressedActionMessage" );
+        if( ! channel.isEmpty() )
+            b.setFactoryPresetPressedAction( OQCopMessage( makeChannel( channel ), QCString( message ) ));
+        channel = cfg.readEntry( "HeldActionChannel" );
+        message = cfg.readEntry( "HeldActionMessage" );
+        if( ! channel.isEmpty() )
+            b.setFactoryPresetHeldAction( OQCopMessage( makeChannel( channel ), QCString( message ) ));
+        QString utext = cfg.readEntry( "UserText" );
+        if( ! utext.isEmpty() )
+            b.setUserText( QObject::tr( utext, "Button" ));
         d->m_buttons->append( b );
     }
 

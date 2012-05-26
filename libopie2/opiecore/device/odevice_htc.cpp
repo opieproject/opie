@@ -56,63 +56,6 @@
 using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
-struct htc_button htc_buttons [] = {
-    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/z_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/z_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/z_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/z_menu",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/z_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-};
-
-struct htc_button htc_buttons_universal [] = {
-    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/z_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/z_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/z_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/z_menu",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/z_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-
-    { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Hinge1"),
-    "devicebuttons/z_hinge1",
-    "QPE/Rotation", "rotateDefault()",0,0},
-    { Qt::Key_F16, QT_TRANSLATE_NOOP("Button", "Hinge2"),
-    "devicebuttons/z_hinge2",
-    "QPE/Rotation", "rotateDefault()",0,0},
-    { Qt::Key_F17, QT_TRANSLATE_NOOP("Button", "Hinge3"),
-    "devicebuttons/z_hinge3",
-    "QPE/Rotation", "rotateDefault()",0,0},
-};
-
-
 //
 //       HTC-Universal (PXA-model w/ 480x640 3.6" lcd)
 //       HTC-Alpine    (PXA-model w/ 240x320 3.5" lcd)
@@ -202,10 +145,6 @@ void HTC::initButtons()
     if ( d->m_buttons )
         return;
 
-    d->m_buttons = new QValueList <ODeviceButton>;
-
-    struct htc_button * phtc_buttons;
-    int buttoncount;
     switch ( d->m_model )
     {
         case Model_HTC_Universal:
@@ -213,28 +152,12 @@ void HTC::initButtons()
             {
                 addPreHandler(this);
             }
-            phtc_buttons = htc_buttons_universal;
-            buttoncount = ARRAY_SIZE(htc_buttons_universal);
             break;
         default:
-            phtc_buttons = htc_buttons;
-            buttoncount = ARRAY_SIZE(htc_buttons);
             break;
     }
 
-    for ( int i = 0; i < buttoncount; i++ ) {
-        struct htc_button *zb = phtc_buttons + i;
-        ODeviceButton b;
-
-        b.setKeycode( zb->code );
-        b.setUserText( QObject::tr( "Button", zb->utext ));
-        b.setPixmap( OResource::loadPixmap( zb->pix ));
-        b.setFactoryPresetPressedAction( OQCopMessage( makeChannel ( zb->fpressedservice ), zb->fpressedaction ));
-        b.setFactoryPresetHeldAction( OQCopMessage( makeChannel ( zb->fheldservice ), zb->fheldaction ));
-        d->m_buttons->append( b );
-    }
-
-    reloadButtonMapping();
+    ODevice::initButtons();
 }
 
 bool HTC::setDisplayStatus( bool on )

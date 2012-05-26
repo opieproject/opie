@@ -63,17 +63,6 @@ class iPAQ : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     int m_power_timer;
 };
 
-struct i_button {
-    uint model;
-    Qt::Key code;
-    const char *utext;
-    const char *pix;
-    const char *fpressedservice;
-    const char *fpressedaction;
-    const char *fheldservice;
-    const char *fheldaction;
-};
-
 }
 }
 }

@@ -1,0 +1,45 @@
+[Button0]
+Keycode = F9
+UserText = Calendar Button
+Icon = devicebuttons/z_calendar
+PressedActionChannel = datebook
+PressedActionMessage = nextView()
+HeldActionChannel = today
+HeldActionMessage = raise()
+
+[Button1]
+Keycode = F10
+UserText = Contacts Button
+Icon = devicebuttons/z_contact
+PressedActionChannel = addressbook
+PressedActionMessage = raise()
+HeldActionChannel = addressbook
+HeldActionMessage = beamBusinessCard()
+
+[Button2]
+Keycode = F12
+UserText = Home Button
+Icon = devicebuttons/z_home
+PressedActionChannel = QPE/Launcher
+PressedActionMessage = home()
+HeldActionChannel = buttonsettings
+HeldActionMessage = raise()
+
+[Button3]
+Keycode = F11
+UserText = Menu Button
+Icon = devicebuttons/z_menu
+PressedActionChannel = QPE/TaskBar
+PressedActionMessage = toggleMenu()
+HeldActionChannel = QPE/TaskBar
+HeldActionMessage = toggleStartMenu()
+
+[Button4]
+Keycode = F13
+UserText = Mail Button
+Icon = devicebuttons/z_mail
+PressedActionChannel = opiemail
+PressedActionMessage = raise()
+HeldActionChannel = opiemail
+HeldActionMessage = newMail()
+

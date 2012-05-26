@@ -1,0 +1,89 @@
+[Button0]
+Keycode = F9
+UserText = Calendar Button
+Icon = devicebuttons/z_calendar2
+PressedActionChannel = datebook
+PressedActionMessage = nextView()
+HeldActionChannel = today
+HeldActionMessage = raise()
+
+[Button1]
+Keycode = F10
+UserText = Contacts Button
+Icon = devicebuttons/z_contact2
+PressedActionChannel = addressbook
+PressedActionMessage = raise()
+HeldActionChannel = addressbook
+HeldActionMessage = beamBusinessCard()
+
+[Button2]
+Keycode = F13
+UserText = Mail Button
+Icon = devicebuttons/z_mail2
+PressedActionChannel = opiemail
+PressedActionMessage = raise()
+HeldActionChannel = opiemail
+HeldActionMessage = newMail()
+
+[Button3]
+Keycode = F12
+UserText = Home Button
+Icon = devicebuttons/z_home2
+PressedActionChannel = QPE/Launcher
+PressedActionMessage = home()
+HeldActionChannel = buttonsettings
+HeldActionMessage = raise()
+
+[Button4]
+Keycode = F11
+UserText = Menu Button
+Icon = devicebuttons/z_menu2
+PressedActionChannel = QPE/TaskBar
+PressedActionMessage = toggleMenu()
+HeldActionChannel = QPE/TaskBar
+HeldActionMessage = toggleStartMenu()
+
+[Button5]
+Keycode = F15
+UserText = Home Softkey
+Icon = devicebuttons/z_silk_home
+PressedActionChannel = QPE/Launcher
+PressedActionMessage = home()
+HeldActionChannel = buttonsettings
+HeldActionMessage = raise()
+
+[Button6]
+Keycode = F16
+UserText = Mail Softkey
+Icon = devicebuttons/z_silk_mail
+PressedActionChannel = opiemail
+PressedActionMessage = raise()
+HeldActionChannel = opiemail
+HeldActionMessage = newMail()
+
+[Button7]
+Keycode = F17
+UserText = Contacts Softkey
+Icon = devicebuttons/z_silk_contact
+PressedActionChannel = addressbook
+PressedActionMessage = raise()
+HeldActionChannel = addressbook
+HeldActionMessage = beamBusinessCard()
+
+[Button8]
+Keycode = F18
+UserText = Calendar Softkey
+Icon = devicebuttons/z_silk_calendar
+PressedActionChannel = datebook
+PressedActionMessage = nextView()
+HeldActionChannel = today
+HeldActionMessage = raise()
+
+[Button9]
+Keycode = F19
+UserText = Dictionary Softkey
+Icon = devicebuttons/z_silk_dict
+PressedActionChannel = odict
+PressedActionMessage = raise()
+HeldActionChannel = today
+HeldActionMessage = raise()

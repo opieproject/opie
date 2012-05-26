@@ -62,79 +62,6 @@ using namespace Opie::Core::Internal;
 
 bool suspended;
 
-struct palm_button palm_buttons [] = {
-    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3,
-      Qt::Key_F3, QT_TRANSLATE_NOOP(  "Button", "Slider Close" ),
-        "devicebuttons/palm_slider_close",
-        0, 0, 0, 0 },
-    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3,
-      Qt::Key_F4, QT_TRANSLATE_NOOP(  "Button", "Slider Open" ),
-        "devicebuttons/palm_slider_open",
-        0, 0, 0, 0 },
-    { Model_Palm_LD,
-      Qt::Key_F5, QT_TRANSLATE_NOOP( "Button", "Lock Button" ),
-        "devicebuttons/palm_lock",
-        0, 0, 0, 0 },
-    { Model_Palm_LD,
-      Qt::Key_F6, QT_TRANSLATE_NOOP( "Button", "Rotate Button" ),
-        "devicebuttons/palm_rotate",
-        "QPE/Rotation", "flip()",
-        0, 0 },
-    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_LD |
-      Model_Palm_Z72 | Model_Palm_T600 | Model_Palm_T650 |
-      Model_Palm_T680 | Model_Palm_T700W | Model_Palm_T700P |
-      Model_Palm_T750 | Model_Palm_T755P,
-      Qt::Key_F7, QT_TRANSLATE_NOOP(  "Button", "Record Button" ),
-        "devicebuttons/palm_record",
-        "QPE/VMemo", "toggleRecord()",
-        "sound", "raise()" },
-    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
-      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
-      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
-      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
-      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
-      Qt::Key_F8, QT_TRANSLATE_NOOP(  "Button", "Suspend Button" ),
-        "devicebuttons/palm_suspend",
-        "suspend", "raise()",
-        "suspend", "raise()" },
-    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
-      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
-      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
-      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
-      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
-      Qt::Key_F9, QT_TRANSLATE_NOOP( "Button", "Home Button" ),
-        "devicebuttons/palm_home",
-        "QPE/Launcher", "home()",
-        "buttonsettings", "raise()" },
-    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
-      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
-      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
-      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
-      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
-      Qt::Key_F10, QT_TRANSLATE_NOOP( "Button", "Calendar Button" ),
-        "devicebuttons/palm_calendar",
-        "datebook", "nextView()",
-        "today", "raise()" },
-    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
-      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
-      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
-      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
-      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
-      Qt::Key_F11, QT_TRANSLATE_NOOP( "Button", "Todo Button" ),
-        "devicebuttons/palm_todo",
-        "todolist", "raise()",
-        "todolist", "create()" },
-    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
-      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
-      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
-      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
-      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
-      Qt::Key_F12, QT_TRANSLATE_NOOP( "Button", "Mail Button" ),
-        "devicebuttons/palm_mail",
-        "opiemail", "raise()",
-        "opiemail", "newmail()" },
-};
-
 void Palm::init(const QString& cpu_info)
 {
     d->m_vendorstr = "Palm";
@@ -255,7 +182,6 @@ void Palm::init(const QString& cpu_info)
 
 void Palm::initButtons()
 {
-
     if ( d->m_buttons )
         return ;
 
@@ -263,24 +189,7 @@ void Palm::initButtons()
         addPreHandler(this);
     }
 
-    d->m_buttons = new QValueList <ODeviceButton>;
-
-    for ( uint i = 0; i < ( sizeof( palm_buttons ) / sizeof( palm_button ) ); i++ )
-    {
-        palm_button *ib = palm_buttons + i;
-        ODeviceButton b;
-
-        if (( ib->model & d->m_model ) == d->m_model ) {
-            b. setKeycode ( ib->code );
-            b. setUserText ( QObject::tr ( "Button", ib->utext ));
-            b. setPixmap ( OResource::loadPixmap ( ib->pix ));
-            b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib->fpressedservice ), ib->fpressedaction ));
-            b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib->fheldservice ), ib->fheldaction ));
-
-            d->m_buttons->append ( b );
-        }
-    }
-    reloadButtonMapping();
+    ODevice::initButtons();
 }
 
 

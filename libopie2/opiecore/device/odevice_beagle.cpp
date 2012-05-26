@@ -64,51 +64,6 @@ namespace Opie {
 namespace Core {
 namespace Internal {
 
-struct b_button {
-    uint model;
-    Qt::Key code;
-    const char *utext;
-    const char *pix;
-    const char *fpressedservice;
-    const char *fpressedaction;
-    const char *fheldservice;
-    const char *fheldaction;
-};
-
-
-/*
- * The MVista Beagle kernel maps the action
- * buttons to the Qt keymap
- */
-struct b_button beagle_buttons [] = {
-    { Model_Beagle_PA100,
-      Qt::Key_F8, QT_TRANSLATE_NOOP("Button", "Record Button"),
-      "devicebuttons/beagle_record",
-      "QPE/VMemo", "toggleRecord()",
-      "sound", "raise()" },
-    { Model_Beagle_PA100,
-      Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-      "devicebuttons/beagle_calendar",
-      "datebook", "nextView()",
-      "today", "raise()" },
-    { Model_Beagle_PA100,
-      Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-      "devicebuttons/beagle_contact",
-      "addressbook", "raise()",
-      "addressbook", "beamBusinessCard()" },
-    { Model_Beagle_PA100,
-      Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Todo Button"),
-      "devicebuttons/beagle_todo",
-      "todolist", "raise()",
-      "QPE/TaskBar", "toggleMenu()" },
-    { Model_Beagle_PA100,
-      Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-      "devicebuttons/beagle_home",
-      "QPE/Launcher", "home()",
-      "buttonsettings", "raise()" },
-};
-
-
 Beagle::Beagle()  {}
 
 Beagle::~Beagle() {}
@@ -127,34 +82,6 @@ void Beagle::init( const QString&) {
     d->m_model = Model_Beagle_PA100;
 }
 
-
-/*
- * Initialize the Buttons. We only do it
- * if not yet initialized.
- * We go through our hardware button array
- * and set the 'Factory' Pressed and Held Action
- * reloadButtonMapping will then apply the user
- * configuration to the buttons
- */
-void Beagle::initButtons() {
-    if ( d->m_buttons )
-        return;
-
-    d->m_buttons = new QValueList<ODeviceButton>;
-    uint length = sizeof( beagle_buttons )/ sizeof( b_button );
-    for ( uint i = 0; i < length; ++i ) {
-        b_button *bb = &beagle_buttons[i];
-        ODeviceButton b;
-        b.setKeycode( bb->code );
-        b.setUserText( QObject::tr( "Button", bb->utext ) );
-        b.setPixmap( OResource::loadPixmap( bb->pix ) );
-        b.setFactoryPresetPressedAction( OQCopMessage( makeChannel( bb->fpressedservice ), bb->fpressedaction ) );
-        b.setFactoryPresetHeldAction( OQCopMessage( makeChannel( bb->fheldservice ), bb->fheldaction ) );
-        d->m_buttons->append( b );
-    }
-
-    reloadButtonMapping();
-}
 
 /*
  * Turn the display on. We do it by ioctl on FL_FILE

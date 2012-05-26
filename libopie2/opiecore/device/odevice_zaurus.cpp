@@ -60,137 +60,6 @@
 using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
-struct z_button z_buttons [] = {
-    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/z_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/z_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/z_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/z_menu",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/z_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-};
-
-struct z_button z_buttons_c700 [] = {
-    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/z_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/z_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/z_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/z_menu",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/z_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-
-    { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Hinge1"),
-    "devicebuttons/z_hinge1",
-    "QPE/Rotation", "rotateDefault()",0,0},
-    { Qt::Key_F16, QT_TRANSLATE_NOOP("Button", "Hinge2"),
-    "devicebuttons/z_hinge2",
-    "QPE/Rotation", "rotateDefault()",0,0},
-    { Qt::Key_F17, QT_TRANSLATE_NOOP("Button", "Hinge3"),
-    "devicebuttons/z_hinge3",
-    "QPE/Rotation", "rotateDefault()",0,0},
-};
-
-struct z_button z_buttons_c3000 [] = {
-    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/z_calendar2",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/z_contact2",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/z_mail2",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/z_home2",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/z_menu2",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-
-    { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Home Softkey"),
-    "devicebuttons/z_silk_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Qt::Key_F16, QT_TRANSLATE_NOOP("Button", "Mail Softkey"),
-    "devicebuttons/z_silk_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-    { Qt::Key_F17, QT_TRANSLATE_NOOP("Button", "Contacts Softkey"),
-    "devicebuttons/z_silk_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F18, QT_TRANSLATE_NOOP("Button", "Calendar Softkey"),
-    "devicebuttons/z_silk_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Qt::Key_F19, QT_TRANSLATE_NOOP("Button", "Dictionary Softkey"),
-    "devicebuttons/z_silk_dict",
-    "odict", "raise()",
-    "today", "raise()" },
-};
-
-struct z_button z_buttons_6000 [] = {
-    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/z_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/z_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/z_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/z_menu",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/z_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-    { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Rotate Button"),
-    "devicebuttons/z_rotate",
-    0, "QPE/Rotation",
-    "rotateDefault()", 0 },
-    { Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
-    "devicebuttons/z_hinge3",
-    "QPE/VMemo", "toggleRecord()",
-    "sound", "raise()" },
-};
-
 struct ODeviceButtonComboStruct z_combos[] = {
     // Centre of joypad (OK) + Calendar -> recalibrate
     { Model_Zaurus_All,
@@ -304,20 +173,8 @@ void Zaurus::initButtons()
     if ( d->m_buttons )
         return;
 
-    d->m_buttons = new QValueList <ODeviceButton>;
-
-    struct z_button * pz_buttons;
-    int buttoncount;
     switch ( d->m_model )
     {
-        case Model_Zaurus_SL6000:
-            pz_buttons = z_buttons_6000;
-            buttoncount = ARRAY_SIZE(z_buttons_6000);
-            break;
-        case Model_Zaurus_SLC3000:
-            pz_buttons = z_buttons_c3000;
-            buttoncount = ARRAY_SIZE(z_buttons_c3000);
-            break;
         case Model_Zaurus_SLC3100: // fallthrough
         case Model_Zaurus_SLC1000: // fallthrough
         case Model_Zaurus_SLC7x0:
@@ -325,28 +182,12 @@ void Zaurus::initButtons()
             {
                 addPreHandler(this);
             }
-            pz_buttons = z_buttons_c700;
-            buttoncount = ARRAY_SIZE(z_buttons_c700);
             break;
         default:
-            pz_buttons = z_buttons;
-            buttoncount = ARRAY_SIZE(z_buttons);
             break;
     }
 
-    for ( int i = 0; i < buttoncount; i++ ) {
-        struct z_button *zb = pz_buttons + i;
-        ODeviceButton b;
-
-        b.setKeycode( zb->code );
-        b.setUserText( QObject::tr( "Button", zb->utext ));
-        b.setPixmap( OResource::loadPixmap( zb->pix ));
-        b.setFactoryPresetPressedAction( OQCopMessage( makeChannel ( zb->fpressedservice ), zb->fpressedaction ));
-        b.setFactoryPresetHeldAction( OQCopMessage( makeChannel ( zb->fheldservice ), zb->fheldaction ));
-        d->m_buttons->append( b );
-    }
-
-    reloadButtonMapping();
+    ODevice::initButtons();
 }
 
 void Zaurus::initButtonCombos()

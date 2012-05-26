@@ -1,0 +1,54 @@
+[Button0]
+Keycode = F7
+UserText = Record Button
+Icon = devicebuttons/palm_record
+PressedActionChannel = QPE/VMemo
+PressedActionMessage = toggleRecord()
+HeldActionChannel = sound
+HeldActionMessage = raise()
+
+[Button1]
+Keycode = F8
+UserText = Suspend Button
+Icon = devicebuttons/palm_suspend
+PressedActionChannel = suspend
+PressedActionMessage = raise()
+HeldActionChannel = suspend
+HeldActionMessage = raise()
+
+[Button2]
+Keycode = F9
+UserText = Home Button
+Icon = devicebuttons/palm_home
+PressedActionChannel = QPE/Launcher
+PressedActionMessage = home()
+HeldActionChannel = buttonsettings
+HeldActionMessage = raise()
+
+[Button3]
+Keycode = F10
+UserText = Calendar Button
+Icon = devicebuttons/palm_calendar
+PressedActionChannel = datebook
+PressedActionMessage = nextView()
+HeldActionChannel = today
+HeldActionMessage = raise()
+
+[Button4]
+Keycode = F11
+UserText = Todo Button
+Icon = devicebuttons/palm_todo
+PressedActionChannel = todolist
+PressedActionMessage = raise()
+HeldActionChannel = todolist
+HeldActionMessage = create()
+
+[Button5]
+Keycode = F12
+UserText = Mail Button
+Icon = devicebuttons/palm_mail
+PressedActionChannel = opiemail
+PressedActionMessage = raise()
+HeldActionChannel = opiemail
+HeldActionMessage = newMail()
+

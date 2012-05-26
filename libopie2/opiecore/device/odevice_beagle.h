@@ -42,7 +42,6 @@ public:
 
 //@{
     void init( const QString& init );
-    void initButtons();
 //@}
 
 

@@ -44,7 +44,6 @@ class MyPal : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
 
   protected:
     virtual void init(const QString&);
-    virtual void initButtons();
 
   public:
     virtual bool setDisplayStatus ( bool on );
@@ -56,17 +55,6 @@ class MyPal : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual void timerEvent( QTimerEvent *te );
 
     int m_power_timer;
-};
-
-struct m_button {
-    uint model;
-    Qt::Key code;
-    const char *utext;
-    const char *pix;
-    const char *fpressedservice;
-    const char *fpressedaction;
-    const char *fheldservice;
-    const char *fheldaction;
 };
 
 }

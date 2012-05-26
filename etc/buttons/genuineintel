@@ -1,0 +1,54 @@
+[Button0]
+Keycode = F1
+UserText = Calendar Button
+Icon = devicebuttons/ipaq_calendar
+PressedActionChannel = datebook
+PressedActionMessage = nextView()
+HeldActionChannel = today
+HeldActionMessage = raise()
+
+[Button1]
+Keycode = F2
+UserText = Contacts Button
+Icon = devicebuttons/ipaq_contact
+PressedActionChannel = addressbook
+PressedActionMessage = raise()
+HeldActionChannel = addressbook
+HeldActionMessage = beamBusinessCard()
+
+[Button2]
+Keycode = F3
+UserText = Menu Button
+Icon = devicebuttons/ipaq_menu
+PressedActionChannel = QPE/TaskBar
+PressedActionMessage = toggleMenu()
+HeldActionChannel = QPE/TaskBar
+HeldActionMessage = toggleStartMenu()
+
+[Button3]
+Keycode = F4
+UserText = Mail Button
+Icon = devicebuttons/ipaq_mail
+PressedActionChannel = opiemail
+PressedActionMessage = raise()
+HeldActionChannel = opiemail
+HeldActionMessage = newMail()
+
+[Button4]
+Keycode = F5
+UserText = Home Button
+Icon = devicebuttons/ipaq_home
+PressedActionChannel = QPE/Launcher
+PressedActionMessage = home()
+HeldActionChannel = buttonsettings
+HeldActionMessage = raise()
+
+[Button5]
+Keycode = F6
+UserText = Record Button
+Icon = devicebuttons/ipaq_record
+PressedActionChannel = QPE/VMemo
+PressedActionMessage = toggleRecord()
+HeldActionChannel = sound
+HeldActionMessage = raise()
+

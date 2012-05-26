@@ -40,24 +40,12 @@ class Yopy : public OAbstractMobileDevice
   protected:
 
     virtual void init(const QString&);
-    virtual void initButtons();
 
   public:
     virtual bool suspend();
 
     virtual bool setDisplayBrightness ( int b );
     virtual int displayBrightnessResolution() const;
-};
-
-struct yopy_button
-{
-    Qt::Key code;
-    const char *utext;
-    const char *pix;
-    const char *fpressedservice;
-    const char *fpressedaction;
-    const char *fheldservice;
-    const char *fheldaction;
 };
 
 }

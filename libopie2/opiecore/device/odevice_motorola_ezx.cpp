@@ -60,29 +60,6 @@
 using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
-struct ezx_button ezx_buttons [] = {
-    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/z_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/z_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/z_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/z_menu",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/z_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-};
-
 void Motorola_EZX::init(const QString& cpu_info)
 {
     qDebug( "Motorola_EZX::init()" );
@@ -115,16 +92,6 @@ void Motorola_EZX::init(const QString& cpu_info)
     d->m_qteDriver = "Transformed";
 
     qDebug( "Motorola_EZX::init() - Using the 2.6 OpenEZX HAL on a %s", (const char*) d->m_modelstr );
-}
-
-void Motorola_EZX::initButtons()
-{
-    qDebug( "Motorola_EZX::initButtons()" );
-    if ( d->m_buttons )
-        return;
-
-    d->m_buttons = new QValueList <ODeviceButton>;
-    reloadButtonMapping();
 }
 
 bool Motorola_EZX::setDisplayStatus( bool on )
