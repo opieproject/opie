@@ -219,12 +219,17 @@ ODevice::ODevice()
     }
 
     d->m_ledTimers.setAutoDelete(true);
+
+    d->m_customButtonCount = 0;
 }
 
 void ODevice::systemMessage( const QCString &msg, const QByteArray & )
 {
     if ( msg == "deviceButtonMappingChanged()" ) {
         reloadButtonMapping();
+    }
+    else if ( msg == "deviceCustomButtonsChanged()" ) {
+        reloadCustomButtons();
     }
 }
 
@@ -244,27 +249,28 @@ void ODevice::initButtons()
     d->m_buttons = new QValueList <ODeviceButton>;
 
     Config cfg( QPEApplication::qpeDir() + "etc/opie_buttons.conf", Config::File );
+    readButtonConfig( cfg, false );
 
+    // Read custom buttons
+    Config cfg2( "CustomButtons" );
+    readButtonConfig( cfg2, true );
+}
+
+void ODevice::readButtonConfig( Config &cfg, bool custom )
+{
     QStringList grps = cfg.allGroups();
+    int buttonmax = 0;
     for( uint i=0; i < grps.count() ; i++ ) {
         cfg.setGroup( grps[i] );
+
+        int idx = grps[i].mid(6).toInt();
+        if( idx > buttonmax )
+            buttonmax = idx;
 
         QString keyc = cfg.readEntry( "Keycode" );
         if( keyc.isEmpty() )
             break;
-        int keycode = 0;
-        if( keyc.startsWith( "0x" ) ) {
-            bool ok = false;
-            keycode = keyc.mid(2).toInt( &ok, 16 );
-            if( !ok ) {
-                owarn << "Invalid hex keycode " << keyc << oendl;
-                break;
-            }
-        }
-        else {
-            keycode = QAccel::stringToKey( keyc );
-        }
-
+        int keycode = stringToKey( keyc );
         if( keycode == 0 ) {
             owarn << "Invalid keycode " << keyc << oendl;
             break;
@@ -285,10 +291,132 @@ void ODevice::initButtons()
         QString utext = cfg.readEntry( "UserText" );
         if( ! utext.isEmpty() )
             b.setUserText( QObject::tr( utext, "Button" ));
+        b.setCustom( custom );
         d->m_buttons->append( b );
     }
 
+    if( custom )
+        d->m_customButtonCount = buttonmax + 1;
+
     reloadButtonMapping();
+}
+
+QString ODevice::keyToString( int keycode )
+{
+    QString str = QAccel::keyToString( keycode );
+    if( str.startsWith("<") )
+        str = "0x" + QString::number( keycode, 16 );
+    return str;
+}
+
+int ODevice::stringToKey( const QString &keystr )
+{
+    int keycode = 0;
+    if( keystr.startsWith( "0x" ) ) {
+        bool ok = false;
+        keycode = keystr.mid(2).toInt( &ok, 16 );
+        if( !ok ) {
+            owarn << "Invalid hex keycode " << keystr << oendl;
+            keycode = 0;
+        }
+    }
+    else {
+        keycode = QAccel::stringToKey( keystr );
+    }
+    return keycode;
+}
+
+void ODevice::reloadCustomButtons()
+{
+    // Remove any custom buttons
+    QValueListIterator<ODeviceButton> it = d->m_buttons->begin();
+    while( it != d->m_buttons->end() ) {
+        if( (*it).custom() )
+            it = d->m_buttons->remove( it );
+        else
+            ++it;
+    }
+
+    Config cfg2( "CustomButtons" );
+    readButtonConfig( cfg2, true );
+}
+
+/**
+ * Register a new custom button
+ */
+void ODevice::registerCustomButton( int keycode, const QString &usertext, const QString &icon )
+{
+    ODeviceButton b;
+    b.setKeycode( keycode );
+    if( ! icon.isEmpty() )
+        b.setPixmap( OResource::loadPixmap( icon ) );
+    if( ! usertext.isEmpty() )
+        b.setUserText( usertext );
+    d->m_buttons->append( b );
+
+    Config cfg( "CustomButtons" );
+    cfg.setGroup( "Button" + QString::number( d->m_customButtonCount ) );
+    cfg.writeEntry( "Keycode", keyToString( keycode ) );
+    if( ! icon.isEmpty() )
+        cfg.writeEntry( "Icon", icon );
+    if( ! usertext.isEmpty() )
+        cfg.writeEntry( "UserText", usertext );
+    d->m_customButtonCount++;
+}
+
+/**
+ * Unregister a custom button
+ */
+void ODevice::unregisterCustomButton( int keycode )
+{
+    // This is all rather tedious, but saves us from reloading everything and rewriting the entire config file
+    int lastidx = -1;
+    int removedidx = -1;
+    int idx = 0;
+    for ( QValueListConstIterator<ODeviceButton> it = d->m_buttons->begin(); it != d->m_buttons->end(); ++it ) {
+        if( removedidx > -1 ) {
+            lastidx = idx;
+            writeButtonUserSettings( (*it), idx - 1 );
+        }
+        else if ( (*it).keycode() == keycode ) {
+            if( (*it).custom() ) {
+                removedidx = idx;
+                lastidx = idx;
+            }
+            else {
+                owarn << "Cannot remove non-custom button" << oendl;
+                return;
+            }
+        }
+        idx++;
+    }
+    if( removedidx > -1 ) {
+        idx = 0;
+        for ( QValueListIterator<ODeviceButton> it = d->m_buttons->begin(); it != d->m_buttons->end(); ++it ) {
+            if( idx == removedidx ) {
+                d->m_buttons->remove( it );
+                break;
+            }
+        }
+    }
+    if( lastidx > -1 ) {
+        Config cfg( "ButtonSettings" );
+        cfg.setGroup( "Button" + QString::number( lastidx ) );
+        cfg.removeGroup();
+    }
+
+    // Remove custombuttons entry
+    Config cfg( "CustomButtons" );
+    QStringList grps = cfg.allGroups();
+    for( uint i=0; i < grps.count() ; i++ ) {
+        cfg.setGroup( grps[i] );
+
+        QString keyc = cfg.readEntry( "Keycode" );
+        int fkeycode = stringToKey( keyc );
+        if( fkeycode == keycode ) {
+            cfg.removeGroup();
+        }
+    }
 }
 
 /**
@@ -878,22 +1006,13 @@ void ODevice::remapPressedAction ( int button, const OQCopMessage &action )
 {
     initButtons();
 
-    QString mb_chan;
-
     if ( button >= (int) d->m_buttons->count())
         return;
 
     ODeviceButton &b = ( *d->m_buttons ) [button];
     b.setPressedAction( action );
 
-    mb_chan = b.pressedAction(). channel();
-
-    Config buttonFile ( "ButtonSettings" );
-    buttonFile.setGroup ( "Button" + QString::number ( button ));
-    buttonFile.writeEntry ( "PressedActionChannel", (const char*) mb_chan);
-    buttonFile.writeEntry ( "PressedActionMessage", (const char*) b.pressedAction(). message());
-
-//  buttonFile.writeEntry( "PressedActionArgs", encodeBase64 ( b.pressedAction(). data()));
+    writeButtonUserSettings( b, button );
 
     QCopEnvelope( "QPE/System", "deviceButtonMappingChanged()" );
 }
@@ -908,15 +1027,23 @@ void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
     ODeviceButton &b = ( *d->m_buttons ) [button];
     b.setHeldAction( action );
 
-    Config buttonFile( "ButtonSettings" );
-    buttonFile.setGroup( "Button" + QString::number ( button ));
-    buttonFile.writeEntry( "HeldActionChannel", (const char *) b.heldAction(). channel());
-    buttonFile.writeEntry( "HeldActionMessage", (const char *) b.heldAction(). message());
-
-//  buttonFile.writeEntry( "HeldActionArgs", decodeBase64 ( b.heldAction(). data()));
+    writeButtonUserSettings( b, button );
 
     QCopEnvelope( "QPE/System", "deviceButtonMappingChanged()" );
 }
+
+void ODevice::writeButtonUserSettings( const ODeviceButton &button, int idx )
+{
+    Config buttonFile( "ButtonSettings" );
+    buttonFile.setGroup( "Button" + QString::number( idx ) );
+    buttonFile.writeEntry( "PressedActionChannel", (const char *) button.pressedAction().channel() );
+    buttonFile.writeEntry( "PressedActionMessage", (const char *) button.pressedAction().message() );
+    //buttonFile.writeEntry( "PressedActionArgs", encodeBase64( b.pressedAction().data() ) );
+    buttonFile.writeEntry( "HeldActionChannel", (const char *) button.heldAction().channel() );
+    buttonFile.writeEntry( "HeldActionMessage", (const char *) button.heldAction().message() );
+    //buttonFile.writeEntry( "HeldActionArgs", decodeBase64( b.heldAction().data() ) );
+}
+
 
 /**
  * @internal

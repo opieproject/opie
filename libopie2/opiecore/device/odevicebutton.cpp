@@ -156,6 +156,7 @@ ODeviceButton::ODeviceButton()
     : m_Keycode( 0 )
     , m_UserText()
     , m_Pixmap()
+    , m_custom( false )
     , d( 0 )
 {}
 
@@ -228,6 +229,14 @@ OQCopMessage ODeviceButton::heldAction() const
     return m_HeldAction;
 }
 
+/*!
+This function returns whether or not the button is a custom one.
+*/
+bool ODeviceButton::custom() const
+{
+    return m_custom;
+}
+
 void ODeviceButton::setKeycode(ushort keycode)
 {
     m_Keycode = keycode;
@@ -262,6 +271,11 @@ void ODeviceButton::setFactoryPresetHeldAction(const OQCopMessage& action)
 void ODeviceButton::setHeldAction(const OQCopMessage& action)
 {
     m_HeldAction = action;
+}
+
+void ODeviceButton::setCustom( bool custom )
+{
+    m_custom = custom;
 }
 
 /////////////////////////////////////////////////////////////////

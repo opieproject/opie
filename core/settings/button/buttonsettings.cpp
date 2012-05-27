@@ -28,8 +28,10 @@ _;:,   .>  :=|.         This file is free software; you can
 #include "buttonsettings.h"
 #include "buttonutils.h"
 #include "remapdlg.h"
+#include "adddlg.h"
 
 #include <opie2/odevice.h>
+#include <opie2/odebug.h>
 
 #include <qpe/applnk.h>
 
@@ -37,6 +39,11 @@ _;:,   .>  :=|.         This file is free software; you can
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qscrollview.h>
+#include <qpushbutton.h>
+#include <qhbox.h>
+#include <qobjectlist.h>
+#include <qlineedit.h>
+#include <qmessagebox.h>
 #include <qcopchannel_qws.h>
 
 using namespace Opie::Core;
@@ -55,6 +62,8 @@ struct buttoninfo {
 
     bool        m_pdirty : 1;
     bool        m_hdirty : 1;
+
+    QList<QWidget> *m_widgets;
 };
 
 
@@ -67,89 +76,52 @@ ButtonSettings::ButtonSettings ( QWidget *parent , const char *,  bool, WFlags  
     setCaption ( tr( "Button Settings" ));
 
     QVBoxLayout *toplay = new QVBoxLayout( this, 3, 3 );
-    QScrollView *mainview = new QScrollView( this );
-    mainview->setResizePolicy( QScrollView::AutoOneFit );
+    m_mainview = new QScrollView( this );
+    m_mainview->setResizePolicy( QScrollView::AutoOneFit );
 
-    toplay->addWidget( mainview );
-    QFrame *framehold = new QFrame( mainview->viewport() );
-    framehold->setFrameStyle( QFrame::NoFrame | QFrame::Plain );
-    mainview->addChild( framehold );
-    toplay = new QVBoxLayout( framehold, 3, 3 );
+    toplay->addWidget( m_mainview );
+    m_framehold = new QFrame( m_mainview->viewport() );
+    m_framehold->setFrameStyle( QFrame::NoFrame | QFrame::Plain );
+    m_mainview->addChild( m_framehold );
 
-    QLabel *l = new QLabel ( tr( "<center>Press or hold the button you want to remap.</center>" ), framehold );
-    toplay->addWidget ( l );
+    QHBox *buttonbox = new QHBox( this );
+    QPushButton *addButton = new QPushButton( tr("Add new"), buttonbox );
+    addButton->setFocusPolicy( QWidget::NoFocus );
+    QPushButton *removeButton = new QPushButton( tr("Remove"), buttonbox );
+    removeButton->setFocusPolicy( QWidget::NoFocus );
+    toplay->addWidget( buttonbox );
+    connect ( addButton, SIGNAL( pressed()), this, SLOT( slotAdd()));
+    connect ( removeButton, SIGNAL( pressed()), this, SLOT( slotRemove()));
 
-    QGridLayout *lay = new QGridLayout ( toplay );
-    lay->setMargin ( 0 );
-    lay->setColStretch ( 0, 0 );
-    lay->setColStretch ( 1, 0 );
-    lay->setColStretch ( 2, 0 );
-    lay->setColStretch ( 3, 10 );
+    m_scrolllayout = new QVBoxLayout( m_framehold, 3, 3 );
+
+    QLabel *l = new QLabel ( tr( "<center>Press or hold the button you want to remap.</center>" ), m_framehold );
+    m_scrolllayout->addWidget ( l );
+
+    m_itemlayout = new QGridLayout ( m_scrolllayout );
+    m_itemlayout->setMargin ( 0 );
+    m_itemlayout->setColStretch ( 0, 0 );
+    m_itemlayout->setColStretch ( 1, 0 );
+    m_itemlayout->setColStretch ( 2, 0 );
+    m_itemlayout->setColStretch ( 3, 10 );
 
     m_infos.setAutoDelete ( true );
 
-    int i = 1;
-    int index = 0;
+    m_scrolllayout->addStretch ( 10 );
+
     for ( QValueList<ODeviceButton>::ConstIterator it = buttons.begin(); it != buttons.end(); it++ ) {
-        if ( it != buttons.begin()) {
-            QFrame *f = new QFrame ( framehold );
-            f->setFrameStyle ( QFrame::Sunken | QFrame::VLine );
-            lay->addMultiCellWidget ( f, i, i, 0, 3 );
-            i++;
-        }
-
-        buttoninfo *bi = new buttoninfo();
-        bi->m_button = &(*it);
-        bi->m_index = index++;
-        bi->m_pmsg = (*it).pressedAction();
-        bi->m_hmsg = (*it).heldAction();
-        bi->m_pdirty = false;
-        bi->m_hdirty = false;
-
-        l = new QLabel ( framehold );
-        l->setPixmap (( *it ).pixmap());
-
-        lay->addMultiCellWidget ( l, i, i + 1, 0, 0 );
-
-        l = new QLabel ( tr( "Press:" ), framehold );
-        lay->addWidget ( l, i, 1, AlignLeft | AlignBottom );
-        l = new QLabel ( tr( "Hold:" ), framehold );
-        lay->addWidget ( l, i + 1, 1, AlignLeft | AlignTop );
-
-        l = new QLabel ( framehold );
-        l->setFixedSize ( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
-        lay->addWidget ( l, i, 2, AlignLeft | AlignBottom );
-        bi->m_picon = l;
-
-        l = new QLabel ( framehold );
-        l->setAlignment ( AlignLeft | AlignVCenter | SingleLine );
-        lay->addWidget ( l, i, 3, AlignLeft | AlignBottom );
-        bi->m_plabel = l;
-
-        l = new QLabel ( framehold );
-        l->setFixedSize ( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
-        lay->addWidget ( l, i + 1, 2, AlignLeft | AlignTop );
-        bi->m_hicon = l;
-
-        l = new QLabel ( framehold );
-        l->setAlignment ( AlignLeft | AlignVCenter | SingleLine );
-        lay->addWidget ( l, i + 1, 3, AlignLeft | AlignTop );
-        bi->m_hlabel = l;
-
-        i += 2;
-
-        m_infos.append ( bi );
+        addButtonItem( *it );
     }
 
-    toplay->addStretch ( 10 );
+    updateLabels();
 
     m_last_button = 0;
     m_lock = false;
+    m_addWidget = 0;
+    m_customChanged = false;
 
     m_timer = new QTimer ( this );
     connect ( m_timer, SIGNAL( timeout()), this, SLOT( keyTimeout()));
-
-    updateLabels();
 
     QPEApplication::grabKeyboard();
 }
@@ -157,7 +129,86 @@ ButtonSettings::ButtonSettings ( QWidget *parent , const char *,  bool, WFlags  
 ButtonSettings::~ButtonSettings()
 {
     QPEApplication::ungrabKeyboard();
+    if( m_customChanged )
+        QCopChannel::send ("QPE/System", "deviceCustomButtonsChanged()" );
     QCopChannel::send ("QPE/System", "deviceButtonMappingChanged()" );
+}
+
+void ButtonSettings::addButtonItem( const ODeviceButton &btn )
+{
+    buttoninfo *bi = new buttoninfo();
+    bi->m_button = &btn;
+    bi->m_index = m_infos.count();
+    bi->m_pmsg = btn.pressedAction();
+    bi->m_hmsg = btn.heldAction();
+    bi->m_pdirty = false;
+    bi->m_hdirty = false;
+    bi->m_widgets = new QList<QWidget>();
+
+    int i = ( m_infos.count() * 3 ) + 2;
+    if( m_infos.count() > 0 ) {
+        QFrame *f = new QFrame ( m_framehold );
+        f->setFrameStyle ( QFrame::Sunken | QFrame::VLine );
+        m_itemlayout->addMultiCellWidget ( f, i-1, i-1, 0, 3 );
+        bi->m_widgets->append(f);
+    }
+
+    QLabel *l = new QLabel ( m_framehold );
+    l->setPixmap( btn.pixmap() );
+    bi->m_widgets->append(l);
+
+    m_itemlayout->addMultiCellWidget ( l, i, i + 1, 0, 0 );
+
+    l = new QLabel ( tr( "Press:" ), m_framehold );
+    m_itemlayout->addWidget ( l, i, 1, AlignLeft | AlignBottom );
+    bi->m_widgets->append(l);
+    l = new QLabel ( tr( "Hold:" ), m_framehold );
+    m_itemlayout->addWidget ( l, i + 1, 1, AlignLeft | AlignTop );
+    bi->m_widgets->append(l);
+
+    l = new QLabel ( m_framehold );
+    l->setFixedSize ( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+    m_itemlayout->addWidget ( l, i, 2, AlignLeft | AlignBottom );
+    bi->m_picon = l;
+    bi->m_widgets->append(l);
+
+    l = new QLabel ( m_framehold );
+    l->setAlignment ( AlignLeft | AlignVCenter | SingleLine );
+    m_itemlayout->addWidget ( l, i, 3, AlignLeft | AlignBottom );
+    bi->m_plabel = l;
+    bi->m_widgets->append(l);
+
+    l = new QLabel ( m_framehold );
+    l->setFixedSize ( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+    m_itemlayout->addWidget ( l, i + 1, 2, AlignLeft | AlignTop );
+    bi->m_hicon = l;
+    bi->m_widgets->append(l);
+
+    l = new QLabel ( m_framehold );
+    l->setAlignment ( AlignLeft | AlignVCenter | SingleLine );
+    m_itemlayout->addWidget ( l, i + 1, 3, AlignLeft | AlignTop );
+    bi->m_hlabel = l;
+    bi->m_widgets->append(l);
+
+    m_infos.append ( bi );
+
+    if( m_framehold->isVisible() ) {
+        // Ensure all newly added widgets get shown
+        for ( QListIterator<QWidget> it( *(bi->m_widgets) ); it.current(); ++it ) {
+            (*it)->show();
+        }
+        qApp->processEvents();
+        m_mainview->setContentsPos( 0, m_mainview->contentsHeight() );
+    }
+}
+
+void ButtonSettings::removeButtonItem( buttoninfo *bi )
+{
+    for ( QListIterator<QWidget> it ( *(bi->m_widgets) ); *it; ++it ) {
+        QWidget *w = (*it);
+        delete w;
+    }
+    m_infos.remove( bi );
 }
 
 void ButtonSettings::updateLabels()
@@ -265,4 +316,71 @@ void ButtonSettings::done ( int r )
 {
     QDialog::done ( r );
     close();
+}
+
+void ButtonSettings::slotAdd()
+{
+    m_addWidget = new AddDlg( this );
+    m_addWidget->setCaption( tr("Add button") );
+    connect( m_addWidget, SIGNAL( closed(int) ), this, SLOT( slotAddDlgClosed(int) ) );
+    m_addWidget->show();
+}
+
+void ButtonSettings::slotAddDlgClosed( int key )
+{
+    if( key > 0 ) {
+        odebug << "**** Add button " << ODevice::keyToString( key ) << oendl;
+        delete m_addWidget;
+        m_addWidget = 0;
+
+        buttoninfo *bi = buttonInfoForKeycode( key );
+        if( bi ) {
+            QMessageBox::warning ( this, tr( "Already bound" ), tr( "The pressed button is already in the list." ));
+            return;
+        }
+
+        // Get a name for the key
+        QDialog *dlg = new QDialog( this, 0, true );
+        QVBoxLayout *lay = new QVBoxLayout( dlg );
+        QLabel *l = new QLabel( tr("Please enter a name for this button"), dlg );
+        lay->addWidget(l);
+        QLineEdit *le = new QLineEdit( dlg );
+        lay->addWidget(le);
+        lay->addStretch(1);
+        dlg->setGeometry( qApp->desktop()->width() / 8, (qApp->desktop()->height() / 2) - 25,
+                 3 * (qApp->desktop()->width() / 4), 50 );
+        dlg->setCaption( tr( "Button name" ) );
+        dlg->show();
+        if( dlg->exec() == QDialog::Accepted ) {
+            ODevice::inst()->registerCustomButton( key, le->text(), "" );
+            addButtonItem( ODevice::inst()->buttons().last() );
+            updateLabels();
+            m_customChanged = true;
+        }
+
+    }
+}
+
+void ButtonSettings::slotRemove()
+{
+    m_addWidget = new AddDlg( this );
+    m_addWidget->setCaption( tr("Remove button") );
+    connect( m_addWidget, SIGNAL( closed(int) ), this, SLOT( slotRemoveDlgClosed(int) ) );
+    m_addWidget->show();
+}
+
+void ButtonSettings::slotRemoveDlgClosed( int key )
+{
+    if( key > 0 ) {
+        odebug << "**** Remove button " << ODevice::keyToString( key ) << oendl;
+        delete m_addWidget;
+        m_addWidget = 0;
+
+        buttoninfo *bi = buttonInfoForKeycode( key );
+        if( bi ) {
+            ODevice::inst()->unregisterCustomButton( key );
+            removeButtonItem( bi );
+            m_customChanged = true;
+        }
+    }
 }

@@ -33,7 +33,10 @@
 #include <opie2/odevice.h>
 
 class QTimer;
-
+class QFrame;
+class QGridLayout;
+class QVBoxLayout;
+class QScrollView;
 
 class buttoninfo;
 
@@ -51,6 +54,10 @@ public:
 private slots:
     void keyTimeout();
     void updateLabels();
+    void slotAdd();
+    void slotRemove();
+    void slotAddDlgClosed( int key );
+    void slotRemoveDlgClosed( int key );
 
 protected:
     virtual void keyPressEvent ( QKeyEvent *e );
@@ -61,10 +68,18 @@ private:
 
     void edit ( buttoninfo *bi, bool hold );
     QString qcopToString ( const Opie::Core::OQCopMessage &c );
+    void addButtonItem( const Opie::Core::ODeviceButton &btn );
+    void removeButtonItem( buttoninfo *bi );
 
 private:
     QTimer *m_timer;
     buttoninfo *m_last_button;
+    QWidget *m_addWidget;
+    QFrame *m_framehold;
+    QGridLayout *m_itemlayout;
+    QVBoxLayout *m_scrolllayout;
+    QScrollView *m_mainview;
+    bool m_customChanged;
 
     QList <buttoninfo> m_infos;
     bool m_lock;

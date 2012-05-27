@@ -2,12 +2,14 @@ CONFIG      += qt warn_on  quick-app
 
 HEADERS      = buttonsettings.h \
                buttonutils.h \
-               remapdlg.h
+               remapdlg.h \
+               adddlg.h
 
 SOURCES      = main.cpp \
                buttonsettings.cpp \
                buttonutils.cpp \
-               remapdlg.cpp
+               remapdlg.cpp \
+               adddlg.cpp
 
 INTERFACES   = remapdlgbase.ui
 

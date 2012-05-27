@@ -85,6 +85,7 @@ class ODeviceButton
     OQCopMessage pressedAction ( ) const;
     OQCopMessage factoryPresetHeldAction ( ) const;
     OQCopMessage heldAction ( ) const;
+    bool custom() const;
 
     void setKeycode ( ushort keycode );
     void setUserText ( const QString& text );
@@ -93,6 +94,7 @@ class ODeviceButton
     void setPressedAction ( const OQCopMessage& qcopMessage );
     void setFactoryPresetHeldAction ( const OQCopMessage& qcopMessage );
     void setHeldAction ( const OQCopMessage& qcopMessage );
+    void setCustom( bool custom );
 
   private:
     ushort m_Keycode;
@@ -102,6 +104,7 @@ class ODeviceButton
     OQCopMessage m_PressedAction;
     OQCopMessage m_FactoryPresetHeldAction;
     OQCopMessage m_HeldAction;
+    bool m_custom;
     class Private;
     Private *d;
 };

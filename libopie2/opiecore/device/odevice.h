@@ -48,6 +48,7 @@
 
 
 class Sound;
+class Config;
 
 namespace Opie{
 namespace Core{
@@ -393,6 +394,16 @@ public:
     uint buttonHoldTime() const;
 
     /**
+     * Register a new custom button
+     */
+    void registerCustomButton( int keycode, const QString &usertext, const QString &icon );
+
+    /**
+     * Un-register a custom button
+     */
+    void unregisterCustomButton( int keycode );
+
+    /**
      * Returns the button combos set up for this device. At the moment these are intended
      * to be hard-coded eg. for launching screen calibration.
      *
@@ -404,7 +415,17 @@ public:
      * @returns true if the combo was activated, false otherwise
      */
     bool comboKeyEvent( ushort keycode, bool press, bool locked );
-    
+
+    /**
+     * Get the string representation of a button
+     */
+    static QString keyToString( int keycode );
+
+    /**
+     * Get the keycode from its string representation
+     */
+    static int stringToKey( const QString &keystr );
+
 signals:
     void buttonMappingChanged();
 
@@ -416,6 +437,9 @@ protected:
     void addPreHandler(QWSServer::KeyboardFilter*aFilter);
     void remPreHandler(QWSServer::KeyboardFilter*aFilter);
     void reloadButtonMapping();
+    void reloadCustomButtons();
+    void readButtonConfig( Config &cfg, bool custom );
+    void writeButtonUserSettings( const ODeviceButton &button, int idx );
 
     /*  ugly virtual hook */
     virtual void virtual_hook( int id, void* data );
@@ -467,6 +491,8 @@ class ODeviceData {
 
     QMap<QString,OLedState> m_ledState;
     QDict<OLedTimer> m_ledTimers;
+
+    int m_customButtonCount;
 };
 
 extern bool isQWS();
