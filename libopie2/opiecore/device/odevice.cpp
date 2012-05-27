@@ -284,10 +284,14 @@ void ODevice::readButtonConfig( Config &cfg, bool custom )
         QString message = cfg.readEntry( "PressedActionMessage" );
         if( ! channel.isEmpty() )
             b.setFactoryPresetPressedAction( OQCopMessage( makeChannel( channel ), QCString( message ) ));
+        else
+            b.setFactoryPresetPressedAction( OQCopMessage ( "ignore", 0 ) );
         channel = cfg.readEntry( "HeldActionChannel" );
         message = cfg.readEntry( "HeldActionMessage" );
         if( ! channel.isEmpty() )
             b.setFactoryPresetHeldAction( OQCopMessage( makeChannel( channel ), QCString( message ) ));
+        else
+            b.setFactoryPresetHeldAction( OQCopMessage ( "ignore", 0 ) );
         QString utext = cfg.readEntry( "UserText" );
         if( ! utext.isEmpty() )
             b.setUserText( QObject::tr( utext, "Button" ));
@@ -352,6 +356,8 @@ void ODevice::registerCustomButton( int keycode, const QString &usertext, const 
         b.setPixmap( OResource::loadPixmap( icon ) );
     if( ! usertext.isEmpty() )
         b.setUserText( usertext );
+    b.setFactoryPresetPressedAction( OQCopMessage ( "ignore", 0 ) );
+    b.setFactoryPresetHeldAction( OQCopMessage ( "ignore", 0 ) );
     d->m_buttons->append( b );
 
     Config cfg( "CustomButtons" );
