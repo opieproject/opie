@@ -61,87 +61,87 @@ struct buttoninfo {
 ButtonSettings::ButtonSettings ( QWidget *parent , const char *,  bool, WFlags  )
     : QDialog ( parent, "ButtonSettings", false, WStyle_ContextHelp )
 {
-    const QValueList <ODeviceButton> &buttons = ODevice::inst ( )-> buttons ( );
-    (void) ButtonUtils::inst ( ); // initialise
+    const QValueList <ODeviceButton> &buttons = ODevice::inst()->buttons();
+    (void) ButtonUtils::inst(); // initialise
 
     setCaption ( tr( "Button Settings" ));
 
-    QVBoxLayout *toplay = new QVBoxLayout ( this, 3, 3 );
-    QScrollView*mainview = new QScrollView(this);
+    QVBoxLayout *toplay = new QVBoxLayout( this, 3, 3 );
+    QScrollView *mainview = new QScrollView( this );
     mainview->setResizePolicy( QScrollView::AutoOneFit );
 
-    toplay->addWidget(mainview);
-    QFrame*framehold=new QFrame(mainview->viewport());
-    framehold->setFrameStyle(QFrame::NoFrame|QFrame::Plain);
-    mainview->addChild(framehold);
-    toplay = new QVBoxLayout (framehold, 3, 3 );
+    toplay->addWidget( mainview );
+    QFrame *framehold = new QFrame( mainview->viewport() );
+    framehold->setFrameStyle( QFrame::NoFrame | QFrame::Plain );
+    mainview->addChild( framehold );
+    toplay = new QVBoxLayout( framehold, 3, 3 );
 
     QLabel *l = new QLabel ( tr( "<center>Press or hold the button you want to remap.</center>" ), framehold );
-    toplay-> addWidget ( l );
+    toplay->addWidget ( l );
 
     QGridLayout *lay = new QGridLayout ( toplay );
-    lay-> setMargin ( 0 );
-    lay-> setColStretch ( 0, 0 );
-    lay-> setColStretch ( 1, 0 );
-    lay-> setColStretch ( 2, 0 );
-    lay-> setColStretch ( 3, 10 );
+    lay->setMargin ( 0 );
+    lay->setColStretch ( 0, 0 );
+    lay->setColStretch ( 1, 0 );
+    lay->setColStretch ( 2, 0 );
+    lay->setColStretch ( 3, 10 );
 
-    m_infos. setAutoDelete ( true );
+    m_infos.setAutoDelete ( true );
 
     int i = 1;
     int index = 0;
-    for ( QValueList<ODeviceButton>::ConstIterator it = buttons. begin ( ); it != buttons. end ( ); it++ ) {
-        if ( it != buttons. begin ( )) {
+    for ( QValueList<ODeviceButton>::ConstIterator it = buttons.begin(); it != buttons.end(); it++ ) {
+        if ( it != buttons.begin()) {
             QFrame *f = new QFrame ( framehold );
-            f-> setFrameStyle ( QFrame::Sunken | QFrame::VLine );
-            lay-> addMultiCellWidget ( f, i, i, 0, 3 );
+            f->setFrameStyle ( QFrame::Sunken | QFrame::VLine );
+            lay->addMultiCellWidget ( f, i, i, 0, 3 );
             i++;
         }
 
-        buttoninfo *bi = new buttoninfo ( );
-        bi-> m_button = &(*it);
-        bi-> m_index = index++;
-        bi-> m_pmsg = (*it). pressedAction ( );
-        bi-> m_hmsg = (*it). heldAction ( );
-        bi-> m_pdirty = false;
-        bi-> m_hdirty = false;
+        buttoninfo *bi = new buttoninfo();
+        bi->m_button = &(*it);
+        bi->m_index = index++;
+        bi->m_pmsg = (*it).pressedAction();
+        bi->m_hmsg = (*it).heldAction();
+        bi->m_pdirty = false;
+        bi->m_hdirty = false;
 
         l = new QLabel ( framehold );
-        l-> setPixmap (( *it ). pixmap ( ));
+        l->setPixmap (( *it ).pixmap());
 
-        lay-> addMultiCellWidget ( l, i, i + 1, 0, 0 );
+        lay->addMultiCellWidget ( l, i, i + 1, 0, 0 );
 
         l = new QLabel ( tr( "Press:" ), framehold );
-        lay-> addWidget ( l, i, 1, AlignLeft | AlignBottom );
+        lay->addWidget ( l, i, 1, AlignLeft | AlignBottom );
         l = new QLabel ( tr( "Hold:" ), framehold );
-        lay-> addWidget ( l, i + 1, 1, AlignLeft | AlignTop );
+        lay->addWidget ( l, i + 1, 1, AlignLeft | AlignTop );
 
         l = new QLabel ( framehold );
-        l-> setFixedSize ( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
-        lay-> addWidget ( l, i, 2, AlignLeft | AlignBottom );
-        bi-> m_picon = l;
+        l->setFixedSize ( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+        lay->addWidget ( l, i, 2, AlignLeft | AlignBottom );
+        bi->m_picon = l;
 
         l = new QLabel ( framehold );
-        l-> setAlignment ( AlignLeft | AlignVCenter | SingleLine );
-        lay-> addWidget ( l, i, 3, AlignLeft | AlignBottom );
-        bi-> m_plabel = l;
+        l->setAlignment ( AlignLeft | AlignVCenter | SingleLine );
+        lay->addWidget ( l, i, 3, AlignLeft | AlignBottom );
+        bi->m_plabel = l;
 
         l = new QLabel ( framehold );
-        l-> setFixedSize ( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
-        lay-> addWidget ( l, i + 1, 2, AlignLeft | AlignTop );
-        bi-> m_hicon = l;
+        l->setFixedSize ( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+        lay->addWidget ( l, i + 1, 2, AlignLeft | AlignTop );
+        bi->m_hicon = l;
 
         l = new QLabel ( framehold );
-        l-> setAlignment ( AlignLeft | AlignVCenter | SingleLine );
-        lay-> addWidget ( l, i + 1, 3, AlignLeft | AlignTop );
-        bi-> m_hlabel = l;
+        l->setAlignment ( AlignLeft | AlignVCenter | SingleLine );
+        lay->addWidget ( l, i + 1, 3, AlignLeft | AlignTop );
+        bi->m_hlabel = l;
 
         i += 2;
 
-        m_infos. append ( bi );
+        m_infos.append ( bi );
     }
 
-    toplay-> addStretch ( 10 );
+    toplay->addStretch ( 10 );
 
     m_last_button = 0;
     m_lock = false;
@@ -149,39 +149,39 @@ ButtonSettings::ButtonSettings ( QWidget *parent , const char *,  bool, WFlags  
     m_timer = new QTimer ( this );
     connect ( m_timer, SIGNAL( timeout()), this, SLOT( keyTimeout()));
 
-    updateLabels ( );
+    updateLabels();
 
-    QPEApplication::grabKeyboard ( );
+    QPEApplication::grabKeyboard();
 }
 
-ButtonSettings::~ButtonSettings ( )
+ButtonSettings::~ButtonSettings()
 {
-    QPEApplication::ungrabKeyboard ( );
+    QPEApplication::ungrabKeyboard();
     QCopChannel::send ("QPE/System", "deviceButtonMappingChanged()" );
 }
 
-void ButtonSettings::updateLabels ( )
+void ButtonSettings::updateLabels()
 {
     for ( QListIterator <buttoninfo> it ( m_infos ); *it; ++it ) {
-        qCopInfo cip = ButtonUtils::inst ( )-> messageToInfo ((*it)-> m_pmsg );
+        qCopInfo cip = ButtonUtils::inst()->messageToInfo ((*it)->m_pmsg );
 
         QPixmap pic;
         pic.convertFromImage( cip.m_icon.convertToImage().smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-        (*it)-> m_picon-> setPixmap ( pic );
-        (*it)-> m_plabel-> setText ( cip. m_name );
+        (*it)->m_picon->setPixmap ( pic );
+        (*it)->m_plabel->setText ( cip.m_name );
 
-        qCopInfo cih = ButtonUtils::inst ( )-> messageToInfo ((*it)-> m_hmsg );
+        qCopInfo cih = ButtonUtils::inst()->messageToInfo ((*it)->m_hmsg );
 
         pic.convertFromImage( cih.m_icon.convertToImage().smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-        (*it)-> m_hicon-> setPixmap ( pic );
-        (*it)-> m_hlabel-> setText ( cih. m_name );
+        (*it)->m_hicon->setPixmap ( pic );
+        (*it)->m_hlabel->setText ( cih.m_name );
     }
 }
 
 buttoninfo *ButtonSettings::buttonInfoForKeycode ( ushort key )
 {
     for ( QListIterator <buttoninfo> it ( m_infos ); *it; ++it ) {
-        if ((*it)-> m_button-> keycode ( ) == key )
+        if ((*it)->m_button->keycode() == key )
             return *it;
     }
     return 0;
@@ -189,12 +189,12 @@ buttoninfo *ButtonSettings::buttonInfoForKeycode ( ushort key )
 
 void ButtonSettings::keyPressEvent ( QKeyEvent *e )
 {
-    buttoninfo *bi = buttonInfoForKeycode ( e-> key ( ));
+    buttoninfo *bi = buttonInfoForKeycode ( e->key());
 
-    if ( bi && !e-> isAutoRepeat ( )) {
-        m_timer-> stop ( );
+    if ( bi && !e->isAutoRepeat()) {
+        m_timer->stop();
         m_last_button = bi;
-        m_timer-> start ( ODevice::inst ( )-> buttonHoldTime ( ), true );
+        m_timer->start ( ODevice::inst()->buttonHoldTime(), true );
     }
     else
         QDialog::keyPressEvent ( e );
@@ -202,17 +202,17 @@ void ButtonSettings::keyPressEvent ( QKeyEvent *e )
 
 void ButtonSettings::keyReleaseEvent ( QKeyEvent *e )
 {
-    buttoninfo *bi = buttonInfoForKeycode ( e-> key ( ));
+    buttoninfo *bi = buttonInfoForKeycode ( e->key());
 
-    if ( bi && !e-> isAutoRepeat ( ) && m_timer-> isActive ( )) {
-        m_timer-> stop ( );
+    if ( bi && !e->isAutoRepeat() && m_timer->isActive()) {
+        m_timer->stop();
         edit ( bi, false );
     }
     else
         QDialog::keyReleaseEvent ( e );
 }
 
-void ButtonSettings::keyTimeout ( )
+void ButtonSettings::keyTimeout()
 {
     if ( m_last_button ) {
         edit ( m_last_button, true );
@@ -222,26 +222,25 @@ void ButtonSettings::keyTimeout ( )
 
 void ButtonSettings::edit ( buttoninfo *bi, bool hold )
 {
-
     if ( m_lock )
         return;
     m_lock = true;
 
-    RemapDlg *d = new RemapDlg ( bi-> m_button, hold, this );
+    RemapDlg *d = new RemapDlg ( bi->m_button, hold, this );
 
     if ( QPEApplication::execDialog ( d ) == QDialog::Accepted ) {
 
 
         if ( hold ) {
-            bi-> m_hmsg = d-> message ( );
-            bi-> m_hdirty = true;
+            bi->m_hmsg = d->message();
+            bi->m_hdirty = true;
         }
         else {
-            bi-> m_pmsg = d-> message ( );
-            bi-> m_pdirty = true;
+            bi->m_pmsg = d->message();
+            bi->m_pdirty = true;
         }
 
-        updateLabels ( );
+        updateLabels();
     }
 
     delete d;
@@ -249,21 +248,21 @@ void ButtonSettings::edit ( buttoninfo *bi, bool hold )
     m_lock = false;
 }
 
-void ButtonSettings::accept ( )
+void ButtonSettings::accept()
 {
     for ( QListIterator <buttoninfo> it ( m_infos ); *it; ++it ) {
         buttoninfo *bi = *it;
 
-        if ( bi-> m_pdirty )
-            ODevice::inst ( )-> remapPressedAction ( bi-> m_index, bi-> m_pmsg );
-        if ( bi-> m_hdirty )
-            ODevice::inst ( )-> remapHeldAction ( bi-> m_index, bi-> m_hmsg );
+        if ( bi->m_pdirty )
+            ODevice::inst()->remapPressedAction ( bi->m_index, bi->m_pmsg );
+        if ( bi->m_hdirty )
+            ODevice::inst()->remapHeldAction ( bi->m_index, bi->m_hmsg );
     }
-    QDialog::accept ( );
+    QDialog::accept();
 }
 
 void ButtonSettings::done ( int r )
 {
     QDialog::done ( r );
-    close ( );
+    close();
 }

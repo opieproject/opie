@@ -36,32 +36,32 @@ class QListViewItem;
 
 class qCopInfo {
 public:
-	qCopInfo ( const QString &str, const QPixmap &pix = QPixmap ( ))
-		: m_name ( str ), m_icon ( pix )
-	{ }
+    qCopInfo ( const QString &str, const QPixmap &pix = QPixmap ( ))
+        : m_name ( str ), m_icon ( pix )
+    { }
 
-	QString m_name;
-	QPixmap m_icon;
+    QString m_name;
+    QPixmap m_icon;
 };
 
 
 class ButtonUtils {
 public:
-	~ButtonUtils ( );
+    ~ButtonUtils ( );
 
-	static ButtonUtils *inst ( );
+    static ButtonUtils *inst ( );
 
-	qCopInfo messageToInfo ( const Opie::Core::OQCopMessage & );
+    qCopInfo messageToInfo ( const Opie::Core::OQCopMessage & );
 
-	void insertActions ( QListViewItem *here );
-	void insertAppLnks ( QListViewItem *here );
-
-private:
-	ButtonUtils ( );
-	static void cleanup ( );
+    void insertActions ( QListViewItem *here );
+    void insertAppLnks ( QListViewItem *here );
 
 private:
-	AppLnkSet *m_apps;
+    ButtonUtils ( );
+    static void cleanup ( );
+
+private:
+    AppLnkSet *m_apps;
 };
 
 #endif

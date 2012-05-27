@@ -38,36 +38,36 @@ class QTimer;
 class buttoninfo;
 
 class ButtonSettings : public QDialog {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	ButtonSettings ( QWidget *parent = 0, const char *name = 0,  bool modal = FALSE,WFlags f = 0 );
-	~ButtonSettings ( );
+    ButtonSettings ( QWidget *parent = 0, const char *name = 0,  bool modal = FALSE,WFlags f = 0 );
+    ~ButtonSettings();
 
-	static QString appName() { return QString::fromLatin1("buttonsettings"); }
-	virtual void accept ( );
-	virtual void done ( int r );
+    static QString appName() { return QString::fromLatin1("buttonsettings"); }
+    virtual void accept();
+    virtual void done ( int r );
 
 private slots:
-	void keyTimeout ( );
-	void updateLabels ( );
+    void keyTimeout();
+    void updateLabels();
 
 protected:
-	virtual void keyPressEvent ( QKeyEvent *e );
-	virtual void keyReleaseEvent ( QKeyEvent *e );
+    virtual void keyPressEvent ( QKeyEvent *e );
+    virtual void keyReleaseEvent ( QKeyEvent *e );
 
 private:
-	buttoninfo *buttonInfoForKeycode ( ushort key );
+    buttoninfo *buttonInfoForKeycode ( ushort key );
 
-	void edit ( buttoninfo *bi, bool hold );
-	QString qcopToString ( const Opie::Core::OQCopMessage &c );
+    void edit ( buttoninfo *bi, bool hold );
+    QString qcopToString ( const Opie::Core::OQCopMessage &c );
 
 private:
-	QTimer *m_timer;
-	buttoninfo *m_last_button;
+    QTimer *m_timer;
+    buttoninfo *m_last_button;
 
-	QList <buttoninfo> m_infos;
-	bool m_lock;
+    QList <buttoninfo> m_infos;
+    bool m_lock;
 };
 
 #endif
