@@ -53,7 +53,7 @@ void QPEApplication::showWidget( QWidget* wg, bool nomax ) {
     }
 
     if ( !isSaveWindowsPos() || (!nomax
-         && ( qApp->desktop()->width() <= 30 )) ){
+         && ( qApp->desktop()->width() <= 320 )) ){
         wg->showMaximized();
     } else {
 #ifdef Q_WS_QWS
