@@ -1,3 +1,65 @@
+2012-??-??  Opie 1.2.6
+	
+	
+	New Features
+	------------
+	* ConnMan: implement applet & settings application for ConnMan, the network connection manager
+	* AdvancedFm: replace SD/CF buttons with button to select any filesystem
+	* Reworked Bluetooth support, now fully compatible with BlueZ 4.x
+	* Generic backlight support for any device providing the standard kernel backlight interface
+	* Generic LED support for any device providing the standard kernel LED interface
+	* Generic button support (loaded from external file)
+	* ButtonSettings: allow binding any button/key
+	* Pop-up passive notifications (now used by Bluetooth, CardApplet, etc.)
+	* Reworked Euroconv application into Currconv, a generic currency converter using updateable online data
+
+	Fixed Bugs
+	----------
+	* #1551 - Fix OBEX receive of vcf/vcs file with uppercase extension
+	* #1101 - Today: show owner birthday/anniversary in contacts plugin
+	* n.a.  - Today: fix display of birthdays & anniversaries around the end of year
+	* #1828 - Today: sort todo items by priority and show due date
+	* n.a.  - Today: fix todo items due today being listed twice
+	* n.a.  - DateBook: fix display of birthdays & anniversaries around the end of year
+	* n.a.  - DateBook: show birthday & anniversary of owner contact
+	* #1828 - TodoList: save and restore sorting between sessions
+	* n.a.  - TodoList: improve sorting behaviour (use secondary columns, etc.)
+	* #0424 - TodoList: improve behaviour when completing an item from the list
+	* #1777 - TodoList: set Status and Progress fields when Completed is ticked
+	* #1846 - Contacts: improve handling of organization-only contacts
+	* #1552 - Contacts: fix import of vcf file from Documents tab
+	* n.a.  - BatteryApplet: show remaining time in hours/mins instead of mins/secs
+	* n.a.  - Fix backlight adjustment on Motorola EZX phones
+	* n.a.  - Fix backlight adjustment on Zaurus devices with 3.x kernels
+	* n.a.  - Don't retry OBEX send when other end cancels
+	* n.a.  - BluetoothManager: fix Status tab to actually show status info
+	* n.a.  - BluetoothManager: fix several crashes
+	* #1417, #1418, #1684, #1792, #1798, #1925 - fix bluetooth adapter initialisation
+	* #1720 - bluepin: replace bluepin with registered BlueZ 4.x passkey agent
+	* #1758 - Opie-Eye: update view when deleting images
+	* #1824 - Opie-Eye: add easy access to popup menu in fullscreen mode
+	* #1940 - ScreenShotApplet: use linuxtogo scap service
+	* #1937 - SysInfo: show info about USB devices on recent kernels
+	* n.a.  - SysInfo: hide details pane on devices tab when nothing selected
+	* n.a.  - OpieRec: improve integration with VMemo
+	* #1939 - Make libopiepim2 dependency on libopiedb2 optional again (at build time)
+	* #1938 - Launcher: make dependency on libopiepim2 optional again (at build time)
+
+	Internal
+	--------
+	* Bluetooth initialisation via hciattach now requires /etc/sysconfig/bluetooth (as written by blueprobe)
+	* libopieobex now depends on libopiebluez2 instead of libopietooth
+	* Rewrite and extend libopiebluez2 to provide useful BlueZ 4.x interface
+	* Use obexftp for sending files over OBEX
+	* Add dpconvert standalone utility for extracting images from DrawPad data
+	* Merged some gcc 4.5 compilation fixes
+	* pcmcia & cardmon applets removed - these have been replaced by cardapplet
+	* Added libdbus-qt2 - DBus bindings for Qt 2.x
+	* Updated API documentation and README
+	* PimConverter: remove sqlite2->sqlite3 conversion code
+	* Remove support for M&N / MNCI Ramses device which was never sold
+
+
 2010-12-12  Opie 1.2.5
 	
 	
