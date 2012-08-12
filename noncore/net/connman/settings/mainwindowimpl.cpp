@@ -132,21 +132,10 @@ void MainWindowImpl::slotAsyncReply( int callId, const QDBusMessage& reply )
     if (reply.type() == QDBusMessage::ReplyMessage && reply.count() == 1) {
         if (method == "GetServices") {
             m_services.clear();
-            QValueList<QDBusData> services = reply[0].toList().toQValueList();
-            for( QValueList<QDBusData>::ConstIterator it = services.begin(); it != services.end(); ++it ) {
-                QValueList<QDBusData> memberList;
-                memberList = (*it).toStruct();
-                ServiceListener *listener = new ServiceListener( memberList[0].toObjectPath(), 
-                                                                    memberList[1].toStringKeyMap() );
-                QObject::connect(listener, SIGNAL(serviceStateChanged(const QDBusObjectPath&, const QString&, const QString&)),
-                                this, SLOT(serviceStateChanged(const QDBusObjectPath&, const QString&, const QString&)));
-                //QObject::connect(listener, SIGNAL(signalStrength(int)),
-                //                this, SLOT(signalStrength(int)));
-                m_services.insert(memberList[0].toObjectPath(), listener);
-            }
+            addServices(reply[0].toList().toQValueList());
             updateList();
         }
-        else if (method == "GetTechnologies") {
+        if (method == "GetTechnologies") {
             m_techs.clear();
             QValueList<QDBusData> techs = reply[0].toList().toQValueList();
             for( QValueList<QDBusData>::Iterator it = techs.begin(); it != techs.end(); ++it ) {
@@ -166,13 +155,10 @@ void MainWindowImpl::slotServiceAsyncReply( int callId, const QDBusMessage& repl
 
 void MainWindowImpl::slotDBusSignal(const QDBusMessage& message)
 {
-    if( message.member() == "ServicesAdded" ) {
-        int callId = m_managerProxy->sendWithAsyncReply("GetServices", QValueList<QDBusData>());
-        m_calls[callId] = "GetServices";
-    }
-    else if( message.member() == "ServicesRemoved" ) {
-        int callId = m_managerProxy->sendWithAsyncReply("GetServices", QValueList<QDBusData>());
-        m_calls[callId] = "GetServices";
+    if( message.member() == "ServicesChanged" ) {
+        removeServices( message[1].toList().toObjectPathList() );
+        addServices( message[0].toList().toQValueList() );
+        updateList();
     }
     else if( message.member() == "TechnologyAdded" ) {
         TechnologyListener *tech = new TechnologyListener( message[0].toObjectPath(),
@@ -181,6 +167,28 @@ void MainWindowImpl::slotDBusSignal(const QDBusMessage& message)
     }
     else if( message.member() == "TechnologyRemoved" ) {
         m_techs.remove( message[0].toObjectPath() );
+    }
+}
+
+void MainWindowImpl::addServices( const QValueList<QDBusData> &services )
+{
+    for( QValueList<QDBusData>::ConstIterator it = services.begin(); it != services.end(); ++it ) {
+        QValueList<QDBusData> memberList;
+        memberList = (*it).toStruct();
+        ServiceListener *listener = new ServiceListener( memberList[0].toObjectPath(), 
+                                                            memberList[1].toStringKeyMap() );
+        QObject::connect(listener, SIGNAL(serviceStateChanged(const QDBusObjectPath&, const QString&, const QString&)),
+                        this, SLOT(serviceStateChanged(const QDBusObjectPath&, const QString&, const QString&)));
+        //QObject::connect(listener, SIGNAL(signalStrength(int)),
+        //                this, SLOT(signalStrength(int)));
+        m_services.insert(memberList[0].toObjectPath(), listener);
+    }
+}
+
+void MainWindowImpl::removeServices( const QValueList<QDBusObjectPath> &services )
+{
+    for( QValueList<QDBusObjectPath>::ConstIterator it = services.begin(); it != services.end(); ++it ) {
+        m_services.remove( QString(*it) );
     }
 }
 

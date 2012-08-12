@@ -74,6 +74,8 @@ protected:
     void initHostname();
     ServiceListener *selectedService();
     void updateListItem( QListViewItem *item, ServiceListener *service );
+    void addServices( const QValueList<QDBusData> &services );
+    void removeServices( const QValueList<QDBusObjectPath> &services );
 
 protected:
     QDBusConnection m_connection;

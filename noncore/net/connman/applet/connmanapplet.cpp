@@ -360,11 +360,9 @@ void ConnManApplet::slotDBusSignal(const QDBusMessage& message)
     if( message.member() == "PropertyChanged" ) {
         managerPropertySet( message[0].toString(), message[1].toVariant() );
     }
-    else if( message.member() == "ServicesAdded" ) {
+    else if( message.member() == "ServicesChanged" ) {
+        removeServices( message[1].toList().toObjectPathList() );
         addServices( message[0].toList().toQValueList() );
-    }
-    else if( message.member() == "ServicesRemoved" ) {
-        removeServices( message[0].toList().toObjectPathList() );
     }
     else if( message.member() == "TechnologyAdded" ) {
         TechnologyListener *tech = new TechnologyListener( message[0].toObjectPath(),
