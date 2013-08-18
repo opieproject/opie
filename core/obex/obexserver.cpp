@@ -48,6 +48,9 @@ using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 using namespace OpieObex;
 
+static const bdaddr_t bt_bdaddr_any   = {{0, 0, 0, 0, 0, 0}};
+static const bdaddr_t bt_bdaddr_local = {{0, 0, 0, 0xff, 0xff, 0xff}};
+
 ObexServer::ObexServer(int trans) :
     OProcess(tr("ObexServer"), 0, "ObexServer")
 {
@@ -318,7 +321,7 @@ sdp_session_t* ObexServer::addOpushSvc(uint8_t chan, const char* name)
 
     // connect to the local SDP server, register the service record, and
     // disconnect
-    lsession = sdp_connect(BDADDR_ANY, BDADDR_LOCAL, SDP_RETRY_IF_BUSY);
+    lsession = sdp_connect(&bt_bdaddr_any, &bt_bdaddr_local, SDP_RETRY_IF_BUSY);
     if (lsession == NULL)
         goto errout;
     err = sdp_record_register(lsession, &record, 0);
