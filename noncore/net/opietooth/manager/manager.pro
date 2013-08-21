@@ -42,4 +42,5 @@ include( $(OPIEDIR)/include.pro )
     LIBS += $$LIBOBEXFTP_LIB_DIR/libobexftp.a
     LIBS += $$LIBOBEXFTP_LIB_DIR/libmulticobex.a
     LIBS += $$LIBOBEXFTP_LIB_DIR/libbfb.a
+    LIBS += -lopenobex
 }
