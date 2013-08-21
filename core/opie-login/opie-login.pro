@@ -19,7 +19,7 @@ INTERFACES  = loginwindow.ui passworddialog.ui
 INCLUDEPATH += $(OPIEDIR)/include ../launcher ../apps/calibrate
 DEPENDPATH  += $(OPIEDIR)/include ../launcher ../apps/calibrate
 
-LIBS        += -lqpe -lopiecore2
+LIBS        += -lqpe -lopiecore2 -lcrypt
 
 DESTDIR     = $(OPIEDIR)/bin
 TARGET      = opie-login
