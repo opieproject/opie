@@ -83,6 +83,6 @@ DESTDIR		= $(OPIEDIR)/bin
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 TARGET		= opie-reader
-LIBS		+= -lopiecore2 -lopieui2 -lqpe -lreader_codec
+LIBS		+= -lopiecore2 -lopieui2 -lqpe -lreader_codec -ldl -lz
 
 include( $(OPIEDIR)/include.pro )
