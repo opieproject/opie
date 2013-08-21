@@ -47,40 +47,42 @@ void CurrencyConverter::loadRates( const QString &filename )
         QTextStream t( &f );
         QString s = t.read();
         json_value *data = json_parse(s.latin1());
-        if( data->type == json_object ) {
-            for (uint i = 0; i < data->u.object.length; i++) {
-                QString name(data->u.object.values[i].name);
-                if( name == "rates" ) {
-                    json_value *ratedata = data->u.object.values[i].value;
-                    if( ratedata->type == json_object ) {
-                        for (uint k = 0; k < ratedata->u.object.length; k++) {
-                            QString currname(ratedata->u.object.values[k].name);
-                            json_value *ratevalue = ratedata->u.object.values[k].value;
-                            if( ratevalue->type == json_double) {
-                                m_rates.insert(currname, ratevalue->u.dbl);
+        if( data ) {
+            if( data->type == json_object ) {
+                for (uint i = 0; i < data->u.object.length; i++) {
+                    QString name(data->u.object.values[i].name);
+                    if( name == "rates" ) {
+                        json_value *ratedata = data->u.object.values[i].value;
+                        if( ratedata->type == json_object ) {
+                            for (uint k = 0; k < ratedata->u.object.length; k++) {
+                                QString currname(ratedata->u.object.values[k].name);
+                                json_value *ratevalue = ratedata->u.object.values[k].value;
+                                if( ratevalue->type == json_double) {
+                                    m_rates.insert(currname, ratevalue->u.dbl);
+                                }
                             }
                         }
                     }
-                }
-                else if( name == "timestamp" ) {
-                    json_value *valuedata = data->u.object.values[i].value;
-                    if( valuedata->type == json_integer ) {
-                        m_timestamp.setTime_t( valuedata->u.integer );
+                    else if( name == "timestamp" ) {
+                        json_value *valuedata = data->u.object.values[i].value;
+                        if( valuedata->type == json_integer ) {
+                            m_timestamp.setTime_t( valuedata->u.integer );
+                        }
+                    }
+                    else if( name == "base" ) {
+                        json_value *valuedata = data->u.object.values[i].value;
+                        if( valuedata->type == json_string)
+                            m_rates[QString::fromUtf8(valuedata->u.string.ptr)] = 1.0;
+                    }
+                    else {
+                        json_value *valuedata = data->u.object.values[i].value;
+                        if( valuedata->type == json_string)
+                            m_extra[name] = QString::fromUtf8(valuedata->u.string.ptr);
                     }
                 }
-                else if( name == "base" ) {
-                    json_value *valuedata = data->u.object.values[i].value;
-                    if( valuedata->type == json_string)
-                        m_rates[QString::fromUtf8(valuedata->u.string.ptr)] = 1.0;
-                }
-                else {
-                    json_value *valuedata = data->u.object.values[i].value;
-                    if( valuedata->type == json_string)
-                        m_extra[name] = QString::fromUtf8(valuedata->u.string.ptr);
-                }
             }
+            json_value_free( data );
         }
-        json_value_free( data );
     }
 }
 
@@ -92,16 +94,18 @@ void CurrencyConverter::loadCurrencies( const QString &filename )
         QTextStream t( &f );
         QString s = t.read();
         json_value *data = json_parse(s.latin1());
-        if( data->type == json_object ) {
-            for (uint i = 0; i < data->u.object.length; i++) {
-                QString name(data->u.object.values[i].name);
-                json_value *valuedata = data->u.object.values[i].value;
-                if( valuedata->type == json_string) {
-                    m_currencies.insert(name, QString::fromUtf8(valuedata->u.string.ptr));
+        if( data ) {
+            if( data->type == json_object ) {
+                for (uint i = 0; i < data->u.object.length; i++) {
+                    QString name(data->u.object.values[i].name);
+                    json_value *valuedata = data->u.object.values[i].value;
+                    if( valuedata->type == json_string) {
+                        m_currencies.insert(name, QString::fromUtf8(valuedata->u.string.ptr));
+                    }
                 }
             }
+            json_value_free( data );
         }
-        json_value_free( data );
     }
 }
 
