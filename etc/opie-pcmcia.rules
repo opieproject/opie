@@ -1,5 +1,5 @@
-SUBSYSTEM=="pcmcia", ACTION=="add", 
+SUBSYSTEM=="pcmcia", ACTION=="add", ENV{MODALIAS}=="?*" \
 		RUN+="/etc/udev/scripts/opie-pcmcia.sh"
-SUBSYSTEM=="pcmcia", ACTION=="remove", 
+SUBSYSTEM=="pcmcia", ACTION=="remove", ENV{MODALIAS}=="?*", \
 		RUN+="/etc/udev/scripts/opie-pcmcia.sh"
 
