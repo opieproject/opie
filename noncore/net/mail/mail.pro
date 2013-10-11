@@ -49,7 +49,7 @@ INTERFACES     = editaccountsui.ui \
                nntpgroupsui.ui
 
 
-INCLUDEPATH += $(OPIEDIR)/include /usr/local/include
+INCLUDEPATH += $(OPIEDIR)/include
 
 CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
 contains( CONFTEST, y ){
