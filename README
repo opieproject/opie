@@ -2,7 +2,7 @@
 ====================================
 For more complete instructions on getting started, please see:
 
-  http://opie.sourceforge.net/cgi-bin/moin.cgi/BuildOpie
+  http://opie.sourceforge.net/wiki/BuildOpie
 
 There's also a tutorial document at:
 
@@ -13,12 +13,12 @@ The API reference currently is at:
   http://opie.sourceforge.net/apidocs/
 
 You will need qvfb, uic and (if you want to develop applications) designer
-compiled and linked against Qt/X11. That means you must download and 
-configure/make it:
+compiled and linked against Qt/X11. That means either you must download and
+configure/make it from source:
 
-  wget ftp://ftp.trolltech.com/qt/source/qt-x11-2.3.2.tar.gz
+  http://download.qt-project.org/archive/qt/2/qt-x11-2.3.2.tar.gz
 
-Alternatively, you can get static binaries from here: 
+or, alternatively, you can get static binaries from here:
 
   http://www.bluelightning.org/files/opie/qt2-dev-tools-bin.tar.gz
 
@@ -26,7 +26,8 @@ You will need Qt/Embedded 2.3.10. Note that we don't support any
 other Qt/Embedded version anymore. Qt/Embedded 2.3.12 is not recommended atm.
 
 You can get it from:
-ftp://ftp.trolltech.com/qt/source/qt-embedded-2.3.10-free.tar.gz
+
+  http://download.qt-project.org/archive/qt/2/qt-embedded-2.3.10-free.tar.gz
 
 Set QTDIR to point to your qt/embedded source tree, such as:
 export QTDIR=/opt/qt-2.3.10
